@@ -1,10 +1,10 @@
 # FLAWS — versioned flaw taxonomy register (§3.7)
 
-- **Taxonomy version:** `0.1.0` — **DRAFT**, seeded in Session 1 (2026-10-12) from the thirteen seed
-  classes named in the genesis prompt. Ratified at S0.5 by Al. After ratification: entries are
-  append-only; a new entry bumps the minor version; a semantic change to an existing entry's
-  definition or Lean-catchable status bumps the major version and requires an ADR. Every manifest
-  pins `taxonomy_version` (SD1).
+- **Taxonomy version:** `0.1.0` — **ratified by Al 2026-10-12 (Session 2, S0.5)**: thirteen classes
+  seeded in Session 1 from the genesis prompt, plus FLAW-0014 and one example fix applied as
+  pre-ratification edits (changelog). From ratification: entries are append-only; a new entry bumps
+  the minor version; a semantic change to an existing entry's definition or Lean-catchable status
+  bumps the major version and requires an ADR. Every manifest pins `taxonomy_version` (SD1).
 - **Examples are executor-authored and synthetic.** They are illustrations, not citations (SD11); the
   mathematics of each was checked by hand in Session 1 and each becomes a golden fixture at S2.4. No
   example reuses a real author's name for a fictional work.
@@ -167,7 +167,7 @@ FLAW-0012 exist precisely to separate them. The S0.4 ADR fixes the field names.
 - **Severity range:** cosmetic (unused; cost only) → gap or fatal (a vacuous lemma relied upon).
 - **Generator recipe:** insert a true, proved, irrelevant lemma (dials: count, length); or a lemma
   with contradictory hypotheses plus a later application.
-- **Example:** Unused: "Lemma 2. For all n, n² ≥ n." — proved, cited nowhere. Vacuous: "Lemma 3. If
+- **Example:** Unused: "Lemma 2. For all n ∈ ℕ, n² ≥ n." — proved, cited nowhere. Vacuous: "Lemma 3. If
   p is an even prime greater than 2 then …" (no such p), later "applying Lemma 3 to p = 2".
 - **Candidate detectors:** lemma-usage consistency (the priority detector for this class);
   step-dependency extraction.
@@ -280,6 +280,25 @@ FLAW-0012 exist precisely to separate them. The S0.4 ADR fixes the field names.
   outbound edge to the conclusion); length statistics (surface control). Feeds the S3.4 cost model:
   padding raises expert-minutes per item without raising the flaw count.
 
+## FLAW-0014 — Incomplete case analysis (non-inductive)
+
+- **Definition:** A case split omits a case — equality, zero, the empty set, a boundary value — and
+  the conclusion is asserted for all cases. Distinct from FLAW-0006 (induction): no inductive
+  structure is involved. Dial: the omitted case is one where the claim still holds (gap) or one
+  where it fails (fatal).
+- **Manifests in:** both.
+- **Lean-catchable:** `YES-KERNEL` — `cases`, `match`, and `rcases` force exhaustiveness; a missing
+  branch is an error.
+- **Severity range:** gap → fatal.
+- **Generator recipe:** from a complete case split, delete one branch and every mention of it;
+  record the deleted case and whether the claim holds there.
+- **Example:** Gap: "Claim: for every integer n, n² ≡ 0 or 1 (mod 4). Proof: if n is even, n = 2k
+  and n² = 4k² ≡ 0. Hence the claim." — the odd case is omitted; the claim holds there. Fatal:
+  "Claim: for every real x, x/|x| = ±1. Case x > 0: it is 1. Case x < 0: it is −1. Hence for all
+  x." — the case x = 0 is omitted, and there the expression is undefined.
+- **Candidate detectors:** step-dependency extraction (a case analysis whose branches do not cover
+  the domain); autoformalization attempt.
+
 ---
 
 ## Summary table (v0.1.0)
@@ -299,8 +318,9 @@ FLAW-0012 exist precisely to separate them. The S0.4 ADR fixes the field names.
 | FLAW-0011 | True theorem, invalid proof | both | per embedded flaw | inherits |
 | FLAW-0012 | False theorem, convincing proof | both | YES-KERNEL | fatal |
 | FLAW-0013 | Correct proof with padding | both | NO | cosmetic |
+| FLAW-0014 | Incomplete case analysis (non-inductive) | both | YES-KERNEL | gap → fatal |
 
-**Pre-registered expectation (§0.7, SD5):** four of thirteen classes (0003-cycle, 0007-vacuous,
+**Pre-registered expectation (§0.7, SD5):** four of fourteen classes (0003-cycle, 0007-vacuous,
 0008, 0013) are invisible to compilation, and one (0009) is invisible to compilation but visible to
 tooling. A battery that relies on "it compiles" is blind to exactly the classes an adversarial or
 careless generator finds cheapest to emit. This expectation is a prediction to be tested in S3, not
@@ -308,4 +328,7 @@ a result.
 
 ## Changelog
 
-- `0.1.0` — 2026-10-12, Session 1: seeded FLAW-0001..0013 from the genesis prompt. DRAFT pending S0.5.
+- `0.1.0` — 2026-10-12, Session 1: seeded FLAW-0001..0013 from the genesis prompt (draft).
+- `0.1.0` — 2026-10-12, Session 2, pre-ratification edits ruled by Al: added FLAW-0014 (incomplete
+  case analysis, non-inductive); FLAW-0007's unused-lemma example now states n ∈ ℕ. Version unchanged
+  (pre-ratification). **Ratified by Al, Session 2 (S0.5, Q12).**

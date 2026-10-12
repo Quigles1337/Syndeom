@@ -11,8 +11,7 @@ SYNDEOM measures truth and triage, never understanding. It never issues verdicts
 contested proof; its outputs are calibrated triage scores with uncertainty. "Proven" is reserved for
 sorry-free Lean proofs that have also passed statement-fidelity review.
 
-- **Constitution (read first):** [`PROGRAM/SYNDEOM-PROGRAM.md`](PROGRAM/SYNDEOM-PROGRAM.md) — **DRAFT**
-  pending ratification by Al (Session 2)
+- **Constitution (read first):** [`PROGRAM/SYNDEOM-PROGRAM.md`](PROGRAM/SYNDEOM-PROGRAM.md)
 - **Current state:** [`PROGRAM/STATE.md`](PROGRAM/STATE.md)
 - **Session log:** [`PROGRAM/HANDOFF.md`](PROGRAM/HANDOFF.md)
 - **Flaw taxonomy:** [`PROGRAM/FLAWS.md`](PROGRAM/FLAWS.md)

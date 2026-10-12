@@ -27,7 +27,7 @@ logs are `PROGRAM/HANDOFF.md`.
 
 | Section | KOBER | FRIEDMAN | SYNDEOM draft |
 |---|---|---|---|
-| Title line | `# KOBER — Autonomous Engineering Program v1.0` | same pattern | same pattern + DRAFT marker |
+| Title line | `# KOBER — Autonomous Engineering Program v1.0` | same pattern | same pattern (carried a DRAFT marker until ratification, 2026-10-12) |
 | Header block | **Program**, **Named for**, **Engineer of record** (Al), **Executor**, "This file is the constitution" | adds **Sibling program** | adds **Sibling programs**, **Draft status** |
 | §0 Charter | 4 items | 6 items (adds scoped novelty 0.4, bounded play 0.6) | 8 items (scope boundary, verdict ban, reserved "proven", two success states, scoped novelty, detector priority) |
 | §1 Epistemic Constitution | **E1–E10** | **F1–F12** | **SD1–SD17** |
@@ -217,7 +217,10 @@ Nothing in this table is a SYNDEOM pin. Pins are decided by ADR-0002 at S0.6 aft
 3. Phase/commit tag `[P…]` vs `[F…]` → Q5 (SYNDEOM draft uses `[S…]`).
 4. Rust components clippy vs clippy+rustfmt; gate with/without `fmt --check` → Q6.
 5. Workspace root repo root vs `engine/` → Q7.
-6. Lean present (4.33.1, no Mathlib) vs absent → Q8 (SYNDEOM needs mathlib pairs in S1.2).
+6. Lean present (4.33.1, no Mathlib) vs absent → Q8. **Ruled 2026-10-12 — a load-bearing divergence
+   from KOBER:** SYNDEOM pins Mathlib at a commit and its Lean version follows Mathlib's
+   `lean-toolchain`, because the S1.2 pairs, the FLAW-0008 example, and the tactics named in
+   FLAW-0001 require Mathlib (ADR-0000 addendum; ADR-0002 writes the pin at S0.6).
 7. CI action versions v4 vs v5 → Q9.
 8. CLAIMS statuses (PROVEN vs REPRODUCED/MEASURED) → union adopted; no question.
 9. HANDOFF fences vs plain; ADR form → FRIEDMAN's adopted; no question.

@@ -1,4 +1,4 @@
-# SYNDEOM — Autonomous Engineering Program v1.0 (DRAFT — pending ratification by Al, Session 2)
+# SYNDEOM — Autonomous Engineering Program v1.0
 
 **Program:** Calibration infrastructure for AI-generated mathematical proofs. A generator of
 proof-shaped text — informal and Lean 4 formal variants — with dialable, labeled flaws and ground
@@ -15,9 +15,9 @@ recorded in `PROGRAM/SIBLING-MAP-2026-10.md`. Interface with the siblings via ma
 never a code dependency.
 **Engineer of record:** Al (Quigles1337). **Executor:** Claude Code, running the loop in §4.
 **This file is the constitution.** Read at the start of every session; amended only via ADR (§3.5).
-**Draft status:** authored by the executor in Session 1 (2026-10-12) from Al's genesis prompt, for
-Al's review. Until Al ratifies it, it is a draft and may be edited freely in Session 2; ratification is
-recorded as an addendum to ADR-0000 and removes the DRAFT marker from this header. After that, ADR only.
+**Ratification:** authored by the executor in Session 1 (2026-10-12) from Al's genesis prompt;
+**ratified by Al in Session 2 (2026-10-12)**, with the rulings and the pre-ratification edits recorded
+in the ADR-0000 addendum. From that commit onward this file changes only via ADR.
 
 ---
 
@@ -56,7 +56,7 @@ recorded as an addendum to ADR-0000 and removes the DRAFT marker from this heade
 ## §1 Epistemic Constitution (non-negotiable rules)
 
 Rule IDs carry the prefix `SD` (SynDeom) because `S` alone is taken by phase names (S0–S5) and by
-source IDs (`S-NNNN`). The siblings use `E` (KOBER) and `F` (FRIEDMAN); see STATE.md Q4.
+source IDs (`S-NNNN`). The siblings use `E` (KOBER) and `F` (FRIEDMAN). Ratified (ADR-0000 addendum, Q4).
 
 - **SD1 — Ground truth is sacred; every artifact carries a manifest.** Every generated artifact ships
   with a manifest carrying: generator ID + version, full config, seed, taxonomy version, and ground
@@ -134,8 +134,8 @@ source IDs (`S-NNNN`). The siblings use `E` (KOBER) and `F` (FRIEDMAN); see STAT
   memory holds program state; no memory writes during an exam session. A session running in the
   conversation context that built the state under test is not cold, regardless of memory, and this
   extends to launching prompts: a cold session is launched with the §6 resume prompt verbatim and
-  nothing that carries program state. (FRIEDMAN ADR-0003 D1–D3 and its corollary, adopted here;
-  see STATE.md Q13 on the corollary's ratification record.)
+  nothing that carries program state. (FRIEDMAN ADR-0003 D1–D3, cited and not duplicated; the
+  conversation-context corollary is ratified for SYNDEOM by Al, 2026-10-12 — ADR-0000 addendum, Q13.)
 - **SD16 — Licences and credit.** Published proofs, errata, mathlib, and AI-generated corpora have
   owners and licences. Record licence terms in SOURCES.md before ingesting; store derived data with
   attribution; commit a stored copy only when its licence permits redistribution (this repo is
@@ -158,31 +158,48 @@ Verify the situation, ratify the constitution, define the interfaces, scaffold t
   genesis, all **UNVERIFIED** program memory from Al's prompt, each with a CLAIM entry at UNKNOWN:
   S-0001 the 6 October 2026 OpenAI manuscript release and its verification counts; S-0002 the AGMAI
   guidelines; S-0003 the AHM statement; S-0004 the Fields Medalist letter; S-0005 the Leiden
-  Declaration. A claim is VERIFIED only when read from a primary source (SD11). The exact public
-  location of the S5 target corpus is established here and nowhere else.
+  Declaration; S-0006 (added at ratification) a reported correction or retraction of some
+  manuscripts in the 6 October release shortly after publication — a contact-phase item under SD8:
+  its existence is verified in S0, its content is read only in S5, and it is never S1 ground truth.
+  A claim is VERIFIED only when read from a primary source (SD11). The exact public location of the
+  S5 target corpus is established here and nowhere else.
 - S0.2 **Founding sweep, if Al provides one:** placed at `PROGRAM/SWEEP-<YYYY-MM>.md` with the SD11
   banner, identity verified against Al's stated digest before the move. The executor never
   reconstructs one from memory. Absent a sweep, §0.6 holds: no novelty claim.
-- S0.3 **Ratify the constitution.** Al reviews this draft and rules on the open questions in STATE.md;
-  the rulings are recorded (ADR-0000 addendum; toolchain and schema rulings become their own ADRs);
-  the DRAFT marker is removed.
-- S0.4 **Manifest schema ADR:** `syndeom-manifest/1` as a versioned extension of `friedman-manifest/1`.
-  Read FRIEDMAN ADR-0001 D1–D7 and its canonical crate at a pinned commit; keep every FRIEDMAN field
-  whose semantics survive (hashing per RFC 8785 JCS + SHA-256, `corpus_id` as a pure function of
-  generator/config/seed, no wall-clock timestamps, commanded/achieved/fidelity); add proof-specific
-  ground truth (`correct`, `flaws[]` with class/location/severity/`lean_catchable`,
-  `taxonomy_version`), the artifact format (informal text, Lean source, or a pair), and `origin`
-  values for synthetic, ground-truth (S1), and contact (S5) artifacts. Decide the compatibility
-  semantics (STATE.md Q10) before writing a field.
-- S0.5 **Flaw taxonomy v0.1 ratified.** `PROGRAM/FLAWS.md` is seeded at genesis with thirteen entries
-  (definition, Lean-catchable, generator recipe, example). Al reviews; the taxonomy version is pinned
-  and manifests reference it from S2 on.
-- S0.6 **Scaffold:** `lean/` (toolchain pinned via `lean-toolchain` after checking `elan`; KOBER's pin
-  is the default; the Mathlib decision is an ADR because S1.2 depends on mathlib formalizations and
-  Mathlib pins its own toolchain — STATE.md Q8), `engine/` Rust workspace (siblings' pin unless Al
-  rules otherwise — Q6, Q7), `lab/`, `corpora/`, `groundtruth/`, `contact/` (empty; SD8 rules posted
-  in a README), `analysis/`, `scripts/check.sh`, CI if the environment supports it (discover, don't
-  assume; never a required status check).
+- S0.3 **Ratify the constitution.** Al rules on the genesis question list; the rulings are recorded
+  in the ADR-0000 addendum (toolchain and schema rulings bind their own later ADRs); the DRAFT
+  marker is removed. Completed in Session 2, 2026-10-12.
+- S0.4 **Manifest schema ADR (ADR-0001):** `syndeom-manifest/1` as a versioned extension of
+  `friedman-manifest/1`. Compatibility is **structural** (ruling Q10): same field semantics, hashing
+  per RFC 8785 JCS + SHA-256, `corpus_id` as a pure function of generator/config/seed, no wall-clock
+  timestamps, commanded/achieved/fidelity; handshake per FRIEDMAN D7; SYNDEOM never requires a
+  FRIEDMAN-side change (if FRIEDMAN ever consumes SYNDEOM corpora, that is a FRIEDMAN ADR). Read
+  FRIEDMAN ADR-0001 D1–D7 and its canonical crate at a pinned commit. The ADR fills in field names
+  under the ruled constraints (Q11, ADR-0000 addendum): `origin` ∈ {synthetic, ground-truth,
+  contact}; derivation ∈ {by-construction, documented-by-source, formalized-in-mathlib} (SD12);
+  artifact kind ∈ {informal, formal, pair} sharing one artifact id — informal is UTF-8 Markdown with
+  LaTeX math and generator-numbered steps (location = step index + character span), formal is one
+  Lean file (location = declaration:line); ground truth carries `statement_status` with how it was
+  established, `proof_status`, `flaws[]` {class, sub_variant, location, severity, lean_catchable,
+  dials}, and `taxonomy_version`; commanded/achieved covers length in tokens, steps, and lemmas,
+  flaws per class, and `padding_ratio`; and for any LLM-assisted generator the SD6 clause records
+  model id and version, prompt hash, sampling parameters, and output content hash — the artifact is
+  uncounted unless the hash re-verifies.
+- S0.5 **Flaw taxonomy v0.1 ratified.** `PROGRAM/FLAWS.md` holds fourteen entries (thirteen seeded at
+  genesis, FLAW-0014 added at ratification), each with definition, Lean-catchable status, generator
+  recipe, and example. Ratified by Al in Session 2 (Q12); the version is pinned and manifests
+  reference it from S2 on.
+- S0.6 **Scaffold (ADR-0002):** `lean/` with **Mathlib at a pinned commit; the Lean version follows
+  Mathlib's `lean-toolchain`** (ruling Q8: the S1.2 pairs, the FLAW-0008 example, and the tactics
+  named in FLAW-0001 all require Mathlib, so a no-Mathlib pin would leave the taxonomy's own golden
+  fixtures unbuildable; the pin is written after reading `elan` and Mathlib's pin, and diverges from
+  KOBER's — load-bearing, recorded in SIBLING-MAP; the gate uses Mathlib's cache and builds only this
+  project's modules); `engine/Cargo.toml` as the Rust workspace root (Q7), pinned from the siblings'
+  `rust-toolchain.toml` as re-read at S0.6 — expected channel 1.91.0, edition 2024, clippy + rustfmt,
+  with `cargo fmt --check` in the gate (Q6); `lab/`, `corpora/`, `groundtruth/`, `contact/` (empty;
+  SD8 rules posted in a README), `analysis/`, `sources/` (Q17); `scripts/check.sh`; CI if the
+  environment supports it (discover, don't assume) on `actions/*@v5` (Q9), never a required status
+  check.
 
 **Gate S0:** CLAIM-0001..0005 resolved to VERIFIED or honestly UNVERIFIED with consequences stated;
 constitution ratified; manifest ADR merged; taxonomy v0.1 ratified; licences recorded for anything
@@ -210,8 +227,11 @@ Proof-shaped text with dialable, labeled flaws.
 
 - S2.1 **Modules behind one shared interface:** (i) informal proof generator; (ii) Lean 4 formal
   variant generator; (iii) the flaw injector — every FLAWS.md recipe as a dial (presence, location,
-  severity); (iv) the padding module (FLAW-0013). Whether any module is LLM-assisted is an ADR under
-  SD6 (determinism recovery stated before the first artifact is generated).
+  severity); (iv) the padding module (FLAW-0013). **Standing ruling (Al, Session 2; ADR at S2):** the
+  first generator family is deterministic — seeded Rust templates and grammars. Any LLM-assisted
+  generator is a separate family requiring its own ADR under SD6 and is excluded from
+  `battery-freeze-v1` unless that ADR exists; reasons: determinism, and the leakage risk that an LLM
+  generator was trained on the contact corpus (SD8).
 - S2.2 **Commanded and achieved statistics:** proof length (tokens, steps, lemmas), flaws per class,
   severity, padding ratio. Fidelity verdict per artifact (FRIEDMAN F5 lineage): a flawed artifact
   counts only when the injected flaw is confirmed present — for Lean-catchable flaws, the kernel or
@@ -232,9 +252,12 @@ The battery, the curves, the fooling length, the cost model, the freeze.
   citation existence check; statement-fidelity comparison (informal claim vs formal statement);
   axiom audit (`#print axioms`). Controls (surface, documented-weak): length and hedge-word
   statistics, perplexity-style scores — kept to demonstrate that they are fooled, per §0.7.
-- S3.2 **ROC/AUC** over detector × flaw class × proof length × severity, bootstrap CIs on every AUC;
-  the **fooling length** per detector per class = the proof length at which the AUC interval includes
-  0.5. Proof length is swept log-spaced over the regimes the S1 corpus actually exhibits.
+- S3.2 **ROC/AUC** over detector × flaw class × proof length × severity, bootstrap CIs on every AUC.
+  The **fooling length** per detector per class is defined with a power floor: the smallest proof
+  length L at which, in a cell with N ≥ N_min items, the 95% bootstrap CI of the AUC contains 0.5.
+  N_min is declared in the S3 calibration ADR *before any curve is computed*. Cells with N < N_min
+  are reported as **underpowered**, never as fooled. Proof length is swept log-spaced over the
+  regimes the S1 corpus actually exhibits.
 - S3.3 **Leave-one-out.** Leave-one-generator-out and leave-one-flaw-class-out evaluation, to measure
   whether detectors detect flaws or fingerprint generators.
 - S3.4 **Cost model:** expert-minutes per true positive, from a pre-declared per-item review-time
@@ -268,7 +291,8 @@ Post-freeze runs on real AI-generated corpora. The quarantine lifts here and onl
 
 - S5.1 **Ingest** real AI-generated corpora (e.g., the 6 October 2026 public release — exact
   location VERIFIED in S0.1, never assumed) under `contact/`, with licence and provenance (SD16);
-  read-only.
+  read-only. Contact corpora carry their own Mathlib pins: ingest records each corpus's pin, and
+  per-corpus toolchains may be needed (noted at ratification, Q8; solved at ingest, not before).
 - S5.2 **Outputs:** per manuscript, calibrated triage scores with uncertainty, relative to the frozen
   battery version and named flaw classes (SD3). Never "proven/disproven".
 - S5.3 **Battery immutability:** contact results never modify the battery in place (SD8); a new
@@ -307,7 +331,7 @@ register (3.7).
   definition, Lean-catchable status, generator recipe, example, candidate detectors. Append-only;
   additions bump the minor version, semantic changes to an existing entry bump the major version;
   manifests pin `taxonomy_version`. Ratified at S0.5; changed only by ADR thereafter.
-- **3.8 Layout (proposed; confirmed by the S0.6 scaffold ADR):** `engine/` (Rust, canonical),
+- **3.8 Layout (ratified, Q17; ADR-0002 records the build layout inside it):** `engine/` (Rust, canonical),
   `lean/` (Lean 4, canonical), `lab/` (Python, no result authority), `corpora/` (manifested synthetic
   artifacts), `groundtruth/` (S1 real items), `contact/` (S5 real AI-generated corpora; SD8 rules),
   `analysis/` (design documents: referee protocol, calibration reports), `sources/` (stored copies
@@ -411,7 +435,7 @@ executor authored this constitution and the register skeletons from it, mirrorin
 structure; provenance is recorded in ADR-0000. The genesis prompt is reproduced in HANDOFF Session 1
 only by reference (its content is this file). No generator or detector code was written.
 
-### Session 2 — ratification
+### Session 2 — ratification (run 2026-10-12; kept for the record)
 ```
 You are the executor of the SYNDEOM program. Read PROGRAM/SYNDEOM-PROGRAM.md in full — it is a
 DRAFT until this session records Al's ratification — then run the metacognitive loop (§4) exactly:
@@ -435,5 +459,5 @@ per §4.6. Honor escalations — some decisions are Al's, not yours.
 ```
 
 ---
-*SYNDEOM v1.0 (DRAFT) — συνδέω, to bind together: Friedman's calibration, Kober's rigor. Constitution
-amendments via ADR only, once ratified.*
+*SYNDEOM v1.0 — συνδέω, to bind together: Friedman's calibration, Kober's rigor. Ratified 2026-10-12.
+Constitution amendments via ADR only.*

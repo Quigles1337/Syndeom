@@ -33,6 +33,8 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Axiom print / fidelity check:** n/a (not a formal claim)
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
+  - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
+    as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
 
 ---
 
@@ -47,6 +49,8 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
+  - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
+    as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
 
 ---
 
@@ -60,6 +64,8 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
+  - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
+    as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
 
 ---
 
@@ -74,6 +80,8 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
+  - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
+    as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
 
 ---
 
@@ -87,6 +95,8 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
+  - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
+    as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
 
 ---
 
@@ -104,3 +114,20 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN from the genesis prompt's problem statement.
+  - 2026-10-12 (Session 2) — Al confirms no founding sweep exists (Q14); §0.6 holds; stays UNKNOWN.
+
+---
+
+## CLAIM-0007 — a reported correction or retraction within the 6 October 2026 release
+
+- **Informal statement:** Shortly after the 6 October 2026 release, some of its manuscripts were
+  corrected or retracted, as reported. Named by Al at ratification (Session 2). **Contact-phase item
+  under SD8:** verifying that such a correction or retraction *exists* is S0 work; reading its
+  *content* (which manuscripts, which flaws) is S5 work and never informs design before the freeze.
+  It is never S1 ground truth (SD12: S1 holds human-authored proofs with documented status).
+- **Status:** UNKNOWN
+- **Evidence:** none. S-0006 UNVERIFIED.
+- **Deps:** S-0006; S-0001.
+- **Axiom print / fidelity check:** n/a
+- **Transitions:**
+  - 2026-10-12 (Session 2) — seeded UNKNOWN at ratification (pre-ratification edit 3).

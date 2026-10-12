@@ -33,6 +33,11 @@ retrieve; nothing enters this register from it.
 - **Needed (S0.1):** the primary announcement or release page; the manuscripts' public location and
   licence; the verification counts as stated by the primary source. If Al holds copies, a path plus
   size or SHA-256 lets the executor verify identity in one step.
+- **Named by Al (Session 2, 2026-10-12) — UNVERIFIED until retrieved:** OpenAI post "Sharing AI
+  progress in mathematics", 6 October 2026, and the public GitHub repository `openai/math`. Read the
+  licence from the repository. Derive verification counts from the repository itself (its contents
+  listing and Lean formalization catalogue), not from press, and record the unit (manuscripts vs
+  families) with every number.
 
 ## S-0002 — the AGMAI guidelines (CLAIM-0002)
 
@@ -40,6 +45,9 @@ retrieve; nothing enters this register from it.
 - **As named in the genesis prompt:** "the AGMAI guidelines".
 - **Known to the executor beyond that wording:** nothing. The acronym is not expanded here (SD7).
 - **Needed (S0.1):** the primary document, its issuing body, date, URL, licence.
+- **Named by Al (Session 2, 2026-10-12) — UNVERIFIED until retrieved:** AGMAI = Advisory Group on
+  Mathematics and Artificial Intelligence, hosted at the Institute for Advanced Study; "Responsible
+  Release of AI-Generated Mathematics", 29 September 2026.
 
 ## S-0003 — the AHM statement (CLAIM-0003)
 
@@ -47,6 +55,10 @@ retrieve; nothing enters this register from it.
 - **As named in the genesis prompt:** "the AHM statement".
 - **Known to the executor beyond that wording:** nothing. The acronym is not expanded here (SD7).
 - **Needed (S0.1):** the primary document, its issuing body, date, URL, licence.
+- **Named by Al (Session 2, 2026-10-12) — UNVERIFIED until retrieved:** AHM = Association for Human
+  Mathematics; statement dated 7 October 2026 on its own statements page, republished the same day
+  as a guest post on Terence Tao's blog (terrytao.wordpress.com), signed by its Communications
+  Working Group. The primary is the AHM page.
 
 ## S-0004 — the Fields Medalist letter (CLAIM-0004)
 
@@ -54,6 +66,9 @@ retrieve; nothing enters this register from it.
 - **As named in the genesis prompt:** "the Fields Medalist letter".
 - **Known to the executor beyond that wording:** nothing.
 - **Needed (S0.1):** the letter itself (primary), signatories, date, venue, URL, licence.
+- **Named by Al (Session 2, 2026-10-12) — UNVERIFIED until retrieved:** "A Severe Misalignment of AI
+  in Mathematics", 11 September 2026, 25 Fields Medalists, hosted at mathandai.org, with a same-day
+  post on Tao's blog. Record the signatory count as of the access date.
 
 ## S-0005 — the Leiden Declaration (CLAIM-0005)
 
@@ -61,3 +76,17 @@ retrieve; nothing enters this register from it.
 - **As named in the genesis prompt:** "the Leiden Declaration".
 - **Known to the executor beyond that wording:** nothing.
 - **Needed (S0.1):** the declaration text (primary), authors or signatories, date, URL, licence.
+- **Named by Al (Session 2, 2026-10-12) — UNVERIFIED until retrieved:** "Leiden Declaration on
+  Artificial Intelligence and Mathematics", 2 June 2026, leidendeclaration.ai.
+
+## S-0006 — reported correction or retraction within the 6 October 2026 release (CLAIM-0007)
+
+- **State:** UNVERIFIED
+- **Named by Al (Session 2, 2026-10-12):** "a reported correction or retraction of some manuscripts in
+  the 6 October release shortly after publication."
+- **Known to the executor beyond that wording:** nothing.
+- **SD8 standing:** a **contact-phase item**. S0 verifies only that the correction or retraction
+  exists (primary: the release's own repository or announcement). Its content — which manuscripts,
+  which flaws — is read in S5 and never earlier, and it never enters S1 ground truth (SD12).
+- **Needed (S0.1):** the primary notice of correction or retraction: URL, date, access date, licence,
+  SHA-256 of any local copy.
