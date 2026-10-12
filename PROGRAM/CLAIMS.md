@@ -27,14 +27,32 @@ and nothing about them beyond the prompt's wording is known or recorded.
   many were verified. Program memory from the genesis prompt (§S0.1). Content, public location,
   counts, licence, and format are all unestablished. The exact location of the S5 contact corpus is
   derived from this claim's resolution and from nowhere else.
-- **Status:** UNKNOWN
-- **Evidence:** none. S-0001 UNVERIFIED.
+- **Status:** VERIFIED
+- **Evidence:** S-0001 — the OpenAI post "Sharing AI progress in mathematics" (dated October 6,
+  2026 on the page) and the public repository `github.com/openai/math` (created
+  2026-10-06T21:47:02Z, licence Apache-2.0 from its own LICENSE file), both read first-hand on
+  2026-10-12. **Verification counts, derived from the repository itself, with units:** at the
+  initial commit `adc7f124` (2026-10-06) the catalogue states 722 manuscripts in 372 result
+  families (722 preprint directories linked, 372 result headers counted); at the tip `1581d4cb`
+  (after the 2026-10-08 update) 719 manuscripts in 372 families (719 linked, 372 headers);
+  `history.md` (dated October 7, 2026) states "300 / 719 = ~42%" of top-line results formalized
+  (numerator phrased as top-line results, denominator = manuscripts); the Lean catalogue
+  `lean/formalization.yaml` (schema version v0.4) lists 173 source papers with a formalized main
+  result and 231 related-formalization entries, and declares `review: status: unchecked`; 242
+  families carry a Lean scope note under `lean/docs/`. The post itself states no counts; it states
+  10 reasoning summaries (the repository holds 10 PDFs) and roughly three hours of ChatGPT Pro
+  thinking per result. The repository's own update PR #1 states "Lean builds were not run for
+  this synchronization." **S5 contact-corpus location established:** `https://github.com/openai/math`,
+  to be pinned at a commit at ingest; its Lean toolchain is `leanprover/lean4:v4.34.1` with Mathlib
+  at `d13f23b7…` (recorded now for the Q8 consequence; acted on only at S5).
 - **Deps:** S-0001.
 - **Axiom print / fidelity check:** n/a (not a formal claim)
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
   - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
     as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
+  - 2026-10-12 (Session 2) — UNKNOWN → **VERIFIED** (S0.1; the post and the repository read
+    first-hand; counts derived from the catalogue at two commits; S-0001).
 
 ---
 
@@ -43,14 +61,22 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Informal statement:** A document referred to in the genesis prompt as "the AGMAI guidelines"
   exists and bears on the AI-mathematics situation. The acronym is deliberately not expanded here:
   the executor does not know what it stands for and will not guess (SD7, SD11).
-- **Status:** UNKNOWN
-- **Evidence:** none. S-0002 UNVERIFIED.
+- **Status:** VERIFIED
+- **Evidence:** S-0002 — `agmai.org` read first-hand 2026-10-12: "Advisory Group on Mathematics
+  and Artificial Intelligence", nine named members, and the document "Responsible Release of
+  AI-Generated Mathematics" dated September 29, 2026 (web page plus PDF). The group's page header
+  names the Institute for Advanced Study and links its IAS project page; that IAS page returned
+  HTTP 403 to both retrieval tools, so the IAS affiliation is verified from the group's own site,
+  not from IAS's. The OpenAI post links both agmai.org pages. Al's expansion of the acronym is
+  confirmed by the primary.
 - **Deps:** S-0002.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
   - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
     as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
+  - 2026-10-12 (Session 2) — UNKNOWN → **VERIFIED** (S0.1; agmai.org index and document read
+    first-hand; S-0002).
 
 ---
 
@@ -58,14 +84,21 @@ and nothing about them beyond the prompt's wording is known or recorded.
 
 - **Informal statement:** A document referred to in the genesis prompt as "the AHM statement" exists
   and bears on the AI-mathematics situation. Acronym deliberately not expanded (SD7, SD11).
-- **Status:** UNKNOWN
-- **Evidence:** none. S-0003 UNVERIFIED.
+- **Status:** VERIFIED
+- **Evidence:** S-0003 — `www.ahmath.org/statements` read first-hand 2026-10-12: "AHM Statement
+  on OpenAI's October 6 Release of Mathematical Documents", signed "Association for Human
+  Mathematics / Communications Working Group". The primary page carries **no date**; its text
+  opens "Yesterday, on October 6th, 2026". The 7 October date is carried by Terence Tao's repost
+  (terrytao.wordpress.com, 7 October, 2026, "reposted from their statements page"). Al's expansion
+  of the acronym is confirmed by the primary.
 - **Deps:** S-0003.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
   - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
     as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
+  - 2026-10-12 (Session 2) — UNKNOWN → **VERIFIED** (S0.1; the AHM statements page read
+    first-hand, Tao's repost read for the date; S-0003).
 
 ---
 
@@ -74,14 +107,22 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Informal statement:** A letter signed by one or more Fields Medalists concerning AI-generated
   mathematics, referred to in the genesis prompt as "the Fields Medalist letter", exists. Signatories,
   date, venue, and content unestablished.
-- **Status:** UNKNOWN
-- **Evidence:** none. S-0004 UNVERIFIED.
+- **Status:** VERIFIED
+- **Evidence:** S-0004 — `mathandai.org` read first-hand 2026-10-12: "A Severe Misalignment of AI
+  in Mathematics", "Published 11 September 2026 · DOI 10.5281/zenodo.22737750". The Zenodo record
+  (version v1 at 22737751, licence CC0 1.0) lists 25 authors. The page lists **28 signatories as
+  of 2026-10-12**, each labelled with a Fields Medal year: the 25 deposited plus Drinfeld,
+  Margulis, and Mumford. Tao's same-day post states "25 initial signatories — all Fields
+  Medallists". The deposited PDF (29,254 bytes; MD5 matches the record) is stored under
+  `sources/` under CC0.
 - **Deps:** S-0004.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
   - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
     as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
+  - 2026-10-12 (Session 2) — UNKNOWN → **VERIFIED** (S0.1; page, Zenodo record and deposited PDF
+    read first-hand; signatory count recorded as of access date; S-0004).
 
 ---
 
@@ -89,14 +130,21 @@ and nothing about them beyond the prompt's wording is known or recorded.
 
 - **Informal statement:** A document referred to in the genesis prompt as "the Leiden Declaration"
   exists and bears on the AI-mathematics situation. Date, authors, and content unestablished.
-- **Status:** UNKNOWN
-- **Evidence:** none. S-0005 UNVERIFIED.
+- **Status:** VERIFIED
+- **Evidence:** S-0005 — `leidendeclaration.ai` read first-hand 2026-10-12: "Leiden Declaration on
+  Artificial Intelligence and Mathematics", "2 June 2026 · DOI: 10.5281/zenodo.20302944"; a
+  16-member working group is named; "4322 Signatories" as of 2026-10-12. Zenodo record v1 (licence
+  CC BY-NC 4.0, 16 creators, published June 2, 2026) and arXiv:2609.35334 (math.HO; v1 28 Sep 2026,
+  v2 30 Sep 2026; arXiv non-exclusive distribution licence). The deposited PDF (199,338 bytes; MD5
+  matches the record) is stored under `sources/` under CC BY-NC 4.0.
 - **Deps:** S-0005.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN per §S0.1.
   - 2026-10-12 (Session 2) — retrieval hints supplied by Al at ratification, recorded in SOURCES.md
     as "named by Al"; status unchanged: UNKNOWN until the primary source is read (SD11).
+  - 2026-10-12 (Session 2) — UNKNOWN → **VERIFIED** (S0.1; page, Zenodo record, arXiv abstract
+    and deposited PDF read first-hand; S-0005).
 
 ---
 
@@ -125,9 +173,17 @@ and nothing about them beyond the prompt's wording is known or recorded.
   under SD8:** verifying that such a correction or retraction *exists* is S0 work; reading its
   *content* (which manuscripts, which flaws) is S5 work and never informs design before the freeze.
   It is never S1 ground truth (SD12: S1 holds human-authored proofs with documented status).
-- **Status:** UNKNOWN
-- **Evidence:** none. S-0006 UNVERIFIED.
+- **Status:** VERIFIED (existence only)
+- **Evidence:** S-0006 — `history.md` in `openai/math`, dated "October 7, 2026", added by commit
+  `30148886` (PR #1 "Update manuscripts and Lean formalizations", merged 2026-10-08T05:20:01Z;
+  the file is absent at the initial commit). It records withdrawals (3 manuscripts), revisions
+  (14), citation updates (13), and additional formalizations; the catalogue's manuscript count
+  fell from 722 to 719 accordingly, and the README promises that previous versions remain
+  accessible. **The content — which manuscripts, what gaps — is deliberately not transcribed
+  here (SD8)** and is read only in S5.
 - **Deps:** S-0006; S-0001.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 2) — seeded UNKNOWN at ratification (pre-ratification edit 3).
+  - 2026-10-12 (Session 2) — UNKNOWN → **VERIFIED (existence only)** (S0.1; the repository's own
+    history file and PR read first-hand; content withheld under SD8; S-0006).

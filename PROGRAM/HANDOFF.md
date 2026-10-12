@@ -110,3 +110,121 @@ constitution draft, every register skeleton plus FLAWS.md, question list) and th
 says stop here and present for review. Repo LF-clean at `d53f5b6` and after this entry. This entry's
 commit is the first push to `origin/main`, which establishes the default branch on GitHub; the next
 ORIENT confirms it with `git remote show origin`.
+
+---
+
+SESSION: 2026-10-12 @ c803c96 (Session 2 — ratification + S0.1; the commit adding this entry and
+the S0.1 register updates lands on top of c803c96)
+LAUNCH CONTEXT (SD15; not an exam session): launched with the §6 Session-2 prompt carrying Al's
+rulings on Q1–Q17, three pre-ratification edits, a standing S2 ruling, and retrieval hints — a
+state-carrying prompt by design for a non-exam session. The session runs in the same conversation
+as Session 1 (the executor holds its transcript); under the corollary ratified this session it is
+therefore not cold, which is why no cold-start test was attempted. Recalled memory at start: the
+memory-index lines for SYNDEOM and both siblings (location + hazards + "run the loop from the repo";
+D1-compliant), user-identity and machine-hazard lines, and roughly thirty index lines for unrelated
+private programs (withheld).
+PHASE / GATE: S0 — FOUNDATION AND CITATION VERIFICATION / Gate S0 open. Done this session: S0.3
+(ratified), S0.5 (taxonomy ratified), S0.1 (sources). Open: S0.4, S0.6, cold-start; S0.2 waiting on
+a ferry.
+PLAN NOTE: the inherited NEXT-SINGLE-ACTION was the ratification; Al's prompt directed "then continue
+into S0.1 if budget allows". Ratification was executed first as the one thing (`c803c96`); S0.1
+followed as Al's explicit direction, sequentially, not in parallel (FRIEDMAN Session 3 precedent for
+an escalation response that directs two things).
+ADVANCED:
+- ORIENT from the repo: clean at `1fe9c06` = `origin/main`, `origin/HEAD` → `main`, 11/11 `i/lf`,
+  cross-reference check ALL PASS, STATE/HANDOFF/CLAIMS/FLAWS read from disk and consistent.
+- Ratification (`c803c96`): Al's rulings recorded as a table in the ADR-0000 addendum (Q6–Q9, Q17
+  bind ADR-0002; Q10–Q11 bind ADR-0001; Q13 ratifies the corollary by citation of FRIEDMAN
+  ADR-0003; Q16 keeps the trailer); the S2 standing ruling (deterministic first generator family;
+  LLM-assisted families need their own ADR and are outside `battery-freeze-v1` without it)
+  recorded in §2 S2.1 and STATE; pre-ratification edits applied — S3.2 fooling length with the
+  N_min power floor; FLAW-0014 incomplete case analysis (non-inductive) with gap and fatal
+  examples; FLAW-0007 example states n ∈ ℕ; S-0006/CLAIM-0007 added as an SD8 contact-phase
+  item; DRAFT markers removed from the constitution, README, FLAWS, STATE, ADR-0000; SIBLING-MAP
+  §10 records the Mathlib pin as a load-bearing divergence from KOBER. No CLAIMS transitions at
+  that commit (hints are not retrievals).
+- S0.1 (this commit): all six sources retrieved and read from primary sources on 2026-10-12
+  between 21:57Z and 22:07Z, every one with URL, access time, licence, and SHA-256 of the exact
+  bytes read (SOURCES.md). CLAIM-0001..0005 UNKNOWN → VERIFIED; CLAIM-0007 UNKNOWN → VERIFIED
+  (existence only). Two deposited PDFs committed under `sources/` with their Zenodo licences (CC0;
+  CC BY-NC 4.0) and MD5s reproducing the records'. Counts for S-0001 derived from `openai/math`
+  itself at two commits with units stated (722 → 719 manuscripts, 372 families; 300/719 "top-line
+  results formalized"; 173 catalogued papers; 242 families with scope notes; 10 reasoning
+  summaries; ≈4,000 problems) — not from press. The S5 contact-corpus location is now established.
+- Check script repaired: it now reads Q definitions from the ADR-0000 addendum table as well as
+  STATE (the rulings moved there this session).
+BELIEF DELTAS:
+- The post carries no counts at all; every number lives in the repository, and the repository
+  carries three *different* formalization units (300 top-line results over 719 manuscripts; 173
+  catalogued papers with a formalized main result; 242 families with a Lean scope note) that it
+  does not reconcile. Evidence: README, history.md, formalization.yaml, lean/docs listing at the
+  tip. Consequence: S5 outputs must name the unit on every number, and "~42% formalized" is a
+  claim about one unit only.
+- The repository's own update PR states "Lean builds were not run for this synchronization", and
+  its formalization catalogue declares `review: status: unchecked` with `automation: agent`. The
+  corpus therefore ships with explicitly unverified verification artifacts. Evidence: PR #1 body;
+  formalization.yaml tail. Consequence for S3/S5: "has a Lean file" and "has been checked" are
+  different predicates; the battery's axiom/build audit cannot assume the latter.
+- The contact corpus pins `leanprover/lean4:v4.34.1` and Mathlib `d13f23b7…` with roughly forty
+  further git dependencies and a tree the API truncates at 58,728 entries. Evidence: lean-toolchain,
+  lake-manifest.json, trees API. Consequence: the Q8 "per-corpus toolchains" consequence is now a
+  measured fact, not a hypothetical; S5 ingest must plan for it.
+- Primary and secondary disagree on dates and counts in ways the register must carry, not
+  smooth: the AHM statement page is undated (the 7 October date is the repost's); the Fields
+  Medalist page lists 28 signatories today against 25 in the Zenodo deposit and Tao's "25 initial
+  signatories"; the manuscript count is 722 at release and 719 after 7 October; search summaries
+  said "722" and "377 results" — the 377 is the catalogue's highest result *number*, not a count
+  (372 distinct). Evidence: the primaries at the digests recorded.
+- Tool reachability is per-site, not per-tool: openai.com served curl and refused the fetch tool;
+  ias.edu refused both; Zenodo refused its API to curl but served record pages to both. Evidence:
+  HTTP codes in SOURCES.md. Consequence: try the other tool before recording UNVERIFIED.
+CONFUSIONS:
+- A `| grep` after the check script masked its non-zero exit, so the ratification commit went
+  ahead before I read the script's verdict; the verdict was a stale regex (Q definitions had
+  moved), not a repo defect, and the repo was coherent — but the sequence was wrong. Cost: one
+  post-hoc verification. Doc fix: this entry; the script's regex is fixed; the sibling hazard "a
+  grep in a pipeline is not a guard" is now also a SYNDEOM hazard in the memory file.
+- `history.md` had to be read to establish S-0006's *existence*, and it also states the nature of
+  the gaps. Resolved by transcribing only existence facts and counts, withholding names and gap
+  descriptions from every register (SD8), and recording the exposure in the LEAKAGE CHECK. Cost:
+  none. Doc fix: S-0006 carries an explicit "Withheld (SD8)" field so a successor knows what not
+  to look for before S5.
+- The CONTENTS.md link regex truncated one path at a parenthesis ("CAT(0"), making it look like one
+  non-PDF link. It is a parse artifact; all 719 links are PDFs. Cost: one extra check.
+- A cp1252 console killed a Python print after the work was done (again). Cost: one re-run.
+  `PYTHONIOENCODING=utf-8` and `-X utf8` fixed it; recorded as a hazard.
+HONESTY CHECK: six transitions, all UNKNOWN → VERIFIED on primary-source reads, each recording what
+was *not* obtained: the IAS page (403), the AHM page's missing date, the three unreconciled
+formalization units, the 25-vs-28 signatory difference, the arXiv licence that forbids storing.
+CLAIM-0007 is VERIFIED *for existence only* and says so in its status. CLAIM-0006 stays UNKNOWN —
+no sweep exists and nothing retrieved bears on the absence of prior calibration work. Nothing from
+search-result summaries entered any register (the "722"/"377" figures were replaced by counts from
+the repository). The Lean "~42%" is recorded as the repository's own phrasing, not as a verified
+proportion of anything SYNDEOM measured. Downgrades: none needed.
+LEAKAGE CHECK: checked, not assumed — no design decision was made this session on the basis of any
+contact material: the ratification rulings came from Al; ADR-0001/0002 were not written. Exposure to
+disclose: the executor read `history.md` and the `openai/math` README/catalogue headers to
+establish existence and counts; `history.md` names withdrawn manuscripts and describes the gaps.
+Those descriptions were not transcribed, not committed, and informed no decision; no manuscript, PDF,
+or Lean file from the corpus was opened; `contact/` does not exist. The two PDFs ingested under
+`sources/` are declarations about AI and mathematics, not proofs. Verdict: no leakage; one
+disclosed exposure.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. Every retrieval is pinned by URL + access time
++ SHA-256 of the bytes read; repository files are pinned by git blob id and commit; the two stored
+PDFs reproduce their records' MD5s. Nothing to quarantine.
+MANIFEST CHECK: no artifacts exist. "Proven" was not applied to anything; the corpus's own
+"formalized" counts are recorded as its phrasing, with its `review: status: unchecked`. Nothing
+synthetic labeled real: the two stored PDFs are real documents recorded as INGESTED sources, not
+corpus items.
+DRIFT CHECK: no statement about any real manuscript's correctness (SD3) — S-0006 records that
+withdrawals exist, not what is wrong in any paper; no statement about understanding (SD17); no
+detectors exist; no referee contact (SD13). One scope note: ingesting two declaration PDFs under
+`sources/` is bibliography, not corpus work; `groundtruth/` and `contact/` remain nonexistent.
+NEXT-SINGLE-ACTION: see STATE.md — S0.4, write ADR-0001 (the proof-artifact manifest schema) under
+the Q10/Q11 constraints, with D6-style goldens; then S0.6.
+ESCALATIONS:
+- Q3 repository LICENSE (standing, due before S5.4).
+- Q14 founding sweep ferry (standing; no novelty claim until then).
+- None new. No ferry needed for S0.1 (nothing load-bearing was unreachable).
+STOP-REASON: natural boundary — S0.1 complete and recorded; S0.4 is a design task that should start
+with a fresh read of the sibling's ADR. Repo LF-clean; this commit pushes to `origin/main`.
