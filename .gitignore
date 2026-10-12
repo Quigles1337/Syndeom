@@ -1,0 +1,11 @@
+# Lean build dir (the lean/ project lands at S0.6; unanchored like the sibling's)
+.lake/
+# Rust build output — both candidate workspace roots listed until the S0.6 scaffold ADR picks one
+/target/
+engine/target/
+# Python caches — lab/ has zero result authority (SD10)
+__pycache__/
+*.pyc
+# OS noise
+Thumbs.db
+Desktop.ini

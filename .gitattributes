@@ -1,0 +1,9 @@
+# Deterministic text handling: repo-internal and checked-out line endings are LF everywhere,
+# so any digest pinned over a committed text file is identical on every clone.
+# (Lesson imported from the sibling programs' recorded machine gotcha: autocrlf=true checkouts
+# silently CRLF-ing files whose digests were pinned, breaking verification on clean clones.)
+* text=auto eol=lf
+*.pdf binary
+*.png binary
+*.jpg binary
+*.zip binary
