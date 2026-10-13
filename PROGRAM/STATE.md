@@ -1,6 +1,8 @@
 # STATE
 
-- **Updated:** 2026-10-13 UTC (Session 6 — Gate S0 cold-start exam: PASS; Gate S0 closed)
+- **Updated:** 2026-10-13 UTC (Session 7 — Al's rulings of 2026-10-13 recorded: Apache-2.0
+  `LICENSE` closes Q3; ADR-0004 amends §2 S3.2; S2 seed-family standing ruling; the advisory-note
+  ferry did not verify and is escalated. Bookkeeping only; nothing built; NEXT unchanged)
 - **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
 - **Gate:** S1 open; no S1 criterion has evidence yet (table below). **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
@@ -18,23 +20,28 @@
   (CLAIM-0006 examination, done); its runners-up remain unretrieved (carried note below).
 - **Default branch:** `main` — discovered from the clone of the empty remote and the REST API
   (ADR-0000 D3); confirmed by Al (Q2). Remote: `origin` = `https://github.com/Quigles1337/Syndeom`
-  (**public**; created by Al 2026-10-12; Actions enabled; no `LICENSE` file — Q3 deferred).
+  (**public**; created by Al 2026-10-12; Actions enabled; **`LICENSE` = Apache-2.0 since Session 7**
+  — Q3 resolved by Al 2026-10-13, ADR-0000 Addendum 2 R1; the release boundary is stated in
+  README.md § Licence; text provenance S-0019).
   **ORIENT note (SD7):** `git symbolic-ref refs/remotes/origin/HEAD` resolves to `main`; if it ever
   fails, fallback `git remote show origin`, repair `git remote set-head origin -a`.
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
-  2026-10-13 03:45:45Z–03:46:17Z (Session 6) at `2b7c573`, and again on the tree the Session-6
-  commit lands, before that commit** — Lean `Build completed successfully (8926 jobs)`, axioms
-  `[propext]`; Rust fmt and clippy clean, 23/23 tests; 36 text files `i/lf` + 9 binaries; registers
-  coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 18/18). Earlier GREEN runs: Session 4
-  (before the S0.6 commit) and Session 5 (at `132788c`). **Standing instruction:** update this
-  line at every GREEN run a HANDOFF entry records, so it never lags HANDOFF. **Timing:** about 30 s
-  with a warm `lean/.lake` (Mathlib cache present); about 15 min on a fresh machine (toolchain
-  install, nine clones, 8,908-file cache download) — a `lake build` that prints nothing for minutes
-  under a pipe is the download, not a hang. The advisory CI (`.github/workflows/check.yml`) runs
-  the same script and is never a required check; it completed `success` for `132788c` and
-  `2b7c573`.
+  2026-10-13 22:54:28Z–23:04:29Z (Session 7) on the Session-7 tree with every edit in, and again
+  on the final tree before the Session-7 commit** — Lean `Build completed successfully (8926 jobs)`,
+  axioms `[propext]`; Rust fmt and clippy clean, 23/23 tests; 38 text files `i/lf` + 9 binaries;
+  registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 20/20). Earlier GREEN runs:
+  Session 4 (before the S0.6 commit), Session 5 (at `132788c`), Session 6 (at `2b7c573` and on its
+  own tree). **Standing instruction:** update this line at every GREEN run a HANDOFF entry
+  records, so it never lags HANDOFF. **Timing:** about 30 s with a warm `lean/.lake` *and* a warm
+  OS file cache; **about 10 min after a reboot even with `lean/.lake` warm** (Session 7: the axiom
+  audit, `lake env lean Audit.lean`, loaded Mathlib's oleans from a cold disk cache, lean.exe
+  above 1.4 GB — not a hang; run the gate in the background with a log); about 15 min on a fresh
+  machine (toolchain install, nine clones, 8,908-file cache download) — a `lake build` that prints
+  nothing for minutes under a pipe is the download, not a hang. The advisory CI
+  (`.github/workflows/check.yml`) runs the same script and is never a required check; it
+  completed `success` for `132788c` and `2b7c573`.
 - **Toolchain (ADR-0002, Session 4):** Lean `leanprover/lean4:v4.34.1` (`lean/lean-toolchain`),
   which is Mathlib's own `lean-toolchain` at the pinned Mathlib commit
   `d13f23b723b8a846827a245b89c10fc7d3f11612` (tag `v4.34.1`; `lean/lakefile.toml` +
@@ -50,7 +57,10 @@
   to pin the same Lean and Mathlib commit (S-0001); the ADR-0002 criterion was fixed before that
   was compared.
 - **Constitution:** `PROGRAM/SYNDEOM-PROGRAM.md` v1.0, ratified by Al 2026-10-12 (Session 2);
-  rulings of record in the ADR-0000 addendum. ADR-only.
+  **amended once: ADR-0004 (2026-10-13, Session 7) — §2 S3.2, fooling length as equivalence to
+  chance with a design-derived N_min.** Rulings of record: the ADR-0000 addendum (Session 2, Q1–Q17)
+  and ADR-0000 Addendum 2 (Al's rulings of 2026-10-13, R1–R4). ADR-only; the constitution's version
+  string is unchanged because no rule assigns version numbers to amendments (noted in ADR-0004).
 - **Taxonomy:** `PROGRAM/FLAWS.md` 0.1.0 ratified (FLAW-0001..0014).
 - **Registers (unchanged in Session 6):** CLAIM-0001..0005 and 0007 VERIFIED (0007 existence
   only); CLAIM-0006 **CONDITIONAL** in a narrowed form (unfalsified as of 2026-10-13; bounding
@@ -85,8 +95,23 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
   S-0001.
 - **ADR numbers:** ADR-0001 manifest schema — written (Session 3), ratified by Al (Session 4) with
   its *Amendments*; ADR-0002 toolchain pins, Lean project, Rust workspace, JCS crate, storage
-  default, gate and CI — written (Session 4, S0.6), D8 records what was measured. **ADR-0003 is the
-  next free number and is reserved for S1.1 (NEXT).**
+  default, gate and CI — written (Session 4, S0.6), D8 records what was measured; **ADR-0003 remains
+  reserved for S1.1 (NEXT)**; ADR-0004 constitution amendment to §2 S3.2 (Al's ruling R2 of
+  2026-10-13) — written Session 7. **ADR-0005 is the next free number.**
+- **S3 calibration ADR obligations (ADR-0004, 2026-10-13):** before any curve is computed it must
+  (1) compute N_min by the method ADR-0004 fixes — the smallest balanced cell at which the
+  equivalence test (95% bootstrap CI of the AUC inside [0.45, 0.55]) has 90% power at true AUC
+  0.5, from the null-hypothesis variance of the Mann–Whitney statistic — and confirm the number by
+  simulation against the bootstrap procedure actually used; (2) state how effective N is computed
+  for items derived from one seed theorem (for example a cluster bootstrap by seed theorem).
+  Cells that cannot reach N_min — human-referee cells under SD13, detectors needing a per-item
+  Lean build across the full grid — are reported **underpowered** by design.
+- **S2 seed family (Al's ruling R4 of 2026-10-13; ADR at S2):** a Mnemosyne-derived seed family —
+  the static-reduction theorem DM-FM-THM-001 and the labelled variants the advisory note proposes —
+  is a **candidate** hand-authored golden-fixture family for S2.4, beside the FLAWS.md examples. A
+  pipeline test, not calibration data (one theorem, six variants). Its licence line is decided at
+  S2 under the R1 release boundary (ADR-0000 Addendum 2). Nothing built yet. The program is named
+  with its program owner's authorization (Al, 2026-10-13).
 - **Real items and detectors (ADR-0001 D4, ratified Session 4):** `raw/1` is archival; detectors
   consume only `syndeom-informal-md/1` and `syndeom-lean/1`; every S1/S5 item to be scored gets a
   derived canonical artifact (deterministic producer, `config.derived_from` + `method`, parent's
@@ -134,11 +159,24 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
 
 ## Standing escalations (awaiting Al)
 
-- **Q3 — Repository LICENSE.** Public repo, no licence file. Al's decision, due before S5.4 and
-  before any paper cites the repo. Not a blocker. Recorded since Session 5 as **deferred pending
-  Al's explicit decision text** (the slot in Sessions 3–5 arrived as unfilled template text; the
-  executor cannot supply the decision or the reason — SD7). Al: please paste an SPDX identifier or
-  the words "deferred pending <reason>". Nothing in S1 depends on it.
+- **Q3 — RESOLVED 2026-10-13 (Session 7).** Al: SPDX `Apache-2.0` for SYNDEOM's original software
+  and technical documentation, with the release boundary recorded in ADR-0000 Addendum 2 R1 and
+  README.md § Licence. `LICENSE` committed (S-0019), `license` field set on `syndeom-manifest`.
+  Nothing awaited. One note for Al, not a blocker: the Apache Software Foundation's own host
+  (`www.apache.org`) refused connections from both tools throughout Session 7, so the committed
+  text is the SPDX License List's rendering, cross-checked whitespace-for-whitespace against an
+  independent copy (S-0019); a later session can diff it against the ASF file when the host answers.
+- **Advisory note ferry (Al's ruling R3 of 2026-10-13) — awaiting the file.** The ruling names
+  `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md`, 27,238 bytes, LF, SHA-256
+  `f3e40b684a8b437fa4f0ba9d059d23d6ae61ce88ce8bca84ceb49fd7c181fa2c`. In Session 7 the file was
+  not at that path, not in `origin`, not in the stash, and not found by a bounded name search of
+  the machine; the text Al pasted into the session mid-turn hashed, as transcribed, to 25,652 bytes
+  / `0ee1eda0ab0ef11ffe70c52a1118ca1235b1306fe5895fcf75914c46081baa80` (chat rendering lost the
+  tables' structure, the `=` of several displayed equations and the heading markers), so it is not
+  the ferried artifact and was not committed. Per the ruling: stop and escalate. **Al: place the
+  file at the path (or name a path on this machine holding the exact bytes); the next session
+  verifies the digest and commits it as ferried, body unedited.** R4 and the jurisdiction ruling
+  are recorded regardless (ADR-0000 Addendum 2); nothing from the paste entered any register.
 - **SD15 audit request (Session 6).** The cold-start exam's memory disclosure (HANDOFF Session 6,
   first entry) flags two memory-file lines as borderline — a paraphrase of three constitution rules
   (§0.3, §0.4, SD17) and the hazard "the gate runs `fmt --check`" — and withholds 85 unrelated

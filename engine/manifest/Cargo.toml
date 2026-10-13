@@ -2,6 +2,7 @@
 name = "syndeom-manifest"
 version = "0.1.0"
 edition = "2024"
+license = "Apache-2.0"
 description = "SYNDEOM proof-artifact manifest types, byte formats, hashes, and fidelity verdicts (ADR-0001)"
 publish = false
 

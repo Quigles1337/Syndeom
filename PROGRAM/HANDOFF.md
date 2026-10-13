@@ -815,3 +815,175 @@ ESCALATIONS:
 STOP-REASON: gate reached — Gate S0 closed by the cold-start exam. Repo green on the committed tree
 (`bash scripts/check.sh` re-run after these edits, before the commit); this commit pushes to
 `origin/main`.
+
+SESSION: 2026-10-13 UTC @ b1b17d2 (Session 7 — Al's rulings of 2026-10-13 recorded; the commit
+adding this entry lands on top of b1b17d2)
+LAUNCH CONTEXT (SD15; not an exam session): launched with the §6 Session-N resume prompt plus Al's
+instructions for the session — four rulings (R1 LICENSE, R2 the S3.2 amendment, R3 an advisory-note
+ferry, R4 a standing ruling for S2), one jurisdiction note, a leakage instruction, and the order
+that NEXT stays S1.1. The harness loaded the executor's memory index at start; the SYNDEOM memory
+file holds the repo location and machine hazards only (SD15). Memory written this session: hazards
+only (three retrieval/ferry hazards; no program state), recorded below.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open; no S1 criterion advanced — this was
+bookkeeping of decisions already made, and it built nothing. Gate S0 closed (Session 6) — unchanged.
+PLAN NOTE: one thing — record Al's rulings of 2026-10-13 where STATE and the ADR-0000 addendum say
+rulings belong, as Session 2 recorded Q1–Q17. The inherited NEXT-SINGLE-ACTION (S1.1, ADR-0003) was
+not this session's task; ORIENT did not invalidate it; it stands unchanged at the end.
+ADVANCED:
+- ORIENT (§4.1): toplevel `C:/Users/LEET/Syndeom`; `origin` =
+  `https://github.com/Quigles1337/Syndeom.git`; `git symbolic-ref refs/remotes/origin/HEAD` →
+  `refs/remotes/origin/main`; HEAD = `origin/main` = `b1b17d2` (after `git fetch`); worktree clean,
+  stash empty. Read: the constitution (465 lines), STATE, HANDOFF Session 6, CLAIMS headings and
+  CLAIM-0006 in full, FLAWS header, ADR-0000 in full, ADR-0001 header and Amendments, ADR-0002
+  header, SOURCES header with S-0007 and S-0018 as format exemplars, `scripts/check.sh`,
+  `scripts/check_registers.py`, `.github/workflows/check.yml`, `engine/Cargo.toml`,
+  `engine/manifest/Cargo.toml`, `rust-toolchain.toml`, `.gitattributes`, `.gitignore`,
+  `analysis/README.md`. The sibling trees were read for licence practice only (root listings,
+  READMEs, Cargo manifests, STATE licence lines) and not touched.
+- ORIENT discrepancy: the file R3 names, `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md`, was not
+  in the tree, not in `origin` (fetched), not in the stash, and not found by a bounded name search
+  of `C:\Users\LEET` (depth 3, OneDrive/AppData/build dirs pruned). Al then pasted the note's text
+  into the session mid-turn. Transcribed exactly as received into the scratchpad and hashed:
+  25,652 bytes, 0 CR, SHA-256 `0ee1eda0ab0ef11ffe70c52a1118ca1235b1306fe5895fcf75914c46081baa80`;
+  the ruling states 27,238 bytes and `f3e40b684a8b437fa4f0ba9d059d23d6ae61ce88ce8bca84ceb49fd7c181fa2c`.
+  Mismatch, with visible cause: the chat rendering flattened the three-column table to spaced text,
+  dropped the `=` from four displayed equations (the §6 field equation, the boxed static reduction,
+  the difference-field equation, the cost ratio), and stripped heading and bullet markers. Per R3
+  ("on mismatch, stop and escalate") the file was not committed and nothing from the paste entered
+  any register; the paste was read once, for the LEAKAGE CHECK below, and otherwise left alone.
+- R1 — LICENSE (executed): the Apache Software Foundation host refused connections from both tools
+  all session (curl ×3 on two hostnames, `Could not connect to server` after ~21 s each; the fetch
+  tool `connect ECONNREFUSED 151.101.2.132:443`; DNS fine). Retrieved instead from the SPDX License
+  List for the identifier Al named — `https://spdx.org/licenses/Apache-2.0.txt`, 22:38:32Z, 10,279
+  bytes, SHA-256 `c274f803…366c` — and cross-checked against an independent copy from the GitHub
+  Licenses API (22:44:34Z, 11,357 bytes, `c71d239d…0ab4`): identical after whitespace
+  normalization. Committed `LICENSE` = SPDX bytes + one trailing LF (gate rule): 10,280 bytes,
+  `074e6e32…15ff`. README.md gained a Licence section stating Al's boundary and pointing to
+  SOURCES.md; `license = "Apache-2.0"` added to `engine/manifest/Cargo.toml` `[package]` (the only
+  package table — `engine/Cargo.toml` is a bare `[workspace]`). No NOTICE file: KOBER (`f94bec2`)
+  and FRIEDMAN (`7c3e5dd`) have no LICENSE, NOTICE, README licence section or Cargo `license`
+  field. S-0019 records every URL, time and digest. ADR-0000: Q3 row annotated resolved; Addendum 2
+  R1. STATE: Q3 escalation closed; default-branch line updated.
+- R2 — S3.2 amendment (executed): `PROGRAM/DECISIONS/ADR-0004.md` written — D1–D7 are Al's (i)–(vii)
+  verbatim in substance; *Method* fixes the N_min derivation from the null variance of U (S-0020
+  eqs. (2) and (5)), reproduces that variance by an independent covariance count, gives the
+  normal-approximation closed form as the S3 calibration ADR's starting value, and lists the four
+  steps that ADR performs before any curve (analytic n; simulation against the real bootstrap with
+  the real tie structure; type-I at the band edges and coverage at 0.5; effective-N at cluster
+  level). **No number computed** (deferred as ruled). §2 S3.2 replaced to match, citing the ADR;
+  Amendments line in the constitution's header and footer; version string unchanged (no rule).
+  STATE: ADR-0003 stays reserved for S1.1, ADR-0005 next free, S3 calibration ADR obligations
+  listed. S-0020: Project Euclid served an Incapsula challenge to curl (three URLs) and empty
+  content to the fetch tool; the DOI resolves (302 observed); Crossref confirms the record; the
+  publisher PDF was retrieved from the Internet Archive's 2026-09-27 capture (`id_` raw route),
+  779,952 bytes, `7647e2a2…0788`, rendered to images (no text layer) and read: p. 50 title/authors,
+  p. 51 eq. (2) E(U) = nm/2, p. 55 eq. (5) E[(U − nm/2)²] = nm(n+m+1)/12. VERIFIED, digest-only
+  (licence unstated on the copy).
+- R3 — advisory ferry (not executed; escalated): recorded in ADR-0000 Addendum 2 R3 with the stated
+  path, size, digest and provenance header summary, the non-execution and its evidence; STATE
+  standing escalation says exactly what is needed (the file at the path, or a path on this machine
+  holding the exact bytes). The program it names is named with its owner's authorization (Al,
+  2026-10-13) — recorded in Addendum 2 and STATE.
+- R4 — S2 seed family (recorded): STATE standing rulings; Addendum 2 R4. Candidate hand-authored
+  golden-fixture family for S2.4 beside the FLAWS.md examples; a pipeline test, not calibration
+  data; licence line decided at S2 under the R1 boundary; ADR at S2. Nothing built.
+- Jurisdiction: one line of record in Addendum 2 — the note's §6/§7 finding is a DARQ MNEMOSYNE
+  change-control item under that program's governance; SYNDEOM records nothing about it beyond
+  what the note's header says. Nothing about the finding itself is written anywhere here.
+- Evidence run (§4.1): `bash scripts/check.sh` on the fully edited tree, 22:54:28Z–23:04:29Z:
+  `Build completed successfully (8926 jobs)`; audit `'syndeom_golden_nat_le_sq' depends on axioms:
+  [propext]`; `cargo fmt --all --check` clean; `cargo clippy -D warnings` clean; `cargo test` 23
+  passed, 0 failed; `git ls-files --eol` no `i/crlf` or `i/mixed`; `check_registers.py` 45 tracked
+  files CR/BOM/trailing-LF clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, **S- 20/20** (S-0019
+  and S-0020 new); `RESULT: ALL PASS`; `GATE: GREEN`. Ten minutes rather than Session 6's thirty
+  seconds: the axiom audit loaded Mathlib's oleans from a cold OS file cache after a reboot
+  (lean.exe above 1.4 GB) with `lean/.lake` itself warm — not a hang; STATE's timing note now says
+  so. After staging, 47 tracked files: 38 `i/lf` + 9 `i/-text` (LICENSE and ADR-0004 added; both
+  byte-checked LF, no BOM, trailing LF). The gate is re-run on the final tree, after this entry and
+  the STATE lines are in, before the commit (STOP-REASON).
+- Memory (SD15, hazards only): four hazard bullets appended to the SYNDEOM memory file — paste
+  ferries never match a digest; apache.org unreachable / SPDX and GitHub licence copies; Project
+  Euclid's bot challenge and the Wayback `id_` route plus image-reading of textless scans; the
+  gate's cold-OS-cache timing. Re-read after writing: the file still names no phase, gate status,
+  claim status, commit, next action or escalation (grep for those tokens matched only the policy
+  sentence that forbids them).
+BELIEF DELTAS:
+- A ferried file's identity is its digest, and a chat paste cannot carry it: the harness rendering
+  of a Markdown file flattens tables, drops `=` lines from display math and strips heading markers,
+  so a paste of a 27,238-byte file arrived as 25,652 bytes. Evidence: the two digests above.
+  Consequence: a ferry is a path to bytes on disk, never a paste; STATE's escalation asks for that;
+  the hazard is in memory.
+- "Canonical source" can be unreachable while the document is available from the authority for the
+  identifier Al named: the SPDX License List is the SPDX text for `Apache-2.0`, and an independent
+  copy cross-checks it. Evidence: S-0019. Consequence: the record says plainly that the committed
+  bytes are not from the ASF host, and a later session diffs them when the host answers.
+- The Internet Archive's `id_` raw-capture route serves publisher PDFs that the publisher's own host
+  hides behind a bot challenge, and the copy is identified by its digest like any other retrieval.
+  Evidence: S-0020. Consequence: hazard in memory; the licence still governs (digest-only).
+- Mann and Whitney 1947 is a scan without a text layer: `pdftotext` returned only the JSTOR footer;
+  the content was read from rendered page images. Evidence: `pdfinfo` 11 pages, 3 lines of text.
+  Consequence: for old scans, render and read; do not conclude "no content" from empty text.
+- The equivalence framing makes the §0.5(b) negative result more expensive and more honest at once:
+  a cell must be large enough to *show* chance, and dependent variants of one seed theorem cannot
+  manufacture that power (ADR-0004 D6). Consequence: D7's underpowered cells are a pre-declared
+  finding, not a defect.
+CONFUSIONS:
+- Session-start me expected the advisory file on disk because the ruling said "Al has placed"; it
+  was not there. Cost: a bounded search, a paste transcription and a hash. Doc fix: STATE's
+  escalation names the two acceptable forms of the ferry; the memory hazard says a paste never
+  matches a digest.
+- Whether to split the session into two commits (the ADR-0004 set and the rulings set): the STATE
+  and SOURCES edits interleave, and Session 2's `[S0][ADR-0000] ratify the constitution and record
+  Al's rulings` is the precedent for one rulings commit. One commit, tagged ADR-0000, naming
+  ADR-0004 in the summary. Doc fix: none; the precedent is in `git log`.
+- `pdftotext` on the archived PDF produced three lines; a minute was spent before rendering pages.
+  Doc fix: the BELIEF DELTA above and a memory hazard.
+HONESTY CHECK: no CLAIM changed status; CLAIMS.md and FLAWS.md untouched. New SOURCES entries:
+S-0019 INGESTED (the licence text, with the ASF-unreachable caveat stated in the entry) and S-0020
+VERIFIED (digest-only; licence unstated on the copy, so no copy committed). CLAIM-0006's scoped
+novelty statement was re-read against the amended S3.2 ("a power-floored fooling length") and
+remains true. R3 is recorded as stopped, not as done. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. (1) `contact/` holds only its README; nothing from
+`openai/math` was opened; S-0001 and S-0006 were not reread. (2) The advisory paste — unverified
+text, read once — was searched for contact-corpus terms (`contact`, `openai/math`, `6 October`,
+`withdraw`, `retraction`, S-0001, S-0006, CLAIM-0001, CLAIM-0007): no match; read in full, it cites
+no contact-corpus behaviour; its examples are one private theorem's algebraic variants. This
+reading is repeated on the verified file when it arrives. (3) ADR-0004's rationale cites S-0020
+and its own derivation; the advisory note is named only as the provenance of the prompt for Al's
+ruling, never as rationale. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. Every digest above is regenerable by
+`sha256sum` over the recorded URL at the recorded route (the Wayback capture is timestamped; the
+SPDX file carries an ETag); the gate's numbers by `bash scripts/check.sh`. ADR-0004 computes no
+number by design. Nothing to quarantine.
+MANIFEST CHECK: no artifact touched or created; `corpora/` and `groundtruth/` hold READMEs only.
+"Proven" applied to nothing. Nothing synthetic labeled real. R4 names a *candidate* fixture family
+and nothing was authored for it.
+DRIFT CHECK: no statement about any real manuscript (SD3) — the Mnemosyne theorem appears only in
+Al's ruling text as a candidate fixture source, with no assessment of it; no understanding claims
+(SD17); no detectors exist, so no detector-shopping, and ADR-0004 was ruled before any curve; no
+referee contact (SD13). The jurisdiction line records nothing about the Mnemosyne finding. Scope:
+the four rulings and nothing else; R3 stopped at the digest, as ruled.
+NEXT-SINGLE-ACTION: S1.1 — write `PROGRAM/DECISIONS/ADR-0003.md`, the errata-and-retraction
+harvest procedure for `groundtruth/` (procedure only; no item is ingested in that session),
+exactly as STATE.md states it: decide (a) where candidate items come from and how one is admitted
+or rejected; (b) the per-item record (original, notice, the flaw's location, its FLAWS.md class
+argued in writing, derivation `documented-by-source`, source and licence per SD16); (c) licence
+handling — stored copy only when the licence permits, else digest-only with `storage: external`
+(ADR-0001 D2), ambiguity escalated; (d) the `raw/1` parent plus the derived `syndeom-informal-md/1`
+canonical artifact per ADR-0001 D4 (iii); (e) the shape of the S1.4 coverage table. Read first,
+from the stored PDF under `sources/`: S-0015's ArxivMathGradingBench pipeline. Commit
+`[S1][ADR-0003] decide the errata-harvest procedure`. Unchanged from Session 6.
+ESCALATIONS:
+- **Advisory ferry (R3) — awaiting the file.** Al: place `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md`
+  (27,238 bytes, LF, SHA-256 `f3e40b68…fa2c`) in the tree, or name a path on this machine holding
+  the exact bytes. The next session verifies the digest, commits it as ferried with the body
+  unedited, repeats the leakage reading on the verified file, and records placement in HANDOFF.
+  The paste in this session is not usable for that and was not committed.
+- **SD15 audit request (Session 6)** — unchanged; still awaiting Al's confirm-or-overrule.
+- **Note, not a blocker:** when `www.apache.org` answers, diff `LICENSE` against
+  `https://www.apache.org/licenses/LICENSE-2.0.txt` after whitespace normalization (S-0019 gives the
+  command) and record the ASF digest in S-0019.
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: natural boundary — the session's one task is recorded as far as it can be executed;
+R3 is a blocker requiring Al (the file). Repo green on the committed tree (gate re-run after every
+edit, before the commit); this commit pushes to `origin/main`.

@@ -18,6 +18,8 @@ never a code dependency.
 **Ratification:** authored by the executor in Session 1 (2026-10-12) from Al's genesis prompt;
 **ratified by Al in Session 2 (2026-10-12)**, with the rulings and the pre-ratification edits recorded
 in the ADR-0000 addendum. From that commit onward this file changes only via ADR.
+**Amendments:** ADR-0004 (2026-10-13, Session 7; Al's ruling of 2026-10-13) — §2 S3.2, the fooling
+length redefined as equivalence to chance with a design-derived N_min.
 
 ---
 
@@ -253,11 +255,23 @@ The battery, the curves, the fooling length, the cost model, the freeze.
   axiom audit (`#print axioms`). Controls (surface, documented-weak): length and hedge-word
   statistics, perplexity-style scores — kept to demonstrate that they are fooled, per §0.7.
 - S3.2 **ROC/AUC** over detector × flaw class × proof length × severity, bootstrap CIs on every AUC.
-  The **fooling length** per detector per class is defined with a power floor: the smallest proof
-  length L at which, in a cell with N ≥ N_min items, the 95% bootstrap CI of the AUC contains 0.5.
-  N_min is declared in the S3 calibration ADR *before any curve is computed*. Cells with N < N_min
-  are reported as **underpowered**, never as fooled. Proof length is swept log-spaced over the
-  regimes the S1 corpus actually exhibits.
+  **"Fooled" is a claim of equivalence to chance, not a failure to reject it** (amended by ADR-0004,
+  2026-10-13). The equivalence band is AUC ∈ [0.45, 0.55]; a detector is fooled in a cell when the
+  95% bootstrap CI of its AUC lies entirely inside the band — two one-sided tests at α = 0.025 each,
+  stricter than the conventional 90%-interval TOST. The **fooling length** per detector per flaw
+  class is the smallest proof length L at which a cell with N ≥ N_min items satisfies that criterion.
+  A cell whose CI merely contains 0.5 is reported as **"not distinguished from chance"**; a cell with
+  N < N_min is reported as **underpowered** — never as fooled. N_min is design-derived, not chosen:
+  the smallest balanced cell (flawed versus matched correct) at which the test has 90% power to
+  declare equivalence when the true AUC is exactly 0.5, derived from the null-hypothesis variance of
+  the Mann–Whitney statistic by the method ADR-0004 fixes; the number is computed in the S3
+  calibration ADR *before any curve is computed* and confirmed there by simulation against the
+  bootstrap procedure actually used. Items derived from one seed theorem are not independent: the S3
+  calibration ADR states how effective N is computed (for example a cluster bootstrap by seed
+  theorem) before any curve is computed. Cells too expensive to fill to N_min — human-referee cells
+  under SD13, detectors needing a per-item Lean build across the full grid — are reported as
+  underpowered; that is the intended behaviour, not a defect. Proof length is swept log-spaced over
+  the regimes the S1 corpus actually exhibits.
 - S3.3 **Leave-one-out.** Leave-one-generator-out and leave-one-flaw-class-out evaluation, to measure
   whether detectors detect flaws or fingerprint generators.
 - S3.4 **Cost model:** expert-minutes per true positive, from a pre-declared per-item review-time
@@ -460,4 +474,4 @@ per §4.6. Honor escalations — some decisions are Al's, not yours.
 
 ---
 *SYNDEOM v1.0 — συνδέω, to bind together: Friedman's calibration, Kober's rigor. Ratified 2026-10-12.
-Constitution amendments via ADR only.*
+Amended 2026-10-13 (ADR-0004, §2 S3.2). Constitution amendments via ADR only.*

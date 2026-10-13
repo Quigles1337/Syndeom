@@ -621,3 +621,91 @@ claim turns on — error/flaw class and proof length — and at what level.
 AGMAI "Responsible Release of AI-Generated Mathematics" is S-0002 (VERIFIED, Session 2); the
 7 October withdrawals are S-0006 (existence VERIFIED; content withheld under SD8). Neither is a
 calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
+
+---
+
+## S-0019 — Apache License, Version 2.0 — the repository licence text (Al's ruling R1 of 2026-10-13)
+
+- **State:** INGESTED (the text is committed verbatim at the repo root as `LICENSE`, applying the
+  licence to this repository under the boundary stated in README.md § Licence).
+- **As named:** Al's ruling R1 of 2026-10-13 (ADR-0000 Addendum 2): SPDX `Apache-2.0`, "retrieved
+  this session from its canonical source and recorded with URL, access date and SHA-256 per SD11
+  (do not reproduce it from memory)".
+- **Canonical host — unreachable this session (reachability, not existence):**
+  `https://www.apache.org/licenses/LICENSE-2.0.txt` and `https://apache.org/licenses/LICENSE-2.0.txt`.
+  curl at 2026-10-13T22:36:27Z: `Failed to connect to www.apache.org port 443 after 21115 ms:
+  Could not connect to server`; again IPv4-forced on both hosts at 22:38:32Z (same error); the
+  host root at 22:44Z (connect failed); the harness fetch tool at about 22:40Z: `connect
+  ECONNREFUSED 151.101.2.132:443`. DNS resolved (`151.101.2.132`, `2a04:4e42::644`). A later
+  session diffs the committed text against the ASF file when the host answers (whitespace
+  normalization as below); nothing in S1 depends on it.
+- **Retrieved — the SPDX License List's text for the identifier `Apache-2.0`:**
+  `https://spdx.org/licenses/Apache-2.0.txt`, accessed 2026-10-13T22:38:32Z (curl, HTTP 200,
+  `Content-Type: text/plain`, `Last-Modified: Wed, 29 Apr 2020 17:19:07 GMT`, ETag
+  `"ba963850f6731c74878fe839d227e675"`): 10,279 bytes, 0 CR, no trailing newline, 72 lines
+  (paragraph-per-line layout), SHA-256
+  `c274f80372d90c012937370f0e1f15087d22e308ef98b27cea5dc0d2d088366c`. Header reads "Apache License
+  / Version 2.0, January 2004 / http://www.apache.org/licenses/".
+- **Cross-check — an independent copy:** GitHub Licenses API `https://api.github.com/licenses/apache-2.0`
+  (`key: apache-2.0`, `spdx_id: Apache-2.0`, `name: Apache License 2.0`; GitHub sources it from
+  `choosealicense.com/licenses/apache-2.0/`), accessed 2026-10-13T22:44:34Z via `gh api`
+  (authenticated): `body` 11,357 bytes UTF-8, 0 CR, trailing LF, centred-header layout, SHA-256
+  `c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4`. The two texts are
+  **identical after whitespace normalization** (`tr -s ' \t\r\n' ' '` on each, trim, `diff`: empty);
+  they differ only in line wrapping and the centred header.
+- **Committed form:** `LICENSE` = the SPDX bytes plus one trailing LF, because the gate requires
+  every tracked text file to end with LF (`scripts/check_registers.py`): 10,280 bytes, SHA-256
+  `074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff`. Re-verify the retrieved
+  bytes from the committed file with `head -c 10279 LICENSE | sha256sum` → `c274f803…366c`.
+- **Licence (of this material):** the Apache License 2.0 is itself the licence; the text is
+  included to apply it (R1). What it covers and does not cover: README.md § Licence (Al's
+  boundary: not `sources/`, `groundtruth/`, `contact/` third-party materials, each under its own
+  recorded licence; not separately controlled DARQ Labs research materials, which are marked where
+  they appear and remain proprietary).
+- **Also set:** `license = "Apache-2.0"` in `engine/manifest/Cargo.toml` `[package]` (the only
+  package manifest; `engine/Cargo.toml` is a bare `[workspace]`). No NOTICE file: neither sibling
+  carries one (KOBER `f94bec2`, FRIEDMAN `7c3e5dd`, read 2026-10-13).
+
+---
+
+## S-0020 — Mann and Whitney (1947), "On a Test of Whether one of Two Random Variables is Stochastically Larger than the Other" (ADR-0004 D5: the null-hypothesis variance of U)
+
+- **State:** VERIFIED (the publisher's PDF retrieved this session — through the Internet Archive's
+  capture of the Project Euclid file, because Project Euclid itself served a bot challenge — and
+  read on pp. 50, 51 and 55; digest-only, no copy committed).
+- **As named:** Al's ruling R2 (v) of 2026-10-13: N_min is derived "from the null-hypothesis
+  variance of the AUC (Mann–Whitney) statistic, with the primary source for that variance retrieved
+  and cited this session per SD11, or left UNVERIFIED with a note". The executor identified the
+  candidate paper; its bibliographic record was confirmed from Crossref before anything was read.
+- **Citation (from the first page, confirmed by Crossref):** H. B. Mann and D. R. Whitney (Ohio
+  State University), "On a Test of Whether one of Two Random Variables is Stochastically Larger than
+  the Other", *The Annals of Mathematical Statistics* 18(1), pp. 50–60, March 1947, Institute of
+  Mathematical Statistics. DOI `10.1214/aoms/1177730491`.
+- **Primary host, this session:** `https://doi.org/10.1214/aoms/1177730491` → HTTP 302 →
+  `projecteuclid.org/euclid.aoms/1177730491` (22:36:49Z). The Project Euclid landing page, the
+  `.full` page and the `.pdf` URL each returned HTTP 200 with an Incapsula challenge page
+  (1,054–1,167 bytes; "Request unsuccessful. Incapsula incident ID …") to curl with a browser UA at
+  22:36:49Z and 22:40Z; the harness fetch tool received empty content from both. Crossref
+  `https://api.crossref.org/works/10.1214/aoms/1177730491` at 22:44:36Z: title, authors, container
+  title, volume 18, issue 1, pages 50-60, published-print 1947-03, publisher as cited; `license: null`.
+- **Retrieved copy:** the Internet Archive's capture of the Project Euclid PDF —
+  `http://web.archive.org/web/20260927082551id_/https://projecteuclid.org/journals/annals-of-mathematical-statistics/volume-18/issue-1/On-a-Test-of-Whether-one-of-Two-Random-Variables/10.1214/aoms/1177730491.pdf`
+  (capture 2026-09-27T08:25:51Z, found through `archive.org/wayback/available` at 22:44:36Z),
+  accessed 2026-10-13T22:46:04Z (curl, HTTP 200, `application/pdf`): 779,952 bytes, PDF-1.3,
+  11 pages, a JSTOR scan without a text layer (p. 50 carries the footer "Institute of Mathematical
+  Statistics is collaborating with JSTOR to digitize, preserve, and extend access to The Annals of
+  Mathematical Statistics"), SHA-256 `7647e2a29f7d11a12ecafa31e7474cb48349a8e71f140effdf24e014b80e0788`.
+  Pages were rendered to images (poppler 26.02.0) and read: 50, 51, 52–54 (Table I), 55.
+- **Content used (ADR-0004 D5 and its Method):** §1 and §2 assume continuous distributions (so
+  P(x_i = y_j) = 0 — no ties). §3 "The U test": "Let U count the number of times a y precedes an
+  x"; U = mn + m(m+1)/2 − T with T Wilcoxon's rank sum. §4 "The distribution of U": the recurrence
+  (1) for p_nm(U); eq. (2), p. 51: E_nm(U) = nm/2 ("Since the probability of the ith 1 preceding
+  the jth 0 is ½"); p. 55, with u = U − nm/2: eq. (5) E_nm(u²) = nm(n + m + 1)/12, shown by
+  substitution to solve the recurrence (3) with initial conditions (4), "hence it follows by
+  mathematical induction". Eq. (5) is the null-hypothesis variance of U that ADR-0004 fixes as the
+  basis of N_min. The fourth moment (8) and the limit-normality argument were not used.
+- **Licence:** not stated on the retrieved copy; Crossref `license: null`; the publisher's page was
+  unreadable this session. **Not redistributable on the record available; no copy committed**
+  (digest-only). Nothing needs redistributing: ADR-0004 cites the equation numbers and reproduces
+  the variance by an independent derivation.
+- **Bears on:** ADR-0004 only. Not a CLAIM; nothing about any manuscript.
