@@ -163,6 +163,12 @@ and nothing about them beyond the prompt's wording is known or recorded.
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN from the genesis prompt's problem statement.
   - 2026-10-12 (Session 2) — Al confirms no founding sweep exists (Q14); §0.6 holds; stays UNKNOWN.
+  - 2026-10-12 (Session 3) — founding sweep ferried by Al and placed at `PROGRAM/SWEEP-2026-10.md`
+    (SHA-256 `f4bfb2ad…b03e`, verified against Al's stated digest; SD11 banner). **Stays UNKNOWN:**
+    the sweep is a map, not evidence. Its verdict (no falsifying source found; a narrowed form
+    survives) is a hint for retrieval, not a transition. Al's ruling: CLAIM-0006 moves only after
+    the ten sources the sweep ranks are retrieved and read first-hand — a later S0 action (STATE
+    "Deferred S0 actions"). Deps now name the file.
 
 ---
 
