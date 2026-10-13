@@ -1,6 +1,6 @@
 # STATE
 
-- **Updated:** 2026-10-12 (Session 3 — Q14 ferry + S0.4 ADR-0001, close)
+- **Updated:** 2026-10-12 (Session 4 — ADR-0001 ratified and amended; S0.6 in progress)
 - **Phase:** S0 — FOUNDATION AND CITATION VERIFICATION
 - **Gate:** S0 open. Done: S0.1 (sources register), S0.2 (founding sweep placed), S0.3
   (constitution ratified), S0.4 (manifest ADR-0001), S0.5 (taxonomy 0.1.0 ratified). Open: S0.6
@@ -54,10 +54,16 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 - **S5 toolchains:** contact corpora carry their own Mathlib pins; S5 ingest records them and may
   need per-corpus toolchains. Note, not solve, until ingest (Q8). First data point recorded in
   S-0001.
-- **ADR numbers:** ADR-0001 manifest schema — **written** (S0.4, Session 3; five choices flagged
-  for Al in its Consequences, amendable by ADR before S1.3/S2.1); ADR-0002 toolchain pins and
-  scaffold — reserved (S0.6; constraints Q6–Q9, Q17; also decides the JCS crate, the synthetic
-  storage default, and the gate, per ADR-0001 Consequences).
+- **ADR numbers:** ADR-0001 manifest schema — **written (Session 3) and ratified by Al (Session
+  4)** on all five flagged choices, with the derived-canonical-artifact convention added to D4 and
+  the UTF-8 decoding sentence to D3 (see its *Amendments*); ADR-0002 toolchain pins and scaffold —
+  reserved (S0.6; constraints Q6–Q9, Q17; also decides the JCS crate, the synthetic storage
+  default, and the gate, per ADR-0001 Consequences).
+- **Real items and detectors (ADR-0001 D4, ratified Session 4):** `raw/1` is archival; detectors
+  consume only `syndeom-informal-md/1` and `syndeom-lean/1`; every S1/S5 item to be scored gets a
+  derived canonical artifact (deterministic producer, `config.derived_from` + `method`, parent's
+  ground truth with locations re-expressed and argued in the S1.3 record); the `raw/1` parent
+  remains the item of record.
 
 ## Deferred S0 actions (scheduled, not NEXT)
 
@@ -89,8 +95,9 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 ## Standing escalations (awaiting Al)
 
 - **Q3 — Repository LICENSE.** Public repo, no licence file. Al's decision, due before S5.4 and
-  before any paper cites the repo. Not a blocker. The Session-3 prompt's Q3 slot carried its
-  placeholder text unfilled, so no ruling was delivered; Q3 remains deferred, unchanged.
+  before any paper cites the repo. Not a blocker. The Session-3 and Session-4 prompts' Q3 slots
+  both carried the placeholder text unfilled, so no ruling was delivered; Q3 remains deferred,
+  unchanged.
 - **Q14 — Founding sweep.** **Resolved in Session 3:** Al ferried the sweep by pasting its text
   (no file path was given); the pasted bytes, LF with one trailing newline, hashed to Al's stated
   digest exactly, and the file was placed. Nothing further is awaited.
