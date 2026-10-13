@@ -987,3 +987,89 @@ ESCALATIONS:
 STOP-REASON: natural boundary — the session's one task is recorded as far as it can be executed;
 R3 is a blocker requiring Al (the file). Repo green on the committed tree (gate re-run after every
 edit, before the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-13 UTC @ 06df7db (Session 8 — R3 closed: the advisory note ferried, verified and
+committed; the commit adding this entry lands on top of 06df7db)
+LAUNCH CONTEXT (SD15; not an exam session): the same conversation as Session 7, continued on Al's
+message that the file R3 names is in place, "written byte-exact by Claude on 2026-10-13 and
+hash-verified; untracked on top of 06df7db", with the order to close R3 first and then proceed to
+NEXT (S1.1). Not cold. No memory written this session.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open; no criterion advanced. Gate S0 closed
+(Session 6) — unchanged.
+PLAN NOTE: one thing — close R3: verify the digest, commit the file as ferried with its body
+unedited, repeat the leakage reading on the verified bytes, record the closure. S1.1 follows as its
+own session (Session 9) with its own commit and HANDOFF entry, under the §4.3 one-thing rule; both
+were ordered by Al in one message.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `06df7db`; exactly one untracked file, the one R3 names.
+  `wc -c` 27,238; `sha256sum` `f3e40b684a8b437fa4f0ba9d059d23d6ae61ce88ce8bca84ceb49fd7c181fa2c`
+  = Al's stated digest; 0 CR, no BOM, trailing LF, 520 lines; `.gitattributes` applies
+  `text=auto eol=lf`; after staging `git ls-files --eol` shows `i/lf w/lf`, blob `db92abb`. The
+  committed blob is therefore exactly the verified bytes; nothing in the body was edited.
+- Read in full (520 lines). The header says what R3 says it says: the SD11 banner ("ADVISORY, NOT
+  EVIDENCE … Nothing in this file enters any SYNDEOM register"); produced by ChatGPT at Al's
+  request on 2026-10-13 and relayed verbatim; verified by Claude on 2026-10-13 against both local
+  clones; rights — the DARQ MNEMOSYNE material is proprietary and not part of the Apache-2.0
+  release (the R1 boundary), the program named with its owner's authorization (Al, 2026-10-13);
+  disposition — the §5 equivalence point taken up by R2, the cases a candidate S2 seed family
+  (R4), nothing else adopted; "Not found" — the two counterexamples are ChatGPT's own, not the
+  repository's, with the arithmetic checked by hand; the §6/§7 scope item is DARQ MNEMOSYNE change
+  control, not a SYNDEOM item. Recorded here that the file was placed and verified, and that the
+  program it names is named with its program owner's authorization (Al, 2026-10-13).
+- Records: ADR-0000 Addendum 2 R3 row annotated closed; STATE gains an "Advisory note" bullet
+  beside the founding-sweep bullet (path, bytes, digest, banner, what it does and does not do
+  here) and the R3 escalation is marked resolved, with the standing form for any future ferry (a
+  path to bytes on disk, never a paste).
+- Register check with the file staged (`check_registers.py`, run directly before the gate): 48
+  tracked files CR/BOM/trailing-LF clean; the file's ID tokens (FLAW-0001/0008/0011/0013, Q3,
+  SD11/SD12/SD13) all resolve; S- 20/20; `RESULT: ALL PASS`.
+- Evidence run (§4.1): `bash scripts/check.sh` with the file and the closure edits staged,
+  23:21:33Z–23:31:44Z: `Build completed successfully (8926 jobs)`; audit
+  `'syndeom_golden_nat_le_sq' depends on axioms: [propext]`; fmt and clippy clean; `cargo test`
+  23 passed, 0 failed; `git ls-files --eol` no `i/crlf` or `i/mixed`; `check_registers.py` 48
+  tracked files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 20/20; `RESULT: ALL PASS`;
+  `GATE: GREEN`. Ten minutes again — the axiom audit's Mathlib load was cold a second time
+  (STATE's timing note already covers it). Re-run on the final tree after this entry, before the
+  commit (STOP-REASON).
+BELIEF DELTAS:
+- A ferry closes in one short session once the bytes are on disk: ORIENT found the stated digest
+  on the first hash. Evidence: above. Consequence: STATE's escalation form ("the file at the path,
+  or a path to the exact bytes") is the standard ask for every future ferry; it is now written
+  into the resolved escalation.
+- The Session-7 paste and the Session-8 file differ by 1,586 bytes and all of the Markdown
+  structure, and carry the same words. Consequence: the Session-7 leakage reading was of the right
+  text, but the record of that reading is made only now, on verified bytes — the digest, not the
+  reading, is what makes it a record.
+CONFUSIONS: none new. One decision explained rather than confused: Session 3 took Al's "ferry,
+then NEXT" order as one session with two commits and one HANDOFF entry; this time the R3 closure
+and S1.1 are two sessions, so that the closure is a complete record with its own commit even if
+S1.1 were cut short by the context budget. Either form is within §4; this one is the safer record.
+HONESTY CHECK: no register entry changed status; CLAIMS, SOURCES and FLAWS untouched. The note is
+not a SOURCES entry — like the founding sweep it is a bannered PROGRAM document, a ruling-of-record
+artifact, and nothing is cited from it. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed, on the verified file. Searched for `contact/`, "contact
+corpus", `openai/math`, "6 October", "October 6", "withdraw", "retract", any S-NNNN and any
+CLAIM-NNNN: no match. Read in full: every worked example is the private Mnemosyne static-reduction
+theorem and its algebraic variants; the three external references are the Lean reference manual's
+page on validating proofs, an equivalence-testing primer and a neural-network calibration paper —
+none is a contact corpus and none is cited by SYNDEOM. `contact/` holds only its README. No design
+decision was taken this session. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The file's identity is its digest,
+regenerable by `sha256sum`; the gate's numbers by `bash scripts/check.sh`. Nothing to quarantine.
+MANIFEST CHECK: no artifact touched or created; the note is a PROGRAM document, not an artifact,
+and carries no manifest (as the sweep does not). Nothing synthetic labeled real. "Proven" applied
+to nothing.
+DRIFT CHECK: the note discusses a real private theorem and a real specification; SYNDEOM records
+no assessment of either — the note's assessments are the note's, under its banner, and the only
+SYNDEOM-side statement about them is the jurisdiction line already in Addendum 2 (SD3). No
+understanding claims (SD17). No detectors exist. No referee contact (SD13). Nothing was done
+beyond the closure.
+NEXT-SINGLE-ACTION: S1.1 — write `PROGRAM/DECISIONS/ADR-0003.md`, the errata-and-retraction
+harvest procedure for `groundtruth/`, exactly as STATE.md states it (procedure only; no item
+ingested). Begun in Session 9 on Al's order in the same message.
+ESCALATIONS:
+- SD15 audit request (Session 6) — unchanged; still awaiting Al's confirm-or-overrule.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers (S-0019).
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: natural boundary — R3 closed. Repo green on the committed tree (gate run with every
+edit staged, before the commit); this commit pushes to `origin/main`. Session 9 follows at once.

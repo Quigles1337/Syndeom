@@ -1,8 +1,9 @@
 # STATE
 
-- **Updated:** 2026-10-13 UTC (Session 7 — Al's rulings of 2026-10-13 recorded: Apache-2.0
-  `LICENSE` closes Q3; ADR-0004 amends §2 S3.2; S2 seed-family standing ruling; the advisory-note
-  ferry did not verify and is escalated. Bookkeeping only; nothing built; NEXT unchanged)
+- **Updated:** 2026-10-13 UTC (Session 8 — R3 closed: the advisory note ferried by Al, digest
+  verified, committed unedited. Session 7 recorded Al's rulings of 2026-10-13: Apache-2.0
+  `LICENSE` closes Q3; ADR-0004 amends §2 S3.2; S2 seed-family standing ruling. Bookkeeping
+  only; nothing built; NEXT unchanged and now in progress on Al's order)
 - **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
 - **Gate:** S1 open; no S1 criterion has evidence yet (table below). **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
@@ -18,6 +19,16 @@
   disagrees with the S0.1 register, the register stands (its own ferry note says so). It was
   redacted under SD8 before the ferry. Its ten ranked sources were retrieved and read in Session 5
   (CLAIM-0006 examination, done); its runners-up remain unretrieved (carried note below).
+- **Advisory note:** `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md` (27,238 bytes, LF, SHA-256
+  `f3e40b684a8b437fa4f0ba9d059d23d6ae61ce88ce8bca84ceb49fd7c181fa2c`, ferried by Al under ruling
+  R3 of 2026-10-13 and verified against the stated digest before the commit, Session 8). A
+  ChatGPT-produced design discussion of 2026-10-13 relayed verbatim under a provenance header,
+  with Claude's verification record and its rights status under the R1 boundary (the DARQ
+  MNEMOSYNE material in it is proprietary and outside the Apache-2.0 release; the program is named
+  with its owner's authorization, Al, 2026-10-13). **SD11 banner: advisory, not evidence** —
+  nothing enters any register from it; its two "recorded counterexamples" are not in the Mnemosyne
+  repository (its header says so); its §6/§7 finding is Mnemosyne change control, not SYNDEOM's.
+  Its only standing effect here is R4 (candidate S2 seed family, standing rulings below).
 - **Default branch:** `main` — discovered from the clone of the empty remote and the REST API
   (ADR-0000 D3); confirmed by Al (Q2). Remote: `origin` = `https://github.com/Quigles1337/Syndeom`
   (**public**; created by Al 2026-10-12; Actions enabled; **`LICENSE` = Apache-2.0 since Session 7**
@@ -166,17 +177,12 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
   (`www.apache.org`) refused connections from both tools throughout Session 7, so the committed
   text is the SPDX License List's rendering, cross-checked whitespace-for-whitespace against an
   independent copy (S-0019); a later session can diff it against the ASF file when the host answers.
-- **Advisory note ferry (Al's ruling R3 of 2026-10-13) — awaiting the file.** The ruling names
-  `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md`, 27,238 bytes, LF, SHA-256
-  `f3e40b684a8b437fa4f0ba9d059d23d6ae61ce88ce8bca84ceb49fd7c181fa2c`. In Session 7 the file was
-  not at that path, not in `origin`, not in the stash, and not found by a bounded name search of
-  the machine; the text Al pasted into the session mid-turn hashed, as transcribed, to 25,652 bytes
-  / `0ee1eda0ab0ef11ffe70c52a1118ca1235b1306fe5895fcf75914c46081baa80` (chat rendering lost the
-  tables' structure, the `=` of several displayed equations and the heading markers), so it is not
-  the ferried artifact and was not committed. Per the ruling: stop and escalate. **Al: place the
-  file at the path (or name a path on this machine holding the exact bytes); the next session
-  verifies the digest and commits it as ferried, body unedited.** R4 and the jurisdiction ruling
-  are recorded regardless (ADR-0000 Addendum 2); nothing from the paste entered any register.
+- **Advisory note ferry (Al's ruling R3 of 2026-10-13) — RESOLVED 2026-10-13 (Session 8).** In
+  Session 7 the file was absent and a mid-session paste hashed to 25,652 bytes /
+  `0ee1eda0…baa80` (lossy chat rendering), so the executor stopped and escalated. Al then placed
+  the file at the path; Session 8 verified it byte-exact against the stated digest and committed
+  it as ferried, body unedited (Advisory note bullet above; ADR-0000 Addendum 2 R3). Nothing
+  awaited. Standing form for any future ferry: a path to bytes on disk, never a paste.
 - **SD15 audit request (Session 6).** The cold-start exam's memory disclosure (HANDOFF Session 6,
   first entry) flags two memory-file lines as borderline — a paraphrase of three constitution rules
   (§0.3, §0.4, SD17) and the hazard "the gate runs `fmt --check`" — and withholds 85 unrelated
