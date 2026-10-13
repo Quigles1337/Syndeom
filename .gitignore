@@ -1,8 +1,11 @@
-# Lean build dir (the lean/ project lands at S0.6; unanchored like the sibling's)
+# Lean build dir and Mathlib checkout (ADR-0002: lean/ is the project; lake-manifest.json is committed)
 .lake/
-# Rust build output — both candidate workspace roots listed until the S0.6 scaffold ADR picks one
-/target/
+# Rust build output (ADR-0002 D2: engine/Cargo.toml is the workspace root; Cargo.lock is committed)
 engine/target/
+# ADR-0002 D4: synthetic proof files default to storage "regenerable" — manifests are committed,
+# proof bytes are regenerated from the manifest and verified by content_hash
+corpora/**/proof.md
+corpora/**/Proof.lean
 # Python caches — lab/ has zero result authority (SD10)
 __pycache__/
 *.pyc

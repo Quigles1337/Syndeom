@@ -292,3 +292,36 @@ page digest identifies *this* copy, not the page for all time.
   Relating to IETF Documents (https://trustee.ietf.org/license-info)". Copy **not committed**
   (digest-only, FRIEDMAN's storage rule); nothing needs redistributing — the engine cites the RFC
   number.
+
+---
+
+## S-0008 — Toolchain and dependency licences at the ADR-0002 pins (SD16; recorded before ingestion)
+
+- **State:** VERIFIED (every licence file read from the pinned checkout or crate metadata on
+  2026-10-13 UTC, Session 4). Nothing from these projects is copied into this repository; they are
+  dependencies resolved at build time from the pins in `lean/lean-toolchain`,
+  `lean/lake-manifest.json`, and `engine/Cargo.lock`.
+- **Lean 4 toolchain** `leanprover/lean4:v4.34.1` (release tag commit `5045d00…`; installed by
+  elan from `releases.lean-lang.org`): `LICENSE` at the tag begins "Apache License 2.0 (Apache)".
+- **Mathlib** `leanprover-community/mathlib4` at `d13f23b723b8a846827a245b89c10fc7d3f11612` (tag
+  `v4.34.1`, committed 2026-09-24T20:34:32Z "chore: bump toolchain to v4.34.1"): `LICENSE` blob
+  `8dada3edaf50dbc082c9a125058f25def75e625a`, 11,357 bytes, Apache License 2.0. Its
+  `lean-toolchain` at that commit reads `leanprover/lean4:v4.34.1` (the source of the toolchain
+  pin, Q8).
+- **Mathlib's transitive Lake dependencies** (revisions from `lean/lake-manifest.json`, licence
+  files read from `lean/.lake/packages/<name>/LICENSE`): `batteries` `f2effa3d803f` Apache-2.0;
+  `aesop` `355695d523e4` Apache-2.0; `Qq` (quote4) `6a489d9af5d0` Apache-2.0; `proofwidgets`
+  (ProofWidgets4) `106ff4fafc74` Apache-2.0; `importGraph` (import-graph) `e928b7254487`
+  Apache-2.0; `LeanSearchClient` `ddf04cf3949f` Apache-2.0; `plausible` `118aa17ee846` Apache-2.0;
+  `Cli` (leanprover/lean4-cli) `e92c9f15fdfa` MIT ("Copyright (c) 2021 mhuisi").
+- **Rust crates** (`engine/Cargo.lock`, 24 crates, licences from `cargo metadata`): direct —
+  `serde 1.0.229` MIT OR Apache-2.0, `serde_json 1.0.154` MIT OR Apache-2.0,
+  `serde_json_canonicalizer 0.3.2` MIT, `sha2 0.11.1` MIT OR Apache-2.0, `hex 0.4.3` MIT OR
+  Apache-2.0; transitive — `block-buffer 0.12.1`, `cfg-if 1.0.5`, `cpufeatures 0.3.1`,
+  `crypto-common 0.2.2`, `digest 0.11.3`, `hybrid-array 0.4.15`, `itoa 1.0.18`, `libc 0.2.190`,
+  `proc-macro2 1.0.107`, `quote 1.0.47`, `serde_core 1.0.229`, `serde_derive 1.0.229`,
+  `syn 3.0.9`, `typenum 1.20.1` (all MIT OR Apache-2.0); `const-oid 0.10.2` Apache-2.0 OR MIT;
+  `ryu-js 1.0.3` Apache-2.0 OR BSL-1.0; `memchr 2.8.3` Unlicense OR MIT; `zmij 1.0.23` MIT;
+  `unicode-ident 1.0.27` (MIT OR Apache-2.0) AND Unicode-3.0.
+- **Use:** build-time dependencies only; no copy committed; no ambiguity to escalate. Any change
+  of pin re-reads the licences (a new transition here).

@@ -1,0 +1,12 @@
+# SYNDEOM Lean project (ADR-0002). The Lean version follows Mathlib's own `lean-toolchain` at the
+# pinned Mathlib commit (ruling Q8); `lean-toolchain` next to this file is a copy of that line.
+name = "syndeom"
+defaultTargets = ["Syndeom"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "d13f23b723b8a846827a245b89c10fc7d3f11612"
+
+[[lean_lib]]
+name = "Syndeom"

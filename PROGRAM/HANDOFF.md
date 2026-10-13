@@ -337,3 +337,110 @@ ESCALATIONS:
 STOP-REASON: natural boundary — S0.2 and S0.4 complete and recorded; S0.6 begins with toolchain
 discovery that deserves a fresh session (elan, Mathlib pin, crate re-read). Repo LF-clean; this
 commit and `a5f8043` push to `origin/main`.
+
+---
+
+SESSION: 2026-10-12 @ 9137c64 (Session 4 — ADR-0001 ratified and amended, then S0.6: ADR-0002 and
+the scaffold; the commit adding this entry lands on top of 9137c64; UTC was 2026-10-13 throughout)
+LAUNCH CONTEXT (SD15; not an exam session): launched with the §6 Session-N resume prompt plus Al's
+rulings on ADR-0001's five flagged choices and a Q3 slot. Same conversation as Sessions 1–3
+(compacted transcript held), therefore not cold; no cold-start test attempted. Recalled memory at
+start: the SYNDEOM/KOBER/FRIEDMAN memory-index lines (location + hazards; D1-compliant),
+user-identity and machine-hazard lines, and roughly thirty index lines for unrelated private
+programs (withheld).
+PHASE / GATE: S0 — FOUNDATION AND CITATION VERIFICATION / Gate S0 open. Done this session: ADR-0001
+ratification + amendment (`9137c64`), S0.6 (ADR-0002, scaffold, gate — this commit). Open: the
+deferred CLAIM-0006 examination, then the cold-start test.
+PLAN NOTE: Al's prompt directed the amendment commit first, then S0.6 "if the context budget allows".
+Executed in that order as two commits. The Q3 slot carried its placeholder text again; recorded as
+"no ruling delivered", not chosen.
+ADVANCED:
+- ORIENT: clean at `d3e5842` = `origin/main`, `origin/HEAD` → `main`, 13 text files `i/lf` + 2 PDFs,
+  register check ALL PASS, constitution unchanged since `c803c96`.
+- ADR-0001 (`9137c64`): Status now "ratified by Al in Session 4"; D3 gains the UTF-8 decoding
+  sentence (ii) and the archival note on `raw/1` (iii); D4 gains the derived-canonical-artifact
+  convention (iii); Consequences carry the Resolution; an Amendments log closes the file.
+- Discovery (SD7), every value read: elan 4.2.3 with `stable` → v4.35.0 not installed; Mathlib has
+  tags up to `v4.34.1` plus `v4.35.0-rc1..rc4` and **no `v4.35.0`**; tag `v4.34.1` = commit
+  `d13f23b7…` whose `lean-toolchain` reads `leanprover/lean4:v4.34.1`; KOBER's Rust pin re-read
+  (`1.91.0`, clippy only) and FRIEDMAN's (`1.91.0`, clippy + rustfmt); crates.io versions; Actions
+  enabled on the repo with `v5` tags available for every GitHub-owned action used.
+- `lean/`: `lean-toolchain`, `lakefile.toml` (Mathlib by URL + full rev), `Syndeom.lean`,
+  `Syndeom/Fixtures/GoldenB.lean` byte-identical to ADR-0001 D8 (`c568a981…458e`), `Audit.lean`;
+  elan installed v4.34.1; `lake update` locked nine packages (`lake-manifest.json` committed);
+  `lake exe cache get` fetched 8,908 files.
+- `engine/`: workspace + crate `syndeom-manifest` implementing ADR-0001 D1–D7 (types with
+  `deny_unknown_fields` and a `required_option` helper so nullable fields must be present; both
+  `artifact_id` forms; the informal segmenter with code-point spans; the Lean counter; the D6
+  verdict rule; `check` with every D4 rule; `check_derived`). `tests/goldens.rs`: 23 tests — D8
+  goldens incl. the span example, ADR-0001's example manifest parsed from the ADR text and
+  self-checked against Golden A, the Lean module pinned to the fixture bytes, D2/D3/D4 rule
+  rejections, the derived-artifact convention, ADR-0004's seven vectors, RFC 8785 §3.2 sample +
+  Appendix B 24 rows + NaN/Inf + UTF-16 sorting. `cargo fmt --check`, `clippy -D warnings`, and
+  `cargo test` all clean; 24 locked crates.
+- `scripts/check.sh` (the gate) and `scripts/check_registers.py` (moved into the repo from the
+  executor's scratchpad); `.github/workflows/check.yml` (advisory, `actions/*@v5`); READMEs for
+  `lab/`, `corpora/`, `groundtruth/`, `contact/` (SD8 rules posted), `analysis/`; `.gitignore`
+  with the `regenerable` storage rule; `rust-toolchain.toml` at the root.
+- SOURCES: S-0008 — licences of the Lean toolchain, Mathlib, its eight Lake dependencies, and the
+  24 crates, each read from the pinned checkout or `cargo metadata`.
+- ADR-0002 written with the discovery table and D8 measured results: `lake build` succeeded
+  (`Built Syndeom.Fixtures.GoldenB (172s)`, 8,926 jobs, 8,924 from Mathlib's cache); the axiom
+  audit prints `[propext]`; the whole Lean sequence took 02:56:39Z–03:10:45Z. ADR-0001's
+  Amendments log records the Golden B measurement as a transition. Gate: `bash scripts/check.sh`
+  run before this commit (result in STATE "Build status").
+BELIEF DELTAS:
+- "Latest stable Lean" and "latest Mathlib release" are different points: elan's `stable` is
+  v4.35.0 while Mathlib's newest release tag is `v4.34.1` (master is on rc4). The Q8 rule — Lean
+  follows Mathlib — resolves it without a judgment call. Evidence: `elan show`, the tag list.
+- The newest Mathlib release tag is the very commit the first contact corpus pins (S-0001). The
+  criterion (newest release tag with a stable Lean) was fixed in STATE's S0.6 procedure before the
+  tag list was read, so the coincidence is one of dates; it is disclosed in ADR-0002 and below.
+- serde's derive silently maps a *missing* `Option` field to `None`, so "present as `null`"
+  (ADR-0001 D4) needs an explicit `deserialize_with` helper; without it the test
+  `d4_nullable_fields_must_be_present` fails. Evidence: that test, red before the helper.
+- Rust byte-string literals cannot carry `\u{…}` escapes; `cargo fmt` reformats freely-written
+  code, so the committed form is whatever rustfmt emits and the gate checks exactly that.
+- A `lake build` that imports all of Mathlib is silent for minutes when its output is piped
+  through `tail`; a successor should run it unpiped or tail the log with `tr '\r' '\n'`.
+CONFUSIONS:
+- The Session-4 prompt's Q3 slot carried its placeholder text, as in Session 3. Recorded; not a
+  value. Cost: none.
+- `du -sh lean/.lake` during the cache unpack exceeded the tool's 120 s limit and was backgrounded;
+  never measure `.lake` while lake is writing it. Cost: one stray background job.
+- The first `cargo build` failed on a missing `Ord` derive and the first test build on `\u{…}` in a
+  byte string; both one-line fixes. Cost: two iterations, no two-strike.
+HONESTY CHECK: ADR-0002 D8 states only what was run this session; the Lean result is recorded as
+measured, not asserted. Golden B's axiom audit prints the axiom set — that satisfies SD2(i)–(ii)
+for the fixture but **not SD2(iii)** (no recorded statement-fidelity diff against an informal
+statement), so Golden B is "builds, standard axioms", never PROVEN, and no register says otherwise.
+S-0008 licences were read from the checked-out files and crate metadata, not assumed. No
+downgrades needed.
+LEAKAGE CHECK: checked, not assumed. No contact material was read this session; `contact/` now
+exists, empty, with the SD8 rules posted. One disclosure: the Mathlib pin chosen by ADR-0002's
+criterion (newest release tag with a stable Lean) is the same commit the `openai/math` corpus pins
+(S-0001). The criterion was written into STATE's S0.6 procedure in Session 3 and the tag list was
+read afterwards; the corpus's pin was neither a reason nor a tiebreaker, and the ADR says so.
+Verdict: no leakage; one disclosed coincidence.
+DETERMINISM CHECK: every pin is a commit or a locked version (`lean-toolchain`, `lakefile.toml`
+rev, `lake-manifest.json`, `rust-toolchain.toml`, `Cargo.lock`); the goldens reproduce ADR-0001
+D8 from fixed bytes; Mathlib's compiled modules are fetched by `lake exe cache get` for that
+commit and regenerable from a fresh clone by the gate alone. No MEASURED or REPRODUCED result
+entered CLAIMS. Nothing to quarantine.
+MANIFEST CHECK: no artifacts exist; ADR-0001's example manifest now self-checks in the engine
+against Golden A's bytes. "Proven" applied to nothing (see HONESTY CHECK). Nothing synthetic
+labeled real; the READMEs for `corpora/`, `groundtruth/`, `contact/` restate the origin rules.
+DRIFT CHECK: no statement about any real manuscript (SD3); no understanding claims (SD17); no
+detectors, so no detector-shopping; no referee contact (SD13). Scope note: the gate's axiom audit
+is infrastructure for SD2, not a detector.
+NEXT-SINGLE-ACTION: see STATE.md — the deferred CLAIM-0006 examination: retrieve and read the ten
+sources ranked in `PROGRAM/SWEEP-2026-10.md` "Verdict (3)" from primary sources, one S-entry each,
+then move CLAIM-0006 on evidence; after that, the Gate S0 cold-start test in a fresh conversation.
+ESCALATIONS:
+- Q3 repository LICENSE (standing; the Session-4 slot was unfilled; due before S5.4).
+- For Al's awareness, not a decision: the Mathlib pin coincides with the first contact corpus's
+  (LEAKAGE CHECK above); the advisory CI's first run result is unknown until the push lands.
+- None new otherwise.
+STOP-REASON: natural boundary — S0.6 complete and the gate green; the next action (ten
+primary-source retrievals for CLAIM-0006) is a retrieval session of its own, and the cold-start
+test after it must be a fresh conversation. Repo green; this commit pushes to `origin/main`.

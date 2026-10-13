@@ -1,0 +1,44 @@
+# Advisory CI (ADR-0002 D6; ruling Q9): runs the same gate as scripts/check.sh. It is never a
+# required status check — the gate's authority is the local run recorded in STATE.md.
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install elan (Lean version from lean/lean-toolchain)
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          chmod +x elan-init.sh
+          ./elan-init.sh -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Cache Mathlib and the Lean build directory
+        uses: actions/cache@v5
+        with:
+          path: lean/.lake
+          key: lake-${{ runner.os }}-${{ hashFiles('lean/lean-toolchain', 'lean/lake-manifest.json') }}
+
+      - name: Fetch Mathlib's cache for the pinned commit
+        working-directory: lean
+        run: |
+          lake exe cache get
+
+      - name: Rust toolchain from rust-toolchain.toml
+        run: |
+          rustup show active-toolchain || rustup toolchain install
+          rustc --version && cargo --version
+
+      - name: Gate
+        run: bash scripts/check.sh
