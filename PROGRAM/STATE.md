@@ -1,9 +1,9 @@
 # STATE
 
-- **Updated:** 2026-10-13 UTC (Session 8 — R3 closed: the advisory note ferried by Al, digest
-  verified, committed unedited. Session 7 recorded Al's rulings of 2026-10-13: Apache-2.0
-  `LICENSE` closes Q3; ADR-0004 amends §2 S3.2; S2 seed-family standing ruling. Bookkeeping
-  only; nothing built; NEXT unchanged and now in progress on Al's order)
+- **Updated:** 2026-10-13 UTC (Session 9 — S1.1: ADR-0003, the errata-harvest procedure, decided;
+  no item ingested; five choices flagged for Al; NEXT = the ingest producer. Session 8 closed R3
+  (advisory note ferried, verified, committed unedited); Session 7 recorded Al's rulings of
+  2026-10-13: Apache-2.0 `LICENSE` closes Q3, ADR-0004 amends §2 S3.2, S2 seed-family ruling)
 - **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
 - **Gate:** S1 open; no S1 criterion has evidence yet (table below). **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
@@ -39,12 +39,13 @@
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
-  2026-10-13 22:54:28Z–23:04:29Z (Session 7) on the Session-7 tree with every edit in, and again
-  on the final tree before the Session-7 commit** — Lean `Build completed successfully (8926 jobs)`,
-  axioms `[propext]`; Rust fmt and clippy clean, 23/23 tests; 38 text files `i/lf` + 9 binaries;
+  2026-10-13 23:35:52Z–23:36:23Z (Session 9) on the Session-9 tree with every edit in, and again
+  on the final tree before the Session-9 commit** — Lean `Build completed successfully (8926 jobs)`,
+  axioms `[propext]`; Rust fmt and clippy clean, 23/23 tests; 40 text files `i/lf` + 9 binaries;
   registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 20/20). Earlier GREEN runs:
   Session 4 (before the S0.6 commit), Session 5 (at `132788c`), Session 6 (at `2b7c573` and on its
-  own tree). **Standing instruction:** update this line at every GREEN run a HANDOFF entry
+  own tree), Session 7 (22:54:28Z–23:04:29Z, cold OS cache) and Session 8 (23:21:33Z–23:31:44Z
+  and 23:32:45Z–23:33:19Z), each on its own tree before its commit. **Standing instruction:** update this line at every GREEN run a HANDOFF entry
   records, so it never lags HANDOFF. **Timing:** about 30 s with a warm `lean/.lake` *and* a warm
   OS file cache; **about 10 min after a reboot even with `lean/.lake` warm** (Session 7: the axiom
   audit, `lake env lean Audit.lean`, loaded Mathlib's oleans from a cold disk cache, lean.exe
@@ -106,9 +107,11 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
   S-0001.
 - **ADR numbers:** ADR-0001 manifest schema — written (Session 3), ratified by Al (Session 4) with
   its *Amendments*; ADR-0002 toolchain pins, Lean project, Rust workspace, JCS crate, storage
-  default, gate and CI — written (Session 4, S0.6), D8 records what was measured; **ADR-0003 remains
-  reserved for S1.1 (NEXT)**; ADR-0004 constitution amendment to §2 S3.2 (Al's ruling R2 of
-  2026-10-13) — written Session 7. **ADR-0005 is the next free number.**
+  default, gate and CI — written (Session 4, S0.6), D8 records what was measured; **ADR-0003
+  errata-and-retraction harvest procedure for `groundtruth/` (S1.1) — written Session 9**, D1–D9,
+  five choices (i)–(v) flagged for Al's ratification (standing escalations); ADR-0004
+  constitution amendment to §2 S3.2 (Al's ruling R2 of 2026-10-13) — written Session 7.
+  **ADR-0005 is the next free number.**
 - **S3 calibration ADR obligations (ADR-0004, 2026-10-13):** before any curve is computed it must
   (1) compute N_min by the method ADR-0004 fixes — the smallest balanced cell at which the
   equivalence test (95% bootstrap CI of the AUC inside [0.45, 0.55]) has 90% power at true AUC
@@ -141,7 +144,7 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **open — NEXT** | the harvest procedure (ADR-0003) is the next action; no item yet |
+| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **procedure decided; no item yet — NEXT is the producer** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping, D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences, D6 `raw/1` parent + derived artifact + the `s1_ingest` producer, D7 log, D8 window and no-skipping, D9 the S1.4 table; routes live-checked 2026-10-13 (ADR *Measured*). Evidence slots still empty: the producer in `engine/`, the harvest log, the first admitted items |
 | S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | open | — |
 | S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | open | — |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | open | — |
@@ -183,6 +186,16 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
   the file at the path; Session 8 verified it byte-exact against the stated digest and committed
   it as ferried, body unedited (Advisory note bullet above; ADR-0000 Addendum 2 R3). Nothing
   awaited. Standing form for any future ferry: a path to bytes on disk, never a paste.
+- **ADR-0003 flagged choices (i)–(v) — awaiting Al's ratification (Session 9).** (i) `RECORD.md`
+  per item directory and `groundtruth/HARVEST-LOG.md` beside the ADR-0001 D2 layout; (ii)
+  candidates whose notice leaves the statement's truth open are held **pending-truth** — the
+  executor recommends an ADR-0001 amendment adding `statement_status.value: null` with
+  `method: "undetermined"`, the alternative being permanent exclusion — **this one must be ruled
+  before any such item is ingested**; (iii) the first-harvest window 2023-01-01..2026-09-30,
+  ascending arXiv id, no skipping, no target count; (iv) NC-licensed originals committable on the
+  S-0005 precedent and ND-licensed ones as verbatim raw copies only; (v) no LLM anywhere in
+  admission (regex finder in `lab/`, the executor reads every candidate). Not blockers: the
+  executor proceeds under them as written until Al rules; a contrary ruling amends ADR-0003.
 - **SD15 audit request (Session 6).** The cold-start exam's memory disclosure (HANDOFF Session 6,
   first entry) flags two memory-file lines as borderline — a paraphrase of three constitution rules
   (§0.3, §0.4, SD17) and the hazard "the gate runs `fmt --check`" — and withholds 85 unrelated
@@ -198,24 +211,25 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
 
 ## NEXT-SINGLE-ACTION
 
-**S1.1 — write `PROGRAM/DECISIONS/ADR-0003.md`, the errata-and-retraction harvest procedure for
-`groundtruth/`** (procedure only; no item is ingested in that session). The ADR decides:
-(a) **where candidate items come from** — published proofs whose errata or retraction notices are
-themselves public documents, the notice being the status document SD12 requires — and how a
-candidate is admitted or rejected (a proof with a documented error, located in the text, whose
-class can be argued from FLAWS.md 0.1.0; nothing AI-generated — that is S5);
-(b) **the per-item record** — original, notice, the flaw's location, its FLAWS.md class with the
-mapping argued in writing, derivation `documented-by-source`, source and licence per SD16;
-(c) **licence handling** — a stored copy under `groundtruth/` only when the licence permits
-redistribution (this repo is public), otherwise digest-only with `storage: external` (ADR-0001 D2);
-ambiguity is escalated to Al, never ingested;
-(d) **the artifact form** — the `raw/1` parent (item of record) plus the derived
-`syndeom-informal-md/1` canonical artifact per ADR-0001 D4 (iii), with the location re-expression
-argued per item in the S1.3 record;
-(e) **the shape of the S1.4 coverage table** — flaw class × proof length, zero-coverage classes
-named as a finding, and the power statement Gate S1 requires.
-Read first, from the stored PDF under `sources/`: S-0015's ArxivMathGradingBench pipeline, the
-precedent for harvesting human-authored papers with referee-identified errors (what it harvested,
-how it located and labelled errors, what it licensed). Commit `[S1][ADR-0003] decide the
-errata-harvest procedure`; update this file's Gate S1 table and set NEXT to the first harvested
-items. Run `bash scripts/check.sh` before the commit (expect `GATE: GREEN`).
+**S1.1 — build the deterministic ingest producer for ground-truth manifests (ADR-0003 D6).** Add
+a workspace member `engine/ingest/` (binary `syndeom-ingest`; `generator.id` `s1_ingest`,
+`version` `0.1.0`, `rng` `"none"`) that:
+(a) takes a per-item config file carrying the ADR-0003 D4 fields — `sources` (S-entry ids), `item`,
+`licence`, `status {kind, reference}`, `statement_status {value, method, reference}`,
+`proof_status`, `flaws[]` with `raw/1` locators, `notes` — and the path of the original's bytes;
+(b) computes `content_hash`, `n_bytes`, `config_hash` and `artifact_id` with the existing
+`syndeom-manifest` functions (`content_hash`, `config_hash`, `artifact_id`); sets
+`origin: "ground-truth"`, `seed: null`, `derivation: "documented-by-source"`, `commanded: {}`,
+`fidelity` vacuously PASS, `toolchain: null`, `engine_commit` from `git rev-parse HEAD`;
+(c) writes `groundtruth/<artifact_id>/manifest.json` as JCS bytes and **self-checks it against
+ADR-0001 D4's consistency rules before writing, refusing on any violation** (wrong root, a
+canonical-form location on a `raw/1` file, `correct` not derived, a `flaws[].class` outside
+FLAWS.md 0.1.0, `statement_status.value == false` with `proof_status == "valid"`);
+(d) ships one golden test over fixed bytes and a fixed config with hand-computed digests (the
+ADR-0001 D8 style), passes `cargo fmt --check` and `clippy -D warnings`, and runs in the gate.
+It decides nothing: every value it writes is an input or a hash. Commit
+`[S1][INFRA] add the s1_ingest producer for ground-truth manifests`; update this file's Gate S1
+table; set NEXT to the first Route A harvest session under ADR-0003 D8 (window
+2023-01-01..2026-09-30, ascending arXiv id, no skipping; each admitted item with its S-entries,
+`RECORD.md` and a `groundtruth/HARVEST-LOG.md` line). Run `bash scripts/check.sh` before the
+commit (expect `GATE: GREEN`).

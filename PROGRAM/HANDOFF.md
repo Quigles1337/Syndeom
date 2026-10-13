@@ -1073,3 +1073,142 @@ ESCALATIONS:
 - Human-referee participants remain Al's decision (SD13) — unchanged.
 STOP-REASON: natural boundary — R3 closed. Repo green on the committed tree (gate run with every
 edit staged, before the commit); this commit pushes to `origin/main`. Session 9 follows at once.
+
+SESSION: 2026-10-13 UTC @ d9f53de (Session 9 — S1.1: ADR-0003, the errata-harvest procedure; the
+commit adding this entry lands on top of d9f53de)
+LAUNCH CONTEXT (SD15; not an exam session): the same conversation as Sessions 7 and 8, continued
+on Al's order in the Session-8 message: "then proceed to NEXT-SINGLE-ACTION as STATE.md states it
+(S1.1, ADR-0003)". Not cold. Memory written this session: hazards only (three API-route lines),
+recorded under ADVANCED.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open; **S1.1 procedure decided (ADR-0003); no
+item ingested** (as the action specified). Gate S0 closed (Session 6) — unchanged.
+PLAN NOTE: the inherited NEXT-SINGLE-ACTION, executed as STATE stated it: S-0015's pipeline read
+first from the stored PDF; the ADR decides (a) sources and admission, (b) the per-item record, (c)
+licence handling, (d) the artifact form, (e) the S1.4 table; commit
+`[S1][ADR-0003] decide the errata-harvest procedure`. One deviation from the Session-6 text, with
+its reason: NEXT is set to the ingest producer, not to "the first harvested items", because
+ADR-0001 D4 requires every ground-truth manifest's `generator` to name the `engine/` producer
+that wrote it, so no item can exist before the producer does (ADR-0003 D6, Consequences).
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `d9f53de` after the Session-8 push; worktree clean. Read for
+  this action: the constitution's S1 text and SD12/SD16; STATE's NEXT block; ADR-0001 D2, D3, D4
+  in full (storage enum, `raw/1`, the ingest-producer fields, the derived-canonical-artifact
+  convention); FLAWS.md in full (all fourteen entries, vocabulary, summary table); the
+  `groundtruth/`, `corpora/`, `contact/`, `lab/` READMEs; `engine/manifest/src/lib.rs`'s public
+  surface (the types `Manifest`, `Generator`, `Storage`, `RawLocation`, `GroundTruth`, `Flaw`,
+  and the functions `content_hash`, `config_hash`, `artifact_id` — what the producer will use).
+- **S-0015 read first** (stored PDF `sources/arxiv-2605.20531v3-pseudo-formalization.pdf`,
+  digest re-verified `a6c93783…7439`; text extracted; §4.2, Table 1, §5 opening, §7.1, Appendix
+  D): the ArxivMathGradingBench pipeline is (1) arXiv API over `math.*` in a window, (2) two
+  case-insensitive regexes over the revision comment — `correct|errat|error|fix|mistake|bug|
+  flaw|wrong|revised|amendment` and `lemma|theorem|proposition`, (3) an LLM (GPT 5.4 nano)
+  classifying major / minor / none, (4) removal of non-permissive licences and false positives
+  (100 → 35), (5) the PDF of the version before the correction; labels are location-only; their
+  false-positive counts are upper bounds because documented errors are a subset of the errors
+  present. Read, not cited as evidence for anything but its own procedure. One inconsistency
+  noted: §4.2 says the window is 2023–2025 inclusive, Appendix D says 2025-01-01 to 2025-07-30.
+- **Routes live-checked** (discovery only; nothing ingested; no S-entry): arXiv API `co:` search
+  in `math.*` (23:28:55Z; `http://` answers 301 with an empty body — use `https://`): 319 for
+  `co:erratum`, 4,108 for the S-0015-shaped query; Crossref `filter=update-type:erratum,
+  type:journal-article` with `query.bibliographic=theorem proof` (23:26:34Z): 134, each with an
+  `update-to` DOI; `update-type:retraction`: 66,928 across all fields; zbMATH Open
+  `ti:erratum` (23:26:34Z): 4,791 with DOI links. Recorded in ADR-0003's *Measured* section with
+  URLs, times and counts.
+- **ADR-0003 written** (`PROGRAM/DECISIONS/ADR-0003.md`): D1 three routes (arXiv comments;
+  Crossref update relations; zbMATH as the mathematics index) and the exclusions (anything
+  AI-generated; unread secondary indexes; discussions that are not status documents); D2 seven
+  admission criteria and the six-value verdict vocabulary; D3 the class mapping argued per item
+  from the notice and the version diff, severity and `lean_catchable` from the FLAWS.md entry,
+  `statement_status` from the status document, `proof_status` invalid by construction of S1.1;
+  D4 the per-item record (manifest per ADR-0001 D4, committable bytes, `RECORD.md`, S-entries
+  before ingestion, `groundtruth/HARVEST-LOG.md`); D5 licence handling (what is `committed`,
+  what is `external`, ambiguity escalated); D6 the `raw/1` parent as item of record, the derived
+  artifact = the affected result's statement and proof (method fixed at S1.3), and the
+  deterministic producer `s1_ingest` 0.1.0 built before the first item; D7 the append-only
+  harvest log with resumability; D8 the first-harvest window 2023-01-01..2026-09-30 (before the
+  6 October release), ascending id, **no skipping**, no target count; D9 the S1.4 table shape
+  and the power statement. Five choices flagged for Al: (i) the two files beside the ADR-0001
+  layout, (ii) pending-truth items (recommendation: an ADR-0001 amendment adding
+  `statement_status.value: null` / `method: "undetermined"`), (iii) the window and no-skipping
+  rule, (iv) NC/ND originals committable as raw copies, (v) no LLM in admission.
+- STATE: Gate S1 row S1.1 → procedure decided; ADR-0003 no longer reserved, ADR-0005 next free;
+  the flagged choices added to standing escalations (not blockers, except (ii) for any
+  pending-truth item); NEXT replaced (below). Memory: three hazard lines (the arXiv API
+  `https`/`co:` route, the Crossref `update-type` filter with `mailto`, the zbMATH Open search
+  endpoint) — tool hazards, no program state.
+- Evidence run (§4.1): `bash scripts/check.sh` with ADR-0003 and the STATE edits staged,
+  23:35:52Z–23:36:23Z: `Build completed successfully (8926 jobs)`; audit
+  `'syndeom_golden_nat_le_sq' depends on axioms: [propext]`; fmt and clippy clean; `cargo test`
+  23 passed, 0 failed; `git ls-files --eol` no `i/crlf` or `i/mixed`; `check_registers.py` 49
+  tracked files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 20/20; `RESULT: ALL PASS`;
+  `GATE: GREEN` (31 s — warm OS cache this time). Re-run on the final tree after this entry,
+  before the commit (STOP-REASON).
+BELIEF DELTAS:
+- The ingest producer is a prerequisite the Session-6 NEXT did not foresee: ADR-0001 D4's
+  `generator` field must name the `engine/` script that wrote the directory, so hand-written
+  manifests are not an option. Evidence: ADR-0001 D4, read this session. Consequence: NEXT is the
+  producer; the first items follow it.
+- Location-only labels (S-0015's) are not enough for SYNDEOM: the class, severity and
+  Lean-catchability need the notice *and* the diff of the two versions, so each candidate costs
+  one reading of each. Evidence: S-0015 §7.1 ("we only have coarse-grained labels"); FLAWS.md
+  definitions. Consequence: D2.4 and D3; the harvest is reading-bound, not supply-bound.
+- Supply is in the thousands on every route, so a small admitted set is a budget outcome, not a
+  scarcity finding — which is exactly why D8's no-skipping rule exists: a curated hundred would
+  look richer and prove less. Evidence: the route counts.
+- Real errata sometimes leave the statement's truth open, and the manifest schema cannot say so.
+  Evidence: S-0015 Table 1's "we do not know whether it is true"; ADR-0001 D4's `value: true /
+  false`. Consequence: pending-truth, flagged (ii).
+- A paper can be inconsistent with itself about its own parameters (S-0015's two windows); read
+  the appendix before quoting the body.
+CONFUSIONS:
+- The arXiv API over `http://` returned 301 with an empty body and looked dead for one call;
+  `https://` answers. Cost: one retry. Doc fix: memory hazard; the ADR's Measured section names
+  the host.
+- Whether the live route checks needed SOURCES entries: no — they are discovery, not sources;
+  nothing was retrieved as scholarship and nothing is cited from them. Doc fix: the ADR says so
+  in its Measured section.
+HONESTY CHECK: no register entry changed status; CLAIMS, SOURCES and FLAWS untouched (S-0015
+re-read only, digest re-verified). The ADR's Measured numbers are route sizes at a timestamp and
+say so; nothing from the route responses entered any register. Five choices are flagged as
+choices, not slipped into the decision text. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. ADR-0003 names `openai/math` (S-0001), the 7 October
+withdrawals (S-0006) and the First Proof batches only to exclude them from S1; nothing under
+`contact/` was opened. The route checks returned metadata of human-authored papers; one arXiv
+comment thanked an "AI Math Referee" for finding the error — an AI-found error in a human proof,
+admissible under D2.6 and recorded as such, with no influence on any decision. No detector,
+threshold or battery design exists to be influenced. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The route counts are time-stamped API
+responses that will differ tomorrow and are explicitly not results; the S-0015 digest and the
+ADR's own bytes are regenerable by `sha256sum`. Nothing to quarantine.
+MANIFEST CHECK: no artifact created; the ADR specifies the manifests future items will carry
+under ADR-0001 and names the producer that will write them. Nothing synthetic labeled real;
+"proven" applied to nothing.
+DRIFT CHECK: no assessment of any paper (the three corrigendum titles and five arXiv comments
+appear as route evidence, quoted, with no judgment); no understanding claims (SD17); no detectors,
+so no detector-shopping; no referee contact (SD13). Scope: the ADR and its records; the producer
+was not started.
+NEXT-SINGLE-ACTION: S1.1 — **build the deterministic ingest producer** (ADR-0003 D6): add a
+workspace member `engine/ingest/` (binary `syndeom-ingest`, `generator.id` `s1_ingest`, version
+`0.1.0`, `rng` `"none"`) that takes a per-item config file carrying the ADR-0003 D4 fields
+(`sources`, `item`, `licence`, `status`, `statement_status`, `proof_status`, `flaws[]` with
+`raw/1` locators, `notes`) and the path of the original's bytes; computes `content_hash`,
+`n_bytes`, `config_hash` and `artifact_id` with the existing `syndeom-manifest` functions; sets
+`origin: "ground-truth"`, `seed: null`, `derivation: "documented-by-source"`, `commanded: {}`,
+`fidelity` vacuous PASS, `engine_commit` from `git rev-parse HEAD`, `toolchain: null`; writes
+`groundtruth/<artifact_id>/manifest.json` (JCS bytes) and self-checks it against ADR-0001 D4's
+consistency rules, refusing to write on any violation; one golden test over fixed bytes and a
+fixed config with hand-computed digests (ADR-0001 D8 style); `cargo fmt`, `clippy -D warnings`,
+in the gate. Commit `[S1][INFRA] add the s1_ingest producer for ground-truth manifests`. Then the
+first Route A harvest session under ADR-0003 D8 (window 2023-01-01..2026-09-30, ascending id, no
+skipping), each admitted item with its S-entries, `RECORD.md`, and a HARVEST-LOG line.
+ESCALATIONS:
+- **ADR-0003 flagged choices (i)–(v)** — for Al's ratification; not blockers, the executor
+  proceeds under them as written; **(ii) must be ruled before any pending-truth item is
+  ingested** (recommendation: amend ADR-0001 D4 to admit `statement_status.value: null` with
+  `method: "undetermined"`).
+- SD15 audit request (Session 6) — unchanged.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers (S-0019).
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: natural boundary — the NEXT-SINGLE-ACTION done as specified. Repo green on the
+committed tree (gate run with every edit staged, before the commit); this commit pushes to
+`origin/main`.
