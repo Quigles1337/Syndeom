@@ -228,3 +228,112 @@ ESCALATIONS:
 - None new. No ferry needed for S0.1 (nothing load-bearing was unreachable).
 STOP-REASON: natural boundary — S0.1 complete and recorded; S0.4 is a design task that should start
 with a fresh read of the sibling's ADR. Repo LF-clean; this commit pushes to `origin/main`.
+
+---
+
+SESSION: 2026-10-12 @ a5f8043 (Session 3 — Q14 ferry + S0.4 ADR-0001; the commit adding this entry
+and ADR-0001 lands on top of a5f8043; UTC had passed midnight to 2026-10-13 during the session, so
+access times in SOURCES.md read 2026-10-13T02:xxZ)
+LAUNCH CONTEXT (SD15; not an exam session): launched with the §6 Session-N resume prompt plus Al's
+inputs (the Q14 ferry digest and a Q3 slot). The session runs in the same conversation as Sessions
+1 and 2 (the executor holds a compacted transcript of both), so under the ratified corollary it is
+not cold; no cold-start test was attempted. Recalled memory at start: the memory-index lines for
+SYNDEOM and both siblings (location + hazards + "run the loop from the repo"; D1-compliant),
+user-identity and machine-hazard lines, and roughly thirty index lines for unrelated private
+programs (withheld).
+PHASE / GATE: S0 — FOUNDATION AND CITATION VERIFICATION / Gate S0 open. Done this session: S0.2
+(sweep placed), S0.4 (ADR-0001). Open: S0.6, the deferred CLAIM-0006 examination, cold-start.
+PLAN NOTE: Al's prompt directed two things in order — the ferry, then "proceed with
+NEXT-SINGLE-ACTION (S0.4) if the context budget allows after the ferry". Executed sequentially as
+two commits (Session 2 / FRIEDMAN Session 3 precedent), not in parallel. The prompt's path slot read
+`<path where Al saved SWEEP-2026-10.md>` literally; a bounded name search of the home directory
+found no such file; Al then pasted the sweep's text mid-session, and its bytes were verified
+against the stated digest instead — the digest, not the path, is the identity.
+ADVANCED:
+- ORIENT from the repo: clean at `770580e` = `origin/main`, `origin/HEAD` → `main`, 11 text files
+  `i/lf` + 2 PDFs binary, cross-reference check ALL PASS, STATE/HANDOFF/CLAIMS/FLAWS/SOURCES read
+  from disk and consistent with each other.
+- S0.2 (`a5f8043`): the pasted sweep, written LF with one trailing newline (41,060 bytes), hashed
+  to Al's digest `f4bfb2ad…b03e` exactly (seven line-ending/BOM variants tried; only that one
+  matched); placed unchanged at `PROGRAM/SWEEP-2026-10.md`; SD11 banner on line 3; mechanical SD8
+  check (corpus-path and manuscript-identifier patterns) found only the redaction note itself and
+  C9's "omitted here" sentence. STATE S0.2 done; Q14 resolved; CLAIM-0006 transition line (stays
+  UNKNOWN); the ten-source retrieval recorded as a deferred S0 action per Al's ruling.
+- S0.4 (this commit): `PROGRAM/DECISIONS/ADR-0001.md` — `syndeom-manifest/1`, D1–D9, written
+  after re-reading FRIEDMAN's ADR-0001 D1–D7, ADR-0004, `engine/manifest/src/lib.rs`,
+  `tests/goldens.rs`, `Cargo.toml`, and ADR-0002 D3/D4 at the pinned tip `7c3e5dd` (unchanged since
+  Session 1; local clone at the same commit, read with `git show`, never built). RFC 8785 retrieved
+  from the RFC Editor and recorded as S-0007 (VERIFIED, digest-only). Goldens: two fixtures written
+  byte-for-byte by a script, every stated number computed from the bytes and cross-checked with
+  `sha256sum`; the same pipeline reproduced FRIEDMAN's D6 vector before being trusted. STATE S0.4
+  done; NEXT = S0.6 with a discovery-first procedure.
+- Check script unchanged; `python … check_repo.py` run alone and gated on `$?` for both commits.
+BELIEF DELTAS:
+- Identity of a ferried file is the digest, not the path: a paste that hashes to Al's stated
+  SHA-256 is the file, and a path alone would have proved nothing. Evidence: seven byte variants
+  of the paste, exactly one match. Consequence: S0.2's "verified against Al's stated digest before
+  the move" is satisfiable without filesystem access to Al's copy; recorded in STATE.
+- A unit of location is a design decision with visible consequences: in Golden A the same span is
+  `[35, 60)` in code points and `[37, 62)` in bytes because of one em dash. Evidence: D8.
+  Consequence: the ADR fixes code points and the engine test must exercise a non-ASCII prefix.
+- `exact` tolerance compares JSON values structurally in FRIEDMAN's crate (`Value == Value`), so
+  an integer `0` and a number `0.0` are unequal under `exact`. Evidence: `statistic_verdict` in
+  `lib.rs` at `7c3e5dd`. Consequence: ADR-0001 D4 makes the statistic registry declare each key's
+  JSON type and uses `abs` for ratios; a successor writing the registry must not learn this by
+  surprise.
+- Real S1 items will not be Markdown, and the Q11 informal format describes what the generator
+  emits, not what errata look like. Evidence: S1.1 (errata, retraction notices) and the S-0001
+  corpus (PDF manuscripts). Consequence: `raw/1` with free-text locators; flagged for Al.
+- The sibling tip did not move in seven weeks (`7c3e5dd`, 2026-08-25), so the SIBLING-MAP's §7.1
+  facts are still those of the live code; re-reading cost one API call and removed an assumption.
+CONFUSIONS:
+- The Session-3 prompt's Q3 slot carried its template text (`<Al's licence ruling, or "still
+  deferred">`) unfilled. Not a value; not chosen. Recorded in STATE as "no ruling delivered, Q3
+  unchanged" so a successor does not read the placeholder as a ruling. Cost: none.
+- A bounded `find` for the sweep file name under the home directory (maxdepth 4, OneDrive and
+  AppData excluded) returned nothing, and a hash-every-recent-Markdown search was killed by its own
+  60-second timeout before Al's paste made both moot. Cost: about two minutes. Doc fix: the ferry
+  procedure in STATE now says a paste verified by digest is an acceptable ferry.
+- Golden B's Lean proof (`simpa [sq] using Nat.le_mul_self n`) cannot be built this session — no
+  toolchain is pinned. Rather than claim it builds, ADR-0001 D8 states that its build status is
+  unasserted and makes S0.6 measure it. If it fails to build, the fixture's bytes change and the
+  digests in D8 are recomputed by a new ADR-0001 transition, never by silent edit.
+HONESTY CHECK: register entries re-examined. CLAIM-0006 stays UNKNOWN although the sweep's own
+verdict says the claim survives in a narrowed form — the sweep is a map and Al ruled the ten
+sources must be read first; the entry's transition says exactly that. S-0007 is VERIFIED on a
+first-hand read of the sections used, not of the whole RFC, and says so. ADR-0001 marks every
+placeholder in its example manifest and asserts nothing about Golden B's buildability. No
+downgrades needed; no transition made on the strength of the sweep.
+LEAKAGE CHECK: checked, not assumed. The sweep was read in full to place it; its contact-related
+content is existence-level only by Al's redaction, and the mechanical check found no corpus paths or
+manuscript identifiers. Design decisions this session (ADR-0001) cite FRIEDMAN, the constitution,
+FLAWS.md, Q10/Q11, and RFC 8785 — none cites the sweep, `openai/math`, or any real AI-generated
+proof. The one contact-adjacent fact used in the ADR is that contact corpora carry their own Lean
+and Mathlib pins (S-0001, an S0.1 existence/toolchain fact), which shaped the `toolchain` field;
+that is provenance, not behaviour of any manuscript. `contact/` still does not exist. Verdict: no
+leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. Every stated number in ADR-0001 D8 is
+recomputable from the fixture bytes printed in the ADR (digests by `sha256sum`, counts by the D3
+rules, JCS forms by the §3.2 rules), and the computing script reproduced FRIEDMAN's D6 vector first.
+RFC 8785 is pinned by URL, access time, size, and SHA-256. Nothing to quarantine.
+MANIFEST CHECK: no artifacts exist yet; ADR-0001 defines what one is. "Proven" was not applied to
+anything (Golden B is "unasserted"; `statement_status.method: lean-kernel` in the example carries a
+PLACEHOLDER reference until S0.6). Nothing synthetic labeled real: the schema makes `by-construction`
+exclusive to `origin = synthetic` and forbids ground truth on contact artifacts entirely.
+DRIFT CHECK: no statement about any real manuscript (SD3) — the schema now makes one unwritable in a
+contact manifest; no statement about understanding (SD17); no detectors exist, so no detector-
+shopping; no referee contact (SD13). Scope note: ADR-0001 decided real-origin fields (ingest
+producer, `raw/1`) that Q11 did not spell out; they are flagged for Al rather than treated as
+settled.
+NEXT-SINGLE-ACTION: see STATE.md — S0.6, write ADR-0002 and land the scaffold, discovery first
+(`elan`, Mathlib's `lean-toolchain` at the chosen pin, the siblings' `rust-toolchain.toml`,
+crates.io for the JCS crate, Actions availability), then the gate, then Golden B's build measured.
+ESCALATIONS:
+- Q3 repository LICENSE (standing; the Session-3 slot was unfilled; due before S5.4).
+- ADR-0001 flags five design choices for Al's attention (its Consequences): ingest "producer" in
+  `generator`, code-point spans, `raw/1` for non-Markdown real items, `ground_truth: null` for
+  contact, Golden B unbuilt until S0.6. Non-blocking; amend by ADR if objected to before S1.3/S2.1.
+- None new otherwise. Q14 is closed.
+STOP-REASON: natural boundary — S0.2 and S0.4 complete and recorded; S0.6 begins with toolchain
+discovery that deserves a fresh session (elan, Mathlib pin, crate re-read). Repo LF-clean; this
+commit and `a5f8043` push to `origin/main`.

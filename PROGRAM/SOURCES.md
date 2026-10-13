@@ -266,3 +266,29 @@ page digest identifies *this* copy, not the page for all time.
   are stated in that file and were seen by the executor while establishing existence; they are not
   transcribed here, not committed, and informed no decision. They are read in S5.
 - **Licence:** Apache-2.0 (repository); not copied.
+
+---
+
+## S-0007 — RFC 8785, "JSON Canonicalization Scheme (JCS)" (ADR-0001 D5)
+
+- **State:** VERIFIED (the RFC text retrieved from the RFC Editor and read: §3.2.1–3.2.4 and
+  Appendix B, the parts ADR-0001 D5 relies on).
+- **As named:** FRIEDMAN ADR-0001 D5 and its own S-0004 (read at FRIEDMAN tip `7c3e5dd`); under
+  SD14 the standard is adopted by reference, but SD11 requires SYNDEOM to retrieve it itself rather
+  than inherit the sibling's citation — done here.
+- **Citation (from the document header):** A. Rundgren, B. Jordan, S. Erdtman, "JSON
+  Canonicalization Scheme (JCS)", RFC 8785, Independent Submission, Category: Informational, ISSN
+  2070-1721, June 2020.
+- **Primary:** `https://www.rfc-editor.org/rfc/rfc8785.txt`, accessed 2026-10-13T02:23:50Z (curl,
+  HTTP 200), 41,879 bytes, SHA-256 `63d52294eb0e3f0014174288186d388b4ddbf2c67d1ce8af1d9726eb0c3ab240`.
+- **Content used:** §3.2.1 whitespace; §3.2.2.3 numbers ("MUST be serialized according to Section
+  7.1.12.1 of [ECMA-262], including the 'Note 2' enhancement"; NaN/Infinity "MUST cause a compliant
+  JCS implementation to terminate with an appropriate error"); §3.2.3 property sorting ("sorted
+  recursively", array order "MUST NOT be changed", names compared in raw unescaped form); §3.2.4
+  UTF-8 generation; Appendix B number-serialization samples (the engine's conformance vectors at
+  S0.6, as in FRIEDMAN's crate tests).
+- **Licence:** "Copyright (c) 2020 IETF Trust and the persons identified as the document authors.
+  All rights reserved. This document is subject to BCP 78 and the IETF Trust's Legal Provisions
+  Relating to IETF Documents (https://trustee.ietf.org/license-info)". Copy **not committed**
+  (digest-only, FRIEDMAN's storage rule); nothing needs redistributing — the engine cites the RFC
+  number.

@@ -1,10 +1,10 @@
 # STATE
 
-- **Updated:** 2026-10-12 (Session 3 — Q14 ferry done; S0.4 in progress)
+- **Updated:** 2026-10-12 (Session 3 — Q14 ferry + S0.4 ADR-0001, close)
 - **Phase:** S0 — FOUNDATION AND CITATION VERIFICATION
 - **Gate:** S0 open. Done: S0.1 (sources register), S0.2 (founding sweep placed), S0.3
-  (constitution ratified), S0.5 (taxonomy 0.1.0 ratified). Open: S0.4 (manifest ADR), S0.6
-  (scaffold), cold-start test.
+  (constitution ratified), S0.4 (manifest ADR-0001), S0.5 (taxonomy 0.1.0 ratified). Open: S0.6
+  (scaffold), the deferred CLAIM-0006 examination, cold-start test.
 - **Founding sweep:** `PROGRAM/SWEEP-2026-10.md` (41,060 bytes, SHA-256
   `f4bfb2adcdf7c6714101ad6ddc2fdcf528e98e7c993accb8a5dbe04a8115b03e`, ferried by Al in Session 3
   and verified against Al's stated digest before placement). It is a **map, not evidence** (SD11
@@ -32,8 +32,12 @@
   rulings of record in the ADR-0000 addendum. ADR-only.
 - **Taxonomy:** `PROGRAM/FLAWS.md` 0.1.0 ratified (FLAW-0001..0014).
 - **Registers:** CLAIM-0001..0005 and 0007 VERIFIED (0007 existence only); CLAIM-0006 UNKNOWN by
-  design (no sweep). S-0001..S-0006 VERIFIED; S-0004 and S-0005 INGESTED (two PDFs under `sources/`,
-  CC0 and CC BY-NC 4.0).
+  design (sweep placed; its ten ranked sources not yet retrieved). S-0001..S-0007 VERIFIED; S-0004
+  and S-0005 INGESTED (two PDFs under `sources/`, CC0 and CC BY-NC 4.0); S-0007 is RFC 8785
+  (digest-only).
+- **Manifest schema:** `syndeom-manifest/1`, ADR-0001 (Session 3). Formats `syndeom-informal-md/1`,
+  `syndeom-lean/1`, `raw/1`; ids `<generator.id>-v<version>-<config_hash[0:12]>[-s<seed>]`; JCS +
+  SHA-256; FRIEDMAN ADR-0004 arithmetic by reference; contact artifacts carry `ground_truth: null`.
 
 ## Memory policy
 
@@ -50,8 +54,10 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 - **S5 toolchains:** contact corpora carry their own Mathlib pins; S5 ingest records them and may
   need per-corpus toolchains. Note, not solve, until ingest (Q8). First data point recorded in
   S-0001.
-- **ADR numbers reserved:** ADR-0001 manifest schema (S0.4; constraints Q10–Q11 in the ADR-0000
-  addendum); ADR-0002 toolchain pins and scaffold (S0.6; constraints Q6–Q9, Q17).
+- **ADR numbers:** ADR-0001 manifest schema — **written** (S0.4, Session 3; five choices flagged
+  for Al in its Consequences, amendable by ADR before S1.3/S2.1); ADR-0002 toolchain pins and
+  scaffold — reserved (S0.6; constraints Q6–Q9, Q17; also decides the JCS crate, the synthetic
+  storage default, and the gate, per ADR-0001 Consequences).
 
 ## Deferred S0 actions (scheduled, not NEXT)
 
@@ -69,7 +75,7 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 | S0.1 CLAIM-0001..0005 (and 0007) resolved to VERIFIED or honestly UNVERIFIED with consequences | **done** | all six VERIFIED 2026-10-12 from primary sources (CLAIMS.md transitions; SOURCES.md S-0001..S-0006 with URLs, access times, licences, digests). Consequences stated: S5 corpus location = `github.com/openai/math` (Apache-2.0); counts carry units and three unreconciled formalization units; the AHM page is undated; IAS page unretrievable (403); signatory counts recorded as of access date |
 | S0.2 Founding sweep placed with the SD11 banner | **done** | `PROGRAM/SWEEP-2026-10.md`, SHA-256 `f4bfb2ad…b03e` = Al's stated digest (verified before the move, Session 3); banner present; redacted under SD8 before ferry; reconciliation note defers to the S0.1 register. §0.6 still holds: no novelty claim until CLAIM-0006 is examined |
 | S0.3 Constitution ratified by Al; DRAFT marker removed | **done** | `c803c96` `[S0][ADR-0000] ratify the constitution and record Al's rulings`; ADR-0000 addendum |
-| S0.4 Manifest schema ADR (`syndeom-manifest/1` extending `friedman-manifest/1`) | **open — NEXT** | ruled constraints Q10 (structural) and Q11 (fields) in the ADR-0000 addendum and §2 S0.4; FRIEDMAN D1–D7 and crate facts in SIBLING-MAP §7.1 |
+| S0.4 Manifest schema ADR (`syndeom-manifest/1` extending `friedman-manifest/1`) | **done** | `PROGRAM/DECISIONS/ADR-0001.md` (Session 3): D1–D9 under Q10 (structural) and Q11 (fields); FRIEDMAN ADR-0001/0004 and crate re-read at pinned tip `7c3e5dd`; two goldens over fixed bytes (Golden A `0ac16447…a6a1`, Golden B `c568a981…458e`) with digests, counts, span example, ids; RFC 8785 retrieved as S-0007. Five open design choices flagged for Al in its Consequences (non-blocking) |
 | S0.5 Flaw taxonomy v0.1 ratified | **done** | `PROGRAM/FLAWS.md` 0.1.0, 14 entries, ratified (Q12; changelog) at `c803c96` |
 | S0.6 Scaffold (`lean/` with Mathlib, `engine/`, `lab/`, `corpora/`, `groundtruth/`, `contact/`, `analysis/`, `sources/`, gate, CI) | **open** | rulings Q6–Q9, Q17 recorded (ADR-0000 addendum; §2 S0.6); `sources/` already exists (S0.1 copies) |
 | Licences recorded for anything touched | **done** | S-0001 Apache-2.0 (nothing copied); S-0002, S-0003 licence unstated (nothing copied); S-0004 CC0 and S-0005 CC BY-NC 4.0 (PDFs copied under those terms); no dependency added |
@@ -95,17 +101,9 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 
 ## NEXT-SINGLE-ACTION
 
-**S0.4 — write ADR-0001, the proof-artifact manifest schema `syndeom-manifest/1`.** Procedure:
-(1) read FRIEDMAN `PROGRAM/DECISIONS/ADR-0001.md` D1–D7, ADR-0004, and `engine/manifest/src/lib.rs`
-at a commit you pin in the ADR (the sibling tip read in Session 1 was `7c3e5dd`; re-read, do not
-assume it is unchanged); (2) decide under the Q10 ruling (structural compatibility; new schema
-string; handshake per FRIEDMAN D7; no FRIEDMAN-side change) and the Q11 constraints (ADR-0000
-addendum: `origin`, derivation, artifact kind {informal, formal, pair} with one artifact id, Markdown
-with LaTeX and generator-numbered steps, one Lean file, `location` forms, two-dimensional ground
-truth with `flaws[]` fields, `taxonomy_version`, commanded/achieved vocabulary, the SD6 LLM clause);
-(3) keep FRIEDMAN's hashing (RFC 8785 JCS + SHA-256), `corpus_id`-style pure-function ids, no
-timestamps, and the D4 binary64 tolerance arithmetic by reference; (4) include hand-computed goldens
-in the FRIEDMAN D6 style for one informal artifact and one Lean artifact (fixed bytes, digests
-computed with `sha256sum`, no placeholders in digests); (5) state the step-segmentation rule for
-informal `location`; (6) commit `[S0][ADR-0001] decide the proof-artifact manifest schema`. Then set
-NEXT-SINGLE-ACTION = S0.6 (ADR-0002 scaffold, beginning with `elan` and Mathlib pin discovery).
+**S0.6 — write ADR-0002 and land the scaffold.** Procedure, every value read, none assumed (SD7):
+(1) **Discovery first, recorded in the ADR:** `elan --version`, `elan show`, `lake --version`;
+Mathlib's current `lean-toolchain` and the commit it is read at (`gh api repos/leanprover-community/mathlib4/contents/lean-toolchain?ref=<sha>` after choosing the pin from `git ls-remote` or the API — the pin is the commit, the Lean version is whatever that commit's `lean-toolchain` says, Q8); the siblings' `rust-toolchain.toml` as re-read then (FRIEDMAN's at `7c3e5dd` says channel `1.91.0`, components clippy + rustfmt — confirm KOBER's too, and `rustc --version`/`cargo --version` on this machine); crates.io for the JCS serializer (FRIEDMAN chose `serde_json_canonicalizer 0.3.2`; re-read, then test against the RFC 8785 vectors from S-0007); whether GitHub Actions is available on this repo (it is enabled per Q2 notes — verify, and keep CI advisory, never a required check, Q9; `actions/*@v5`).
+(2) **Decide in ADR-0002:** Lean toolchain + Mathlib pin + `lake` layout under `lean/` (gate uses Mathlib's cache and builds only this project's modules); `engine/Cargo.toml` workspace root (Q7) with a `manifest` crate implementing ADR-0001 D1–D7 and the D8 goldens + ADR-0004 vectors as tests; JCS crate; synthetic storage default (ADR-0001 D2); directories `lab/`, `corpora/`, `groundtruth/`, `contact/` (empty, README posting the SD8 rules), `analysis/`, `sources/` (exists) (Q17); `scripts/check.sh` = `lake build` + `cargo test` + `cargo clippy -D warnings` + `cargo fmt --check` (Q6); `.gitignore` additions (`.lake/`, `engine/target/`, and the synthetic storage rule).
+(3) **Land it and prove it:** `bash scripts/check.sh` green locally, including Golden B's build at the pinned toolchain (record its `lean_build` and `#print axioms` outcome in the ADR as measured, replacing the "unasserted" note by a new transition, never by editing ADR-0001's text); LF check; register check.
+(4) Commit `[S0][ADR-0002] pin the toolchains and land the scaffold and gate`, push, then set NEXT-SINGLE-ACTION = the deferred CLAIM-0006 examination (STATE "Deferred S0 actions"), after which the Gate S0 cold-start test is attempted in a cold session (SD15).
