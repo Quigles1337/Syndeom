@@ -561,3 +561,257 @@ evidence), ASSESS, PLAN one thing, EXECUTE under the §1 constitution, VERIFY, R
 the §4.5 schema — including the LEAKAGE, DETERMINISM, MANIFEST, and DRIFT checks — and stop clean
 per §4.6. Honor escalations — some decisions are Al's, not yours.
 ```
+
+SESSION: 2026-10-13 UTC @ 2b7c573 (Session 6 — Gate S0 cold-start exam; the commit adding this
+entry lands on top of 2b7c573)
+RECALLED MEMORY (SD15 — the first entry of this block, verbatim, before any other action; this is
+an exam session, so no memory was written): the launching message was the §6 "Session N — resume"
+prompt verbatim and alone, in a fresh conversation holding no transcript of Sessions 1–5. The
+harness loaded the executor's memory index (99 lines) at start. The lines that name SYNDEOM or a
+sibling program are reproduced below exactly as loaded, and the memory file the SYNDEOM line
+links was read in full and is reproduced after them exactly as read. The index's remaining 85
+lines concern unrelated private programs; none mentions SYNDEOM (checked by a case-insensitive
+grep for "syndeom" over the index, which matched lines 98–99 only), and they are withheld from
+this public file by count rather than by text. Nothing in any recalled memory was used as a value:
+every value in the re-derivation below was read from the repo this session.
+
+Index lines 1–4, 83–87 and 98–99 of `MEMORY.md`, verbatim:
+```text
+# Project Memory
+
+## User Identity
+- **GitHub**: Quigles1337 · **Email**: adz@alphx.io · commit with `--author="Quigles1337 <adz@alphx.io>"`
+## KOBER (Linear A falsification infrastructure)
+- [Repo pointer + machine hazards](project_kober.md) — `C:\Users\LEET\KOBER`, remote `Quigles1337/KOBER` (**public**); the constitution `PROGRAM/KOBER-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (memory-policy ADR).
+
+## FR13DMAN (FRIEDMAN — designedness-detection instrument)
+- [Repo pointer + machine hazards](project_friedman.md) — `C:\Users\LEET\FR13DMAN` / `Quigles1337/FR13DMAN` (**public**, leetspeak name); sibling of KOBER; the constitution `PROGRAM/FRIEDMAN-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (ADR-0003).
+## SYNDEOM (AI-proof calibration — third sibling of KOBER/FRIEDMAN)
+- [Repo pointer + machine hazards](project_syndeom.md) — `C:\Users\LEET\Syndeom` / `Quigles1337/Syndeom` (**public**); the constitution `PROGRAM/SYNDEOM-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (SD15 / FR13DMAN ADR-0003).
+```
+
+File `project_syndeom.md` (SHA-256 `feff158ccb872ca5627d393fc91aa544cca4a60d25d6af393282112f7ea8f798`), verbatim:
+```text
+---
+name: project-syndeom
+description: "SYNDEOM program - repo C:\\Users\\LEET\\Syndeom (remote Quigles1337/Syndeom, public); constitution and ALL program state live IN the repo, never here"
+metadata:
+  node_type: memory
+  type: project
+  originSessionId: 07cebf44-c690-47a3-8c97-d4b909c4e75b
+  modified: 2026-10-13T03:32:54.297Z
+---
+
+**SYNDEOM** — repo `C:\Users\LEET\Syndeom`, remote `https://github.com/Quigles1337/Syndeom`
+(**public**). Third sibling of [[project-kober]] and [[project-friedman]].
+
+This file locates the repo and records machine hazards. Per the constitution's memory-discipline
+rule (adopting FR13DMAN ADR-0003) it records NO program state: no phase, gate, claims, commits,
+toolchain versions, escalations, or next actions.
+
+**Standing rule:** the repo is the sole memory of the program (constitution at
+`PROGRAM/SYNDEOM-PROGRAM.md`). Every session: read the constitution, then run its §4 loop from
+`PROGRAM/STATE.md` and `PROGRAM/HANDOFF.md`. Never resume from this file. Discover the default
+branch, toolchain, and every other value from the repo — never assume one, and never carry a value
+across from a sibling program.
+
+**Hard invariants (standing prohibitions, not state):** SYNDEOM never issues verdicts on any real
+contested proof; "proven" is reserved for sorry-free Lean proofs that also passed
+statement-fidelity review; it measures truth and triage, never understanding.
+
+**Never work in the sibling KOBER or FR13DMAN trees** — identical `PROGRAM/` schema, and their
+sessions may be live concurrently.
+
+Machine and harness hazards:
+- System-level git config has `core.autocrlf=true`; the repo pins LF via `.gitattributes`. Verify
+  with `git ls-files --eol` and a byte-level CR/BOM check, never by eye.
+- The Python console is cp1252: set `PYTHONIOENCODING=utf-8` before any script that prints
+  non-ASCII (`§`, `→`, `—`), or it dies with a UnicodeEncodeError after doing its work.
+- Cloning an empty GitHub repo yields the server's default branch (`main` here); `git init` on this
+  machine yields `master` (system `init.defaultBranch`). Read the branch, don't infer it.
+- Long heredocs fail to parse in this harness; write multi-line files with the Write/Edit tools and
+  pass commit messages via `-F file`. A `grep` inside an `&&` chain is not a guard.
+- The Bash tool's working directory persists between calls (a `cd` in one call moves later calls);
+  use absolute paths.
+- Deep `find` over the home dir hangs on OneDrive reparse points; bound searches.
+- Publisher pages (ScienceDirect, MDPI, Taylor & Francis, academia.edu) return 403 to tool
+  fetches; Crossref, arXiv, the GitHub API, and institutional repositories work.
+- `git symbolic-ref refs/remotes/origin/HEAD` may fail on a working copy cloned from an empty
+  remote until the first push and fetch; fallback `git remote show origin`.
+- elan resolves the Lean toolchain from the working directory; `cd` into the Lean project before
+  `lake build`. elan's `stable` may resolve to a version that is not installed.
+- Reachability is per site, not per tool: openai.com serves `curl` (browser UA) but 403s the
+  WebFetch tool; ias.edu 403s both (Cloudflare interstitial); Zenodo 403s its REST API to curl but
+  serves record pages and `?download=1` file links. Try the other tool before recording a failure.
+- `python script.py | grep …` masks the script's exit code; never put a verifier behind a pipe
+  when its verdict gates a commit. Run it alone, then act on `$?`.
+- Python needs `-X utf8` (or `PYTHONIOENCODING=utf-8`) to print `§`, `→`, `π` on this console.
+- The GitHub trees API truncates large repos (`"truncated": true`); use per-directory contents
+  calls for counts. The contents API returns base64 content only for files under 1 MB.
+- Hashing every recent file under the home dir (`find … | xargs sha256sum`) blows a 60–90 s
+  timeout even at maxdepth 4 with OneDrive/AppData excluded. Search by name only; verify a ferried
+  file by its digest once a candidate (or a paste) is in hand — the digest is the identity.
+- The console clock is local but `date -u` and web access times are UTC; a session that starts late
+  on day D records retrievals dated D+1 UTC. Write the session date and access times separately.
+- A `lake build` that imports all of Mathlib prints nothing for minutes when piped through `tail`
+  (first build of a one-module project took ~3 min after the cache); run it in the background
+  with a log and read the log with `tr '\r' '\n'` — the cache tool writes progress with CRs.
+  The full cold Lean setup (toolchain + nine clones + ~8,900 cache files + build) took 14 min.
+- Never `du` the `lean/.lake` tree while lake is writing it; it blew the 120 s tool timeout.
+- `cargo fmt` rewrites freshly written Rust; the gate runs `fmt --check`, so commit the formatted
+  form. Rust byte-string literals cannot hold `\u{…}` escapes — use `"…".as_bytes()`.
+- For arXiv papers, `arxiv.org/html/<id>` is the better text source for sentence-level checks;
+  poppler's `pdftotext` (at `C:\Users\LEET\tools\poppler-26.02.0\poppler-26.02.0\Library\bin`)
+  splits sentences across columns and figures. Read licence, version count and dates from the
+  `arxiv.org/abs/<id>` `<meta name="citation_*">` tags; ACL Anthology pages put `content=` before
+  `name=` in their meta tags, so match either attribute order.
+```
+Judgment on the recalled memory: no recalled memory holds program state in SD15's enumeration
+(phase, gate status, CLAIM or FLAW statuses, file contents as state, commit SHAs as markers, next
+actions, escalations). Two lines of the memory file are flagged for Al's audit as borderline: the
+"Hard invariants" paragraph paraphrases three constitution rules (§0.3, §0.4, SD17), and one hazard
+line says "the gate runs `fmt --check`" (the Q6 ruling). Both are constitution and design facts, not
+state; the executor judges them D1-legal (the siblings' convention for hazard content). If Al rules
+either line program state, this exam downgrades to CONDITIONAL PASS (ESCALATIONS).
+PHASE / GATE: S0 — FOUNDATION AND CITATION VERIFICATION / Gate S0 open on the cold-start exam only,
+which this session is. Result: **PASS** (below). Gate S0 is CLOSED at this commit; the phase
+advances to S1 — GROUND-TRUTH CORPUS.
+PLAN NOTE: one thing — the exam that STATE's NEXT-SINGLE-ACTION scheduled. It survived ORIENT
+unchanged; the inherited procedure (1)–(4) was followed as written. The two reconciliations the exam
+surfaced were made in this commit as the session's first task (§4.1).
+ADVANCED:
+- ORIENT (§4.1): `git rev-parse --show-toplevel` = `C:/Users/LEET/Syndeom`; `origin` =
+  `https://github.com/Quigles1337/Syndeom.git`; `git symbolic-ref refs/remotes/origin/HEAD` →
+  `refs/remotes/origin/main` (no fallback needed); HEAD = `origin/main` = `2b7c573`; worktree
+  clean. Read in order: the constitution (463 lines), STATE, HANDOFF Session 5, CLAIMS in full,
+  FLAWS header and entry list, ADR-0000 addendum, ADR-0001 header, section list and Amendments,
+  ADR-0002 in full, every SOURCES state line and S-0008's crate enumeration, `scripts/check.sh`,
+  `scripts/check_registers.py`, `.github/workflows/check.yml`, the pin files on disk, the six
+  directory READMEs, `.gitignore`, `.gitattributes`, the SIBLING-MAP section list.
+- Evidence run: `bash scripts/check.sh` at `2b7c573`, 03:45:45Z–03:46:17Z (warm `lean/.lake`
+  from Session 4): `Build completed successfully (8926 jobs)`; audit `'syndeom_golden_nat_le_sq'
+  depends on axioms: [propext]`; `cargo fmt --all --check` clean; `cargo clippy -D warnings`
+  clean; `cargo test` 23 passed, 0 failed; `git ls-files --eol` 36 `i/lf` + 9 `i/-text` (the
+  PDFs), no `i/crlf` or `i/mixed`; `check_registers.py`: 45 tracked files CR/BOM/trailing-LF
+  clean; Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 18/18 defined; `RESULT: ALL PASS`;
+  `GATE: GREEN`. The advisory CI run for `2b7c573` (run 38342304442) completed `success` at
+  03:46:38Z.
+- Byte checks beyond the gate: `PROGRAM/SWEEP-2026-10.md` 41,060 bytes, SHA-256 `f4bfb2ad…b03e`
+  (= the digest STATE and CLAIM-0006 record; banner on line 3); `lean/Syndeom/Fixtures/GoldenB.lean`
+  SHA-256 `c568a981…458e` (= ADR-0001 D8, ADR-0002 D3); every one of the nine PDFs under
+  `sources/` hashes to a digest present in SOURCES.md, byte for byte, as Session 5's DETERMINISM
+  CHECK claimed.
+- THE EXAM — program state re-derived in one pass from the repo (what was read → what it
+  establishes), then compared against STATE.md:
+  - Phase S0; Gate S0 criteria S0.1–S0.6 done. S0.1: CLAIM-0001..0005 and 0007 carry
+    UNKNOWN → VERIFIED transitions dated Session 2 with S-0001..S-0006 (S-0004, S-0005 INGESTED);
+    the S5 contact corpus location `github.com/openai/math` is in CLAIM-0001's evidence. S0.2: the
+    sweep file, digest recomputed, banner present. S0.3: ADR-0000 addendum; commit `c803c96`;
+    the constitution header says ratified Session 2. S0.4: ADR-0001 accepted, ratified Session 4,
+    Amendments recorded (`d3e5842`, `9137c64`). S0.5: FLAWS 0.1.0, fourteen `## FLAW-` headings,
+    ratified. S0.6: ADR-0002 D1–D8; the pin files on disk agree with it (below); six directory
+    READMEs; gate and CI present; `132788c`. CLAIM-0006 examined: `2b7c573`. Cold-start: this
+    session.
+  - Registers. CLAIM statuses 0001..0007: VERIFIED ×5, CONDITIONAL (0006), VERIFIED (0007,
+    existence only). CLAIM-0006 is CONDITIONAL because a claim of absence cannot become VERIFIED
+    by retrieval; it is narrowed to the joint flaw-class × proof-length breakdown above word-problem
+    level (and any joint breakdown at research level), bounded by S-0009..S-0018, FALSIFIED by one
+    counterexample; the scoped novelty statement lifts §0.6 only in that scope. SOURCES: 18
+    entries; INGESTED S-0004, S-0005, S-0010..S-0016 (the nine PDFs on disk); the rest VERIFIED
+    (S-0006 existence only; S-0009 and S-0018 digest-only; S-0017 a repository).
+  - Pins. `lean/lean-toolchain` = `leanprover/lean4:v4.34.1`; `lean/lakefile.toml` requires
+    mathlib at `d13f23b723b8a846827a245b89c10fc7d3f11612`; `lake-manifest.json` pins nine packages;
+    `rust-toolchain.toml` channel `1.91.0`, components clippy + rustfmt; `engine/Cargo.toml` is a
+    workspace (resolver 3, member `manifest`). Installed and matching: elan 4.2.3, Lake 5.0.0 /
+    Lean 4.34.1, rustc and cargo 1.91.0, Python 3.11.9.
+  - Manifest schema `syndeom-manifest/1` (ADR-0001): formats `syndeom-informal-md/1`,
+    `syndeom-lean/1`, `raw/1` (archival); ids `<generator.id>-v<version>-<config_hash[0:12]>` with
+    `-s<seed>` for synthetic; RFC 8785 (S-0007) + SHA-256; FRIEDMAN ADR-0004 arithmetic by
+    reference; `ground_truth: null` for contact; the derived-canonical-artifact convention in D4.
+    Each read in the ADR's own D2–D6 text.
+  - Standing escalations: Q3 LICENSE deferred (ADR-0000 addendum row Q3; HANDOFF Session 5
+    records "deferred pending Al's explicit decision text"); referee participants are Al's (SD13).
+    Nothing else open. Next action before this session: the cold-start exam.
+- Comparison: STATE.md agrees on every item above. Two precision findings, neither
+  unreconstructable: (1) STATE's "Build status" still named the Session-4 run as the last GREEN,
+  while HANDOFF Session 5 records a GREEN run at `132788c`; both are superseded by this session's
+  run at `2b7c573`, now recorded, with a standing instruction to update the line at every recorded
+  GREEN run. (2) "24 crates" (STATE, ADR-0002 D4, S-0008) counts the dependencies S-0008
+  enumerates (5 direct, 19 transitive); `engine/Cargo.lock` holds 25 `[[package]]` entries because
+  the workspace crate `syndeom-manifest` is the 25th. Clarified in STATE's toolchain line; the
+  ADR and the register are correct as worded and are not edited.
+- EXAM RESULT: **PASS.** Every item was re-derived from the repo alone, in one pass, without
+  guessing; the gate is GREEN at the tip and again on the tree this commit lands; the two findings
+  are staleness and precision, reconciled here. Gate S0 CLOSED at this commit (`[S0][INFRA] gate
+  S0 cold-start exam: PASS at 2b7c573`). NEXT-SINGLE-ACTION = S1.1 (below).
+- STATE: Phase → S1; the S0 table closed with this exam's evidence and retained; a Gate S1 table
+  opened (S1.1–S1.4, licences, green, cold-start — all open); Build status and toolchain lines
+  updated; ADR-0003 reserved for S1.1; the sweep's unretrieved runners-up carried as a note, not
+  an action.
+BELIEF DELTAS:
+- The repo is sufficient, now tested rather than asserted. Session-start me had the §6 prompt and
+  nothing else; constitution + STATE + HANDOFF + registers + ADRs reconstructed every pin, status
+  and escalation, and the gate confirmed every build claim. Evidence: the exam list above.
+  Consequence: §0.8 has one passed test, at S0; each later gate repeats it.
+- The gate costs ~30 s with a warm cache against the ~15 min STATE warned of. Evidence: the log
+  timestamps 03:45:45Z–03:46:17Z. Consequence: STATE now gives both numbers, so a successor can
+  tell a cache download from a hang.
+- SD15's "reproduce every recalled memory verbatim" meets "this repo is public" when the memory
+  index also lists unrelated private programs; the constitution does not name the case. Resolution
+  used: verbatim for every line naming SYNDEOM or a sibling (grep-checked), count-only for the
+  rest, stated openly. Evidence: the first entry of this block. Consequence: flagged to Al; if the
+  rule should say so, that is an SD15 amendment by ADR.
+- A cold session's first useful act is to distrust the freshest-looking line: STATE's Build status
+  lagged HANDOFF by a session. Evidence: finding (1). Consequence: the standing instruction in
+  STATE.
+CONFUSIONS:
+- The crate count (24 vs 25) cost one extra read of S-0008's enumeration; the doc fix is the one
+  clause in STATE's toolchain line.
+- STATE's Build-status line lagged HANDOFF by one session; the doc fix is the standing instruction
+  in that line.
+- Nothing else misunderstood; the §4.1 reading order was sufficient as written.
+HONESTY CHECK: no register entry changed status this session; CLAIMS, SOURCES and FLAWS are
+untouched. CLAIM-0006's CONDITIONAL was re-examined against its evidence: status, bounding set and
+the "what this examination cannot establish" sentence are all present; nothing to downgrade. The
+exam result is PASS rather than CONDITIONAL PASS on the executor's judgment of the two borderline
+memory lines, stated in the first entry so Al can overrule it. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+was opened; S-0001 and S-0006 were read only as register entries; no design decision was taken
+this session (no ADR, detector, generator or threshold). Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The only numbers produced are the gate's,
+regenerable by `bash scripts/check.sh` at `2b7c573`, and the digests above, regenerable by
+`sha256sum`. Nothing to quarantine.
+MANIFEST CHECK: no artifact was touched or created; `corpora/` and `groundtruth/` hold READMEs
+only. "Proven" was applied to nothing (Golden B remains SD2(i)–(ii) only, per ADR-0002 D8).
+Nothing synthetic labeled real.
+DRIFT CHECK: no statement about any real manuscript (SD3); no understanding claims (SD17); no
+detectors exist, so no detector-shopping; no referee contact (SD13). The session did the scheduled
+exam and the two reconciliations it surfaced, nothing else.
+NEXT-SINGLE-ACTION: S1.1 — write `PROGRAM/DECISIONS/ADR-0003.md`, the errata-and-retraction
+harvest procedure for `groundtruth/` (procedure only; no item is ingested in that session). It
+decides: (a) where candidate items come from — published proofs whose errata or retraction notices
+are themselves public documents, the notice being the status document SD12 requires — and how a
+candidate is admitted or rejected; (b) the per-item record: original, notice, the flaw's location,
+its FLAWS.md class with the mapping argued in writing, derivation `documented-by-source`; (c)
+licence handling per SD16 — a stored copy only when the licence permits, otherwise digest-only
+with `storage: external` (ADR-0001 D2) — ambiguity escalated, never ingested; (d) the `raw/1`
+parent plus the derived `syndeom-informal-md/1` canonical artifact per ADR-0001 D4 (iii), with the
+location re-expression argued per item; (e) the shape of the S1.4 coverage table (flaw class ×
+proof length, zero-coverage classes named). Read first, from the stored PDF: S-0015's
+ArxivMathGradingBench pipeline, as the precedent for harvesting human-authored papers with
+referee-identified errors. Commit `[S1][ADR-0003] decide the errata-harvest procedure`; the first
+harvested items are the action after.
+ESCALATIONS:
+- **Q3 repository LICENSE** — unchanged: deferred pending Al's explicit decision text (an SPDX
+  identifier, or "deferred pending <reason>"). Due before S5.4; nothing in S1 depends on it.
+- **SD15 audit request (new):** Al, please confirm or overrule the executor's judgment that the two
+  flagged memory lines (the "Hard invariants" paraphrase; "the gate runs `fmt --check`") are not
+  program state, and whether withholding the 85 unrelated index lines by count is acceptable for a
+  public repo. If overruled: this exam becomes CONDITIONAL PASS, the memory is trimmed in a
+  non-exam session, and the exam is re-run cold before Gate S1 — Gate S0's closure would then be
+  provisional until that re-run. If the count-only convention should be the rule, it is an SD15
+  amendment by ADR.
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: gate reached — Gate S0 closed by the cold-start exam. Repo green on the committed tree
+(`bash scripts/check.sh` re-run after these edits, before the commit); this commit pushes to
+`origin/main`.
