@@ -444,3 +444,120 @@ ESCALATIONS:
 STOP-REASON: natural boundary — S0.6 complete and the gate green; the next action (ten
 primary-source retrievals for CLAIM-0006) is a retrieval session of its own, and the cold-start
 test after it must be a fresh conversation. Repo green; this commit pushes to `origin/main`.
+
+---
+
+SESSION: 2026-10-13 UTC @ 132788c (Session 5 — the deferred CLAIM-0006 examination; the commit
+adding this entry lands on top of 132788c)
+LAUNCH CONTEXT (SD15; not an exam session): launched with the §6 Session-N resume prompt plus Al's
+inputs (a Q3 slot and the instructions for the CLAIM-0006 examination). Same conversation as
+Sessions 1–4 (compacted transcript held), therefore not cold; no cold-start test attempted.
+Recalled memory at start: the SYNDEOM/KOBER/FRIEDMAN memory-index lines (location + hazards;
+D1-compliant), user-identity and machine-hazard lines, and roughly thirty index lines for
+unrelated private programs (withheld).
+PHASE / GATE: S0 — FOUNDATION AND CITATION VERIFICATION / Gate S0 open on the cold-start test
+only. Done this session: the CLAIM-0006 examination (S0.1 continuation). Open: the cold-start test.
+PLAN NOTE: one thing — the ten retrievals and the claim's examination — as Al's prompt and STATE's
+NEXT-SINGLE-ACTION both directed. Al's prompt allowed several sessions; one sufficed. The Q3 slot
+arrived as template text for the third time; recorded as a choice ("deferred pending Al's explicit
+decision text"), not as silence, per Al's instruction and SD7.
+ADVANCED:
+- ORIENT: clean at `132788c` = `origin/main`; `bash scripts/check.sh` → `GATE: GREEN` as evidence
+  (Golden B builds, axioms `[propext]`, 23/23 tests); constitution unchanged since `c803c96`; the
+  advisory CI run for `132788c` completed `success`.
+- Retrieval: all nine arXiv papers the sweep ranks retrieved as abstract page + latest PDF + HTML
+  (HTTP 200 each, 03:23Z) and the `leanprover/comparator` repository read through the GitHub API;
+  Hard2Verify's ACL 2026 listing confirmed on the Anthology page; AdvancedMathBench's quoted
+  "nearly 90%" sentence found in the v2 HTML after the PDF extraction split it. Licences read per
+  paper: seven CC BY 4.0 (PDFs stored under `sources/`, ~16 MB), two arXiv non-exclusive
+  (digest-only), comparator Apache-2.0.
+- Reading: each paper's text was extracted and read against the claim's two axes — by error/flaw
+  class, by proof length — plus level and whether the proofs were AI-generated; the findings are in
+  each S-entry's "Bears on CLAIM-0006" field in the source's own words with figure/table/section
+  references (SOURCES.md S-0009..S-0018; S-0002/S-0006 cross-referenced for rank 9).
+- CLAIM-0006: **no retrieved source falsifies the claim as worded** (said first, as Al asked). The
+  claim is narrowed to the narrowest form the sources leave standing — tighter than the sweep's
+  §(2) draft — and moved UNKNOWN → CONDITIONAL (unfalsified as of 2026-10-13; bounding sources
+  listed; FALSIFIED by any single counterexample). The scoped novelty statement is recorded; §0.6
+  lifts only in that scope.
+- STATE: Q3 recorded as a choice; CLAIM-0006 row done; registers line; NEXT-SINGLE-ACTION = the
+  Gate S0 cold-start test with a procedure a cold successor can execute; the resume prompt a cold
+  session must receive is reproduced verbatim and alone at the end of this entry.
+BELIEF DELTAS:
+- The length axis has a precedent I did not expect to be this concrete: ProofGrid (S-0013) plots
+  proof-checking accuracy as a function of proof length and reports a challenge set of 720–987-unit
+  proofs on which "only two of [the four strongest models] manage to perform better than flipping
+  a coin" — a measured near-chance regime at long length, in formal natural deduction, with no
+  flaw-class breakdown. Evidence: its Figures 7–8 and Table 6. Consequence: SYNDEOM's fooling
+  length is not the first observation of the phenomenon; it is the first that would be per flaw
+  class, power-floored, and on mathematical proofs. The novelty statement says exactly that.
+- The one class × length result (S-0009) is weaker than the sweep implied: 50 GPT-4-rewritten
+  word-problem solutions per step count, one error class, "not significantly affected". Evidence:
+  its Appendix E.1. Consequence: the narrowed claim excludes word problems explicitly rather than
+  arguing about whether they are proofs.
+- Research-level AI-generated proofs with human-labelled errors already exist in a benchmark
+  (S-0015's FirstProofGradingBench: 16 proofs, 24 referee-identified errors), and the measured
+  verifiers leave "roughly 40%" of research-paper errors uncaught at k = 8. Evidence: S-0015 §4.
+  Consequence: S4/S5 have an external validation set to position against, and the claim's "no
+  breakdown at research level" is a statement about breakdowns, not about the absence of labels.
+- A claim of absence has a proper register state: CONDITIONAL with the bounding set named. Al's
+  ruling that retrieval cannot make it VERIFIED matched the register vocabulary without an
+  amendment. Evidence: §3.3 statuses; Al's prompt.
+- arXiv's HTML rendering is the better text source for sentence-level verification; poppler's
+  extraction split one load-bearing sentence into unmatched fragments. Evidence: the "nearly 90%"
+  search. Consequence: recorded as a hazard.
+CONFUSIONS:
+- The Session-5 prompt's Q3 slot was template text again. Al's instruction to "show a choice
+  rather than silence" was followed by recording the only choice the executor can make — deferred
+  pending Al's explicit text — and flagging it below. Cost: none; it is an escalation, not a value.
+- The ACL Anthology page carries its `<meta>` attributes content-first, so my first metadata regex
+  found nothing; the venue, Anthology ID and pages were read from the page text instead. Cost: one
+  extra call.
+- The sweep's "cite the version" hint for AdvancedMathBench was right: the category analysis is in
+  v2 (29 Sep 2026), and the register names v2 explicitly.
+HONESTY CHECK: the claim was examined as worded before being narrowed, and the register says no
+source falsifies it as worded — a weaker claim about word problems (S-0009) is reported rather than
+argued away. CLAIM-0006 is CONDITIONAL, not VERIFIED, with the bounding set and the unretrieved
+runners-up named; the novelty statement is scoped to the retrieval date and set. Every quoted
+sentence in S-0009..S-0018 was read in the retrieved text; three secondary-coverage items the sweep
+mentions (Retraction Watch, aggregator counts, blogs) stayed out of the register. ProofGrid's
+proof-length unit is recorded as the paper's own unit because the paper does not define it where
+the PL1-PC-c lengths are stated. Downgrades: none; one upgrade (UNKNOWN → CONDITIONAL) with
+evidence.
+LEAKAGE CHECK: checked, not assumed. No contact material was read: nothing from `openai/math` was
+opened; S-0006 was cross-referenced by its existing register entry only. The papers read describe
+other corpora (Hard2Verify responses, First Proof submissions, miniF2F proofs); they informed the
+novelty claim's scope and nothing in the battery design — no detector, generator, or threshold was
+decided this session. `contact/` remains empty. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. Every retrieval is pinned by URL, access
+time, size, and SHA-256; stored PDFs reproduce the retrieved digests byte for byte; comparator is
+pinned by tip commit. Nothing to quarantine.
+MANIFEST CHECK: no artifacts exist; the seven stored PDFs are INGESTED sources under `sources/`,
+not corpus items, and are binary by `.gitattributes`. "Proven" applied to nothing. Nothing
+synthetic labeled real.
+DRIFT CHECK: no statement about any real manuscript's correctness (SD3) — the register reports what
+papers report about verifiers, never a verdict on a proof; no understanding claims (SD17); no
+detectors, so no detector-shopping; no referee contact (SD13). One scope note: the register
+records cost datapoints (Hard2Verify's 90 + 63 minutes per response) for S3.4; they are quotes,
+not a model.
+NEXT-SINGLE-ACTION: Gate S0 cold-start test, in a fresh conversation launched with the prompt below
+verbatim and alone (procedure in STATE.md). Not executable from this conversation.
+ESCALATIONS:
+- **Q3 repository LICENSE** — three prompts in a row have carried the template text; the executor
+  recorded "deferred pending Al's explicit decision text". Al: please paste the decision (an SPDX
+  identifier, or the words "deferred pending <reason>") so the record carries Al's choice, not the
+  executor's description of its absence. Due before S5.4.
+- The cold-start test must be launched by Al: a new conversation, the prompt below, nothing else.
+- None new otherwise.
+STOP-REASON: natural boundary — the CLAIM-0006 examination is complete and recorded; the next
+action cannot run in this conversation (SD15). Repo green; this commit pushes to `origin/main`.
+
+COLD-START RESUME PROMPT (the exact §6 "Session N — resume" text; a cold session receives this and
+nothing else):
+```
+You are the executor of the SYNDEOM program. Read PROGRAM/SYNDEOM-PROGRAM.md in full, then run
+the metacognitive loop (§4) exactly: ORIENT from the repo (state files are claims; builds are
+evidence), ASSESS, PLAN one thing, EXECUTE under the §1 constitution, VERIFY, RECORD+REFLECT per
+the §4.5 schema — including the LEAKAGE, DETERMINISM, MANIFEST, and DRIFT checks — and stop clean
+per §4.6. Honor escalations — some decisions are Al's, not yours.
+```

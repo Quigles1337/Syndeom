@@ -150,15 +150,46 @@ and nothing about them beyond the prompt's wording is known or recorded.
 
 ## CLAIM-0006 — the motivating premise (absence of calibration data)
 
-- **Informal statement:** As of October 2026, no published calibration exists that states the error
-  rate of a proof-triage method as a function of proof length and flaw class, for AI-generated
-  mathematical proofs. This is the genesis prompt's framing of the problem (§0.1) and a scoped
-  novelty claim; it resolves through a founding sweep (map, not evidence — §S0.2) plus primary-source
-  retrieval, and it remains falsifiable by a single counterexample (§0.6). Until it is examined,
-  SYNDEOM makes no novelty claim.
-- **Status:** UNKNOWN
-- **Evidence:** none.
-- **Deps:** any future `PROGRAM/SWEEP-*.md`; S-0001..S-0005.
+- **Informal statement (original, Session 1; superseded in operation by the narrowed form below,
+  kept verbatim for the record):** As of October 2026, no published calibration exists that states
+  the error rate of a proof-triage method as a function of proof length and flaw class, for
+  AI-generated mathematical proofs. This is the genesis prompt's framing of the problem (§0.1) and
+  a scoped novelty claim; it resolves through a founding sweep (map, not evidence — §S0.2) plus
+  primary-source retrieval, and it remains falsifiable by a single counterexample (§0.6). Until it
+  is examined, SYNDEOM makes no novelty claim.
+- **Narrowed statement (Session 5, 2026-10-13, the narrowest form the retrieved sources leave
+  standing):** *As of 2026-10-13, among the primary sources retrieved and read (S-0009..S-0018,
+  with S-0002 and S-0006), no published work reports the detection performance of any proof-triage
+  method — automated or human — on mathematical proofs, informal or formal, broken down **jointly**
+  by flaw class and by proof length, for AI-generated proofs at any level above grade-school and
+  GRE-level word problems; and no retrieved work reports such a joint breakdown at research level
+  for any kind of proof. No retrieved work defines a proof length at which a detector falls to
+  chance for a flaw class.* Bounding results, each axis separately: **by class alone** — S-0009
+  (nine word-problem error types), S-0010 (nine sub-categories, MATH level), S-0012 (missed-error
+  distribution over four groups, undergraduate/qualifying-exam level, AI-generated proofs), S-0014
+  (five Lean injection strategies, olympiad level), S-0016 (per-category F1 for dataset-defect
+  detection, not proof triage); **by length alone** — S-0013 (proof-checking accuracy as a function
+  of proof length in formal natural deduction, partly AI-written proofs, with top models at or near
+  chance on 720–987-unit proofs — no class breakdown); position-not-length — S-0010, S-0011,
+  S-0018; **both axes, one class** — S-0009 (calculation error, 2–9 steps, word-problem solutions
+  rewritten by GPT-4: "not significantly affected by the number of steps"); **research-level
+  AI-generated proofs with labelled errors, no breakdown** — S-0015's FirstProofGradingBench (16
+  proofs, 24 referee-identified errors) and, human-authored, its ArxivMathGradingBench (35
+  papers). What this examination cannot establish: absence beyond the retrieved set; the sweep's
+  runners-up were not retrieved, and the sweep itself (a map) found no further candidate.
+- **Status:** CONDITIONAL — unfalsified as of 2026-10-13 in the narrowed form, conditional on the
+  bounding sources listed; a claim of absence cannot become VERIFIED by retrieval (§0.6; Al,
+  Session 5). FALSIFIED by any single published counterexample to the narrowed statement.
+- **Evidence:** S-0009..S-0018 (each entry's "Bears on CLAIM-0006" field quotes the source on the
+  two axes); none falsifies the original wording either, because the one source crossing class
+  with length (S-0009) does so for one class on word-problem solutions, not proofs.
+- **Scoped novelty statement (lifts §0.6's "no novelty claim" in exactly this scope):** SYNDEOM's
+  deliverable — detector error rates jointly by flaw class × proof length with a power-floored
+  fooling length (§2 S3.2), on manifested informal and formal proof artifacts — has, as far as the
+  Session-5 retrieval found, no published precedent; precedents exist for each axis separately
+  (cite S-0009, S-0010, S-0012, S-0013, S-0014) and for research-level labelled errors without
+  either breakdown (S-0011, S-0015). Every use of this statement cites 2026-10-13 and this scope.
+- **Deps:** `PROGRAM/SWEEP-2026-10.md` (map); S-0002, S-0006, S-0009..S-0018.
 - **Axiom print / fidelity check:** n/a
 - **Transitions:**
   - 2026-10-12 (Session 1) — seeded UNKNOWN from the genesis prompt's problem statement.
@@ -169,6 +200,14 @@ and nothing about them beyond the prompt's wording is known or recorded.
     survives) is a hint for retrieval, not a transition. Al's ruling: CLAIM-0006 moves only after
     the ten sources the sweep ranks are retrieved and read first-hand — a later S0 action (STATE
     "Deferred S0 actions"). Deps now name the file.
+  - 2026-10-13 (Session 5) — the ten ranked sources retrieved from primaries and read against the
+    claim as worded (S-0009..S-0018; S-0002 and S-0006 cross-referenced). **No source falsifies the
+    claim as worded.** Narrowed to the statement above (Al's instruction: the narrowest form the
+    sources leave standing; the sweep's §(2) wording was the draft, not the answer — it is
+    tightened to say what *was* found: a single-class length sweep at word-problem level, a
+    length-axis near-chance regime in formal logic, and research-level labelled AI proofs with no
+    breakdown). UNKNOWN → **CONDITIONAL** (unfalsified as of 2026-10-13, bounded by the sources
+    listed). The scoped novelty statement is recorded; §0.6 lifts only in that scope.
 
 ---
 

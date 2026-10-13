@@ -1,12 +1,12 @@
 # STATE
 
-- **Updated:** 2026-10-12 (Session 4 — ADR-0001 ratified and amended; S0.6 ADR-0002 + scaffold +
-  gate, close; UTC 2026-10-13 during the session)
+- **Updated:** 2026-10-13 UTC (Session 5 — CLAIM-0006 examination, close)
 - **Phase:** S0 — FOUNDATION AND CITATION VERIFICATION
-- **Gate:** S0 open. Done: S0.1 (sources register), S0.2 (founding sweep placed), S0.3
-  (constitution ratified), S0.4 (manifest ADR-0001, ratified Session 4), S0.5 (taxonomy 0.1.0
-  ratified), S0.6 (ADR-0002: toolchains, Lean project with Mathlib, engine crate, gate, CI). Open:
-  the deferred CLAIM-0006 examination (NEXT), then the cold-start test.
+- **Gate:** S0 open on one criterion only. Done: S0.1 (sources register, incl. the CLAIM-0006
+  examination), S0.2 (founding sweep placed), S0.3 (constitution ratified), S0.4 (manifest
+  ADR-0001, ratified Session 4), S0.5 (taxonomy 0.1.0 ratified), S0.6 (ADR-0002: toolchains, Lean
+  project with Mathlib, engine crate, gate, CI); repo green under the gate. **Open: the cold-start
+  test (NEXT)**, which must run in a fresh conversation.
 - **Founding sweep:** `PROGRAM/SWEEP-2026-10.md` (41,060 bytes, SHA-256
   `f4bfb2adcdf7c6714101ad6ddc2fdcf528e98e7c993accb8a5dbe04a8115b03e`, ferried by Al in Session 3
   and verified against Al's stated digest before placement). It is a **map, not evidence** (SD11
@@ -40,9 +40,12 @@
   rulings of record in the ADR-0000 addendum. ADR-only.
 - **Taxonomy:** `PROGRAM/FLAWS.md` 0.1.0 ratified (FLAW-0001..0014).
 - **Registers:** CLAIM-0001..0005 and 0007 VERIFIED (0007 existence only); CLAIM-0006 UNKNOWN by
-  design (sweep placed; its ten ranked sources not yet retrieved). S-0001..S-0008 VERIFIED; S-0004
-  and S-0005 INGESTED (two PDFs under `sources/`, CC0 and CC BY-NC 4.0); S-0007 is RFC 8785
-  (digest-only); S-0008 is the toolchain and dependency licence record at the ADR-0002 pins.
+  design until Session 5, now **CONDITIONAL** in a narrowed form (unfalsified as of 2026-10-13;
+  bounding sources S-0009..S-0018; the scoped novelty statement is in CLAIMS and lifts §0.6 only
+  in that scope). S-0001..S-0018 VERIFIED; INGESTED: S-0004, S-0005 (declarations, CC0 and CC
+  BY-NC 4.0) and S-0010..S-0016 (seven CC BY 4.0 papers under `sources/`, ~16 MB); S-0007 RFC 8785,
+  S-0009 and S-0018 (arXiv non-exclusive licence) digest-only; S-0008 the toolchain licence record;
+  S-0017 the `leanprover/comparator` repository.
 - **Manifest schema:** `syndeom-manifest/1`, ADR-0001 (Session 3). Formats `syndeom-informal-md/1`,
   `syndeom-lean/1`, `raw/1`; ids `<generator.id>-v<version>-<config_hash[0:12]>[-s<seed>]`; JCS +
   SHA-256; FRIEDMAN ADR-0004 arithmetic by reference; contact artifacts carry `ground_truth: null`.
@@ -75,12 +78,12 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 
 ## Deferred S0 actions (scheduled, not NEXT)
 
-- **S0.1 continuation — examine CLAIM-0006 (ruled by Al, Session 3):** now the NEXT-SINGLE-ACTION
-  (below). Retrieve and read, from primary sources, the ten sources ranked in
-  `PROGRAM/SWEEP-2026-10.md` under "Verdict (3)". Each enters SOURCES.md only on retrieval, as
-  UNVERIFIED-then-VERIFIED in the ordinary way (SD11); the sweep's descriptions of them are hints,
-  not citations. Only after all ten are read does CLAIM-0006 move (to VERIFIED in the sweep's
-  narrowed form, or to FALSIFIED by a counterexample). Before the Gate S0 cold-start test.
+- **S0.1 continuation — examine CLAIM-0006 (ruled by Al, Session 3): done in Session 5.** The ten
+  ranked sources were retrieved from primaries and read (S-0009..S-0018); CLAIM-0006 was narrowed
+  and moved to CONDITIONAL (a claim of absence cannot become VERIFIED by retrieval — Al, Session 5).
+  Not retrieved: the sweep's runners-up (IMProofBench, Open Proof Corpus, FormalAlign, Beyond
+  Compilation, ShadowBench, Sadasivan et al., First Proof batches, Greiffenhagen 2024); they stay
+  outside the register until a later action retrieves them, and the narrowed claim's scope says so.
 
 ## Gate S0 exit criteria
 
@@ -94,8 +97,8 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 | S0.6 Scaffold (`lean/` with Mathlib, `engine/`, `lab/`, `corpora/`, `groundtruth/`, `contact/`, `analysis/`, `sources/`, gate, CI) | **done** | `PROGRAM/DECISIONS/ADR-0002.md` (Session 4): Lean `v4.34.1` = Mathlib's `lean-toolchain` at pinned `d13f23b7…` (tag `v4.34.1`), `lake-manifest.json` locked; `engine/` workspace with `syndeom-manifest` (ADR-0001 D1–D7, 23 tests incl. D8 goldens, ADR-0004 vectors, RFC 8785 vectors); `scripts/check.sh` + `scripts/check_registers.py`; advisory CI on `actions/*@v5`; READMEs incl. `contact/` SD8 rules; licences S-0008; D8 measured: Golden B builds, axioms `[propext]` |
 | Licences recorded for anything touched | **done** | S-0001 Apache-2.0 (nothing copied); S-0002, S-0003 licence unstated (nothing copied); S-0004 CC0 and S-0005 CC BY-NC 4.0 (PDFs copied under those terms); no dependency added |
 | Repo green under the gate | **done (and standing)** | `bash scripts/check.sh` → `GATE: GREEN` before the S0.6 commit (Build status above); every earlier commit was LF-clean with coherent registers |
-| CLAIM-0006 examined (deferred S0 action, Al's ruling Session 3) | **open — NEXT** | the ten sources ranked in `PROGRAM/SWEEP-2026-10.md` "Verdict (3)" are not yet retrieved; CLAIM-0006 UNKNOWN |
-| Cold-start test (§2, SD15) | **open** | requires a cold session (fresh conversation, purged memory, §6 resume prompt verbatim) after the CLAIM-0006 examination |
+| CLAIM-0006 examined (deferred S0 action, Al's ruling Session 3) | **done** | Session 5: the ten ranked sources retrieved from primaries and read (S-0009..S-0018; seven CC BY PDFs under `sources/`, two digest-only, one repository); **no source falsifies the claim as worded**; CLAIM-0006 narrowed and moved UNKNOWN → CONDITIONAL (unfalsified as of 2026-10-13, bounding sources listed); the scoped novelty statement recorded in CLAIMS |
+| Cold-start test (§2, SD15) | **open — NEXT** | requires a cold session: a fresh conversation, launched with the §6 Session-N prompt verbatim and alone (reproduced in HANDOFF Session 5); the executor cannot run it from the conversation that built this state |
 
 ## Blockers
 
@@ -104,9 +107,13 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 ## Standing escalations (awaiting Al)
 
 - **Q3 — Repository LICENSE.** Public repo, no licence file. Al's decision, due before S5.4 and
-  before any paper cites the repo. Not a blocker. The Session-3 and Session-4 prompts' Q3 slots
-  both carried the placeholder text unfilled, so no ruling was delivered; Q3 remains deferred,
-  unchanged.
+  before any paper cites the repo. Not a blocker. **Record of choice (Session 5):** Al's Session-5
+  prompt asked that the record "show a choice rather than silence" and offered the forms
+  "<decision>" or "deferred pending <reason>" — but the slot itself arrived as that template text,
+  unfilled, as in Sessions 3 and 4. The executor cannot supply either the decision or the reason
+  (SD7: if a value is not pinned, stop and ask; do not choose). **Q3 is therefore recorded as:
+  deferred pending Al's explicit decision text**, which is the only choice the executor can make
+  on Al's behalf. Nothing in the repo depends on it before S5.4.
 - **Q14 — Founding sweep.** **Resolved in Session 3:** Al ferried the sweep by pasting its text
   (no file path was given); the pasted bytes, LF with one trailing newline, hashed to Al's stated
   digest exactly, and the file was placed. Nothing further is awaited.
@@ -117,26 +124,24 @@ executor's memory store holds, for SYNDEOM, the repo location and machine hazard
 
 ## NEXT-SINGLE-ACTION
 
-**S0.1 continuation — examine CLAIM-0006 by retrieving the sweep's ten ranked sources.** Procedure
-(SD11 throughout; the sweep is a map, its descriptions are hints):
-(1) Open `PROGRAM/SWEEP-2026-10.md`, section "Verdict", item "(3) Ten sources SYNDEOM must cite,
-ranked". For each of the ten, in rank order, retrieve the **primary** source (arXiv abstract page
-and PDF by the arXiv id the sweep names; the GitHub repository for `leanprover/comparator`; the
-agmai.org page already VERIFIED as S-0002 — re-read, do not re-cite the sweep) with `curl -A
-"Mozilla/5.0 …"` or the fetch tool (reachability is per site — try the other tool before recording
-a failure), record URL, access time (UTC), licence, and SHA-256 of the bytes read; store a copy
-under `sources/` only if the licence permits (arXiv licences vary per paper — read each one).
-(2) Add one SOURCES.md entry per source (numbered consecutively after S-0008), state VERIFIED only on a first-hand read;
-anything unreachable stays UNVERIFIED with a note for Al (Q15: never guess, never complete a
-citation from memory). Record for each what it *does* report (by error type? by length? level?)
-in the source's own words with page or section references — that is the evidence CLAIM-0006 turns
-on.
-(3) Then, and only then, write CLAIM-0006's transition: VERIFIED in a narrowed form stated
-precisely (as of the access date; what breakdowns prior work reports; what none reports), or
-FALSIFIED if any source reports detection performance jointly by flaw class and proof length on
-research-level AI-generated proofs. Add the scoped novelty statement to CLAIMS; §0.6's "no novelty
-claim" lifts only at that transition and only in that scope.
-(4) Run `bash scripts/check.sh` (must stay GREEN), commit `[S0][CLAIM-0006] retrieve the sweep's
-ten ranked sources and examine the novelty claim`, push. Then set NEXT-SINGLE-ACTION = Gate S0
-cold-start test, which must be launched in a fresh conversation with the §6 Session-N prompt
-verbatim (SD15) — the executor cannot run it from this conversation.
+**Gate S0 cold-start test (§2, SD15).** This action is not executable from the conversation that
+built the state under test; it is executed by a *cold* successor and judged by what that successor
+writes. Procedure:
+(1) **Launch (Al):** a fresh conversation; the launching message is the §6 "Session N — resume"
+prompt **verbatim and alone** (it is reproduced at the end of HANDOFF Session 5), carrying no
+program state, no rulings, no hints.
+(2) **The cold session** runs §4.1 ORIENT from the repo alone: reads the constitution, STATE, the
+last HANDOFF entry, CLAIMS, FLAWS, the ADRs; runs `bash scripts/check.sh` as evidence (expect
+`GATE: GREEN`; the first run on a fresh machine takes ~15 minutes for the Mathlib cache). As the
+**first entry of its HANDOFF block**, before any other action, it reproduces verbatim every memory
+it recalled (SD15); the exam counts only if no recalled memory holds program state.
+(3) It then writes, in one pass without guessing, the re-derived program state: phase, gate
+criteria with their evidence, the registers' statuses (CLAIM-0006 CONDITIONAL and why), the pins
+(Lean, Mathlib commit, Rust channel), the standing escalations (Q3), and the next action — and
+compares that against STATE.md. Every disagreement is reconciled as the session's first task
+(§4.1). It records the exam result in HANDOFF (PASS / CONDITIONAL PASS / FAIL with the gaps) and
+in the Gate S0 table, commits `[S0][INFRA] gate S0 cold-start exam: <result> at <sha>`, pushes.
+(4) On PASS, Gate S0 is closed and the cold session sets NEXT-SINGLE-ACTION = S1.1 (begin the
+ground-truth corpus: an ADR for the errata-harvest procedure, precedent in S-0015's
+ArxivMathGradingBench pipeline, under SD12/SD16 and the ADR-0001 D4 derived-artifact convention).
+On FAIL, it records the unreconstructable items as the doc fix and leaves NEXT = this test again.
