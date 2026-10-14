@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "86a989c4aa282dc0d1f265abf3c5a862d53fba59248e214cd16339508f504f25",
+        "file": "original-1304.5623v4.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 33391,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-0833f61c748c",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1304.5623v4.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 3.6, proof of Assertion (4): 'there exists a purely inseparable degree-p multisection D_xi in A-bar_xi by Proposition 3.5 ... Since D_xi -> xi x_k S is finite, flat and radicial of degree p, the same is true for D -> Y x_k eta' and the factorisation of the relative Frobenius through X-bar_eta x_{Y x eta} D that yields the height-2 isogeny: Proposition 3.5's radiciality, which its proof does not establish (item 26), is the hypothesis invoked",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1304.5623v4 (the original; corrected by v5's erratum appendix, 8 February 2023, also published as Invent. Math. 223 (2021) 1407-1409) - Theorem 3.6 (TeX label thm:moving torsors general), Assertion (4)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v4): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0060",
+      "S-0061"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0061, the erratum: 'one needs Assertion (4) of Theorem 3.6, whose proof requires that one can find degree p multisections in Proposition 3.5 that are radicial over the base. Without this, one can only conclude that any two supersingular K3 surfaces in characteristic p >= 5 are connected by a sequence of very special degree p correspondences (as in Assertion (3) of Theorem 3.6)' - Assertion (4) is neither re-proved nor disproved",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0061"
+    }
+  },
+  "config_hash": "0833f61c748c3271b4a454e8027ee8a03c78c4fe504fd7636f0fe3f802156b34",
+  "engine_commit": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 3.6, proof of Assertion (4): 'there exists a purely inseparable degree-p multisection D_xi in A-bar_xi by Proposition 3.5 ... Since D_xi -> xi x_k S is finite, flat and radicial of degree p, the same is true for D -> Y x_k eta' and the factorisation of the relative Frobenius through X-bar_eta x_{Y x eta} D that yields the height-2 isogeny: Proposition 3.5's radiciality, which its proof does not establish (item 26), is the hypothesis invoked"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0061, the erratum: 'one needs Assertion (4) of Theorem 3.6, whose proof requires that one can find degree p multisections in Proposition 3.5 that are radicial over the base. Without this, one can only conclude that any two supersingular K3 surfaces in characteristic p >= 5 are connected by a sequence of very special degree p correspondences (as in Assertion (3) of Theorem 3.6)' - Assertion (4) is neither re-proved nor disproved",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 27 (candidate 25, second documented result), Session 20. Ground truth as the author's v5 erratum appendix documents it, confirmed against the v4->v5 TeX diff; RECORD.md holds the argument. Assertions (1)-(3) are not withdrawn by the erratum and are not part of the claim of record. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

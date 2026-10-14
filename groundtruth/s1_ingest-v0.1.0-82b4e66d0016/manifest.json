@@ -1,0 +1,136 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "86a989c4aa282dc0d1f265abf3c5a862d53fba59248e214cd16339508f504f25",
+        "file": "original-1304.5623v4.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 33391,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-82b4e66d0016",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1304.5623v4.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.3, statement: 'These decompositions gives rise to a surjective morphism varpi_N of moduli spaces of rigidified K3 crystals with a section sigma_N ... which turns M_{N_+} into a P^1-bundle over M_N' (the lattice decompositions N = U + Lambda, N_+ = U(p) + Lambda are not withdrawn); the erratum replaces the conclusion by a dominant rational map whose geometric generic fibre has normalization P^1",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.3, proof, Step 6 'varpi_N defines a P^1-bundle structure': the erratum says 'the computations in Step 6 of the proof only show that the normalisation of the geometric generic fibre is isomorphic to P^1' - the step concludes that the fibre is P^1, which fails in the erratum's sigma_0(N) = 3 example",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 3,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.3, proof, the definition of varpi_N on characteristic subspaces (Steps 2-6): 'In the proof, the map is only defined on geometric points and extension to a morphism would require more arguments'",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1304.5623v4 (the original; corrected by v5's erratum appendix, 8 February 2023, also published as Invent. Math. 223 (2021) 1407-1409) - Theorem 4.3 (TeX label thm: bundle structure)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v4): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0060",
+      "S-0061"
+    ],
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0061, the erratum's example: for sigma_0(N) = 3 the moduli space M_N consists geometrically of two copies of the Fermat hypersurface of degree p+1 in P^3 and varpi_N arises from a pencil of planes through a line of this surface, giving 'a fibration over P^1, whose geometric generic fibre is a singular rational curve that is not smooth. This gives an example, where the geometric generic fibre of varpi_N is not smooth, and in particular, not isomorphic to P^1' - so varpi_N is not a P^1-bundle there",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0061"
+    }
+  },
+  "config_hash": "82b4e66d00160db6e9ca232a0b8807dfa412c6aeb47bc5549fd156d370303573",
+  "engine_commit": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.3, statement: 'These decompositions gives rise to a surjective morphism varpi_N of moduli spaces of rigidified K3 crystals with a section sigma_N ... which turns M_{N_+} into a P^1-bundle over M_N' (the lattice decompositions N = U + Lambda, N_+ = U(p) + Lambda are not withdrawn); the erratum replaces the conclusion by a dominant rational map whose geometric generic fibre has normalization P^1"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.3, proof, Step 6 'varpi_N defines a P^1-bundle structure': the erratum says 'the computations in Step 6 of the proof only show that the normalisation of the geometric generic fibre is isomorphic to P^1' - the step concludes that the fibre is P^1, which fails in the erratum's sigma_0(N) = 3 example"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 3,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.3, proof, the definition of varpi_N on characteristic subspaces (Steps 2-6): 'In the proof, the map is only defined on geometric points and extension to a morphism would require more arguments'"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0061, the erratum's example: for sigma_0(N) = 3 the moduli space M_N consists geometrically of two copies of the Fermat hypersurface of degree p+1 in P^3 and varpi_N arises from a pencil of planes through a line of this surface, giving 'a fibration over P^1, whose geometric generic fibre is a singular rational curve that is not smooth. This gives an example, where the geometric generic fibre of varpi_N is not smooth, and in particular, not isomorphic to P^1' - so varpi_N is not a P^1-bundle there",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 28 (candidate 25, third documented result), Session 20. Ground truth as the author's v5 erratum appendix documents it - a mistake in the proof, a weakened statement, and an explicit example in which the constructed map is not a P^1-bundle - confirmed against the v4->v5 TeX diff; RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

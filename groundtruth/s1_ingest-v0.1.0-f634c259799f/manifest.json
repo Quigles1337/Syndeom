@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "99711e20943672c1941370802d21f5537e37aef2773250780125e8ffd0a38483",
+        "file": "original-1312.1045v1.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 17242,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-f634c259799f",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1312.1045v1.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem A.1 (TeX label teo appendix), proof (Perron's method, v1): the two applications of the comparison principle, re-argued in v2",
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem A.1, proof, the sentences 'By applying the comparison principle stated in Proposition A.2, we infer u^* <= u_* on [0,+inf) x R^n' and 'By the comparison principle and the definition of u we get ||u(t+h,.) - u(t,.)|| <= ||u(h,.) - u(0,.)|| <= M h': Proposition A.2 (v1) requires the growth conditions (v_0) and (u_0) for every alpha > 0, which are not established for u^*, u_* nor for u(.+h,.), u; v2 states the bounds u_0 - Mt <= u_* <= u^* <= u_0 + Mt, verifies condition (C) for u_h with alpha = 2Mh and M_alpha = M, and weakens Proposition A.2 so that a continuous subsolution suffices",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1312.1045v1 (the original; corrected by v2, 5 April 2023) - Theorem A.1 (TeX label teo appendix), the appendix's existence-and-uniqueness theorem for viscosity solutions",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v1): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0062",
+      "S-0063"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0063: the statement of Theorem A.1 is unchanged word for word in v2, whose comment says the modified Proposition A.2 was needed 'to fill a gap in the proof of Theorem A.1' and whose proof establishes it",
+      "value": true
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0063"
+    }
+  },
+  "config_hash": "f634c259799f7f4149fb49467232dbc2f70f47fecb9b3de2e4eb80e74014e363",
+  "engine_commit": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem A.1 (TeX label teo appendix), proof (Perron's method, v1): the two applications of the comparison principle, re-argued in v2"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem A.1, proof, the sentences 'By applying the comparison principle stated in Proposition A.2, we infer u^* <= u_* on [0,+inf) x R^n' and 'By the comparison principle and the definition of u we get ||u(t+h,.) - u(t,.)|| <= ||u(h,.) - u(0,.)|| <= M h': Proposition A.2 (v1) requires the growth conditions (v_0) and (u_0) for every alpha > 0, which are not established for u^*, u_* nor for u(.+h,.), u; v2 states the bounds u_0 - Mt <= u_* <= u^* <= u_0 + Mt, verifies condition (C) for u_h with alpha = 2Mh and M_alpha = M, and weakens Proposition A.2 so that a continuous subsolution suffices"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0063: the statement of Theorem A.1 is unchanged word for word in v2, whose comment says the modified Proposition A.2 was needed 'to fill a gap in the proof of Theorem A.1' and whose proof establishes it",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 30 (candidate 26), Session 20. Ground truth as the authors' v2 comment documents it, confirmed against the v1->v2 TeX diff (the statement unchanged; the comparison principle re-stated and its two applications in the proof re-argued); RECORD.md holds the argument. Proposition A.2 itself is not an item: the comment reports no error in it. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

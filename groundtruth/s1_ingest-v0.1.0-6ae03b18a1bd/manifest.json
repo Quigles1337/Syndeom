@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "52d5f949d9ec84eedbaa3d6fc83484a4149332a83646efb88d7d69e8c370f851",
+        "file": "original-1403.4485v3.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 24763,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-6ae03b18a1bd",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1403.4485v3.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 5.1 (TeX label thm:HTX-equilateral), statement: the summand K_{m+2}[(m+1) d_V - d_U + 1] of the displayed decomposition of H_T^*(X_{a,b}(l)) for r = 2m+1 and l = (1,...,1) (v3), where v4 has K_{m+2}[(m+2) d_V - 2 d_U - 1]; the other summands and the conclusion syzord H_T^*(X) = m are unchanged",
+        "severity": "fatal",
+        "sub_variant": "propagated"
+      },
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 5.1, proof, the degree bookkeeping: 'is essentially the map delta~_{r-j}' (no shift stated) and 'ker iota^T_* = ... + K_{m+2}[-m d_V - d_U + 2]' with 'The degree shifts follow from (eq:dim-VJ-WJ) and the convention that the Koszul syzygies are generated in degree 0' (v3), where v4 computes the shift |W_J| - |e_J| = -(j+1) d_U explicitly and obtains K_{m+2}[-(m-1) d_V - 2 d_U]; the splitting argument that follows is unchanged",
+        "severity": "repairable",
+        "sub_variant": "local"
+      }
+    ],
+    "item": "arXiv:1403.4485v3 (the original; corrected by v4, 12 June 2023) - Proposition 5.1 (TeX label thm:HTX-equilateral)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v3): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0064",
+      "S-0065"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0065: 'incorrect degree shift in Proposition 5.1 corrected'; the acknowledgement 'previously incorrect degrees shifts in Proposition 5.1'",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0065"
+    }
+  },
+  "config_hash": "6ae03b18a1bd5f2ac69c5c2abf8d77c5ac05dd3071a8bf73e1eb2528bfb0159b",
+  "engine_commit": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 5.1 (TeX label thm:HTX-equilateral), statement: the summand K_{m+2}[(m+1) d_V - d_U + 1] of the displayed decomposition of H_T^*(X_{a,b}(l)) for r = 2m+1 and l = (1,...,1) (v3), where v4 has K_{m+2}[(m+2) d_V - 2 d_U - 1]; the other summands and the conclusion syzord H_T^*(X) = m are unchanged"
+        },
+        "severity": "fatal",
+        "sub_variant": "propagated"
+      },
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 5.1, proof, the degree bookkeeping: 'is essentially the map delta~_{r-j}' (no shift stated) and 'ker iota^T_* = ... + K_{m+2}[-m d_V - d_U + 2]' with 'The degree shifts follow from (eq:dim-VJ-WJ) and the convention that the Koszul syzygies are generated in degree 0' (v3), where v4 computes the shift |W_J| - |e_J| = -(j+1) d_U explicitly and obtains K_{m+2}[-(m-1) d_V - 2 d_U]; the splitting argument that follows is unchanged"
+        },
+        "severity": "repairable",
+        "sub_variant": "local"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0065: 'incorrect degree shift in Proposition 5.1 corrected'; the acknowledgement 'previously incorrect degrees shifts in Proposition 5.1'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 31 (candidate 27), Session 20. Ground truth as the author's v4 comment and acknowledgement document it, confirmed against the v3->v4 TeX diff; the item-4 shape (a wrong constant in the statement, propagated from the proof's bookkeeping). v2's and v3's own corrections (2014, 2015) are outside the window. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

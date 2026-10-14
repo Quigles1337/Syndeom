@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "86a989c4aa282dc0d1f265abf3c5a862d53fba59248e214cd16339508f504f25",
+        "file": "original-1304.5623v4.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 33391,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-003a35498654",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1304.5623v4.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 3.5, proof, the sentence 'By construction, D_xi -> xi x_k S is a family of A_xi[F]-torsors, and in particular, finite, flat, and radicial of degree p over xi x_k S, which establishes claim (1)': the erratum says the construction yields only a family of A_xi[p]-torsors, finite and flat of degree p, so the Frobenius-kernel torsor structure, and with it radiciality, is asserted without justification",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1304.5623v4 (the original; corrected by v5's erratum appendix, 8 February 2023, also published as Invent. Math. 223 (2021) 1407-1409) - Proposition 3.5 (TeX label prop:inseparable multisection)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v4): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0060",
+      "S-0061"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0061, the erratum: 'the proof of Proposition 3.5 contains a mistake ... More precisely, the proof only shows the following: [a degree p multisection, finite and flat, arising from a family of A_xi[p]-torsors] ... contrary to what was claimed in Proposition 3.5, one may not be able to choose the degree p multisection D_xi to be radicial' - the statement is neither re-proved nor disproved",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0061"
+    }
+  },
+  "config_hash": "003a35498654dac92978f7782ffbcc12f7521603bbd979bb259f3052dd9e50f0",
+  "engine_commit": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 3.5, proof, the sentence 'By construction, D_xi -> xi x_k S is a family of A_xi[F]-torsors, and in particular, finite, flat, and radicial of degree p over xi x_k S, which establishes claim (1)': the erratum says the construction yields only a family of A_xi[p]-torsors, finite and flat of degree p, so the Frobenius-kernel torsor structure, and with it radiciality, is asserted without justification"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0061, the erratum: 'the proof of Proposition 3.5 contains a mistake ... More precisely, the proof only shows the following: [a degree p multisection, finite and flat, arising from a family of A_xi[p]-torsors] ... contrary to what was claimed in Proposition 3.5, one may not be able to choose the degree p multisection D_xi to be radicial' - the statement is neither re-proved nor disproved",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 26 (candidate 25, first documented result), Session 20. Ground truth as the author's v5 erratum appendix documents it (the mistake found by Bragg and Lieblich), confirmed against the v4->v5 TeX diff, which leaves Section 3 unchanged; RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

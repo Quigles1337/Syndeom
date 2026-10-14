@@ -2605,3 +2605,173 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ 1cfcc61 (Session 20 — the ninth Route A harvest: candidates 25–27
+examined, all three admitted yielding 6 items; the commit adding this entry lands on top of
+1cfcc61)
+LAUNCH CONTEXT (SD15; not an exam session): Al's one-word order "resume" in the same conversation
+as Sessions 7–19, about forty minutes after the Session-19 push; the inherited NEXT-SINGLE-ACTION
+executed as STATE stated it. Not cold. No memory written (no new machine hazard).
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: prefix through arXiv id
+`1403.4485` (27 of 2,472 candidates; 21 admitted yielding 31 items, 4 rejected, 2
+found-but-unclassifiable); S1.3: thirty-one `raw/1` parents manifested, no derived artifact
+yet. Gate S0 closed and confirmed.
+PLAN NOTE: the inherited NEXT (the ninth harvest session, resuming at candidate 25), unchanged
+by ORIENT. One thing.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `1cfcc61`, clean; the constitution unchanged since `226a51c`;
+  the log's resume point read. Evidence gate at ORIENT, detached (`gate-20a.log`),
+  21:27:41Z–21:38:17Z (cold load again after forty idle minutes), `GATE: GREEN`.
+- **Candidate list:** regenerated from the 73 cached pages — 0 API requests, 2,472 candidates,
+  digest identical to run 1 (`e164c0b1…2d48`).
+- **Candidates examined in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md` rows 25–27):
+  - **25, arXiv 1304.5623** (Liedtke; math.AG; Invent. Math. 200 (2015), with a published
+    erratum Invent. Math. 223 (2021) listed on the abstract page), v5 (2023-02-08) "due to a
+    mistake in Proposition 3.5, the unirationality of supersingular K3 surfaces remains a
+    conjecture: see the appendix for erratum": the appendix names, at four depths of one
+    dependency chain, Proposition 3.5 (its proof "only shows" a weaker proposition — a degree-p
+    multisection from A_ξ[p]-torsors, not necessarily radicial; found by Bragg and Lieblich),
+    Assertion (4) of Theorem 3.6 ("whose proof requires that one can find degree p multisections
+    in Proposition 3.5 that are radicial"), Theorem 4.3 (a separate mistake: the map "is only
+    defined on geometric points", and "the computations in Step 6 of the proof only show that the
+    normalisation of the geometric generic fibre is isomorphic to ℙ¹", with an explicit
+    σ_0(N) = 3 example whose geometric generic fibre is singular) and Theorem 5.3 (the main
+    theorem, "remains a conjecture"). The 732-line diff leaves Sections 3–5 unchanged.
+    **Admitted as four items**: Proposition 3.5 — FLAW-0004 (gap; "By construction, D_ξ → ξ×S is
+    a family of A_ξ[F]-torsors … radicial"), null / `undetermined`; Theorem 3.6 (4) — FLAW-0005
+    (gap), null / `undetermined`; Theorem 4.3 — FLAW-0012 (fatal) + FLAW-0004 (Step 6, fatal) +
+    FLAW-0004 (the morphism's definition, gap), **false by the `counterexample` method** (the
+    third use; the record states the caveat that the example concerns the constructed map, which
+    is what the statement's "give rise to" asserts); Theorem 5.3 — FLAW-0005 (gap; "follows from
+    Theorem 5.1"), null / `undetermined`. Theorems 4.5, 5.1 and 5.5 are affected by the chain but
+    not named by the erratum and are not items; the records say so. Shared original v4
+    (`external`); S-0060, S-0061; ids `s1_ingest-v0.1.0-003a35498654`,
+    `s1_ingest-v0.1.0-0833f61c748c`, `s1_ingest-v0.1.0-82b4e66d0016`,
+    `s1_ingest-v0.1.0-315546e87259`.
+  - **26, arXiv 1312.1045** (Davini and Zavidovique; math.AP; J. Differential Equations 258
+    (2015)), v2 (2023-04-05) "We have revised the Appendix by slightly changing the statement
+    (and the proof) of Proposition A.2 (Comparison Principle). We needed Proposition A.2 in this
+    modified form to fill a gap in the proof of Theorem A.1 …": Theorem A.1's statement is
+    unchanged word for word; the comparison principle now needs its growth condition for one pair
+    of constants plus either the condition for every α or continuity of the subsolution, and the
+    theorem's proof verifies the hypotheses at both applications (explicit bounds on the Perron
+    envelopes; continuity for the time-shift pair). **Admitted**: Theorem A.1 — FLAW-0011 (gap)
+    + FLAW-0005 (gap), **`statement_status` true** by source document (the third true-statement
+    item, after items 2 and 20); Proposition A.2 is not an item (no error reported in it); the
+    executor's reading of which application was the gap (the Lipschitz step) is labelled.
+    Original v1 (`external`); S-0062, S-0063; id `s1_ingest-v0.1.0-f634c259799f`.
+  - **27, arXiv 1403.4485** (Franz; math.AT; IMRN 2015), v4 (2023-06-12) "incorrect degree shift
+    in Proposition 5.1 corrected": one summand 𝒦_{m+2}[(m+1)d_V − d_U + 1] becomes
+    𝒦_{m+2}[(m+2)d_V − 2d_U − 1], the proof's shifts are recomputed explicitly, the conclusion
+    syzord = m is unchanged; the acknowledgement names the finder. **Admitted**: Proposition 5.1
+    — FLAW-0001 propagated (statement, fatal) + FLAW-0001 local (proof, repairable),
+    `statement_status` false by source document — the item-4 shape, deliberately *not* added to
+    the "corrected"-wording escalation list because a wrong shift constant is a false graded
+    statement, not a possibly-unproved one. The scanner's "llm" hit is the citation "Stillman".
+    v2's and v3's own corrections (2014, 2015) are outside the window. Original v3
+    (`external`); S-0064, S-0065; id `s1_ingest-v0.1.0-6ae03b18a1bd`.
+  - **Counts by verdict, this session:** examined 3 — admitted 3 candidates yielding 6 items,
+    rejected 0, found-but-unclassifiable 0, pending 0, pending-truth 0, escalated 0.
+    **Cumulative:** examined 27 — admitted 21 candidates (31 items), rejected 4,
+    found-but-unclassifiable 2. **Last candidate processed `1403.4485`**; the session stopped at
+    its budget before candidate 28 (`1403.6317`).
+- Each admitted item: S-entries written **before** the producer ran (SD16); config with the D4
+  fields; `syndeom-ingest` at `1cfcc61` wrote `manifest.json` (`syndeom-manifest/2`,
+  `engine_commit` `1cfcc61…`, self-check passed; the ids reproduced independently in Python
+  before the producer ran; the six manifests re-read and their schema, commit, derivation, flaw
+  classes, sub-variants and severities, truth values and methods asserted); `RECORD.md` with the
+  D3 class argument, the alternatives considered, quoted locating sentences and licence basis.
+  The three correcting versions' abstract pages were re-fetched once each (byte-identical) to
+  read the journal fields — all three papers are published, and candidate 25's erratum is too.
+- STATE: Updated line; Gate S1 rows S1.1 (prefix through `1403.4485`, 27/21(31)/4/2) and S1.3
+  (thirty-one parents); registers line (S-0060..S-0065); build line; NEXT resumes at candidate
+  28 with the next three candidates' comments quoted (one a withdrawal, one in math.GM) and the
+  erratum lesson added (record each named result at every depth of the chain; unnamed links are
+  not items).
+- Gates: the ORIENT run (`gate-20a.log`) on the clean tree, 21:27:41Z–21:38:17Z (cold load),
+  `GATE: GREEN`. Evidence run on the staged tree, detached (`gate-20b.log`), 21:48:44Z–21:50:35Z, launched
+  after the ORIENT run had ended: `Build completed successfully (8926 jobs)`; audit `[propext]`;
+  fmt and clippy clean; `cargo test` 5/5 + 24/24; `git ls-files --eol` clean;
+  `check_registers.py` 122 tracked files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7,
+  **S- 65/65**; `RESULT: ALL PASS`; `GATE: GREEN`; `rc=0`. Re-run the same way on the final tree
+  (this entry and STATE's build line in) before the commit (STOP-REASON).
+BELIEF DELTAS:
+- A published erratum appended to the arXiv version is the richest status document the route has
+  met: it names results at several depths of one dependency chain, says for each what the proof
+  actually shows, and can carry an explicit example. Evidence: candidate 25 (four items; the
+  example makes Theorem 4.3 a counterexample-method item while its siblings are undetermined).
+  Consequence: the record stops at the named results; the unnamed links (Theorems 4.5, 5.1, 5.5)
+  are described, not recorded — a D2.3 reading flagged below.
+- "Fill a gap in the proof of Theorem X by modifying Proposition Y" is a true-statement shape:
+  the theorem stands, the auxiliary result is reshaped to cover the use, and the auxiliary result
+  itself carries no documented error. Evidence: candidate 26 against items 2 and 20. Consequence:
+  FLAW-0011 + FLAW-0005 gap with `true`, and the auxiliary proposition is not an item.
+- FLAW-0001 does not join the "corrected"-wording escalation: when the correction replaces one
+  constant by another in the same statement, the old statement is false if the new is true, and
+  the doubt the escalation records (false or merely unproved) does not arise. Evidence:
+  candidate 27 against item 4. Consequence: the escalated list stays at seven.
+- The undetermined share keeps growing: ten of thirty-one items (3, 13, 16, 21–24, 26, 27, 29).
+  Evidence: three more this session. Consequence: the S3 obligation for undetermined items is now
+  a third of the corpus; the effective-N rule (ADR-0004 D6) matters for the two four-item and
+  three-item candidates (25, 23).
+CONFUSIONS:
+- A `grep -nE '\\section\*?\{'` found no section headers in two files where a plain `grep -n
+  'section{'` did; the backslash escaping differed between the two pattern styles. Cost: two
+  re-greps. Doc fix: this entry — use the plain pattern.
+- A `sed -n "$((L-4)),…"` with an empty `L` (the preceding `grep` had not matched) became
+  `sed -n -4,…` and printed sed's usage. Cost: one retry with a different anchor. Doc fix: this
+  entry — test the grep result before arithmetic on it.
+- The six RECORD drafts were written before the ids were known and reference the directory name
+  only, as all records do; the placement script asserts no placeholder survives. No cost.
+HONESTY CHECK: no CLAIM changed status. New SOURCES S-0060..S-0065, VERIFIED digest-only (arXiv
+non-exclusive on every version read; the published erratum of candidate 25 is cited from the
+abstract page and not retrieved). Items 26, 27 and 29 record `null` on "remains a conjecture" and
+"the proof only shows"; item 28 records `false` on the erratum's own example, with the caveat that
+the example concerns the constructed map; item 30 records `true` on an unchanged statement
+re-proved; item 31 records `false` on "incorrect degree shift". The executor's step-level
+readings for items 26 and 30 are labelled as the executor's. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the window excludes the release by rule; the
+three examined papers are 2013–2015 submissions by named human authors; the scanner's one hit
+("llm" in "Stillman") was checked and is a citation. No detector or threshold exists. Verdict:
+no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The six manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `1cfcc61`; the ids reproduced independently in
+Python before the producer ran; the candidate list reproduced from cache with the identical
+digest; every retrieval is pinned by URL, access time and SHA-256. Nothing to quarantine.
+MANIFEST CHECK: six artifacts created, each with a `syndeom-manifest/2` manifest carrying ground
+truth with derivation `documented-by-source`, flaw records with `raw/1` locators (two carrying
+FLAW-0001 sub-variants `propagated` and `local`), `correct: false`, taxonomy 0.1.0, self-checked
+by the producer before writing (SD1); three carry `statement_status.value: null` with `method:
+"undetermined"` (ADR-0001 as amended), one `true`, one `false` by `counterexample`, one `false` by
+`source-document`. Nothing synthetic labeled real (SD12). "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript beyond its own status document (SD3): the records quote
+the authors' words, name the alternative reading where the document leaves room, and label the
+executor's mechanism readings as the executor's; the later literature on the K3 conjecture is
+mentioned only as the introduction mentions it. No understanding claims (SD17). No detectors. No
+referee contact (SD13). Candidate 28 was not opened.
+NEXT-SINGLE-ACTION: S1.1 — the tenth Route A harvest session, resuming at candidate 28
+(`1403.6317`, v3 of 2024-10-15, math.SG, "We removed the wrong theorem from the first version,
+which was brought to our attention by R. Leclercq") in ascending id with no skipping, exactly as
+STATE.md states it.
+ESCALATIONS:
+- For Al's attention, not a blocker (carried from Sessions 16–19, unchanged at seven records):
+  items 8, 10, 11, 14, 15, 18 and 25 carry `false` with `undetermined` named as the alternative
+  where the author writes "corrected", "incorrect", "error" or "false in the stated generality"
+  rather than giving a counterexample. Item 31 (a wrong constant) is deliberately not on this
+  list. A standing ruling either way would make the seven records uniform.
+- For Al's attention, not a blocker (carried from Session 19): ADR-0003 D3's severity clause
+  "withdrawn, weakened or shown false → fatal" against the FLAW-0004/0005 entries' own ranges for
+  statements left open — this session's items 26, 27 and 29 (gap) follow the entries' ranges, as
+  items 13, 16, 21 and 24 did. A one-line clarification in D3 would settle it.
+- For Al's attention, not a blocker (new): D2.3 reads "the status document names the result".
+  Candidate 25's erratum names four results and withdraws the main theorem, which also voids
+  Theorems 4.5, 5.1 and 5.5 that it does not name; the executor recorded only the named four. If
+  Al prefers every result the status document voids by its own words to be an item, the three
+  unnamed links can be added from the same S-entries without re-examination.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers
+  (S-0019); not attempted this session.
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
+set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
+the commit); this commit pushes to `origin/main`.

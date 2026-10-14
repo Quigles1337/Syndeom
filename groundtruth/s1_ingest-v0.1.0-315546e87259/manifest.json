@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "86a989c4aa282dc0d1f265abf3c5a862d53fba59248e214cd16339508f504f25",
+        "file": "original-1304.5623v4.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 33391,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-315546e87259",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1304.5623v4.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 5.3, proof: 'The assertion then follows from Theorem 5.1': Theorem 5.1's purely inseparable isogenies rest, through Corollary 4.6 and Theorem 4.5, on Assertion (4) of Theorem 3.6, which the erratum withdraws (item 27) - 'one needs Assertion (4) of Theorem 3.6 ... Without this, one can only conclude that any two supersingular K3 surfaces in characteristic p >= 5 are connected by a sequence of very special degree p correspondences ..., which is not sufficient for unirationality'",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1304.5623v4 (the original; corrected by v5's erratum appendix, 8 February 2023, also published as Invent. Math. 223 (2021) 1407-1409) - Theorem 5.3 (TeX label thm:main), the main theorem: 'Supersingular K3 surfaces in characteristic p >= 5 are unirational'",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v4): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0060",
+      "S-0061"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0061: 'due to a mistake in Proposition 3.5, the unirationality of supersingular K3 surfaces remains a conjecture' (the comment); 'the main result, the unirationality of supersingular K3 surfaces Theorem 5.3, remains a conjecture' (the erratum)",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0061"
+    }
+  },
+  "config_hash": "315546e87259b3f26a14d1cad24dd8fb4bbd469bce677da516e1ec772cf26b87",
+  "engine_commit": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 5.3, proof: 'The assertion then follows from Theorem 5.1': Theorem 5.1's purely inseparable isogenies rest, through Corollary 4.6 and Theorem 4.5, on Assertion (4) of Theorem 3.6, which the erratum withdraws (item 27) - 'one needs Assertion (4) of Theorem 3.6 ... Without this, one can only conclude that any two supersingular K3 surfaces in characteristic p >= 5 are connected by a sequence of very special degree p correspondences ..., which is not sufficient for unirationality'"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0061: 'due to a mistake in Proposition 3.5, the unirationality of supersingular K3 surfaces remains a conjecture' (the comment); 'the main result, the unirationality of supersingular K3 surfaces Theorem 5.3, remains a conjecture' (the erratum)",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 29 (candidate 25, fourth documented result), Session 20. Ground truth as the author's v5 comment and erratum appendix document it, confirmed against the v4->v5 TeX diff; RECORD.md holds the argument. Theorem 5.1, the intermediate link, is not named by the erratum and is not recorded as an item. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

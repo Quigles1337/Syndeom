@@ -1880,3 +1880,219 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
   copy not committed.
 - **Bears on:** S1.1 item 25 (its status document); no CLAIM.
+
+---
+
+## S-0060 — Christian Liedtke, "Supersingular K3 Surfaces are Unirational", arXiv:1304.5623 **v4** (the original of Route A items 26, 27, 28 and 29)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 25 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 20, 2026-10-14.
+- **Citation (from the abstract page):** Christian Liedtke, "Supersingular K3 Surfaces are
+  Unirational", arXiv:1304.5623, Algebraic Geometry (math.AG; cross-listed math.NT); v1 20 April
+  2013, v2 4 June 2013, v3 13 March 2014, **v4 submitted 16 September 2014** (comment "31 pages;
+  many details added, final version"); v5 8 February 2023 (S-0061). Journal reference on the
+  abstract page: "Invent. Math. 200, 979-1014 (2015) and Invent. Math. 223 (2021), 1407-1409" —
+  the paper and its published erratum; neither was retrieved. One author.
+- **Primary:** abstract page <https://arxiv.org/abs/1304.5623v4>, accessed 2026-10-14T21:27:57Z
+  (HTTP 200), 39,635 bytes, SHA-256
+  `d67c3a08b304975da5f52721c017dd0afe7d51ee9eda0302f95f675e9597bacc`; e-print
+  <https://arxiv.org/e-print/1304.5623v4> (`application/gzip`), 33,391 bytes, SHA-256
+  `86a989c4aa282dc0d1f265abf3c5a862d53fba59248e214cd16339508f504f25` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** Section 3 "Continuous Families of Torsors": Proposition 3.5 (TeX label
+  `prop:inseparable multisection`) with its proof, Theorem 3.6 (`thm:moving torsors general`)
+  with its proof; Section 4 "Moduli spaces": Theorem 4.3 (`thm: bundle structure`) with its
+  proof (Steps 1–6), Remark 4.4 (`rem: crystal geometry`); Section 5 "Supersingular K3 surfaces
+  are unirational": Theorem 5.1 (`thm:correspondences`) and Theorem 5.3 (`thm:main`) with their
+  proofs; Corollary 4.6 (`cor: ogus`) read for the dependency chain. Numbering: all theorem-like
+  environments share one counter per section; Section 3 runs Definition 3.1, Proposition 3.2,
+  Lemma 3.3, Proposition 3.4, Proposition 3.5, Theorem 3.6, …; Section 4 (from source line 1681)
+  Definition 4.1, Definition 4.2, Theorem 4.3, Remark 4.4, Theorem 4.5, Corollary 4.6, Remark
+  4.7; Section 5 (from line 2217) Theorem 5.1, Remark 5.2, Theorem 5.3, … — so the erratum's
+  numbers are v4's.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 26–29); no CLAIM.
+
+---
+
+## S-0061 — Liedtke, arXiv:1304.5623 **v5** — the correcting version, its comment and its erratum appendix (the status document of Route A items 26, 27, 28 and 29)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0060; **v5 submitted 8 February 2023**, comment: "due to a mistake in
+  Proposition 3.5, the unirationality of supersingular K3 surfaces remains a conjecture: see the
+  appendix for erratum". The abstract page also lists the published erratum, Invent. Math. 223
+  (2021), 1407–1409 (not retrieved).
+- **Primary:** abstract page <https://arxiv.org/abs/1304.5623v5>, accessed 2026-10-14T21:27:57Z
+  (HTTP 200), 39,394 bytes, SHA-256
+  `97fabea89d23cfaa7c0f905734d60ab76dc2f730bde69061cfd6a2745c4dab4e` (re-fetched at about
+  21:30Z to read the journal fields; byte-identical); e-print
+  <https://arxiv.org/e-print/1304.5623v5> (`application/gzip`), 34,307 bytes, SHA-256
+  `531f8badcfa87dca9fb3ae1023ae22760e2064dfad973feb92c920b66e4d80b4` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** the comment; the new footnote on the introduction ("Due to a mistake in
+  Proposition 3.5, our results merely show that supersingular K3 surfaces are related by
+  sequences of very special correspondences, which is not sufficient to deduce their
+  unirationality. The unirationality conjecture thus remains a conjecture. See the appendix for
+  erratum."); and the appendix "Erratum" (source lines 2396–2514), the whole of it, in
+  particular: "As was pointed out by Bragg and Lieblich in [BL], the proof of Proposition 3.5
+  contains a mistake, which has the effect that the main result, the unirationality of
+  supersingular K3 surfaces Theorem 5.3, remains a conjecture."; under "Degree p multisections",
+  "More precisely, the proof only shows the following:" followed by a weakened proposition whose
+  conclusion is a degree-p multisection "finite and flat of degree p" that "arises from a family
+  of A_ξ[p]-torsors", and "In particular, contrary to what was claimed in Proposition 3.5, one
+  may not be able to choose the degree p multisection D_ξ to be radicial, that is, purely
+  inseparable, over ξ ×_k S."; "Now, in order to show that unirationality is preserved in these
+  one-dimensional families, one needs Assertion (4) of Theorem 3.6, whose proof requires that one
+  can find degree p multisections in Proposition 3.5 that are radicial over the base. Without
+  this, one can only conclude that any two supersingular K3 surfaces in characteristic p ≥ 5 are
+  connected by a sequence of very special degree p correspondences (as in Assertion (3) of
+  Theorem 3.6), which is not sufficient for unirationality."; under "Fibration structure",
+  "Moreover, the proof of Theorem 4.3 contains a mistake. In fact, the proof only shows the
+  following:" followed by a weakened theorem (a dominant rational map ϖ_N with a section, defined
+  on the open set of crystals of Artin invariant σ_0+1, whose geometric generic fibre has
+  normalization ℙ¹; "(In general, ϖ_N may not be generically smooth.)"), then "In the proof, the
+  map is only defined on geometric points and extension to a morphism would require more
+  arguments. In particular, the computations in Step 6 of the proof only show that the
+  normalisation of the geometric generic fibre is isomorphic to ℙ¹." and "In particular, the
+  table Remark 4.4 has to be corrected as follows: for σ_0(N) = 3, the moduli space 𝓜_N consists
+  geometrically of two copies of the Fermat hypersurface of degree (p+1) in ℙ³. In this case, ϖ_N
+  arises geometrically by choosing a pencil of planes through a line of this surface and then,
+  one obtains a fibration over ℙ¹, whose geometric generic fibre is a singular rational curve
+  that is not smooth. This gives an example, where the geometric generic fibre of ϖ_N is not
+  smooth, and in particular, not isomorphic to ℙ¹." The v4 → v5 TeX diff (732 lines): the
+  footnote, the appendix, a rearranged introduction (the ℙ¹-bundle theorem's "In particular,
+  𝓜_N and 𝓜_{N_+} are iterated ℙ¹-bundles over Spec 𝔽_{p²}" dropped; a sentence on Lieblich's
+  later proof moved), a shortened acknowledgement, and prose edits; the bodies of Sections 3–5
+  are otherwise unchanged. The AI-assistance scanner reports no hit on either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v5 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 items 26–29 (their status document); no CLAIM.
+
+---
+
+## S-0062 — Andrea Davini and Maxime Zavidovique, "On the (non) existence of viscosity solutions of multi-time Hamilton-Jacobi equations", arXiv:1312.1045 **v1** (the original of Route A item 30)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 26 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 20, 2026-10-14.
+- **Citation (from the abstract page):** Andrea Davini, Maxime Zavidovique, "On the (non)
+  existence of viscosity solutions of multi--time Hamilton--Jacobi equations", arXiv:1312.1045,
+  Analysis of PDEs (math.AP; cross-listed math.SG); **v1 submitted 4 December 2013** (comment
+  "15 pages"); v2 5 April 2023 (S-0063). Journal reference on the abstract page: J. Differential
+  Equations 258 (2015), no. 2, 362–378, DOI 10.1016/j.jde.2014.09.015 (the published version was
+  not retrieved). Two authors.
+- **Primary:** abstract page <https://arxiv.org/abs/1312.1045v1>, accessed 2026-10-14T21:28:15Z
+  (HTTP 200), 39,895 bytes, SHA-256
+  `44a2f4614410b57ed78098d58a6ca429b721b768a2ced113d5f498ae1b6995dc`; e-print
+  <https://arxiv.org/e-print/1312.1045v1> (`application/gzip`), 17,242 bytes, SHA-256
+  `99711e20943672c1941370802d21f5537e37aef2773250780125e8ffd0a38483` — a gzipped tar holding
+  `NonCommutingNov2013.tex` and `NonCommutingNov2013.bbl`.
+- **Content used:** the Appendix: Theorem A.1 (TeX label `teo appendix`) with its proof (Perron's
+  method), Proposition A.2 (`prop appendix comparison`, the comparison principle) and Remark A.3
+  (`oss appendix comparison`), and the introduction's sentence "In the appendix we give the proof
+  of a folklore theorem on existence and uniqueness of viscosity solutions". Numbering: the
+  appendix is an unnumbered `\section*{Appendix}` whose environments carry the prefix A;
+  Theorem A.1 is the first, Proposition A.2 the second, so the comment's numbers are v1's.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v1 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 30); no CLAIM.
+
+---
+
+## S-0063 — Davini and Zavidovique, arXiv:1312.1045 **v2** — the correcting version and its comment (the status document of Route A item 30)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0062; **v2 submitted 5 April 2023**, comment: "We have revised the Appendix
+  by slightly changing the statement (and the proof) of Proposition A.2 (Comparison Principle).
+  We needed Proposition A.2 in this modified form to fill a gap in the proof of Theorem A.1. We
+  have also introduced some simplifications in the proof of Proposition A.2".
+- **Primary:** abstract page <https://arxiv.org/abs/1312.1045v2>, accessed 2026-10-14T21:28:15Z
+  (HTTP 200), 40,329 bytes, SHA-256
+  `2a72ecf0abfb69b7c0db50160cb89adea2912684e88bd5ee13c3ea5d11da5821` (re-fetched at about
+  21:30Z to read the journal fields; byte-identical); e-print
+  <https://arxiv.org/e-print/1312.1045v2> (`application/gzip`), 17,971 bytes, SHA-256
+  `3cf8c9755ab2c2f5aa0e18b41de206ba6960ee4eaa1efb8a3be2502e0a2b04b3` — a gzipped tar holding
+  `NonCommuting_revised_Nov2022.tex` and its `.bbl`.
+- **Content used:** the comment; the v1 → v2 TeX diff (467 lines): Theorem A.1's statement is
+  unchanged word for word; Proposition A.2 now reads "Let v and u be, respectively, an upper and
+  lower semicontinuous function on [0,+∞)×ℝⁿ satisfying condition (C) for a pair of constants
+  α̂ > 0 and M_α̂ > 0. Let us assume that v is a subsolution and u is a supersolution of (A), and
+  that either one of the following conditions hold: (a) for every α > 0, there exists M_α > 0 such
+  that (C) holds with f := v; (b) v is continuous on [0,+∞)×ℝⁿ. Then sup(v − u) ≤
+  sup_{ℝⁿ}(v(0,·) − u(0,·))", with condition (C) "f(t,x) ≥ f(0,x) − (α + M_α t) for all (t,x)",
+  in place of v1's hypothesis that both (v_0) and (u_0) hold for every α > 0; its proof is
+  reworked (a penalisation η/(T−t) on a finite time horizon in place of η(t²+s²), and a new case
+  (b)); the proof of Theorem A.1 now states the bounds "u_0(x) − Mt ≤ u_*(t,x) ≤ u*(t,x) ≤
+  u_0(x) + Mt on [0,+∞)×ℝⁿ" before invoking Proposition A.2 for u* ≤ u_*, and for the Lipschitz
+  bound in time introduces u_h(t,x) := u(t+h,x), verifies "u_h satisfies condition (C) with
+  α := 2Mh and M_α := M", and applies Proposition A.2 "to the continuous solutions u_h, u"; the
+  equation (A)'s domain "(0,+∞)×(0,+∞)×ℝⁿ" is corrected to "(0,+∞)×ℝⁿ"; the semicontinuous
+  envelopes are written with inf/sup over balls; the concluding speculation of Section 5 is
+  rewritten. The AI-assistance scanner reports no hit on either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v2 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 30 (its status document); no CLAIM.
+
+---
+
+## S-0064 — Matthias Franz, "Big polygon spaces", arXiv:1403.4485 **v3** (the original of Route A item 31)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 27 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 20, 2026-10-14.
+- **Citation (from the abstract page):** Matthias Franz, "Big polygon spaces", arXiv:1403.4485,
+  Algebraic Topology (math.AT); v1 18 March 2014; v2 21 October 2014; **v3 submitted 7 April
+  2015** (comment "20 pages; proof of Proposition 7.2 corrected, minor changes" — a 2015
+  correction outside the ADR-0003 D8 window, not harvested); v4 12 June 2023 (S-0065). Journal
+  reference on the abstract page: Int. Math. Res. Not. 2015 (2015), 13379–13405, DOI
+  10.1093/imrn/rnv090 (the published version was not retrieved). One author.
+- **Primary:** abstract page <https://arxiv.org/abs/1403.4485v3>, accessed 2026-10-14T21:28:34Z
+  (HTTP 200), 41,241 bytes, SHA-256
+  `46854f524747e82349ddbf30d4075d13d53482afe36e34ba4bc471a4c37e47f1`; e-print
+  <https://arxiv.org/e-print/1403.4485v3> (`application/gzip`), 24,763 bytes, SHA-256
+  `52d5f949d9ec84eedbaa3d6fc83484a4149332a83646efb88d7d69e8c370f851` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** Section 5 "The equilateral case": Proposition 5.1 (TeX label
+  `thm:HTX-equilateral`, the section's first numbered environment; the counter is per section
+  and shared) — its statement and proof, in particular the computation of ker ι^T_* and
+  coker ι^T_* and their degree shifts; quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 31); no CLAIM.
+
+---
+
+## S-0065 — Franz, arXiv:1403.4485 **v4** — the correcting version and its comment (the status document of Route A item 31)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0064; **v4 submitted 12 June 2023**, comment: "20 pages; incorrect degree
+  shift in Proposition 5.1 corrected, some typos fixed".
+- **Primary:** abstract page <https://arxiv.org/abs/1403.4485v4>, accessed 2026-10-14T21:28:34Z
+  (HTTP 200), 41,177 bytes, SHA-256
+  `476f7125e32b057f99cc10b6eb2cda0ec51d7d4c814f9d8c644f71fbe9453472` (re-fetched at about
+  21:30Z to read the journal fields; byte-identical); e-print
+  <https://arxiv.org/e-print/1403.4485v4> (`application/gzip`), 25,056 bytes, SHA-256
+  `126db358c0ecd841159fd5e944866c891a7989dca2e7b59e7b4d88603021bfc5` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** the comment; the v3 → v4 TeX diff (272 lines): the acknowledgement's new
+  clause "and particularly Sergio Chaves for pointing out previously incorrect degrees shifts in
+  Proposition 5.1"; in Proposition 5.1's statement the summand "𝒦_{m+2}[(m+1)d_V − d_U + 1]"
+  becomes "𝒦_{m+2}[(m+2)d_V − 2d_U − 1]" (the other summands and the conclusion "syzord
+  H_T^*(X_{a,b}(ℓ)) = m" unchanged); in its proof the degree bookkeeping is redone — the
+  restriction of ι^T_* is "essentially the map δ̃_j …, up to a degree shift by |W_J| − |e_J| =
+  −(j+1)d_U", with "s̄ = −(m+1)d_U and s = s̄ − 2b(m+1) = −(m+1)d_V" introduced, the kernel's
+  Koszul summand becomes "𝒦_{m+2}[s̄ − 2b(m−1)] = 𝒦_{m+2}[−(m−1)d_V − 2d_U]" where v3 had
+  "𝒦_{m+2}[−m d_V − d_U + 2]", and v3's sentence "The degree shifts follow from (eq:dim-VJ-WJ)
+  and the convention that the Koszul syzygies are generated in degree 0" is dropped; in Lemma
+  4.x's proof "up to a degree shift by −2b(r−k)" is replaced by explicit shifts; the remaining
+  hunks are typographical (hyperref/breakurl preamble, a citation to Puppe 2018, index fixes).
+  The AI-assistance scanner's one hit, "llm", is inside the bibliography entry "Stillman"
+  (Grayson–Stillman, Macaulay2) — checked, not an AI-assistance mention.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 31 (its status document); no CLAIM.
