@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "30978332dd33e6fb3a8d3d2cf94aa8ebe20f8a7eeabe6e1c7b6e28d62502c9d5",
+        "file": "original-0908.3213v4.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 34662,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-a8ac73896464",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-0908.3213v4.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.4, statement, assertions (1) and (2): the listed complex structures J on aff(C) x R^2 and on s_1 (Je_1 = -e_2 + e_3, Je_2 = e_1 + e_4, Je_3 = e_4 in v4; signs reversed in v5)",
+        "severity": "fatal",
+        "sub_variant": "propagated"
+      },
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.4, proof, the normalization displayed with TeX label base (the factor 1/sqrt(a^2+b^2) in v4, 1/(a^2+b^2) in v5) and the bracket [f~_1, f~_2] it feeds",
+        "severity": "repairable",
+        "sub_variant": "local"
+      }
+    ],
+    "item": "arXiv:0908.3213v4 (the original; corrected by v5, 29 July 2024)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v4): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0030",
+      "S-0031"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0031",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0031"
+    }
+  },
+  "config_hash": "a8ac738964648ec51322bc54f2730a594d99d414ab96f1a966b8af2d49e9ef0a",
+  "engine_commit": "bb0fc32f172351aa47eb9f1e2576506ebbd51b71",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.4, statement, assertions (1) and (2): the listed complex structures J on aff(C) x R^2 and on s_1 (Je_1 = -e_2 + e_3, Je_2 = e_1 + e_4, Je_3 = e_4 in v4; signs reversed in v5)"
+        },
+        "severity": "fatal",
+        "sub_variant": "propagated"
+      },
+      {
+        "class": "FLAW-0001",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.4, proof, the normalization displayed with TeX label base (the factor 1/sqrt(a^2+b^2) in v4, 1/(a^2+b^2) in v5) and the bracket [f~_1, f~_2] it feeds"
+        },
+        "severity": "repairable",
+        "sub_variant": "local"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0031",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 4 (candidate 5), Session 13. Ground truth as the authors' v5 comment documents it, confirmed against the v4->v5 TeX diff and by the executor's check that the v4 structures fail the abelian condition [Jx,Jy]=[x,y]; RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

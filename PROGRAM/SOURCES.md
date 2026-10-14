@@ -937,3 +937,112 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
   Proposition 7 typo the comment names.
 - **Licence:** Creative Commons Attribution 4.0 on the v3 abstract page; copy not committed.
 - **Bears on:** S1.1 item 2 (its status document); no CLAIM.
+
+---
+
+## S-0028 — Michael Björklund, "Ergodic Theorems for Homogeneous Dilations", arXiv:0902.0680 **v1** (the original of Route A item 3)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 4 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 13, 2026-10-14.
+- **Citation (from the abstract page):** Michael Björklund, "Ergodic Theorems for Homogeneous
+  Dilations", arXiv:0902.0680, Dynamical Systems (math.DS); **v1 submitted 4 February 2009**
+  (comment "11 pages"); v2 of 29 June 2011 is marked withdrawn on the submission history; v3 of
+  30 September 2026 is the corrected version (S-0029).
+- **Primary:** abstract page <https://arxiv.org/abs/0902.0680v1>, accessed 2026-10-14T02:52:35Z
+  (HTTP 200), 39,446 bytes, SHA-256
+  `4d1555841da366c97ecfb8143c315608dfe78feea970a39e2bb45b88f27cb0a4`; e-print
+  <https://arxiv.org/e-print/0902.0680v1> (`application/gzip`), 11,058 bytes, SHA-256
+  `06c7ac8d54ddf9e5aec3caed1dc604e8bc170081efb5ad00de42b50bed4dcbac` — a single gzipped TeX file.
+- **Content used:** the lemma with TeX label `density` in the section "Pointwise Ergodic
+  Theorems" (the dense-subspace lemma: the span L of smoothed functions is dense in L¹₀(X) and the
+  dilated averages of any f ∈ L converge to 0 almost everywhere when ν is a Rajchman measure) and
+  its proof — the item's claim of record; locating sentences quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v1 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` item); no CLAIM.
+
+---
+
+## S-0029 — Björklund, arXiv:0902.0680 **v3** with the v2 withdrawal — the correcting version, its comment and its "Erratum on a previous version" (the status document of Route A item 3)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0028; **v3 submitted 30 September 2026** (inside the ADR-0003 D8 window, its
+  last day), comment: "10 pages. Revised and corrected version of the paper withdrawn in June
+  2011. The gap in the dense-subspace argument for pointwise convergence has been repaired by a
+  new proof. This version treats the Fourier-dimension theorem; the earlier results on general
+  Rajchman measures and polynomial curves are not included". v2 (29 June 2011) is marked
+  "(withdrawn)" in the submission history; its abstract page carries the comment "11 pages" and no
+  licence link.
+- **Primary:** abstract page <https://arxiv.org/abs/0902.0680v3>, accessed 2026-10-14T02:55:06Z
+  (HTTP 200), 39,907 bytes, SHA-256
+  `ed5a9f433c1549ce8808a4f4d3787fad48e2e6274f84fd61abd0257c8ec2c5ba`; v2 abstract page
+  <https://arxiv.org/abs/0902.0680v2>, 39,139 bytes, SHA-256
+  `a6a765b22c74577c8963f9e8b0035da5d21257d3b31be37d80c43c8e6fe183d7` (no e-print exists for the
+  withdrawn version: HTTP 404); e-print <https://arxiv.org/e-print/0902.0680v3>
+  (`application/gzip`), 12,220 bytes, SHA-256
+  `193b6443d5c928fb621fcd5f3c97a4721fe3ca7e7f9c9b1c4787673a57cb0048` — a gzipped tar holding
+  `ErgodicTheoremsHomogeneousDilations_v15.tex`.
+- **Content used:** the v3 section "Erratum on a previous version": "An earlier version of this
+  work (arXiv:0902.0680) was withdrawn in June 2011 after the author found a gap in the
+  dense-subspace argument for pointwise convergence. The present paper should be read as a
+  correction to the Fourier-dimension theorem in that version and gives a new proof of that
+  result. The broader statements there on Rajchman measures under homogeneous dilations and on
+  polynomial curves are not addressed here." v3's new dense class (its section "A dense class with
+  pointwise convergence") is "localized away from frequency zero" and differs from v1's.
+- **Licence:** Creative Commons Attribution 4.0 on the v3 abstract page; copy not committed.
+- **Bears on:** S1.1 item 3 (its status document); no CLAIM.
+
+---
+
+## S-0030 — A. Andrada, M. L. Barberis and I. G. Dotti, "Classification of abelian complex structures on 6-dimensional Lie algebras", arXiv:0908.3213 **v4** (the original of Route A item 4)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 5 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 13, 2026-10-14.
+- **Citation (from the abstract page):** A. Andrada, M. L. Barberis, I. G. Dotti,
+  "Classification of abelian complex structures on 6-dimensional Lie algebras", arXiv:0908.3213,
+  Rings and Algebras (math.RA) and Differential Geometry (math.DG); v1 21 August 2009; **v4
+  submitted 19 June 2012** (comment: "The proof of Theorem 3.2 and the statement of Theorem 3.4
+  have been fixed. One remark added" — a 2012 correction, outside the window and not this item's
+  notice); five versions in all.
+- **Primary:** abstract page <https://arxiv.org/abs/0908.3213v4>, accessed 2026-10-14T02:52:55Z
+  (HTTP 200), 40,761 bytes, SHA-256
+  `6bcb8355c262a68c209009892f875a7a19362f188bb7dfb552a43aa3869e4c37`; e-print
+  <https://arxiv.org/e-print/0908.3213v4> (`application/gzip`), 34,662 bytes, SHA-256
+  `30978332dd33e6fb3a8d3d2cf94aa8ebe20f8a7eeabe6e1c7b6e28d62502c9d5` — a gzipped tar holding
+  `dim6_arxiv3.tex`.
+- **Content used:** Theorem 4.4 — its statement (the listed Lie algebras with abelian complex
+  structures, assertions (1) and (2) among them) and its proof — is the item's claim of record;
+  the locating lines are quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` item); no CLAIM.
+
+---
+
+## S-0031 — Andrada, Barberis and Dotti, arXiv:0908.3213 **v5** — the correcting version and its comment (the status document of Route A item 4)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0030; **v5 submitted 29 July 2024**, comment: "v4: The proof of Theorem 3.2
+  and the statement of Theorem 3.4 have been fixed, and one remark was added. v5: The statement of
+  Theorem 4.4 (assertions (1) and (2)) was fixed and the proof was modified accordingly. Some
+  arguments were clarified". The v5 part of the comment, with v5 itself, is this item's status
+  document; the v4 part records the 2012 correction, outside the window.
+- **Primary:** abstract page <https://arxiv.org/abs/0908.3213v5>, accessed 2026-10-14T02:53:13Z
+  (HTTP 200), 40,827 bytes, SHA-256
+  `e69afae7e7fdc149be711f68a6206b29bb620fdfd0e79b8af0d94c76831cf877`; e-print
+  <https://arxiv.org/e-print/0908.3213v5> (`application/gzip`), 71,750 bytes, SHA-256
+  `16f9d1c2f512d78f21e5e3e02eb637149db4369175a10e9384a4aa710b1795f5` — a gzipped tar holding
+  `dim6_arxiv_5.tex` and a figure.
+- **Content used:** in Theorem 4.4's statement, assertions (1) `(aff(C) × R², J)` and (2)
+  `(s₁, J₁)`: the complex structure changes from `Jf₁ = f₂, Je₁ = −e₂ + e₃, Je₂ = e₁ + e₄, Je₃ = e₄`
+  (v4) to `Jf₁ = f₂, Je₁ = e₂ − e₃, Je₂ = −e₁ − e₄, Je₃ = −e₄` (v5); in the proof, the
+  normalization with TeX label `base` changes its factor from `1/√(a²+b²)` to `1/(a²+b²)`, with
+  the consequence `[f̃₁, f̃₂] = e₃/(a²+b²)` and a rescaled `ẽ₃`; the case (ii) argument is
+  rewritten. The rest of the diff is typographical (spacing macros, a figure format, `\qedhere`).
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v5 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 4 (its status document); no CLAIM.

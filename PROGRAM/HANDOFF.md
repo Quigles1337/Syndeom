@@ -1611,3 +1611,138 @@ NEXT-SINGLE-ACTION: unchanged — S1.1, the second Route A harvest session resum
 ESCALATIONS: none new; the S-0019 apache.org note and SD13 carry unchanged.
 STOP-REASON: natural boundary — the follow-up recorded. Repo green on the committed tree (gate run
 detached with a log, every edit staged, before the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ bb0fc32 (Session 13 — the second Route A harvest: candidates 3–6
+examined, 2 admitted, 2 rejected; the commit adding this entry lands on top of bb0fc32)
+LAUNCH CONTEXT (SD15; not an exam session): Al's one-word order "resume" in the same
+conversation as Sessions 7–12; the inherited NEXT-SINGLE-ACTION executed as STATE stated it. Not
+cold. No memory written.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: prefix through arXiv id
+`0912.0308` (6 of 2,472 candidates; 4 admitted, 2 rejected); S1.3: four `raw/1` parents
+manifested, no derived artifact yet. Gate S0 closed and confirmed.
+PLAN NOTE: the inherited NEXT (the second harvest session, resuming at candidate 3), unchanged by
+ORIENT. One thing; no housekeeping this session.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `bb0fc32`, clean; the constitution last changed at `226a51c`
+  (read in full in Session 11 of this conversation, unchanged since); STATE's NEXT and the
+  harvest log's resume point read. Evidence gate at ORIENT, detached (`gate-13a.log`):
+  02:51:07Z–02:51:42Z on `bb0fc32`, `GATE: GREEN`.
+- **Candidate list:** regenerated with `lab/route_a_candidates.py` from the 73 cached pages in
+  this conversation's scratchpad — 0 API requests, 2,472 candidates, digest identical to run 1
+  (`e164c0b1…2d48`); noted in the log, no new run record.
+- **Candidates examined in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md` rows 3–6):
+  - **3, arXiv 0812.3181** (lecture notes, math.AP), v3 (2023-07-20) "Corrects an error in
+    statement of Theorem 9.2": the diff changes the Duistermaat–Guillemin statement's description
+    of the Maslov term ("number of conjugate points" → the Morse index), a theorem the notes quote
+    from the literature without proof. **Rejected, D2.1**: no offered proof to label — a
+    FLAW-0010(c)-shaped mis-citation in expository notes. The diff also fixes unannounced small
+    errors (a symbol order, a Huygens statement, coordinates) none of which the notice documents,
+    so none is usable (D2.2); recorded in the row.
+  - **4, arXiv 0902.0680** (math.DS), withdrawn as v2 in 2011, corrected by v3 on 2026-09-30 (the
+    window's last day) with an explicit "Erratum on a previous version": "a gap in the
+    dense-subspace argument for pointwise convergence"; v3 re-proves only the Fourier-dimension
+    case by a new dense class and says the general statements "are not addressed". **Admitted**:
+    the v1 lemma `density`'s almost-everywhere step invokes a weak-convergence criterion whose
+    tightness hypothesis is asserted, not established — FLAW-0005 (gap); **`statement_status`
+    null / `undetermined`** (the general lemma neither re-proved nor retracted) — the first item
+    under Al's ruling (ii), written by the producer under `syndeom-manifest/2` and self-checked;
+    v1 licence arXiv non-exclusive → `external`; `s1_ingest-v0.1.0-5ba6c0f07557`; S-0028, S-0029.
+    The record states plainly that the notice names the argument and the step-level locator is
+    the executor's reading, with FLAW-0004 as the alternative if the author's gap lay elsewhere in
+    the same argument.
+  - **5, arXiv 0908.3213** (math.RA/DG), v5 (2024-07-29) "The statement of Theorem 4.4
+    (assertions (1) and (2)) was fixed and the proof was modified accordingly": the diff reverses
+    the signs in the listed complex structures and fixes a normalization constant in the proof;
+    an executor's six-line check with the theorem's own brackets shows the v4 structures fail the
+    abelian condition on four pairs and the v5 structures pass. **Admitted**: FLAW-0001
+    `propagated` (statement, fatal) + FLAW-0001 `local` (proof, repairable); `statement_status`
+    false by source document, the computation recorded as the executor's confirmation; v4 licence
+    arXiv non-exclusive → `external`; `s1_ingest-v0.1.0-a8ac73896464`; S-0030, S-0031. v4's own
+    2012 correction (Theorem 3.2, Theorem 3.4) is outside the window and not harvested — the D8
+    precision of Session 12 applied.
+  - **6, arXiv 0912.0308** (math.CA): the correcting version v3 is dated 2026-10-02, after the
+    window end. **Rejected, D8 window**; abstract pages only, no sources fetched; its comment
+    ("Corrected Lemma 6.4 which was false as stated") is logged as a candidate for a later window.
+  - **Counts by verdict, this session:** examined 4 — admitted 2, rejected 2 (one D2.1, one D8),
+    found-but-unclassifiable 0, pending 0, pending-truth 0, escalated 0. **Cumulative:** examined
+    6 — admitted 4, rejected 2. **Last candidate processed `0912.0308`**; the session stopped at
+    its budget before examining candidate 7 (`0912.0966`).
+- Each admitted item: S-entries written **before** the producer ran (SD16); config with the D4
+  fields; `syndeom-ingest` at `bb0fc32` wrote `manifest.json` (`syndeom-manifest/2`,
+  `engine_commit` `bb0fc32…`, self-check passed — including the null-truth rules); `RECORD.md`
+  with the D3 class argument, alternatives considered, quoted locating sentences and licence basis.
+- **Helper limits found:** `lab/route_a_examine.py` aborts when the version before the
+  correcting one is a withdrawal (no e-print, HTTP 404) — candidate 4 was finished by hand with
+  the same calls (abs v2/v3, e-print v3, a v1→v3 diff); a successor should fetch the last
+  non-withdrawn version as the original. Not fixed this session; recorded here and in CONFUSIONS.
+- STATE: Updated line; Gate S1 rows S1.1 (prefix through `0912.0308`, 6/4/2) and S1.3 (four
+  parents, the null-truth one named); registers line (S-0028..S-0031); NEXT resumes at candidate
+  7 with the four configs and records as the pattern.
+- Evidence run, detached with a log (`gate-13b.log`), every edit staged: 03:01:46Z–03:02:24Z:
+  `Build completed successfully (8926 jobs)`; audit `[propext]`; fmt and clippy clean; `cargo
+  test` 5/5 + 24/24; `git ls-files --eol` clean; `check_registers.py` 68 tracked files clean,
+  Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, **S- 31/31**; `RESULT: ALL PASS`; `GATE: GREEN`;
+  `rc=0`. Re-run the same way on the final tree (this entry and STATE's build line in) before
+  the commit (STOP-REASON).
+BELIEF DELTAS:
+- Lecture notes with a corrected *quoted* theorem are not S1.1 items: the corpus needs an offered
+  proof, and a mis-stated citation has none. Evidence: candidate 3. Consequence: the D2.1
+  rejection reason is now written once in the log and reusable; such items are the natural ground
+  truth for a citation-content detector, a note for S3, not for S1.
+- The undetermined-truth case is real and arrives early: one of the first four admitted items has
+  a lemma neither re-proved nor retracted. Evidence: candidate 4's erratum. Consequence: ruling
+  (ii) and the `/2` schema earned their keep on the fourth item; the S3 obligation for such items
+  (proof-flaw cells only) already has a member.
+- A notice that locates an error to an *argument* rather than a step forces a choice: admit with
+  the step-level reading marked as the executor's, or refuse to classify. Evidence: candidate 4.
+  Consequence: admitted, with the caveat and the alternative class written into the record and
+  the locator — the honest form of "argued in writing" when the author did not say which step.
+- A small algebraic check can confirm a statement-level falsity from the published brackets
+  alone, with no new mathematics. Evidence: candidate 5's abelian-condition check. Consequence:
+  such checks are recorded as the executor's confirmation, never as the ground truth's source.
+- The D8 precision mattered on the fourth examined paper: a 2012 correction and a 2024
+  correction in one revision history, only the latter in the window. Evidence: candidate 5.
+CONFUSIONS:
+- The examination helper's first run on candidate 4 died on the withdrawn v2's missing e-print;
+  cost: one extra fetch round. Doc fix: this entry; the helper's withdrawal handling is a small
+  change for the next harvest session (fetch the last non-withdrawn version as the original).
+- Candidate 5 has two correcting versions; the first (2012) is outside the window. Cost: one
+  diff read that was not needed. Doc fix: the log row and the record say which correction is the
+  item's.
+HONESTY CHECK: no CLAIM changed status. New SOURCES S-0028..S-0031, all VERIFIED digest-only
+(every licence arXiv non-exclusive or CC BY on the corrected version). Item 3's step-level class
+rests on the executor's reading of the proof and says so in the record, the locator and the log;
+item 4's falsity rests on the notice and an executor's computation recorded as confirmation. The
+two rejections state their criterion. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the window excludes the release by rule and
+candidate 6 was rejected by that rule; all four examined papers are 2008–2009 submissions by
+named human authors, with no AI-assistance mention in the corrected sources (helper scan on 4 and
+5; candidate 3's sources scanned by the helper, none). No detector or threshold exists. Verdict:
+no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The two manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `bb0fc32`; the ids reproduced independently in
+Python; the candidate list reproduced from cache with the identical digest; every retrieval is
+pinned by URL, access time and SHA-256; the abelian-condition check is a short script quoted in
+the record. Nothing to quarantine.
+MANIFEST CHECK: two artifacts created, each with a `syndeom-manifest/2` manifest carrying ground
+truth with derivation `documented-by-source`, flaw records with `raw/1` locators, `correct:
+false`, taxonomy 0.1.0, self-checked by the producer before writing (SD1); one carries
+`statement_status.value: null` with `method: "undetermined"` exactly as ADR-0001 as amended
+requires. Nothing synthetic labeled real (SD12). "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript beyond its own status document (SD3): each record and
+row names only the result the notice names; the executor's computation on candidate 5 confirms
+what the authors' correction states and is labelled as a confirmation; the executor's step-level
+reading on candidate 4 is labelled as a reading. No understanding claims (SD17). No detectors,
+so no detector-shopping. No referee contact (SD13). Candidate 7 was not opened.
+NEXT-SINGLE-ACTION: S1.1 — the third Route A harvest session, resuming at candidate 7
+(`0912.0966`, v6, "… A small correction made to the statement of Theorem 8") in ascending id
+with no skipping, exactly as STATE.md states it; before the first examination, give
+`lab/route_a_examine.py` the withdrawal handling noted above.
+ESCALATIONS:
+- None new: no grey zone arose in candidates 3–6.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers (S-0019).
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — a clean boundary (four candidates fully recorded, the resume point
+set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
+the commit); this commit pushes to `origin/main`.

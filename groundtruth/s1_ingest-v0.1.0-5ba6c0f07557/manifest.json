@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "06c7ac8d54ddf9e5aec3caed1dc604e8bc170081efb5ad00de42b50bed4dcbac",
+        "file": "original-0902.0680v1.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 11058,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-5ba6c0f07557",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-0902.0680v1.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma (TeX label density), Section 'Pointwise Ergodic Theorems', proof of the almost-everywhere convergence for f in the dense subspace L: the weak-convergence step 'this is implied by the uniform convergence of the Fourier transforms of h_lambda to 0 and the tightness of the sequence h_lambda' - the tightness of {h_lambda} is not established (the executor's reading of the step the author's notice locates only to 'the dense-subspace argument for pointwise convergence')",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:0902.0680v1 (the original; withdrawn as v2 on 29 June 2011; corrected by v3, 30 September 2026)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v1): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0028",
+      "S-0029"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0029",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0029"
+    }
+  },
+  "config_hash": "5ba6c0f07557222153ab6e13e6028dfe238463f599da272d7e6b4a38866cbe71",
+  "engine_commit": "bb0fc32f172351aa47eb9f1e2576506ebbd51b71",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma (TeX label density), Section 'Pointwise Ergodic Theorems', proof of the almost-everywhere convergence for f in the dense subspace L: the weak-convergence step 'this is implied by the uniform convergence of the Fourier transforms of h_lambda to 0 and the tightness of the sequence h_lambda' - the tightness of {h_lambda} is not established (the executor's reading of the step the author's notice locates only to 'the dense-subspace argument for pointwise convergence')"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0029",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 3 (candidate 4), Session 13. The author's withdrawal and the v3 erratum section document a gap in the dense-subspace argument and re-prove only the Fourier-dimension case; the general lemma's truth is left open (undetermined). RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
