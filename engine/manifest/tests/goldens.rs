@@ -164,7 +164,17 @@ fn d8_prompt_hash_example() {
 fn d8_example_manifest_from_adr_text() {
     let block = adr_example_block();
     let manifest = from_json_str(block).expect("ADR-0001 example manifest parses");
-    assert_eq!(manifest.manifest_schema, MANIFEST_SCHEMA);
+    // the D8 example predates the 2026-10-13 amendment and stays a valid /1 manifest
+    assert_eq!(manifest.manifest_schema, MANIFEST_SCHEMA_V1);
+    assert_eq!(
+        manifest
+            .ground_truth
+            .as_ref()
+            .unwrap()
+            .statement_status
+            .value,
+        Some(true)
+    );
     assert_eq!(manifest.artifact_id, A_ID);
     assert_eq!(manifest.config_hash, A_CONFIG_HASH);
     assert_eq!(manifest.seed, Some(7));
@@ -308,7 +318,7 @@ fn d4_a_false_statement_cannot_have_a_valid_proof_and_valid_proofs_carry_cosmeti
     let mut m = from_json_str(adr_example_block()).unwrap();
     {
         let gt = m.ground_truth.as_mut().unwrap();
-        gt.statement_status.value = false;
+        gt.statement_status.value = Some(false);
         gt.correct = false;
     }
     let problems = m
@@ -347,6 +357,108 @@ fn d4_a_false_statement_cannot_have_a_valid_proof_and_valid_proofs_carry_cosmeti
     assert_eq!(
         problems,
         vec!["D4: a valid proof may carry cosmetic flaws only".to_string()]
+    );
+}
+
+/// ADR-0001 as amended 2026-10-13 (Al's ruling (ii) on ADR-0003): a null statement truth is
+/// admitted under `syndeom-manifest/2` exactly with `method: "undetermined"`, forces
+/// `proof_status: "invalid"` and `correct: false`, and is rejected under `/1`.
+#[test]
+fn d4_amendment_2026_10_13_null_statement_truth() {
+    let bytes = b"%PDF-1.7 (stand-in bytes)\n";
+    let config = json!({
+        "sources": ["S-0001"], "item": "paper-y, Lemma 3", "licence": "CC-BY-4.0",
+        "status": {"kind": "erratum", "reference": "S-0001"}
+    });
+    let h = config_hash(&config).unwrap();
+    let mut v = json!({
+        "manifest_schema": MANIFEST_SCHEMA,
+        "artifact_id": artifact_id("s1_ingest", "0.1.0", &h, None),
+        "origin": "ground-truth",
+        "generator": {"id": "s1_ingest", "version": "0.1.0", "rng": "none"},
+        "engine_commit": "0000000000000000000000000000000000000000",
+        "seed": null,
+        "config": config,
+        "config_hash": h,
+        "toolchain": null,
+        "artifact": {"kind": "informal", "files": {"informal": {
+            "file": "original.pdf", "format": FORMAT_RAW, "storage": "external",
+            "content_hash": content_hash(bytes), "n_bytes": bytes.len(),
+            "n_tokens": null, "n_steps": null, "n_lemmas": null
+        }}},
+        "ground_truth": {
+            "derivation": "documented-by-source",
+            "statement_status": {"value": null, "method": "undetermined", "reference": "S-0001"},
+            "proof_status": "invalid",
+            "correct": false,
+            "flaws": [{
+                "instance": 1, "class": "FLAW-0005", "sub_variant": null,
+                "location": {"artifact": "informal", "locator": "Lemma 3, proof"},
+                "severity": "fatal", "lean_catchable": "YES-KERNEL", "dials": {}
+            }],
+            "taxonomy_version": "0.1.0"
+        },
+        "commanded": {},
+        "achieved": {},
+        "fidelity": {"per_statistic": {}, "verdict": "PASS"}
+    });
+    let files = FileBytes {
+        informal: Some(bytes),
+        formal: None,
+    };
+    let ok: Manifest = serde_json::from_value(v.clone()).unwrap();
+    assert_eq!(ok.manifest_schema, "syndeom-manifest/2");
+    assert_eq!(
+        ok.ground_truth.as_ref().unwrap().statement_status.value,
+        None
+    );
+    ok.check(files)
+        .unwrap_or_else(|p| panic!("null truth under /2 must pass: {p:#?}"));
+    // the key must be present: absence is not null
+    let mut absent = v.clone();
+    absent["ground_truth"]["statement_status"]
+        .as_object_mut()
+        .unwrap()
+        .remove("value");
+    assert!(serde_json::from_value::<Manifest>(absent).is_err());
+    // /1 does not admit it
+    v["manifest_schema"] = json!(MANIFEST_SCHEMA_V1);
+    let old: Manifest = serde_json::from_value(v.clone()).unwrap();
+    let problems = old.check(files).unwrap_err();
+    assert_eq!(problems.len(), 1, "{problems:#?}");
+    assert!(problems[0].contains("does not admit a null statement truth"));
+    v["manifest_schema"] = json!(MANIFEST_SCHEMA);
+    // null iff undetermined, both ways
+    let mut m: Manifest = serde_json::from_value(v.clone()).unwrap();
+    m.ground_truth.as_mut().unwrap().statement_status.method = StatementMethod::SourceDocument;
+    let problems = m.check(files).unwrap_err();
+    assert_eq!(problems.len(), 1, "{problems:#?}");
+    assert!(problems[0].contains("null iff method"));
+    let mut m: Manifest = serde_json::from_value(v.clone()).unwrap();
+    m.ground_truth.as_mut().unwrap().statement_status.value = Some(true);
+    let problems = m.check(files).unwrap_err();
+    assert_eq!(problems.len(), 1, "{problems:#?}");
+    assert!(problems[0].contains("null iff method"));
+    // null forces invalid, and correct stays derived false
+    let mut m: Manifest = serde_json::from_value(v.clone()).unwrap();
+    {
+        let gt = m.ground_truth.as_mut().unwrap();
+        gt.proof_status = ProofStatus::Valid;
+        gt.flaws.clear();
+    }
+    let problems = m.check(files).unwrap_err();
+    assert!(
+        problems
+            .iter()
+            .any(|p| p.contains("requires proof_status invalid")),
+        "{problems:#?}"
+    );
+    let mut m: Manifest = serde_json::from_value(v).unwrap();
+    m.ground_truth.as_mut().unwrap().correct = true;
+    let problems = m.check(files).unwrap_err();
+    assert_eq!(
+        problems,
+        vec!["D4/SD1: correct is true, derived false".to_string()]
     );
 }
 

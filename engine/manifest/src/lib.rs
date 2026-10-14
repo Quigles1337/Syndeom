@@ -11,7 +11,9 @@
 //!   ([`parse_lean`]) and `raw/1` (no parser: bytes as received).
 //! - D4: the schema ([`Manifest`]), its consistency rules ([`Manifest::check`]), the derived
 //!   canonical artifact convention ([`Manifest::check_derived`]), and the fidelity rule
-//!   ([`statistic_verdict`], [`fidelity`]).
+//!   ([`statistic_verdict`], [`fidelity`]). Amended 2026-10-13 (Al's ruling (ii) on ADR-0003):
+//!   `statement_status.value` may be `null` with `method: "undetermined"` under
+//!   [`MANIFEST_SCHEMA`] (`syndeom-manifest/2`); [`MANIFEST_SCHEMA_V1`] remains accepted.
 //! - D5: SHA-256 over RFC 8785 JCS bytes for `config_hash` and `prompt_hash` ([`config_hash`],
 //!   [`prompt_hash`]); SHA-256 over exact bytes for `content_hash` ([`content_hash`]).
 //! - D6: FRIEDMAN ADR-0004 binary64 arithmetic, `<=` inclusive, no fused operations.
@@ -26,8 +28,15 @@ use serde::{Deserialize, Deserializer, Serialize};
 use serde_json::Value;
 use sha2::{Digest, Sha256};
 
-/// ADR-0001 D4: the only schema version this crate understands.
-pub const MANIFEST_SCHEMA: &str = "syndeom-manifest/1";
+/// ADR-0001 D4 as amended 2026-10-13: the current schema string, written by every producer from
+/// that amendment on. It differs from `/1` only in admitting a null `statement_status.value` with
+/// `method: "undetermined"` (and the rule `null ⇒ proof_status invalid`).
+pub const MANIFEST_SCHEMA: &str = "syndeom-manifest/2";
+/// ADR-0001 D4 as ratified: the pre-amendment schema string. Still accepted (the D8 goldens); a
+/// `/1` manifest with a null statement truth fails its self-check.
+pub const MANIFEST_SCHEMA_V1: &str = "syndeom-manifest/1";
+/// Every schema string this crate understands (SD14: consumers pin the string they understand).
+pub const MANIFEST_SCHEMAS: &[&str] = &[MANIFEST_SCHEMA_V1, MANIFEST_SCHEMA];
 /// ADR-0001 D3: the informal byte format.
 pub const FORMAT_INFORMAL_MD: &str = "syndeom-informal-md/1";
 /// ADR-0001 D3: the formal byte format.
@@ -244,13 +253,20 @@ pub enum StatementMethod {
     SourceDocument,
     #[serde(rename = "counterexample")]
     Counterexample,
+    /// 2026-10-13 amendment (`syndeom-manifest/2`): the status document named by `reference`
+    /// documents the proof as invalid and leaves the statement's truth open. Used iff `value` is
+    /// `null`.
+    #[serde(rename = "undetermined")]
+    Undetermined,
 }
 
-/// ADR-0001 D4 — `ground_truth.statement_status`.
+/// ADR-0001 D4 — `ground_truth.statement_status`. `value` is `null` iff `method` is
+/// `"undetermined"` (2026-10-13 amendment; `/2` only); the key is always present.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct StatementStatus {
-    pub value: bool,
+    #[serde(deserialize_with = "required_option")]
+    pub value: Option<bool>,
     pub method: StatementMethod,
     pub reference: String,
 }
@@ -841,9 +857,10 @@ impl Manifest {
         let mut problems = Vec::new();
         let mut push = |s: String| problems.push(s);
 
-        if self.manifest_schema != MANIFEST_SCHEMA {
+        let schema_v1 = self.manifest_schema == MANIFEST_SCHEMA_V1;
+        if !MANIFEST_SCHEMAS.contains(&self.manifest_schema.as_str()) {
             push(format!(
-                "D4: manifest_schema is {:?}, expected {MANIFEST_SCHEMA:?}",
+                "D4: manifest_schema is {:?}, expected one of {MANIFEST_SCHEMAS:?}",
                 self.manifest_schema
             ));
         }
@@ -1094,14 +1111,34 @@ impl Manifest {
                 if (gt.derivation == Derivation::ByConstruction) != (origin == Origin::Synthetic) {
                     push("D4/SD12: derivation is by-construction iff origin is synthetic".into());
                 }
-                let derived = gt.statement_status.value && gt.proof_status == ProofStatus::Valid;
+                // 2026-10-13 amendment: null truth iff method undetermined; /2 only; implies invalid
+                let truth = gt.statement_status.value;
+                let undetermined = gt.statement_status.method == StatementMethod::Undetermined;
+                if truth.is_none() != undetermined {
+                    push(
+                        "D4 (2026-10-13): statement_status.value is null iff method is \"undetermined\""
+                            .into(),
+                    );
+                }
+                if truth.is_none() && schema_v1 {
+                    push(format!(
+                        "D4 (2026-10-13): {MANIFEST_SCHEMA_V1} does not admit a null statement truth; write {MANIFEST_SCHEMA}"
+                    ));
+                }
+                if truth.is_none() && gt.proof_status == ProofStatus::Valid {
+                    push(
+                        "D4 (2026-10-13): an undetermined statement truth requires proof_status invalid"
+                            .into(),
+                    );
+                }
+                let derived = truth == Some(true) && gt.proof_status == ProofStatus::Valid;
                 if gt.correct != derived {
                     push(format!(
                         "D4/SD1: correct is {}, derived {derived}",
                         gt.correct
                     ));
                 }
-                if !gt.statement_status.value && gt.proof_status == ProofStatus::Valid {
+                if truth == Some(false) && gt.proof_status == ProofStatus::Valid {
                     push("D4: a false statement cannot have a valid proof".into());
                 }
                 if gt.proof_status == ProofStatus::Valid

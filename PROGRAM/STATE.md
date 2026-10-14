@@ -1,17 +1,18 @@
 # STATE
 
-- **Updated:** 2026-10-13 UTC (Session 9 — S1.1: ADR-0003, the errata-harvest procedure, decided;
-  no item ingested; five choices flagged for Al; NEXT = the ingest producer. Session 8 closed R3
-  (advisory note ferried, verified, committed unedited); Session 7 recorded Al's rulings of
-  2026-10-13: Apache-2.0 `LICENSE` closes Q3, ADR-0004 amends §2 S3.2, S2 seed-family ruling)
+- **Updated:** 2026-10-13 UTC (Session 10 — Al's rulings of 2026-10-13 recorded: ADR-0003's five
+  flagged choices resolved ((i), (ii), (v) ratified; (iii) ratified with a prefix gate; (iv)
+  overruled); ADR-0001 amended for undetermined statement truth under `syndeom-manifest/2`; the
+  Session-6 SD15 audit CONFIRMED, Gate S0 not provisional; ADR-0005 amends SD15; memory trimmed.
+  Session 9 decided ADR-0003; Session 8 closed R3; Session 7 recorded the earlier rulings)
 - **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
 - **Gate:** S1 open; no S1 criterion has evidence yet (table below). **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
   verbatim and alone, re-derived the program state from the repo in one pass without guessing and
   found the gate GREEN at `2b7c573`; result **PASS**; record in HANDOFF Session 6, whose first
-  entry is the SD15 memory disclosure. One audit request for Al arising from that disclosure is in
-  the standing escalations; if Al overrules the executor's judgment there, the closure becomes
-  provisional (see the escalation). The closed S0 table is retained below as the record.
+  entry is the SD15 memory disclosure. **Al confirmed the PASS on 2026-10-13 (Session 10, ADR-0000
+  Addendum 3): the closure is not provisional; no re-run.** The closed S0 table is retained below
+  as the record.
 - **Founding sweep:** `PROGRAM/SWEEP-2026-10.md` (41,060 bytes, SHA-256
   `f4bfb2adcdf7c6714101ad6ddc2fdcf528e98e7c993accb8a5dbe04a8115b03e`, ferried by Al in Session 3
   and verified against Al's stated digest before placement; recomputed in Session 6). It is a
@@ -69,10 +70,13 @@
   to pin the same Lean and Mathlib commit (S-0001); the ADR-0002 criterion was fixed before that
   was compared.
 - **Constitution:** `PROGRAM/SYNDEOM-PROGRAM.md` v1.0, ratified by Al 2026-10-12 (Session 2);
-  **amended once: ADR-0004 (2026-10-13, Session 7) — §2 S3.2, fooling length as equivalence to
-  chance with a design-derived N_min.** Rulings of record: the ADR-0000 addendum (Session 2, Q1–Q17)
-  and ADR-0000 Addendum 2 (Al's rulings of 2026-10-13, R1–R4). ADR-only; the constitution's version
-  string is unchanged because no rule assigns version numbers to amendments (noted in ADR-0004).
+  **amended twice: ADR-0004 (2026-10-13, Session 7) — §2 S3.2, fooling length as equivalence to
+  chance with a design-derived N_min; ADR-0005 (2026-10-13, Session 10) — SD15, count-only
+  disclosure of unrelated memory index lines in a cold-start exam.** Rulings of record: the
+  ADR-0000 addendum (Session 2, Q1–Q17), Addendum 2 (Al's rulings of 2026-10-13, R1–R4) and
+  Addendum 3 (Al's rulings of 2026-10-13 on ADR-0003 (i)–(v) and the SD15 audit). ADR-only; the
+  constitution's version string is unchanged because no rule assigns version numbers to
+  amendments (noted in ADR-0004).
 - **Taxonomy:** `PROGRAM/FLAWS.md` 0.1.0 ratified (FLAW-0001..0014).
 - **Registers (unchanged in Session 6):** CLAIM-0001..0005 and 0007 VERIFIED (0007 existence
   only); CLAIM-0006 **CONDITIONAL** in a narrowed form (unfalsified as of 2026-10-13; bounding
@@ -82,7 +86,10 @@
   papers under `sources/`, ~16 MB; all nine stored PDFs re-hashed to their register digests in
   Session 6); S-0007 RFC 8785, S-0009 and S-0018 (arXiv non-exclusive licence) digest-only; S-0008
   the toolchain licence record; S-0017 the `leanprover/comparator` repository.
-- **Manifest schema:** `syndeom-manifest/1`, ADR-0001 (Session 3; ratified Session 4). Formats
+- **Manifest schema:** `syndeom-manifest/2` since 2026-10-13 (ADR-0001 amended, Session 10:
+  `statement_status.value` admits `null` with `method: "undetermined"`, `null ⇒ proof_status
+  invalid`; `/1` remains accepted and names the pre-amendment schema — the D8 goldens), ADR-0001
+  (Session 3; ratified Session 4). Formats
   `syndeom-informal-md/1`, `syndeom-lean/1`, `raw/1` (archival); ids
   `<generator.id>-v<version>-<config_hash[0:12]>[-s<seed>]`; JCS + SHA-256; FRIEDMAN ADR-0004
   arithmetic by reference; contact artifacts carry `ground_truth: null`; real items get a derived
@@ -94,7 +101,12 @@ SD15 adopts FRIEDMAN ADR-0003 D1–D3 and the conversation-context corollary; th
 **ratified for SYNDEOM** (Q13, ADR-0000 addendum), cited from FRIEDMAN, not duplicated. The
 executor's memory store holds, for SYNDEOM, the repo location and machine hazards only. Exam
 sessions write no memory; the Session-6 exam reproduced its recalled memory verbatim as the first
-entry of its HANDOFF block and recorded the memory file's SHA-256 there.
+entry of its HANDOFF block and recorded the memory file's SHA-256 there. **Disclosure convention
+(ADR-0005, 2026-10-13):** an exam reproduces verbatim every index line naming SYNDEOM or a
+sibling and the SYNDEOM memory file in full with its digest, and withholds unrelated programs'
+index lines by count with a recorded name-search check, because this repository is public. The
+memory file was trimmed in Session 10 on Al's order (the paragraph paraphrasing §0.3, §0.4 and
+SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Session-6 one.
 
 ## Standing rulings (recorded; their ADRs come later)
 
@@ -109,9 +121,15 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
   its *Amendments*; ADR-0002 toolchain pins, Lean project, Rust workspace, JCS crate, storage
   default, gate and CI — written (Session 4, S0.6), D8 records what was measured; **ADR-0003
   errata-and-retraction harvest procedure for `groundtruth/` (S1.1) — written Session 9**, D1–D9,
-  five choices (i)–(v) flagged for Al's ratification (standing escalations); ADR-0004
-  constitution amendment to §2 S3.2 (Al's ruling R2 of 2026-10-13) — written Session 7.
-  **ADR-0005 is the next free number.**
+  five choices (i)–(v) ruled by Al 2026-10-13 (Session 10; Amendments); ADR-0004 constitution
+  amendment to §2 S3.2 (Al's ruling R2 of 2026-10-13) — written Session 7; ADR-0005 constitution
+  amendment to SD15 (count-only exam disclosure; Al's SD15 audit ruling of 2026-10-13) — written
+  Session 10. **ADR-0006 is the next free number.**
+- **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
+  items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
+  **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
+  the FLAW-0011 and FLAW-0012 composites included.** Stated in the S3 calibration ADR before any
+  curve, beside the ADR-0004 obligations above.
 - **S3 calibration ADR obligations (ADR-0004, 2026-10-13):** before any curve is computed it must
   (1) compute N_min by the method ADR-0004 fixes — the smallest balanced cell at which the
   equivalence test (95% bootstrap CI of the AUC inside [0.45, 0.55]) has 90% power at true AUC
@@ -186,24 +204,14 @@ entry of its HANDOFF block and recorded the memory file's SHA-256 there.
   the file at the path; Session 8 verified it byte-exact against the stated digest and committed
   it as ferried, body unedited (Advisory note bullet above; ADR-0000 Addendum 2 R3). Nothing
   awaited. Standing form for any future ferry: a path to bytes on disk, never a paste.
-- **ADR-0003 flagged choices (i)–(v) — awaiting Al's ratification (Session 9).** (i) `RECORD.md`
-  per item directory and `groundtruth/HARVEST-LOG.md` beside the ADR-0001 D2 layout; (ii)
-  candidates whose notice leaves the statement's truth open are held **pending-truth** — the
-  executor recommends an ADR-0001 amendment adding `statement_status.value: null` with
-  `method: "undetermined"`, the alternative being permanent exclusion — **this one must be ruled
-  before any such item is ingested**; (iii) the first-harvest window 2023-01-01..2026-09-30,
-  ascending arXiv id, no skipping, no target count; (iv) NC-licensed originals committable on the
-  S-0005 precedent and ND-licensed ones as verbatim raw copies only; (v) no LLM anywhere in
-  admission (regex finder in `lab/`, the executor reads every candidate). Not blockers: the
-  executor proceeds under them as written until Al rules; a contrary ruling amends ADR-0003.
-- **SD15 audit request (Session 6).** The cold-start exam's memory disclosure (HANDOFF Session 6,
-  first entry) flags two memory-file lines as borderline — a paraphrase of three constitution rules
-  (§0.3, §0.4, SD17) and the hazard "the gate runs `fmt --check`" — and withholds 85 unrelated
-  private-program index lines by count because this repo is public. The executor judged neither
-  line program state and recorded PASS. Al: confirm or overrule. If overruled, the exam is
-  CONDITIONAL PASS, the memory is trimmed in a non-exam session, the exam is re-run cold before
-  Gate S1, and Gate S0's closure is provisional until then. If the count-only convention should be
-  the rule, it is an SD15 amendment by ADR.
+- **ADR-0003 flagged choices (i)–(v) — RESOLVED 2026-10-13 (Session 10; ADR-0000 Addendum 3).**
+  (i), (ii), (v) ratified as written; (iii) ratified with the gate clarified (Gate S1 may close on
+  a prefix of the Route A stream); (iv) overruled (NC and ND originals are `external`,
+  digest-only). ADR-0001 amended for (ii) under `syndeom-manifest/2`; the S3 obligation is in the
+  standing rulings. Nothing awaited.
+- **SD15 audit request (Session 6) — CONFIRMED 2026-10-13 (Session 10).** The exam's PASS stands;
+  Gate S0's closure is not provisional; no re-run. The memory paraphrase line was trimmed (digest
+  in HANDOFF Session 10); the count-only convention is now SD15 by ADR-0005. Nothing awaited.
 - **Q14 / Q15 — resolved in S0.** The sweep was ferried and placed (Session 3); no retrieval
   failed outright in S0.1 (the IAS page, HTTP 403, is corroborative only). Nothing awaited.
 - Human-referee participants are Al's decision whenever S4.3 arrives (SD13); any output about a

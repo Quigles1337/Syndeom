@@ -19,7 +19,9 @@ never a code dependency.
 **ratified by Al in Session 2 (2026-10-12)**, with the rulings and the pre-ratification edits recorded
 in the ADR-0000 addendum. From that commit onward this file changes only via ADR.
 **Amendments:** ADR-0004 (2026-10-13, Session 7; Al's ruling of 2026-10-13) — §2 S3.2, the fooling
-length redefined as equivalence to chance with a design-derived N_min.
+length redefined as equivalence to chance with a design-derived N_min. ADR-0005 (2026-10-13,
+Session 10; Al's ruling of 2026-10-13) — SD15, count-only disclosure of unrelated memory index
+lines in a cold-start exam.
 
 ---
 
@@ -131,9 +133,13 @@ source IDs (`S-NNNN`). The siblings use `E` (KOBER) and `F` (FRIEDMAN). Ratified
 - **SD15 — Executor memory discipline.** Executor memories outside the repo hold environment and
   tooling hazards and the repo *location* only — never program state (phase, gate status, CLAIM or
   FLAW statuses, file contents, commit SHAs as state markers, next actions, escalations). In any
-  session attempting a gate's cold-start test, every recalled memory is reproduced verbatim as the
-  first entry of the HANDOFF block before any other action; the exam counts only if no recalled
-  memory holds program state; no memory writes during an exam session. A session running in the
+  session attempting a gate's cold-start test, every recalled memory that names this program or a
+  sibling program — and this program's own memory file in full, with its SHA-256 — is reproduced
+  verbatim as the first entry of the HANDOFF block before any other action; index lines that
+  concern unrelated programs are withheld by count, with the count and a recorded check that none
+  of them names this program or a sibling, because this repository is public (amended by
+  ADR-0005, 2026-10-13); the exam counts only if no reproduced memory holds program state; no
+  memory writes during an exam session. A session running in the
   conversation context that built the state under test is not cold, regardless of memory, and this
   extends to launching prompts: a cold session is launched with the §6 resume prompt verbatim and
   nothing that carries program state. (FRIEDMAN ADR-0003 D1–D3, cited and not duplicated; the
@@ -474,4 +480,4 @@ per §4.6. Honor escalations — some decisions are Al's, not yours.
 
 ---
 *SYNDEOM v1.0 — συνδέω, to bind together: Friedman's calibration, Kober's rigor. Ratified 2026-10-12.
-Amended 2026-10-13 (ADR-0004, §2 S3.2). Constitution amendments via ADR only.*
+Amended 2026-10-13 (ADR-0004, §2 S3.2; ADR-0005, SD15). Constitution amendments via ADR only.*
