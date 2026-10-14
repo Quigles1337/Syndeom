@@ -1685,3 +1685,198 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
   copy not committed.
 - **Bears on:** S1.1 items 19 and 20 (their status document); no CLAIM.
+
+---
+
+## S-0054 — Katrin Wehrheim, "Fredholm notions in scale calculus and Hamiltonian Floer theory", arXiv:1209.4040 **v3** (the original of Route A item 21)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 22 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 19, 2026-10-14.
+- **Citation (from the abstract page):** Katrin Wehrheim, "Fredholm notions in scale calculus
+  and Hamiltonian Floer theory", arXiv:1209.4040, Symplectic Geometry (math.SG); v1 18 September
+  2012; v2 14 January 2013 ("v2: corrections in some nonlinear estimates"); **v3 submitted
+  25 October 2016** ("v3: complete revision - giving full details and correcting substantial
+  mistakes in Floer application") — v2's and v3's own corrections are outside the ADR-0003 D8
+  window and are not harvested; v4 10 September 2025 (S-0055). No journal reference or DOI on
+  the abstract page: a preprint. One author.
+- **Primary:** abstract page <https://arxiv.org/abs/1209.4040v3>, accessed 2026-10-14T20:14:48Z
+  (HTTP 200), 39,385 bytes, SHA-256
+  `dcfc69f6e526b4ad635dab868746d62d63a0744f8457d5d622a4e88e89968854`; e-print
+  <https://arxiv.org/e-print/1209.4040v3> (`application/gzip`), 43,630 bytes, SHA-256
+  `6a907dc3753a3a56f8ccf28dbc58a8ce848fea2d48c1728a1f1979f7fa7eabd0` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** Section 4, "Fredholm property for nonlinear maps": Definition 4.3 (TeX label
+  `def:scfred`, "sc-Fredholm at 0 with respect to the splitting"), in particular its clause (iii)
+  "weakly regularizing, i.e. ker D_{E′}Φ(r,0) ⊂ E′_1"; Theorem 4.5 (label `thm`, the theorem the
+  comment calls the main theorem) and its proof, in particular the injectivity step quoted in
+  `RECORD.md`; Section 5's Lemma `le3` (the Floer application's verification of clause (iii)),
+  read for the diff. The theorem counter is per section and shared: Section 4 holds Definition
+  4.1 (`def:HWZfred`), Remark 4.2, Definition 4.3, Remark 4.4, Theorem 4.5, so the comment's
+  numbers are v3's.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 21); no CLAIM.
+
+---
+
+## S-0055 — Wehrheim, arXiv:1209.4040 **v4** — the correcting version and its comment (the status document of Route A item 21)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0054; **v4 submitted 10 September 2025**, comment: "v4:The notion of
+  "weakly regularizing" (in Def.4.3) was strengthened to fix a gap in the proof of the main
+  theorem (Thm.4.5)".
+- **Primary:** abstract page <https://arxiv.org/abs/1209.4040v4>, accessed 2026-10-14T20:14:48Z
+  (HTTP 200), 39,270 bytes, SHA-256
+  `80202a75a436c6a1340531f5228cc720a4b9885dd677b97fbc9613f761c065b7` (re-fetched at about
+  20:17Z to read the journal fields, which are absent; byte-identical); e-print
+  <https://arxiv.org/e-print/1209.4040v4> (`application/gzip`), 46,286 bytes, SHA-256
+  `5f59f9ad14ea8e594accbbfdee865fdbf5083873dc23cefa382bcf8c0e9213ed` — a gzipped tar holding
+  `fredholm-arxiv.tex` and arXiv's `00README.json`.
+- **Content used:** the comment; the v3 → v4 TeX diff (1,183 lines, most of them reference
+  updates to the polyfold book, a new appendix "Brief Guide to Polyfold Theory", and
+  commented-out `\todo` notes left in the source that describe the edits): Definition 4.3 (iii)
+  "weakly regularizing, i.e. ker D_{E′}Φ(r,0) ⊂ E′_1" becomes "these operators are weakly
+  regularizing in the sense that for all |r| < ε_0 and e ∈ E′_0 we have the implication
+  D_{E′}Φ(r,0) e ∈ F_1 ⟹ e ∈ E′_1", with the source note "Here the notion of "weakly
+  regularizing" was strengthened -- previously it was ker D_{E′}Φ(r,0) ⊂ E′_1"; Theorem 4.5's
+  statement gains the words "in the sense of Definition 4.3" and is otherwise unchanged; its
+  proof's injectivity step is rewritten (source note: "Here we clarified the use of the
+  (strengthened) weak regularization property and added proof that D_{E′}Φ(r^ν,0) is uniformly
+  bounded"); Lemma `le3` of Section 5 asserts and proves the strengthened property for the
+  linearized Floer operators (source note: "Updated the weak regularization claim"). The
+  AI-assistance scanner reports no hit on either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 21 (its status document); no CLAIM.
+
+---
+
+## S-0056 — Aleksandra Kwiatkowska, "Large conjugacy classes, projective Fraïssé limits, and the pseudo-arc", arXiv:1210.6709 **v1** (the original of Route A items 22, 23 and 24)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 23 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 19, 2026-10-14.
+- **Citation (from the abstract page):** Aleksandra Kwiatkowska, "Large conjugacy classes,
+  projective Fraïssé limits, and the pseudo-arc", arXiv:1210.6709, Logic (math.LO; cross-listed
+  math.GN); **v1 submitted 25 October 2012** (comment "18 pages"); v2 20 April 2023 under the
+  new title "Large orbits, projective Fraïssé limits, and the pseudo-arc" (S-0057). No journal
+  reference or DOI on the abstract page; not retrieved. One author. Abstract (v1): "We show that
+  the automorphism group, Aut(ℙ), of a projective Fraïssé limit ℙ, whose natural quotient is the
+  pseudo-arc, has a comeager conjugacy class. This generalizes an unpublished result of
+  Oppenheim that Aut(ℙ) (and consequently, the group of all homeomorphisms of the pseudo-arc)
+  has a dense conjugacy class. We also present a simple proof of the result of Oppenheim."
+- **Primary:** abstract page <https://arxiv.org/abs/1210.6709v1>, accessed 2026-10-14T20:15:06Z
+  (HTTP 200), 38,596 bytes, SHA-256
+  `a50b9233f8615a5bd65c5330a523879a8890943bfa3dec6e509985774d99f9e3`; e-print
+  <https://arxiv.org/e-print/1210.6709v1> (`application/gzip`), 19,732 bytes, SHA-256
+  `3c24927fdca7fbbf289f27839f7308a2b3dcdef23084d80608c7f94d13a5bb34` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** Theorem 1.6 (TeX label `abcd`, the main result, restated as Theorem 3.1,
+  label `maint`) and its Section 3 proof (Propositions 3.2 `ap` and 3.3 `comeager`, Lemma 3.4
+  `ddd`); Section 2's Theorem 2.1 (`pseu`, attributed "[Oppenheim]") and Theorem 2.2 (`aut`,
+  "[Oppenheim]") with the paper's own proofs (Propositions 2.5 `jpp` and 2.6 `dense`, Lemmas
+  2.12 `slawek` and 2.13 `pse`, and the class 𝓕 of finite structures (A, s^A) induced by
+  automorphisms of ℙ); the acknowledgement crediting a proof of Lemma 2.12 to Sławomir Solecki.
+  Numbering: the theorem counter is per section and shared by all environments; **v1 has no
+  Theorem 1.7** — Section 1 ends with Theorem 1.6 — so the v2 comment's "Theorem 1.7" is v2's
+  numbering, in which a new Proposition 1.3 shifts the main theorem to 1.7.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v1 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 22, 23 and 24); no CLAIM.
+
+---
+
+## S-0057 — Kwiatkowska, arXiv:1210.6709 **v2** — the correcting version, its comment and its remark (the status document of Route A items 22, 23 and 24)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0056, under the new title "Large orbits, projective Fraïssé limits, and the
+  pseudo-arc"; **v2 submitted 20 April 2023**, comment: "Statement of Theorem 1.7 is corrected".
+- **Primary:** abstract page <https://arxiv.org/abs/1210.6709v2>, accessed 2026-10-14T20:15:06Z
+  (HTTP 200), 38,086 bytes, SHA-256
+  `decce1a9e007287ed845267a8d8cecc56ee3150b89759c631ea4f53353d71556` (re-fetched at about
+  20:17Z to read the journal fields, which are absent; byte-identical); e-print
+  <https://arxiv.org/e-print/1210.6709v2> (`application/gzip`), 20,021 bytes, SHA-256
+  `a52fadc29937333acb29a5fb6b759309e11c1c5271c4b389d177298e061b8288` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** the comment; the new title and abstract ("We show that the conjugacy action
+  of the automorphism group, Aut(ℙ), of the projective Fraïssé limit ℙ, whose natural quotient
+  is the pseudo-arc, on the set of involutions of ℙ, has a comeager orbit."); Theorem 1.7
+  (label `abcd`): "The action Aut(ℙ) ↷ I(ℙ) has a comeager orbit." (I(ℙ) the set of involutions
+  of ℙ, "a closed invariant subspace for the conjugacy action"); Section 2's Theorem 2.1 ("The
+  action H(P) ↷ I(P) has a dense orbit.") and Theorem 2.2 ("The action Aut(ℙ) ↷ I(ℙ) has a dense
+  orbit."), now without the "[Oppenheim]" attributions; and Remark 2.3, the whole of it: "We do
+  not know if Aut(ℙ), has a dense conjugacy class or if H(P) has a dense conjugacy class. All
+  existing "proofs" seem to have a flow." [sic]. The v1 → v2 TeX diff (1,047 lines): the class
+  𝓕 is redefined with f ∈ I(ℙ) in place of f ∈ Aut(ℙ); "symmetric" is added to the hypotheses
+  of Lemma `slawek` ("surjective, symmetric, and connected") and to the characterisation in
+  Lemma `pse`; a new Proposition `lifttoinv` ("Let A ∈ 𝓖, let s^A be the antidiagonal of A, and
+  let φ: ℙ → A be an epimorphism. Then there is h ∈ I(ℙ) such that φ: (ℙ,h) → (A,s^A) is an
+  epimorphism") with Lemma `switch` replaces v1's lifting argument in Lemma `pse` and is used in
+  Proposition `jpp`; a new Lemma `denseI(p)` and a new proof of Theorem 2.1; Section 3 is
+  rewritten for the action on I(ℙ) with the same propositions. The AI-assistance scanner
+  reports no hit on either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v2 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 items 22, 23 and 24 (their status document); no CLAIM.
+
+---
+
+## S-0058 — Lei Fu and Daqing Wan, "A Class of Incomplete Character Sums", arXiv:1303.3650 **v2** (the original of Route A item 25)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 24 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 19, 2026-10-14.
+- **Citation (from the abstract page):** Lei Fu, Daqing Wan, "A Class of Incomplete Character
+  Sums", arXiv:1303.3650, Algebraic Geometry (math.AG; cross-listed math.NT); v1 15 March 2013;
+  **v2 submitted 19 March 2014** (comment "Following the suggestion of the referee, we use
+  tensor induction to study a class of incomplete character sums. Originally we use transfer,
+  which is a special case of tensor induction, and which only works for rank one sheaves. The
+  paper is to appear in Quarterly Journal of Mathematics"); v3 6 January 2025 (S-0059). No
+  journal reference or DOI on the abstract page; the published version was not retrieved. Two
+  authors.
+- **Primary:** abstract page <https://arxiv.org/abs/1303.3650v2>, accessed 2026-10-14T20:15:25Z
+  (HTTP 200), 38,292 bytes, SHA-256
+  `a44522338986c9fd28c2034909c4e2ba684ba6d8ebf4a413caece8d21ab02729`; e-print
+  <https://arxiv.org/e-print/1303.3650v2> (`application/gzip`), 11,478 bytes, SHA-256
+  `7361c0027ddd151f1895f774bd24304643a781b529f9f4c659d41199d3d5f9b9` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** Section 4, "Character Sums on Curves": Theorem 4.6 — the sixth numbered
+  environment of the section (Proposition 4.1, Theorem 4.2, Lemma 4.3, Remark 4.4, Theorem 4.5,
+  Theorem 4.6; the counter is per section and shared) — its statement and proof; the
+  introduction's conventions ("p is a fixed prime number, 𝔽_p is a finite field with p
+  elements, and 𝔽 is an algebraic closure of 𝔽_p. For any power q of p, let 𝔽_q be the subfield
+  of 𝔽 with q elements"). Quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v2 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 25); no CLAIM.
+
+---
+
+## S-0059 — Fu and Wan, arXiv:1303.3650 **v3** — the correcting version and its comment (the status document of Route A item 25)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0058; **v3 submitted 6 January 2025**, comment: "José Alves Oliveira and
+  Lucas Reis point out an error in the old version of Theorem 4.6. The assumption that Tr(g) is
+  not of the form r^q-r is corrected to that Tr(g) is not of the form r^p-r".
+- **Primary:** abstract page <https://arxiv.org/abs/1303.3650v3>, accessed 2026-10-14T20:15:25Z
+  (HTTP 200), 38,113 bytes, SHA-256
+  `f1dd52c50155cdf5811534989f52b1a0579471e8e1e8fdf384fb9f192baccce3` (re-fetched at about
+  20:17Z to read the journal fields, which are absent; byte-identical); e-print
+  <https://arxiv.org/e-print/1303.3650v3> (`application/gzip`), 11,527 bytes, SHA-256
+  `56343607e895ca241882168dd7b5cdb1a2ed24bee2589d2f2cf19c85e89e3164` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** the comment; the v2 → v3 TeX diff (40 lines, the whole of it): the title
+  footnote gains "We would like to thank José Alves Oliveira and Lucas Reis for pointing out an
+  error in the old version of Theorem 4.6"; in Theorem 4.6's statement "is not of the form
+  r(t)^q−r(t) in 𝔽(t)" becomes "r(t)^p−r(t)"; in its proof the sentence "Since
+  Tr_{𝔽_{q^d}/𝔽_q}(g) is not of the form r(t)^q−r(t) in 𝔽(t), the sheaf 𝓛_{ψ,Tr(g)} is
+  geometrically nonconstant" changes in the same way; otherwise one notation change in Section 3
+  ("tran" to "⊗-Ind") and a document-class option. The AI-assistance scanner reports no hit on
+  either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 25 (its status document); no CLAIM.

@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "7361c0027ddd151f1895f774bd24304643a781b529f9f4c659d41199d3d5f9b9",
+        "file": "original-1303.3650v2.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 11478,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-40e6c0da8821",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1303.3650v2.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.6 (Section 4, Character Sums on Curves), statement: the hypothesis 'Suppose Tr_{F_{q^d}/F_q}(g) = sum_{i=0}^{d-1} sigma^i(g) is not of the form r(t)^q - r(t) in F(t)' (v2), where v3 requires 'not of the form r(t)^p - r(t)'; the conclusion (the bound (d(D_1+D_3+D_4)+D_2-1) sqrt(q) on the incomplete sum) is unchanged",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.6, proof, the sentence 'Since Tr_{F_{q^d}/F_q}(g) is not of the form r(t)^q - r(t) in F(t), the sheaf L_{psi, Tr(g)} is geometrically nonconstant, and it has wild ramification at poles of Tr(g)': the criterion for geometric nonconstancy of the Artin-Schreier sheaf is applied with the weaker form, every r^q - r being of the form s^p - s (s = r + r^p + ... + r^{q/p}) but not conversely",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1303.3650v2 (the original; corrected by v3, 6 January 2025) - Theorem 4.6 (unlabelled; the sixth numbered environment of Section 4)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0058",
+      "S-0059"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0059: 'an error in the old version of Theorem 4.6. The assumption that Tr(g) is not of the form r^q-r is corrected to that Tr(g) is not of the form r^p-r'",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0059"
+    }
+  },
+  "config_hash": "40e6c0da8821baf12fc7494f93fc2090b395fc283cdd15f6db4a8cc08ecbd5ec",
+  "engine_commit": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.6 (Section 4, Character Sums on Curves), statement: the hypothesis 'Suppose Tr_{F_{q^d}/F_q}(g) = sum_{i=0}^{d-1} sigma^i(g) is not of the form r(t)^q - r(t) in F(t)' (v2), where v3 requires 'not of the form r(t)^p - r(t)'; the conclusion (the bound (d(D_1+D_3+D_4)+D_2-1) sqrt(q) on the incomplete sum) is unchanged"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.6, proof, the sentence 'Since Tr_{F_{q^d}/F_q}(g) is not of the form r(t)^q - r(t) in F(t), the sheaf L_{psi, Tr(g)} is geometrically nonconstant, and it has wild ramification at poles of Tr(g)': the criterion for geometric nonconstancy of the Artin-Schreier sheaf is applied with the weaker form, every r^q - r being of the form s^p - s (s = r + r^p + ... + r^{q/p}) but not conversely"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0059: 'an error in the old version of Theorem 4.6. The assumption that Tr(g) is not of the form r^q-r is corrected to that Tr(g) is not of the form r^p-r'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 25 (candidate 24), Session 19. Ground truth as the authors' v3 comment and footnote document it, confirmed against the v2->v3 TeX diff; RECORD.md holds the argument, names the undetermined reading as the alternative and labels the executor's reading of the mechanism as the executor's. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "3c24927fdca7fbbf289f27839f7308a2b3dcdef23084d80608c7f94d13a5bb34",
+        "file": "original-1210.6709v1.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 19732,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-45c3ee8319d5",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1210.6709v1.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 1.6 = Theorem 3.1 (label maint), proof (Section 3): Lemma 3.4's claim 'We know already that D_0 = {(A, s^A) in F : s^A is the antidiagonal of A} is coinitial in F (Lemma 2.12)' and, through Proposition 2.5 (the JPP, used by Proposition 3.3), the step 'Without loss of generality, s^A and s^B are antidiagonals': Lemma 2.12 (label slawek) is applied to structures of v1's class F whose relation s^A need not be symmetric, while the epimorphic image of an antidiagonal is symmetric; v2 adds 'symmetric' to the lemma's hypotheses and restricts the class to involutions",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1210.6709v1 (the original; corrected by v2, 20 April 2023) - Theorem 1.6 (TeX label abcd; restated as Theorem 3.1, label maint), the main theorem - 'Theorem 1.7' in v2's numbering",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v1): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0056",
+      "S-0057"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0057: 'Statement of Theorem 1.7 is corrected' - v2 replaces 'Aut(P) has a comeager conjugacy class' by 'The action Aut(P) on I(P) has a comeager orbit' and its Remark 2.3 says 'We do not know if Aut(P) has a dense conjugacy class ... All existing \"proofs\" seem to have a flow [sic]'",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0057"
+    }
+  },
+  "config_hash": "45c3ee8319d59645ddbcbd60301259bba66f6a24bc1b443292dbb746de4b47e8",
+  "engine_commit": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 1.6 = Theorem 3.1 (label maint), proof (Section 3): Lemma 3.4's claim 'We know already that D_0 = {(A, s^A) in F : s^A is the antidiagonal of A} is coinitial in F (Lemma 2.12)' and, through Proposition 2.5 (the JPP, used by Proposition 3.3), the step 'Without loss of generality, s^A and s^B are antidiagonals': Lemma 2.12 (label slawek) is applied to structures of v1's class F whose relation s^A need not be symmetric, while the epimorphic image of an antidiagonal is symmetric; v2 adds 'symmetric' to the lemma's hypotheses and restricts the class to involutions"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0057: 'Statement of Theorem 1.7 is corrected' - v2 replaces 'Aut(P) has a comeager conjugacy class' by 'The action Aut(P) on I(P) has a comeager orbit' and its Remark 2.3 says 'We do not know if Aut(P) has a dense conjugacy class ... All existing \"proofs\" seem to have a flow [sic]'",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 22 (candidate 23, first documented result), Session 19. Ground truth as the author's v2 comment and Remark 2.3 document it, confirmed against the v1->v2 TeX diff; the step reading (Lemma 2.12 applied to non-symmetric relations) is the executor's from the diff and is labelled as such in RECORD.md. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

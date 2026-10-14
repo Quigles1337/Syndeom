@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "6a907dc3753a3a56f8ccf28dbc58a8ce848fea2d48c1728a1f1979f7fa7eabd0",
+        "file": "original-1209.4040v3.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 43630,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-cafb56cb27fb",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1209.4040v3.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.5 (TeX label thm), proof, the sentence 'Hence for the isomorphism property (eq:iso) is suffices to prove injectivity on W_0; which follows directly from the estimate (eq:est) for m=1 and the weak regularization property in Definition 4.3 (iii)': the estimate for m=1 is available on W_1 = E'_1 cap W_0, and v3's property (iii) (ker D_{E'}Phi(r,0) in E'_1) does not place a w in W_0 with Pi_C^perp D_{E'}Phi(r,0) w = 0 in E'_1; v4 strengthens (iii) to 'D_{E'}Phi(r,0) e in F_1 implies e in E'_1', spells the implication out, and adds the uniform bound on D_{E'}Phi(r^nu,0) w^nu that the subsequence argument needs",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1209.4040v3 (the original; corrected by v4, 10 September 2025) - Theorem 4.5 (TeX label thm), the main theorem, under Definition 4.3 (def:scfred) as stated in v3",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v3): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0054",
+      "S-0055"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0055: 'The notion of \"weakly regularizing\" (in Def.4.3) was strengthened to fix a gap in the proof of the main theorem (Thm.4.5)' - the theorem under v3's Definition 4.3 is neither re-proved nor disproved; v4 proves it under the strengthened definition",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0055"
+    }
+  },
+  "config_hash": "cafb56cb27fb1e3a80b4e090ac64eddc2f1bf0ccf4f8c0cbd96c9882dd89806f",
+  "engine_commit": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.5 (TeX label thm), proof, the sentence 'Hence for the isomorphism property (eq:iso) is suffices to prove injectivity on W_0; which follows directly from the estimate (eq:est) for m=1 and the weak regularization property in Definition 4.3 (iii)': the estimate for m=1 is available on W_1 = E'_1 cap W_0, and v3's property (iii) (ker D_{E'}Phi(r,0) in E'_1) does not place a w in W_0 with Pi_C^perp D_{E'}Phi(r,0) w = 0 in E'_1; v4 strengthens (iii) to 'D_{E'}Phi(r,0) e in F_1 implies e in E'_1', spells the implication out, and adds the uniform bound on D_{E'}Phi(r^nu,0) w^nu that the subsequence argument needs"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0055: 'The notion of \"weakly regularizing\" (in Def.4.3) was strengthened to fix a gap in the proof of the main theorem (Thm.4.5)' - the theorem under v3's Definition 4.3 is neither re-proved nor disproved; v4 proves it under the strengthened definition",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 21 (candidate 22), Session 19. Ground truth as the author's v4 comment documents it, confirmed against the v3->v4 TeX diff and the source's own edit notes; RECORD.md holds the argument and names FLAW-0004 as the alternative class. v2's and v3's own corrections (2013, 2016) are outside the window. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

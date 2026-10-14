@@ -2443,3 +2443,165 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ b05537f (Session 19 — the eighth Route A harvest: candidates 22–24
+examined, all three admitted yielding 5 items; the commit adding this entry lands on top of
+b05537f)
+LAUNCH CONTEXT (SD15; not an exam session): Al's one-word order "resume" in the same conversation
+as Sessions 7–18, three minutes after the Session-18 push; the inherited NEXT-SINGLE-ACTION
+executed as STATE stated it. Not cold. No memory written (no new machine hazard).
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: prefix through arXiv id
+`1303.3650` (24 of 2,472 candidates; 18 admitted yielding 25 items, 4 rejected, 2
+found-but-unclassifiable); S1.3: twenty-five `raw/1` parents manifested, no derived artifact
+yet. Gate S0 closed and confirmed.
+PLAN NOTE: the inherited NEXT (the eighth harvest session, resuming at candidate 22), unchanged
+by ORIENT. One thing.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `b05537f`, clean; the constitution unchanged since `226a51c`;
+  the log's resume point read. Evidence gate at ORIENT, detached (`gate-19a.log`),
+  20:14:35Z–20:15:39Z (warm), `GATE: GREEN`.
+- **Candidate list:** regenerated from the 73 cached pages — 0 API requests, 2,472 candidates,
+  digest identical to run 1 (`e164c0b1…2d48`).
+- **Candidates examined in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md` rows 22–24):
+  - **22, arXiv 1209.4040** (Wehrheim; math.SG, a preprint), v4 (2025-09-10) "The notion of
+    "weakly regularizing" (in Def.4.3) was strengthened to fix a gap in the proof of the main
+    theorem (Thm.4.5)": the v4 source keeps commented-out edit notes at each change, which with
+    the diff locate the step — Definition 4.3 (iii) goes from kernel regularity
+    (ker D_{E′}Φ(r,0) ⊂ E′_1) to the implication D_{E′}Φ(r,0) e ∈ F_1 ⟹ e ∈ E′_1, and the
+    proof's "injectivity on W_0 … follows directly from the estimate for m=1 and the weak
+    regularization property (iii)" becomes a spelled-out implication plus a new uniform-bound
+    argument; the Floer application's lemma is re-proved for the stronger property.
+    **Admitted**: Theorem 4.5 — FLAW-0005 (gap: the m = 1 estimate applied to a w ∈ W_0 whose
+    membership in W_1 the old clause does not give), FLAW-0004 named as the alternative;
+    **`statement_status` null / `undetermined`** (the fourth use of ruling (ii)): the theorem's
+    text is unchanged but its defining hypothesis is stronger. v2's and v3's own corrections
+    (2013, 2016) are outside the window. Original v3 (arXiv non-exclusive → `external`);
+    S-0054, S-0055; id `s1_ingest-v0.1.0-cafb56cb27fb`.
+  - **23, arXiv 1210.6709** (Kwiatkowska; math.LO), v2 (2023-04-20) "Statement of Theorem 1.7
+    is corrected", retitled from "Large conjugacy classes …" to "Large orbits …": **v1 has no
+    Theorem 1.7** — a new Proposition 1.3 in v2 shifts the main theorem (v1's Theorem 1.6,
+    "Aut(ℙ) has a comeager conjugacy class") to 1.7, where it now reads "The action
+    Aut(ℙ) ↷ I(ℙ) has a comeager orbit" (I(ℙ) the involutions); v2's Remark 2.3 adds "We do
+    not know if Aut(ℙ), has a dense conjugacy class or if H(P) has a dense conjugacy class. All
+    existing "proofs" seem to have a flow" [sic], which names v1's Theorems 2.2 and 2.1 by
+    content. The diff restricts the class 𝓕 to involutions, adds "symmetric" to the
+    antidiagonal lemma (Lemma 2.12) and the characterisation lemma, and lifts through a new
+    proposition to an involution. **Admitted as three items**, all **`statement_status` null /
+    `undetermined`** (the fifth to seventh uses of ruling (ii)): Theorem 1.6 — FLAW-0005
+    (fatal); Theorem 2.2 (Oppenheim's dense-class result, proved in the paper) — FLAW-0005
+    (fatal); Theorem 2.1 (H(P), a reduction to 2.2) — FLAW-0005 (gap, the item-16 shape). The
+    executor's reading of the mechanism — an antidiagonal's epimorphic image is symmetric, so
+    Lemma 2.12 cannot serve the non-symmetric relations v1's class contains — is in the records,
+    labelled; the document names no step. Shared original v1 (`external`); S-0056, S-0057; ids
+    `s1_ingest-v0.1.0-45c3ee8319d5`, `s1_ingest-v0.1.0-486ef22f632b`,
+    `s1_ingest-v0.1.0-dc0e0b0d5b87`.
+  - **24, arXiv 1303.3650** (Fu and Wan; math.AG, "to appear in Quarterly Journal of
+    Mathematics" per the v2 comment), v3 (2025-01-06) "José Alves Oliveira and Lucas Reis point
+    out an error in the old version of Theorem 4.6. The assumption that Tr(g) is not of the form
+    r^q-r is corrected to that Tr(g) is not of the form r^p-r": the 40-line diff changes exactly
+    that in the statement and in the proof's one sentence that uses it. **Admitted**: Theorem
+    4.6 — FLAW-0012 (fatal) + FLAW-0005 (the nonconstancy criterion for the Artin–Schreier sheaf
+    applied with the weaker form, fatal), `statement_status` false by source document with
+    `undetermined` named as the alternative; the executor's reading (every r^q − r is an
+    s^p − s, not conversely) labelled. Original v2 (`external`); S-0058, S-0059; id
+    `s1_ingest-v0.1.0-40e6c0da8821`.
+  - **Counts by verdict, this session:** examined 3 — admitted 3 candidates yielding 5 items,
+    rejected 0, found-but-unclassifiable 0, pending 0, pending-truth 0, escalated 0.
+    **Cumulative:** examined 24 — admitted 18 candidates (25 items), rejected 4,
+    found-but-unclassifiable 2. **Last candidate processed `1303.3650`**; the session stopped at
+    its budget before candidate 25 (`1304.5623`).
+- Each admitted item: S-entries written **before** the producer ran (SD16); config with the D4
+  fields; `syndeom-ingest` at `b05537f` wrote `manifest.json` (`syndeom-manifest/2`,
+  `engine_commit` `b05537f…`, self-check passed; the ids reproduced independently in Python
+  before the producer ran; the five manifests re-read and their schema, commit, derivation,
+  flaw classes and severities, truth values and methods asserted); `RECORD.md` with the D3 class
+  argument, the alternatives considered, quoted locating sentences and licence basis. The three
+  correcting versions' abstract pages were re-fetched once each (byte-identical) to read the
+  journal fields, which are absent on all three.
+- STATE: Updated line; Gate S1 rows S1.1 (prefix through `1303.3650`, 24/18(25)/4/2) and S1.3
+  (twenty-five parents); registers line (S-0054..S-0059); build line; NEXT resumes at candidate
+  25 with the next three candidates' comments quoted and two lessons added (a comment's theorem
+  number may follow the corrected version's numbering; a remark naming further results by
+  content yields further items).
+- Gates: the ORIENT run (`gate-19a.log`) on the clean tree, 20:14:35Z–20:15:39Z, `GATE: GREEN`.
+  Evidence run on the staged tree, detached (`gate-19b.log`), 20:35:33Z–20:43:22Z, launched after the
+  ORIENT run had ended: `Build completed successfully (8926 jobs)`; audit `[propext]`; fmt and
+  clippy clean; `cargo test` 5/5 + 24/24; `git ls-files --eol` clean; `check_registers.py`
+  110 tracked files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, **S- 59/59**;
+  `RESULT: ALL PASS`; `GATE: GREEN`; `rc=0`. Re-run the same way on the final tree (this entry
+  and STATE's build line in) before the commit (STOP-REASON).
+BELIEF DELTAS:
+- A revision comment's theorem number is the *corrected* version's number when the correction
+  inserts numbered material: v1 of candidate 23 has no Theorem 1.7. Evidence: the two versions'
+  environment lists. Consequence: resolve the number in both versions before locating; the
+  lesson is in STATE's NEXT.
+- The status document can grow by a remark that names further results by content ("We do not
+  know if Aut(ℙ) has a dense conjugacy class …") without the comment naming them, and D2.2
+  makes the corrected version part of the document. Evidence: candidate 23, three items from a
+  five-word comment. Consequence: the multi-item shape now includes items the comment does not
+  mention; the records say so.
+- Severity for a FLAW-0005 whose "hypothesis" is an invoked result: fatal when the needed
+  hypothesis (or the invoked lemma's applicability) is shown false for objects in the proof's
+  scope or the result is withdrawn, gap when it is merely unestablished or the invoked result is
+  open. Evidence: this session's four FLAW-0005 records (fatal, fatal, gap, gap) against items
+  13, 16 and 20. Consequence: a consistent reading of D3's consequence clause and the entry's
+  range; recorded in each item's RECORD.md, and flagged below for Al because D3's "weakened →
+  fatal" clause read literally would make items 16 and 24 fatal rather than gap.
+- Undetermined truth is now common, not rare: seven of twenty-five items (3, 13, 16, 21, 22,
+  23, 24). Evidence: this session alone added four. Consequence: the S3 obligation for
+  undetermined items (standing rulings) is a sizeable slice of the corpus; the effective-N rule
+  (ADR-0004 D6) matters for candidate 23's three dependent items.
+CONFUSIONS:
+- A `cut` of helper output hid the helper's own `-- tex diff` line count for candidate 22 on the
+  first read; the saved `helper.out` and `wc -l` resolved it. No cost beyond one command.
+- An unquoted `I(P)` in a Bash `echo` was parsed as a subshell and aborted a multi-command
+  probe; re-run with quotes. Cost: one retry. Doc fix: this entry.
+- Two placeholders left in a draft record ("Definition 3.x", a doubled hash fragment) were
+  caught by the placement script's assertions and fixed before staging. Cost: nil; the
+  assertions are the control.
+HONESTY CHECK: no CLAIM changed status. New SOURCES S-0054..S-0059, VERIFIED digest-only (arXiv
+non-exclusive on every version read). Items 21–24 record `null` because the documents leave
+the truth open ("gap", "we do not know"); item 25 records `false` on "an error … is corrected"
+with the alternative named. The executor's step-level readings for items 22, 23 and 25 are
+labelled as the executor's; for candidate 23 the located step (Lemma 2.12's uses) comes from the
+diff, not from the author's words, and the records say so. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the window excludes the release by rule; the
+three examined papers are 2012–2013 submissions by named human authors; the scanner reports no
+AI-assistance mention on any version read. No detector or threshold exists. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The five manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `b05537f`; the ids reproduced independently in
+Python before the producer ran; the candidate list reproduced from cache with the identical
+digest; every retrieval is pinned by URL, access time and SHA-256. Nothing to quarantine.
+MANIFEST CHECK: five artifacts created, each with a `syndeom-manifest/2` manifest carrying
+ground truth with derivation `documented-by-source`, flaw records with `raw/1` locators,
+`correct: false`, taxonomy 0.1.0, self-checked by the producer before writing (SD1); four carry
+`statement_status.value: null` with `method: "undetermined"` (ADR-0001 as amended). Nothing
+synthetic labeled real (SD12). "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript beyond its own status document (SD3): the records quote
+the authors' words, name the alternative reading where the document leaves room, and label the
+executor's mechanism readings as the executor's. No understanding claims (SD17). No detectors. No
+referee contact (SD13). Candidate 25 was not opened.
+NEXT-SINGLE-ACTION: S1.1 — the ninth Route A harvest session, resuming at candidate 25
+(`1304.5623`, v5 of 2023-02-08, math.AG, "due to a mistake in Proposition 3.5, the
+unirationality of supersingular K3 surfaces remains a conjecture: see the appendix for erratum")
+in ascending id with no skipping, exactly as STATE.md states it.
+ESCALATIONS:
+- For Al's attention, not a blocker (carried from Sessions 16–18, now seven records): items 8,
+  10, 11, 14, 15, 18 and 25 carry `false` with `undetermined` named as the alternative where
+  the author writes "corrected", "incorrect", "error" or "false in the stated generality"
+  rather than giving a counterexample. A standing ruling either way would make the seven
+  records uniform; the executor's reading is `false` because in each case the author replaces
+  the statement by a different one.
+- For Al's attention, not a blocker (new): ADR-0003 D3's severity clause "the result withdrawn,
+  weakened or shown false → fatal", read literally, conflicts with the FLAW-0005 entry's own
+  range ("gap: hypothesis true but unshown") for items whose statement is weakened by an added
+  hypothesis while the truth is left open (items 13, 16, 21, 24: recorded gap). The executor
+  reads the entry's range as governing and D3's clause as the tie-breaker; a one-line
+  clarification in D3 would settle it.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers
+  (S-0019); not attempted this session.
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
+set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
+the commit); this commit pushes to `origin/main`.

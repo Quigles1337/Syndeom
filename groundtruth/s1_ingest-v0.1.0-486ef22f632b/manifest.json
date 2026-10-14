@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "3c24927fdca7fbbf289f27839f7308a2b3dcdef23084d80608c7f94d13a5bb34",
+        "file": "original-1210.6709v1.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 19732,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-486ef22f632b",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1210.6709v1.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 2.2, proof via Propositions 2.5 (the JPP for F) and 2.6: Proposition 2.5's step 'Without loss of generality, s^A and s^B are antidiagonals' (Lemma 2.12) and Lemma 2.13's 'other direction' (every surjective connected s^A lies in F, lifted through an antidiagonal (B, s^B) from Lemma 2.12): the lemma is applied to relations that need not be symmetric, while the epimorphic image of an antidiagonal is symmetric; v2 adds 'symmetric' to Lemmas 2.12 and 2.13 and lifts through the new Proposition lifttoinv to an involution",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1210.6709v1 (the original; corrected by v2, 20 April 2023) - Theorem 2.2 (TeX label aut; attributed '[Oppenheim]', proved in the paper): 'The group of all automorphisms of P, Aut(P), has a dense conjugacy class'",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v1): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0056",
+      "S-0057"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0057, Remark 2.3: 'We do not know if Aut(P) has a dense conjugacy class or if H(P) has a dense conjugacy class. All existing \"proofs\" seem to have a flow [sic]' - v2 replaces the theorem by 'The action Aut(P) on I(P) has a dense orbit'",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0057"
+    }
+  },
+  "config_hash": "486ef22f632b7b0d75200750c7cb13af5876a410f0ed15e950d407a69a138d36",
+  "engine_commit": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 2.2, proof via Propositions 2.5 (the JPP for F) and 2.6: Proposition 2.5's step 'Without loss of generality, s^A and s^B are antidiagonals' (Lemma 2.12) and Lemma 2.13's 'other direction' (every surjective connected s^A lies in F, lifted through an antidiagonal (B, s^B) from Lemma 2.12): the lemma is applied to relations that need not be symmetric, while the epimorphic image of an antidiagonal is symmetric; v2 adds 'symmetric' to Lemmas 2.12 and 2.13 and lifts through the new Proposition lifttoinv to an involution"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0057, Remark 2.3: 'We do not know if Aut(P) has a dense conjugacy class or if H(P) has a dense conjugacy class. All existing \"proofs\" seem to have a flow [sic]' - v2 replaces the theorem by 'The action Aut(P) on I(P) has a dense orbit'",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 23 (candidate 23, second documented result), Session 19. Ground truth as the author's v2 Remark 2.3 documents it (the result named by content, its truth left open, the proofs said to be flawed), confirmed against the v1->v2 TeX diff; the step reading is the executor's and is labelled in RECORD.md. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

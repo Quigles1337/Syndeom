@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "3c24927fdca7fbbf289f27839f7308a2b3dcdef23084d80608c7f94d13a5bb34",
+        "file": "original-1210.6709v1.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 19732,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-dc0e0b0d5b87",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1210.6709v1.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 2.1, proof: the three-sentence derivation from Theorem 2.2 through the dense embedding of Aut(P) into H(P) (Irwin-Solecki, Lemma 4.8) - 'We first see how Theorem 2.2 implies Theorem 2.1': the invoked Theorem 2.2 is itself unestablished (item 23)",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1210.6709v1 (the original; corrected by v2, 20 April 2023) - Theorem 2.1 (TeX label pseu; attributed '[Oppenheim]', proved in the paper from Theorem 2.2): 'The group of all homeomorphisms of the pseudo-arc, H(P), has a dense conjugacy class'",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v1): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0056",
+      "S-0057"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0057, Remark 2.3: 'We do not know if Aut(P) has a dense conjugacy class or if H(P) has a dense conjugacy class. All existing \"proofs\" seem to have a flow [sic]' - v2 replaces the theorem by 'The action H(P) on I(P) has a dense orbit'",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0057"
+    }
+  },
+  "config_hash": "dc0e0b0d5b87b315dbfe0e5631e9b0f07b15be3807bca31cc22f0a16297c19ad",
+  "engine_commit": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 2.1, proof: the three-sentence derivation from Theorem 2.2 through the dense embedding of Aut(P) into H(P) (Irwin-Solecki, Lemma 4.8) - 'We first see how Theorem 2.2 implies Theorem 2.1': the invoked Theorem 2.2 is itself unestablished (item 23)"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0057, Remark 2.3: 'We do not know if Aut(P) has a dense conjugacy class or if H(P) has a dense conjugacy class. All existing \"proofs\" seem to have a flow [sic]' - v2 replaces the theorem by 'The action H(P) on I(P) has a dense orbit'",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 24 (candidate 23, third documented result), Session 19. Ground truth as the author's v2 Remark 2.3 documents it, confirmed against the v1->v2 TeX diff; the proof is a reduction to Theorem 2.2, so the flaw is the dependence on an unestablished result (the item-16 shape). A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
