@@ -1881,3 +1881,123 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (four candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ 335344f (Session 15 — the fourth Route A harvest: candidates 11–12
+examined, 1 admitted yielding 2 items, 1 found-but-unclassifiable; the commit adding this entry
+lands on top of 335344f)
+LAUNCH CONTEXT (SD15; not an exam session): Al's one-word order "resume" in the same conversation
+as Sessions 7–14; the inherited NEXT-SINGLE-ACTION executed as STATE stated it. Not cold. No
+memory written.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: prefix through arXiv id
+`1107.0863` (12 of 2,472 candidates; 8 admitted yielding 10 items, 3 rejected, 1
+found-but-unclassifiable); S1.3: ten `raw/1` parents manifested, no derived artifact yet. Gate S0
+closed and confirmed.
+PLAN NOTE: the inherited NEXT (the fourth harvest session, resuming at candidate 11), unchanged
+by ORIENT. One thing.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `335344f`, clean; the constitution unchanged since `226a51c`
+  (read in full in Session 11 of this conversation); the log's resume point read. Evidence gate at
+  ORIENT, detached (`gate-15a.log`): see the gate line below.
+- **Candidate list:** regenerated from the 73 cached pages — 0 API requests, 2,472 candidates,
+  digest identical to run 1 (`e164c0b1…2d48`).
+- **Candidates examined in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md` rows 11–12):
+  - **11, arXiv 1102.1087** ("Graph Theory", one author, cs.DM primary with a math cross-list):
+    the correcting version v11 (2024-01-01) is itself a withdrawal stub — the submission history
+    marks versions 2, 5, 9 and 11 withdrawn and v11 has no e-print — whose comment lists problems
+    ("The algorithm in Section 5.3 does not appear to follow the Turing model … Theorem 29 was not
+    stated properly … It is not clear if this list of errors is comprehensive") without
+    describing any error, and there is no corrected version to confirm against. The helper took
+    v10 as the original (the withdrawal handling added in Session 14 worked) and then stopped on
+    v11's missing e-print; v10 was read. **Found-but-unclassifiable, D2.4** — the first of that
+    verdict; nothing stored.
+  - **12, arXiv 1107.0863** (Chepoi–Hagen; math.MG), v4 (2026-04-22) "Previous version had an
+    error in Lemma 12, affecting Theorem 1. Current version has appendix correcting Theorem 1
+    under additional hypothesis … Appendix appears as journal correction" (a JCTB DOI quoted in
+    the comment): the appendix states Lemma 12 "is false as stated" with a counterexample figure
+    (a 5-cycle in Υ₀(U) without a normal hyperplane) and Theorem 1 "incorrect in the stated
+    generality", corrected by adding the hypothesis that no vertex link contains a 5-cycle.
+    **Admitted as two items**: Lemma 12 — FLAW-0012 (fatal), `statement_status` false by the
+    authors' **counterexample**, the failing proof step not named by the notice and deliberately
+    not guessed; Theorem 1 — FLAW-0012 (fatal) through its reliance on Lemma 12,
+    `statement_status` false by source document with the `undetermined` reading named in the
+    record (the disproving examples are attributed to a forthcoming paper). Shared original (v3,
+    4.2 MB with figures, arXiv non-exclusive → `external`) and shared S-entries S-0038, S-0039;
+    ids `s1_ingest-v0.1.0-1c4c9a7747d0`, `s1_ingest-v0.1.0-2d93a266558a`. The scanner's "llm"
+    hit is the citation key `BallmanSwiatkowski`, checked.
+  - **Counts by verdict, this session:** examined 2 — admitted 1 candidate yielding 2 items,
+    rejected 0, found-but-unclassifiable 1, pending 0, pending-truth 0, escalated 0.
+    **Cumulative:** examined 12 — admitted 8 candidates (10 items), rejected 3,
+    found-but-unclassifiable 1. **Last candidate processed `1107.0863`**; the session stopped at
+    its budget before candidate 13 (`1109.1964`).
+- Each admitted item: S-entries written **before** the producer ran (SD16); config with the D4
+  fields; `syndeom-ingest` at `335344f` wrote `manifest.json` (`syndeom-manifest/2`,
+  `engine_commit` `335344f…`, self-check passed); `RECORD.md` with the D3 class argument, the
+  alternatives considered, quoted locating sentences and licence basis.
+- **Helper limit found:** a correcting version that is itself a withdrawal has no e-print; the
+  helper prints the abstract-page data and then fails on the source fetch (candidate 11). Not
+  fixed this session (the abstract data sufficed for the verdict); the next session may add a
+  `--no-sources` fallback when the correcting version is withdrawn.
+- STATE: Updated line; Gate S1 rows S1.1 (prefix through `1107.0863`, 12/8(10)/3/1) and S1.3 (ten
+  parents); registers line (S-0038..S-0039); NEXT resumes at candidate 13, with a note on how to
+  treat its "superseded by" comment.
+- Gates: the ORIENT run (`gate-15a.log`) on the clean tree, 03:52:24Z–04:03:12Z (cold load),
+  `GATE: GREEN`. Evidence run on the staged tree, detached (`gate-15b.log`), 03:58:38Z–04:03:12Z,
+  overlapping the ORIENT run's tail without harm: `Build completed successfully (8926 jobs)`;
+  audit `[propext]`; fmt and clippy clean; `cargo test` 5/5 + 24/24; `git ls-files --eol` clean;
+  `check_registers.py` 80 tracked files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, **S-
+  39/39**; `RESULT: ALL PASS`; `GATE: GREEN`; `rc=0`. Re-run the same way on the final tree (this
+  entry and STATE's build line in) before the commit (STOP-REASON). Lesson for the next session:
+  do not launch the ORIENT gate and the pre-commit gate within ten minutes of each other on a cold
+  cache; wait for the first to end.
+BELIEF DELTAS:
+- A withdrawal with a list of complaints is not a status document that locates and describes an
+  error: the found-but-unclassifiable verdict exists for exactly this, and the first such
+  candidate was a long-revised paper whose author withdrew it with doubts about his own
+  computational model. Evidence: candidate 11. Consequence: D2.4 is the operative criterion;
+  nothing is guessed.
+- The strongest status documents are journal corrections republished on arXiv as appendices:
+  they name the false lemma, draw the counterexample, and state which other results stand.
+  Evidence: candidate 12. Consequence: two items with the cleanest provenance so far; the
+  counterexample method applies to the lemma, the document method to the theorem.
+- Not guessing the failing step is sometimes the right record: when the notice locates an error
+  to a proof but a counterexample settles the statement, FLAW-0012 alone is the honest class and
+  a use-site record would be invention. Evidence: item 9's record versus item 3's (where the
+  executor's step-level reading was given with a caveat because no counterexample existed).
+  Consequence: the two forms are both in the records, each labelled.
+CONFUSIONS:
+- The helper's withdrawal handling covers a withdrawn *original* but not a withdrawn *correcting*
+  version. Cost: one traceback; the verdict needed only the abstract pages. Doc fix: this entry
+  and the log row; a `--no-sources` fallback is the next session's option.
+HONESTY CHECK: no CLAIM changed status. New SOURCES S-0038, S-0039, VERIFIED digest-only (arXiv
+non-exclusive on both versions). Item 10's statement value (false rather than undetermined) is
+the executor's reading of "incorrect in the stated generality" and says so, with the alternative
+named. Item 9 records no use-site flaw rather than a guessed one. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the window excludes the release by rule; both
+examined papers are 2011 submissions by named human authors; the only AI-mention hit was a
+citation-key substring. No detector or threshold exists. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The two manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `335344f`; the ids reproduced independently in
+Python; the candidate list reproduced from cache with the identical digest; every retrieval is
+pinned by URL, access time and SHA-256. Nothing to quarantine.
+MANIFEST CHECK: two artifacts created, each with a `syndeom-manifest/2` manifest carrying ground
+truth with derivation `documented-by-source`, a flaw record with a `raw/1` locator, `correct:
+false`, taxonomy 0.1.0, self-checked by the producer before writing (SD1); one uses the
+`counterexample` method. Nothing synthetic labeled real (SD12). "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript beyond its own status document (SD3): the records
+quote the authors' own words for both falsities and name the alternative reading where the
+document leaves room. No understanding claims (SD17). No detectors. No referee contact (SD13).
+Candidate 13 was not opened.
+NEXT-SINGLE-ACTION: S1.1 — the fifth Route A harvest session, resuming at candidate 13
+(`1109.1964`, v2, "Crucial mistake in Proposition 2.1. Article superseded by …") in ascending id
+with no skipping, exactly as STATE.md states it, including the note on locating the superseding
+paper before deciding.
+ESCALATIONS:
+- None new. Item 10's record flags one reading for Al's attention, not as a blocker: Theorem 1
+  of candidate 12 is recorded `false` on the authors' "incorrect in the stated generality";
+  `undetermined` is the alternative.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers (S-0019).
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — a clean boundary (two candidates fully recorded, the resume point
+set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
+the commit); this commit pushes to `origin/main`.

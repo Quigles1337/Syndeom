@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "13e63ce74f6b6101a7fa3d29c9d466ec410a71eff57c0bc43d4665bdbd1c1727",
+        "file": "original-1107.0863v3.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 4152829,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-2d93a266558a",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1107.0863v3.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 1 (TeX label theorem1), statement (the chromatic-number bound chi(Gamma(X)) <= M Delta^26 for every 2-dimensional CAT(0) cube complex of bounded degree, without the 5-cycle hypothesis the correction adds) and its proof, Section 7, through Proposition 12 of Section 6.4 whose proof rests on Lemma 12",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1107.0863v3 (the original; corrected by v4's appendix, 22 April 2026, also published as a journal correction) - Theorem 1",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v3): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0038",
+      "S-0039"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0039: 'Theorem 1 of [CH] is incorrect in the stated generality due to an error in [Lem. 12]. We correct this under an extra hypothesis' (no 5-cycle in any vertex link)",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0039"
+    }
+  },
+  "config_hash": "2d93a266558af3cf15d243600554680cbc65ed4b9878d707a5494eaf9bb44949",
+  "engine_commit": "335344f85d1000b1a65eb28216fa49f60c4296ac",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 1 (TeX label theorem1), statement (the chromatic-number bound chi(Gamma(X)) <= M Delta^26 for every 2-dimensional CAT(0) cube complex of bounded degree, without the 5-cycle hypothesis the correction adds) and its proof, Section 7, through Proposition 12 of Section 6.4 whose proof rests on Lemma 12"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0039: 'Theorem 1 of [CH] is incorrect in the stated generality due to an error in [Lem. 12]. We correct this under an extra hypothesis' (no 5-cycle in any vertex link)",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 10 (candidate 12, second documented result), Session 15. Same original bytes and S-entries as item 9; a different claim of record. RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

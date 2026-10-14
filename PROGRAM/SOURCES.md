@@ -1206,3 +1206,67 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
   norm subscript elsewhere is corrected. v10's abstract page carries CC BY 4.0.
 - **Licence:** Creative Commons Attribution 4.0 on the v10 abstract page; copy not committed.
 - **Bears on:** S1.1 item 8 (its status document); no CLAIM.
+
+---
+
+## S-0038 — Victor Chepoi and Mark F. Hagen, "On embeddings of CAT(0) cube complexes into products of trees via colouring their hyperplanes", arXiv:1107.0863 **v3** (the original of Route A items 9 and 10)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 12 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 15, 2026-10-14. One candidate, two documented results → two items sharing this
+  original and S-0039.
+- **Citation (from the abstract page):** Victor Chepoi, Mark F. Hagen, "On embeddings of CAT(0)
+  cube complexes into products of trees via colouring their hyperplanes", arXiv:1107.0863, Metric
+  Geometry (math.MG); v1 5 July 2011; **v3 submitted 26 March 2013** (comment: "Some small
+  corrections; main change is a correction of the computation of the bounds in Theorem 1. Some
+  figures repaired" — a 2013 revision, outside the window); v4 22 April 2026 (S-0039).
+- **Primary:** abstract page <https://arxiv.org/abs/1107.0863v3>, accessed 2026-10-14T03:53:05Z
+  (HTTP 200), 41,872 bytes, SHA-256
+  `7c136ca32e84f97f4a3a7243196d2a154d6433c86f4e3ff4432a091f01fe6144`; e-print
+  <https://arxiv.org/e-print/1107.0863v3> (`application/gzip`), 4,152,829 bytes, SHA-256
+  `13e63ce74f6b6101a7fa3d29c9d466ec410a71eff57c0bc43d4665bdbd1c1727` — a gzipped tar holding
+  `CAT_0__to_trees3_25Mar2013.tex` and figure files.
+- **Content used:** Lemma 12 (TeX label `lem:normal`, Section 6.4) with its proof, and Theorem 1
+  (TeX label `theorem1`) with its proof in Section 7 — the two claims of record; locating
+  sentences quoted in the two `RECORD.md` files.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 9 and 10); no CLAIM.
+
+---
+
+## S-0039 — Chepoi and Hagen, arXiv:1107.0863 **v4** — the correcting version, its comment and its appendix "correction to …" (the status document of Route A items 9 and 10)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0038; **v4 submitted 22 April 2026**, comment: "Previous version had an
+  error in Lemma 12, affecting Theorem 1. Current version has appendix correcting Theorem 1
+  under additional hypothesis: no vertex has a 5-cycle in its link or, equivalently, the crossing
+  graph has no 5-cycle. (4-cycles, and cycles larger than 5, are allowed.) Theorem 2, is
+  unchanged. Appendix appears as journal correction: https://doi.org/10.1016/j.jctb.2026.04.001".
+  The journal correction's DOI is as stated in the comment and was not retrieved separately.
+- **Primary:** abstract page <https://arxiv.org/abs/1107.0863v4>, accessed 2026-10-14T03:53:05Z
+  (HTTP 200), 42,134 bytes, SHA-256
+  `3338cd9a57c806ddac22bab24a36abd77181f17544ce21e4fabbb62e0421eb1d`; e-print
+  <https://arxiv.org/e-print/1107.0863v4> (`application/gzip`), 4,287,074 bytes, SHA-256
+  `489ab21588b9d61ba5c13d7ce4bb3a68e2b5a4d7cf98d24b5def084781d97915` — a gzipped tar holding
+  `CAT_0__to_trees4_17Apr2013.tex` (the original text plus the appendix) and figure files.
+- **Content used:** the appendix "Appendix: correction to *On embeddings of CAT(0) cube complexes
+  into products of trees via colouring their hyperplanes*" (authors Chepoi and Hagen): "Theorem
+  1 of [CH] is incorrect in the stated generality due to an error in [Lem. 12]. We correct this
+  under an extra hypothesis on X by proving:" Theorem A (Theorem 1 with the added hypothesis that
+  no vertex link contains a 5-cycle, equivalently the crossing graph has no 5-cycle); "The only
+  difference between Theorem A and [Thm. 1] is the addition of the hypothesis about 5-cycles";
+  thanks to James Davies and Harry Petyt "for showing us examples that led us to find the error in
+  our original argument; these will be in their forthcoming paper". Section "Summary of
+  corrections": "The error in [CH] is in the proof of [Lem. 12], which is false as stated; Figure
+  A shows a counterexample" (the figure: paths H₁ → H₂ → H₃ → H₄ and H₁ → H₀ → H₄ forming a
+  5-cycle in Υ₀(U)); "Proposition A replaces Proposition 11 and Lemma 12"; Lemmas 8 and 9 hold as
+  written; "The other results in [CH] are unaffected." The proof of Theorem A "proceeds exactly as
+  in [Sec. 7], with one difference" — the colouring of Υ(U), now by the new Proposition A
+  ("Suppose that Γ_#(X) has no 5-cycle. Then Υ₀(U) is bipartite"). The original text is
+  otherwise unchanged apart from a moved paragraph and packaging. The scanner's one "llm" hit in
+  the sources is the substring of a citation key (`BallmanSwiatkowski`); no AI-assistance mention.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 items 9 and 10 (their status document); no CLAIM.

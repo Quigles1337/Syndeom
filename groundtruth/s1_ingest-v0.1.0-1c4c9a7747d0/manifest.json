@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "13e63ce74f6b6101a7fa3d29c9d466ec410a71eff57c0bc43d4665bdbd1c1727",
+        "file": "original-1107.0863v3.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 4152829,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-1c4c9a7747d0",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1107.0863v3.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma 12 (TeX label lem:normal, Section 6.4), statement 'Any induced cycle C of Upsilon_0(U) of odd length n = 2k+1 contains at least one normal hyperplane H_i' and its one-paragraph proof (the partition of the cycle's hyperplanes into the sets I and O); the notice locates the error to the proof without naming the step",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1107.0863v3 (the original; corrected by v4's appendix, 22 April 2026, also published as a journal correction) - Lemma 12",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v3): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0038",
+      "S-0039"
+    ],
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0039: the appendix's Figure A - hyperplanes H_1, H_2, H_3, H_4, H_0 whose paths H_1 -> H_2 -> H_3 -> H_4 and H_1 -> H_0 -> H_4 form a 5-cycle in Upsilon_0(U) with no normal hyperplane; 'Lemma 12 ... is false as stated; Figure A shows a counterexample'",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0039"
+    }
+  },
+  "config_hash": "1c4c9a7747d007ad87792365f1b46902b5c4a5eed4fe7f3960cca304e45001c9",
+  "engine_commit": "335344f85d1000b1a65eb28216fa49f60c4296ac",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma 12 (TeX label lem:normal, Section 6.4), statement 'Any induced cycle C of Upsilon_0(U) of odd length n = 2k+1 contains at least one normal hyperplane H_i' and its one-paragraph proof (the partition of the cycle's hyperplanes into the sets I and O); the notice locates the error to the proof without naming the step"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0039: the appendix's Figure A - hyperplanes H_1, H_2, H_3, H_4, H_0 whose paths H_1 -> H_2 -> H_3 -> H_4 and H_1 -> H_0 -> H_4 form a 5-cycle in Upsilon_0(U) with no normal hyperplane; 'Lemma 12 ... is false as stated; Figure A shows a counterexample'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 9 (candidate 12, first documented result), Session 15. Ground truth as the authors' v4 comment and correction appendix (a published journal correction) document it; RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
