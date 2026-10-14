@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "f15a4756a72d4616ef5801d63440501756109f09620727733d4fb8af9a94db33",
+        "file": "original-1201.3327v2.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 16122,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-fd2bfef40d31",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1201.3327v2.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "The former Theorem 5.9 (Section 5), proof: 'If we combine this lemma with the preceding results we obtain' - the proof rests on the former Lemma 5.8, which is false",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1201.3327v2 (the original; corrected by v3, 5 May 2023) - the former Theorem 5.9",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0042",
+      "S-0043"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0043: the theorem is deleted and replaced by a weaker proposition; 'In contrast to the statement given in the published article, I am not able to classify all these field extensions' - neither re-proved nor disproved",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0043"
+    }
+  },
+  "config_hash": "fd2bfef40d31afa462af7b5c972fff999440a7db7eb2b5c35029d4fb35e5ef7e",
+  "engine_commit": "be22f7207b59cc741988e715cae43aa210cbe00c",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "The former Theorem 5.9 (Section 5), proof: 'If we combine this lemma with the preceding results we obtain' - the proof rests on the former Lemma 5.8, which is false"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0043: the theorem is deleted and replaced by a weaker proposition; 'In contrast to the statement given in the published article, I am not able to classify all these field extensions' - neither re-proved nor disproved",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 13 (candidate 15, second documented result), Session 16. Same original bytes and S-entries as item 12; a different claim of record with undetermined truth. RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

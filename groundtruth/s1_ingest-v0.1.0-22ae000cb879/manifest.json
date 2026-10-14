@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "f15a4756a72d4616ef5801d63440501756109f09620727733d4fb8af9a94db33",
+        "file": "original-1201.3327v2.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 16122,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-22ae000cb879",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1201.3327v2.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "The former Lemma 5.8 (Section 5), statement 'K^{nr,v}(alpha) = the intersection over i of K(alpha)^{nr,w_i}' and its proof; the notice locates the error to the proof without naming the step",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1201.3327v2 (the original; corrected by v3, 5 May 2023) - the former Lemma 5.8",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0042",
+      "S-0043"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0043: 'the claimed Lemma 5.8 in the previous version of this article is not true - a counterexample was found by Francesco Amoroso and Lea Terracini' (the counterexample itself is not in the document)",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0043"
+    }
+  },
+  "config_hash": "22ae000cb879230c8ce4fac68f9474aae835ec68c0e8528d1239b4e193a0c3b7",
+  "engine_commit": "be22f7207b59cc741988e715cae43aa210cbe00c",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "The former Lemma 5.8 (Section 5), statement 'K^{nr,v}(alpha) = the intersection over i of K(alpha)^{nr,w_i}' and its proof; the notice locates the error to the proof without naming the step"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0043: 'the claimed Lemma 5.8 in the previous version of this article is not true - a counterexample was found by Francesco Amoroso and Lea Terracini' (the counterexample itself is not in the document)",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 12 (candidate 15, first documented result), Session 16. Ground truth as the author's v3 comment and in-text notes document it, confirmed against the v2->v3 TeX diff; RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

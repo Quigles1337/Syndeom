@@ -1270,3 +1270,110 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page;
   copy not committed.
 - **Bears on:** S1.1 items 9 and 10 (their status document); no CLAIM.
+
+---
+
+## S-0040 — Ursula Hamenstädt, "Symbolic dynamics for the Teichmueller flow", arXiv:1112.6107 **v2** (the original of Route A item 11)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 14 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 16, 2026-10-14.
+- **Citation (from the abstract page):** Ursula Hamenstädt, "Symbolic dynamics for the
+  Teichmueller flow", arXiv:1112.6107, Dynamical Systems (math.DS); v1 28 December 2011; **v2
+  submitted 18 December 2023** (comment: "Article expanded and split into three parts. This is
+  part 2. 32 p, 1 figure" — a revision, not a correction notice); v3 13 April 2025 (S-0041).
+- **Primary:** abstract page <https://arxiv.org/abs/1112.6107v2>, accessed 2026-10-14T04:53:16Z
+  (HTTP 200), 39,032 bytes, SHA-256
+  `871136a430c430d9cabd57fdcd8e3de0ef432e4dbbff073b0d4950592b775742`; e-print
+  <https://arxiv.org/e-print/1112.6107v2> (`application/gzip`), 46,945 bytes, SHA-256
+  `f1bfb2c30d7a9c98c12cb83d929de33c853825a5c4b56e6a1042a3076fde4da4` — a gzipped tar holding
+  `symbolic3.tex` and a figure.
+- **Content used:** Theorem 1 (TeX label `coding`) — its statement, whose last clause is the
+  documented error — and the paper's proof of it; locating sentences quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v2 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 11); no CLAIM.
+
+---
+
+## S-0041 — Hamenstädt, arXiv:1112.6107 **v3** — the correcting version and its comment (the status document of Route A item 11)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0040; **v3 submitted 13 April 2025**, comment: "Correction of the last
+  statement in Theorem 1, proofs are not affected. Details added, writing improved. 35p".
+- **Primary:** abstract page <https://arxiv.org/abs/1112.6107v3>, accessed 2026-10-14T04:53:16Z
+  (HTTP 200), 38,962 bytes, SHA-256
+  `1171502fa5f54cfa85dfd1e08c567cb8bd1ce2c0050d2d8cfaca9246379209a0`; e-print
+  <https://arxiv.org/e-print/1112.6107v3> (`application/gzip`), 55,742 bytes, SHA-256
+  `dd2e3d03795018fef1d251a1a9f5d5fe5064061389a339eb346b2f4a779234c2` — a gzipped tar holding
+  `symbolic3.tex` and a figure.
+- **Content used:** Theorem 1's last clause changes from "which maps the space of σ-invariant
+  Borel probability measures on 𝒰 continuously onto ℳ_inv(𝒬)" (v2) to "which maps the space of
+  Θ^t-invariant Borel probability measures on X continuously onto ℳ_inv(𝒬)" (v3), where
+  (X, Θ^t) is the suspension of the shift σ over 𝒰 and Ξ: (X, Θ^t) → (𝒬, Φ^t) is the
+  semi-conjugacy of the statement; the introduction now also calls Ξ "a (partial)
+  semi-conjugacy … however it is not surjective". The rest of the 3,720-line diff is the
+  "details added, writing improved" the comment announces (expository rewording, references,
+  an acknowledgement to referees); no other result's statement is named by the comment. The
+  scanner's "llm" hit in the sources is the TeX label `fillmore` (a lemma named for Fillmore),
+  checked; no AI-assistance mention was found.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 11 (its status document); no CLAIM.
+
+---
+
+## S-0042 — Lukas Pottmeyer, "Heights of points with bounded ramification", arXiv:1201.3327 **v2** (the original of Route A items 12 and 13)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 15 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 16, 2026-10-14. One candidate, two documented results → two items sharing
+  this original and S-0043.
+- **Citation (from the abstract page):** Lukas Pottmeyer, "Heights of points with bounded
+  ramification", arXiv:1201.3327, Number Theory (math.NT); v1 16 January 2012; **v2 submitted 18
+  November 2013** (comment: "Major changes regarding the first version. E.g.: the title was
+  changed; errors were corrected; based on a remark of Joseph Silverman Example 5.7 and Theorem
+  5.9 were added" — a 2013 revision, outside the window); v3 5 May 2023 (S-0043). The v3 text
+  refers to "the published version of this article".
+- **Primary:** abstract page <https://arxiv.org/abs/1201.3327v2>, accessed 2026-10-14T04:53:37Z
+  (HTTP 200), 42,130 bytes, SHA-256
+  `0fb78c5db4a727df6bd3ba9c314d0f994ff88e339d18da149758424662e65168`; e-print
+  <https://arxiv.org/e-print/1201.3327v2> (`application/gzip`), 16,122 bytes, SHA-256
+  `f15a4756a72d4616ef5801d63440501756109f09620727733d4fb8af9a94db33` — a single gzipped TeX file.
+- **Content used:** the former Lemma 5.8 (Section 5) with its proof, and the former Theorem 5.9
+  with its proof ("If we combine this lemma with the preceding results we obtain …") — the two
+  claims of record; statements quoted in the two `RECORD.md` files.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v2 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 12 and 13); no CLAIM.
+
+---
+
+## S-0043 — Pottmeyer, arXiv:1201.3327 **v3** — the correcting version, its comment and its in-text notes (the status document of Route A items 12 and 13)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0042; **v3 submitted 5 May 2023**, comment: "There was an error in the proof
+  of the former Lemma 5.8. This false lemma and the former Theorem 5.9 have been deleted in this
+  version".
+- **Primary:** abstract page <https://arxiv.org/abs/1201.3327v3>, accessed 2026-10-14T04:53:37Z
+  (HTTP 200), 41,990 bytes, SHA-256
+  `0ae768a05760f7354e899679090784db79900ba87db4b6df4745bdc313354c3d`; e-print
+  <https://arxiv.org/e-print/1201.3327v3> (`application/gzip`), 16,661 bytes, SHA-256
+  `a23aec07c4ce09623068411872b428308b555748a8c43ccfa268652527ea6e7e` — a single gzipped TeX file.
+- **Content used:** the acknowledgement gains "In the published version of this article there is
+  an error in the proof of the former Lemma 5.8. This was noticed by Francesco Amoroso and Lea
+  Terracini produced a counterexample to prove that the whole statement was false. I thank both
+  of them for the chance to remove this long standing error."; the lemma and theorem are removed
+  and replaced by the note "THE FOLLOWING IS NOT EQUIVALENT TO THE CONTENT OF THE PUBLISHED
+  VERSION!" and the sentences "In contrast to the statement given in the published article, I
+  am not able to classify all these field extensions. This is due the fact that the claimed
+  Lemma 5.8 in the previous version of this article is not true - a counterexample was found by
+  Francesco Amoroso and Lea Terracini.", followed by a weaker Proposition (TeX label
+  `thm:finex`) described as "the trivial consequence of the preceding results"; the deleted
+  proof and a remark remain in the source as comments. The counterexample itself is not in the
+  document. The scanner's "llm" hit in the sources is the surname Ullmo in the acknowledgement.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 items 12 and 13 (their status document); no CLAIM.
