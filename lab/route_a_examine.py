@@ -116,7 +116,18 @@ def main():
     out_dir.mkdir(parents=True, exist_ok=True)
     stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     print(f"== {arxiv_id} correcting version v{v}; access {stamp}")
-    for ver in (v - 1, v):
+    # The original is the last version before v that is not a withdrawal (a withdrawn version has
+    # no e-print and is a stub); read the submission history of v to find it (Session 13 finding).
+    head = abs_info(arxiv_id, v)
+    withdrawn = {int(n) for n in re.findall(r"\[v(\d+)\][^\[]*\(withdrawn\)", head["history"])}
+    orig = v - 1
+    while orig > 1 and orig in withdrawn:
+        orig -= 1
+    if withdrawn:
+        print(f"-- withdrawn versions per the submission history: {sorted(withdrawn)}; "
+              f"original taken as v{orig}")
+    time.sleep(PAUSE)
+    for ver in (orig, v):
         info = abs_info(arxiv_id, ver)
         print(f"-- abs v{ver}: {info['url']} ({info['bytes']} bytes, sha256 {info['sha256']})")
         print(f"   title: {info['title']}")
@@ -129,15 +140,15 @@ def main():
     if "--no-sources" in flags:
         return
     srcs = {}
-    for ver in (v - 1, v):
+    for ver in (orig, v):
         srcs[ver] = fetch_source(arxiv_id, ver, out_dir)
         s = srcs[ver]
         print(f"-- e-print v{ver}: {s['url']} -> {s['content_type']} {s['bytes']} bytes sha256 {s['sha256']} kind={s['kind']} tex={s['tex_files']}")
         time.sleep(PAUSE)
-    old = tex_text(out_dir / f"v{v - 1}").splitlines()
+    old = tex_text(out_dir / f"v{orig}").splitlines()
     new = tex_text(out_dir / f"v{v}").splitlines()
-    diff = list(difflib.unified_diff(old, new, f"v{v - 1}", f"v{v}", n=2, lineterm=""))
-    print(f"-- tex diff v{v - 1} -> v{v}: {len(diff)} lines (showing up to {max_lines})")
+    diff = list(difflib.unified_diff(old, new, f"v{orig}", f"v{v}", n=2, lineterm=""))
+    print(f"-- tex diff v{orig} -> v{v}: {len(diff)} lines (showing up to {max_lines})")
     for line in diff[:max_lines]:
         print(line)
     if len(diff) > max_lines:

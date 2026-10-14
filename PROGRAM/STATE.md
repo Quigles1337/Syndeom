@@ -1,9 +1,11 @@
 # STATE
 
-- **Updated:** 2026-10-14 UTC (Session 13 — the second Route A harvest: candidates 3–6 examined
-  in order, 2 admitted (one with the first undetermined statement truth) and 2 rejected (one
-  D2.1, one D8 window); prefix through `0912.0308`; `groundtruth/` holds four `raw/1` items.
-  Session 12 recorded Al's D8 precision. Session 11 — the first Route A harvest: finder built and
+- **Updated:** 2026-10-14 UTC (Session 14 — the third Route A harvest: candidates 7–10 examined
+  in order, 3 admitted yielding 4 items (one candidate carries two documented results) and 1
+  rejected (D2.1); prefix through `1010.2391`; `groundtruth/` holds eight `raw/1` items; the
+  examination helper now steps over withdrawn versions. Session 13 — candidates 3–6: 2 admitted
+  (one with the first undetermined statement truth), 2 rejected. Session 12 recorded Al's D8
+  precision. Session 11 — the first Route A harvest: finder built and
   run (2,472 candidates), candidates 1–2 examined in order and both admitted and ingested
   (`groundtruth/` now holds two `raw/1` items with records); S-0021..S-0023 registered for the
   position paper's §0 disclosure; memory hazard added. Session 10 recorded Al's rulings of
@@ -44,17 +46,17 @@
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
-  2026-10-14 03:01:46Z–03:02:24Z (Session 13, detached run with a log) on the Session-13 harvest
+  2026-10-14 03:47:34Z–03:48:31Z (Session 14, detached run with a log) on the Session-14 harvest
   tree with every edit staged, and again on the final tree before the harvest commit** — Lean `Build completed successfully (8926 jobs)`,
-  axioms `[propext]`; Rust fmt and clippy clean, 29/29 tests (24 manifest + 5 ingest); 58 text files `i/lf` + 10 binaries;
-  registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 31/31). Earlier GREEN runs:
+  axioms `[propext]`; Rust fmt and clippy clean, 29/29 tests (24 manifest + 5 ingest); 66 text files `i/lf` + 10 binaries;
+  registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 37/37). Earlier GREEN runs:
   Session 4 (before the S0.6 commit), Session 5 (at `132788c`), Session 6 (at `2b7c573` and on its
   own tree), Session 7 (22:54:28Z–23:04:29Z, cold OS cache), Session 8 (23:21:33Z–23:31:44Z and
   23:32:45Z–23:33:19Z), Session 9 (23:35:52Z–23:36:23Z and 23:36:55Z–23:37:25Z) and Session 10's
   rulings commit (2026-10-14 00:07:19Z–00:17:54Z) and producer commit (00:43:55Z–00:52:27Z and
   00:54:48Z–00:55:45Z, detached) Session 11 (02:07:11Z–02:18:18Z and 02:19:15Z–02:21:08Z,
-  detached) and Session 12 (02:34:42Z–02:45:22Z and 02:46:06Z–02:46:35Z, detached), each on its
-  own tree before its commit. A run the harness
+  detached) Session 12 (02:34:42Z–02:45:22Z and 02:46:06Z–02:46:35Z, detached) and Session 13
+  (03:01:46Z–03:02:24Z and 03:03:06Z–03:03:41Z, detached), each on its own tree before its commit. A run the harness
   killed for system memory (00:21:40Z, in the axiom audit) is not a GREEN run; since then the
   gate is run detached with a log (HANDOFF Session 10). **Standing instruction:** update this line at every GREEN run a HANDOFF entry
   records, so it never lags HANDOFF. **Timing:** about 30 s with a warm `lean/.lake` *and* a warm
@@ -100,7 +102,8 @@
   (the Mathathon open letter, joint statement and event page — the position paper's §0
   disclosure, no CLAIM, digest-only, Session 11), S-0024..S-0027 (the Route A items'
   originals and notices, Session 11; S-0024 INGESTED under `groundtruth/`, the rest digest-only),
-  S-0028..S-0031 (Route A items 3 and 4, Session 13, all digest-only).
+  S-0028..S-0031 (Route A items 3 and 4, Session 13, all digest-only), S-0032..S-0037 (Route A
+  items 5–8, Session 14, all digest-only).
 - **Manifest schema:** `syndeom-manifest/2` since 2026-10-13 (ADR-0001 amended, Session 10:
   `statement_status.value` admits `null` with `method: "undetermined"`, `null ⇒ proof_status
   invalid`; `/1` remains accepted and names the pre-amendment schema — the D8 goldens), ADR-0001
@@ -177,9 +180,9 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `0912.0308` (candidates 1–6 of 2,472; Sessions 11 and 13): 6 examined, 4 admitted, 2 rejected (one D2.1 — a mis-stated quoted theorem with no proof offered; one D8 — correcting version after the window); `groundtruth/HARVEST-LOG.md` is the record of every candidate; NEXT resumes at candidate 7** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Evidence slots still empty: the harvest log, the first admitted items |
+| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `1010.2391` (candidates 1–10 of 2,472; Sessions 11, 13, 14): 10 examined, 7 admitted yielding 8 items, 3 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; one D8 — correcting version after the window); `groundtruth/HARVEST-LOG.md` is the record of every candidate; NEXT resumes at candidate 11** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Evidence slots still empty: the harvest log, the first admitted items |
 | S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | open | — |
-| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **`raw/1` parents: 4 manifested (Sessions 11, 13); derived canonical artifacts: none — the derivation producer and its ADR do not exist yet** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; statement false; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0031 |
+| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **`raw/1` parents: 8 manifested (Sessions 11, 13, 14); derived canonical artifacts: none — the derivation producer and its ADR do not exist yet** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; statement false; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0037 |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | open | — |
 | Licences recorded for anything touched (SD16) | open | — |
 | Repo green under the gate | **standing** | Build status above |
@@ -237,25 +240,26 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 **S1.1 — the second Route A harvest session, resuming from the log's last candidate** (ADR-0003
 D7, D8 as amended: a prefix is enough). Procedure, executable cold:
 (a) read `groundtruth/HARVEST-LOG.md`: run 1's query, window 2023-01-01..2026-09-30, ascending
-arXiv id, **last candidate processed `0912.0308` (candidate 6 of 2,472)**; the next candidate is
-`0912.0966` (v6, "… A small correction made to the statement of Theorem 8");
+arXiv id, **last candidate processed `1010.2391` (candidate 10 of 2,472)**; the next candidate is
+`1102.1087` (v11, cs.DM primary, comment beginning "The algorithm in Section 5.3 does not appear
+to follow the Turing model …");
 (b) regenerate the candidate list — `python -I -X utf8 lab/route_a_candidates.py 2023-01-01
 2026-09-30 <scratchpad>/route-a` (pages are cached under that directory only for the session
 that fetched them; a fresh run re-fetches 57 ranges in about 30 minutes) — and confirm its
 digest against the log's run record or record the new digest as run 2 with the difference stated
 (arXiv adds and revises papers; the examined prefix is unaffected because ids are assigned at
 submission and the finder sorts by id);
-(c) examine candidates from `0912.0966` onward **in ascending id, skipping none**, each with
+(c) examine candidates from `1102.1087` onward **in ascending id, skipping none**, each with
 `python -I -X utf8 lab/route_a_examine.py <id> <correcting version> <scratchpad>/exam/<id>`
 (both versions' abstract pages for licence and submission history, both e-prints, the TeX diff,
 the AI-assistance scan) against ADR-0003 D2's seven criteria; log every verdict with its reason;
 (d) for each admitted item, in this order: the S-entries for original and notice in SOURCES.md
 (licence per D5 as amended: CC0 / CC BY / CC BY-SA / public domain → `committed`, NC, ND,
-arXiv non-exclusive or assumed → `external`); the per-item config (the four Session-11/13 configs
-are the pattern, including the null-truth one: ADR-0003 D4 fields, `statement_status` `null` + `"undetermined"` when the notice
+arXiv non-exclusive or assumed → `external`); the per-item config (the eight Session-11/13/14 configs
+are the pattern, including the null-truth one and the two-items-from-one-notice case: ADR-0003 D4 fields, `statement_status` `null` + `"undetermined"` when the notice
 leaves the truth open); then from `engine/`: `cargo run -q -p syndeom-ingest -- --config
 <item.json> --bytes <original bytes> --root .. --engine-commit $(git rev-parse HEAD)`; then
-`RECORD.md` into the item directory (the four Session-11/13 records are the pattern); the `.gz`
+`RECORD.md` into the item directory (the eight Session-11/13/14 records are the pattern); the `.gz`
 originals are binary in `.gitattributes` and the register checker;
 (e) stop at the session's budget before examining the next candidate; update the log's counts
 and last-candidate line, this file's Gate S1 table (S1.1, S1.3 rows), and set NEXT to the next

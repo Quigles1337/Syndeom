@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "a651e35acdba731abb10e2049b96dbe7ab02ecdd6e941d7541da8ed36011cd39",
+        "file": "original-1005.2398v2.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 42669,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-be3b17e73425",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1005.2398v2.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 3.3.5 (TeX label proposition-adequate-equiv), statement: 'Let A -> B be a homomorphism of rings' without the finitely presented hypothesis v3 adds",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 3.3.5, proof, the step (2) => (1): 'an isomorphism at all points with characteristic 0 residue field by Lemma lemma-adequate-char0' - the passage from the isomorphism after tensoring with Q to a local isomorphism needs finite presentation (v3 cites Remark rmk-adequate-homeomorphism for it)",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1005.2398v2 (the original; corrected by v3, 22 March 2026) - Proposition 3.3.5",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0032",
+      "S-0033"
+    ],
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0033: the author's footnote gives the counterexample Z -> Z[{x_p}_{p prime}]/(p x_p, x_p^p) to the statement without the finitely presented hypothesis",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0033"
+    }
+  },
+  "config_hash": "be3b17e73425ecff94cff5a077c0d7936585cf18fb0539b84eb0bb76246ff3bd",
+  "engine_commit": "7c952e6896f40b2352d852cb33e131cb10e9c3ab",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 3.3.5 (TeX label proposition-adequate-equiv), statement: 'Let A -> B be a homomorphism of rings' without the finitely presented hypothesis v3 adds"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 3.3.5, proof, the step (2) => (1): 'an isomorphism at all points with characteristic 0 residue field by Lemma lemma-adequate-char0' - the passage from the isomorphism after tensoring with Q to a local isomorphism needs finite presentation (v3 cites Remark rmk-adequate-homeomorphism for it)"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0033: the author's footnote gives the counterexample Z -> Z[{x_p}_{p prime}]/(p x_p, x_p^p) to the statement without the finitely presented hypothesis",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 5 (candidate 8, first documented result), Session 14. Ground truth as the author's v3 comment and footnotes document it, confirmed against the v2->v3 TeX diff; RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

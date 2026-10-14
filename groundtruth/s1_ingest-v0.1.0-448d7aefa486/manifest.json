@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "d64ff4f096e3c23364c08e67e7214f47c2705b2fe9bc8c013f55a9ed04f002b6",
+        "file": "original-1010.2391v9.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 53403,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-448d7aefa486",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1010.2391v9.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma A.3 (TeX label thm:flip, 'Local EC Lipschitz continuity'), statement: 'For all x in D^{0,1}' (v9), where v10 requires x in D^1",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma A.3, proof, its opening 'Let x be an element of D^1' and the continuity-of-the-mean-value argument that follows: the proof uses x in D^1, a hypothesis the v9 statement does not grant",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1010.2391v9 (the original; corrected by v10, 5 October 2023) - Lemma A.3",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v9): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0036",
+      "S-0037"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0037: 'correcting mistakes in formulation of Lemma A.3 ...: center x of neighborhood must be in C^1'",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0037"
+    }
+  },
+  "config_hash": "448d7aefa486f5d6202471808efb053518868034c3ce8ca42856d5b3d951f59d",
+  "engine_commit": "7c952e6896f40b2352d852cb33e131cb10e9c3ab",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma A.3 (TeX label thm:flip, 'Local EC Lipschitz continuity'), statement: 'For all x in D^{0,1}' (v9), where v10 requires x in D^1"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma A.3, proof, its opening 'Let x be an element of D^1' and the continuity-of-the-mean-value argument that follows: the proof uses x in D^1, a hypothesis the v9 statement does not grant"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0037: 'correcting mistakes in formulation of Lemma A.3 ...: center x of neighborhood must be in C^1'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 8 (candidate 10), Session 14. Ground truth as the author's v10 comment documents it, confirmed against the v9->v10 TeX diff; RECORD.md holds the argument. v9's own 2020 corrections (Lemmas 2.3, A.5) are outside the window. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

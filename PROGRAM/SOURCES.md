@@ -1046,3 +1046,163 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v5 abstract page;
   copy not committed.
 - **Bears on:** S1.1 item 4 (its status document); no CLAIM.
+
+---
+
+## S-0032 — Jarod Alper, "Adequate moduli spaces and geometrically reductive group schemes", arXiv:1005.2398 **v2** (the original of Route A items 5 and 6)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 8 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 14, 2026-10-14. One candidate, two documented results → two items sharing this
+  original and S-0033.
+- **Citation (from the abstract page):** Jarod Alper, "Adequate moduli spaces and geometrically
+  reductive group schemes", arXiv:1005.2398, Algebraic Geometry (math.AG); v1 13 May 2010; **v2
+  submitted 1 September 2018** (comment "minor errors corrected"); v3 22 March 2026 (S-0033). The
+  v3 footnotes refer to "the published version of this paper"; no journal reference is on the
+  abstract page.
+- **Primary:** abstract page <https://arxiv.org/abs/1005.2398v2>, accessed 2026-10-14T03:37:02Z
+  (HTTP 200), 38,222 bytes, SHA-256
+  `f15feae8f7cf6e2b48a15e0b72fefbebc9e4dd7515869efed05c9ed3f3ed981a`; e-print
+  <https://arxiv.org/e-print/1005.2398v2> (`application/gzip`), 42,669 bytes, SHA-256
+  `a651e35acdba731abb10e2049b96dbe7ab02ecdd6e941d7541da8ed36011cd39` — a gzipped tar holding
+  `adequate-website-8-31-18.tex`.
+- **Content used:** Proposition 3.3.5 (TeX label `proposition-adequate-equiv`) with its proof,
+  and the lemma on quasi-coherent algebras that follows it in Section 3.3 with its one-line proof —
+  the two claims of record; locating sentences quoted in the two `RECORD.md` files.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v2 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 5 and 6); no CLAIM.
+
+---
+
+## S-0033 — Alper, arXiv:1005.2398 **v3** — the correcting version, its comment and its footnotes (the status document of Route A items 5 and 6)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0032; **v3 submitted 22 March 2026**, comment: "several minor errors
+  corrected, including the addition of a finitely presented hypothesis to Proposition 3.3.5".
+- **Primary:** abstract page <https://arxiv.org/abs/1005.2398v3>, accessed 2026-10-14T03:37:02Z
+  (HTTP 200), 38,226 bytes, SHA-256
+  `72e0c3d7971f75ffcfe5034c2c18c6371e1609d656f78f6fa99bcd8ad8a48c51`; e-print
+  <https://arxiv.org/e-print/1005.2398v3> (`application/gzip`), 43,530 bytes, SHA-256
+  `442625543857b906985081a39d93f128577dcc5d7c0314d02e63766ef5d80112` — a gzipped tar holding
+  `adequate-jan9-2026.tex`.
+- **Content used:** Proposition 3.3.5 now reads "Let A → B be a finitely presented homomorphism of
+  rings" with the footnote "The published version of this paper had a version of this statement
+  without the finitely presented hypothesis, which was incorrect. Namely, when A → B is not
+  finitely presented, the impli[cation fails for] ℤ → ℤ[{x_p}_{p prime}]/(p x_p, x_p^p)" (the
+  footnote's counterexample; its middle clause is elided here and quoted in full in the item's
+  record); the proof of (2) ⇒ (1) now derives the isomorphism in characteristic 0 from the
+  finitely presented hypothesis via the remark with TeX label `rmk-adequate-homeomorphism`, and
+  the implication (1) ⇒ (3) is re-argued. The following lemma gains the same hypothesis with the
+  footnote "As with Proposition 3.3.5, the published version did not assume that A → B is finitely
+  presented and was incorrect." The rest of the diff: an introduction sentence, a remark's
+  wording, a `char(κ) = 0` → `char(κ) = p` fix in a later lemma's second clause (not named by the
+  comment beyond "several minor errors", so not harvested — D2.2), a bibliography path.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 items 5 and 6 (their status document); no CLAIM.
+
+---
+
+## S-0034 — Ben Green, Terence Tao and Tamar Ziegler, "An inverse theorem for the Gowers U^{s+1}[N]-norm", arXiv:1009.3998 **v4** (the original of Route A item 7)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 9 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 14, 2026-10-14.
+- **Citation (from the abstract page):** Ben Green, Terence Tao, Tamar Ziegler, "An inverse
+  theorem for the Gowers U^{s+1}[N]-norm", arXiv:1009.3998, Combinatorics (math.CO); v1 21
+  September 2010; **v4 submitted 22 April 2024** (comment "116 pages. Submitted"); v5 23 April
+  2026 (S-0035). The v5 comment: "Appeared as Annals of Math. 176 (2012), 1231--1372."
+- **Primary:** abstract page <https://arxiv.org/abs/1009.3998v4>, accessed 2026-10-14T03:39:23Z
+  (HTTP 200), 42,105 bytes, SHA-256
+  `31c74252a31ff82b6e61e4ea31cfb222a6b963f2ef7dc5d60071baa135a163da`; e-print
+  <https://arxiv.org/e-print/1009.3998v4> (`application/gzip`), 395,608 bytes, SHA-256
+  `f765dca2d73a9936a54356e61c9901d0c55f09069df7fefc7018161cf4ede3a2` — a gzipped tar holding
+  `uk-inverse.tex` and auxiliary files.
+- **Content used:** Lemma 13.2 and its proof (the paragraph "We now ℕ-filter G³ by defining
+  (G³)_i …") — the item's claim of record; locating sentences quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 7); no CLAIM.
+
+---
+
+## S-0035 — Green, Tao and Ziegler, arXiv:1009.3998 **v5** — the correcting version, its comment and its footnote (the status document of Route A item 7)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0034; **v5 submitted 23 April 2026**, comment: "Appeared as Annals of Math.
+  176 (2012), 1231--1372. Preprint is 116 pages. This version corrects a mistake in the proof of
+  Lemma 13.2 (the wrong filtration was specified) and two small typos on page 28".
+- **Primary:** abstract page <https://arxiv.org/abs/1009.3998v5>, accessed 2026-10-14T03:39:23Z
+  (HTTP 200), 40,873 bytes, SHA-256
+  `d6727daa30fa1682e1011156715ac7e8b538610094a26c4d92fafda294f5c03a`; e-print
+  <https://arxiv.org/e-print/1009.3998v5> (`application/gzip`), 116,921 bytes, SHA-256
+  `9da858fd065b9621b6cca3ee9bdabb3fbef91f71061df903a1bd127ca951594a` — a gzipped tar holding
+  `uk-inverse.tex`.
+- **Content used:** in the proof of Lemma 13.2 the definition of the ℕ-filtration of G³ is
+  replaced (v4: generated by (G_{(i₁,…,i_s)})³ for i₁+…+i_s > i together with {(g₁g₂, g₁, g₂)} for
+  i₁+…+i_s = i; v5: generated by the diagonal {(g, g, g) : g ∈ G_{(i₁,…,i_s)}} for i₁+…+i_s = i
+  and i₁ = 0 together with {(g₁g₂, g₁, g₂)} for i₁+…+i_s = i and i₁ = 1) with the footnote "In
+  the published version of the paper there is an error in the definition of this filtration,
+  which was pointed out by Jan Fornal. We thank James Leng for indicating the appropriate
+  correction."; the sentences that follow ("one verifies that this is a rational filtration of
+  G³", "g̃ is polynomial with respect to this filtration") are unchanged. The "two small typos on
+  page 28" are the degree-filtration example's quantifiers (h₁,…,h_m ∈ ℤ^k, n ∈ ℤ^k). The scanner's
+  one "llm" hit in the sources is the substring of `\smallmatrix`; no AI-assistance mention.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v5 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 7 (its status document); no CLAIM.
+
+---
+
+## S-0036 — Jan Sieber, "Finding periodic orbits in state-dependent delay differential equations as roots of algebraic equations", arXiv:1010.2391 **v9** (the original of Route A item 8)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 10 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 14, 2026-10-14.
+- **Citation (from the abstract page):** Jan Sieber, "Finding periodic orbits in state-dependent
+  delay differential equations as roots of algebraic equations", arXiv:1010.2391, Dynamical
+  Systems (math.DS); journal reference on the abstract page "Discrete and Continuous Dynamical
+  Systems Series A 32(8), 2607-2651, 2012"; v1 12 October 2010; **v9 submitted 17 January 2020**
+  (comment: "minor revision, correcting mistakes in formulation of Lemma 2.3 and A.5 (which are
+  also present in the Journal paper): center of neighborhood must be in C¹, which is the case for
+  the main theorem" — a 2020 correction, outside the window and not harvested); v10 5 October 2023
+  (S-0037).
+- **Primary:** abstract page <https://arxiv.org/abs/1010.2391v9>, accessed 2026-10-14T03:39:45Z
+  (HTTP 200), 42,878 bytes, SHA-256
+  `9af705af267910d26e95fd4338073122fe3022284d856d530454f0070b06d274`; e-print
+  <https://arxiv.org/e-print/1010.2391v9> (`application/gzip`), 53,403 bytes, SHA-256
+  `d64ff4f096e3c23364c08e67e7214f47c2705b2fe9bc8c013f55a9ed04f002b6` — a gzipped tar holding
+  `S11arxiv.tex`.
+- **Content used:** Lemma A.3 (TeX label `thm:flip`, "Local EC Lipschitz continuity") and its
+  proof — the item's claim of record; locating sentences quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v9 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 8); no CLAIM.
+
+---
+
+## S-0037 — Sieber, arXiv:1010.2391 **v10** — the correcting version and its comment (the status document of Route A item 8)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0036; **v10 submitted 5 October 2023**, comment: "minor revision, correcting
+  mistakes in formulation of Lemma A.3 (which are also present in the Journal paper): center x of
+  neighborhood must be in C¹, which is the case for the main theorem. Further clarification in
+  proof of Lemma A.3".
+- **Primary:** abstract page <https://arxiv.org/abs/1010.2391v10>, accessed 2026-10-14T03:39:45Z
+  (HTTP 200), 43,010 bytes, SHA-256
+  `628736d96d518e6bf3cbf81d4fb0620043e6a890bb09bf9a556e1f9bd17a2dc1`; e-print
+  <https://arxiv.org/e-print/1010.2391v10> (`application/gzip`), 53,362 bytes, SHA-256
+  `853ca171d5e46d15cfa181ee8e457edd8b1f7494cc774566c446b4f316caac40` — a gzipped tar holding
+  `S11arxiv.tex`.
+- **Content used:** Lemma A.3's statement changes from "For all x ∈ D^{0,1} there exists a
+  neighborhood U(x) ⊆ D^{0,1} and a constant K_x > 0 such that …" to "For all x ∈ D¹ …"; its
+  proof is rewritten to work on a ball B¹_{δ/2}(x) ⊂ D¹ and to extend to the D^{0,1}-ball by
+  density, in place of the v9 text "We prove the Lipschitz continuity first for y₁ and y₂ from a
+  sufficiently small neighborhood U(x) ∩ D¹ ⊆ D¹ of x ∈ D¹ … Let x be an element of D¹." One
+  norm subscript elsewhere is corrected. v10's abstract page carries CC BY 4.0.
+- **Licence:** Creative Commons Attribution 4.0 on the v10 abstract page; copy not committed.
+- **Bears on:** S1.1 item 8 (its status document); no CLAIM.

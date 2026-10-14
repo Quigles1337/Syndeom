@@ -1746,3 +1746,138 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (four candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ 7c952e6 (Session 14 — the third Route A harvest: candidates 7–10
+examined, 3 admitted yielding 4 items, 1 rejected; the commit adding this entry lands on top of
+7c952e6)
+LAUNCH CONTEXT (SD15; not an exam session): Al's one-word order "resume" in the same conversation
+as Sessions 7–13; the inherited NEXT-SINGLE-ACTION executed as STATE stated it. Not cold. No
+memory written.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: prefix through arXiv id
+`1010.2391` (10 of 2,472 candidates; 7 admitted yielding 8 items, 3 rejected); S1.3: eight
+`raw/1` parents manifested, no derived artifact yet. Gate S0 closed and confirmed.
+PLAN NOTE: the inherited NEXT (the third harvest session, resuming at candidate 7, with the
+helper's withdrawal handling first), unchanged by ORIENT. One thing.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `7c952e6`, clean; the constitution unchanged since `226a51c`
+  (read in full in Session 11 of this conversation); the log's resume point read. Evidence gate
+  at ORIENT, detached (`gate-14a.log`): 03:36:09Z on `7c952e6` — see the gate line below for its
+  result (it was still loading Mathlib when the examinations ran).
+- **Helper fix (NEXT's first step):** `lab/route_a_examine.py` now reads the submission history
+  of the correcting version first and takes as the original the last version before it that is
+  not marked withdrawn (a withdrawn version has no e-print); the source loop and the diff use
+  that version. Exercised on no withdrawn case this session; the Session-13 case (`0902.0680`) is
+  the test it was written for.
+- **Candidate list:** regenerated from the 73 cached pages — 0 API requests, 2,472 candidates,
+  digest identical to run 1 (`e164c0b1…2d48`).
+- **Candidates examined in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md` rows 7–10):
+  - **7, arXiv 0912.0966** (Tao–Vu, Annals of Probability; math.SP), v6 (2026-06-30) "A small
+    correction made to the statement of Theorem 8": the diff adds "distinct" to the index set of
+    the correlation sum in Theorem 8's statement. Theorem 8 is the sine-kernel result the paper
+    says Nagao and Wadati "established" and cites; the paper proves its extension, not it.
+    **Rejected, D2.1** (no offered proof to label), the candidate-3 shape again.
+  - **8, arXiv 1005.2398** (Alper; math.AG), v3 (2026-03-22) "the addition of a finitely
+    presented hypothesis to Proposition 3.3.5": v3's footnotes say the published statements of
+    the proposition and of the lemma following it "were incorrect", the proposition's footnote
+    giving the counterexample ℤ → ℤ[{x_p}]/(p x_p, x_p^p). **Admitted as two items** (two claims
+    of record from one notice): the proposition — FLAW-0012 (statement, fatal) + FLAW-0005 (the
+    (2) ⇒ (1) step, fatal), `statement_status` false by **counterexample** (the first use of that
+    method); the lemma — the same two classes through its one-line reduction to the proposition,
+    false by source document. Shared original (v2, arXiv non-exclusive → `external`) and shared
+    S-entries S-0032, S-0033; ids `s1_ingest-v0.1.0-be3b17e73425`, `s1_ingest-v0.1.0-72415457dce4`.
+    The lemma's record notes that dependence between the two is the S3 calibration ADR's
+    effective-N business (ADR-0004 D6).
+  - **9, arXiv 1009.3998** (Green–Tao–Ziegler, Annals of Math.; math.CO), v5 (2026-04-23)
+    "corrects a mistake in the proof of Lemma 13.2 (the wrong filtration was specified)": the diff
+    replaces the generating sets of a filtration of G³ inside the proof, with a footnote naming
+    who found and who fixed it; the lemma is unchanged. **Admitted**: FLAW-0001 `local`
+    (repairable; the wrong object written, the intended one's properties asserted) inside
+    FLAW-0011; FLAW-0004 named as the alternative reading; `statement_status` true; v4 arXiv
+    non-exclusive → `external`; `s1_ingest-v0.1.0-e0c199d3c60a`; S-0034, S-0035. The AI-mention
+    scanner's one hit ("llm") is the substring of `\smallmatrix`, checked.
+  - **10, arXiv 1010.2391** (Sieber, DCDS-A; math.DS), v10 (2023-10-05) "correcting mistakes in
+    formulation of Lemma A.3 …: center x of neighborhood must be in C¹": the statement quantified
+    over D^{0,1} while its proof opened "Let x be an element of D¹". **Admitted**: FLAW-0012
+    (statement, fatal) + FLAW-0005 (proof, fatal); `statement_status` false by source document,
+    with the stricter `undetermined` reading named in the record for Al; v9 arXiv non-exclusive
+    → `external`; `s1_ingest-v0.1.0-448d7aefa486`; S-0036, S-0037. v9's own 2020 corrections are
+    outside the window (D8 precision).
+  - **Counts by verdict, this session:** examined 4 — admitted 3 candidates yielding 4 items,
+    rejected 1 (D2.1), found-but-unclassifiable 0, pending 0, pending-truth 0, escalated 0.
+    **Cumulative:** examined 10 — admitted 7 candidates (8 items), rejected 3. **Last candidate
+    processed `1010.2391`**; the session stopped at its budget before candidate 11 (`1102.1087`).
+- Each admitted item: S-entries written **before** the producer ran (SD16); config with the D4
+  fields; `syndeom-ingest` at `7c952e6` wrote `manifest.json` (`syndeom-manifest/2`,
+  `engine_commit` `7c952e6…`, self-check passed); `RECORD.md` with the D3 class argument,
+  alternatives considered, quoted locating sentences and licence basis. Two items from one
+  candidate share bytes and S-entries and differ in `item` and `flaws`, hence in id.
+- STATE: Updated line; Gate S1 rows S1.1 (prefix through `1010.2391`, 10/7(8)/3) and S1.3 (eight
+  parents); registers line (S-0032..S-0037); NEXT resumes at candidate 11.
+- Gates: the ORIENT run (`gate-14a.log`) finished `GATE: GREEN` on `7c952e6` at 03:47:37Z after
+  an eleven-minute cold load. Evidence run on the staged tree, detached (`gate-14b.log`),
+  03:47:34Z–03:48:31Z (it began three seconds before 14a's final register step ended; no Lean
+  contention): `Build completed successfully (8926 jobs)`; audit `[propext]`; fmt and clippy
+  clean; `cargo test` 5/5 + 24/24; `git ls-files --eol` clean; `check_registers.py` 76 tracked
+  files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, **S- 37/37**; `RESULT: ALL PASS`; `GATE:
+  GREEN`; `rc=0`. Re-run the same way on the final tree (this entry and STATE's build line in)
+  before the commit (STOP-REASON).
+BELIEF DELTAS:
+- One notice can document several results, and each is its own claim of record: the
+  two-items-from-one-candidate case arrived on the eighth candidate. Evidence: candidate 8.
+  Consequence: the configs differ in `item` and `flaws`, the bytes and S-entries are shared, and
+  the dependence is for the S3 calibration ADR's effective-N rule, not for the harvest.
+- The candidate-3 shape (a mis-stated theorem quoted from the literature) recurs — twice in ten
+  candidates, both in respected papers; the D2.1 rejection is reusable, and these are the natural
+  seeds for a citation-content detector's ground truth in S3. Evidence: candidates 3 and 7.
+- Half the admitted items so far (4 of 8) have a false statement of record and half of those
+  come with the author's own counterexample or an executor-checkable one; FLAW-0012 with a
+  FLAW-0005 use site is the modal shape of a documented erratum in this stream. Evidence: rows
+  1–10. Consequence: S1.4's class coverage will be uneven, as §2 S1.4 anticipates; nothing to
+  engineer around.
+- The AI-mention scan needs a word boundary: `\smallmatrix` contains "llm". Evidence: candidate
+  9. Consequence: the hit was checked, not trusted; the scanner's pattern is a cheap improvement
+  for the next session (not changed this session, to keep the tool identical across the prefix).
+CONFUSIONS:
+- Candidate 7 looked like a statement-level FLAW-0012 until the TeX showed Theorem 8 is a cited
+  result; the rejection criterion is D2.1, not a classification question. Cost: one extra local
+  read. Doc fix: the log row says to check whether the affected theorem is proved in the paper
+  before classifying — the same lesson as candidate 3, now applied first.
+- Whether candidate 8's second result is a second item or a second flaw record: a second item,
+  because it is a distinct claim of record (ADR-0003 D6: one derived artifact per affected
+  result). Doc fix: the lemma's record and the log row explain the choice.
+HONESTY CHECK: no CLAIM changed status. New SOURCES S-0032..S-0037, all VERIFIED digest-only
+(arXiv non-exclusive on every original; CC BY only on the corrected v10 of candidate 10).
+Item 7's class (FLAW-0001 local for a misdefined object) and item 8's statement value (false
+rather than undetermined) are the executor's readings and are marked as such with the
+alternative named. The scanner's false positive is recorded rather than silently dismissed.
+Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the window excludes the release by rule; all four
+examined papers are 2009–2010 submissions by named human authors; the only AI-mention hit was a
+TeX macro substring. No detector or threshold exists. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The four manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `7c952e6`; the ids reproduced independently in
+Python; the candidate list reproduced from cache with the identical digest; every retrieval is
+pinned by URL, access time and SHA-256. Nothing to quarantine.
+MANIFEST CHECK: four artifacts created, each with a `syndeom-manifest/2` manifest carrying ground
+truth with derivation `documented-by-source`, flaw records with `raw/1` locators, `correct:
+false`, taxonomy 0.1.0, self-checked by the producer before writing (SD1); one uses the
+`counterexample` method with the author's counterexample as its reference. Nothing synthetic
+labeled real (SD12). "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript beyond its own status document (SD3): each record and
+row names only the result the notice names; readings and alternatives are labelled as the
+executor's. No understanding claims (SD17). No detectors, so no detector-shopping. No referee
+contact (SD13). Candidate 11 was not opened.
+NEXT-SINGLE-ACTION: S1.1 — the fourth Route A harvest session, resuming at candidate 11
+(`1102.1087`, v11, cs.DM primary) in ascending id with no skipping, exactly as STATE.md states
+it; candidate 11's comment is unusual (a long self-critical note on an algorithm and several
+theorems) — read it against D2.1–D2.7 like any other, and log the verdict with its criterion.
+ESCALATIONS:
+- None new: no grey zone arose in candidates 7–10. One reading is flagged for Al's attention in
+  item 8's record, not as a blocker: the v9 statement of candidate 10's Lemma A.3 is recorded
+  `false` on the author's "must be in C¹"; the stricter `undetermined` is the alternative.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers (S-0019).
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — a clean boundary (four candidates fully recorded, the resume point
+set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
+the commit); this commit pushes to `origin/main`.
