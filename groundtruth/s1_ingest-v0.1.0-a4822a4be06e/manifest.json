@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "8e7b0c7fbae142df4a267b6999a18f8ad6a7ec62292754c865aa90b492a5098c",
+        "file": "original-1206.1893v6.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 327296,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-a4822a4be06e",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1206.1893v6.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 35 (Section 4, TeX label azuma), proof, the last sentence 'Now apply Proposition 34 with a suitable choice of parameter lambda = n^{o(1)}': the proof rests on Proposition 34, which the authors state is incorrect",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1206.1893v6 (the original, the published version; corrected by v7, 25 May 2024) - Proposition 35, Martingale concentration (TeX label azuma)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v6): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0046",
+      "S-0047"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0047: 'for the purposes of establishing Proposition 35 (which is the only place in this paper where Proposition 34 is used), it is better to proceed as follows. Firstly, one should impose an additional mild moment hypothesis such as E xi_i^2 = O(n^{O(1)}), which is true in all applications of interest' - the statement as written is neither re-proved nor disproved",
+      "value": null
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0047"
+    }
+  },
+  "config_hash": "a4822a4be06e50a9a88e35875e5b6d7c9b2b9f565433625c93c14227865b9932",
+  "engine_commit": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 35 (Section 4, TeX label azuma), proof, the last sentence 'Now apply Proposition 34 with a suitable choice of parameter lambda = n^{o(1)}': the proof rests on Proposition 34, which the authors state is incorrect"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0047: 'for the purposes of establishing Proposition 35 (which is the only place in this paper where Proposition 34 is used), it is better to proceed as follows. Firstly, one should impose an additional mild moment hypothesis such as E xi_i^2 = O(n^{O(1)}), which is true in all applications of interest' - the statement as written is neither re-proved nor disproved",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 16 (candidate 17, second documented result), Session 17. Same original bytes and S-entries as item 15; a different claim of record with undetermined truth: the authors indicate a workaround under an added hypothesis. RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

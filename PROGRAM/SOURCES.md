@@ -1377,3 +1377,177 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
   copy not committed.
 - **Bears on:** S1.1 items 12 and 13 (their status document); no CLAIM.
+
+---
+
+## S-0044 — César Massri, "Irreducibility of G-varieties defined by quadrics", arXiv:1202.5531 **v3** (the original of Route A item 14)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 16 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 17, 2026-10-14.
+- **Citation (from the abstract page):** César Massri, "Irreducibility of G-varieties defined by
+  quadrics", arXiv:1202.5531, Algebraic Geometry (math.AG); v1 24 February 2012, v2 3 May 2012,
+  **v3 submitted 27 March 2013** (no comment); v4 23 August 2026 (S-0045). No journal reference
+  or DOI on arXiv (API query this session): a preprint. Abstract: "Let 𝔤 be a complex semisimple
+  Lie algebra, G a simply connected and connected Lie group with Lie algebra 𝔤 and V a finite
+  dimensional representation. We prove that the zero locus of quadrics containing G.y is an
+  irreducible variety in ℙV."
+- **Primary:** abstract page <https://arxiv.org/abs/1202.5531v3>, accessed 2026-10-14T08:09:19Z
+  (HTTP 200), 38,272 bytes, SHA-256
+  `b28e0061b31121853f6e9e465cc576341ec4727d0add0f1e832a6f42806f0837`; e-print
+  <https://arxiv.org/e-print/1202.5531v3> (`application/gzip`), 11,081 bytes, SHA-256
+  `d99f8d19d17391a4285c1dddf0e6b98dab3852b120742a8135d0e979eb0e2cf9` — a single gzipped TeX file
+  (`main.tex`).
+- **Content used:** Theorem 6 (TeX label `irr-phi-cat`, the paper's main result) — its statement,
+  standing hypotheses and five-step proof, Step 4 in particular — and the unnumbered statement of
+  the result in the introduction; quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 14); no CLAIM.
+
+---
+
+## S-0045 — Massri, arXiv:1202.5531 **v4** — the correcting version and its comment (the status document of Route A item 14)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0044, but under the new title "Irreducibility of quadratic hulls of
+  osculating varieties of closed orbits"; **v4 submitted 23 August 2026**, comment: "Major
+  revision. The main irreducibility theorem in the previous version is false in the stated
+  generality. The error occurs in Step 4 of the proof of Theorem 6. The present version replaces
+  the incorrect general statement by a valid result for quadratic hulls of osculating varieties
+  of closed orbits under suitable hypotheses".
+- **Primary:** abstract page <https://arxiv.org/abs/1202.5531v4>, accessed 2026-10-14T08:09:19Z
+  (HTTP 200), 40,372 bytes, SHA-256
+  `8ab470eb3dfd5136f631db7ece414568b1b5eef6d01626c3bbf551194d982d99`; e-print
+  <https://arxiv.org/e-print/1202.5531v4> (`application/gzip`), 16,787 bytes, SHA-256
+  `b0b1ec31ec96234b0b921b167111f00878af478d76c80789170df8945e6f6b3a` — a gzipped tar holding
+  `irred.tex`, `citas2.bib` and arXiv's `00README.json`.
+- **Content used:** the comment (the only place the previous theorem and its error are named);
+  the v4 text, a complete rewrite (2,003 source lines against 666; new title, abstract and
+  bibliography) whose main theorem is "if d > 4p" the quadratic hull of the p-osculating variety
+  of the closed highest-weight orbit X_{dλ} equals the osculating variety, "In particular, the
+  quadratic hull is irreducible"; its introduction's reducible examples — Böhning's Z₃ ⊂ ℙS⁸V
+  "has two irreducible components", and for the third osculating variety of the rational normal
+  curve c₁₀, "Since 28 does not divide 64, the quadratic hull has another irreducible component
+  of dimension 4. Thus even in the binary case the quadratic hull of an osculating variety may be
+  reducible"; and "In general, 𝒬(Y) may be strictly larger than Y and need not be irreducible".
+  The text does not refer to the previous version's theorem or to Step 4. The AI-assistance
+  scanner reports no hit on either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 14 (its status document); no CLAIM.
+
+---
+
+## S-0046 — Terence Tao and Van Vu, "Random matrices: Universality of local spectral statistics of non-Hermitian matrices", arXiv:1206.1893 **v6** (the published version; the original of Route A items 15 and 16)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 17 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 17, 2026-10-14. One candidate, two documented results → two items sharing
+  this original and S-0047.
+- **Citation (from the abstract page):** Terence Tao and Van Vu, "Random matrices: Universality
+  of local spectral statistics of non-Hermitian matrices", arXiv:1206.1893, Probability
+  (math.PR); v1 9 June 2012 … **v6 submitted 16 March 2015** (comment: "Published in at
+  <http://dx.doi.org/10.1214/13-AOP876> the Annals of Probability … by the Institute of
+  Mathematical Statistics" — the published version, submitted via the VTEX proxy); v7 25 May
+  2024 (S-0047).
+- **Primary:** abstract page <https://arxiv.org/abs/1206.1893v6>, accessed 2026-10-14T08:15:08Z
+  (HTTP 200; a first retrieval at 08:12:31Z fetched the same pages), 47,236 bytes, SHA-256
+  `fc2a781846d0939c332c987235e890aeec0ce4328b9fc85de9726c21b5f79aa8`; e-print
+  <https://arxiv.org/e-print/1206.1893v6> (`application/gzip`), 327,296 bytes, SHA-256
+  `8e7b0c7fbae142df4a267b6999a18f8ad6a7ec62292754c865aa90b492a5098c` — a gzipped tar holding
+  the publisher's TeX `aop876.tex` and figures.
+- **Content used:** Section 4 "A concentration inequality": the setup (Y = Y(ξ₁, …, ξₙ) a random
+  variable of independent atom variables; the martingale differences C_i(ξ) of equation `mdif`;
+  Azuma's inequality as recalled), Proposition 34 (TeX label `azuma0`; the publisher's markers
+  `%pr34`, `%pr35` fix the numbering) with its proof, and Proposition 35 "Martingale
+  concentration" (label `azuma`) with its proof — the two claims of record; quoted in the two
+  `RECORD.md` files.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v6 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 15 and 16); no CLAIM.
+
+---
+
+## S-0047 — Tao and Vu, arXiv:1206.1893 **v7** — the correcting version, its comment and its "Note added after publication" (the status document of Route A items 15 and 16)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0046; **v7 submitted 25 May 2024**, comment: "Published in at [the DOI] the
+  Annals of Probability … . This version notes an error in Proposition 34, and indicates a
+  workaround so as not to impact the remainder of the paper".
+- **Primary:** abstract page <https://arxiv.org/abs/1206.1893v7>, accessed 2026-10-14T08:15:08Z
+  (HTTP 200), 46,744 bytes, SHA-256
+  `5ef405a74cd3d259fbfe56a8808b4ed5d10b0914b90a6cb862bd191b53fd10de`; e-print
+  <https://arxiv.org/e-print/1206.1893v7> (`application/gzip`), 1,642,248 bytes, SHA-256
+  `a890683f825cce05456b41abbf571798a8a7d7f0029a7bf8556a5eec83e50d5c` — a gzipped tar holding
+  the authors' TeX `iid11.tex` and figures.
+- **Content used:** the remark added after the proof of Proposition 35: "(Note added after
+  publication.) It has been pointed out to us by Heejune Sheen, and independently by Christian
+  Borgs and Karissa Huang, that Proposition 34 is incorrect; the random variable Y′ constructed
+  above does not, in fact, obey the hypotheses of Azuma's inequality. A version of the
+  proposition can be salvaged by replacing C_i(ξ₁, …, ξ_i) with the larger quantity
+  sup_η C_i(ξ₁, …, ξ_{i−1}) (and redefining the events B_i accordingly); however, for the
+  purposes of establishing Proposition 35 (which is the only place in this paper where
+  Proposition 34 is used), it is better to proceed as follows. Firstly, one should impose an
+  additional mild moment hypothesis such as 𝔼ξ_i² = O(n^{O(1)}), which is true in all
+  applications of interest. Then one can define Y′ to be the same as Y but with each ξ_i replaced
+  by a mean zero modification ξ′_i of size O(n^{o(1)}) almost surely that agrees with ξ_i with
+  overwhelming probability, and c_i(ξ₁, …, ξ_{i−1}) similarly replaced by c′_i(ξ′₁, …, ξ′_{i−1})
+  that is bounded by α_i almost surely and agrees with c_i with overwhelming probability." (The
+  proposition numbers are written as `\ref`s to `azuma0` and `azuma`.) The 11,140-line diff is
+  the publisher's TeX against the authors' TeX; the statements and proofs of Propositions 34 and
+  35 are the same in both versions, and the remark is the one addition the comment announces.
+  The AI-assistance scanner reports no hit.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v7 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 items 15 and 16 (their status document); no CLAIM.
+
+---
+
+## S-0048 — Michael Beeson, "Triangle Tiling V: Tilings by a tile with integer sides", arXiv:1206.2228 **v1** (the original of Route A item 17)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 18 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 17, 2026-10-14.
+- **Citation (from the abstract page):** Michael Beeson, "Triangle Tiling V: Tilings by a tile
+  with integer sides", arXiv:1206.2228, Metric Geometry (math.MG); **v1 submitted 5 June 2012**
+  (no comment); v2 27 May 2024, withdrawn (S-0049). A 46-page preprint.
+- **Primary:** abstract page <https://arxiv.org/abs/1206.2228v1>, accessed 2026-10-14T08:15:30Z
+  (HTTP 200), 42,150 bytes, SHA-256
+  `56a770d5fa2e0d1c693631166865951ffa7e253f82ed11b704930903abf980e0`; e-print
+  <https://arxiv.org/e-print/1206.2228v1> (`application/gzip`), 44,667 bytes, SHA-256
+  `781abaf3afeac885a2a25b41aea02a56b7ac68ce39730d532f3b2caf4ae7126e` — a gzipped tar holding
+  `TriangleTiling5.tex` and `TriangleTiling5.bbl`; and, to resolve the notice's page-and-line
+  reference, the PDF <https://arxiv.org/pdf/1206.2228v1>, accessed 2026-10-14 at about 08:17Z
+  (HTTP 200, `application/pdf`), 349,941 bytes, SHA-256
+  `3d11b49d09399e8399e74b7df9b8f0392c094bbddfdc8712d8cccb6f4d24907a`, 46 pages.
+- **Content used:** Theorem 1 (TeX label `theorem:everyrowhasazero`, the first theorem
+  environment) — its statement and its proof, whose kernel argument begins at the top of page 8
+  of the PDF; quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v1 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 17); no CLAIM.
+
+---
+
+## S-0049 — Beeson, arXiv:1206.2228 **v2** — the withdrawal and its comment (the status document of Route A item 17)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0048; **v2 submitted 27 May 2024, withdrawn** (1 KB; no e-print, HTTP 404),
+  comment: "Theorem 1 is wrong; tilings described in later papers contradict it. Line 4, page 8,
+  is the error in the alleged proof. This paper is not used in any of my other papers on
+  triangle tiling".
+- **Primary:** abstract page <https://arxiv.org/abs/1206.2228v2>, accessed 2026-10-14T08:15:30Z
+  (HTTP 200), 42,101 bytes, SHA-256
+  `88d290bc8aae5abb86e27865e3cf3922ab6156f127f5fd65c121d3d7a08ab3fe`. The withdrawn version has
+  no e-print and its abstract page shows no licence link.
+- **Content used:** the comment, the whole of the status document: it names the result, states
+  that it is wrong, gives the ground (contradicting tilings in the author's later papers — not
+  in this document and not named), and locates the error to a line of the proof. The later
+  papers were not retrieved: the item's truth is recorded by the document method on the author's
+  statement.
+- **Licence:** none stated for the stub; nothing retrievable to commit.
+- **Bears on:** S1.1 item 17 (its status document); no CLAIM.

@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "d99f8d19d17391a4285c1dddf0e6b98dab3852b120742a8135d0e979eb0e2cf9",
+        "file": "original-1202.5531v3.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 11081,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-dc1e44f39bb9",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1202.5531v3.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 6 (TeX label irr-phi-cat), statement 'The variety M_y is irreducible' (M_y the zero locus of the quadrics containing the orbit G.y, for any finite-dimensional representation V of a complex semisimple Lie algebra and any y in V); the proof's Step 4, 'The variety sigma_{l-1}(D) is a hypersurface', is the step the author names; what fails inside it is not stated by the notice",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1202.5531v3 (the original; corrected by v4, 23 August 2026) - Theorem 6 (TeX label irr-phi-cat)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v3): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0044",
+      "S-0045"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0045: 'The main irreducibility theorem in the previous version is false in the stated generality'",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0045"
+    }
+  },
+  "config_hash": "dc1e44f39bb9fbc251605d75b38a987fc2af4bcc2949c1ee735fbf6f2e5480b4",
+  "engine_commit": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 6 (TeX label irr-phi-cat), statement 'The variety M_y is irreducible' (M_y the zero locus of the quadrics containing the orbit G.y, for any finite-dimensional representation V of a complex semisimple Lie algebra and any y in V); the proof's Step 4, 'The variety sigma_{l-1}(D) is a hypersurface', is the step the author names; what fails inside it is not stated by the notice"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0045: 'The main irreducibility theorem in the previous version is false in the stated generality'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 14 (candidate 16), Session 17. Ground truth as the author's v4 comment documents it; v4 is a complete rewrite proving a restricted statement, so the diff confirms only that the general claim is not re-proved. RECORD.md holds the argument, names the undetermined reading as the alternative and labels the executor's step-level reading as the executor's. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

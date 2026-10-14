@@ -2140,3 +2140,158 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ bc12219 (Session 17 — the sixth Route A harvest: candidates 16–18
+examined, all three admitted yielding 4 items; the commit adding this entry lands on top of
+bc12219)
+LAUNCH CONTEXT (SD15; not an exam session): Al's one-word order "resume" in the same conversation
+as Sessions 7–16, about three hours after the Session-16 commit; the inherited
+NEXT-SINGLE-ACTION executed as STATE stated it. Not cold. No memory written.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: prefix through arXiv id
+`1206.2228` (18 of 2,472 candidates; 13 admitted yielding 17 items, 3 rejected, 2
+found-but-unclassifiable); S1.3: seventeen `raw/1` parents manifested, no derived artifact yet.
+Gate S0 closed and confirmed.
+PLAN NOTE: the inherited NEXT (the sixth harvest session, resuming at candidate 16), unchanged
+by ORIENT. One thing.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `bc12219`, clean; the constitution unchanged since `226a51c`;
+  the log's resume point read. Evidence gate at ORIENT, detached (`gate-17a.log`),
+  08:08:51Z–08:18:18Z (cold load after three idle hours), `GATE: GREEN`.
+- **Candidate list:** regenerated from the 73 cached pages — 0 API requests, 2,472 candidates,
+  digest identical to run 1 (`e164c0b1…2d48`).
+- **Candidates examined in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md` rows 16–18):
+  - **16, arXiv 1202.5531** (Massri; math.AG, a preprint), v4 (2026-08-23) "Major revision. The
+    main irreducibility theorem in the previous version is false in the stated generality. The
+    error occurs in Step 4 of the proof of Theorem 6. The present version replaces the incorrect
+    general statement by a valid result … under suitable hypotheses": v4 is a different paper
+    under a new title, so the diff localises nothing beyond the comment; v4's introduction says
+    quadratic hulls "need not be irreducible" and exhibits reducible ones without naming the old
+    theorem. **Admitted**: Theorem 6 ("The variety M_y is irreducible", for every representation
+    and every y) — FLAW-0012 (fatal), `statement_status` false by source document with the
+    `undetermined` reading named as the alternative; the author locates the error to Step 4 (the
+    hypersurface claim) without saying what fails there, and the record gives the executor's
+    reading (Terracini's lemma applied at a special rather than a general point) labelled as
+    the executor's. Original v3 (arXiv non-exclusive → `external`); S-0044, S-0045; id
+    `s1_ingest-v0.1.0-dc1e44f39bb9`.
+  - **17, arXiv 1206.1893** (Tao and Vu; math.PR; Annals of Probability, v6 the published
+    version), v7 (2024-05-25) "notes an error in Proposition 34, and indicates a workaround so as
+    not to impact the remainder of the paper": the one addition is a "(Note added after
+    publication.)" after Proposition 35 — "Proposition 34 is incorrect; the random variable Y′
+    constructed above does not, in fact, obey the hypotheses of Azuma's inequality. A version of
+    the proposition can be salvaged by replacing C_i … with the larger quantity sup_η C_i …;
+    however, for the purposes of establishing Proposition 35 … it is better to proceed as
+    follows. Firstly, one should impose an additional mild moment hypothesis …". **Admitted as
+    two items**: Proposition 34 — FLAW-0012 (fatal) + FLAW-0005 (Azuma's inequality applied to
+    Y′, fatal), `statement_status` false by source document, `undetermined` named as the
+    alternative; Proposition 35 ("Martingale concentration", the result the rest of the paper
+    uses) — FLAW-0005 (gap: its proof applies Proposition 34), **`statement_status` null /
+    `undetermined`** — re-established only under an added hypothesis, the third use of Al's
+    ruling (ii). Shared original v6 (the publisher's TeX; arXiv non-exclusive → `external`) and
+    shared S-entries S-0046, S-0047; ids `s1_ingest-v0.1.0-68ed1abfecb4`,
+    `s1_ingest-v0.1.0-a4822a4be06e`. The scanner reports no hit; the helper was run twice (the
+    first run's summary was lost to a display filter; the digests are from the second).
+  - **18, arXiv 1206.2228** (Beeson; math.MG, a 46-page preprint), v2 (2024-05-27) a withdrawal
+    with the comment "Theorem 1 is wrong; tilings described in later papers contradict it. Line
+    4, page 8, is the error in the alleged proof. This paper is not used in any of my other
+    papers on triangle tiling": the comment describes the error and locates it, which the
+    withdrawals of candidates 11 and 13 did not; the v1 PDF was retrieved (one extra request) to
+    resolve the page-and-line reference to the kernel argument's sentence "Now consider the third
+    vector (c, 0, −a), which is also in 𝒟. It must be a linear combination of the first two".
+    **Admitted**: Theorem 1 ("every row of the 𝐝 matrix has a zero") — FLAW-0012 (fatal),
+    `statement_status` false by source document (the contradicting tilings are in unnamed later
+    papers, not retrieved); the executor's reading of the mechanism ((0, b, −c) is not
+    orthogonal to (a, b, c)) is in the record, labelled. **First item with `status.kind`
+    `retraction`** (the producer accepts `erratum` or `retraction`; a withdrawal is the latter).
+    Original v1 (arXiv non-exclusive → `external`); S-0048, S-0049; id
+    `s1_ingest-v0.1.0-da3a4784c2be`. The helper failed on the withdrawn v2's missing e-print as
+    before; the abstract pages and v1 sufficed.
+  - **Counts by verdict, this session:** examined 3 — admitted 3 candidates yielding 4 items,
+    rejected 0, found-but-unclassifiable 0, pending 0, pending-truth 0, escalated 0.
+    **Cumulative:** examined 18 — admitted 13 candidates (17 items), rejected 3,
+    found-but-unclassifiable 2. **Last candidate processed `1206.2228`**; the session stopped at
+    its budget before candidate 19 (`1206.5522`).
+- Each admitted item: S-entries written **before** the producer ran (SD16); config with the D4
+  fields; `syndeom-ingest` at `bc12219` wrote `manifest.json` (`syndeom-manifest/2`,
+  `engine_commit` `bc12219…`, self-check passed; the ids reproduced independently in Python
+  before the producer ran; the four manifests re-read and their schema, commit, truth values and
+  methods asserted); `RECORD.md` with the D3 class argument, the alternatives considered, quoted
+  locating sentences and licence basis.
+- STATE: Updated line; Gate S1 rows S1.1 (prefix through `1206.2228`, 18/13(17)/3/2) and S1.3
+  (seventeen parents); registers line (S-0044..S-0049); build line; NEXT resumes at candidate 19
+  with the next two candidates' comments quoted, the withdrawn-correcting-version note extended
+  (candidate 18 admitted from the abstract pages and the original) and the PDF page-and-line
+  method noted.
+- Gates: the ORIENT run (`gate-17a.log`) on the clean tree, 08:08:51Z–08:18:18Z (cold load),
+  `GATE: GREEN`. Evidence run on the staged tree, detached (`gate-17b.log`), 08:30:22Z–08:30:47Z, launched
+  after the ORIENT run had ended: `Build completed successfully (8926 jobs)`; audit `[propext]`;
+  fmt and clippy clean; `cargo test` 5/5 + 24/24; `git ls-files --eol` clean;
+  `check_registers.py` 94 tracked files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7,
+  **S- 49/49**; `RESULT: ALL PASS`; `GATE: GREEN`; `rc=0`. Re-run the same way on the final tree
+  (this entry and STATE's build line in) before the commit (STOP-REASON).
+BELIEF DELTAS:
+- A withdrawal can be a complete status document: when its comment names the result, says it is
+  false and why, and locates the error, the found-but-unclassifiable verdict does not apply —
+  the rule was never "withdrawals are unclassifiable" but D2.4. Evidence: candidate 18 against
+  candidates 11 and 13. Consequence: the first `retraction`-kind item; the helper's limit on
+  withdrawn correcting versions is a nuisance, not a blocker, and the next session may still add
+  the `--no-sources` fallback.
+- The strongest post-publication notes name the failed hypothesis: "does not, in fact, obey the
+  hypotheses of Azuma's inequality" is FLAW-0005 in the authors' own words, and the two-item
+  shape (false auxiliary result, dependent result re-established under an added hypothesis)
+  recurs. Evidence: candidate 17 against candidate 15. Consequence: the third undetermined item,
+  with the same FLAW-0005-gap reading as item 13.
+- A complete rewrite is the weakest kind of corrected version for localisation: it confirms only
+  that the general claim is not re-proved, and the diff is useless; the comment carries the whole
+  location. Evidence: candidate 16. Consequence: the record quotes the comment, gives the
+  executor's step-level reading labelled as such, and names the `undetermined` alternative — the
+  fifth record of that shape (escalation below).
+CONFUSIONS:
+- The helper takes the correcting version as a bare number; "v4" raised a `ValueError`. Cost:
+  one re-run. Doc fix: this entry; STATE's NEXT already writes the bare form.
+- A display filter (`grep -v '^[-+@ ]'`, meant to drop diff lines) also dropped the helper's
+  summary lines for candidate 17, which begin with "--"; the helper was re-run (four requests).
+  Cost: one re-run and a 20-second wait. Doc fix: this entry; filter on the diff header instead
+  (`awk '/^--- v6/{skip=1} /more diff lines/{skip=0; next} !skip'` worked for candidate 18).
+- The helper's withdrawn-correcting-version limit hit a third time (candidate 18). Not fixed
+  mid-harvest, deliberately, so the examination procedure stays identical across the prefix.
+HONESTY CHECK: no CLAIM changed status. New SOURCES S-0044..S-0049, VERIFIED digest-only (arXiv
+non-exclusive on every version with an e-print; the withdrawn stub shows no licence). Items 14,
+15 and 17 record `false` on the authors' "false in the stated generality", "incorrect" and
+"wrong" with the alternative named; item 16's truth is null because the authors re-establish it
+only under an added hypothesis. The executor's step-level readings for items 14 and 17 are
+labelled as the executor's and are not the basis of any class. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the window excludes the release by rule; the
+three examined papers are 2012 submissions by named human authors; the scanner reports no
+AI-assistance mention on any version read. No detector or threshold exists. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The four manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `bc12219`; the ids reproduced independently in
+Python before the producer ran; the candidate list reproduced from cache with the identical
+digest; every retrieval is pinned by URL, access time and SHA-256 (the v1 PDF of candidate 18 to
+the minute). Nothing to quarantine.
+MANIFEST CHECK: four artifacts created, each with a `syndeom-manifest/2` manifest carrying ground
+truth with derivation `documented-by-source`, flaw records with `raw/1` locators, `correct:
+false`, taxonomy 0.1.0, self-checked by the producer before writing (SD1); one carries
+`statement_status.value: null` with `method: "undetermined"` (ADR-0001 as amended); one carries
+`status.kind: "retraction"`, the first. Nothing synthetic labeled real (SD12). "Proven" applied
+to nothing.
+DRIFT CHECK: no verdict on any manuscript beyond its own status document (SD3): the records quote
+the authors' words, name the alternative reading where the document leaves room, and label the
+executor's mechanism readings as the executor's. No understanding claims (SD17). No detectors. No
+referee contact (SD13). Candidate 19 was not opened.
+NEXT-SINGLE-ACTION: S1.1 — the seventh Route A harvest session, resuming at candidate 19
+(`1206.5522`, v6 of 2024-06-23, math.AT, "37 pages. Corrected Proposition 5.3") in ascending id
+with no skipping, exactly as STATE.md states it.
+ESCALATIONS:
+- For Al's attention, not a blocker (carried from Session 16, now five records): items 8, 10, 11,
+  14 and 15 carry `false` with `undetermined` named as the alternative where the author writes
+  "corrected", "incorrect" or "false in the stated generality" rather than giving a
+  counterexample. A standing ruling either way would make the five records uniform; the
+  executor's reading is `false` because in each case the author replaces the statement by a
+  different one.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers
+  (S-0019); not attempted this session.
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
+set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
+the commit); this commit pushes to `origin/main`.

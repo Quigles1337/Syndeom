@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "8e7b0c7fbae142df4a267b6999a18f8ad6a7ec62292754c865aa90b492a5098c",
+        "file": "original-1206.1893v6.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 327296,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-68ed1abfecb4",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1206.1893v6.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 34 (Section 4, TeX label azuma0), statement: for any alpha_i >= 0, P(|Y - E Y| >= lambda sqrt(sum alpha_i^2)) = O(exp(-Omega(lambda^2))) + sum_i P(C_i(xi) >= alpha_i), with C_i the martingale differences of Y",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 34, proof, the sentence 'Moreover, Y' satisfies the condition of Azuma's inequality, so ...': Azuma's inequality is applied to the modified variable Y', which by the authors' note does not obey its hypotheses",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1206.1893v6 (the original, the published version; corrected by v7, 25 May 2024) - Proposition 34 (TeX label azuma0)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v6): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0046",
+      "S-0047"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0047: 'Proposition 34 is incorrect; the random variable Y' constructed above does not, in fact, obey the hypotheses of Azuma's inequality. A version of the proposition can be salvaged by replacing C_i(xi_1,...,xi_i) with the larger quantity sup_eta C_i(xi_1,...,xi_{i-1})'",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0047"
+    }
+  },
+  "config_hash": "68ed1abfecb451895b57399b952bb6f07d98a53cf67d2f5f9f24f02cf3b8d8e9",
+  "engine_commit": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 34 (Section 4, TeX label azuma0), statement: for any alpha_i >= 0, P(|Y - E Y| >= lambda sqrt(sum alpha_i^2)) = O(exp(-Omega(lambda^2))) + sum_i P(C_i(xi) >= alpha_i), with C_i the martingale differences of Y"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 34, proof, the sentence 'Moreover, Y' satisfies the condition of Azuma's inequality, so ...': Azuma's inequality is applied to the modified variable Y', which by the authors' note does not obey its hypotheses"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0047: 'Proposition 34 is incorrect; the random variable Y' constructed above does not, in fact, obey the hypotheses of Azuma's inequality. A version of the proposition can be salvaged by replacing C_i(xi_1,...,xi_i) with the larger quantity sup_eta C_i(xi_1,...,xi_{i-1})'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 15 (candidate 17, first documented result), Session 17. Ground truth as the authors' v7 comment and 'Note added after publication' document it, confirmed against the v6->v7 TeX diff (the proposition's text is unchanged; the note is the addition); RECORD.md holds the argument and names the undetermined reading as the alternative. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

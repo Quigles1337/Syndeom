@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "781abaf3afeac885a2a25b41aea02a56b7ac68ce39730d532f3b2caf4ae7126e",
+        "file": "original-1206.2228v1.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 44667,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-da3a4784c2be",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1206.2228v1.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 1 (TeX label theorem:everyrowhasazero), statement 'Let T be any triangle with integer sides a, b, and c. Suppose there is an N-tiling of triangle ABC by T. Then every row of the d matrix has a zero', and its proof at 'Line 4, page 8' of the author's reference, which in the arXiv PDF of v1 is the sentence beginning 'Now consider the third vector (c, 0, -a), which is also in D. It must be a linear combination of the first two'",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1206.2228v1 (the original; withdrawn by v2, 27 May 2024) - Theorem 1 (TeX label theorem:everyrowhasazero)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v1): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0048",
+      "S-0049"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0049: 'Theorem 1 is wrong; tilings described in later papers contradict it' (the contradicting tilings are not in the document)",
+      "value": false
+    },
+    "status": {
+      "kind": "retraction",
+      "reference": "S-0049"
+    }
+  },
+  "config_hash": "da3a4784c2be58897b24db894ceeda109ae8173a1e0c3695751968d4eee49780",
+  "engine_commit": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 1 (TeX label theorem:everyrowhasazero), statement 'Let T be any triangle with integer sides a, b, and c. Suppose there is an N-tiling of triangle ABC by T. Then every row of the d matrix has a zero', and its proof at 'Line 4, page 8' of the author's reference, which in the arXiv PDF of v1 is the sentence beginning 'Now consider the third vector (c, 0, -a), which is also in D. It must be a linear combination of the first two'"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0049: 'Theorem 1 is wrong; tilings described in later papers contradict it' (the contradicting tilings are not in the document)",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 17 (candidate 18), Session 17. Ground truth as the author's withdrawal comment documents it (the only status document; the withdrawn v2 has no e-print); the page-and-line locator was resolved against the arXiv PDF of v1 and the TeX source. RECORD.md holds the argument and labels the executor's reading of the failing step as the executor's. First item with status kind 'retraction'. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
