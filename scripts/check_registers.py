@@ -8,7 +8,7 @@ files = subprocess.check_output(["git", "-C", str(root), "ls-files"], text=True)
 problems = []
 
 print("== bytes ==")
-BINARY = (".pdf", ".png", ".jpg", ".zip")  # marked binary in .gitattributes; not line-ending checked
+BINARY = (".pdf", ".png", ".jpg", ".zip", ".gz", ".tgz")  # marked binary in .gitattributes; not line-ending checked
 for f in files:
     if f.lower().endswith(BINARY):
         print(f"binary (skipped): {f}")

@@ -7,3 +7,5 @@
 *.png binary
 *.jpg binary
 *.zip binary
+*.gz binary
+*.tgz binary

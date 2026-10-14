@@ -1410,3 +1410,168 @@ STOP-REASON: natural boundary — the rulings recorded and the NEXT-SINGLE-ACTIO
 blocker on the way, recorded above: the harness stopped the producer's gate run for low system
 memory; on Al's order the gate ran detached and GREEN. Repo green on each committed tree (gate
 run with every edit staged, before each commit); both commits push to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ 30e2a4a (Session 11 — housekeeping, then the first Route A harvest: two
+candidates examined, two admitted and ingested; the commit adding this entry lands on top of
+30e2a4a)
+LAUNCH CONTEXT (SD15; not an exam session): the §6 Session-N resume prompt plus Al's session
+instructions (two housekeeping items, then the inherited NEXT), in the same conversation as
+Sessions 7–10. Not cold. Memory written this session: the two tooling hazards Al ordered
+(HOUSEKEEPING 1) and nothing else.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: the first prefix
+harvested — 2 of 2,472 Route A candidates examined, both admitted; S1.3: two `raw/1` parents
+manifested, no derived artifact yet. Gate S0 closed and confirmed.
+PLAN NOTE: the inherited NEXT-SINGLE-ACTION, executed as STATE stated it, after the two
+housekeeping items Al placed before it. One thing: the harvest; the housekeeping needed no
+decision. The inherited NEXT survived ORIENT unchanged.
+ADVANCED:
+- ORIENT: toplevel `C:/Users/LEET/Syndeom`, `origin` the GitHub remote, `symbolic-ref` → `main`,
+  HEAD = `origin/main` = `30e2a4a`, clean; DECISIONS ADR-0000..0005; SOURCES last entry S-0020 →
+  S-0021 next. Evidence gate at ORIENT, detached with a log (`gate-11a.log`): 01:06:18Z–01:06:53Z
+  on `30e2a4a`, `GATE: GREEN`. Read: the constitution in full as amended (ADR-0004, ADR-0005),
+  STATE, HANDOFF Session 10, S-0003 (the date-carrier pattern), the lab and groundtruth READMEs.
+- **HOUSEKEEPING 1 — memory hazard (SD15):** two bullets appended to the SYNDEOM memory file —
+  PowerShell's `bash` is the WSL stub, name `C:\Program Files\Git\bin\bash.exe`; run the gate
+  detached with a log under the scratchpad so a harness kill does not lose the result. Digests:
+  Session 10 `bc6de3600c87f7c5fb5f088a3c305dfc434e0c694dea4006791c5a5d75a6f8f1`; **after this
+  session's append `80c4333bd22eec23d9d05d6d0dc2422c60b3840e4b0a065616af5b9ba39d24c7`** (8,044
+  bytes). No program state written (grep for phase, gate status, NEXT, escalation, CLAIM, ADR,
+  commit and session tokens matches only the policy sentence).
+- **HOUSEKEEPING 2 — three sources for the position paper's §0 disclosure**, retrieved and read
+  under SD11, each digest-only (no licence stated on any page): **S-0021** the "Open Letter about
+  the Mathathon" (Proofs and Prompts, published 2026-09-10, "Received 8 September 2026", "At the
+  time of publication, there are 771 signatories", "Anthropic and OpenAI, will supply participants
+  with 2 million dollars in AI credits" — all on the page, quoted); **S-0022** the "Joint
+  Statement about Mathathon" (2026-09-28; "We no longer receive sponsorships from developers of
+  proprietary AI models"; the Tao cross-post of the same day retrieved as corroboration, the S-0003
+  pattern — here the primary is itself dated); **S-0023** the Mathathon page "Old Problems, New
+  Proofs" (undated; "Round 1 on November 13th to November 15th at Caltech"). Each entry's
+  "bears on" field: the position paper's §0 disclosure; no CLAIM. Reader comments not
+  transcribed. Al's summaries were checked against the pages, not copied.
+- **S-0019 note:** one attempt at `www.apache.org` as ordered, 01:06:29Z, connection timed out;
+  carried unchanged, recorded in the entry.
+- **Harvest — the finder.** `lab/route_a_candidates.py` (standard library, zero result
+  authority): the API-side pre-filter over the comment field (18 correction words × 3 result
+  words) and `cat:math.*`, the two S-0015 stage-1 regexes as the post-filter, latest version ≥ 2,
+  latest update ≥ window start, sorted by ascending id. **Two strikes on the first form** (one
+  range, 500 per page): HTTP 429 at the first request, then after three good pages persistent
+  429/503 at offset 1,500 until the retries ran out — the arXiv API refuses deep offsets for a
+  large result set. **Switched approach** (§4.4): the query split into 57 original-submission-date
+  ranges (yearly 1991–2019, quarterly 2020–2026), 200 per page, never past offset 1,000 in a
+  range, every page cached on disk, 6 s between requests, backoff on 429/503. Run 1:
+  01:28:02Z–01:56:25Z, 73 requests, 11 transient errors retried, largest range 462 hits, **8,081
+  API hits, 2,472 candidates** (71 marked `latest update after window`), `candidates.tsv` SHA-256
+  `e164c0b1693c7a6cdf242dcca853db28517f8c210d17af7ba82d2446dd752d48` (not committed; the log
+  records the query, the run and every examined candidate). `lab/route_a_examine.py` fetches both
+  versions' abstract pages and e-prints, records digests, diffs the TeX and scans for
+  AI-assistance mentions.
+- **Harvest — the examination, in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md`,
+  run 1, rows 1–2):
+  - **Candidate 1, arXiv 0706.0357** (math.GM, one author, 71 versions since 2007), v71
+    (2026-06-07) "To fix an error in Lemma 1.1": the diff shows the lemma's identity acquired a
+    family of terms over the prime divisors of the modulus and its proof the missing coprimality
+    condition on the character-orthogonality formula. **Admitted**: FLAW-0012 (statement, fatal)
+    + FLAW-0005 (proof, fatal); `statement_status` false by source document; v70 CC BY 4.0 →
+    original **committed** (`original-0706.0357v70.tar.gz`, 8,236 B, `5987d810…cca8`);
+    `s1_ingest-v0.1.0-63e23a952084`; S-0024, S-0025. The paper's category and revision count
+    played no part — the no-skipping rule admits what the criteria admit, and the record says so.
+  - **Candidate 2, arXiv 0707.3799** (math.RT, two authors, "to appear in Moscow Math J"), v3
+    (2026-02-25) "corrects a mistake in the proof of Theorem 1b) … All the statements are
+    unchanged": the diff replaces the proof of part b) with an explicitly W-equivariant
+    identification of the affine Grassmannian's components, which the v2 proof had used without
+    establishing. **Admitted**: FLAW-0011 (composite, gap) + FLAW-0005 (gap); `statement_status`
+    true by source document; v2 licence "assumed-1991-2003" (arXiv's page: equivalent to the
+    non-exclusive-distrib licence, retrieved and digested) → **`external`**, digest-only
+    (`3f9593e1…3053`); `s1_ingest-v0.1.0-744652f4b95f`; S-0026, S-0027.
+  - Each item: S-entries written **before** the producer ran (SD16); config with the D4 fields;
+    `syndeom-ingest` wrote `manifest.json` (`syndeom-manifest/2`, `engine_commit` `30e2a4aa…`,
+    self-check passed; ids equal to the Python-computed JCS hashes); `RECORD.md` with the D3
+    class argument, the alternatives considered, the quoted locating sentences and the licence
+    basis. Both records state that nothing in them assesses the paper beyond its own status
+    document (SD3).
+  - **Counts by verdict:** examined 2 — admitted 2, rejected 0, found-but-unclassifiable 0,
+    pending 0, pending-truth 0, escalated 0. **Last candidate processed `0707.3799`**; the session
+    stopped at its budget before examining candidate 3 (`0812.3181`), not because the stream
+    changed.
+- **Tooling:** `.gitattributes` gains `*.gz binary` and `*.tgz binary`, and the register checker's
+  binary list gains `.gz`/`.tgz`, so committed gzip originals are not line-ending-checked (git
+  already stored the file `i/-text`). `groundtruth/README.md` unchanged (it already names the
+  producer and the record files).
+- STATE: Gate S1 rows S1.1 (prefix through `0707.3799`, 2 admitted) and S1.3 (two `raw/1`
+  parents manifested, no derived artifact); registers line; Updated line; NEXT = the second
+  harvest session resuming at candidate 3, with the exact commands.
+- Evidence run (§4.1), detached with a log (`gate-11b.log`), every edit staged:
+  02:07:11Z–02:18:18Z (cold OS cache): `Build completed successfully (8926 jobs)`; audit
+  `[propext]`; fmt and clippy clean; `cargo test` 5/5 ingest + 24/24 manifest; `git ls-files
+  --eol` clean (the `.tar.gz` original stored `i/-text`); `check_registers.py` 64 tracked files
+  clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, **S- 27/27**; `RESULT: ALL PASS`; `GATE:
+  GREEN`; `rc=0`. Re-run the same way on the final tree (this entry and STATE's build line in)
+  before the commit (STOP-REASON).>
+BELIEF DELTAS:
+- The arXiv API cannot be paged deeply: a single large query dies at offset ≈1,500 with 429/503
+  however patient the retries. Evidence: two failed runs, then 57 shallow ranges that all
+  succeeded. Consequence: the finder is range-split and cached; the hazard is in the log header,
+  and the examined prefix never depends on a re-fetch.
+- "Ascending arXiv id" puts old papers with recent corrections first: the stream's head is
+  2007–2012 submissions corrected in 2023–2026, including long-revised math.GM preprints.
+  Evidence: candidates 1–15. Consequence: the corpus's early prefix is what the rule yields, not
+  what a curator would pick; D8 exists for exactly that reason, and each record says the
+  category played no part.
+- A revision comment plus a TeX diff is enough to argue a FLAWS.md class in writing for both
+  items examined, one at the statement level (FLAW-0012 with its FLAW-0005 use site) and one at
+  the proof level under a true statement (FLAW-0011 with FLAW-0005). Evidence: the two RECORD
+  files. Consequence: D3's "argued from the notice and the diff" is workable at roughly one hour
+  per candidate including retrieval; the harvest is reading-bound, as ADR-0003 predicted.
+- The 2008 version of a 2007 paper carries arXiv's "assumed" licence on its abstract page, not
+  the non-exclusive one; the licence is per version and must be read, not inferred from the
+  date. Evidence: S-0026 versus S-0027. Consequence: `external` for the original, `committed`
+  would have been wrong.
+CONFUSIONS:
+- The first finder's failure looked like rate limiting to be waited out; it was the deep-offset
+  limit. Cost: two runs, about 25 minutes. Doc fix: the log header and the script docstring say
+  so; the memory hazard list does not (program-independent API behaviour; a successor reads the
+  script).
+- A file-name slip (`.tar.gz` for a single gzipped TeX) cost one producer run; the producer
+  refused cleanly (exit 1, file not found) and wrote nothing. Doc fix: none needed.
+- The committed `.tar.gz` original was not in the checker's binary list; caught by running the
+  checker before the gate. Doc fix: the list and `.gitattributes` now cover `.gz`/`.tgz`.
+HONESTY CHECK: no CLAIM changed status. New SOURCES: S-0021..S-0023 VERIFIED digest-only
+(licence unstated on each page), S-0024 INGESTED (CC BY 4.0, committed), S-0025..S-0027 VERIFIED
+digest-only (S-0026's assumed licence quoted from arXiv's own page). The two items' ground truth
+is what their authors' notices and diffs document; the records name the alternative classes
+considered and why they were not chosen. The finder's hit counts are a snapshot and say so.
+Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the Route A window ends 2026-09-30, before the 6
+October release, by rule; both admitted papers predate it by years and carry no AI-assistance
+mention (helper scan of both corrected sources: none). The three disclosure sources concern a
+hackathon and its sponsorship, not any proof corpus, and inform no design. No detector or
+threshold exists. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The two manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `30e2a4a` (ids and hashes reproduced
+independently in Python); every retrieval is pinned by URL, access time and SHA-256; the finder's
+snapshot digest is recorded with the caveat that arXiv changes. Nothing to quarantine.
+MANIFEST CHECK: two artifacts created, each with a `syndeom-manifest/2` manifest carrying ground
+truth with derivation `documented-by-source`, flaw records with `raw/1` locators, `correct:
+false`, taxonomy 0.1.0, self-checked by the producer before writing (SD1). Nothing synthetic
+labeled real; nothing real labeled `by-construction` (SD12). "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any real manuscript beyond its own status document (SD3) — each record
+and log row says so and names only the result the notice names; the executor's one algebraic
+check (that the omitted term in item 1 is non-zero) is a check of the corrected statement the
+authors published, recorded as such. No understanding claims (SD17). No detectors, so no
+detector-shopping. No referee contact (SD13). The session did not examine candidate 3 to avoid
+a half-examined candidate at the budget boundary.
+NEXT-SINGLE-ACTION: S1.1 — the second Route A harvest session, resuming at candidate 3
+(`0812.3181`) in ascending id with no skipping, exactly as STATE.md states it: regenerate or
+re-cache the candidate list and record its digest, examine with `lab/route_a_examine.py`,
+register sources before ingestion, ingest with `syndeom-ingest`, write `RECORD.md`, log every
+verdict, stop at budget, update the log's last-candidate line and the Gate S1 table.
+ESCALATIONS:
+- None new: no grey zone arose in candidates 1–2 (no licence ambiguity, no authorship question).
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers (S-0019;
+  one attempt this session timed out).
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — the session's one task advanced to a clean boundary (two
+candidates fully recorded, the log's resume point set). Repo green on the committed tree (gate
+run detached with a log, every edit staged, before the commit); this commit pushes to
+`origin/main`.

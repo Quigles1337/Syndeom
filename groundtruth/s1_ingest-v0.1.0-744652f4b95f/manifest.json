@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "3f9593e18a00f30685f66f1e4d920fbf2a4427e94b23beb2032ccd91d47d3053",
+        "file": "original-0707.3799v2.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 40240,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-744652f4b95f",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-0707.3799v2.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 1 b) (TeX label normocon), proof: the paragraph beginning 'b) Let \tilde G stand for the simply connected cover of G' (v2); v3 replaces the whole paragraph",
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 1 b), proof, the steps 'Hence H_{T x G_m}(Gr_G) is equal to the product over pi_1(G)^ of H_{T x G_m}(Gr_G). Finally, H_{G_O x G_m}(Gr_G) ... coincides with the W-invariants in H_{T x G_m}(Gr_G)': the identification of the connected components is used as if W-equivariant without that being established",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:0707.3799v2 (the original; corrected by v3, 25 February 2026)",
+    "licence": "arXiv assumed non-exclusive licence to distribute (http://arxiv.org/licenses/assumed-1991-2003/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0026",
+      "S-0027"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0027",
+      "value": true
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0027"
+    }
+  },
+  "config_hash": "744652f4b95f03c2d81a2c947516d25a392d4a16bf7b736a5550696c92f654c6",
+  "engine_commit": "30e2a4aa06368b8a2ba1cc1a8164c4d22229a0cd",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 1 b) (TeX label normocon), proof: the paragraph beginning 'b) Let \tilde G stand for the simply connected cover of G' (v2); v3 replaces the whole paragraph"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 1 b), proof, the steps 'Hence H_{T x G_m}(Gr_G) is equal to the product over pi_1(G)^ of H_{T x G_m}(Gr_G). Finally, H_{G_O x G_m}(Gr_G) ... coincides with the W-invariants in H_{T x G_m}(Gr_G)': the identification of the connected components is used as if W-equivariant without that being established"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0027",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 2, Session 11. Ground truth as the authors' v3 comment and footnote document it, confirmed against the v2->v3 TeX diff; the argument is in RECORD.md. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

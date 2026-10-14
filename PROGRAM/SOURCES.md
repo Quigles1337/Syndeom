@@ -665,6 +665,9 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Also set:** `license = "Apache-2.0"` in `engine/manifest/Cargo.toml` `[package]` (the only
   package manifest; `engine/Cargo.toml` is a bare `[workspace]`). No NOTICE file: neither sibling
   carries one (KOBER `f94bec2`, FRIEDMAN `7c3e5dd`, read 2026-10-13).
+- **2026-10-14 (Session 11), one attempt as ordered:** `https://www.apache.org/licenses/LICENSE-2.0.txt`
+  at 01:06:29Z — `Connection timed out after 20003 milliseconds`. The diff note is carried
+  unchanged.
 
 ---
 
@@ -709,3 +712,228 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
   (digest-only). Nothing needs redistributing: ADR-0004 cites the equation numbers and reproduces
   the variance by an independent derivation.
 - **Bears on:** ADR-0004 only. Not a CLAIM; nothing about any manuscript.
+
+---
+
+## S-0021 — "Open Letter about the Mathathon", a coalition of current and former Caltech mathematicians, *Proofs and Prompts*, 10 September 2026 (position paper §0 disclosure)
+
+- **State:** VERIFIED (page retrieved and read this session; digest-only).
+- **As named:** Al (Session 11): published 10 September 2026, received 8 September; 771
+  signatories at publication; states that Anthropic and OpenAI would supply participants with two
+  million dollars in AI credits. Each point is on the page, quoted below.
+- **Primary:** <https://proofsandprompts.com/2026/09/10/open-letter-about-the-mathathon/>,
+  accessed 2026-10-14T01:06:24Z (curl, HTTP 200, `text/html`), 221,399 bytes, SHA-256
+  `f21fbc51771eae5588108fd3eb88796dd77072d0eeef08a03d66d90d9679aa6f`.
+- **Page metadata:** `og:title` "Open Letter about the Mathathon"; `og:site_name` "Proofs and
+  Prompts"; `article:published_time` 2026-09-10T10:21:20+00:00; `article:modified_time`
+  2026-09-29T21:51:19+00:00; byline "A coalition of current and former Caltech mathematicians";
+  filed under "Initiatives"; tags "Community · Initiative · Open letter".
+- **Content (quoted from the page):** a note above the letter: "The Mathathon organizers have
+  published a response, available here" (linking
+  `https://proofsandprompts.com/2026/09/10/a-response-from-mathathon/`). The letter opens: "On
+  October 30th, 2026, Caltech will begin hosting the Caltech Mathathon, a math hackathon in which
+  participants are encouraged to solve open research problems by prompting LLMs. Two prominent AI
+  companies, Anthropic and OpenAI, will supply participants with 2 million dollars in AI credits.
+  This event is likely to have destructive impacts for the mathematical community." It states
+  five headed concerns — "The creation of slop mathematics and the exacerbation of a market-driven
+  arms race", "Intrusion of corporate interest", "Conditions unlikely to foster mathematical
+  understanding", "Damaging misinformation about research mathematics", "Failure to care for
+  young mathematicians" — then "we call on the organizers to suspend this event" and, in closing,
+  "we ask that the organizers give up this harmful enterprise entirely." A footnote dated
+  "September 10th, 2026" says the Mathathon website changed after the letter circulated and links
+  "a version of the website accessed September 8th, 2026, which included the line 'What is the
+  role of a mathematician when AI can solve conjectures faster?'". Below the letter: "At the time
+  of publication, there are 771 signatories. A full list of signatories is available here."
+  (linking a Google document); eligibility to sign — members of the Caltech community or of the
+  mathematical research community at PhD level or higher; and "Received 8 September 2026." The
+  page's reader comments are not the source and were not transcribed.
+- **Licence:** none stated on the page (no licence or copyright notice in the retrieved HTML);
+  **copy not committed** (digest-only).
+- **Bears on:** the position paper's §0 disclosure; no CLAIM.
+
+---
+
+## S-0022 — "Joint Statement about Mathathon", a coalition of Caltech mathematicians, *Proofs and Prompts*, 28 September 2026, cross-posted on Terence Tao's blog (position paper §0 disclosure)
+
+- **State:** VERIFIED (both pages retrieved and read this session; digest-only).
+- **As named:** Al (Session 11): 28 September 2026, cross-posted the same day on Terence Tao's
+  blog; states that the redesigned event no longer receives sponsorships from developers of
+  proprietary AI models. Each point is on the pages, quoted below.
+- **Primary:** <https://proofsandprompts.com/2026/09/28/joint-statement-about-mathathon/>,
+  accessed 2026-10-14T01:06:25Z (curl, HTTP 200, `text/html`), 189,416 bytes, SHA-256
+  `bc7a0c9610fe6cdf10481c0088bbfae39b97a787b4c5ec1381b7d2abc49ba22d`. Metadata: `og:title`
+  "Joint Statement about Mathathon"; `article:published_time` 2026-09-28T16:44:23+00:00;
+  `article:modified_time` 2026-09-29T21:49:42+00:00; byline "A coalition of Caltech
+  Mathematicians", with a footnote "This is a joint statement by everyone named in footnotes 2-4":
+  the original organizers of Mathathon, two coauthors of the Open Letter (S-0021), and other
+  members of the Caltech community, each group named on the page; opening line "Also
+  cross-posted at Terry Tao's blog."
+- **Content (quoted from the primary page):** "Mathathon is centered around one question: how
+  can we use AI to augment human understanding of mathematics?" "This past week, the original
+  organizers of Mathathon, two coauthors of Open Letter about the Mathathon, and other members
+  of the Caltech community engaged in a conversation to redesign this event." "Thus the new
+  theme of Mathathon is Old Problems, New Proofs." Participants pick a problem with an unintuitive
+  solution, learn for 40 hours, present, then "take two months to develop an alternative proof or
+  exposition" and submit "an explainer and a GitHub repository" holding "LLM chat histories, code
+  used to produce visualizations, and more". "Mathathon treats AI as one of many tools available
+  to mathematicians. We no longer receive sponsorships from developers of proprietary AI models.
+  Participants are given a cash grant to purchase any tool they need, whether that be LLM credits,
+  HPC access, or pen and paper. Proprietary models are allowed, but we encourage the use of
+  open-source tools." "The new event will take place on November 13–15. It is co-organized with
+  the Foundation for Science and AI Research (SAIR), which will provide compute, host workshops,
+  and offer prizes to teams that use open-source models." "Our lead donor is XTX Markets, an
+  algorithmic trading firm". Acknowledgements thank Terence Tao and Andrew Wu for reviewing the
+  statement; "All of the views above are solely our own and do not reflect those of Caltech or any
+  other organizations we belong to." Reader comments not transcribed.
+- **Cross-post (secondary, the S-0003 pattern):** Terence Tao, "Joint Statement about Mathathon",
+  *What's new*, "28 September, 2026 in advertising, guest blog, math.GM | Tags: AI, Caltech,
+  Mathathon, SAIR | by Terence Tao",
+  <https://terrytao.wordpress.com/2026/09/28/joint-statement-about-mathathon/>, accessed
+  2026-10-14T01:06:26Z (HTTP 200), 251,467 bytes, SHA-256
+  `71af973573c58cc60e7ff0a8e86e69763416d17eb4706420a98961ca027f8e16`;
+  `article:published_time` 2026-09-28T18:33:48+00:00. Its bracketed note: "[This is a guest post
+  by a coalition of Caltech mathematicians: the original organizers of Mathathon (…), two
+  coauthors of the Open Letter about the Mathathon (…), and other members of the Caltech
+  community (…). This blog post was initially written in a different file format and converted
+  using AI. It is also crossposted at Proofs and Prompts — T.]" The body matches the primary.
+  Unlike S-0003, the primary page is itself dated; the cross-post corroborates the date rather
+  than supplying it.
+- **Licence:** none stated on either page; **copies not committed** (digest-only).
+- **Bears on:** the position paper's §0 disclosure; no CLAIM.
+
+---
+
+## S-0023 — Mathathon, "Old Problems, New Proofs" — the event's current page (position paper §0 disclosure)
+
+- **State:** VERIFIED (page retrieved and read this session; digest-only). The page is undated;
+  the access time is the date of record for this copy.
+- **As named:** Al (Session 11): the Mathathon's current page, Round 1 on 13–15 November 2026.
+  On the page as quoted below.
+- **Primary:** <https://mathathonchallenge.com/>, accessed 2026-10-14T01:06:28Z (curl, HTTP 200,
+  `text/html`), 5,656 bytes, SHA-256
+  `96e4af8497458214b56e6c30fc623b7a5a298d817b073475c60a623fc5707955`. `<title>` "Mathathon: Old
+  Problems, New Proofs"; no other metadata; no date.
+- **Content (quoted from the page):** "Mathathon is centered around one question: how can we use
+  AI to augment human understanding of mathematics?" Two rounds: "Round 1: Onsite, 40 hours. Teams
+  will make preliminary progress and give live talks before judges and other contestants." and
+  "Round 2: Remote, 2 months. Teams will produce an online explainer and a GitHub repository."
+  "We are hosting Round 1 on November 13th to November 15th at Caltech." FAQ: "Mathathon is a
+  registered student organization at Caltech. Its decisions are made by its organizing committee,
+  which consists of undergraduate and graduate students currently enrolled at Caltech. The
+  committee does not receive monetary compensation from Mathathon or its sponsors." Organizers
+  and faculty advisors (Sergei Gukov, Terence Tao, Tony Yue Yu) are named; "The Foundation of
+  Science and AI Research (SAIR) administers grants and travel reimbursements on behalf of
+  Mathathon."; applicants above 18 with research or competition experience, PhD holders may apply
+  as judges; flights covered for participants and judges; "We treat AI as one of many tools
+  available to mathematicians. Proprietary models are allowed, but we encourage the use of
+  open-source tools." A contact e-mail on the page is not transcribed.
+- **Licence:** none stated; **copy not committed** (digest-only).
+- **Bears on:** the position paper's §0 disclosure; no CLAIM. The page changes over time
+  (S-0021's footnote records an earlier version); this digest identifies the 2026-10-14 copy only.
+
+---
+
+## S-0024 — Hisanobu Shinya, "On a new approach to the Riemann hypothesis", arXiv:0706.0357 **v70** (the original of Route A item 1)
+
+- **State:** INGESTED (the v70 e-print bytes are committed under `groundtruth/` as the item's
+  `raw/1` original; licence permits, below). Retrieved and read this session.
+- **How found:** Route A (ADR-0003 D1), candidate 1 of the finder's ascending-id stream
+  (HARVEST-LOG run 1); examined Session 11, 2026-10-14.
+- **Citation (from the abstract page):** Hisanobu Shinya, "On a new approach to the Riemann
+  hypothesis", arXiv:0706.0357, General Mathematics (math.GM); v1 4 June 2007; **v70 submitted
+  7 March 2026** (comment: "13 pages. In this revision, the author tried to clarify what he thinks
+  is a key feature of his preprint"); 71 versions in all.
+- **Primary:** abstract page <https://arxiv.org/abs/0706.0357v70>, accessed 2026-10-14T01:57:34Z
+  (HTTP 200), 49,164 bytes, SHA-256
+  `4a1cd5dc8663424fbb6c582cd708404d34e312cce12f2d743f6a525e64209013`; e-print
+  <https://arxiv.org/e-print/0706.0357v70> (`application/gzip`), 8,236 bytes, SHA-256
+  `5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8` — a gzipped tar holding one
+  file, `On_a_new_approach_to_the_Riemann_hypothesis.tex`.
+- **Content used:** Lemma 1.1 — its statement and proof — is the item's claim of record (ADR-0003
+  D6); the locating sentences are quoted in the item's `RECORD.md`, nothing more is reproduced
+  outside the committed copy.
+- **Licence:** Creative Commons Attribution 4.0 (`http://creativecommons.org/licenses/by/4.0/`,
+  the licence link on the v70 abstract page). **Copy committed** as
+  `groundtruth/<artifact_id>/original-0706.0357v70.tar.gz` (ADR-0003 D5 as amended: CC BY is in
+  the committable set), with attribution here and in `RECORD.md`.
+- **Bears on:** S1.1 (`groundtruth/` item); no CLAIM.
+
+---
+
+## S-0025 — Hisanobu Shinya, "On a new approach to the Riemann hypothesis", arXiv:0706.0357 **v71** — the correcting version and its comment (the status document of Route A item 1)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0024; **v71 submitted 7 June 2026**, comment: "11 pages. To fix an error in
+  Lemma 1.1". This comment, with the corrected version it belongs to, is the status document SD12
+  requires (ADR-0003 D1 Route A, D2.2).
+- **Primary:** abstract page <https://arxiv.org/abs/0706.0357v71>, accessed 2026-10-14T01:57:34Z
+  (HTTP 200), 49,049 bytes, SHA-256
+  `1dbf356c8d01e9a60e66a7db043d332655697deaf3dab5694e7c35e1b5774e29`; e-print
+  <https://arxiv.org/e-print/0706.0357v71> (`application/gzip`), 8,750 bytes, SHA-256
+  `fffd0fdc3a868deb642102a1f72f23cd92ee89bf118c92a4b992cb5a6fdfd263` — a gzipped tar holding
+  `On_a_new_approach_to_the_Riemann_hypothesis_2.tex`.
+- **Content used:** the corrected Lemma 1.1: its statement now reads, in the executor's
+  transcription of the TeX, "M(s, a/b) − Σ_{q|b} Σ_{l≥1} (log q) q^{−sl} e^{−2πi a q^l/b} = −Σ_χ
+  A(a, b; χ) (L′/L)(s, χ), where the sum Σ_{q|b} runs through all the prime divisors of b"; its
+  proof now applies the orthogonality formula "for (k, b) = 1" and says the formula "is applicable
+  to all n's which are powers of primes other than of q|b". The diff v70 → v71 is otherwise
+  typographical and expository (a new introductory paragraph, a new bibliography entry).
+- **Licence:** Creative Commons Attribution 4.0 on the abstract page; copy not committed (the
+  item's committed bytes are the original, S-0024).
+- **Bears on:** S1.1 item 1 (its status document); no CLAIM.
+
+---
+
+## S-0026 — Roman Bezrukavnikov and Michael Finkelberg, "Equivariant Satake category and Kostant-Whittaker reduction", arXiv:0707.3799 **v2** (the original of Route A item 2)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 2 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 11, 2026-10-14.
+- **Citation (from the abstract page):** Roman Bezrukavnikov, Michael Finkelberg, "Equivariant
+  Satake category and Kostant-Whittaker reduction", arXiv:0707.3799, Representation Theory
+  (math.RT); v1 25 July 2007; **v2 submitted 18 February 2008** (comment: "31 pages, to appear in
+  Moscow Math J; some typos corrected"); four versions in all.
+- **Primary:** abstract page <https://arxiv.org/abs/0707.3799v2>, accessed 2026-10-14T01:58:05Z
+  (HTTP 200), 40,691 bytes, SHA-256
+  `d37bcb174d90c18aad1e65ab0a38ae0849c6931c05bf45fcf475be5b0f187699`; e-print
+  <https://arxiv.org/e-print/0707.3799v2> (`application/gzip`), 40,240 bytes, SHA-256
+  `3f9593e18a00f30685f66f1e4d920fbf2a4427e94b23beb2032ccd91d47d3053` — a single gzipped TeX file.
+- **Content used:** Theorem 1 b) (TeX label `normocon`) — statement and proof — is the item's
+  claim of record; the locating sentences are quoted in `RECORD.md`.
+- **Licence:** the abstract page's licence link is `http://arxiv.org/licenses/assumed-1991-2003/`,
+  arXiv's "Assumed non-exclusive license to distribute" (page retrieved 2026-10-14T02:00:31Z,
+  1,988 bytes, SHA-256 `dfe5bdbd72f269aaf1cbbb2fcae418267571b6df6fe6c9e139dc73918b37fe13`): "It
+  was assumed that … a license equivalent to http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+  was granted by the act of submission." Equivalent to the arXiv non-exclusive licence, which
+  ADR-0003 D5 lists as `external`: **no copy committed**; the hash above pins what was read.
+- **Bears on:** S1.1 (`groundtruth/` item); no CLAIM.
+
+---
+
+## S-0027 — Bezrukavnikov and Finkelberg, arXiv:0707.3799 **v3** — the correcting version and its comment (the status document of Route A item 2)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0026; **v3 submitted 25 February 2026**, comment: "This version corrects a
+  mistake in the proof of Theorem 1b) and a typo in Proposition 7. All the statements are
+  unchanged from the previous version. We thank Jakub Löwut for pointing out the issue in Theorem
+  1b)". (v4, 9 September 2026, adds "v4: section 5.2, and a typo in section 3.3 corrected"; v4 is
+  not the notice for Theorem 1 b) and was not retrieved.) This comment, with the corrected
+  version it belongs to, is the status document SD12 requires.
+- **Primary:** abstract page <https://arxiv.org/abs/0707.3799v3>, accessed 2026-10-14T01:58:05Z
+  (HTTP 200), 41,001 bytes, SHA-256
+  `d2444a7842fd6e12e5519e085030c8f8554ee93b2960b7955dc6f68b06dd6e1b`; e-print
+  <https://arxiv.org/e-print/0707.3799v3> (`application/gzip`), 41,505 bytes, SHA-256
+  `0818ab63cef2ca7a4a3760ccbee0e1c78175be383b4367c950df9e46cbf65a00` — a gzipped tar holding
+  `qsatake_final_corrected.tex`.
+- **Content used:** the v3 proof of Theorem 1 b) carries the footnote "The proof of this part of
+  the Theorem in the published version contained a mistake, here we present a corrected proof.
+  We thank Jakub Löwit for pointing out the issue." and replaces the v2 paragraph with an
+  explicit construction of a W-equivariant identification of the connected components of the
+  affine Grassmannian (via the coweight-lattice action and an affine blow-up), ending "It is
+  easy to see that the resulting isomorphism is independent of the choice of λ and hence it is
+  W-equivariant." The statement of Theorem 1 is unchanged apart from notation (`Gr` → `Gr_G`,
+  `π_1(G)^` → `π_1(G)`). The rest of the diff is notational (`\epf` → `\hfill $\Box$`) and the
+  Proposition 7 typo the comment names.
+- **Licence:** Creative Commons Attribution 4.0 on the v3 abstract page; copy not committed.
+- **Bears on:** S1.1 item 2 (its status document); no CLAIM.

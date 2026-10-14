@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8",
+        "file": "original-0706.0357v70.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 8236,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "committed"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-63e23a952084",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-0706.0357v70.tar.gz",
+      "storage": "committed"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma 1.1, statement: the identity M(s, a/b) = - sum over chi of A(a, b; chi) (L'/L)(s, chi) for all s (v70); v71 adds the term - sum_{q | b} sum_{l >= 1} (log q) q^{-sl} e^{-2 pi i a q^l / b} on the left",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma 1.1, proof: the character orthogonality formula (valid for (a, m) = 1, i.e. for n coprime to the modulus) applied to every n, including prime powers q^l with q | b, for which every chi(n) vanishes",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:0706.0357v70 (the original; corrected by v71, 7 June 2026)",
+    "licence": "CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/, stated on the arXiv abstract page of v70)",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0024",
+      "S-0025"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0025",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0025"
+    }
+  },
+  "config_hash": "63e23a9520843809c8f6b1d538d2ab2f1c3609dd5c6889b3779ea417a3567013",
+  "engine_commit": "30e2a4aa06368b8a2ba1cc1a8164c4d22229a0cd",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma 1.1, statement: the identity M(s, a/b) = - sum over chi of A(a, b; chi) (L'/L)(s, chi) for all s (v70); v71 adds the term - sum_{q | b} sum_{l >= 1} (log q) q^{-sl} e^{-2 pi i a q^l / b} on the left"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma 1.1, proof: the character orthogonality formula (valid for (a, m) = 1, i.e. for n coprime to the modulus) applied to every n, including prime powers q^l with q | b, for which every chi(n) vanishes"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0025",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 1, Session 11. Ground truth as the authors' v71 comment documents it, confirmed against the v70->v71 TeX diff; the argument is in RECORD.md. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
