@@ -10,7 +10,10 @@ verdict on any paper's mathematics beyond what its own status document says (SD3
 
 - **Window (D8):** correcting version submitted 2023-01-01 through 2026-09-30, inclusive. The
   window end precedes the 6 October 2026 release (S-0001), so the stream cannot overlap the
-  contact era; nothing AI-generated is examined (SD8; D2 criterion 6).
+  contact era; nothing AI-generated is examined (SD8; D2 criterion 6). **Precision (ADR-0003 D8,
+  Al, 2026-10-14):** the window bounds the date of the correcting version, never the paper's
+  original submission; ascending arXiv id therefore puts the oldest papers first — the head of
+  this stream is 2007–2012 submissions corrected in the window, by design.
 - **Ordering (D8):** ascending arXiv identifier of the paper, as a plain string sort
   (`YYMM.NNNNN` ids first, then any `archive/YYMMNNN` id). **No skipping:** every candidate the
   finder lists is examined in this order and logged.

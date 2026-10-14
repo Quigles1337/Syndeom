@@ -1,6 +1,9 @@
 # STATE
 
-- **Updated:** 2026-10-14 UTC (Session 11 — the first Route A harvest: finder built and run
+- **Updated:** 2026-10-14 UTC (Session 12 — Al's D8 precision recorded in ADR-0003 and the
+  harvest-log header: the window bounds the correcting version's date, so ascending id puts the
+  oldest papers first; nothing else changed, NEXT unchanged. Session 11 — the first Route A
+  harvest: finder built and run
   (2,472 candidates), candidates 1–2 examined in order and both admitted and ingested
   (`groundtruth/` now holds two `raw/1` items with records); S-0021..S-0023 registered for the
   position paper's §0 disclosure; memory hazard added. Session 10 recorded Al's rulings of
@@ -41,15 +44,16 @@
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
-  2026-10-14 02:07:11Z–02:18:18Z (Session 11, detached run with a log) on the Session-11 harvest
-  tree with every edit staged, and again on the final tree before the harvest commit** — Lean `Build completed successfully (8926 jobs)`,
+  2026-10-14 02:34:42Z–02:45:22Z (Session 12, detached run with a log) on the Session-12 tree with
+  every edit staged, and again on the final tree before the Session-12 commit** — Lean `Build completed successfully (8926 jobs)`,
   axioms `[propext]`; Rust fmt and clippy clean, 29/29 tests (24 manifest + 5 ingest); 54 text files `i/lf` + 10 binaries;
   registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 27/27). Earlier GREEN runs:
   Session 4 (before the S0.6 commit), Session 5 (at `132788c`), Session 6 (at `2b7c573` and on its
   own tree), Session 7 (22:54:28Z–23:04:29Z, cold OS cache), Session 8 (23:21:33Z–23:31:44Z and
   23:32:45Z–23:33:19Z), Session 9 (23:35:52Z–23:36:23Z and 23:36:55Z–23:37:25Z) and Session 10's
   rulings commit (2026-10-14 00:07:19Z–00:17:54Z) and producer commit (00:43:55Z–00:52:27Z and
-  00:54:48Z–00:55:45Z, detached), each on its own tree before its commit. A run the harness
+  00:54:48Z–00:55:45Z, detached) and Session 11 (02:07:11Z–02:18:18Z and 02:19:15Z–02:21:08Z,
+  detached), each on its own tree before its commit. A run the harness
   killed for system memory (00:21:40Z, in the axiom audit) is not a GREEN run; since then the
   gate is run detached with a log (HANDOFF Session 10). **Standing instruction:** update this line at every GREEN run a HANDOFF entry
   records, so it never lags HANDOFF. **Timing:** about 30 s with a warm `lean/.lake` *and* a warm

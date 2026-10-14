@@ -1575,3 +1575,39 @@ STOP-REASON: context budget — the session's one task advanced to a clean bound
 candidates fully recorded, the log's resume point set). Repo green on the committed tree (gate
 run detached with a log, every edit staged, before the commit); this commit pushes to
 `origin/main`.
+
+SESSION: 2026-10-14 UTC @ 81f4f98 (Session 12 — Al's D8 precision recorded; the commit adding this
+entry lands on top of 81f4f98)
+LAUNCH CONTEXT (SD15; not an exam session): Al's follow-up to Session 11 in the same
+conversation — an ADR-0003 D8 precision and a harvest-log note; no ruling, no build. Not cold.
+No memory written.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open; unchanged from Session 11.
+PLAN NOTE: one thing — the precision Al ordered, recorded where ADR amendments go (D8 bullet,
+Amendments entry) and in the log header. The inherited NEXT-SINGLE-ACTION survived unchanged.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `81f4f98`, clean; the D8 window bullet, the ADR's Amendments
+  tail and the log's window bullet located and read.
+- ADR-0003 D8 gains a **Precision** bullet (Al, 2026-10-14, after Session 11): the window bounds
+  the date of the correcting version (Route A) or notice (Routes B, C), never the paper's original
+  submission; ascending id therefore puts the oldest papers first, by design. Amendments entry
+  added. `groundtruth/HARVEST-LOG.md`'s window bullet carries the same precision and consequence.
+  STATE's Updated line names the session. No decision changed; Session 11 applied the window this
+  way already (both admitted items are 2007 submissions corrected in 2026).
+- Evidence run, detached with a log (`gate-12a.log`), every edit staged: 02:34:42Z–02:45:22Z;
+  64 tracked files clean, S- 27/27, `RESULT: ALL PASS`, `GATE: GREEN`, `rc=0`; re-run the same
+  way on the final tree (this entry and STATE's build line in) before the commit.
+BELIEF DELTAS: none beyond Session 11's — the precision states what the harvest already did.
+CONFUSIONS: none.
+HONESTY CHECK: no register entry changed; no item touched. Downgrades: none.
+LEAKAGE CHECK: nothing under `contact/` opened; nothing AI-generated cited; no design decision
+taken (a wording precision only). Verdict: no leakage.
+DETERMINISM CHECK: no results. Nothing to quarantine.
+MANIFEST CHECK: no artifact touched; the two `groundtruth/` manifests are unchanged (digests as
+committed in `81f4f98`). "Proven" applied to nothing.
+DRIFT CHECK: no statement about any manuscript; no understanding claims; no detectors; no
+referee contact. Scope: the precision and its two records.
+NEXT-SINGLE-ACTION: unchanged — S1.1, the second Route A harvest session resuming at candidate 3
+(`0812.3181`), exactly as STATE.md states it.
+ESCALATIONS: none new; the S-0019 apache.org note and SD13 carry unchanged.
+STOP-REASON: natural boundary — the follow-up recorded. Repo green on the committed tree (gate run
+detached with a log, every edit staged, before the commit); this commit pushes to `origin/main`.
