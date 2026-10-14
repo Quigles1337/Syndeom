@@ -1,0 +1,13 @@
+{
+  "sources": ["S-0000"],
+  "item": "golden fixture A: stand-in original, boolean statement truth (not a real item)",
+  "licence": "CC0-1.0",
+  "status": {"kind": "erratum", "reference": "S-0000"},
+  "statement_status": {"value": true, "method": "source-document", "reference": "S-0000"},
+  "proof_status": "invalid",
+  "flaws": [
+    {"instance": 1, "class": "FLAW-0005", "sub_variant": null, "locator": "Lemma 2.1, proof, first display", "severity": "gap", "lean_catchable": "YES-KERNEL", "dials": {}}
+  ],
+  "file": {"name": "original.bin", "storage": "external"},
+  "notes": "ADR-0003 D6 golden fixture A; S-0000 is a placeholder, not a register entry"
+}

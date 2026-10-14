@@ -1212,3 +1212,201 @@ ESCALATIONS:
 STOP-REASON: natural boundary — the NEXT-SINGLE-ACTION done as specified. Repo green on the
 committed tree (gate run with every edit staged, before the commit); this commit pushes to
 `origin/main`.
+
+SESSION: 2026-10-13 UTC, running into 2026-10-14 UTC @ 226a51c (Session 10 — Al's rulings of
+2026-10-13 on ADR-0003 (i)–(v) and the SD15 audit recorded and committed as `226a51c` on top of
+`4fe43a4`; then the `s1_ingest` producer built, verified, blocked for a while when the harness
+stopped its gate run for system memory, then gated GREEN detached on Al's order and committed as
+the commit adding this entry)
+LAUNCH CONTEXT (SD15; not an exam session): the §6 Session-N resume prompt plus Al's rulings,
+in the same conversation as Sessions 7–9. Not cold. Memory written this session: the trim Al
+ordered (below) and nothing else; no hazards added.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1: procedure decided (ADR-0003, now
+ruled); **the ingest producer built (ADR-0003 D6)**; no item ingested. Gate S0 closed and, since
+this session, **confirmed not provisional**.
+PLAN NOTE: two things in the order Al set — first the rulings of record (as Sessions 2 and 7 did:
+ADR-0000 addendum, each amended ADR, STATE), then the inherited NEXT-SINGLE-ACTION (the producer,
+as STATE stated it, against the schema as amended by ruling (ii)). Two commits, one HANDOFF entry
+(the Session-3 precedent). The inherited NEXT survived ORIENT unchanged.
+ADVANCED:
+- ORIENT: toplevel `C:/Users/LEET/Syndeom`, `origin` the GitHub remote, `symbolic-ref` →
+  `main`, HEAD = `origin/main` = `4fe43a4`, clean. Read: the constitution in full as amended by
+  ADR-0004; STATE; HANDOFF Session 9; `PROGRAM/DECISIONS/` (ADR-0005 confirmed free); ADR-0001's
+  schema-evolution text (Context line on structural compatibility; D9's "schema evolution is a new
+  version string; consumers pin the string they understand"; the Session-4 Amendments precedent);
+  SD14; `engine/manifest/src/lib.rs` and `tests/goldens.rs` in full; the memory file.
+- **Rulings recorded** — ADR-0000 Addendum 3 (table: (i)–(v) and the SD15 audit, Al's words
+  quoted where load-bearing); ADR-0003 amended (Status; D3 admission of undetermined-truth items;
+  D5 licence sets per (iv); D8 prefix gate and D9 "prefix through arXiv id <last id processed>"
+  per (iii); Rationale resolutions; Amendments entry); **ADR-0001 amended** per (ii): nullable
+  `statement_status.value` iff `method: "undetermined"`, `correct` derived false, new rule
+  `null ⇒ proof_status invalid`, and the schema-string decision read from the rules — both SD14
+  and D9 say schema evolution is a new version string, no carve-out, so **`syndeom-manifest/2`**
+  from this amendment on with `/1` accepted for pre-amendment manifests (the D8 goldens unchanged
+  and valid); the alternative reading recorded and rejected. **ADR-0005** written (SD15 count-only
+  disclosure: D1 what is verbatim, D2 count-only, D3 the name-search check, D4 pass criterion
+  unchanged, D5 Session 6 retroactively conformant); SD15's sentence amended citing it;
+  constitution header and footer Amendments lines updated. STATE: Updated line; Gate S0 line
+  (confirmed, not provisional); constitution line (amended twice; three addenda); manifest-schema
+  line (`/2`); memory-policy paragraph (ADR-0005; the trim); ADR numbers (ADR-0006 next free);
+  the S3 obligation for undetermined items beside ADR-0004's; the two escalations resolved.
+- **Crate change for (ii)** (`syndeom-manifest`): `MANIFEST_SCHEMA = "syndeom-manifest/2"`,
+  `MANIFEST_SCHEMA_V1`, `MANIFEST_SCHEMAS`; `StatementStatus.value: Option<bool>` (key required,
+  null allowed); `StatementMethod::Undetermined`; `Manifest::check` accepts both strings and adds
+  three rules (null iff undetermined; null not under `/1`; null ⇒ invalid), derives `correct` as
+  `value == Some(true) && valid`; `tests/goldens.rs` pins the D8 example as `/1` with `Some(true)`
+  and adds `d4_amendment_2026_10_13_null_statement_truth` (passes under `/2`, key must be present,
+  rejected under `/1`, null⇔undetermined both ways, null forces invalid, `correct` stays derived).
+  `cargo fmt`, clippy `-D warnings` clean, **24/24 tests**.
+- **Memory trim (SD15 audit (a))**: the "Hard invariants" paragraph removed from the SYNDEOM
+  memory file; the `fmt --check` hazard line kept; nothing else changed. Digests: Session 6
+  `feff158ccb872ca5627d393fc91aa544cca4a60d25d6af393282112f7ea8f798` (as recorded in HANDOFF
+  Session 6); after the Session 7 and 9 hazard additions, before the trim,
+  `9a31f8169af05f4ac9fb4fd49fcf237167996fb1b95aad240fc5b8868ceeddbb`; **after the trim
+  `bc6de3600c87f7c5fb5f088a3c305dfc434e0c694dea4006791c5a5d75a6f8f1`** (7,453 bytes). A grep of
+  the file for phase, gate status, NEXT, escalation, CLAIM, ADR, commit and session tokens matches
+  only the policy sentence that forbids them.
+- Evidence run for the first commit (§4.1): `bash scripts/check.sh` with every recording edit
+  staged, 2026-10-14 00:07:19Z–00:17:54Z (cold OS cache again): `Build completed successfully
+  (8926 jobs)`; audit `[propext]`; fmt and clippy clean; `cargo test` 24 passed, 0 failed;
+  `git ls-files --eol` clean; `check_registers.py` 50 tracked files clean, Q 17/17, SD 17/17,
+  FLAW 14/14, CLAIM 7/7, S- 20/20; `RESULT: ALL PASS`; `GATE: GREEN`. Commit **`226a51c`**
+  `[S1][ADR-0000] record Al's rulings of 2026-10-13 on ADR-0003 (i)-(v) and the SD15 audit;
+  ADR-0005; manifest/2`, pushed; `origin/main` = `226a51c`.
+- **Producer built — the NEXT-SINGLE-ACTION (ADR-0003 D6).** `engine/ingest/` added to the
+  workspace (`members = ["manifest", "ingest"]`; `Cargo.lock` gains only the `syndeom-ingest`
+  package — no external dependency, S-0008 unchanged). `src/main.rs`: arguments parsed by hand
+  (no new crate); `ItemConfig` with `deny_unknown_fields` — `sources`, `item`, `licence`,
+  `status`, `statement_status`, `proof_status`, `flaws[]` with a `raw/1` `locator`, `file {name,
+  storage}`, `notes`; `manifest.config` is the file minus `notes` (notes never enter the id);
+  ADR-0003 shape checks (S1.1 status kinds `erratum` | `retraction`; `proof_status` invalid by
+  construction; no `regenerable` storage; a bare file name; at least one flaw; classes
+  FLAW-0001..0014 for taxonomy 0.1.0; non-empty locators; `S-NNNN` sources; `item` and `licence`
+  non-empty); the manifest built with `MANIFEST_SCHEMA` (`/2`), `origin: "ground-truth"`,
+  `generator {s1_ingest, 0.1.0, none}`, `seed null`, `toolchain null`, a `raw/1` file record with
+  `content_hash` and `n_bytes`, ground truth with `Location::Raw` locators, `commanded {}`,
+  `achieved {}`, vacuous fidelity; `Manifest::check` with the bytes **before any write** (exit 2
+  listing every problem — the crate's rules including null ⇒ invalid); `write_or_refuse`
+  (identical bytes are fine, different bytes under the same id exit 3 and nothing is overwritten,
+  ADR-0001 D2); `--dry-run` prints the disk JSON and writes nothing. **Goldens** (`tests/golden.rs`):
+  fixture `original.bin` 72 bytes `915d3ed6d9f7e388466bd03ea1f11f603fa57477fdf3724e6327537698ad1390`;
+  config A (boolean truth, `external`) and B (null truth, `committed`), each citing the placeholder
+  a four-zero placeholder id and saying so; config hashes `d2134e7fd2c3f7042d08f00f5a6536322e145f110722247532932a9337f8f0a7`
+  and `4f5d4e93adaa08b8191c53d7ccfa2a57c4f49126822c84b9b9ce2a6e22ac59e0` computed independently
+  in Python (sorted-key JCS + SHA-256) and reproduced by the binary; ids
+  `s1_ingest-v0.1.0-d2134e7fd2c3` and `s1_ingest-v0.1.0-4f5d4e93adaa`; manifest digests pinned
+  from the first run after every field had been checked against those values: A
+  `1f2cf7b9230a74d26f4aff5128140ad997a53d76ca562c1e06a39224bf951f63` (2,305 bytes), B
+  `451bde2d114eacdde2b8b7aeb3404efdb6b594121e4835614a19075e609b8340` (2,929 bytes). Tests: the
+  fixture bytes; golden A (every field, external copies nothing, a second run is idempotent);
+  golden B (bytes copied verbatim, a literal `null` written with the key present); dry-run writes
+  nothing; refusals — exit 2 for a valid proof on an S1.1 item, a class outside 0.1.0,
+  `regenerable` storage, a null truth with a non-undetermined method (the crate's rule reached
+  through the binary), an unknown key; exit 1 for a malformed engine commit; exit 3 for a
+  same-id byte conflict, with the existing file untouched. `cargo fmt` clean; clippy
+  `-D warnings` clean after one dead-code warning was resolved by making the producer validate
+  `sources`, `item` and `licence`; **5/5 ingest tests, 24/24 manifest tests**, sandboxes under the
+  OS temp dir removed after each test. `groundtruth/README.md` now names the producer and the
+  `RECORD.md` / `HARVEST-LOG.md` convention.
+- STATE: S1.1 row (producer built, goldens), S1.3 row (the `raw/1` producer exists; the
+  derivation producer and its ADR do not); NEXT replaced by the first Route A harvest session,
+  steps (a)–(e), executable cold.
+- **Second commit NOT made — the gate run on the staged producer tree was stopped by the harness.**
+  Foreground verification before the gate: `cargo fmt --all --check` clean, `cargo clippy
+  --all-targets --all-features -- -D warnings` clean, `cargo test` 5/5 + 24/24 (00:20:14Z–00:20:16Z);
+  `git ls-files --eol` shows every new file `i/lf`; `check_registers.py` with the producer staged:
+  56 tracked files clean, all cross-references resolve, `RESULT: ALL PASS`. The full gate started
+  00:21:40Z, completed `lake build` (`Build completed successfully (8926 jobs)`), and was in the
+  axiom audit (`lake env lean Audit.lean`, loading Mathlib's oleans; lean.exe above 3.2 GB) when the
+  harness killed the shell at about 00:30Z because the machine was critically low on memory. At
+  00:32:39Z the child `lean.exe` (3.2 GB) and two `lake.exe` were still listed by `tasklist`; by
+  the next check, seconds later, all three had exited on their own and free memory was 6.7 GB —
+  the executor stopped nothing. The harness forbids restarting the stopped command unasked, so
+  **the producer is left staged and
+  uncommitted in the working tree; `origin/main` is green at `226a51c`.** The gate must run GREEN
+  on this tree before the commit (Al's instruction and SD9); the commit message is ready in the
+  executor's scratchpad and reproduced in STATE's NEXT. Nothing on `main` is broken.
+- **Resolved in the same conversation on Al's order** ("run gate with a log in the background in a
+  separate powershell"): the gate ran detached from the session's shells — `Start-Process` of Git
+  Bash (`C:\Program Files\Gitinash.exe`; the `bash` on PowerShell's PATH is the WSL stub
+  `C:\WINDOWS\system32ash.exe`, which exits at once) on a four-line wrapper script writing to
+  `gate-10c.log` — 00:43:55Z–00:52:27Z on `226a51c` with the 11 producer files staged: `Build
+  completed successfully (8926 jobs)`; audit `[propext]`; fmt and clippy clean; `cargo test`
+  5/5 ingest + 24/24 manifest; `git ls-files --eol` clean; `check_registers.py` 56 tracked files
+  clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 20/20; `RESULT: ALL PASS`; `GATE: GREEN`;
+  `rc=0`. The gate was then re-run the same way on the final tree (this entry and STATE's lines
+  updated) before the commit; the producer is committed as the commit adding this entry.
+BELIEF DELTAS:
+- "Schema evolution is a new version string" has no proportionality clause, and reading it as
+  written costs almost nothing: two accepted strings and three conditional rules. Evidence: SD14,
+  ADR-0001 D9, the crate diff. Consequence: `/2` is the current schema; a consumer that only knows
+  `/1` is told so by the string, which is the whole point of the rule.
+- A nullable truth value is not a hole in the schema but the triage case the charter describes
+  (§0.2: truth versus triage); S-0015's "we do not know whether it is true" is exactly an item the
+  corpus wants. Evidence: ruling (ii) and the S3 obligation it carries. Consequence: such items
+  count in proof-flaw cells only.
+- Overruled is cheap when the record was a flag: (iv) changed one bullet, and the reason of record
+  is Al's, quoted. Evidence: ADR-0003 D5. Consequence: keep flagging choices rather than deciding
+  them silently.
+- A producer that "decides nothing" still needs a shape layer the schema does not have: the crate
+  accepts any `S-NNNN`, any of four status kinds and any well-formed class; ADR-0003's narrower
+  admissions (two status kinds, fourteen classes, invalid by construction) have to live in the
+  producer. Evidence: `check_shape` versus `Manifest::check`. Consequence: ADR-0001 is enforced in
+  the crate, ADR-0003 in the producer; both refuse, neither repairs.
+- `notes` must stay outside `config`, or editing a note changes the artifact id. Evidence:
+  ADR-0001 D2 (id = f(producer, config, seed)) and D4 ("never load-bearing"). Consequence: the
+  config file's `notes` key is lifted to `manifest.notes`.
+- A manifest digest pinned from a first run is a weaker golden than a hand-computed one; it is
+  acceptable only because every load-bearing field was first checked against an independently
+  computed value. Evidence: the test preamble says exactly that. Consequence: a change to the disk
+  form fails the digest and must re-justify it in the open.
+CONFUSIONS:
+- One ADR-0003 edit missed its anchor (the D3 pending-truth sentence had wrapped differently from
+  the draft in the scratchpad); re-read and re-targeted. Cost: one round. Doc fix: none needed —
+  always grep the committed text, not the draft.
+- clippy's dead-code warning on three parsed-but-unread config fields: resolved by validating
+  them, which the producer should have done anyway. Cost: one build. Doc fix: none.
+- The register checker flagged the goldens' placeholder source id when this entry first named it
+  as a literal: a `S-` + four digits token in any `.md` must be a defined entry. Fixed by
+  describing the placeholder instead of writing it; the JSON fixtures are not scanned. Cost: one
+  check run. Doc fix: this line.
+- Whether the binary should read the engine commit from `git` itself: no — it is an argument, so
+  the goldens are deterministic and the runbook passes `$(git rev-parse HEAD)`; STATE's NEXT says
+  so.
+HONESTY CHECK: no CLAIM or SOURCE changed status; FLAWS untouched. S-0005's INGESTED state is
+unchanged by ruling (iv), as the ruling says. The D8 goldens are byte-identical and still pass as
+`/1`. ADR-0001's amendment records the alternative reading it rejected. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the only mentions are ADR-0003's exclusions and
+STATE's S5 notes, unchanged. No detector or threshold exists. The producer writes manifests from
+inputs and hashes and decides nothing. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. Every digest above is regenerable by
+`sha256sum`; the producer's goldens are fixed bytes and fixed configs with independently computed
+hashes (Python JCS cross-check for the config hashes). Nothing to quarantine.
+MANIFEST CHECK: no real artifact was created — the producer's golden directories live in the test
+sandbox under the OS temp dir and are deleted after each test; their configs cite a placeholder
+source id (four zeros, no such entry) and say so in `notes`. Nothing synthetic labeled real; "proven" applied to nothing.
+DRIFT CHECK: no statement about any real manuscript (SD3); no understanding claims (SD17); no
+detectors, so no detector-shopping; no referee contact (SD13). Scope: the rulings, the schema
+amendment they required, and the producer NEXT named.
+NEXT-SINGLE-ACTION: S1.1 — the first Route A harvest session under ADR-0003 D8 as amended (a
+prefix is enough), exactly as STATE.md now states it: (a) create `groundtruth/HARVEST-LOG.md`
+with the D7 header (query, window 2023-01-01..2026-09-30, ascending arXiv id, "last candidate
+processed: none"); (b) the `lab/` candidate finder — standard library only, the two S-0015
+stage-1 regexes over the arXiv API's Atom feed for `cat:math.*` in the window — run and its
+output digest logged; (c) candidates examined in ascending arXiv id, none skipped, each against
+ADR-0003 D2's seven criteria, every verdict logged with its reason; (d) per admitted item: the
+S-entries for original and notice in SOURCES.md before ingestion (licences per D5 as amended),
+the per-item config, `RECORD.md` with the D3 class argument, then from `engine/`
+`cargo run -p syndeom-ingest -- --config <item.json> --bytes <original> --root ..
+--engine-commit $(git rev-parse HEAD)`; (e) stop at the session's budget, the log's last
+candidate being the resume point. Commit `[S1][ADR-0003] harvest Route A prefix through arXiv
+id <last id processed>: <n> admitted`; update the Gate S1 table; set NEXT to the next prefix.
+ESCALATIONS:
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers (S-0019).
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+- Nothing else awaits Al: ADR-0003's five choices and the SD15 audit are resolved.
+STOP-REASON: natural boundary — the rulings recorded and the NEXT-SINGLE-ACTION done. One
+blocker on the way, recorded above: the harness stopped the producer's gate run for low system
+memory; on Al's order the gate ran detached and GREEN. Repo green on each committed tree (gate
+run with every edit staged, before each commit); both commits push to `origin/main`.

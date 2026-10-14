@@ -186,6 +186,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "syndeom-ingest"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "syndeom-manifest",
+]
+
+[[package]]
 name = "syndeom-manifest"
 version = "0.1.0"
 dependencies = [

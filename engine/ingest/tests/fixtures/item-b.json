@@ -1,0 +1,14 @@
+{
+  "sources": ["S-0000"],
+  "item": "golden fixture B: stand-in original, undetermined statement truth (not a real item)",
+  "licence": "CC-BY-4.0",
+  "status": {"kind": "retraction", "reference": "S-0000"},
+  "statement_status": {"value": null, "method": "undetermined", "reference": "S-0000"},
+  "proof_status": "invalid",
+  "flaws": [
+    {"instance": 1, "class": "FLAW-0001", "sub_variant": "propagated", "locator": "Theorem 1.3, proof, equation (7)", "severity": "fatal", "lean_catchable": "YES-KERNEL", "dials": {}},
+    {"instance": 2, "class": "FLAW-0005", "sub_variant": null, "locator": "Theorem 1.3, proof, application of Lemma 2.4", "severity": "gap", "lean_catchable": "YES-KERNEL", "dials": {}}
+  ],
+  "file": {"name": "original.bin", "storage": "committed"},
+  "notes": "ADR-0003 D6 golden fixture B (the null case of the 2026-10-13 amendment); S-0000 is a placeholder"
+}
