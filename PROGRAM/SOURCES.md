@@ -1551,3 +1551,137 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
   statement.
 - **Licence:** none stated for the stub; nothing retrievable to commit.
 - **Bears on:** S1.1 item 17 (its status document); no CLAIM.
+
+---
+
+## S-0050 — David Ayala and John Francis, "Factorization homology of topological manifolds", arXiv:1206.5522 **v5** (the original of Route A item 18)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 19 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 18, 2026-10-14.
+- **Citation (from the abstract page):** David Ayala, John Francis, "Factorization homology of
+  topological manifolds", arXiv:1206.5522, Algebraic Topology (math.AT; cross-listed math.GT,
+  math.QA); v1 24 June 2012, v2 29 August 2013, v3 22 April 2014, v4 13 May 2015, **v5 submitted
+  18 August 2015** (comment "37 pages. Accepted for publication by Journal of Topology"); v6
+  23 June 2024 (S-0051). Journal reference on the abstract page: J. Topol. 8 (2015), no. 4,
+  1045–1084; related DOI 10.1112/jtopol/jtv028. The published version was not retrieved; the
+  original of record is v5, the accepted version.
+- **Primary:** abstract page <https://arxiv.org/abs/1206.5522v5>, accessed 2026-10-14T19:45:32Z
+  (HTTP 200), 43,810 bytes, SHA-256
+  `64a931cffd932d0b932075cd361ca2a30c1ff4e90090dab1fa0b93adcb114859`; e-print
+  <https://arxiv.org/e-print/1206.5522v5> (`application/gzip`), 43,241 bytes, SHA-256
+  `dc5828b3f1403bfb32140ecbc6687c634ef712456003882373a551eede869a4f` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** Proposition 5.3 (Subsection 5.1, "Factorization homology with coefficients in
+  commutative algebras"; unlabelled in v5 — the third numbered environment of Section 5, after
+  Proposition 5.1 `tensor` and an unlabelled Corollary 5.2, so the comment's "Proposition 5.3" is
+  this one) — its statement and proof, including the convergence step that cites Dwyer [Dw] and
+  Hilton–Mislin–Roitberg–Steiner [HMRS]; quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v5 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 18); no CLAIM.
+
+---
+
+## S-0051 — Ayala and Francis, arXiv:1206.5522 **v6** — the correcting version and its comment (the status document of Route A item 18)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0050; **v6 submitted 23 June 2024**, comment: "37 pages. Corrected
+  Proposition 5.3".
+- **Primary:** abstract page <https://arxiv.org/abs/1206.5522v6>, accessed 2026-10-14T19:45:32Z
+  (HTTP 200), 43,703 bytes, SHA-256
+  `0ee83fd6aa33e29473f00b09ee3bc931b4b516826eba64dd22c8efccf341dbbf` (re-fetched at about
+  19:49Z to read the journal fields; byte-identical); e-print
+  <https://arxiv.org/e-print/1206.5522v6> (`application/gzip`), 43,658 bytes, SHA-256
+  `7a5c8411a01861b5b3177765c3f247dfcd53b8e6c7f9755cf4e982819b0129c4` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** the comment; the v5 → v6 TeX diff (61 lines, the whole of it): the
+  acknowledgement's added sentence "We thank Amabel Wilson and Theo Johnson–Freyd for
+  correcting the hypotheses in the statement of Proposition 5.3"; the restated Proposition 5.3
+  (now labelled `prop.5.3`), whose hypotheses "Let M be an n-manifold, and let X be a nilpotent
+  n-connective space of finite type over R such that π_n X is finite" replace v5's "Let M be an
+  n-manifold. Let X be a nilpotent space whose first n homotopy groups are finite, |π_i X| < ∞
+  for i ≤ n, and let R be any commutative ring" (the conclusion is unchanged); and its proof's
+  two changed steps — the convergence step, which now states Dwyer's criterion as requiring a
+  connected base and a nilpotent action of π₁ of the base on the homotopy of the fibre and
+  derives both from n-connectivity (a semi-direct-product computation of π₁(X^{S^k})), and the
+  finiteness step, which now reads "Since π_n X is finite … Since they are additionally finite
+  CW complexes and X is finite type, the homology groups … are finite rank over R". The
+  AI-assistance scanner reports no hit on either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v6 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 18 (its status document); no CLAIM.
+
+---
+
+## S-0052 — César Galindo, "On braided and ribbon unitary fusion categories", arXiv:1209.2022 **v2** (the original of Route A items 19 and 20)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 21 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 18, 2026-10-14.
+- **Citation (from the abstract page):** César Galindo, "On braided and ribbon unitary fusion
+  categories", arXiv:1209.2022, Quantum Algebra (math.QA); v1 10 September 2012, **v2 submitted
+  23 May 2013** (comment "The introduction have been improved"); v3 6 December 2024 (S-0053).
+  No journal reference or DOI on the abstract page; v3's remark speaks of "the published version
+  of this work", which was not identified or retrieved. A seven-page note. Abstract (v2): "We
+  prove that every braiding over a unitary fusion category is unitary and every unitary braided
+  fusion category admits a unique unitary ribbon structure."
+- **Primary:** abstract page <https://arxiv.org/abs/1209.2022v2>, accessed 2026-10-14T19:51:37Z
+  (HTTP 200), 38,028 bytes, SHA-256
+  `788378057c63d7645c1696b4cf801eb3e7317cc8ddf268a5e8b101dfe8b9be31`; e-print
+  <https://arxiv.org/e-print/1209.2022v2> (`application/gzip`), 7,300 bytes, SHA-256
+  `21f63ae00385cda7216c843cfc4730e994f1fe0c40f645bb49bb323a2456d0ed` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** Subsection 3.1, "The center of a unitary fusion category": the definition of
+  the unitary center 𝒵*(𝒞); Proposition 3.1 (TeX label `centro igual a centro unitario`) with
+  its proof; Theorem 3.2 (TeX label `braids are unitary`) with its proof; and Remark 2.1
+  (`remark polar`, the polar decomposition), which the proof of Proposition 3.1 invokes. The
+  theorem counter is per section and shared by propositions, lemmas, remarks and definitions;
+  Proposition 3.1 and Theorem 3.2 are the first two numbered environments of Section 3, so the
+  comment's numbering is v2's. Quoted in the two `RECORD.md` files.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v2 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 19 and 20); no CLAIM.
+
+---
+
+## S-0053 — Galindo, arXiv:1209.2022 **v3** — the correcting version, its comment and its remark (the status document of Route A items 19 and 20)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0052; **v3 submitted 6 December 2024**, comment: "In this version,
+  Proposition 3.1, which discussed the equality of the unitary center and the ordinary center,
+  has been removed. While these centers are equivalent as braided fusion categories, the unitary
+  center is generally a non-replete subcategory. The proof of Theorem 3.2 has been revised to
+  avoid reliance on this proposition".
+- **Primary:** abstract page <https://arxiv.org/abs/1209.2022v3>, accessed 2026-10-14T19:51:37Z
+  (HTTP 200), 38,328 bytes, SHA-256
+  `093d48181d3dd3b6590de732217d07016c19f2501c1956546ec523806f108de5` (re-fetched at about
+  19:54Z to read the journal fields, which are absent; byte-identical); e-print
+  <https://arxiv.org/e-print/1209.2022v3> (`application/gzip`), 7,668 bytes, SHA-256
+  `59b919282e273cadb2a12baa8a48b90cdb79468ce3beb6931cd0c37bc2fb89a7` — a single gzipped TeX
+  file (`main.tex`).
+- **Content used:** the comment; the v2 → v3 TeX diff (410 lines, most of them reflowed prose
+  and a reformatted bibliography): the acknowledgement's added sentence "The author is also
+  grateful to Tian Lan for identifying an error in Proposition 3.1 of the previous version"; the
+  unnumbered remark that stands where Proposition 3.1 stood — "In the published version of this
+  work, it was stated that the inclusion functor 𝒵*(𝒞) ⊆ 𝒵(𝒞), being an equivalence as
+  established in [GHR, Proposition 5.24] and [Mueg2, Theorem 6.4], implied that 𝒵*(𝒞) = 𝒵(𝒞).
+  However, thanks to an observation by Tian Lan, we now understand that, in general,
+  𝒵*(𝒞) ≠ 𝒵(𝒞); in other words, 𝒵*(𝒞) is not a replete subcategory of 𝒵(𝒞). To illustrate
+  this distinction, consider the following case, as pointed out by Tian Lan: URep(G), the
+  category of unitary representations of a finite group G, and Rep_ℂ(G), the category of all
+  complex representations of G. Although these two categories are equivalent as fusion
+  categories, they are not identical in terms of their objects. Indeed, Tian Lan provided a
+  counterexample using the category Hilb_G of finite-dimensional Hilbert spaces graded over G,
+  where we have URep(G) ⊊ Rep(G) ⊂ 𝒵(Hilb_G) and URep(G) ⊂ 𝒵*(Hilb_G), yet the inclusion
+  URep(G) ⊊ Rep(G) is not a replete subcategory. This nuance arises because every complex
+  representation is unitarizable (i.e., isomorphic to a unitary representation)."; and the new
+  proof of Theorem 3.2 (its statement unchanged), which works with the object (X, c_{−,X}) of
+  𝒵(𝒞), takes an equivalent object (Y, τ_{−,Y}) of 𝒵*(𝒞), identifies τ_{−,Y} with c_{−,Y} by
+  naturality, and applies the polar decomposition to the isomorphism f: X → Y in 𝒞 only. The
+  AI-assistance scanner reports no hit on either version.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 items 19 and 20 (their status document); no CLAIM.

@@ -2295,3 +2295,151 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+SESSION: 2026-10-14 UTC @ fd309a5 (Session 18 — the seventh Route A harvest: candidates 19–21
+examined, 2 admitted yielding 3 items, 1 rejected; the commit adding this entry lands on top of
+fd309a5)
+LAUNCH CONTEXT (SD15; not an exam session): Al's one-word order "resume" in the same conversation
+as Sessions 7–17 (continued after a context compaction), about eleven hours after the Session-17
+commit; the inherited NEXT-SINGLE-ACTION executed as STATE stated it. Not cold. Memory: two
+machine hazards added to the executor's memory file (no program state; SD15).
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 open. S1.1 in progress: prefix through arXiv id
+`1209.2022` (21 of 2,472 candidates; 15 admitted yielding 20 items, 4 rejected, 2
+found-but-unclassifiable); S1.3: twenty `raw/1` parents manifested, no derived artifact yet.
+Gate S0 closed and confirmed.
+PLAN NOTE: the inherited NEXT (the seventh harvest session, resuming at candidate 19), unchanged
+by ORIENT. One thing.
+ADVANCED:
+- ORIENT: HEAD = `origin/main` = `fd309a5`, clean; the constitution unchanged since `226a51c`;
+  the log's resume point read. Evidence gate at ORIENT, detached (`gate-18a.log`),
+  19:44:55Z–19:55:18Z (cold load after eleven idle hours), `GATE: GREEN`.
+- **Candidate list:** regenerated from the 73 cached pages — 0 API requests, 2,472 candidates,
+  digest identical to run 1 (`e164c0b1…2d48`).
+- **Candidates examined in ascending id, none skipped** (`groundtruth/HARVEST-LOG.md` rows 19–21):
+  - **19, arXiv 1206.5522** (Ayala and Francis; math.AT; J. Topol. 8 (2015), the original v5 the
+    accepted version), v6 (2024-06-23) "37 pages. Corrected Proposition 5.3", with the
+    acknowledgement's new sentence "We thank Amabel Wilson and Theo Johnson–Freyd for correcting
+    the hypotheses in the statement of Proposition 5.3": the 61-line diff shows the hypotheses
+    "X a nilpotent space whose first n homotopy groups are finite … R any commutative ring"
+    replaced by "X a nilpotent n-connective space of finite type over R such that π_n X is
+    finite", and the proof's convergence step rewritten so that Dwyer's criterion (a connected
+    base, a nilpotent π₁-action) is derived from n-connectivity. **Admitted**: Proposition 5.3 —
+    FLAW-0012 (fatal) + FLAW-0005 (Dwyer's theorem applied without its hypotheses, fatal),
+    `statement_status` false by source document with the `undetermined` reading named as the
+    alternative; the executor's reading of which hypothesis fails (the base X^{S^k} need not be
+    connected under the old hypotheses) is in the record, labelled. Original v5 (arXiv
+    non-exclusive → `external`); S-0050, S-0051; id `s1_ingest-v0.1.0-685b874cf579`. The v6
+    abstract page was re-fetched once (byte-identical) to read the journal fields.
+  - **20, arXiv 1208.2806** (Maakestad; math.AG; CC BY-NC-SA 4.0), v14 (2023-11-29) with a
+    cumulative comment "Example 2.21 added. A minor correction to Example 3.10. September 2022: …
+    March 2023: … Nov 2023: Example 4.5 and Theorem 4.6 on Calabi-Yau manifolds added": the
+    abstract pages of v9–v12 were fetched (four requests) and show the correction sentence
+    already on v9 (2020-11-12); the in-window v13→v14 diff (43 lines) adds an example, a theorem
+    and a note and corrects nothing. **Rejected (D8)**: the correcting version is outside the
+    window; D2.1 and D2.3 would fail as well (an Example, "minor correction"). Nothing stored.
+  - **21, arXiv 1209.2022** (Galindo; math.QA; a seven-page note), v3 (2024-12-06) "In this
+    version, Proposition 3.1, which discussed the equality of the unitary center and the ordinary
+    center, has been removed. While these centers are equivalent as braided fusion categories,
+    the unitary center is generally a non-replete subcategory. The proof of Theorem 3.2 has been
+    revised to avoid reliance on this proposition", with an acknowledgement to Tian Lan and a
+    remark in the proposition's place that prints the counterexample (Hilb_G: URep(G) ⊊ Rep(G)
+    inside the center, URep(G) inside the unitary center). **Admitted as two items**:
+    Proposition 3.1 ("𝒵*(𝒞) = 𝒵(𝒞)") — FLAW-0012 (fatal), `statement_status` false by the
+    `counterexample` method (the second use, after item 9), the failing step not named by the
+    notice and the executor's reading (the polar decomposition's unitary factor taken to be a
+    morphism of the center) labelled; Theorem 3.2 ("Every braiding of a unitary fusion category
+    is unitary", the note's first main result) — FLAW-0011 (gap) + FLAW-0005 (gap: the proof's
+    one step applies Proposition 3.1), `statement_status` **true** by source document (the
+    statement unchanged, re-proved directly in the center) — the second true-statement item,
+    after item 2. Shared original v2 (arXiv non-exclusive → `external`) and shared S-entries
+    S-0052, S-0053; ids `s1_ingest-v0.1.0-00f28e252823`, `s1_ingest-v0.1.0-a93badadec27`. The v3
+    abstract page was re-fetched once (byte-identical; no journal fields).
+  - **Counts by verdict, this session:** examined 3 — admitted 2 candidates yielding 3 items,
+    rejected 1, found-but-unclassifiable 0, pending 0, pending-truth 0, escalated 0.
+    **Cumulative:** examined 21 — admitted 15 candidates (20 items), rejected 4,
+    found-but-unclassifiable 2. **Last candidate processed `1209.2022`**; the session stopped at
+    its budget before candidate 22 (`1209.4040`).
+- Each admitted item: S-entries written **before** the producer ran (SD16); config with the D4
+  fields; `syndeom-ingest` at `fd309a5` wrote `manifest.json` (`syndeom-manifest/2`,
+  `engine_commit` `fd309a5…`, self-check passed; the ids reproduced independently in Python
+  before the producer ran; the three manifests re-read and their schema, commit, derivation,
+  flaw classes and severities, truth values and methods asserted); `RECORD.md` with the D3 class
+  argument, the alternatives considered, quoted locating sentences and licence basis.
+- STATE: Updated line; Gate S1 rows S1.1 (prefix through `1209.2022`, 21/15(20)/4/2) and S1.3
+  (twenty parents); registers line (S-0050..S-0053); build line; NEXT resumes at candidate 22
+  with the next three candidates' comments quoted and the cumulative-comment D8 lesson added.
+- Gates: the ORIENT run (`gate-18a.log`) on the clean tree, 19:44:55Z–19:55:18Z (cold load),
+  `GATE: GREEN`. Evidence run on the staged tree, detached (`gate-18b.log`), 20:05:35Z–20:09:55Z, launched
+  after the ORIENT run had ended: `Build completed successfully (8926 jobs)`; audit `[propext]`;
+  fmt and clippy clean; `cargo test` 5/5 + 24/24; `git ls-files --eol` clean;
+  `check_registers.py` 100 tracked files clean, Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7,
+  **S- 53/53**; `RESULT: ALL PASS`; `GATE: GREEN`; `rc=0`. Re-run the same way on the final tree
+  (this entry and STATE's build line in) before the commit (STOP-REASON).
+BELIEF DELTAS:
+- A Route A comment is the *latest* version's comment, and some authors keep a cumulative
+  changelog there: correction language in it may belong to a version outside the window.
+  Evidence: candidate 20, whose "minor correction" sentence dates from v9 (2020) while the
+  finder saw it on v14 (2023). Consequence: D8 is decided from each version's own abstract page
+  (four extra requests here); the lesson is in STATE's NEXT. The finder is unchanged — it is a
+  recall net, and the examination step is where D8 is decided.
+- "Corrected the hypotheses" is the item-8 shape again: a statement quantified over too large a
+  class, a proof that silently needs the smaller one, and the use site is a named theorem's
+  application. Evidence: candidate 19 (Dwyer's convergence theorem; the v6 proof derives its
+  hypotheses from the new assumption). Consequence: FLAW-0012 + FLAW-0005 as for item 8, and a
+  sixth record of the `false`-with-`undetermined`-alternative shape (escalation below).
+- A corrected version can print the counterexample inside a remark rather than in the comment,
+  and then the `counterexample` method applies even though the comment says only "removed".
+  Evidence: candidate 21. Consequence: the second counterexample-method item (after item 9), and
+  the second true-statement item (after item 2): the dependent main theorem is re-proved as
+  stated, so its truth is `true` by source document rather than `null`.
+CONFUSIONS:
+- A display filter on the diff header (`awk '/^--- v5/{skip=1} /more diff lines/{skip=0; next}
+  !skip'`) also swallowed the helper's trailing scanner line when the diff was short (no "more
+  diff lines" marker to end the skip). Cost: the scanner was re-run by hand on the saved sources
+  (no hit). Doc fix: this entry; save the helper's whole output to a file and print its head and
+  tail instead (done for candidates 20 and 21).
+- Python under Git Bash does not resolve `/c/Users/…` paths; one abstract-page fetch failed on
+  the output path and was re-run with `C:/Users/…`. Cost: one retry. Doc fix: memory hazard.
+- A `sed` substitution carrying an apostrophe inside the pattern silently did not match when
+  quoted from Bash; the record sentence was fixed with Python instead. Cost: one retry.
+HONESTY CHECK: no CLAIM changed status. New SOURCES S-0050..S-0053, VERIFIED digest-only (arXiv
+non-exclusive on every version read). Item 18 records `false` on the authors' "corrected the
+hypotheses" with the alternative named; item 19 records `false` on a counterexample the author
+prints; item 20 records `true` because the author re-proves the unchanged statement. The
+executor's step-level readings for items 18 and 19 are labelled as the executor's and are not
+the basis of any class. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed. `contact/` holds only its README; nothing from `openai/math`
+or any AI-generated corpus was opened or cited; the window excludes the release by rule; the
+three examined papers are 2012 submissions by named human authors; the scanner reports no
+AI-assistance mention on any version read. No detector or threshold exists. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The three manifests are regenerable from
+their configs and bytes by `syndeom-ingest` at `fd309a5`; the ids reproduced independently in
+Python before the producer ran; the candidate list reproduced from cache with the identical
+digest; every retrieval is pinned by URL, access time and SHA-256 (the two re-fetched abstract
+pages byte-identical to the helper's). Nothing to quarantine.
+MANIFEST CHECK: three artifacts created, each with a `syndeom-manifest/2` manifest carrying
+ground truth with derivation `documented-by-source`, flaw records with `raw/1` locators,
+`correct: false`, taxonomy 0.1.0, self-checked by the producer before writing (SD1); one carries
+`statement_status.value: true` (the proof invalid, the statement re-proved); none is null.
+Nothing synthetic labeled real (SD12). "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript beyond its own status document (SD3): the records quote
+the authors' words, name the alternative reading where the document leaves room, and label the
+executor's mechanism readings as the executor's. No understanding claims (SD17). No detectors. No
+referee contact (SD13). Candidate 22 was not opened.
+NEXT-SINGLE-ACTION: S1.1 — the eighth Route A harvest session, resuming at candidate 22
+(`1209.4040`, v4 of 2025-09-10, math.SG, "v4:The notion of “weakly regularizing” (in Def.4.3) was
+strengthened to fix a gap in the proof of the main theorem (Thm.4.5)") in ascending id with no
+skipping, exactly as STATE.md states it.
+ESCALATIONS:
+- For Al's attention, not a blocker (carried from Sessions 16 and 17, now six records): items 8,
+  10, 11, 14, 15 and 18 carry `false` with `undetermined` named as the alternative where the
+  author writes "corrected", "incorrect" or "false in the stated generality" rather than giving
+  a counterexample. A standing ruling either way would make the six records uniform; the
+  executor's reading is `false` because in each case the author replaces the statement by a
+  different one.
+- Note, not a blocker: diff `LICENSE` against the ASF file when `www.apache.org` answers
+  (S-0019); not attempted this session.
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
+set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
+the commit); this commit pushes to `origin/main`.

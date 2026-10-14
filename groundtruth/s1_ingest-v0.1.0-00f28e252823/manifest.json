@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "21f63ae00385cda7216c843cfc4730e994f1fe0c40f645bb49bb323a2456d0ed",
+        "file": "original-1209.2022v2.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 7300,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-00f28e252823",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1209.2022v2.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 3.1 (TeX label 'centro igual a centro unitario', Subsection 3.1), statement 'Let C be a unitary fusion category then Z*(C) = Z(C)' and its one-paragraph proof; the notice locates the error to the proposition (removed in v3) without naming the step",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1209.2022v2 (the original; corrected by v3, 6 December 2024) - Proposition 3.1 (TeX label 'centro igual a centro unitario')",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0052",
+      "S-0053"
+    ],
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0053: the v3 remark - Tian Lan's counterexample Hilb_G, the category of finite-dimensional Hilbert spaces graded over a finite group G, in whose center Rep(G) sits with URep(G) a proper, non-replete subcategory, while URep(G) lies in the unitary center: 'in general, Z*(C) != Z(C); in other words, Z*(C) is not a replete subcategory of Z(C)'",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0053"
+    }
+  },
+  "config_hash": "00f28e2528239e6e357edde96efffa2bed913390a73e9d8f70bd46b54490f513",
+  "engine_commit": "fd309a5fd06ac3d9ad1740084102aeee4a445ebe",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 3.1 (TeX label 'centro igual a centro unitario', Subsection 3.1), statement 'Let C be a unitary fusion category then Z*(C) = Z(C)' and its one-paragraph proof; the notice locates the error to the proposition (removed in v3) without naming the step"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0053: the v3 remark - Tian Lan's counterexample Hilb_G, the category of finite-dimensional Hilbert spaces graded over a finite group G, in whose center Rep(G) sits with URep(G) a proper, non-replete subcategory, while URep(G) lies in the unitary center: 'in general, Z*(C) != Z(C); in other words, Z*(C) is not a replete subcategory of Z(C)'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 19 (candidate 21, first documented result), Session 18. Ground truth as the author's v3 comment, acknowledgement and remark document it (a counterexample attributed to Tian Lan), confirmed against the v2->v3 TeX diff; RECORD.md holds the argument and labels the executor's reading of the failing step as the executor's. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

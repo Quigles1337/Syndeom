@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "21f63ae00385cda7216c843cfc4730e994f1fe0c40f645bb49bb323a2456d0ed",
+        "file": "original-1209.2022v2.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 7300,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-a93badadec27",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1209.2022v2.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 3.2 (TeX label 'braids are unitary', Subsection 3.1), proof: the three-sentence v2 proof, replaced whole in v3",
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 3.2, proof, the sentence 'Proposition 3.1 implies that c_{X,W} is unitary for every W in C': the invoked proposition is false (item 19), so the step rests on a premise the paper does not have; v3 argues directly in the center Z(C)",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1209.2022v2 (the original; corrected by v3, 6 December 2024) - Theorem 3.2 (TeX label 'braids are unitary')",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0052",
+      "S-0053"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0053: the statement 'Every braiding of a unitary fusion category is unitary' is unchanged in v3, whose comment says 'The proof of Theorem 3.2 has been revised to avoid reliance on this proposition' and which proves it anew",
+      "value": true
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0053"
+    }
+  },
+  "config_hash": "a93badadec27f3c51a5512743bd5b4b85f71b1e2ea4cca58b2756eec9ad52efe",
+  "engine_commit": "fd309a5fd06ac3d9ad1740084102aeee4a445ebe",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 3.2 (TeX label 'braids are unitary', Subsection 3.1), proof: the three-sentence v2 proof, replaced whole in v3"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 3.2, proof, the sentence 'Proposition 3.1 implies that c_{X,W} is unitary for every W in C': the invoked proposition is false (item 19), so the step rests on a premise the paper does not have; v3 argues directly in the center Z(C)"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0053: the statement 'Every braiding of a unitary fusion category is unitary' is unchanged in v3, whose comment says 'The proof of Theorem 3.2 has been revised to avoid reliance on this proposition' and which proves it anew",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 20 (candidate 21, second documented result), Session 18. Ground truth as the author's v3 comment documents it (the statement unchanged, the proof revised to avoid Proposition 3.1), confirmed against the v2->v3 TeX diff; RECORD.md holds the argument. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

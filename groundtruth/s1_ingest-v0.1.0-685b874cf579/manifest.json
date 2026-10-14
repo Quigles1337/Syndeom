@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "dc5828b3f1403bfb32140ecbc6687c634ef712456003882373a551eede869a4f",
+        "file": "original-1206.5522v5.tex.gz",
+        "format": "raw/1",
+        "n_bytes": 43241,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-685b874cf579",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1206.5522v5.tex.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 5.3 (Subsection 5.1; unlabelled in v5, prop.5.3 in v6), statement: the hypotheses 'X a nilpotent space whose first n homotopy groups are finite, |pi_i X| < infinity for i <= n, and R any commutative ring' (v5), where v6 requires X nilpotent, n-connective, of finite type over R, with pi_n X finite; the conclusion (the natural equivalence of chain complexes between the factorization homology of M with coefficients in C^*(X, R) and C^*(X^M, R)) is unchanged",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 5.3, proof, the convergence step 'By Dwyer [dwyer], the convergence of this Eilenberg-Moore spectral sequence is assured if the base X^{S^k x R^{n-k}} and the fibrations in the diagram are nilpotent. However, by [nilpotent], the space of maps X^K is nilpotent for any K if X is nilpotent ...': Dwyer's theorem is applied where its hypotheses (a connected base, a nilpotent pi_1-action on the homotopy of the fibre) are not supplied by the v5 hypotheses; v6 derives both from n-connectivity",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1206.5522v5 (the original; corrected by v6, 23 June 2024) - Proposition 5.3 (unlabelled in v5; TeX label prop.5.3 in v6)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v5): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0050",
+      "S-0051"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0051: 'Corrected Proposition 5.3'; the acknowledgement 'correcting the hypotheses in the statement of Proposition 5.3'; v6 restates the proposition under stronger hypotheses",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0051"
+    }
+  },
+  "config_hash": "685b874cf5796179330423488ba0fef0b08c3de3838373aefd42380914c67440",
+  "engine_commit": "fd309a5fd06ac3d9ad1740084102aeee4a445ebe",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 5.3 (Subsection 5.1; unlabelled in v5, prop.5.3 in v6), statement: the hypotheses 'X a nilpotent space whose first n homotopy groups are finite, |pi_i X| < infinity for i <= n, and R any commutative ring' (v5), where v6 requires X nilpotent, n-connective, of finite type over R, with pi_n X finite; the conclusion (the natural equivalence of chain complexes between the factorization homology of M with coefficients in C^*(X, R) and C^*(X^M, R)) is unchanged"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 5.3, proof, the convergence step 'By Dwyer [dwyer], the convergence of this Eilenberg-Moore spectral sequence is assured if the base X^{S^k x R^{n-k}} and the fibrations in the diagram are nilpotent. However, by [nilpotent], the space of maps X^K is nilpotent for any K if X is nilpotent ...': Dwyer's theorem is applied where its hypotheses (a connected base, a nilpotent pi_1-action on the homotopy of the fibre) are not supplied by the v5 hypotheses; v6 derives both from n-connectivity"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0051: 'Corrected Proposition 5.3'; the acknowledgement 'correcting the hypotheses in the statement of Proposition 5.3'; v6 restates the proposition under stronger hypotheses",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 18 (candidate 19), Session 18. Ground truth as the authors' v6 comment and acknowledgement document it, confirmed against the v5->v6 TeX diff; RECORD.md holds the argument, names the undetermined reading as the alternative and labels the executor's reading of the failed hypothesis as the executor's. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
