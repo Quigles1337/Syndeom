@@ -852,8 +852,10 @@ pub fn coverage(
                 }
             }
         }
+        let statement_only = steps.iter().filter(|n| **n == 0).count();
         row.steps = step_summary(steps, selected.len());
-        row.proof_steps = step_summary(proof_steps, selected.len());
+        row.proof_steps = step_summary(proof_steps, selected.len() - statement_only);
+        row.proof_steps["excluded_statement_only"] = json!(statement_only);
         rows.push(row);
     }
     rows
@@ -1327,6 +1329,10 @@ fn render(report: &Value, inventory: &Value) -> Result<String> {
         .join(", ");
     out.push_str(&format!("\nCandidate pending / pending-truth / escalated counts: {}. Undetermined admitted statements are a separate category. The positive pair is a separate source route, not another arXiv candidate. Unclassifiable candidates {unclassifiable} remain unassigned; their notices do not support a class. No harvest is performed; resume remains candidate 28, 1403.6317.\n\nItem review union: {}; escalated item union: {}; promotion holds: {}; unflagged subset: {}. These counts overlap canonical missingness and truth missingness; they must not be added.\n\nRecorded item review issues:\n\n",compact_counts(&report["candidate_counts"],&["pending","pending-truth","escalated"]),report["qualification_counts"]["pending_item_review_union"],report["qualification_counts"]["escalated_item_union"],report["qualification_counts"]["promotion_holds"],report["qualification_counts"]["unflagged_documented_subset"]));
     for (kind, ids) in report["issues_by_kind"].as_object().unwrap() {
+        if ids.as_array().unwrap().is_empty() {
+            out.push_str(&format!("- {kind}: 0 additional flags.\n"));
+            continue;
+        }
         out.push_str(&format!(
             "- {kind}: {} roots — {}.\n",
             ids.as_array().unwrap().len(),
@@ -1385,7 +1391,18 @@ fn render(report: &Value, inventory: &Value) -> Result<String> {
             })
             .collect::<Vec<_>>()
             .join(", ");
-        out.push_str(&format!("| {family} | {} | {licence}; {storage} | {links}; source entries in inventory.json | {} |\n",ids.as_array().unwrap().len(),if issues.is_empty(){"none recorded in reviewed disposition overlay".into()}else{issues.into_iter().collect::<Vec<_>>().join(", ")}));
+        let status = &first["root_manifest"]["config"]["status"];
+        let status_evidence = format!(
+            "{} / {}",
+            status["kind"].as_str().unwrap(),
+            status["reference"].as_str().unwrap()
+        );
+        let admission = if status["kind"] == "mathlib" {
+            "owner merged PR 4"
+        } else {
+            "Route A admitted; HARVEST-LOG"
+        };
+        out.push_str(&format!("| {family} | {} | {licence}; {storage} | {status_evidence}; {admission}; {links} | {} |\n",ids.as_array().unwrap().len(),if issues.is_empty(){"none recorded in reviewed disposition overlay".into()}else{issues.into_iter().collect::<Vec<_>>().join(", ")}));
     }
     out.push_str("\nEvery representation retains its typed manifest, stored status/truth/validity/correctness, complete flaw instances and locations, source references, byte-check scope and prior evidence links in inventory.json. The source register text is historical testimony, not fresh retrieval or a new rights opinion. Completeness of fields is distinct from mathematical assurance. provenance.json enumerates exact corpus/tool hashes and the preserved pair closure. Reproduce using ../README.md.\n");
     Ok(out)

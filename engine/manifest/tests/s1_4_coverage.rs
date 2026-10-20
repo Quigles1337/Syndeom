@@ -266,6 +266,8 @@ fn raw_missing_length_is_not_a_canonical_zero() {
     assert_eq!(total.steps["missing"], 1);
     assert_eq!(total.positive_length_informal_controls, 0);
     assert_eq!(total.statement_only_controls, 1);
+    assert_eq!(total.proof_steps["missing"], 1);
+    assert_eq!(total.proof_steps["excluded_statement_only"], 1);
 }
 
 #[test]
@@ -355,12 +357,12 @@ fn changed_added_and_missing_frozen_inputs_are_rejected() {
 
 #[test]
 fn serialization_is_deterministic_across_insertion_orders() {
-    let a = BTreeMap::from([("b", 2), ("a", 1)]);
-    let mut b = BTreeMap::new();
-    b.insert("a", 1);
-    b.insert("b", 2);
-    assert_eq!(json_bytes(&a).unwrap(), json_bytes(&b).unwrap());
-    assert!(json_bytes(&a).unwrap().ends_with(b"\n"));
+    let a = vec![item(flawed()), item(fixture()), item(raw(&flawed()))];
+    let b = a.iter().rev().cloned().collect::<Vec<_>>();
+    let first = json_bytes(&coverage(&a, &classes(), &bins())).unwrap();
+    let second = json_bytes(&coverage(&b, &classes(), &bins())).unwrap();
+    assert_eq!(first, second);
+    assert!(first.ends_with(b"\n"));
 }
 
 #[test]
