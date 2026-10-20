@@ -1,0 +1,527 @@
+[
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-check-01.json",
+    "original_sha256": "e88ed4ba07230d41964c20d8a433716128ba752d1ee74ff6c100b58fd2713d96",
+    "committed_path": "producer-checks/producer-check-01.json",
+    "committed_sha256": "e88ed4ba07230d41964c20d8a433716128ba752d1ee74ff6c100b58fd2713d96",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-check-01.log",
+    "original_sha256": "43b6d309122f1a37fe9dbd07f453165f80aa24a65809dbf35063089c84bb2b54",
+    "committed_path": "producer-checks/producer-check-01.txt",
+    "committed_sha256": "43b6d309122f1a37fe9dbd07f453165f80aa24a65809dbf35063089c84bb2b54",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-tests-01.json",
+    "original_sha256": "e2db710beed3d3166cd10284ec93b1bde057afaff1239b2734fd95fe0c454e56",
+    "committed_path": "producer-checks/producer-tests-01.json",
+    "committed_sha256": "e2db710beed3d3166cd10284ec93b1bde057afaff1239b2734fd95fe0c454e56",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-tests-01.log",
+    "original_sha256": "785f40f58fa60db9cc49658bb5c4acab9c088bf7f1138a4649dee00e32c871ce",
+    "committed_path": "producer-checks/producer-tests-01.txt",
+    "committed_sha256": "785f40f58fa60db9cc49658bb5c4acab9c088bf7f1138a4649dee00e32c871ce",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-tests-02.json",
+    "original_sha256": "7c6342e8d2acd3813ac94464d45815a2b3b2f2f2e6380e00ffa767c2d99f1720",
+    "committed_path": "producer-checks/producer-tests-02.json",
+    "committed_sha256": "7c6342e8d2acd3813ac94464d45815a2b3b2f2f2e6380e00ffa767c2d99f1720",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-tests-02.log",
+    "original_sha256": "66ed279de7d57366d42f36578438b756fd49593555fc4798dccd7e79f743a258",
+    "committed_path": "producer-checks/producer-tests-02.txt",
+    "committed_sha256": "66ed279de7d57366d42f36578438b756fd49593555fc4798dccd7e79f743a258",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-tests-03.json",
+    "original_sha256": "2c547b4fbf8f43f4f7a691b30af7402436acc1ea99028135ed479e3d4772eae0",
+    "committed_path": "producer-checks/producer-tests-03.json",
+    "committed_sha256": "2c547b4fbf8f43f4f7a691b30af7402436acc1ea99028135ed479e3d4772eae0",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-tests-03.log",
+    "original_sha256": "6e947d02dac9997e8b6aba3b58bce3ba979a89d4d3540cfcb9fdf24ad8c92850",
+    "committed_path": "producer-checks/producer-tests-03.txt",
+    "committed_sha256": "8c5e0c5facadcb8bffd1ea94cc6d6b2c0a6f44c47fbfe07244891daff2c1f266",
+    "transformation": "CRLF to LF; terminal empty lines removed from display copy; original preserved"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-clippy-01.json",
+    "original_sha256": "ce1d4dd46213a702eba0a6e3144a1bb144fbc63584dad27110ece13a4699b40b",
+    "committed_path": "producer-checks/producer-clippy-01.json",
+    "committed_sha256": "ce1d4dd46213a702eba0a6e3144a1bb144fbc63584dad27110ece13a4699b40b",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-clippy-01.log",
+    "original_sha256": "143adfb463f62fc0cf3198a282d6ceb1d41f409c5c1afda6a9cc1d07c70c7a54",
+    "committed_path": "producer-checks/producer-clippy-01.txt",
+    "committed_sha256": "143adfb463f62fc0cf3198a282d6ceb1d41f409c5c1afda6a9cc1d07c70c7a54",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-gate-01.json",
+    "original_sha256": "0d47d5af64434789953f954d1ed2a172d10d3bfb7bcc7b5843d6d15ae70545eb",
+    "committed_path": "producer-checks/producer-gate-01.json",
+    "committed_sha256": "0d47d5af64434789953f954d1ed2a172d10d3bfb7bcc7b5843d6d15ae70545eb",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\producer-gate-01.log",
+    "original_sha256": "4ba729d45ed1c7e51b9d861656ec8d23d42cba24efdaeef63280ce076bf3d6fe",
+    "committed_path": "producer-checks/producer-gate-01.txt",
+    "committed_sha256": "5ba86cf4c100580f887ef3895677a612dd456c88b271770ba21e42aa4a2992a5",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\capture.py",
+    "original_sha256": "7136667ae30df7ebccda2327c655c72697b1e8e5f3e2c840362b780724fe4d82",
+    "committed_path": "producer-checks/capture-original.py",
+    "committed_sha256": "7136667ae30df7ebccda2327c655c72697b1e8e5f3e2c840362b780724fe4d82",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\verification-receipt.json",
+    "original_sha256": "50a4182b293f8ab0daf74783a9181c89156ef4246407f76c7151d33ecb9e0aea",
+    "committed_path": "production/verification-receipt.json",
+    "committed_sha256": "50a4182b293f8ab0daf74783a9181c89156ef4246407f76c7151d33ecb9e0aea",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\altered-formal-source\\receipt.json",
+    "original_sha256": "490af533efc85baaf1c760f992e79c9ec70743f6d492c8192756fe0dfdf3a9b8",
+    "committed_path": "production/receipts/altered-formal-source.json",
+    "committed_sha256": "490af533efc85baaf1c760f992e79c9ec70743f6d492c8192756fe0dfdf3a9b8",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\archive\\receipt.json",
+    "original_sha256": "36650af2328e2a6d598c82e49d1e5e9f12591a6e2889179969f97dfa80d6da66",
+    "committed_path": "production/receipts/archive.json",
+    "committed_sha256": "36650af2328e2a6d598c82e49d1e5e9f12591a6e2889179969f97dfa80d6da66",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\archive-identical-retry\\receipt.json",
+    "original_sha256": "f3068d34f238c9414ac6bbaef238062f3b53a148ff9df953fb202286681249f8",
+    "committed_path": "production/receipts/archive-identical-retry.json",
+    "committed_sha256": "f3068d34f238c9414ac6bbaef238062f3b53a148ff9df953fb202286681249f8",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\archive-new-dry-run\\receipt.json",
+    "original_sha256": "d6b8ce557dd3448c0f6868de1f7381e0c7c331713a14c5194f45b5e713e9731d",
+    "committed_path": "production/receipts/archive-new-dry-run.json",
+    "committed_sha256": "d6b8ce557dd3448c0f6868de1f7381e0c7c331713a14c5194f45b5e713e9731d",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\canonical\\receipt.json",
+    "original_sha256": "8003fd28c2300f87aa5700e5a071ed1f8b7055d63dac0e1932d07c460b87e248",
+    "committed_path": "production/receipts/canonical.json",
+    "committed_sha256": "8003fd28c2300f87aa5700e5a071ed1f8b7055d63dac0e1932d07c460b87e248",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\canonical-existing-dry-run\\receipt.json",
+    "original_sha256": "3e5fb85672efbfe1f9be7cba6e4bbc04230ccd2891cabbfe3360d4e8fb6767b1",
+    "committed_path": "production/receipts/canonical-existing-dry-run.json",
+    "committed_sha256": "3e5fb85672efbfe1f9be7cba6e4bbc04230ccd2891cabbfe3360d4e8fb6767b1",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\canonical-identical-retry\\receipt.json",
+    "original_sha256": "e2df5c5f87af0d7266ac703aadad73f1419871641f9c27b8231bca6b70fe8516",
+    "committed_path": "production/receipts/canonical-identical-retry.json",
+    "committed_sha256": "e2df5c5f87af0d7266ac703aadad73f1419871641f9c27b8231bca6b70fe8516",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-actual-parent-bytes\\receipt.json",
+    "original_sha256": "86e24acf2ebdaa77b3539e04dfbb8de3c13887cd4d0fd492f4f4ca657999796b",
+    "committed_path": "production/receipts/changed-actual-parent-bytes.json",
+    "committed_sha256": "86e24acf2ebdaa77b3539e04dfbb8de3c13887cd4d0fd492f4f4ca657999796b",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-parent-metadata\\receipt.json",
+    "original_sha256": "899692c141b15bda32bb01ff21b8cf73e7223ba761959a44ce915531d1d63919",
+    "committed_path": "production/receipts/changed-parent-metadata.json",
+    "committed_sha256": "899692c141b15bda32bb01ff21b8cf73e7223ba761959a44ce915531d1d63919",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-parent-source-map\\receipt.json",
+    "original_sha256": "87677340777b7ae4cbfb93f79b9786f88dc980922e09a06cb4f92b2832a199c0",
+    "committed_path": "production/receipts/changed-parent-source-map.json",
+    "committed_sha256": "87677340777b7ae4cbfb93f79b9786f88dc980922e09a06cb4f92b2832a199c0",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\invented-informal-proof\\receipt.json",
+    "original_sha256": "3480705a3df89d42a3fb35e407216435257a858beb67caa00b11449ff0cc22f8",
+    "committed_path": "production/receipts/invented-informal-proof.json",
+    "committed_sha256": "3480705a3df89d42a3fb35e407216435257a858beb67caa00b11449ff0cc22f8",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\late-output-collision\\receipt.json",
+    "original_sha256": "e5edc13a143949c3e58d2b6b1cae068a0a3e5ffd37d0f8dc7e55d2c5c4a00f23",
+    "committed_path": "production/receipts/late-output-collision.json",
+    "committed_sha256": "e5edc13a143949c3e58d2b6b1cae068a0a3e5ffd37d0f8dc7e55d2c5c4a00f23",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\late-output-collision-dry-run\\receipt.json",
+    "original_sha256": "e83554747398bd890ab2ba3741d67ef22d6264918db5e76c39d681377a9f9daa",
+    "committed_path": "production/receipts/late-output-collision-dry-run.json",
+    "committed_sha256": "e83554747398bd890ab2ba3741d67ef22d6264918db5e76c39d681377a9f9daa",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\missing-actual-parent-file\\receipt.json",
+    "original_sha256": "8c52cc63d7493cf6c2e3a847097423947f5dcaf38f4682f3a4403d5f337aaecd",
+    "committed_path": "production/receipts/missing-actual-parent-file.json",
+    "committed_sha256": "8c52cc63d7493cf6c2e3a847097423947f5dcaf38f4682f3a4403d5f337aaecd",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\missing-source\\receipt.json",
+    "original_sha256": "2c60a9b8a4ab1375a7566b74939ce61b00310bd5dd125ece9ff1cd63ef32dbeb",
+    "committed_path": "production/receipts/missing-source.json",
+    "committed_sha256": "2c60a9b8a4ab1375a7566b74939ce61b00310bd5dd125ece9ff1cd63ef32dbeb",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\producer-before-implementation\\receipt.json",
+    "original_sha256": "5e65950cad64efc798d278395226318300d32762f2a09632c0e1c16aa19ef0ac",
+    "committed_path": "production/receipts/producer-before-implementation.json",
+    "committed_sha256": "5e65950cad64efc798d278395226318300d32762f2a09632c0e1c16aa19ef0ac",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\replay-archive\\receipt.json",
+    "original_sha256": "c6e1750b7525210d43508ebce543c46e831297e50be32cdd5f8a8eddab0221cc",
+    "committed_path": "production/receipts/replay-archive.json",
+    "committed_sha256": "c6e1750b7525210d43508ebce543c46e831297e50be32cdd5f8a8eddab0221cc",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\replay-canonical\\receipt.json",
+    "original_sha256": "912ed150c8eccb61f7ecf703cfebbbccc5bb2f804781a456d70f2cd007615860",
+    "committed_path": "production/receipts/replay-canonical.json",
+    "committed_sha256": "912ed150c8eccb61f7ecf703cfebbbccc5bb2f804781a456d70f2cd007615860",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\source-line-regression\\receipt.json",
+    "original_sha256": "45e13a779997fd4db2603d70ef8b752e8fb1b44c06f1fe6d2944cecebb8330dd",
+    "committed_path": "production/receipts/source-line-regression.json",
+    "committed_sha256": "45e13a779997fd4db2603d70ef8b752e8fb1b44c06f1fe6d2944cecebb8330dd",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\substituted-source-with-matching-caller-hash\\receipt.json",
+    "original_sha256": "64a2b9c0979ddac9266d2156f819c485b2d50fd3d0cb15f6d10f87799d5ad2fb",
+    "committed_path": "production/receipts/substituted-source-with-matching-caller-hash.json",
+    "committed_sha256": "64a2b9c0979ddac9266d2156f819c485b2d50fd3d0cb15f6d10f87799d5ad2fb",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\unknown-field\\receipt.json",
+    "original_sha256": "eab700f0d212eb9f701c0dc67cef9c7ff379b8739ecda8af02de6240cc509f10",
+    "committed_path": "production/receipts/unknown-field.json",
+    "committed_sha256": "eab700f0d212eb9f701c0dc67cef9c7ff379b8739ecda8af02de6240cc509f10",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\unsupported-method\\receipt.json",
+    "original_sha256": "0a980ba9b51d0fd73dcc40f2effe7473a5a1e7eb7ffd7539d3aaf6d3c2b4272d",
+    "committed_path": "production/receipts/unsupported-method.json",
+    "committed_sha256": "0a980ba9b51d0fd73dcc40f2effe7473a5a1e7eb7ffd7539d3aaf6d3c2b4272d",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-declaration\\receipt.json",
+    "original_sha256": "f8cf6f09d79015f7545b39e2914bc3624541e137fc7bac32933a66d2f14aab5c",
+    "committed_path": "production/receipts/wrong-declaration.json",
+    "committed_sha256": "f8cf6f09d79015f7545b39e2914bc3624541e137fc7bac32933a66d2f14aab5c",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-parent-config-hash\\receipt.json",
+    "original_sha256": "915536f9959f42bbd4c7635fddd2d48dbc54e69b507b905966fbe1cc0134feb8",
+    "committed_path": "production/receipts/wrong-parent-config-hash.json",
+    "committed_sha256": "915536f9959f42bbd4c7635fddd2d48dbc54e69b507b905966fbe1cc0134feb8",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-parent-link\\receipt.json",
+    "original_sha256": "70b3b55b458d804e9e949f0c4eaace2ffd0e2867c57537022dfc2855368d9df7",
+    "committed_path": "production/receipts/wrong-parent-link.json",
+    "committed_sha256": "70b3b55b458d804e9e949f0c4eaace2ffd0e2867c57537022dfc2855368d9df7",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-type\\receipt.json",
+    "original_sha256": "6b9400bcf3b1470c36a963313df56caf5daa227a15617dd9323997b5c11deefd",
+    "committed_path": "production/receipts/wrong-type.json",
+    "committed_sha256": "6b9400bcf3b1470c36a963313df56caf5daa227a15617dd9323997b5c11deefd",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\altered-formal-source.log",
+    "original_sha256": "a6db834cf1ffeb929c08764e39b72c73261b0fec975d557377d46caf1f617346",
+    "committed_path": "production/logs/altered-formal-source.txt",
+    "committed_sha256": "a6db834cf1ffeb929c08764e39b72c73261b0fec975d557377d46caf1f617346",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\archive-identical-retry.log",
+    "original_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "committed_path": "production/logs/archive-identical-retry.txt",
+    "committed_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\archive-new-dry-run.log",
+    "original_sha256": "b3fb54f30e60d20c7ec89adf47511017bef791c0b017b97d1fd7227a2b620951",
+    "committed_path": "production/logs/archive-new-dry-run.txt",
+    "committed_sha256": "b3fb54f30e60d20c7ec89adf47511017bef791c0b017b97d1fd7227a2b620951",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\archive.log",
+    "original_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "committed_path": "production/logs/archive.txt",
+    "committed_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\canonical-existing-dry-run.log",
+    "original_sha256": "c87e98115e3569d9ba4bfb822603c7149eadbd2163e341aeba8dd1a345ddeca5",
+    "committed_path": "production/logs/canonical-existing-dry-run.txt",
+    "committed_sha256": "c87e98115e3569d9ba4bfb822603c7149eadbd2163e341aeba8dd1a345ddeca5",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\canonical-identical-retry.log",
+    "original_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "committed_path": "production/logs/canonical-identical-retry.txt",
+    "committed_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\canonical.log",
+    "original_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "committed_path": "production/logs/canonical.txt",
+    "committed_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\changed-actual-parent-bytes.log",
+    "original_sha256": "a6db834cf1ffeb929c08764e39b72c73261b0fec975d557377d46caf1f617346",
+    "committed_path": "production/logs/changed-actual-parent-bytes.txt",
+    "committed_sha256": "a6db834cf1ffeb929c08764e39b72c73261b0fec975d557377d46caf1f617346",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\changed-parent-metadata.log",
+    "original_sha256": "3fab263a5aca64c165fca6c2f70c5fc0406b6f78eacae785f18424ef37212154",
+    "committed_path": "production/logs/changed-parent-metadata.txt",
+    "committed_sha256": "3fab263a5aca64c165fca6c2f70c5fc0406b6f78eacae785f18424ef37212154",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\changed-parent-source-map.log",
+    "original_sha256": "32e326f86177b686f303c4a91bbd3fb0fe83a7830f21c89ba6b53ab6b24a9c85",
+    "committed_path": "production/logs/changed-parent-source-map.txt",
+    "committed_sha256": "32e326f86177b686f303c4a91bbd3fb0fe83a7830f21c89ba6b53ab6b24a9c85",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\controlled-lean-failure.log",
+    "original_sha256": "c09f6d8589c85e456f2ec949f6d8bef208120ec1177c8af6a84ec5c476d96a26",
+    "committed_path": "production/logs/controlled-lean-failure.txt",
+    "committed_sha256": "c09f6d8589c85e456f2ec949f6d8bef208120ec1177c8af6a84ec5c476d96a26",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\emitted-file-compile.log",
+    "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "committed_path": "production/logs/emitted-file-compile.txt",
+    "committed_sha256": "02a713f76226c52a198adae80526740fc4d6057636326bc8dec49635db8ae7a7",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\emitted-type-axiom-audit.log",
+    "original_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3",
+    "committed_path": "production/logs/emitted-type-axiom-audit.txt",
+    "committed_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\existing-receipt-refused.log",
+    "original_sha256": "92e90c2d58a4ae16bc0856a29a42b48fc2061b6012a640b3e5a944d3b53f8487",
+    "committed_path": "production/logs/existing-receipt-refused.txt",
+    "committed_sha256": "92e90c2d58a4ae16bc0856a29a42b48fc2061b6012a640b3e5a944d3b53f8487",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\invented-informal-proof.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/invented-informal-proof.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\late-output-collision-dry-run.log",
+    "original_sha256": "7f37a7b68b87273c4cf2f2e412076e2d091ca0a6557cb7c471ab7643a4011605",
+    "committed_path": "production/logs/late-output-collision-dry-run.txt",
+    "committed_sha256": "7f37a7b68b87273c4cf2f2e412076e2d091ca0a6557cb7c471ab7643a4011605",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\late-output-collision.log",
+    "original_sha256": "55e391c44115975d1165200bf8e4acdb016d7ab18950661e88a89725fb3d04ac",
+    "committed_path": "production/logs/late-output-collision.txt",
+    "committed_sha256": "55e391c44115975d1165200bf8e4acdb016d7ab18950661e88a89725fb3d04ac",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\lean-version.log",
+    "original_sha256": "caa538834571fbbf53913bbde24b9fd3d9deac746137443a1c712d820e6a5b38",
+    "committed_path": "production/logs/lean-version.txt",
+    "committed_sha256": "caa538834571fbbf53913bbde24b9fd3d9deac746137443a1c712d820e6a5b38",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\missing-actual-parent-file.log",
+    "original_sha256": "1498ef8f5e5da491ab6a644fdd68399df018ba1219df0ebf0e956f58c2b17876",
+    "committed_path": "production/logs/missing-actual-parent-file.txt",
+    "committed_sha256": "1498ef8f5e5da491ab6a644fdd68399df018ba1219df0ebf0e956f58c2b17876",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\missing-source.log",
+    "original_sha256": "67d06e994455c90eb0392d7bdc2202c36ecb3040061d139dde7e495553966360",
+    "committed_path": "production/logs/missing-source.txt",
+    "committed_sha256": "67d06e994455c90eb0392d7bdc2202c36ecb3040061d139dde7e495553966360",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\producer-before-implementation.log",
+    "original_sha256": "1f3dd898b04b30f2e9aadef7366ed9f9a0623ed549077a54839f01f422e310c5",
+    "committed_path": "production/logs/producer-before-implementation.txt",
+    "committed_sha256": "d4176b84348d360c3a99b0cfe46ee221f65996fb0192f5ecc9089435e77348fb",
+    "transformation": "CRLF to LF; terminal empty lines removed from display copy; original preserved"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\producer-build.log",
+    "original_sha256": "0b53209db424367e80c52cd8cde8b75e37af110438a0efde777104a1463956de",
+    "committed_path": "production/logs/producer-build.txt",
+    "committed_sha256": "0b53209db424367e80c52cd8cde8b75e37af110438a0efde777104a1463956de",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\replay-archive.log",
+    "original_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "committed_path": "production/logs/replay-archive.txt",
+    "committed_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\replay-canonical.log",
+    "original_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "committed_path": "production/logs/replay-canonical.txt",
+    "committed_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\rust-version.log",
+    "original_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "committed_path": "production/logs/rust-version.txt",
+    "committed_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\source-line-regression.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/source-line-regression.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\substituted-source-with-matching-caller-hash.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/substituted-source-with-matching-caller-hash.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\unknown-field.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/unknown-field.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\unsupported-method.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/unsupported-method.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-declaration.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/wrong-declaration.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-parent-config-hash.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/wrong-parent-config-hash.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-parent-link.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/wrong-parent-link.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-type.log",
+    "original_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "committed_path": "production/logs/wrong-type.txt",
+    "committed_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+    "transformation": "CRLF to LF; empty output displayed as (no output)"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\EmittedAudit.lean",
+    "original_sha256": "76cad90b70f93d2b6a311be0f7602fba6415757e5c30c14185148ba61c3572fa",
+    "committed_path": "production/EmittedAudit.lean",
+    "committed_sha256": "76cad90b70f93d2b6a311be0f7602fba6415757e5c30c14185148ba61c3572fa",
+    "transformation": "none; exact bytes"
+  },
+  {
+    "original_external_path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\ControlledLeanFailure.lean",
+    "original_sha256": "2857756b5f6501dde6b7411b7b4c7f0f3bfcbe481d8ee9917c3be494e23bb239",
+    "committed_path": "production/ControlledLeanFailure.lean",
+    "committed_sha256": "2857756b5f6501dde6b7411b7b4c7f0f3bfcbe481d8ee9917c3be494e23bb239",
+    "transformation": "none; exact bytes"
+  }
+]

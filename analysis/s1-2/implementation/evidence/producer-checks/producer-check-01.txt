@@ -1,0 +1,21 @@
+   Compiling typenum v1.20.1
+   Compiling const-oid v0.10.2
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling ryu-js v1.0.3
+   Compiling cpufeatures v0.3.1
+   Compiling cfg-if v1.0.5
+   Compiling hex v0.4.3
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+    Checking syndeom-manifest v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\manifest)
+   Compiling hybrid-array v0.4.15
+   Compiling crypto-common v0.2.2
+   Compiling block-buffer v0.12.1
+   Compiling serde_json v1.0.154
+   Compiling serde v1.0.229
+   Compiling digest v0.11.3
+   Compiling sha2 v0.11.1
+   Compiling serde_json_canonicalizer v0.3.2
+   Compiling syndeom-pair v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\pair)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 8.47s

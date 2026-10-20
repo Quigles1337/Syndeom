@@ -1,0 +1,536 @@
+{
+  "arch": "x86_64",
+  "argv": [
+    "--mode",
+    "canonical",
+    "--config",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\config.json",
+    "--root",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+    "--artifact-root",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\artifacts",
+    "--external-dir",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\external",
+    "--engine-commit",
+    "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+    "--receipt-dir",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-parent-metadata"
+  ],
+  "commands": [
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf^{commit}"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "796ca71da267b0c5f4f253437b3a37da6759a13cecca3386ef9bbe95d6a98a09",
+      "success": true
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "HEAD"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/Cargo.toml"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "216a85c750cf1f687999abcee678d52c33764e730455bcd005d20a054469f0d7",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/build.rs"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "40ce3de07b4de3e552a098becd5b10ff775cbee020af69d5d5ad8395236cf05d",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/input-files.txt"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "3b06a3c9f6eb517f7cea7e9a3a15c989757ccf8aff6f3cd9f36d470df683ea1a",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/src/lib.rs"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "a23ea41f12bc7eee3f808a31963a8c753a50f9e2445d1535c8853788937a5279",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/src/strict_json.rs"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "4484b9eed198b68e234f7aa989fecdc423567d5550a1c4d6d1b797da91875598",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/src/output.rs"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "024166443f305a21ee42da5cb614afc599ecfb0d972448801663a25eff5f3b69",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/src/provenance.rs"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "bed99f66fc8e9ac04ccafe7639610eefbcd231779a8ea7fb3f04c2c8dc52841e",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/pair/src/main.rs"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "970310298945adb4281091ac36264d189406385343fb8cecd597da6ccef5fa01",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/manifest/Cargo.toml"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "7142e5046b7411516edf7a845a5ab4894b00efdadf1dc476f6b182205e496fb9",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/manifest/src/lib.rs"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "549223c7b84fbf639c9e37fb3757b1484ad22879a82702f125c8cd52f7cdb01d",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/Cargo.toml"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "b062063aa2056ee6fe5d7b175502b413163190b220088a97275fd61d4f96e4f1",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:engine/Cargo.lock"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "47fea4b3a80b0465afa11c19945d7044b7010e392ef68e4efb64318123149826",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:rust-toolchain.toml"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "7157527d1a56f14e9c980b3d18e7332f16efdd2fb16c5b7974ca2aa86586129c",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:lean/lean-toolchain"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:lean/lakefile.toml"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "07795417392fca1382f27ac6ad4a2d3d8c088add408efdb772785c0e2865b755",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:lean/lake-manifest.json"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "6cbd1dccf13a06b64fce2f50b9d3f9ca2c463cff3033c1ff611b727e3b383af5",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:analysis/s1-2/archive-config.proposed.json"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "5c65abfd981955e1e64d52f9cdfb2795c3bd88ad819be585344d755dded939a1",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:analysis/s1-2/canonical-config.proposed.json"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "6564d83d0e7a68d491ab79e653ab2fd278cd494aab62360641ec4ba4441741da",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:analysis/s1-2/Proof.lean"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf:analysis/s1-2/inspection-tail.lean"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "9a0d71a7afe800456c43977a940ead173f14bc3eed827c2a1d84528e558ad4ad",
+      "success": true
+    },
+    {
+      "args": [
+        "--version"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "rustc",
+      "stderr": "",
+      "stdout_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+      "success": true
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean\\.lake\\packages\\mathlib",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "d26684ea790064f49bcb150415b3a062ec30b5e646b207927aa3fc5fcbb43fbe",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "d13f23b723b8a846827a245b89c10fc7d3f11612:Mathlib/Data/Nat/PrimeFin.lean"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean\\.lake\\packages\\mathlib",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "d13f23b723b8a846827a245b89c10fc7d3f11612:Mathlib/Data/Nat/Prime/Infinite.lean"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean\\.lake\\packages\\mathlib",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "ede54daa0f432b403dfd402d96c682fc892f371fcbec26fb003c3fece9aea3f5",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "d13f23b723b8a846827a245b89c10fc7d3f11612:Mathlib/Data/Nat/Prime/Defs.lean"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean\\.lake\\packages\\mathlib",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "aebd695f444b13ff056ba32c43c88d31b327a5e65d2a3e0ed4784643c542a59c",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "d13f23b723b8a846827a245b89c10fc7d3f11612:LICENSE"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean\\.lake\\packages\\mathlib",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "success": true
+    }
+  ],
+  "completed_unix_ms": 1792478041911,
+  "config_file_sha256": "6564d83d0e7a68d491ab79e653ab2fd278cd494aab62360641ec4ba4441741da",
+  "corrected_procedure_revision": "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+  "dry_run": false,
+  "error": "same-ID/different-bytes conflict: \\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\artifacts\\groundtruth\\s1_pair_archive-v0.1.0-094625fa10ff\\manifest.json",
+  "executable_sha256": "a63de04b8d0aef958fbdcb3b3b7d2bb621217f6312e7e99b447184e74f3d1ba6",
+  "exit_code": 2,
+  "kind": "ADR-0007 production run; admission remains a review decision",
+  "main_baseline": "1a8388b03017e4044cad01ac10e7e89f8fb5e38f",
+  "mathlib_inputs": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612",
+    "source_comparisons": [
+      {
+        "file": "Mathlib/Data/Nat/PrimeFin.lean",
+        "git_blob_sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6",
+        "worktree_eol": "exact CRLF checkout of LF blob",
+        "worktree_sha256": "f045bed6e9eb1ba7b87d5adf09a51b030ab348e99e2521d5499207784128792e"
+      },
+      {
+        "file": "Mathlib/Data/Nat/Prime/Infinite.lean",
+        "git_blob_sha256": "ede54daa0f432b403dfd402d96c682fc892f371fcbec26fb003c3fece9aea3f5",
+        "worktree_eol": "exact CRLF checkout of LF blob",
+        "worktree_sha256": "0598e63714aad5ab4fd7b240ebcc809dda9c70284e1dc4af976463d738517a9a"
+      },
+      {
+        "file": "Mathlib/Data/Nat/Prime/Defs.lean",
+        "git_blob_sha256": "aebd695f444b13ff056ba32c43c88d31b327a5e65d2a3e0ed4784643c542a59c",
+        "worktree_eol": "exact CRLF checkout of LF blob",
+        "worktree_sha256": "5aba0745ff003fba03b16a3c29a915649ad24ddd79a423b4986c7f37c1bf4a7c"
+      },
+      {
+        "file": "LICENSE",
+        "git_blob_sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+        "worktree_eol": "exact CRLF checkout of LF blob",
+        "worktree_sha256": "e03ba41d7fab20700769fe4118bab50d800cb74f990353a05d2f5fff1c228363"
+      }
+    ]
+  },
+  "native_file_alias_check": "reparse attributes and fsutil hardlink list",
+  "os": "windows",
+  "provenance": {
+    "compiled_input_closure": [
+      {
+        "file": "engine/pair/Cargo.toml",
+        "git_and_checkout_match": true,
+        "sha256": "216a85c750cf1f687999abcee678d52c33764e730455bcd005d20a054469f0d7"
+      },
+      {
+        "file": "engine/pair/build.rs",
+        "git_and_checkout_match": true,
+        "sha256": "40ce3de07b4de3e552a098becd5b10ff775cbee020af69d5d5ad8395236cf05d"
+      },
+      {
+        "file": "engine/pair/input-files.txt",
+        "git_and_checkout_match": true,
+        "sha256": "3b06a3c9f6eb517f7cea7e9a3a15c989757ccf8aff6f3cd9f36d470df683ea1a"
+      },
+      {
+        "file": "engine/pair/src/lib.rs",
+        "git_and_checkout_match": true,
+        "sha256": "a23ea41f12bc7eee3f808a31963a8c753a50f9e2445d1535c8853788937a5279"
+      },
+      {
+        "file": "engine/pair/src/strict_json.rs",
+        "git_and_checkout_match": true,
+        "sha256": "4484b9eed198b68e234f7aa989fecdc423567d5550a1c4d6d1b797da91875598"
+      },
+      {
+        "file": "engine/pair/src/output.rs",
+        "git_and_checkout_match": true,
+        "sha256": "024166443f305a21ee42da5cb614afc599ecfb0d972448801663a25eff5f3b69"
+      },
+      {
+        "file": "engine/pair/src/provenance.rs",
+        "git_and_checkout_match": true,
+        "sha256": "bed99f66fc8e9ac04ccafe7639610eefbcd231779a8ea7fb3f04c2c8dc52841e"
+      },
+      {
+        "file": "engine/pair/src/main.rs",
+        "git_and_checkout_match": true,
+        "sha256": "970310298945adb4281091ac36264d189406385343fb8cecd597da6ccef5fa01"
+      },
+      {
+        "file": "engine/manifest/Cargo.toml",
+        "git_and_checkout_match": true,
+        "sha256": "7142e5046b7411516edf7a845a5ab4894b00efdadf1dc476f6b182205e496fb9"
+      },
+      {
+        "file": "engine/manifest/src/lib.rs",
+        "git_and_checkout_match": true,
+        "sha256": "549223c7b84fbf639c9e37fb3757b1484ad22879a82702f125c8cd52f7cdb01d"
+      },
+      {
+        "file": "engine/Cargo.toml",
+        "git_and_checkout_match": true,
+        "sha256": "b062063aa2056ee6fe5d7b175502b413163190b220088a97275fd61d4f96e4f1"
+      },
+      {
+        "file": "engine/Cargo.lock",
+        "git_and_checkout_match": true,
+        "sha256": "47fea4b3a80b0465afa11c19945d7044b7010e392ef68e4efb64318123149826"
+      },
+      {
+        "file": "rust-toolchain.toml",
+        "git_and_checkout_match": true,
+        "sha256": "7157527d1a56f14e9c980b3d18e7332f16efdd2fb16c5b7974ca2aa86586129c"
+      },
+      {
+        "file": "lean/lean-toolchain",
+        "git_and_checkout_match": true,
+        "sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+      },
+      {
+        "file": "lean/lakefile.toml",
+        "git_and_checkout_match": true,
+        "sha256": "07795417392fca1382f27ac6ad4a2d3d8c088add408efdb772785c0e2865b755"
+      },
+      {
+        "file": "lean/lake-manifest.json",
+        "git_and_checkout_match": true,
+        "sha256": "6cbd1dccf13a06b64fce2f50b9d3f9ca2c463cff3033c1ff611b727e3b383af5"
+      },
+      {
+        "file": "analysis/s1-2/archive-config.proposed.json",
+        "git_and_checkout_match": true,
+        "sha256": "5c65abfd981955e1e64d52f9cdfb2795c3bd88ad819be585344d755dded939a1"
+      },
+      {
+        "file": "analysis/s1-2/canonical-config.proposed.json",
+        "git_and_checkout_match": true,
+        "sha256": "6564d83d0e7a68d491ab79e653ab2fd278cd494aab62360641ec4ba4441741da"
+      },
+      {
+        "file": "analysis/s1-2/Proof.lean",
+        "git_and_checkout_match": true,
+        "sha256": "038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2"
+      },
+      {
+        "file": "analysis/s1-2/inspection-tail.lean",
+        "git_and_checkout_match": true,
+        "sha256": "9a0d71a7afe800456c43977a940ead173f14bc3eed827c2a1d84528e558ad4ad"
+      }
+    ],
+    "compiled_rustc": "rustc 1.91.0 (f8297e351 2025-10-28)",
+    "engine_commit": "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+    "executable_input_identity": "verified"
+  },
+  "result": "failed",
+  "source_bytes": [
+    {
+      "file": "Infinite.lean",
+      "n_bytes": 1671,
+      "sha256": "ede54daa0f432b403dfd402d96c682fc892f371fcbec26fb003c3fece9aea3f5"
+    },
+    {
+      "file": "PrimeDefs.lean",
+      "n_bytes": 16833,
+      "sha256": "aebd695f444b13ff056ba32c43c88d31b327a5e65d2a3e0ed4784643c542a59c"
+    },
+    {
+      "file": "PrimeFin.lean",
+      "n_bytes": 5328,
+      "sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6"
+    },
+    {
+      "file": "aata-20250801.pdf",
+      "n_bytes": 2207438,
+      "sha256": "4f74587b61861b4790d613f2adb64699f90fd1d07760204f1d8fc9fcaf63d14f"
+    },
+    {
+      "file": "mathlib-LICENSE",
+      "n_bytes": 11357,
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    }
+  ],
+  "started_unix_ms": 1792478040341
+}

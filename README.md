@@ -17,32 +17,36 @@ never verdicts.
 [Repository](#repository-map) · [Governance](#governance-and-contribution)
 
 > **Research stage: S1 — ground-truth corpus.** The manifest library, ingestion CLI, first canonical
-> derivation producer, and Lean verification fixture are implemented. Synthetic generation,
+> derivation producer, narrow positive-pair producer, and Lean verification fixture are implemented. Synthetic generation,
 > the detector battery, calibration reports, and contact scoring remain planned work.
 > This repository does not yet provide a
 > calibrated proof-triage service.
 
 ## Status
 
-The research snapshot below includes **the first S1.3 canonical derivation, 2026-10-20 UTC**.
+This branch includes **the first S1.2 producer and proposed positive pair, 2026-10-20 UTC**.
+The new draft implementation/admission PR is open for review; main admission is not claimed.
 The harvest remains at the Session 20 prefix of 2026-10-14. The authoritative
 gate checklist, evidence, and next action are maintained in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
 
 | Surface | Implemented or recorded | Remaining boundary |
 |---|---|---|
 | Foundation | Ratified constitution; 14 flaw classes in taxonomy `0.1.0`; S0 closed | Constitutional and taxonomy changes require an ADR |
-| Ground truth | 31 `raw/1` manifests from 21 admitted candidates; 27 candidates examined; one canonical child of an existing parent | S1 remains open; additional canonical derivatives, informal–formal pairs, and coverage analysis are pending |
-| Rust engine | `syndeom-manifest` library, `syndeom-ingest` and `syndeom-derive` CLIs, all `0.1.0` | Ingestion and derivation preserve reviewed evidence; they do not determine mathematical truth |
+| Ground truth | Accepted-main baseline: 31 raw + 1 canonical, zero S1.2 pairs. This branch: 32 raw + 2 canonical, proposing one additional positive item | Pair admission review, further derivatives and coverage analysis remain; Gate S1 is open |
+| Rust engine | `syndeom-manifest` library; `syndeom-ingest`, `syndeom-derive` and `syndeom-pair` CLIs, all `0.1.0` | Ingestion and derivation preserve reviewed evidence; they do not determine mathematical truth |
 | Formal verification | Pinned Lean/Mathlib project, golden theorem, and axiom audit | A successful build alone does not establish statement fidelity |
 | Calibration | Experimental design and phase gates specified | No synthetic corpus, calibrated battery, freeze tag, or contact report yet |
 
-The 31 archival items span five taxonomy classes; this is a corpus inventory, not a coverage or
+The baseline's 31 archival items span five taxonomy classes; this is a corpus inventory, not a coverage or
 performance result. Thirty originals use `external` storage and one is committed under its
 recorded licence. The canonical child is another representation of one parent, not a 32nd
 independent item; its proof and source context remain external. See the
 [harvest log](groundtruth/HARVEST-LOG.md), [source register](PROGRAM/SOURCES.md), and
-[S1.3 evidence and reproduction](analysis/s1-3/README.md). The next action is the S1.2 positive
-informal–formal pair procedure; no such pair has been admitted.
+[S1.3 evidence and reproduction](analysis/s1-3/README.md). This branch additionally contains
+the Judson/Mathlib archive and canonical pair, two representations of one positive item.
+Its informal statement has zero proof steps; the offered argument is Mathlib's proof.
+The next action is review of the [S1.2 implementation and admission evidence](analysis/s1-2/implementation/README.md);
+no S1.2 pair is yet accepted on main.
 
 ## Architecture
 
@@ -54,7 +58,8 @@ queue, or database in the present implementation.
 
 ### 01 · Evidence into an archive
 
-The working S1 path begins with a published original and its erratum or retraction notice.
+The S1.1 path begins with a published original and its erratum or retraction notice.
+The separate S1.2 path pairs one independently published statement with its reviewed Mathlib argument.
 Admission review establishes provenance, records the licence, and argues the flaw classification
 before the producer runs. The CLI validates structure and consistency, computes hashes, and
 writes the manifest.
@@ -88,12 +93,15 @@ flowchart LR
 - [`engine/derive/`](engine/derive/) implements `s1_derive`: reviewed statement/proof slices from
   one gzip TeX source become canonical informal Markdown, with the full original source retained
   as external context. It validates actual bytes, inherited labels, and mapped flaw locations.
+- [`engine/pair/`](engine/pair/) implements the fixed ADR-0007 archive/canonical pair contract,
+  with executable-input provenance, actual-byte validation, full output preflight and fresh receipts.
 - [`groundtruth/`](groundtruth/) retains the archival item and its written evidence.
   [`lean/`](lean/) supplies the separate formal build and axiom-audit path.
 
 Admission and licensing are review obligations: the CLI checks their input shape, not the
 underlying scholarship or redistribution rights. The procedure is
-[ADR-0003](PROGRAM/DECISIONS/ADR-0003.md).
+[ADR-0003](PROGRAM/DECISIONS/ADR-0003.md) for errata and
+[ADR-0007](PROGRAM/DECISIONS/ADR-0007.md) for the reviewed positive pair.
 
 ## Artifact contract
 
@@ -297,6 +305,14 @@ comparing exact proof, context, manifest, and source-map bytes. Choose a new ext
 directory for each run; existing destinations are refused. The retained evidence pins producer
 commit `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, which predates generation of the real child.
 
+### Reproduce the proposed first positive pair
+
+Follow [the S1.2 implementation instructions](analysis/s1-2/implementation/README.md#reproduce-into-a-new-destination).
+The helper retrieves frozen sources, invokes the committed Rust producer, compiles/audits the
+actual emitted alias, compares a fresh replay and runs labeled refusal controls. Every run
+uses a new external destination. This branch proposes one pair for review; it does not claim
+accepted-main admission or PROVEN promotion.
+
 ## Repository map
 
 | Path | Responsibility |
@@ -305,6 +321,7 @@ commit `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, which predates generation of 
 | [`engine/manifest/`](engine/manifest/) | Canonical Rust schema, identity, byte formats, fidelity, and consistency library |
 | [`engine/ingest/`](engine/ingest/) | Deterministic S1 ingestion CLI and golden tests |
 | [`engine/derive/`](engine/derive/) | Deterministic reviewed TeX derivation CLI and mechanical tests |
+| [`engine/pair/`](engine/pair/) | Narrow reviewed positive-pair archive/canonical CLI, provenance and refusal tests |
 | [`lean/`](lean/) | Pinned formal project, golden theorem, and axiom audit |
 | [`lab/`](lab/) | Exploratory Python candidate discovery and examination |
 | [`groundtruth/`](groundtruth/) | Real archival manifests, canonical child metadata and recipes, item records, permitted originals, and harvest log |
@@ -312,6 +329,7 @@ commit `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, which predates generation of 
 | [`contact/`](contact/) | Reserved for quarantined AI-generated corpora in S5 |
 | [`analysis/`](analysis/) | Engineering evidence and future experimental designs and calibration/validation/contact reports |
 | [`analysis/s1-3/`](analysis/s1-3/) | First canonical derivation receipts, preservation checks, and reproduction instructions |
+| [`analysis/s1-2/`](analysis/s1-2/) | Historical procedure evidence, separate source-map correction, implementation and proposed-admission evidence |
 | [`sources/`](sources/) | Source copies whose licences permit redistribution |
 | [`scripts/`](scripts/) | Local verification gate and register checks |
 | [`scripts/reproduce_s1_3.py`](scripts/reproduce_s1_3.py) | Source retrieval and orchestration of two independent Rust derivations |

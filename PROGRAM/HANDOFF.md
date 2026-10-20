@@ -3102,3 +3102,55 @@ on this branch, test/gate and commit it before real generation; prepare an unmer
 implementation/admission PR. STATE's existing implementation next action remains consistent.
 ESCALATIONS: none new; first-parent hold unchanged; harvest resumes candidate 28, `1403.6317`.
 STOP-REASON: Phase A correction boundary; continue authorized Phase B after its separate commit.
+
+
+---
+
+SESSION: 2026-10-20 UTC, S1.2 implementation Phase B and proposed admission.
+PHASE / GATE: S1 open; new draft implementation/admission PR remains unmerged.
+BASELINE: merged PR 3 main `1a8388b03017e4044cad01ac10e7e89f8fb5e38f`, re-fetched unchanged.
+CORRECTED PROCEDURE: `d88fad2bb7b339c56bd9964167d3e0acddc8ee4e`, committed before implementation.
+PRODUCER: `eb1b96d5b8084ceb1de734fffc90c9b480ec32bf`, exact gated tree
+`ad9cbee9a1939ddf3e0deb200a8afbe8db642d53`, committed before real generation.
+ADVANCED: narrow `syndeom-pair` archive/canonical implementation; frozen reviewed contract,
+actual raw/canonical checks and stronger inherited metadata, compiled input closure,
+complete preflight including dry runs, exclusive outputs and fresh failure receipts.
+Generated archive `s1_pair_archive-v0.1.0-094625fa10ff` and child `s1_pair-v0.1.0-62fe0c816a6b` are proposed for review.
+VERIFICATION: pre-generation gate 06:17:12Z–06:28:55Z, exit 0 / GATE: GREEN,
+8,926 Lean jobs, golden axioms `[propext]`, clean fmt/clippy, 51 tests, 203 tracked files,
+Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 68. STATE records this same run.
+Real production 06:33:04Z–06:34:11Z: fresh five-object retrieval, actual both-file
+Manifest checks and check_derived/stronger checks, emitted Lean compile and exact full-type
+match, accepted transitive axioms, 11-file byte-identical fresh replay, idempotence/dry-run
+preservation, 18 mutation refusals and receipt-overwrite refusal all passed. A separate
+synthetic Lean subprocess failure exited 1 as expected and left the actual proof unchanged.
+FINAL TREE GATE: after the artifact/evidence commit, retain the exact clean-commit gate
+receipt/log externally and record that SHA/tree/result and hosted check in the draft PR;
+do not edit the checked tree merely to embed its own final commit hash.
+EVIDENCE: `analysis/s1-2/implementation/`; actual source correspondence and admission
+review in both new RECORDs; original PR 3 and correction evidence remain byte-identical.
+PRESERVATION: new scoped check passed: 162 baseline files, 20 correction files, historical
+prefixes and all existing dependency entries unchanged; exactly two expected representations.
+FAILURES: retained first unit-test run exposed a Windows extended-drive-prefix bug;
+second exposed a fixture's premature path normalization; both fixed before the successful
+14-test run, producer gate and commit. No unexpected real-generation/audit failure.
+BELIEF DELTAS: a verified executable closure and complete output preflight are required
+in addition to manifest consistency; a source locator also needs actual line inspection.
+CONFUSIONS: resolved source interval and drive-prefix fixture failures have explicit evidence.
+HONESTY CHECK: real generated objects are distinguished from rehearsal and accepted-main
+admission; source correspondence, kernel checks and empty-statistics PASS are separate.
+LEAKAGE CHECK: same exposed Judson development candidate; no contact/private Eigenverse
+material, detector output or claim of held-out isolation.
+DETERMINISM CHECK: recorded actual producer closure; all eleven deterministic output files
+replayed identically; run timestamps/destinations are excluded from artifact identity.
+MANIFEST CHECK: 32 raw + two canonical on this branch propose one extra independent positive
+item. Accepted-main baseline remains 31 raw + one canonical with zero admitted S1.2 pairs.
+DRIFT CHECK: existing corpus, source statuses, pins, historical prefixes and original
+evidence preserved; no schema, ingest/derive contract, S2, detector or harvest work.
+NEXT-SINGLE-ACTION: review the correction, producer and both actual admission RECORDs with
+generation/audit/replay/refusal/preservation/final-gate evidence; accept or reject this one
+proposed pair before counting it on main. STATE names the same review action.
+ESCALATIONS: no new implementation blocker; admission review/merge deferred by instruction.
+The first-parent promotion hold remains; paused harvest resumes candidate 28, `1403.6317`.
+STOP-REASON: implementation and verification complete; publish the new draft for review,
+leave unmerged, and do not promote any CLAIM or close Gate S1.

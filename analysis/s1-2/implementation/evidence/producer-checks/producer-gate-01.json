@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Program Files\\Git\\bin\\bash.exe",
+    "scripts/check.sh"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+  "started_at": "2026-10-20T06:17:12.966030+00:00",
+  "checkout_revision": "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+  "index_before": "ad9cbee9a1939ddf3e0deb200a8afbe8db642d53",
+  "status_before": "A  analysis/s1-2/implementation/README.md\nM  engine/Cargo.lock\nM  engine/Cargo.toml\nA  engine/pair/Cargo.toml\nA  engine/pair/README.md\nA  engine/pair/build.rs\nA  engine/pair/input-files.txt\nA  engine/pair/src/lib.rs\nA  engine/pair/src/main.rs\nA  engine/pair/src/output.rs\nA  engine/pair/src/provenance.rs\nA  engine/pair/src/strict_json.rs\nA  engine/pair/tests/io_provenance.rs\nA  engine/pair/tests/support/contract.rs",
+  "capture_helper_sha256": "7136667ae30df7ebccda2327c655c72697b1e8e5f3e2c840362b780724fe4d82",
+  "exit_code": 0,
+  "completed_at": "2026-10-20T06:28:55.544784+00:00",
+  "index_after": "ad9cbee9a1939ddf3e0deb200a8afbe8db642d53",
+  "status_after": "A  analysis/s1-2/implementation/README.md\nM  engine/Cargo.lock\nM  engine/Cargo.toml\nA  engine/pair/Cargo.toml\nA  engine/pair/README.md\nA  engine/pair/build.rs\nA  engine/pair/input-files.txt\nA  engine/pair/src/lib.rs\nA  engine/pair/src/main.rs\nA  engine/pair/src/output.rs\nA  engine/pair/src/provenance.rs\nA  engine/pair/src/strict_json.rs\nA  engine/pair/tests/io_provenance.rs\nA  engine/pair/tests/support/contract.rs",
+  "raw_log_sha256": "4ba729d45ed1c7e51b9d861656ec8d23d42cba24efdaeef63280ce076bf3d6fe"
+}

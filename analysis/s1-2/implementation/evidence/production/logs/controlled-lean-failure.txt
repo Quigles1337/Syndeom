@@ -1,0 +1,6 @@
+C:\Users\LEET\Codex\Projects\Syndeom-S1.2-implementation-work-2026-10-20\production-run-01\ControlledLeanFailure.lean:7:2: error: Type mismatch
+  True.intro
+has type
+  True
+but is expected to have type
+  False

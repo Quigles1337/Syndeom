@@ -19,6 +19,12 @@ before computing its identity. The table below contains those corrected prospect
 [Correction evidence](correction/README.md) is separate; the original `evidence/` receipts
 and transcripts still describe the original configurations and are byte-for-byte retained.
 
+**Implementation follow-up:** the original procedural statements below describe PR 3's
+review boundary. The tested producer and real proposed pair now exist on the implementation
+branch; full actual-byte/parent-child, emitted Lean, replay and refusal checks are in
+[implementation/](implementation/README.md). No old receipt is rewritten as production evidence.
+The current next action is admission review of that draft.
+
 ## Independent primary source and rights
 
 Thomas W. Judson, *Abstract Algebra: Theory and Applications*, **Annual Edition 2025**,
@@ -270,20 +276,19 @@ Neither was a failed mathematical audit. The initial focused Lean run and both l
 runs returned 0 with identical audit output. No failure was replaced by an asserted success,
 axiom, placeholder, producer SHA or rewritten old receipt.
 
-**Not executed:** full candidate `Manifest::check`, `check_derived`, producer output/replay
+**Not executed in the original procedure session:** full candidate `Manifest::check`, `check_derived`, producer output/replay
 tests or admission, because no production pair producer/manifest exists yet. Pure API
 success is not advertised as full manifest validation. The repository gate and preservation
 results are in [VERIFICATION.md](VERIFICATION.md); its Lean audit remains the existing golden.
 
 ## Remaining obligation and exact next action
 
-No unresolved source/statement/rights decision was found for the chosen external-source
-design. The implementation/admission obligation is still real: review this draft packet,
-then implement only the narrow `syndeom-pair` archive/canonical producer of ADR-0007,
-test and commit it first, freshly verify the frozen objects, generate a genuine raw pair
-and canonical child from that actual producer SHA, run all byte/parent-child/kernel/axiom
-and refusal checks, and review the admission RECORD before counting the first positive pair.
+The procedure and corrected source map have now been implemented. Review the new draft's
+[implementation evidence](implementation/README.md) and both actual admission RECORDs;
+accept or reject the one proposed pair before counting it on main. The original procedure
+and correction evidence remain separate and unchanged.
 
-This packet leaves the corpus at **31 raw parents plus one canonical representation**.
-The first-parent promotion hold is unresolved; harvest resumes at candidate 28,
-`1403.6317`. Gate S1, S1.4 and unrelated standing questions remain open.
+The accepted-main baseline remains **31 raw parents plus one canonical representation,
+zero positive pairs**. This branch proposes **32 raw plus two canonical**, one additional
+independent positive item. The first-parent promotion hold remains unresolved; paused
+harvest resumes candidate 28, `1403.6317`. Gate S1 and S1.4 remain open.

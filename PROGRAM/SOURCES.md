@@ -2232,3 +2232,20 @@ The source hash, declaration/type/argument, licence and VERIFIED source status a
 `analysis/s1-2/correction/` records Rust-computed corrected config identities, a fresh
 successful rehearsal and negative controls that reject the old interval even with valid
 source bytes. The original entry and all original receipts remain historical evidence.
+
+
+### S-0067 / S-0068 implementation and proposed-admission follow-up — 2026-10-20
+
+The source statuses above remain unchanged. After the S-0068 locator correction at
+`d88fad2bb7b339c56bd9964167d3e0acddc8ee4e`, the first narrow pair producer was committed at
+`eb1b96d5b8084ceb1de734fffc90c9b480ec32bf` and all five fixed objects were freshly retrieved
+and hash/length verified. Source lines remain 27–28 inclusive; canonical declaration line 3.
+The claim, raw source objects, source/alias attribution and canonical bytes are unchanged.
+Production receipt: `analysis/s1-2/implementation/evidence/production/verification-receipt.json`.
+
+Actual proposed archive `s1_pair_archive-v0.1.0-094625fa10ff` and child `s1_pair-v0.1.0-62fe0c816a6b` have
+both-file validation, stronger parent/child checks, emitted-file full-type/axiom audit and
+11-file byte-identical replay evidence. The new RECORDs preserve the independent publication,
+Mathlib offered argument and SYNDEOM transcription roles. Zero informal proof steps;
+empty-statistics fidelity PASS is vacuous. Full raw/licensing context and informal output
+remain external. Draft admission review is pending; no source label or CLAIM is promoted.

@@ -1,0 +1,47 @@
+   Compiling syndeom-pair v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\pair)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.21s
+     Running unittests src\lib.rs (target\debug\deps\syndeom_pair-b038fb431257769b.exe)
+
+running 8 tests
+test tests::duplicate_json_keys_are_rejected_at_every_depth ... ok
+test tests::manifest_unknown_fields_and_wrong_producer_are_refused ... ok
+test tests::changed_inputs_with_matching_caller_hashes_still_fail_reviewed_contract ... ok
+test tests::source_interval_regression_checks_declaration_and_body_not_just_hash ... ok
+test tests::unknown_missing_fields_and_substituted_recipe_type_declaration_fail ... ok
+test tests::self_consistent_but_wrong_parent_config_and_metadata_are_rejected ... ok
+test tests::reviewed_identities_and_canonical_shape_are_fixed ... ok
+test tests::canonical_both_byte_checks_and_stronger_inheritance_are_required ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running unittests src\main.rs (target\debug\deps\syndeom_pair-68933451353ad1ba.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\io_provenance.rs (target\debug\deps\io_provenance-b4f80e4443138a20.exe)
+
+running 6 tests
+test redirected_directory_is_refused_without_target_writes ... ok
+test hardlink_case_alias_ancestor_and_dot_paths_refused ... FAILED
+test collision_on_last_output_prevents_all_writes_even_during_dry_run ... ok
+test success_replay_preserves_existing_file_times_and_dry_run_writes_nothing ... ok
+test partial_file_refused_but_missing_siblings_can_be_completed ... ok
+test provenance_checks_executable_git_and_checkout_and_propagates_subprocess_failure ... ok
+
+failures:
+
+---- hardlink_case_alias_ancestor_and_dot_paths_refused stdout ----
+
+thread 'hardlink_case_alias_ancestor_and_dot_paths_refused' (15404) panicked at pair\tests\io_provenance.rs:114:5:
+assertion failed: output::safe_path(&s.path.join("x/../escape")).is_err()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    hardlink_case_alias_ancestor_and_dot_paths_refused
+
+test result: FAILED. 5 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.15s
+
+error: test failed, to rerun pass `-p syndeom-pair --test io_provenance`

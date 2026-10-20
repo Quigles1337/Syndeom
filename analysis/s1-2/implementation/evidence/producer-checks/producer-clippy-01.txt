@@ -1,0 +1,5 @@
+    Checking syndeom-manifest v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\manifest)
+    Checking syndeom-derive v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\derive)
+    Checking syndeom-ingest v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\ingest)
+   Compiling syndeom-pair v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\pair)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 5.23s

@@ -1,0 +1,1259 @@
+{
+  "kind": "actual producer generation and proposed-admission verification",
+  "main_baseline": "1a8388b03017e4044cad01ac10e7e89f8fb5e38f",
+  "corrected_procedure_revision": "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+  "producer_revision": "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+  "started_at": "2026-10-20T06:33:04.160227+00:00",
+  "helper_sha256": "a4ad574e215c8ee5c7798de2c48487db9cb3650e6168cfa30ff62e4740715c78",
+  "checkout_revision": "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+  "artifact_root": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+  "external_root": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\external",
+  "commands": [
+    {
+      "label": "producer-build",
+      "argv": [
+        "cargo",
+        "build",
+        "--locked",
+        "-p",
+        "syndeom-pair"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine",
+      "started_at": "2026-10-20T06:33:04.194936+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:04.571870+00:00",
+      "raw_log_sha256": "0b53209db424367e80c52cd8cde8b75e37af110438a0efde777104a1463956de",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\producer-build.log"
+    },
+    {
+      "label": "rust-version",
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:04.574998+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:04.651988+00:00",
+      "raw_log_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\rust-version.log"
+    },
+    {
+      "label": "lean-version",
+      "argv": [
+        "lake",
+        "env",
+        "lean",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean",
+      "started_at": "2026-10-20T06:33:04.651988+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:07.395167+00:00",
+      "raw_log_sha256": "caa538834571fbbf53913bbde24b9fd3d9deac746137443a1c712d820e6a5b38",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\lean-version.log"
+    },
+    {
+      "label": "archive",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\archive-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\archive",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:11.735959+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:14.088303+00:00",
+      "raw_log_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\archive.log"
+    },
+    {
+      "label": "canonical",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\canonical-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\canonical"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:14.088636+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:16.078602+00:00",
+      "raw_log_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\canonical.log"
+    },
+    {
+      "label": "emitted-file-compile",
+      "argv": [
+        "lake",
+        "env",
+        "lean",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\groundtruth\\s1_pair-v0.1.0-62fe0c816a6b\\Proof.lean"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean",
+      "started_at": "2026-10-20T06:33:16.078602+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:25.480843+00:00",
+      "raw_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\emitted-file-compile.log"
+    },
+    {
+      "label": "emitted-type-axiom-audit",
+      "argv": [
+        "lake",
+        "env",
+        "lean",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\EmittedAudit.lean"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean",
+      "started_at": "2026-10-20T06:33:25.482349+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:34.465489+00:00",
+      "raw_log_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\emitted-type-axiom-audit.log"
+    },
+    {
+      "label": "controlled-lean-failure",
+      "argv": [
+        "lake",
+        "env",
+        "lean",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\ControlledLeanFailure.lean"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean",
+      "started_at": "2026-10-20T06:33:34.466999+00:00",
+      "expected_exit": 1,
+      "classification": "synthetic subprocess failure fixture; not admitted",
+      "exit_code": 1,
+      "completed_at": "2026-10-20T06:33:41.943853+00:00",
+      "raw_log_sha256": "c09f6d8589c85e456f2ec949f6d8bef208120ec1177c8af6a84ec5c476d96a26",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\controlled-lean-failure.log"
+    },
+    {
+      "label": "archive-identical-retry",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\archive-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\archive-identical-retry",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:41.949856+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:44.246842+00:00",
+      "raw_log_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\archive-identical-retry.log"
+    },
+    {
+      "label": "canonical-identical-retry",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\canonical-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\canonical-identical-retry"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:44.246842+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:47.197703+00:00",
+      "raw_log_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\canonical-identical-retry.log"
+    },
+    {
+      "label": "canonical-existing-dry-run",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\canonical-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\canonical-existing-dry-run",
+        "--dry-run"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:47.197703+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:49.357674+00:00",
+      "raw_log_sha256": "c87e98115e3569d9ba4bfb822603c7149eadbd2163e341aeba8dd1a345ddeca5",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\canonical-existing-dry-run.log"
+    },
+    {
+      "label": "archive-new-dry-run",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\archive-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\dry-artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\dry-external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\archive-new-dry-run",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\sources",
+        "--dry-run"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:49.363175+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:51.071148+00:00",
+      "raw_log_sha256": "b3fb54f30e60d20c7ec89adf47511017bef791c0b017b97d1fd7227a2b620951",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\archive-new-dry-run.log"
+    },
+    {
+      "label": "replay-archive",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\archive-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\replay-artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\replay-external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\replay-archive",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:51.071651+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:53.227715+00:00",
+      "raw_log_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\replay-archive.log"
+    },
+    {
+      "label": "replay-canonical",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\canonical-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\replay-artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\replay-external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\replay-canonical"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:53.227715+00:00",
+      "expected_exit": 0,
+      "classification": "positive",
+      "exit_code": 0,
+      "completed_at": "2026-10-20T06:33:55.523064+00:00",
+      "raw_log_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\replay-canonical.log"
+    },
+    {
+      "label": "wrong-declaration",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-declaration\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-declaration\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-declaration\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-declaration"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:55.676753+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:55.747987+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-declaration.log"
+    },
+    {
+      "label": "wrong-type",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-type\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-type\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-type\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-type"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:55.836191+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:55.901540+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-type.log"
+    },
+    {
+      "label": "invented-informal-proof",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\invented-informal-proof\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\invented-informal-proof\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\invented-informal-proof\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\invented-informal-proof"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:55.999177+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:56.069958+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\invented-informal-proof.log"
+    },
+    {
+      "label": "unknown-field",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\unknown-field\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\unknown-field\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\unknown-field\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\unknown-field"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:56.178961+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:56.251748+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\unknown-field.log"
+    },
+    {
+      "label": "unsupported-method",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\unsupported-method\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\unsupported-method\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\unsupported-method\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\unsupported-method"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:56.360956+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:56.431590+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\unsupported-method.log"
+    },
+    {
+      "label": "wrong-parent-link",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-link\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-link\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-link\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-parent-link"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:56.535081+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:56.603929+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-parent-link.log"
+    },
+    {
+      "label": "wrong-parent-config-hash",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-config-hash\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-config-hash\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-config-hash\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-parent-config-hash"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:56.705851+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:56.780004+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\wrong-parent-config-hash.log"
+    },
+    {
+      "label": "source-line-regression",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\source-line-regression\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\source-line-regression\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\source-line-regression\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\source-line-regression"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:56.888807+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:56.960597+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\source-line-regression.log"
+    },
+    {
+      "label": "missing-source",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-source\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-source\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-source\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\missing-source",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-source\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:57.109721+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:58.485330+00:00",
+      "raw_log_sha256": "67d06e994455c90eb0392d7bdc2202c36ecb3040061d139dde7e495553966360",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\missing-source.log"
+    },
+    {
+      "label": "altered-formal-source",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\altered-formal-source\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\altered-formal-source\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\altered-formal-source\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\altered-formal-source",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\altered-formal-source\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:33:58.654088+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:33:59.960459+00:00",
+      "raw_log_sha256": "a6db834cf1ffeb929c08764e39b72c73261b0fec975d557377d46caf1f617346",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\altered-formal-source.log"
+    },
+    {
+      "label": "substituted-source-with-matching-caller-hash",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\substituted-source-with-matching-caller-hash\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\substituted-source-with-matching-caller-hash\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\substituted-source-with-matching-caller-hash\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\substituted-source-with-matching-caller-hash",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\substituted-source-with-matching-caller-hash\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:00.147273+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:00.219066+00:00",
+      "raw_log_sha256": "98412c5d5ed5cd61f00443b052917fda5cc82fe735752f957484c2c2058ecc09",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\substituted-source-with-matching-caller-hash.log"
+    },
+    {
+      "label": "changed-parent-metadata",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-parent-metadata"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:00.325895+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:01.925050+00:00",
+      "raw_log_sha256": "3fab263a5aca64c165fca6c2f70c5fc0406b6f78eacae785f18424ef37212154",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\changed-parent-metadata.log"
+    },
+    {
+      "label": "changed-parent-source-map",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-source-map\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-source-map\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-source-map\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-parent-source-map"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:02.015798+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:03.786092+00:00",
+      "raw_log_sha256": "32e326f86177b686f303c4a91bbd3fb0fe83a7830f21c89ba6b53ab6b24a9c85",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\changed-parent-source-map.log"
+    },
+    {
+      "label": "missing-actual-parent-file",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-actual-parent-file\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-actual-parent-file\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-actual-parent-file\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\missing-actual-parent-file"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:03.881453+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:05.213790+00:00",
+      "raw_log_sha256": "1498ef8f5e5da491ab6a644fdd68399df018ba1219df0ebf0e956f58c2b17876",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\missing-actual-parent-file.log"
+    },
+    {
+      "label": "changed-actual-parent-bytes",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-actual-parent-bytes\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-actual-parent-bytes\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-actual-parent-bytes\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-actual-parent-bytes"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:05.322113+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:06.636716+00:00",
+      "raw_log_sha256": "a6db834cf1ffeb929c08764e39b72c73261b0fec975d557377d46caf1f617346",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\changed-actual-parent-bytes.log"
+    },
+    {
+      "label": "late-output-collision",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\late-output-collision"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:06.746054+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:08.687767+00:00",
+      "raw_log_sha256": "55e391c44115975d1165200bf8e4acdb016d7ab18950661e88a89725fb3d04ac",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\late-output-collision.log"
+    },
+    {
+      "label": "late-output-collision-dry-run",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "canonical",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision-dry-run\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision-dry-run\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision-dry-run\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\late-output-collision-dry-run",
+        "--dry-run"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:08.791048+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:10.958309+00:00",
+      "raw_log_sha256": "7f37a7b68b87273c4cf2f2e412076e2d091ca0a6557cb7c471ab7643a4011605",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\late-output-collision-dry-run.log"
+    },
+    {
+      "label": "producer-before-implementation",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\config.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\artifacts",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\external",
+        "--engine-commit",
+        "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\producer-before-implementation",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:11.088871+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:11.355738+00:00",
+      "raw_log_sha256": "1f3dd898b04b30f2e9aadef7366ed9f9a0623ed549077a54839f01f422e310c5",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\producer-before-implementation.log"
+    },
+    {
+      "label": "existing-receipt-refused",
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\syndeom-pair.exe",
+        "--mode",
+        "archive",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\archive-config.proposed.json",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--artifact-root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\external",
+        "--engine-commit",
+        "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+        "--receipt-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\archive",
+        "--sources-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\sources"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-20T06:34:11.384929+00:00",
+      "expected_exit": 2,
+      "classification": "controlled refusal",
+      "exit_code": 2,
+      "completed_at": "2026-10-20T06:34:11.419337+00:00",
+      "raw_log_sha256": "92e90c2d58a4ae16bc0856a29a42b48fc2061b6012a640b3e5a944d3b53f8487",
+      "log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\logs\\existing-receipt-refused.log"
+    }
+  ],
+  "sources": [
+    {
+      "file": "aata-20250801.pdf",
+      "requested_url": "https://judsonbooks.org/aata-files/aata-20250801.pdf",
+      "final_url": "https://judsonbooks.org/aata-files/aata-20250801.pdf",
+      "http_status": 200,
+      "retrieval_started_at": "2026-10-20T04:50:52.448265+00:00",
+      "accessed_at": "2026-10-20T04:50:55.721358+00:00",
+      "content_type": "application/pdf",
+      "sha256": "4f74587b61861b4790d613f2adb64699f90fd1d07760204f1d8fc9fcaf63d14f",
+      "n_bytes": 2207438,
+      "method": "HTTP",
+      "status": 200,
+      "verification_started": "2026-10-20T06:33:07.396166+00:00",
+      "verification_completed": "2026-10-20T06:33:10.291927+00:00"
+    },
+    {
+      "file": "PrimeFin.lean",
+      "requested_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean",
+      "final_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean",
+      "http_status": 200,
+      "retrieval_started_at": "2026-10-20T04:50:55.728766+00:00",
+      "accessed_at": "2026-10-20T04:50:56.017343+00:00",
+      "content_type": "text/plain; charset=utf-8",
+      "sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6",
+      "n_bytes": 5328,
+      "method": "HTTP",
+      "status": 200,
+      "verification_started": "2026-10-20T06:33:10.291927+00:00",
+      "verification_completed": "2026-10-20T06:33:10.678412+00:00"
+    },
+    {
+      "file": "Infinite.lean",
+      "requested_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/Prime/Infinite.lean",
+      "final_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/Prime/Infinite.lean",
+      "http_status": 200,
+      "retrieval_started_at": "2026-10-20T04:50:56.020240+00:00",
+      "accessed_at": "2026-10-20T04:50:56.306122+00:00",
+      "content_type": "text/plain; charset=utf-8",
+      "sha256": "ede54daa0f432b403dfd402d96c682fc892f371fcbec26fb003c3fece9aea3f5",
+      "n_bytes": 1671,
+      "method": "HTTP",
+      "status": 200,
+      "verification_started": "2026-10-20T06:33:10.678412+00:00",
+      "verification_completed": "2026-10-20T06:33:11.031787+00:00"
+    },
+    {
+      "file": "PrimeDefs.lean",
+      "requested_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/Prime/Defs.lean",
+      "final_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/Prime/Defs.lean",
+      "http_status": 200,
+      "retrieval_started_at": "2026-10-20T04:50:56.308521+00:00",
+      "accessed_at": "2026-10-20T04:50:56.594573+00:00",
+      "content_type": "text/plain; charset=utf-8",
+      "sha256": "aebd695f444b13ff056ba32c43c88d31b327a5e65d2a3e0ed4784643c542a59c",
+      "n_bytes": 16833,
+      "method": "HTTP",
+      "status": 200,
+      "verification_started": "2026-10-20T06:33:11.032793+00:00",
+      "verification_completed": "2026-10-20T06:33:11.400656+00:00"
+    },
+    {
+      "file": "mathlib-LICENSE",
+      "requested_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/LICENSE",
+      "final_url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/LICENSE",
+      "http_status": 200,
+      "retrieval_started_at": "2026-10-20T04:50:56.597092+00:00",
+      "accessed_at": "2026-10-20T04:50:56.859508+00:00",
+      "content_type": "text/plain; charset=utf-8",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "n_bytes": 11357,
+      "method": "HTTP",
+      "status": 200,
+      "verification_started": "2026-10-20T06:33:11.400656+00:00",
+      "verification_completed": "2026-10-20T06:33:11.734960+00:00"
+    }
+  ],
+  "refusal_controls": [
+    {
+      "name": "wrong-declaration",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-declaration\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "wrong-type",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-type\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "invented-informal-proof",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\invented-informal-proof\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "unknown-field",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\unknown-field\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "unsupported-method",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\unsupported-method\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "wrong-parent-link",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-parent-link\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "wrong-parent-config-hash",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-parent-config-hash\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "source-line-regression",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\source-line-regression\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "missing-source",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-source\\sources\\PrimeFin.lean: The system cannot find the file specified. (os error 2)",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\missing-source\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "altered-formal-source",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "changed/unreviewed source bytes: PrimeFin.lean",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\altered-formal-source\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "substituted-source-with-matching-caller-hash",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\substituted-source-with-matching-caller-hash\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "changed-parent-metadata",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "same-ID/different-bytes conflict: \\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-metadata\\artifacts\\groundtruth\\s1_pair_archive-v0.1.0-094625fa10ff\\manifest.json",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-parent-metadata\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "changed-parent-source-map",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "same-ID/different-bytes conflict: \\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\changed-parent-source-map\\artifacts\\groundtruth\\s1_pair_archive-v0.1.0-094625fa10ff\\source-map.json",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-parent-source-map\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "missing-actual-parent-file",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\missing-actual-parent-file\\external\\s1_pair_archive-v0.1.0-094625fa10ff\\PrimeFin.lean: The system cannot find the file specified. (os error 2)",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\missing-actual-parent-file\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "changed-actual-parent-bytes",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "changed/unreviewed source bytes: PrimeFin.lean",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\changed-actual-parent-bytes\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "late-output-collision",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "same-ID/different-bytes conflict: \\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision\\artifacts\\groundtruth\\s1_pair-v0.1.0-62fe0c816a6b\\Proof.lean",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\late-output-collision\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "late-output-collision-dry-run",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "same-ID/different-bytes conflict: \\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\late-output-collision-dry-run\\artifacts\\groundtruth\\s1_pair-v0.1.0-62fe0c816a6b\\Proof.lean",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\late-output-collision-dry-run\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    },
+    {
+      "name": "producer-before-implementation",
+      "exit_code": 2,
+      "preservation": "exact bytes and mtimes",
+      "reason": "git subprocess failed (Some(128)): fatal: path 'engine/pair/Cargo.toml' exists on disk, but not in 'd88fad2bb7b339c56bd9964167d3e0acddc8ee4e'\n",
+      "receipt": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\producer-before-implementation\\receipt.json",
+      "classification": "development mutation fixture, not corpus data"
+    }
+  ],
+  "accepted_main_admission": false,
+  "executable_sha256": "a63de04b8d0aef958fbdcb3b3b7d2bb621217f6312e7e99b447184e74f3d1ba6",
+  "rust_version": "rustc 1.91.0 (f8297e351 2025-10-28)",
+  "lean_version": "Lean (version 4.34.1, x86_64-w64-windows-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)",
+  "packet_input_sha256": {
+    "archive-config.proposed.json": "5c65abfd981955e1e64d52f9cdfb2795c3bd88ad819be585344d755dded939a1",
+    "canonical-config.proposed.json": "6564d83d0e7a68d491ab79e653ab2fd278cd494aab62360641ec4ba4441741da",
+    "Proof.lean": "038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2",
+    "inspection-tail.lean": "9a0d71a7afe800456c43977a940ead173f14bc3eed827c2a1d84528e558ad4ad"
+  },
+  "emitted_audit": {
+    "actual_file_sha256": "038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2",
+    "audit_sha256": "76cad90b70f93d2b6a311be0f7602fba6415757e5c30c14185148ba61c3572fa",
+    "types": {
+      "Nat.infinite_setOfPred_prime": "@Set.Infinite.{0} Nat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)",
+      "syndeom_s1_2_judson_primes": "@Set.Infinite.{0} Nat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)"
+    },
+    "axioms": {
+      "Nat.infinite_setOfPred_prime": {
+        "printed": [
+          "propext",
+          "Classical.choice.{u}",
+          "Quot.sound.{u}"
+        ],
+        "constant_names": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "syndeom_s1_2_judson_primes": {
+        "printed": [
+          "propext",
+          "Classical.choice.{u}",
+          "Quot.sound.{u}"
+        ],
+        "constant_names": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "Nat.prime_def": {
+        "printed": [
+          "propext"
+        ],
+        "constant_names": [
+          "propext"
+        ]
+      },
+      "Nat.not_bddAbove_setOfPred_prime": {
+        "printed": [
+          "propext",
+          "Classical.choice.{u}",
+          "Quot.sound.{u}"
+        ],
+        "constant_names": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "Nat.exists_infinite_primes": {
+        "printed": [
+          "propext",
+          "Classical.choice.{u}",
+          "Quot.sound.{u}"
+        ],
+        "constant_names": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      },
+      "Set.infinite_of_not_bddAbove": {
+        "printed": [
+          "propext",
+          "Classical.choice.{u}",
+          "Quot.sound.{u}"
+        ],
+        "constant_names": [
+          "propext",
+          "Classical.choice",
+          "Quot.sound"
+        ]
+      }
+    },
+    "result": "PASS"
+  },
+  "identical_retry_and_dry_run_preserve_bytes_and_mtimes": true,
+  "fresh_replay": {
+    "result": "byte-for-byte identical",
+    "files": {
+      "metadata/s1_pair_archive-v0.1.0-094625fa10ff/manifest.json": {
+        "sha256": "ce102662b2377bc96c4a127a20fa1a343b07ae50fd855728150cca03fee0d3fa",
+        "n_bytes": 4662
+      },
+      "metadata/s1_pair_archive-v0.1.0-094625fa10ff/source-map.json": {
+        "sha256": "3691b1b481d847bc9573867d4a69234dc86f0ed156fce9a29f5a84ad56172195",
+        "n_bytes": 1708
+      },
+      "external/s1_pair_archive-v0.1.0-094625fa10ff/aata-20250801.pdf": {
+        "sha256": "4f74587b61861b4790d613f2adb64699f90fd1d07760204f1d8fc9fcaf63d14f",
+        "n_bytes": 2207438
+      },
+      "external/s1_pair_archive-v0.1.0-094625fa10ff/Infinite.lean": {
+        "sha256": "ede54daa0f432b403dfd402d96c682fc892f371fcbec26fb003c3fece9aea3f5",
+        "n_bytes": 1671
+      },
+      "external/s1_pair_archive-v0.1.0-094625fa10ff/mathlib-LICENSE": {
+        "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+        "n_bytes": 11357
+      },
+      "external/s1_pair_archive-v0.1.0-094625fa10ff/PrimeDefs.lean": {
+        "sha256": "aebd695f444b13ff056ba32c43c88d31b327a5e65d2a3e0ed4784643c542a59c",
+        "n_bytes": 16833
+      },
+      "external/s1_pair_archive-v0.1.0-094625fa10ff/PrimeFin.lean": {
+        "sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6",
+        "n_bytes": 5328
+      },
+      "metadata/s1_pair-v0.1.0-62fe0c816a6b/manifest.json": {
+        "sha256": "6903276efcd9fed08ddb25a0d2dddc10648ead8d409d8ce53a73553cf1a7d556",
+        "n_bytes": 5932
+      },
+      "metadata/s1_pair-v0.1.0-62fe0c816a6b/Proof.lean": {
+        "sha256": "038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2",
+        "n_bytes": 142
+      },
+      "metadata/s1_pair-v0.1.0-62fe0c816a6b/source-map.json": {
+        "sha256": "462e119bec0a25262d01dde3cbd59def20fce9b6f46af4013c260c10121d3075",
+        "n_bytes": 2348
+      },
+      "external/s1_pair-v0.1.0-62fe0c816a6b/proof.md": {
+        "sha256": "56983d03aa658d0315659b88147f6277e7cb6b883e3ce5a6db099094b5949b95",
+        "n_bytes": 118
+      }
+    },
+    "deterministic_file_count": 11,
+    "receipt_differences": "timestamps, directories and run commands are intentionally outside artifact identity"
+  },
+  "retained_receipt_overwrite_refused": true,
+  "result": "PASS: generation, actual-byte validation, emitted Lean audit, replay and controls; draft admission only",
+  "exit_code": 0,
+  "completed_at": "2026-10-20T06:34:11.430260+00:00"
+}

@@ -1,0 +1,74 @@
+{
+  "arch": "x86_64",
+  "argv": [
+    "--mode",
+    "archive",
+    "--config",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\config.json",
+    "--root",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+    "--artifact-root",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\artifacts",
+    "--external-dir",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\external",
+    "--engine-commit",
+    "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+    "--receipt-dir",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\producer-before-implementation",
+    "--sources-dir",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\producer-before-implementation\\sources"
+  ],
+  "commands": [
+    {
+      "args": [
+        "rev-parse",
+        "--verify",
+        "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e^{commit}"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "0cf5b487eb4ed3f21b47b4bab657f960eb542360292f48168051117be7ce1450",
+      "success": true
+    },
+    {
+      "args": [
+        "merge-base",
+        "--is-ancestor",
+        "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+        "HEAD"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "program": "git",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "success": true
+    },
+    {
+      "args": [
+        "show",
+        "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e:engine/pair/Cargo.toml"
+      ],
+      "cwd": "\\\\?\\C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 128,
+      "program": "git",
+      "stderr": "fatal: path 'engine/pair/Cargo.toml' exists on disk, but not in 'd88fad2bb7b339c56bd9964167d3e0acddc8ee4e'\n",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "success": false
+    }
+  ],
+  "completed_unix_ms": 1792478051342,
+  "corrected_procedure_revision": "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+  "dry_run": false,
+  "error": "git subprocess failed (Some(128)): fatal: path 'engine/pair/Cargo.toml' exists on disk, but not in 'd88fad2bb7b339c56bd9964167d3e0acddc8ee4e'\n",
+  "executable_sha256": "a63de04b8d0aef958fbdcb3b3b7d2bb621217f6312e7e99b447184e74f3d1ba6",
+  "exit_code": 2,
+  "kind": "ADR-0007 production run; admission remains a review decision",
+  "main_baseline": "1a8388b03017e4044cad01ac10e7e89f8fb5e38f",
+  "native_file_alias_check": "reparse attributes and fsutil hardlink list",
+  "os": "windows",
+  "result": "failed",
+  "started_unix_ms": 1792478051102
+}

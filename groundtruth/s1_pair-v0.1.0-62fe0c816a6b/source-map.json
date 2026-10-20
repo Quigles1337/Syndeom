@@ -1,0 +1,65 @@
+{
+  "artifact_id": "s1_pair-v0.1.0-62fe0c816a6b",
+  "attribution": {
+    "formal": "Mathlib; source header copyright 2015 Microsoft Corporation; authors Leonardo de Moura, Jeremy Avigad, Mario Carneiro",
+    "informal": "Thomas W. Judson; book copyright 1997-2025 Thomas W. Judson and Robert A. Beezer; annual edition dated August 1, 2025",
+    "pairing_and_transcription": "SYNDEOM executor, 2026-10-20; development review, no source-author endorsement"
+  },
+  "derived_from": "s1_pair_archive-v0.1.0-094625fa10ff",
+  "method": "reviewed-statement-mathlib-alias/1",
+  "parent_config_sha256": "094625fa10ffde723ba3a3ae47ff75db2b1994b8f96f26f6eb562dcbf653ede0",
+  "parent_manifest_sha256": "ce102662b2377bc96c4a127a20fa1a343b07ae50fd855728150cca03fee0d3fa",
+  "required_external_context": [
+    {
+      "file": "aata-20250801.pdf",
+      "n_bytes": 2207438,
+      "sha256": "4f74587b61861b4790d613f2adb64699f90fd1d07760204f1d8fc9fcaf63d14f"
+    },
+    {
+      "file": "PrimeFin.lean",
+      "n_bytes": 5328,
+      "sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6"
+    },
+    {
+      "file": "Infinite.lean",
+      "n_bytes": 1671,
+      "sha256": "ede54daa0f432b403dfd402d96c682fc892f371fcbec26fb003c3fece9aea3f5"
+    },
+    {
+      "file": "PrimeDefs.lean",
+      "n_bytes": 16833,
+      "sha256": "aebd695f444b13ff056ba32c43c88d31b327a5e65d2a3e0ed4784643c542a59c"
+    },
+    {
+      "file": "mathlib-LICENSE",
+      "n_bytes": 11357,
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1"
+    }
+  ],
+  "source_interval_convention": "one-based inclusive; canonical line one-based; statement scalar span zero-based half-open",
+  "source_map": {
+    "formal": {
+      "canonical_declaration": "syndeom_s1_2_judson_primes",
+      "canonical_line": 3,
+      "source_declaration": "Nat.infinite_setOfPred_prime",
+      "source_file": "PrimeFin.lean",
+      "source_lines_one_based": [
+        27,
+        28
+      ]
+    },
+    "informal": {
+      "pdf_page_one_based": 41,
+      "printed_page": "28",
+      "section": "2.2.2",
+      "source_file": "aata-20250801.pdf",
+      "span_unicode_scalars": [
+        0,
+        41
+      ],
+      "step": 0,
+      "theorem": "2.2.6"
+    },
+    "proof_role": "No source proof steps selected; formal file is the offered argument for the informal claim"
+  }
+}
