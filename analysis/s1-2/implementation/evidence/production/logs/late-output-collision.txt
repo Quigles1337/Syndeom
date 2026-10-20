@@ -1,0 +1,1 @@
+same-ID/different-bytes conflict: \\?\C:\Users\LEET\Codex\Projects\Syndeom-S1.2-implementation-work-2026-10-20\production-run-01\controls\late-output-collision\artifacts\groundtruth\s1_pair-v0.1.0-62fe0c816a6b\Proof.lean

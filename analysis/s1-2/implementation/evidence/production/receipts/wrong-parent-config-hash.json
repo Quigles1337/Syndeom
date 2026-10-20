@@ -1,0 +1,32 @@
+{
+  "arch": "x86_64",
+  "argv": [
+    "--mode",
+    "canonical",
+    "--config",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-config-hash\\config.json",
+    "--root",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+    "--artifact-root",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-config-hash\\artifacts",
+    "--external-dir",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\controls\\wrong-parent-config-hash\\external",
+    "--engine-commit",
+    "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+    "--receipt-dir",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\production-run-01\\receipts\\wrong-parent-config-hash"
+  ],
+  "commands": [],
+  "completed_unix_ms": 1792478036775,
+  "corrected_procedure_revision": "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+  "dry_run": false,
+  "error": "unsupported/unreviewed configuration, metadata, source, declaration, type or recipe",
+  "executable_sha256": "a63de04b8d0aef958fbdcb3b3b7d2bb621217f6312e7e99b447184e74f3d1ba6",
+  "exit_code": 2,
+  "kind": "ADR-0007 production run; admission remains a review decision",
+  "main_baseline": "1a8388b03017e4044cad01ac10e7e89f8fb5e38f",
+  "native_file_alias_check": "reparse attributes and fsutil hardlink list",
+  "os": "windows",
+  "result": "failed",
+  "started_unix_ms": 1792478036722
+}

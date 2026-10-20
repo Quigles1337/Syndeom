@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "cargo",
+    "clippy",
+    "--locked",
+    "--all-targets",
+    "--all-features",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine",
+  "started_at": "2026-10-20T06:14:46.165033+00:00",
+  "checkout_revision": "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+  "index_before": "8b4c0903508705e61a15c3640e2763ef20b851bd",
+  "status_before": "M engine/Cargo.lock\n M engine/Cargo.toml\n?? engine/pair/",
+  "capture_helper_sha256": "7136667ae30df7ebccda2327c655c72697b1e8e5f3e2c840362b780724fe4d82",
+  "exit_code": 0,
+  "completed_at": "2026-10-20T06:14:51.737293+00:00",
+  "index_after": "8b4c0903508705e61a15c3640e2763ef20b851bd",
+  "status_after": "M engine/Cargo.lock\n M engine/Cargo.toml\n?? engine/pair/",
+  "raw_log_sha256": "143adfb463f62fc0cf3198a282d6ceb1d41f409c5c1afda6a9cc1d07c70c7a54"
+}

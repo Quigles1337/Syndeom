@@ -9,9 +9,9 @@
     "kind": "mathlib",
     "reference": "S-0068: Nat.infinite_setOfPred_prime at mathlib d13f23b723b8a846827a245b89c10fc7d3f11612; S-0067 claim correspondence in analysis/s1-2/README.md"
   },
-  "derived_from": "s1_pair_archive-v0.1.0-ad12b7ada449",
+  "derived_from": "s1_pair_archive-v0.1.0-094625fa10ff",
   "method": "reviewed-statement-mathlib-alias/1",
-  "parent_config_sha256": "ad12b7ada4490b5011a231941dee44e00968a5b8ec6f1863c1183db905d7e46b",
+  "parent_config_sha256": "094625fa10ffde723ba3a3ae47ff75db2b1994b8f96f26f6eb562dcbf653ede0",
   "ground_truth": {
     "derivation": "formalized-in-mathlib",
     "statement_status": {
@@ -58,8 +58,8 @@
       "formal": {
         "source_file": "PrimeFin.lean",
         "source_lines_one_based": [
-          28,
-          29
+          27,
+          28
         ],
         "source_declaration": "Nat.infinite_setOfPred_prime",
         "canonical_declaration": "syndeom_s1_2_judson_primes",

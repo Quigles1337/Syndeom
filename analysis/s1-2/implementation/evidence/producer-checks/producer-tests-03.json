@@ -1,0 +1,21 @@
+{
+  "argv": [
+    "cargo",
+    "test",
+    "--locked",
+    "-p",
+    "syndeom-pair",
+    "--all-targets"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine",
+  "started_at": "2026-10-20T06:14:34.363580+00:00",
+  "checkout_revision": "d88fad2bb7b339c56bd9964167d3e0acddc8ee4e",
+  "index_before": "8b4c0903508705e61a15c3640e2763ef20b851bd",
+  "status_before": "M engine/Cargo.lock\n M engine/Cargo.toml\n?? engine/pair/",
+  "capture_helper_sha256": "7136667ae30df7ebccda2327c655c72697b1e8e5f3e2c840362b780724fe4d82",
+  "exit_code": 0,
+  "completed_at": "2026-10-20T06:14:39.181150+00:00",
+  "index_after": "8b4c0903508705e61a15c3640e2763ef20b851bd",
+  "status_after": "M engine/Cargo.lock\n M engine/Cargo.toml\n?? engine/pair/",
+  "raw_log_sha256": "6e947d02dac9997e8b6aba3b58bce3ba979a89d4d3540cfcb9fdf24ad8c92850"
+}

@@ -93,3 +93,22 @@ The analytical parser controls are not new producer tests. No proof of equivalen
 as a substitute for source correspondence, and no source-proof formalization is claimed.
 No S1.4 coverage analysis, S2 family, detector/contact evaluation, private evidence import,
 schema change, dependency change or promotion of the held first parent occurred.
+
+
+## Post-merge source-locator correction
+
+The preceding record is historical PR 3 evidence for its original configurations.
+The original 28–29 formal interval omitted the declaration; the corrected interval is
+27–28 (one-based inclusive). See [correction/README.md](correction/README.md) and its fresh
+receipt/log set for corrected hashes/IDs, actual line checks, rejected negative controls
+and the successful replay. The old logs and helper/input hashes above were not rewritten.
+
+
+## Implementation follow-up — separate real generation evidence
+
+The original receipts above and the Phase A correction evidence remain unchanged.
+Producer `eb1b96d5b8084ceb1de734fffc90c9b480ec32bf` was tested/gated and committed before
+actual generation. `implementation/VERIFICATION.md` and its separate `evidence/` directory
+record real manifests, both-file/parent-child checks, emitted Lean/type/axiom audit,
+11-file fresh replay, refusal controls and scoped preservation. The new draft proposes
+one pair for admission review. It does not relabel the old pure-API rehearsal as admission.

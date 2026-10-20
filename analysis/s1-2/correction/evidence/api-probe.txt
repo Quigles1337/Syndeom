@@ -1,0 +1,10 @@
+DEVELOPMENT REHEARSAL ONLY: no manifest, producer record, or corpus admission
+informal: InformalStats { n_bytes: 118, n_tokens: 7, n_steps: 0, n_lemmas: 0, steps: ["There exist an infinite number of primes."] }
+formal: LeanStats { n_bytes: 142, n_tokens: 14, n_lines: 4, n_declarations: 1, declarations: [(3, "syndeom_s1_2_judson_primes")], imports: ["Mathlib.Data.Nat.PrimeFin"] }
+informal_sha256: 56983d03aa658d0315659b88147f6277e7cb6b883e3ce5a6db099094b5949b95
+formal_sha256: 038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2
+s1_pair_archive proposed_config_sha256: 094625fa10ffde723ba3a3ae47ff75db2b1994b8f96f26f6eb562dcbf653ede0
+s1_pair_archive prospective_id_not_admitted: s1_pair_archive-v0.1.0-094625fa10ff
+s1_pair proposed_config_sha256: 62fe0c816a6b0ef928f3e4c2fb7e2bd2e215171ebf6b6130202e851e1e9664a3
+s1_pair prospective_id_not_admitted: s1_pair-v0.1.0-62fe0c816a6b
+negative format controls: CR informal and non-Mathlib import rejected

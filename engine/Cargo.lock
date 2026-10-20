@@ -258,6 +258,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "syndeom-pair"
+version = "0.1.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "syndeom-manifest",
+]
+
+[[package]]
 name = "typenum"
 version = "1.20.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"

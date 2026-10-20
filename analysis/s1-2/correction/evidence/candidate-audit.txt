@@ -1,0 +1,585 @@
+Nat.infinite_setOfPred_prime : @Set.Infinite.{0} Nat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)
+syndeom_s1_2_judson_primes : @Set.Infinite.{0} Nat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)
+@Nat.prime_def : ∀ {p : Nat},
+  Iff (Nat.Prime p)
+    (And (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p)
+      (∀ (m : Nat),
+        @Dvd.dvd.{0} Nat Nat.instDvd m p →
+          Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Eq.{1} Nat m p)))
+theorem Nat.infinite_setOfPred_prime : @Set.Infinite.{0} Nat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) :=
+@Set.infinite_of_not_bddAbove.{0} Nat Nat.instPreorder
+  (@SemilatticeSup.instIsDirectedOrder.{0} Nat
+    (@Lattice.toSemilatticeSup.{0} Nat (@DistribLattice.toLattice.{0} Nat instDistribLatticeNat)))
+  (@instNonemptyOfInhabited.{1} Nat instInhabitedNat) (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)
+  Nat.not_bddAbove_setOfPred_prime
+protected def Set.Infinite.{u} : {α : Type u} → (s : Set.{u} α) → Prop :=
+fun {α : Type u} (s : Set.{u} α) => Not (@Set.Finite.{u} α s)
+protected def Set.Finite.{u} : {α : Type u} → (s : Set.{u} α) → Prop :=
+fun {α : Type u} (s : Set.{u} α) => Finite.{u + 1} (@Set.Elem.{u} α s)
+def Nat.Prime : (p : Nat) → Prop :=
+fun (p : Nat) => @Irreducible.{0} Nat Nat.instMonoid p
+theorem Nat.prime_def : ∀ {p : Nat},
+  Iff (Nat.Prime p)
+    (And (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p)
+      (∀ (m : Nat),
+        @Dvd.dvd.{0} Nat Nat.instDvd m p →
+          Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Eq.{1} Nat m p))) :=
+fun {p : Nat} =>
+  @Iff.intro (Nat.Prime p)
+    (And (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p)
+      (∀ (m : Nat),
+        @Dvd.dvd.{0} Nat Nat.instDvd m p →
+          Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Eq.{1} Nat m p)))
+    (fun (h : Nat.Prime p) =>
+      @And.intro (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p)
+        (∀ (m : Nat),
+          @Dvd.dvd.{0} Nat Nat.instDvd m p →
+            Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Eq.{1} Nat m p))
+        (@Nat.Prime.two_le p h) (@Nat.Prime.eq_one_or_self_of_dvd p h))
+    fun
+      (h :
+        And (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p)
+          (∀ (m : Nat),
+            @Dvd.dvd.{0} Nat Nat.instDvd m p →
+              Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Eq.{1} Nat m p))) =>
+    have h1 :
+      @LT.lt.{0} Nat (@Preorder.toLT.{0} Nat Nat.instPreorder)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) p :=
+      @LT.lt.trans_le.{0} Nat Nat.instPreorder (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+        (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p Nat.one_lt_two
+        (@And.left (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p)
+          (∀ (m : Nat),
+            @Dvd.dvd.{0} Nat Nat.instDvd m p →
+              Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Eq.{1} Nat m p))
+          h);
+    @Irreducible.mk.{0} Nat Nat.instMonoid p
+      (@mt (@IsUnit.{0} Nat Nat.instMonoid p)
+        (@Eq.{1} Nat p (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+        (@Iff.mp (@IsUnit.{0} Nat Nat.instMonoid p)
+          (@Eq.{1} Nat p (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Nat.isUnit_iff p))
+        (@LT.lt.ne'.{0} Nat Nat.instPreorder p (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) h1))
+      fun ⦃a b : Nat⦄
+        (a_1 :
+          @Eq.{1} Nat p
+            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+              (@instHMul.{0} Nat
+                (@MulOne.toMul.{0} Nat (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+              a b)) =>
+      @Eq.ndrec.{0, 1} Nat
+        (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+          (@instHMul.{0} Nat
+            (@MulOne.toMul.{0} Nat (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+          a b)
+        (fun {p : Nat} =>
+          ∀
+            (h :
+              And (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) p)
+                (∀ (m : Nat),
+                  @Dvd.dvd.{0} Nat Nat.instDvd m p →
+                    Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) (@Eq.{1} Nat m p)))
+            (h1 :
+              @LT.lt.{0} Nat (@Preorder.toLT.{0} Nat Nat.instPreorder)
+                (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) p),
+            Or (@IsUnit.{0} Nat Nat.instMonoid a) (@IsUnit.{0} Nat Nat.instMonoid b))
+        (fun
+            (h :
+              And
+                (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2)))
+                  (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                    (@instHMul.{0} Nat
+                      (@MulOne.toMul.{0} Nat
+                        (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                    a b))
+                (∀ (m : Nat),
+                  @Dvd.dvd.{0} Nat Nat.instDvd m
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                        (@instHMul.{0} Nat
+                          (@MulOne.toMul.{0} Nat
+                            (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                        a b) →
+                    Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                      (@Eq.{1} Nat m
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                          (@instHMul.{0} Nat
+                            (@MulOne.toMul.{0} Nat
+                              (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                          a b))))
+            (h1 :
+              @LT.lt.{0} Nat (@Preorder.toLT.{0} Nat Nat.instPreorder)
+                (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+                (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                  (@instHMul.{0} Nat
+                    (@MulOne.toMul.{0} Nat
+                      (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                  a b)) =>
+          @Eq.mpr.{0} (Or (@IsUnit.{0} Nat Nat.instMonoid a) (@IsUnit.{0} Nat Nat.instMonoid b))
+            (Or (@Eq.{1} Nat a (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+              (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+            (@id.{0}
+              (@Eq.{1} Prop (Or (@IsUnit.{0} Nat Nat.instMonoid a) (@IsUnit.{0} Nat Nat.instMonoid b))
+                (Or (@Eq.{1} Nat a (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                  (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))))
+              (@congr.{1, 1} Prop Prop (Or (@IsUnit.{0} Nat Nat.instMonoid a))
+                (Or (@Eq.{1} Nat a (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                (@IsUnit.{0} Nat Nat.instMonoid b)
+                (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                (@congrArg.{1, 1} Prop ((b : Prop) → Prop) (@IsUnit.{0} Nat Nat.instMonoid a)
+                  (@Eq.{1} Nat a (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))) Or
+                  (@_private.Mathlib.Data.Nat.Prime.Defs.0.Nat.prime_def._simp_1_1 a))
+                (@_private.Mathlib.Data.Nat.Prime.Defs.0.Nat.prime_def._simp_1_1 b)))
+            (@Or.imp_right
+              (@Eq.{1} Nat a
+                (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                  (@instHMul.{0} Nat
+                    (@MulOne.toMul.{0} Nat
+                      (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                  a b))
+              (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+              (@Eq.{1} Nat a (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+              (fun
+                  (hab :
+                    @Eq.{1} Nat a
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                        (@instHMul.{0} Nat
+                          (@MulOne.toMul.{0} Nat
+                            (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                        a b)) =>
+                @Eq.mpr.{0} (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                  (@Eq.{1} Nat
+                    (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                        (@instHMul.{0} Nat
+                          (@MulOne.toMul.{0} Nat
+                            (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                        a b)
+                      b)
+                    (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                        (@instHMul.{0} Nat
+                          (@MulOne.toMul.{0} Nat
+                            (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                        a b)
+                      (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                  (@id.{0}
+                    (@Eq.{1} Prop (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                      (@Eq.{1} Nat
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                            (@instHMul.{0} Nat
+                              (@MulOne.toMul.{0} Nat
+                                (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                            a b)
+                          b)
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                            (@instHMul.{0} Nat
+                              (@MulOne.toMul.{0} Nat
+                                (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                            a b)
+                          (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))))
+                    (@congrArg.{1, 1} Prop Prop
+                      (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                      (@Eq.{1} Nat
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                            (@instHMul.{0} Nat
+                              (@MulOne.toMul.{0} Nat
+                                (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                            a b)
+                          b)
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                            (@instHMul.{0} Nat
+                              (@MulOne.toMul.{0} Nat
+                                (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                            a b)
+                          (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                      (fun (_a : Prop) => _a)
+                      (@Eq.symm.{1} Prop
+                        (@Eq.{1} Nat
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                              (@instHMul.{0} Nat
+                                (@MulOne.toMul.{0} Nat
+                                  (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                              a b)
+                            b)
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                              (@instHMul.{0} Nat
+                                (@MulOne.toMul.{0} Nat
+                                  (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                              a b)
+                            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                        (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                        (@propext
+                          (@Eq.{1} Nat
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                              (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                                (@instHMul.{0} Nat
+                                  (@MulOne.toMul.{0} Nat
+                                    (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                                a b)
+                              b)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                              (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                                (@instHMul.{0} Nat
+                                  (@MulOne.toMul.{0} Nat
+                                    (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                                a b)
+                              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                          (@Eq.{1} Nat b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                          (@mul_right_inj'.{0} Nat instMulNat (@MulZeroClass.toZero.{0} Nat Nat.instMulZeroClass)
+                            (@IsCancelMulZero.toIsLeftCancelMulZero.{0} Nat instMulNat
+                              (@MulZeroClass.toZero.{0} Nat Nat.instMulZeroClass) Nat.instIsCancelMulZero)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                              (@instHMul.{0} Nat
+                                (@MulOne.toMul.{0} Nat
+                                  (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                              a b)
+                            b (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+                            (@Nat.ne_zero_of_lt (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+                              (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                                (@instHMul.{0} Nat
+                                  (@MulOne.toMul.{0} Nat
+                                    (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                                a b)
+                              h1))))))
+                  (@Eq.mpr.{0}
+                    (@Eq.{1} Nat
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                          (@instHMul.{0} Nat
+                            (@MulOne.toMul.{0} Nat
+                              (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                          a b)
+                        b)
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                          (@instHMul.{0} Nat
+                            (@MulOne.toMul.{0} Nat
+                              (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                          a b)
+                        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                    (@Eq.{1} Nat (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a b)
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                    (@id.{0}
+                      (@Eq.{1} Prop
+                        (@Eq.{1} Nat
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                              (@instHMul.{0} Nat
+                                (@MulOne.toMul.{0} Nat
+                                  (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                              a b)
+                            b)
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                              (@instHMul.{0} Nat
+                                (@MulOne.toMul.{0} Nat
+                                  (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                              a b)
+                            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                        (@Eq.{1} Nat (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a b)
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))))
+                      (@congrArg.{1, 1} Nat Prop
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                          (@instHMul.{0} Nat
+                            (@MulOne.toMul.{0} Nat
+                              (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                          a b)
+                        a
+                        (fun (_a : Nat) =>
+                          @Eq.{1} Nat (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) _a b)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) _a
+                              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                        (@Eq.symm.{1} Nat a
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                            (@instHMul.{0} Nat
+                              (@MulOne.toMul.{0} Nat
+                                (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                            a b)
+                          hab)))
+                    (@Eq.mpr.{0}
+                      (@Eq.{1} Nat (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a b)
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                          (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                      (@Eq.{1} Nat a
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                          (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                      (@id.{0}
+                        (@Eq.{1} Prop
+                          (@Eq.{1} Nat (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a b)
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                          (@Eq.{1} Nat a
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))))
+                        (@congrArg.{1, 1} Nat Prop
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                            (@instHMul.{0} Nat
+                              (@MulOne.toMul.{0} Nat
+                                (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                            a b)
+                          a
+                          (fun (_a : Nat) =>
+                            @Eq.{1} Nat _a
+                              (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                                (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                          (@Eq.symm.{1} Nat a
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                              (@instHMul.{0} Nat
+                                (@MulOne.toMul.{0} Nat
+                                  (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                              a b)
+                            hab)))
+                      (@Eq.mpr.{0}
+                        (@Eq.{1} Nat a
+                          (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                            (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                        (@Eq.{1} Nat a a)
+                        (@id.{0}
+                          (@Eq.{1} Prop
+                            (@Eq.{1} Nat a
+                              (@HMul.hMul.{0, 0, 0} Nat Nat Nat (@instHMul.{0} Nat instMulNat) a
+                                (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+                            (@Eq.{1} Nat a a))
+                          (@congrArg.{1, 1} Nat Prop
+                            (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                              (@instHMul.{0} Nat
+                                (@MulOne.toMul.{0} Nat (@MulOneClass.toMulOne.{0} Nat Nat.instMulOneClass)))
+                              a
+                              (@OfNat.ofNat.{0} Nat (nat_lit 1)
+                                (@One.toOfNat1.{0} Nat
+                                  (@MulOne.toOne.{0} Nat (@MulOneClass.toMulOne.{0} Nat Nat.instMulOneClass)))))
+                            a (fun (_a : Nat) => @Eq.{1} Nat a _a) (@mul_one.{0} Nat Nat.instMulOneClass a)))
+                        (@Eq.refl.{1} Nat a)))))
+              (@And.right
+                (@LE.le.{0} Nat instLENat (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2)))
+                  (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                    (@instHMul.{0} Nat
+                      (@MulOne.toMul.{0} Nat
+                        (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                    a b))
+                (∀ (m : Nat),
+                  @Dvd.dvd.{0} Nat Nat.instDvd m
+                      (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                        (@instHMul.{0} Nat
+                          (@MulOne.toMul.{0} Nat
+                            (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                        a b) →
+                    Or (@Eq.{1} Nat m (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+                      (@Eq.{1} Nat m
+                        (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+                          (@instHMul.{0} Nat
+                            (@MulOne.toMul.{0} Nat
+                              (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+                          a b)))
+                h a (@dvd_mul_right.{0} Nat Nat.instSemigroup a b))))
+        p
+        (@Eq.symm.{1} Nat p
+          (@HMul.hMul.{0, 0, 0} Nat Nat Nat
+            (@instHMul.{0} Nat
+              (@MulOne.toMul.{0} Nat (@MulOneClass.toMulOne.{0} Nat (@Monoid.toMulOneClass.{0} Nat Nat.instMonoid))))
+            a b)
+          a_1)
+        h h1
+theorem Nat.not_bddAbove_setOfPred_prime : Not
+  (@BddAbove.{0} Nat instLENat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)) :=
+@Eq.mpr.{0} (Not (@BddAbove.{0} Nat instLENat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)))
+  (∀ (x : Nat),
+    @Exists.{1} Nat fun (y : Nat) =>
+      And
+        (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+          (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) y)
+        (@LT.lt.{0} Nat
+          (@Preorder.toLT.{0} Nat
+            (@PartialOrder.toPreorder.{0} Nat
+              (@SemilatticeInf.toPartialOrder.{0} Nat
+                (@Lattice.toSemilatticeInf.{0} Nat
+                  (@DistribLattice.toLattice.{0} Nat (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+          x y))
+  (@id.{0}
+    (@Eq.{1} Prop (Not (@BddAbove.{0} Nat instLENat (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)))
+      (∀ (x : Nat),
+        @Exists.{1} Nat fun (y : Nat) =>
+          And
+            (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+              (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) y)
+            (@LT.lt.{0} Nat
+              (@Preorder.toLT.{0} Nat
+                (@PartialOrder.toPreorder.{0} Nat
+                  (@SemilatticeInf.toPartialOrder.{0} Nat
+                    (@Lattice.toSemilatticeInf.{0} Nat
+                      (@DistribLattice.toLattice.{0} Nat
+                        (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+              x y)))
+    (@congrArg.{1, 1} Prop Prop
+      (Not
+        (@BddAbove.{0} Nat
+          (@Preorder.toLE.{0} Nat
+            (@PartialOrder.toPreorder.{0} Nat
+              (@SemilatticeInf.toPartialOrder.{0} Nat
+                (@Lattice.toSemilatticeInf.{0} Nat
+                  (@DistribLattice.toLattice.{0} Nat (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+          (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)))
+      (∀ (x : Nat),
+        @Exists.{1} Nat fun (y : Nat) =>
+          And
+            (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+              (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) y)
+            (@LT.lt.{0} Nat
+              (@Preorder.toLT.{0} Nat
+                (@PartialOrder.toPreorder.{0} Nat
+                  (@SemilatticeInf.toPartialOrder.{0} Nat
+                    (@Lattice.toSemilatticeInf.{0} Nat
+                      (@DistribLattice.toLattice.{0} Nat
+                        (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+              x y))
+      (fun (_a : Prop) => _a)
+      (@propext
+        (Not
+          (@BddAbove.{0} Nat
+            (@Preorder.toLE.{0} Nat
+              (@PartialOrder.toPreorder.{0} Nat
+                (@SemilatticeInf.toPartialOrder.{0} Nat
+                  (@Lattice.toSemilatticeInf.{0} Nat
+                    (@DistribLattice.toLattice.{0} Nat
+                      (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+            (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)))
+        (∀ (x : Nat),
+          @Exists.{1} Nat fun (y : Nat) =>
+            And
+              (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+                (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) y)
+              (@LT.lt.{0} Nat
+                (@Preorder.toLT.{0} Nat
+                  (@PartialOrder.toPreorder.{0} Nat
+                    (@SemilatticeInf.toPartialOrder.{0} Nat
+                      (@Lattice.toSemilatticeInf.{0} Nat
+                        (@DistribLattice.toLattice.{0} Nat
+                          (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+                x y))
+        (@not_bddAbove_iff.{0} Nat Nat.instLinearOrder (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p)))))
+  fun (n : Nat) =>
+  @Exists.casesOn.{1} Nat (fun (p : Nat) => And (@LE.le.{0} Nat instLENat (Nat.succ n) p) (Nat.Prime p))
+    (fun (x : @Exists.{1} Nat fun (p : Nat) => And (@LE.le.{0} Nat instLENat (Nat.succ n) p) (Nat.Prime p)) =>
+      @Exists.{1} Nat fun (y : Nat) =>
+        And
+          (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+            (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) y)
+          (@LT.lt.{0} Nat
+            (@Preorder.toLT.{0} Nat
+              (@PartialOrder.toPreorder.{0} Nat
+                (@SemilatticeInf.toPartialOrder.{0} Nat
+                  (@Lattice.toSemilatticeInf.{0} Nat
+                    (@DistribLattice.toLattice.{0} Nat
+                      (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+            n y))
+    (Nat.exists_infinite_primes (Nat.succ n))
+    fun (p : Nat) (h : And (@LE.le.{0} Nat instLENat (Nat.succ n) p) (Nat.Prime p)) =>
+    @And.casesOn.{0} (@LE.le.{0} Nat instLENat (Nat.succ n) p) (Nat.Prime p)
+      (fun (x : And (@LE.le.{0} Nat instLENat (Nat.succ n) p) (Nat.Prime p)) =>
+        @Exists.{1} Nat fun (y : Nat) =>
+          And
+            (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+              (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) y)
+            (@LT.lt.{0} Nat
+              (@Preorder.toLT.{0} Nat
+                (@PartialOrder.toPreorder.{0} Nat
+                  (@SemilatticeInf.toPartialOrder.{0} Nat
+                    (@Lattice.toSemilatticeInf.{0} Nat
+                      (@DistribLattice.toLattice.{0} Nat
+                        (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+              n y))
+      h fun (hi : @LE.le.{0} Nat instLENat (Nat.succ n) p) (hp : Nat.Prime p) =>
+      @Exists.intro.{1} Nat
+        (fun (y : Nat) =>
+          And
+            (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+              (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) y)
+            (@LT.lt.{0} Nat
+              (@Preorder.toLT.{0} Nat
+                (@PartialOrder.toPreorder.{0} Nat
+                  (@SemilatticeInf.toPartialOrder.{0} Nat
+                    (@Lattice.toSemilatticeInf.{0} Nat
+                      (@DistribLattice.toLattice.{0} Nat
+                        (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+              n y))
+        p
+        (@And.intro
+          (@Membership.mem.{0, 0} Nat (Set.{0} Nat) (@Set.instMembership.{0} Nat)
+            (@Set.ofPred.{0} Nat fun (p : Nat) => Nat.Prime p) p)
+          (@LT.lt.{0} Nat
+            (@Preorder.toLT.{0} Nat
+              (@PartialOrder.toPreorder.{0} Nat
+                (@SemilatticeInf.toPartialOrder.{0} Nat
+                  (@Lattice.toSemilatticeInf.{0} Nat
+                    (@DistribLattice.toLattice.{0} Nat
+                      (@instDistribLatticeOfLinearOrder.{0} Nat Nat.instLinearOrder))))))
+            n p)
+          hp hi)
+theorem Nat.exists_infinite_primes : ∀ (n : Nat),
+  @Exists.{1} Nat fun (p : Nat) => And (@LE.le.{0} Nat instLENat n p) (Nat.Prime p) :=
+fun (n : Nat) =>
+  let p : Nat :=
+    Nat.minFac
+      (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (Nat.factorial n)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))));
+  have f1 :
+    @Ne.{1} Nat
+      (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (Nat.factorial n)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) :=
+    @ne_of_gt.{0} Nat Nat.instPreorder
+      (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (Nat.factorial n)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))
+      (@Nat.succ_lt_succ (@OfNat.ofNat.{0} Nat (nat_lit 0) (instOfNatNat (nat_lit 0))) (Nat.factorial n)
+        (Nat.factorial_pos n));
+  have pp : Nat.Prime p :=
+    @Nat.minFac_prime
+      (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (Nat.factorial n)
+        (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+      f1;
+  have np : @LE.le.{0} Nat instLENat n p :=
+    @le_of_not_ge.{0} Nat Nat.instLinearOrder p n
+      fun
+        (h :
+          @LE.le.{0} Nat
+            (@Preorder.toLE.{0} Nat
+              (@PartialOrder.toPreorder.{0} Nat (@LinearOrder.toPartialOrder.{0} Nat Nat.instLinearOrder)))
+            p n) =>
+      have h₁ : @Dvd.dvd.{0} Nat Nat.instDvd p (Nat.factorial n) :=
+        @Nat.dvd_factorial p n
+          (Nat.minFac_pos
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (Nat.factorial n)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+          h;
+      have h₂ : @Dvd.dvd.{0} Nat Nat.instDvd p (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) :=
+        @Iff.mpr (@Dvd.dvd.{0} Nat Nat.instDvd p (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))))
+          (@Dvd.dvd.{0} Nat Nat.instDvd p
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (Nat.factorial n)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))))
+          (@Nat.dvd_add_iff_right p (Nat.factorial n) (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1))) h₁)
+          (Nat.minFac_dvd
+            (@HAdd.hAdd.{0, 0, 0} Nat Nat Nat (@instHAdd.{0} Nat instAddNat) (Nat.factorial n)
+              (@OfNat.ofNat.{0} Nat (nat_lit 1) (instOfNatNat (nat_lit 1)))));
+      @Nat.Prime.not_dvd_one p pp h₂;
+  @Exists.intro.{1} Nat (fun (p : Nat) => And (@LE.le.{0} Nat instLENat n p) (Nat.Prime p)) p
+    (@And.intro (@LE.le.{0} Nat instLENat n p) (Nat.Prime p) np pp)
+theorem Set.infinite_of_not_bddAbove.{u} : ∀ {α : Type u} [inst : Preorder.{u} α]
+  [@IsDirectedOrder.{u} α (@Preorder.toLE.{u} α inst)] [Nonempty.{u + 1} α] {s : Set.{u} α},
+  Not (@BddAbove.{u} α (@Preorder.toLE.{u} α inst) s) → @Set.Infinite.{u} α s :=
+fun {α : Type u} [inst : Preorder.{u} α] [inst_1 : @IsDirectedOrder.{u} α (@Preorder.toLE.{u} α inst)]
+    [inst_2 : Nonempty.{u + 1} α] {s : Set.{u} α} =>
+  @mt (@Set.Finite.{u} α s) (@BddAbove.{u} α (@Preorder.toLE.{u} α inst) s)
+    (@Set.Finite.bddAbove.{u} α inst inst_1 inst_2 s)
+'Nat.infinite_setOfPred_prime' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'syndeom_s1_2_judson_primes' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'Nat.prime_def' depends on axioms: [propext]
+'Nat.not_bddAbove_setOfPred_prime' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'Nat.exists_infinite_primes' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]
+'Set.infinite_of_not_bddAbove' depends on axioms: [propext, Classical.choice.{u}, Quot.sound.{u}]

@@ -50,7 +50,7 @@
       "sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6",
       "n_bytes": 5328,
       "url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean",
-      "locator": "Nat.infinite_setOfPred_prime, lines 28-29"
+      "locator": "Nat.infinite_setOfPred_prime, lines 27-28"
     }
   }
 }

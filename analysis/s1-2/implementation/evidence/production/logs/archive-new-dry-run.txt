@@ -1,0 +1,4 @@
+s1_pair_archive-v0.1.0-094625fa10ff
+reviewed contract and both-file checks: PASS
+all-output preflight: PASS
+dry run: no artifact files written
