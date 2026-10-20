@@ -1,0 +1,8 @@
+'FirstParentWitness.character_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.phase_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.phase_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.coefficient_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.finite_step_fails' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.geometric_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.residual_series' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.residual_positive' depends on axioms: [propext, Classical.choice, Quot.sound]

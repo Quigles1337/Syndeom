@@ -1,0 +1,82 @@
+[
+  {
+    "name": "v70-archive.gz",
+    "url": "https://arxiv.org/src/0706.0357v70",
+    "accessed_utc": "2026-10-20T21:36:42.189391+00:00",
+    "final_url": "https://arxiv.org/src/0706.0357v70",
+    "http_status": 200,
+    "content_type": "application/gzip",
+    "bytes": 8236,
+    "sha256": "5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8"
+  },
+  {
+    "name": "v71-archive.gz",
+    "url": "https://arxiv.org/src/0706.0357v71",
+    "accessed_utc": "2026-10-20T21:36:42.564464+00:00",
+    "final_url": "https://arxiv.org/src/0706.0357v71",
+    "http_status": 200,
+    "content_type": "application/gzip",
+    "bytes": 8750,
+    "sha256": "fffd0fdc3a868deb642102a1f72f23cd92ee89bf118c92a4b992cb5a6fdfd263"
+  },
+  {
+    "name": "v70-abstract.html",
+    "url": "https://arxiv.org/abs/0706.0357v70",
+    "accessed_utc": "2026-10-20T21:36:42.799669+00:00",
+    "final_url": "https://arxiv.org/abs/0706.0357v70",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 49539,
+    "sha256": "e8ec509b8f820c94e657c10c86f7483d8ca84e3a39510a1c7ddc16f25de09deb"
+  },
+  {
+    "name": "v71-abstract.html",
+    "url": "https://arxiv.org/abs/0706.0357v71",
+    "accessed_utc": "2026-10-20T21:36:43.353297+00:00",
+    "final_url": "https://arxiv.org/abs/0706.0357v71",
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "bytes": 49424,
+    "sha256": "4fc7a80198fb772dd9b8994f24f26bb736ff4cb07558cb2401ac4b4ea5423fe7"
+  },
+  {
+    "name": "dlmf-27-8.html",
+    "url": "https://dlmf.nist.gov/27.8",
+    "accessed_utc": "2026-10-20T21:36:43.746745+00:00",
+    "final_url": "https://dlmf.nist.gov/27.8",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 68162,
+    "sha256": "34f7100585b68af0dbc868e51038f22c4c91c6efb482bf1481f7cbc9ce3d54e5"
+  },
+  {
+    "name": "dlmf-25-15.html",
+    "url": "https://dlmf.nist.gov/25.15",
+    "accessed_utc": "2026-10-20T21:36:44.495977+00:00",
+    "final_url": "https://dlmf.nist.gov/25.15",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 100871,
+    "sha256": "ca746b3571f06cdd2a53530059cdfc6d1c12cc66b7457ec30023212e0b90a54f"
+  },
+  {
+    "name": "dlmf-27-4.html",
+    "url": "https://dlmf.nist.gov/27.4",
+    "accessed_utc": "2026-10-20T21:36:45.205913+00:00",
+    "final_url": "https://dlmf.nist.gov/27.4",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 86532,
+    "sha256": "9765f56ffb3b2b79125b516780c55654243230fe81296b348d1427afdb86c208"
+  },
+  {
+    "name": "dlmf-27-2.html",
+    "url": "https://dlmf.nist.gov/27.2",
+    "accessed_utc": "2026-10-20T21:36:45.889969+00:00",
+    "final_url": "https://dlmf.nist.gov/27.2",
+    "http_status": 200,
+    "content_type": "text/html",
+    "bytes": 160061,
+    "sha256": "6256c868078ac904ff6e0e55027c84d8aad63d438fd339957689980e26b6d510"
+  }
+]

@@ -1,0 +1,7 @@
+rustc 1.91.0 (f8297e351 2025-10-28)
+binary: rustc
+commit-hash: f8297e351a40c1439a467bbbb6879088047f50b3
+commit-date: 2025-10-28
+host: x86_64-pc-windows-msvc
+release: 1.91.0
+LLVM version: 21.1.2

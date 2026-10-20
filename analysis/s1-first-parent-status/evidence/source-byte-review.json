@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-20T21:56:43.080031+00:00",
+  "result": "PASS",
+  "all_eight_fresh_files_match_receipt": true,
+  "source_comparisons": [
+    {
+      "version": "v70",
+      "archive_equals_retained": true,
+      "old_html_sha256": "4a1cd5dc8663424fbb6c582cd708404d34e312cce12f2d743f6a525e64209013",
+      "fresh_html_sha256": "e8ec509b8f820c94e657c10c86f7483d8ca84e3a39510a1c7ddc16f25de09deb",
+      "dynamic_html_differs": true
+    },
+    {
+      "version": "v71",
+      "archive_equals_retained": true,
+      "old_html_sha256": "1dbf356c8d01e9a60e66a7db043d332655697deaf3dab5694e7c35e1b5774e29",
+      "fresh_html_sha256": "4fc7a80198fb772dd9b8994f24f26bb736ff4cb07558cb2401ac4b4ea5423fe7",
+      "dynamic_html_differs": true
+    }
+  ],
+  "retrieval_script_sha256": "92867aa185a4a12e6d20c026def062d10f3d95332b04263edfa0fee4ab5f3ff9",
+  "retrieval_invocation": [
+    "python",
+    "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\retrieve.py"
+  ],
+  "retrieval_exit_code_observed_in_session": 0,
+  "retrieval_stdout_note": "Per-object responses retained in retrieval.json; no separate raw console log was captured."
+}

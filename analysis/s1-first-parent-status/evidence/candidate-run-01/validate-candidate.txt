@@ -1,0 +1,7 @@
+PASS: old and proposed manifests validate against actual source bytes
+PASS: duplicated status agrees; exact evidence-only config amendment; no derived_from
+PASS: one effective item, pending owner decision; four negative controls rejected
+candidate_id: s1_ingest-v0.1.0-15ab865466d6
+config_sha256: 15ab865466d67dfd18ed487b4e51a3dc1719b07a00b89b3627e92dc111c95364
+manifest_sha256: 2fbb965ffe92a8d0f102081adc43d84d56182fba5f4fee2bbd7c8dbfd080f8be
+witness_sha256: c88af9c0d8b1ac2a65e8bdb634d41fbf3a8bbc1f31c168f81e3caff9e8573917

@@ -1,0 +1,114 @@
+[
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\gate-orientation.log",
+    "raw_sha256": "5055d937eeb74e118dcdb8c5c33d21b6be1d8c8f5cb0c05dd0462f111b3dd4da",
+    "committed_path": "analysis/s1-first-parent-status/evidence/gate-orientation.txt",
+    "committed_lf_sha256": "781850a90681b44ea93564b6b317b74f1dc947352a99616c1f812c1818b13e23",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\gate-orientation-02.log",
+    "raw_sha256": "0d328ca4a0d448df53de172004843bcce7d07b6bdd360ad0934b77868fab5faf",
+    "committed_path": "analysis/s1-first-parent-status/evidence/gate-orientation-02.txt",
+    "committed_lf_sha256": "0ae2f628f30330d533d2e0f1516c51d49bc92eea7c7aec3beeff4f30f988cb78",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\lean-prototype-01.log",
+    "raw_sha256": "78c9cfc5f20c97e098b09c5e7a1de6a941ac9dbf1525003b6f8dfc540d761b02",
+    "committed_path": "analysis/s1-first-parent-status/evidence/lean-prototype-01.txt",
+    "committed_lf_sha256": "78c9cfc5f20c97e098b09c5e7a1de6a941ac9dbf1525003b6f8dfc540d761b02",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\lean-prototype-02.log",
+    "raw_sha256": "803650aff175ffb9d465b3236af01da55e8a3e2933157a2d56fa2541dcd8d5a4",
+    "committed_path": "analysis/s1-first-parent-status/evidence/lean-prototype-02.txt",
+    "committed_lf_sha256": "803650aff175ffb9d465b3236af01da55e8a3e2933157a2d56fa2541dcd8d5a4",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\lean-explicit-03.log",
+    "raw_sha256": "dee0a33d845f84e4184155336b86b1572dc133872f3201e19c8bb57c146bfd4a",
+    "committed_path": "analysis/s1-first-parent-status/evidence/lean-explicit-03.txt",
+    "committed_lf_sha256": "dee0a33d845f84e4184155336b86b1572dc133872f3201e19c8bb57c146bfd4a",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\ingest-build.log",
+    "raw_sha256": "ee1d3fffa2022e962e63e0dbe4d35c9c198450a20c29fc09030f635dbb38bfcd",
+    "committed_path": "analysis/s1-first-parent-status/evidence/ingest-build.txt",
+    "committed_lf_sha256": "ee1d3fffa2022e962e63e0dbe4d35c9c198450a20c29fc09030f635dbb38bfcd",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\build.log",
+    "raw_sha256": "4ec3989c815e93bb2733c27f137bbef4cfce9253a4e3344299391ce9b9a07efe",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/build.txt",
+    "committed_lf_sha256": "4ec3989c815e93bb2733c27f137bbef4cfce9253a4e3344299391ce9b9a07efe",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\cargo-version.log",
+    "raw_sha256": "761fd950b3a651d1b4a0a5eb9a6f39b5bb7df291b2c2bf6915f6a7c0c3b8809a",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/cargo-version.txt",
+    "committed_lf_sha256": "761fd950b3a651d1b4a0a5eb9a6f39b5bb7df291b2c2bf6915f6a7c0c3b8809a",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\compile-validator.log",
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/compile-validator.txt",
+    "committed_lf_sha256": "2c0f58d1ff65fa9367cbab38a671421fb5ce67814ef13a7d7520330039117691",
+    "conversion": "Empty raw transcript represented by an explicit no-output marker; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\extra-engine-files.log",
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/extra-engine-files.txt",
+    "committed_lf_sha256": "2c0f58d1ff65fa9367cbab38a671421fb5ce67814ef13a7d7520330039117691",
+    "conversion": "Empty raw transcript represented by an explicit no-output marker; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\ingest-01.log",
+    "raw_sha256": "1d7d656d421bded97d7beb1f414dee8800093fd8a71b78966ee93835e3e498b5",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/ingest-01.txt",
+    "committed_lf_sha256": "1d7d656d421bded97d7beb1f414dee8800093fd8a71b78966ee93835e3e498b5",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\ingest-02.log",
+    "raw_sha256": "1d7d656d421bded97d7beb1f414dee8800093fd8a71b78966ee93835e3e498b5",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/ingest-02.txt",
+    "committed_lf_sha256": "1d7d656d421bded97d7beb1f414dee8800093fd8a71b78966ee93835e3e498b5",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\producer-files.log",
+    "raw_sha256": "b81516d4e6e116548e4e7ab8d9f4ea4de68c61642649e95afb5a8a4abca4cd99",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/producer-files.txt",
+    "committed_lf_sha256": "b81516d4e6e116548e4e7ab8d9f4ea4de68c61642649e95afb5a8a4abca4cd99",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\rust-version.log",
+    "raw_sha256": "69f4ed37c244eea2204569769ed8157d71fbb722ed9794939164020fc57feae9",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/rust-version.txt",
+    "committed_lf_sha256": "69f4ed37c244eea2204569769ed8157d71fbb722ed9794939164020fc57feae9",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\candidate-run-01\\validate-candidate.log",
+    "raw_sha256": "46c4205f351407deb6fc95041cc174dfaf124d8b93e78604da30bce582b432e7",
+    "committed_path": "analysis/s1-first-parent-status/evidence/candidate-run-01/validate-candidate.txt",
+    "committed_lf_sha256": "46c4205f351407deb6fc95041cc174dfaf124d8b93e78604da30bce582b432e7",
+    "conversion": "CRLF to LF only; raw external file retained"
+  },
+  {
+    "raw_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\lean-packet.log",
+    "raw_sha256": "dee0a33d845f84e4184155336b86b1572dc133872f3201e19c8bb57c146bfd4a",
+    "committed_path": "analysis/s1-first-parent-status/evidence/lean-packet.txt",
+    "committed_lf_sha256": "dee0a33d845f84e4184155336b86b1572dc133872f3201e19c8bb57c146bfd4a",
+    "conversion": "CRLF to LF only; raw external file retained"
+  }
+]

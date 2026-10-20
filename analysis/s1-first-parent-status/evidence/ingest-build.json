@@ -1,0 +1,20 @@
+{
+  "command": [
+    "cargo",
+    "build",
+    "--locked",
+    "-p",
+    "syndeom-ingest"
+  ],
+  "cwd": "C:\\Users\\LEET\\Documents\\ChatGPT\\Syndeom\\engine",
+  "head": "1a76d9ac21cd5d2e4311f9164178327c0ca128bb",
+  "tree": "3b9028c0502add53ac646108132d89ba5f1e5666",
+  "status_before": "",
+  "started": "2026-10-20T21:45:26.393211+00:00",
+  "exit_code": 0,
+  "finished": "2026-10-20T21:45:26.515796+00:00",
+  "log_sha256": "ee1d3fffa2022e962e63e0dbe4d35c9c198450a20c29fc09030f635dbb38bfcd",
+  "head_after": "1a76d9ac21cd5d2e4311f9164178327c0ca128bb",
+  "tree_after": "3b9028c0502add53ac646108132d89ba5f1e5666",
+  "status_after": ""
+}

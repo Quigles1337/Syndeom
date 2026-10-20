@@ -1,0 +1,19 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-20261020\\Witness-02.lean"
+  ],
+  "cwd": "C:\\Users\\LEET\\Documents\\ChatGPT\\Syndeom\\lean",
+  "head": "1a76d9ac21cd5d2e4311f9164178327c0ca128bb",
+  "tree": "3b9028c0502add53ac646108132d89ba5f1e5666",
+  "status_before": "",
+  "started": "2026-10-20T21:42:11.626292+00:00",
+  "exit_code": 1,
+  "finished": "2026-10-20T21:42:24.714741+00:00",
+  "log_sha256": "803650aff175ffb9d465b3236af01da55e8a3e2933157a2d56fa2541dcd8d5a4",
+  "head_after": "1a76d9ac21cd5d2e4311f9164178327c0ca128bb",
+  "tree_after": "3b9028c0502add53ac646108132d89ba5f1e5666",
+  "status_after": ""
+}

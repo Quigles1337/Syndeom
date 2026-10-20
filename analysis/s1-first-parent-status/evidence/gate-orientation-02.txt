@@ -1,0 +1,99 @@
+== lean: lake build (toolchain leanprover/lean4:v4.34.1) ==
+Build completed successfully (8926 jobs).
+== lean: axiom audit of the golden fixture ==
+'syndeom_golden_nat_le_sq' depends on axioms: [propext]
+== engine: cargo fmt --check ==
+== engine: cargo clippy -D warnings ==
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on build directory
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.97s
+== engine: cargo test ==
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+........
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 5 tests
+.....
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 24 tests
+........................
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 16 tests
+................
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+........
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 6 tests
+......
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.36s
+
+== repo: line endings (every tracked text file i/lf) ==
+== repo: register cross-reference check ==
+== bytes ==
+binary (skipped): groundtruth/s1_ingest-v0.1.0-63e23a952084/original-0706.0357v70.tar.gz
+binary (skipped): sources/arxiv-2501.03124v5-prmbench.pdf
+binary (skipped): sources/arxiv-2510.13744v1-hard2verify.pdf
+binary (skipped): sources/arxiv-2605.10141v1-formalrewardbench.pdf
+binary (skipped): sources/arxiv-2605.12524v1-proofgrid.pdf
+binary (skipped): sources/arxiv-2605.20531v3-pseudo-formalization.pdf
+binary (skipped): sources/arxiv-2606.29493v1-faults-in-our-formal-benchmarking.pdf
+binary (skipped): sources/arxiv-2607.11849v2-advancedmathbench.pdf
+binary (skipped): sources/leiden-declaration-2026-06-02-zenodo-20302944.pdf
+binary (skipped): sources/mathandai-severe-misalignment-2026-09-11-zenodo-22737751.pdf
+328 tracked files checked for CR/BOM/trailing LF
+== Q: defined 17, referenced 17, undefined []
+== SD: defined 17, referenced 17, undefined []
+== FLAW: defined 14, referenced 14, undefined []
+== CLAIM: defined 7, referenced 7, undefined []
+== S-: defined 68, referenced 68, undefined []
+== phase items == ['S0.1', 'S0.2', 'S0.3', 'S0.4', 'S0.5', 'S0.6', 'S1.1', 'S1.2', 'S1.3', 'S1.4', 'S2.1', 'S2.2', 'S2.3', 'S2.4', 'S3.1', 'S3.2', 'S3.3', 'S3.4', 'S3.5', 'S3.6', 'S4.1', 'S4.2', 'S4.3', 'S5.1', 'S5.2', 'S5.3', 'S5.4']
+== gates == ['S0', 'S1', 'S2', 'S3', 'S4', 'S5']
+== CLAIM statuses == ['VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'CONDITIONAL', 'VERIFIED']
+== SOURCE states == ['VERIFIED', 'VERIFIED', 'VERIFIED', 'INGESTED', 'INGESTED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'INGESTED', 'INGESTED', 'INGESTED', 'INGESTED', 'INGESTED', 'INGESTED', 'INGESTED', 'VERIFIED', 'VERIFIED', 'INGESTED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'INGESTED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED', 'VERIFIED']
+== DRAFT word count by file == {'PROGRAM/DECISIONS/ADR-0000.md': 3, 'PROGRAM/HANDOFF.md': 6, 'PROGRAM/SIBLING-MAP-2026-10.md': 1, 'PROGRAM/STATE.md': 1, 'PROGRAM/SYNDEOM-PROGRAM.md': 3}
+
+RESULT: ALL PASS
+GATE: GREEN

@@ -92,3 +92,52 @@ with the actual primary testimony or a separately checked counterexample clearly
 then an explicit evidence trail for any historical-label amendment. Do not infer an alternative
 truth value from this hold. The short CC BY source is therefore not this session's engineering
 parent. The supported separate parent `s1_ingest-v0.1.0-00f28e252823` serves ADR-0006.
+
+
+## Status-support investigation — 2026-10-20 UTC
+
+**Written witness checked; metadata amendment proposed; canonical promotion remains held.**
+Executor/reviewer: Codex (GPT-6), this status-resolution session. The owner supplied a
+candidate argument; the executor checked exact primary source correspondence and two
+derivations. These are same-executor checks, not independent human or blind review.
+
+The new packet at `analysis/s1-first-parent-status/` records exact source member hashes
+and locators. Both freshly retrieved source archives match the retained receipts.
+The v71 notice says only “To fix an error in Lemma 1.1.” Its statement and proof changes
+are source testimony; the following parameterized witnesses are executor reasoning.
+
+1. At a=1,b=2,k=2 there is one character, with chi0(2)=0 and A=-1. The displayed
+   unrestricted character expansion has left side 1 and right side 0.
+2. At a=1,b=2,s=2, absolute convergence and nonvanishing justify the logarithmic
+   derivative and parity split. The residual of the v70 identity is exactly
+   log(2)*sum(ell>=1)4^(-ell)=log(2)/3>0. A second derivation using
+   L(s,chi0)=(1-2^(-s))*zeta(s) checks the same sign and value.
+
+This supplies the missing noncancellation argument for the named lemma: here all
+omitted phases equal 1. It does not rehabilitate the old positive-magnitudes argument
+or attribute an explicit falsity declaration to the author. The partial Lean witness
+checks the actual character, finite expressions, infinite geometric series and positivity;
+the full M/L analytic bridge is written rather than kernel-checked. No PROVEN claim.
+
+The old manifest, its embedded config/status, source archive and entire earlier RECORD
+remain unchanged. ADR-0001 can express a checkable counterexample, whereas ADR-0003 D3
+ties truth evidence to the status document; SD12's documented-by-source attribution
+and ADR-0000 Addendum 3(v) also require an explicit owner disposition for this case.
+`PROPOSED-RULING.md` states that narrow decision without silently broadening the policy.
+
+The actual existing Rust producer at `1a76d9ac21cd5d2e4311f9164178327c0ca128bb`
+generated proposed raw replacement `s1_ingest-v0.1.0-15ab865466d6` into fresh external
+trees. Both embedded statuses use false/counterexample with the exact witness hash;
+actual bytes, config hash/ID and unchanged labels were validated and replayed. A complete
+copy is retained under the analysis packet's `candidate/`, outside live `groundtruth/`.
+`amendment-map.json` relates the two raw records as one existing logical item; there is
+no `derived_from` relation and no additional independent example.
+
+**Effect now:** mathematical evidence gap addressed at the disclosed written-review
+level; old source-document attribution still historical and inconsistent for effective
+truth use; amendment pending; canonical eligibility held. The sidecar alone cannot fix
+the old parent's embedded metadata. Owner acceptance and a verified consistent integration
+must precede release of the status hold. Later canonical selection requires its own review.
+S1.4, its old disposition overlay and first-write bins remain frozen; this is a separate
+proposed event. This case is development-exposed; no other result or paper-wide conclusion
+is assessed. Gate S1 and the saved harvest point are unchanged.

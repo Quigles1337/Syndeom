@@ -3231,3 +3231,108 @@ Cold-start closure requires a later fresh session with §6 verbatim and alone. H
 resume remains candidate 28, `1403.6317`; the fixed prefix ends at `1403.4485`.
 STOP-REASON: authorized report and verification complete; publish one draft PR, keep unmerged,
 leave Gate S1 open and carry the concrete source-status review forward.
+
+
+---
+
+SESSION: 2026-10-20 UTC, first-parent status-support resolution; Codex (GPT-6), one
+executor. The owner supplied the candidate argument and requested a checked disposition,
+complete candidate amendment, verification and one unmerged draft PR.
+PHASE / GATE: S1; Gate S1 remains open. This is an informed session, not a cold-start test.
+BASELINE: fetched default main `1a76d9ac21cd5d2e4311f9164178327c0ca128bb`, tree
+`3b9028c0502add53ac646108132d89ba5f1e5666`; initial worktree clean, no open PRs.
+PR 5 was merged by Quigles1337 at 20:41:46Z; PR head
+`618271daf7b8b091382f800826dbe03156f4d803` has the same tree; no GitHub reviews recorded.
+The new branch is `codex/s1-first-parent-status-resolution`. Current summaries reconcile
+the merge; historical S1.4 prose/receipts/overlay and all 35 packet files stay frozen.
+
+ADVANCED: exact v70/v71 archives freshly retrieved, matching retained hashes and lengths;
+definitions, Lemma 1.1 and the displayed proof step read at exact TeX locators. New HTML
+hashes are separate retrieval events. NIST DLMF primary identities retrieved/read and
+registered as S-0069 through S-0072, digest-only. Existing licence/storage choices preserved.
+New packet: `analysis/s1-first-parent-status/`.
+
+MATHEMATICAL CHECK: at a=1,b=2 the unique character is 1 on odds, 0 on evens and A=-1.
+At k=2 the displayed unrestricted expansion gives 1 versus 0. Separately, at s=2 the
+lemma residual is log(2)/3>0. The written check justifies absolute/local uniform
+convergence, nonvanishing, differentiation/regrouping, Mangoldt support and starting
+indices. A second derivation uses the missing Euler factor and zeta logarithmic derivative.
+v71's correction term is only a correspondence check. Both checks are by this executor,
+not independent humans or blind reviewers. No other result or paper-wide verdict.
+
+KERNEL SCOPE: the exact `Witness.lean` compiled at 21:49:47Z; eight theorems each audited
+with `[propext, Classical.choice, Quot.sound]`. Actual character uniqueness, phases,
+coefficient and finite inequality, infinite geometric HasSum and positivity are covered.
+The source all-character-sum reduction is a written correspondence; the full M/L analytic
+bridge is written, not formalized. No complete kernel-refutation or PROVEN claim.
+
+POLICY / DISPOSITION: mathematical noncancellation gap addressed at the disclosed written
+level; author attribution clarified. The notice identifies an error but does not give
+this witness or explicitly declare falsity. Old false/source-document/S-0025 metadata
+remains unchanged. ADR-0001 permits a counterexample reference; ADR-0003 D3's source-notice
+rule, SD12's derivation attribution and ratified admission boundary need a case-specific
+owner ruling. The exact proposed text and acceptance requirements are prepared, not assumed.
+Metadata amendment is proposed; canonical eligibility remains held. An evidence sidecar
+alone does not repair the embedded old-parent metadata.
+
+CANDIDATE: existing Rust ingest at actual source revision
+`1a76d9ac21cd5d2e4311f9164178327c0ca128bb` generated
+`s1_ingest-v0.1.0-15ab865466d6` twice into fresh external output trees. Both outputs are
+byte-identical. The complete candidate is retained outside live `groundtruth/`, under
+the packet's `candidate/`. Both embedded statuses are false/counterexample with the exact
+witness hash; all other config fields, source bytes and labels agree with the old item.
+Actual source closure, locked build, binary hash, command/exit logs and Rust validation
+are retained. Four negative controls reject wrong ID/bytes, double counting and premature
+effective replacement. `amendment-map.json` is a minimal one-case relation, no `derived_from`.
+The live corpus stays 34 representations / 32 logical items. A later admitted replacement
+would remain one effective logical item; no 33rd independent example is manufactured.
+
+CHECKS: clean-base full gate ended 21:44:58Z, exit 0 / GATE: GREEN: Lean build, golden
+axioms `[propext]`, fmt/clippy, 67 Rust tests, 328 files and register checks. Two actual
+orientation logs retained; an unnecessary retry started after sandbox process visibility
+hid the original still-running process. Candidate checks and explicit scoped Lean audit
+passed. Preservation checks cover 323 unchanged baseline files, all 35 S1.4 files, three
+exact historical prefixes and the pair producer's 20 inputs against its pinned revision.
+The final clean committed tree is gated, explicitly Lean-audited, candidate-replayed and
+preservation-checked separately; exact commit/tree/results and external first-write
+receipts are placed in the draft PR without a self-referential recording commit.
+
+FAILURES: first Lean prototype failed implicit character/geometric simplification; the
+second left a weighted-series normalization goal. Both code/logs and failed `sorryAx`
+output are retained as failed attempts. Explicit identities/ring equality replaced broad
+simplification; third prototype and exact packet passed. No accepted witness has sorry/admit.
+Initial path-discovery misses and denied CIM process visibility are disclosed in VERIFICATION.
+BELIEF DELTAS: a correct explicit residual repairs a mathematical gap but does not make
+the author's short notice its source. Status method/reference are identity-bearing config,
+so a sidecar cannot silently repair a canonical parent's inherited metadata.
+CONFUSIONS: resolved process-visibility and Lean normalization issues; remaining ambiguity
+is policy, with a concrete proposed decision and validated object ready for owner review.
+HONESTY CHECK: source testimony, executor reasoning, kernel scope, structural validity and
+owner acceptance are separate. Two checks do not imply independent human review. No new
+claim status, new canonical artifact, blanket relabel or unrecorded policy change.
+LEAKAGE CHECK: source case/witnesses are development-exposed; no held-out fidelity claim,
+contact data, private Eigenverse material, human recruitment or detector work.
+DETERMINISM CHECK: actual existing producer source/lockfile bytes verified; Rust owns
+config hash/ID and typed validation. Python orchestrates and compares bytes only. Both
+fresh two-file outputs replay identically; raw logs and earlier receipts are not overwritten.
+MANIFEST CHECK: old and proposed objects validate against actual archive bytes. New config
+hash is `15ab865466d67dfd18ed487b4e51a3dc1719b07a00b89b3627e92dc111c95364`; source remains
+`5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8`. Proposed relation contributes
+one effective item; future consumers must honor that relation before integration/use.
+DRIFT CHECK: frozen S1.4 report, inventory, provenance, config, bins, overlay and receipts
+unchanged; old manifests/configurations/proofs/source archives unchanged. HANDOFF/SOURCES
+and held RECORD preserve complete byte prefixes. No engine, schema, taxonomy or pin changes.
+The seven truth questions, seven severity questions and unnamed-dependent-results question
+retain their historical nonblocking classification and exclusions. No fourteen new adjudications.
+NEXT-SINGLE-ACTION: owner reviews and accepts or rejects the exact case-specific ruling in
+`analysis/s1-first-parent-status/PROPOSED-RULING.md` and the generated candidate. If accepted,
+a separate verified integration records the ruling and consistent effective metadata/counting
+before releasing the hold. STATE names the same action.
+ESCALATIONS: the exact D3/SD12/admission-boundary and amendment decision is now concrete;
+no further implementation permission is needed for this draft. Remaining Gate S1 work is
+valid disposition/integration of the hold and the later genuine cold-start examination,
+with a green repository. Canonical lengths are scoring prerequisites, not a blanket gate
+requirement. Cold-start examination uses §6 verbatim and alone in a separate fresh conversation.
+Harvest prefix stays through `1403.4485`; candidate 28 / `1403.6317` remains saved next.
+STOP-REASON: evidence and candidate preparation complete; publish one draft PR for review,
+keep unmerged and Gate S1 open. No harvest advancement, canonical production or S2/S3 start.

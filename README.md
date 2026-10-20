@@ -24,16 +24,19 @@ never verdicts.
 
 ## Status
 
-**PR 4 was merged by the owner on 2026-10-20 at 18:10:13 UTC.** Main contains the first
-Judson/Mathlib positive statement pair. This branch completes the reproducible
-[S1.4 coverage and interim-power report](analysis/s1-4/report/report.md) for that merged
-corpus. The harvest remains at the Session 20 prefix of 2026-10-14. The authoritative
+**PR 5 was merged by the owner on 2026-10-20 at 20:41:46 UTC.** Main contains the first
+Judson/Mathlib positive statement pair and the reproducible
+[S1.4 coverage and interim-power report](analysis/s1-4/report/report.md).
+The [first-parent status review](analysis/s1-first-parent-status/README.md) now supplies
+two checked witnesses and a validated metadata amendment proposal. The owner decision
+and canonical-promotion hold remain open. The harvest stays at the Session 20 prefix
+of 2026-10-14. The authoritative
 gate checklist, evidence, and next action are maintained in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
 
 | Surface | Implemented or recorded | Remaining boundary |
 |---|---|---|
 | Foundation | Ratified constitution; 14 flaw classes in taxonomy `0.1.0`; S0 closed | Constitutional and taxonomy changes require an ADR |
-| Ground truth | 34 representations: 32 logical roots, two canonical children, one admitted positive pair; S1.4 report reproduced | First-parent status hold, carried label questions and cold-start assessment remain; Gate S1 is open |
+| Ground truth | 34 representations: 32 logical roots, two canonical children, one admitted positive pair; frozen S1.4 report | First-parent witness checked; evidence-attribution amendment proposed outside the corpus; promotion held and Gate S1 open |
 | Rust engine | `syndeom-manifest` library; `syndeom-ingest`, `syndeom-derive` and `syndeom-pair` CLIs, all `0.1.0` | Ingestion and derivation preserve reviewed evidence; they do not determine mathematical truth |
 | Formal verification | Pinned Lean/Mathlib project, golden theorem, and axiom audit | A successful build alone does not establish statement fidelity |
 | Calibration | Experimental design and phase gates specified | No synthetic corpus, calibrated battery, freeze tag, or contact report yet |
@@ -56,9 +59,15 @@ test pending S3's design-derived N_min and frozen protocol.
 The owner merge and [retained pair checks](analysis/s1-2/implementation/VERIFICATION.md)
 support the positive-pair admission. No separate GitHub reviewer approval is recorded, no
 new mathematical claim is promoted to PROVEN, and this informed session does not close S1.
-The [obligation ledger](analysis/s1-4/OBLIGATIONS.md) sets the next action: resolve the
-documented status-support hold on `s1_ingest-v0.1.0-63e23a952084`. Harvest remains paused
-after candidate 27, `1403.4485`; candidate 28, `1403.6317`, remains next.
+The [historical obligation ledger](analysis/s1-4/OBLIGATIONS.md) remains frozen.
+Its first-parent review now has an exact residual, **log(2)/3 > 0**, at a=1,b=2,s=2,
+and a separate finite proof-step witness, **1 versus 0**, at k=2. These are attributed
+executor checks, with partial Lean support; the author's notice is not their source.
+The next action is owner review of the [exact proposed ruling and candidate amendment](analysis/s1-first-parent-status/PROPOSED-RULING.md).
+The old metadata and canonical hold remain in force until a consistent amendment is
+approved and integrated. This adds no independent example and changes no S1.4 report
+or bin. Harvest remains paused after candidate 27, `1403.4485`; candidate 28,
+`1403.6317`, remains next.
 
 ## Architecture
 
