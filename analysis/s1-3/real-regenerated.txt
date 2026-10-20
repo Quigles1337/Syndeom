@@ -1,0 +1,6 @@
+s1_derive-v0.1.0-c08f9e3ec092
+byte-aware check: PASS
+parent/child check: PASS
+proof SHA-256: 79929ff56666b0f80283625f683e3d5598e521010ab7426dd3071aa6525bbc5d
+context SHA-256: 25ba26029915d23c5591361c337c20d4b5fc667c6dd704af08933a490b0ecc4f
+metadata and external outputs verified/written

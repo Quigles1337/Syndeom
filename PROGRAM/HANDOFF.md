@@ -2775,3 +2775,114 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+
+---
+
+SESSION: 2026-10-20 UTC @ producer 49e4723 (S1.3 first canonical derivation; the later
+artifact/evidence commit adds this entry on top of the committed producer).
+LAUNCH CONTEXT (SD15; not an exam): the owner's supplied S1.3 implementation brief, with
+prior conversation context; informed working session. No cold-start certification. The owner
+explicitly prioritized S1.3 over the inherited harvest NEXT and authorized this public feature
+branch, code/docs, commits, push and draft PR, within existing rights. No external contact,
+merge or visibility change is authorized or performed by this slice.
+PHASE / GATE: S1 open. 31 raw parents; one derived external representation of an existing
+parent, not a 32nd independent item. S1.2 positive pairs and S1.4 coverage/power remain open.
+The harvest prefix through candidate 27, `1403.4485`, and resume at 28, `1403.6317`, are intact.
+ADVANCED:
+- ORIENT from public main `8e222a49a64273c9cefc35bca5ae15a0a05fb9ee`; read the constitution
+  in full, state/latest handoff, claim statuses, taxonomy and applicable decisions/prefix ruling.
+  Existing writable checkout has unrelated local edits; the deliberately read-only review
+  checkout is intact. Work used a separate local clone outside OneDrive, on
+  `codex/s1-3-canonical-derivation`. No applicable repository/ancestor AGENTS file was found;
+  the owner's local-storage instruction was followed.
+- Reconciled STATE/groundtruth README assertions of empty evidence against the actual 31
+  manifests/log. Orientation gate passed on existing Lean/Rust code, with doc reconciliation
+  in progress (29 tests, golden audit `[propext]`). New Rust workspace membership was enabled
+  afterward. A no-cache setup attempt was interrupted; `lake exe cache get` succeeded; that
+  interrupted attempt is not a passing gate. Logs in `analysis/s1-3/`.
+- ADR-0006 specifies the narrow gzip/TeX reviewed-slice procedure. Rust reuses the ratified
+  parser, counts, hashes, ID/serialization and both validators. Full decompressed context is
+  retained externally; only selected UTF-8 slices are normalized, by ASCII whitespace alone.
+  The procedure rejects missing/ambiguous boundaries/context, omissions, unsupported changes,
+  bad mappings, changed sources/inheritance and conflicting output bytes.
+- 37 tests pass: 24 manifest + 5 ingest unchanged, 8 derivation. The artificial mechanical
+  source is test data only. Fixed hashes/ID/manifest serialization were independently
+  cross-checked in Python for that simple JSON fixture. No existing dependency pin changed;
+  the six added registry packages and licences are in S-0066/dependencies.json.
+- Fresh primary retrieval/read of S-0024/S-0025 and S-0052/S-0053, with hashes matching
+  history. Selected the Galindo Proposition 3.1 parent because the v3 remark supplies direct
+  counterexample testimony, and the original short proof has explicit boundaries. The
+  recorded licence requires proof/context bytes to remain external; the existing bibliographic
+  and status metadata is retained.
+- Committed the tested producer at `49e47237924eddf0c39c24aefad0eb9aa02ee8b3` BEFORE the real
+  manifest. Produced child `s1_derive-v0.1.0-c08f9e3ec092`, independently regenerated identical
+  outputs, both runs passing actual-byte and parent/child checks. 770 bytes, 75 format tokens,
+  one proof step, zero lemma steps. Written fidelity review and source ranges are in its RECORD;
+  FLAW-0012 instance 1 anchors the entire statement, step 0 `[0,79)`, without a fabricated
+  proof-step attribution. Parent labels and all other flaw metadata remain exact.
+- Compared 54 protected baseline files byte-for-byte, and historical contents of both changed
+  parent RECORDs remain full prefixes. No harvest advancement, old evidence replacement,
+  existing producer/library/golden change, Lean change or dependency upgrade.
+BELIEF DELTAS: the short CC BY first item is not automatically a supportable first child. Its
+record attributes an executor inference to source-established falsity; primary rereading led
+to a promotion hold, preserving the historical manifest and assigning no alternative truth.
+The Galindo status document supplies the counterexample testimony needed for the selected
+slice. The original gzip contains non-UTF-8 bibliography bytes, so decoding the whole source
+as UTF-8 would lose fidelity; complete opaque context plus strict selected-slice decoding
+resolves this without repairing or discarding source content.
+CONFUSIONS: stale empty-evidence sentences and the manifest-only 25-package count were caught
+and reconciled (baseline actually 26, now 33 with the new crate/dependencies). The development
+golden-capture run intentionally failed its placeholder before independently checked constants
+were installed. A first register check found CRLF in copied metadata; normalized copies passed.
+A proof-printing inspection hit Windows cp1252; the UTF-8 rerun completed. No repeated failure
+was hidden or reported as green. The explicit reproduction command uses UTF-8 and a new
+external destination. The fresh clone's initial Lean build needed the pinned cache preparation.
+HONESTY CHECK: CLAIMS/FLAWS and all 31 historical manifests unchanged. The known first parent
+is held only for promotion, with the precise discrepancy appended; this is not a silent
+reclassification or an unrequested corpus-wide audit. Source testimony and executor inference
+are distinguished in both records. No generalized compatibility/performance conclusion.
+LEAKAGE CHECK: checked current scope and protected-file comparison: `contact/` remains its
+README alone, no contact artifact or real-AI-proof behavior was used in source selection,
+procedure design or validation. No detector exists in this workstream; SD8 unchanged.
+DETERMINISM CHECK: engine commit, version, recipe, source/parent/context hashes, fixed mechanical
+goldens, two independent actual Rust runs and exact stable manifest bytes are recorded in
+`analysis/s1-3/`. Python orchestrates only. No new MEASURED/REPRODUCED claim was added to CLAIMS.
+MANIFEST CHECK: canonical child has origin ground-truth, parent link, inherited documentary
+labels and canonical span, actual-byte check plus check_derived passed; its raw parent remains
+the item of record. Artificial mechanical fixture stays outside the corpus. No PROVEN claim.
+DRIFT CHECK: preserved original erroneous statement/proof, no repaired argument, no source
+verdict beyond the documented status. No referee contact, generator, detector, quarantine,
+schema/taxonomy amendment, informal–formal pair or coverage analysis implemented. Previous
+closed work stayed outside this assignment; no contents or judgments were imported.
+NEXT-SINGLE-ACTION: S1.2 — specify the first positive informal–formal pair procedure: read
+constitution §2 S1.2, ADR-0001 D3/D4 and pinned Lake files, discover the next free ADR (0007
+here), then write the one-pair procedure/selection requirements for an actually retrieved,
+licensed informal statement paired with an existing pinned Mathlib declaration. STATE gives
+the exact starting commands. No pair is already admitted; synthetic goldens cannot be relabeled.
+ESCALATIONS: the first-parent promotion hold needs a reviewed source-status determination
+(primary testimony or separately reviewed counterexample, correctly attributed) and an
+explicit trail for any label amendment. It does not block the selected child. Prior standing
+S1 rulings/questions remain recorded in STATE; none was silently resolved here. Public draft
+publication is explicitly authorized by the owner for this slice and permitted material.
+STOP-REASON: completed S1.3 engineering boundary; final staged-tree gate is recorded below.
+The feature branch is prepared for authorized draft publication after this evidence commit.
+Gate S1 remains open.
+
+CONCURRENT MAIN: a pre-publication fetch found `origin/main` at
+`be7d1445edf942821716b2d5c0d7b02c0d9f2257`, merging the separately prepared documentation PR.
+Its only changed paths are README, STATE and HANDOFF, not producer/proof inputs. This branch
+retains the original baseline and producer commit; no merge or history rewrite was performed.
+The draft PR calls out the overlapping state/history records so both sessions can be preserved
+at owner-controlled integration. The other local checkout is now clean after that independent
+publication; this executor did not alter it or the deliberately read-only review checkout.
+
+FINAL VERIFICATION: 2026-10-20 03:47:27Z, `bash scripts/check.sh`, exit 0 / GATE: GREEN. Lean build
+completed 8,926 jobs; existing golden axiom audit `[propext]`; fmt and clippy clean; 37 tests
+passed (24 manifest, 5 ingest, 8 derivation); 147 staged/tracked files passed byte checks;
+Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 66/66, no undefined references. Log:
+`analysis/s1-3/gate-final.txt`. This audit is for the existing Lean golden, not a formalization
+of the canonical informal child. The subsequent log/recording-only edits pass byte/register
+and diff checks before commit. No producer, recipe, proof, manifest or source-map bytes changed
+after the successful real run. The documented default-commit reproduction command also passed
+and matched the retained first receipt; its separate receipt is `documented-command.json`.

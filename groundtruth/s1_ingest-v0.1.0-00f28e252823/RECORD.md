@@ -104,7 +104,14 @@ This parent is suitable for one engineering slice because its original statement
 have short, unambiguous source boundaries and documented status. It is not a new admission
 or representative calibration sample. Rights remain external/digest-only under SD16 and
 ADR-0003 D5: the non-exclusive distribution grant is to arXiv, not this repository.
-No original or derived source text is added to Git. The complete decompressed source,
+No proof or complete source-context file is added to Git; existing attribution/status/locator
+metadata is retained. The complete decompressed source,
 including non-UTF-8 bibliography bytes, is required external context under ADR-0006.
 The public recipe is `groundtruth/derivations/1209.2022v2-proposition3.1.json`.
 The resulting child and completed verification are recorded in the later evidence commit.
+
+The post-producer run completed: child `s1_derive-v0.1.0-c08f9e3ec092`, engine commit
+`49e47237924eddf0c39c24aefad0eb9aa02ee8b3`. Its RECORD and source map document exact source
+ranges, retained context and the statement-wide step-0 `[0,79)` flaw anchor. Both actual-byte
+and parent/child checks passed on two identical independent regenerations. Receipt and
+commands: `analysis/s1-3/real-result.json`; full evidence index: `analysis/s1-3/README.md`.
