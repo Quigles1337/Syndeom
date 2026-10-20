@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Program Files\\Git\\bin\\bash.exe",
+    "scripts/check.sh"
+  ],
+  "cwd": "C:\\Users\\LEET\\Documents\\ChatGPT\\Syndeom",
+  "head": "9375af283e748e915ffc6e31df12f1bb81122e1d",
+  "tree": "96cf29f99656b039561170cc9356d0839f97a6ef",
+  "started": "2026-10-20T20:11:20.569576+00:00",
+  "exit_code": 0,
+  "finished": "2026-10-20T20:23:14.733002+00:00",
+  "log_sha256": "8eaa2870f6e4a8bef6cfcea7720d2340039d746dd2403855a6cc556bc6a9890a",
+  "head_after": "9375af283e748e915ffc6e31df12f1bb81122e1d",
+  "tree_after": "96cf29f99656b039561170cc9356d0839f97a6ef"
+}

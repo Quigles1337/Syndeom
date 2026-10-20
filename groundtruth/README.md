@@ -27,3 +27,14 @@ complete required context remain external for this first example. A child is ano
 representation of its parent and must not be counted as another independent real item.
 Promotion holds in parent records must be resolved before using those parents for derivation.
 The S1.3 evidence and single-command reproduction are in `analysis/s1-3/`.
+
+
+## Post-merge inventory — 2026-10-20
+
+The Route A prefix above still holds 31 logical items. Owner merge of PR 4 added one
+Judson/Mathlib positive pair through the separate ADR-0007 route: main now has 32 raw
+parents and two canonical children, representing 32 logical items. The canonical pair
+selects a zero-step informal statement and a formal theorem alias. The S1.4
+[coverage report](../analysis/s1-4/report/report.md) distinguishes archive, qualified,
+truth-dependent and length-bearing populations, with the first-parent hold retained.
+Gate S1 remains open; [remaining obligations](../analysis/s1-4/OBLIGATIONS.md).

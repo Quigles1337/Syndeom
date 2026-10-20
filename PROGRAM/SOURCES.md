@@ -2249,3 +2249,21 @@ both-file validation, stronger parent/child checks, emitted-file full-type/axiom
 Mathlib offered argument and SYNDEOM transcription roles. Zero informal proof steps;
 empty-statistics fidelity PASS is vacuous. Full raw/licensing context and informal output
 remain external. Draft admission review is pending; no source label or CLAIM is promoted.
+
+
+### S-0067 / S-0068 post-merge disposition — 2026-10-20 UTC
+
+The owner merged the pair implementation/admission packet in PR 4 at 18:10:13Z,
+main `e6a7cae4392dd1565ee57f9fb727cc01e453687d`, with the same tree as PR head
+`0b30d782163ed961262dbf70328dc1d16cf58746`. The archived and canonical pair RECORDs
+append that disposition. The earlier proposed/pending text remains historical evidence.
+S-0067 and S-0068 retain their recorded VERIFIED states, attribution, licence and external
+storage decisions. No source status, historical locator correction or earlier receipt is
+rewritten; no fresh primary retrieval or independent reviewer is claimed here.
+
+The S1.4 compatibility check uses retained exact source bytes, a fresh pair build and new
+archive/canonical output destinations. All 11 deterministic outputs match the originals;
+this is byte/provenance replay, not a newly executed emitted-file Lean audit. The source
+correspondence and earlier audit remain the scientific evidence. The pair is one logical
+positive item with zero informal proof steps, not an independent population sample or
+a PROVEN promotion. `analysis/s1-4/` records the scope and remaining obligations.

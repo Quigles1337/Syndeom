@@ -67,14 +67,14 @@ before the retained report is generated. From `engine/`, substitute that full re
 a new output directory (its parent must exist):
 
 ```powershell
-cargo run --locked -p syndeom-manifest --example s1_4_coverage -- report C:\Users\LEET\Documents\ChatGPT\Syndeom e6a7cae4392dd1565ee57f9fb727cc01e453687d <tool-revision> C:\Users\LEET\Codex\Temp\syndeom-s1-4-report-new
+cargo run --locked -p syndeom-manifest --example s1_4_coverage -- report C:\Users\LEET\Documents\ChatGPT\Syndeom e6a7cae4392dd1565ee57f9fb727cc01e453687d 4e46564ac62bc2bd7a5bef54265e9b2dd26772bb C:\Users\LEET\Codex\Temp\syndeom-s1-4-report-new
 ```
 
 For two independent destinations, byte comparison and an existing-output refusal check,
 run from the repository root:
 
 ```powershell
-python -I -X utf8 analysis/s1-4/reproduce.py --repo C:\Users\LEET\Documents\ChatGPT\Syndeom --corpus e6a7cae4392dd1565ee57f9fb727cc01e453687d --tool <tool-revision> --out C:\Users\LEET\Codex\Temp\syndeom-s1-4-reproduction-new
+python -I -X utf8 analysis/s1-4/reproduce.py --repo C:\Users\LEET\Documents\ChatGPT\Syndeom --corpus e6a7cae4392dd1565ee57f9fb727cc01e453687d --tool 4e46564ac62bc2bd7a5bef54265e9b2dd26772bb --out C:\Users\LEET\Codex\Temp\syndeom-s1-4-reproduction-new
 ```
 
 The orchestrator records actual argv, exit codes, compiler version, run times, and log/output
@@ -116,3 +116,19 @@ clean commit and retain the exact commit/tree, log, timestamps and exit outside 
 Publish that actual result in the draft PR without another edit to the checked tree merely
 to embed its own hash. Historical HANDOFF/SOURCES remain exact byte prefixes; corpus labels,
 manifests, recipes, proofs, licence decisions and old receipts are preserved.
+
+
+## Retained results
+
+[VERIFICATION.md](VERIFICATION.md) identifies actual commands, scope, failures and the
+final-tree convention. [evidence/execution-final.json](evidence/execution-final.json) records the final two
+fresh Rust reports, byte comparison and output refusal. The separate
+[initial execution receipt](evidence/execution-receipt.json) retains the fresh historical
+pair build/replay and first reporting revision. The committed report is an exact copy of
+`production-02/report-a`, identified by the final execution receipt.
+The preservation helper compares all baseline files, allowing only named current summaries
+and exact-prefix appends, and checks the pair closure separately:
+
+```powershell
+python -I -X utf8 analysis/s1-4/check_preservation.py --repo C:\Users\LEET\Documents\ChatGPT\Syndeom --base e6a7cae4392dd1565ee57f9fb727cc01e453687d --output C:\Users\LEET\Codex\Temp\syndeom-s1-4-preservation-new.json
+```

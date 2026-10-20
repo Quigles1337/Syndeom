@@ -1,0 +1,2 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running `target\debug\examples\s1_4_coverage.exe report C:\Users\LEET\Documents\ChatGPT\Syndeom e6a7cae4392dd1565ee57f9fb727cc01e453687d 9375af283e748e915ffc6e31df12f1bb81122e1d C:\Users\LEET\Codex\Temp\syndeom-s1-4-20261020\production-01\report-b`

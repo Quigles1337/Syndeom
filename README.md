@@ -24,34 +24,46 @@ never verdicts.
 
 ## Status
 
-This branch includes **the first S1.2 producer and proposed positive pair, 2026-10-20 UTC**.
-The new draft implementation/admission PR is open for review; main admission is not claimed.
-The harvest remains at the Session 20 prefix of 2026-10-14. The authoritative
+**PR 4 was merged by the owner on 2026-10-20 at 18:10:13 UTC.** Main contains the first
+Judson/Mathlib positive statement pair. This branch completes the reproducible
+[S1.4 coverage and interim-power report](analysis/s1-4/report/report.md) for that merged
+corpus. The harvest remains at the Session 20 prefix of 2026-10-14. The authoritative
 gate checklist, evidence, and next action are maintained in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
 
 | Surface | Implemented or recorded | Remaining boundary |
 |---|---|---|
 | Foundation | Ratified constitution; 14 flaw classes in taxonomy `0.1.0`; S0 closed | Constitutional and taxonomy changes require an ADR |
-| Ground truth | Accepted-main baseline: 31 raw + 1 canonical, zero S1.2 pairs. This branch: 32 raw + 2 canonical, proposing one additional positive item | Pair admission review, further derivatives and coverage analysis remain; Gate S1 is open |
+| Ground truth | 34 representations: 32 logical roots, two canonical children, one admitted positive pair; S1.4 report reproduced | First-parent status hold, carried label questions and cold-start assessment remain; Gate S1 is open |
 | Rust engine | `syndeom-manifest` library; `syndeom-ingest`, `syndeom-derive` and `syndeom-pair` CLIs, all `0.1.0` | Ingestion and derivation preserve reviewed evidence; they do not determine mathematical truth |
 | Formal verification | Pinned Lean/Mathlib project, golden theorem, and axiom audit | A successful build alone does not establish statement fidelity |
 | Calibration | Experimental design and phase gates specified | No synthetic corpus, calibrated battery, freeze tag, or contact report yet |
 
-The baseline's 31 archival items span five taxonomy classes; this is a corpus inventory, not a coverage or
-performance result. Thirty originals use `external` storage and one is committed under its
-recorded licence. The canonical child is another representation of one parent, not a 32nd
-independent item; its proof and source context remain external. See the
-[harvest log](groundtruth/HARVEST-LOG.md), [source register](PROGRAM/SOURCES.md), and
-[S1.3 evidence and reproduction](analysis/s1-3/README.md). This branch additionally contains
-the Judson/Mathlib archive and canonical pair, two representations of one positive item.
-Its informal statement has zero proof steps; the offered argument is Mathlib's proof.
-The next action is review of the [S1.2 implementation and admission evidence](analysis/s1-2/implementation/README.md);
-no S1.2 pair is yet accepted on main.
+The [Rust inventory](analysis/s1-4/README.md) distinguishes representations, logical items,
+source families and flaw instances. The 32 roots carry **46 flaw instances across five classes**;
+nine classes have no real examples and cannot be validated by S4 on this prefix. **Thirty roots
+have no canonical length.** Two canonical informal selections supply 75 tokens / one proof step
+and seven tokens / zero proof steps; the latter is the positive statement pair, not a
+positive-length informal proof control. Its 14-token Lean alias does not measure the transitive
+Mathlib proof. No detector performance or numerical power is inferred from these counts.
+
+Historical labels remain visible: statement truth is 5 true / 17 false / 10 undetermined;
+offered-proof validity is 1 valid / 31 invalid. The first-parent promotion hold, seven truth
+questions and seven severity questions qualify use without rewriting labels. The explicitly
+unflagged subset contains 17 roots; documentary grouping yields 22 source-ID arrays, not an
+effective sample size. All real-item cells are **expected underpowered** for the equivalence
+test pending S3's design-derived N_min and frozen protocol.
+
+The owner merge and [retained pair checks](analysis/s1-2/implementation/VERIFICATION.md)
+support the positive-pair admission. No separate GitHub reviewer approval is recorded, no
+new mathematical claim is promoted to PROVEN, and this informed session does not close S1.
+The [obligation ledger](analysis/s1-4/OBLIGATIONS.md) sets the next action: resolve the
+documented status-support hold on `s1_ingest-v0.1.0-63e23a952084`. Harvest remains paused
+after candidate 27, `1403.4485`; candidate 28, `1403.6317`, remains next.
 
 ## Architecture
 
 SYNDEOM currently operates as a **local, file-based research pipeline**. Rust owns canonical
-manifest construction, canonical derivation, and validation; Lean checks the formal fixture;
+manifest construction, canonical derivation, validation, and coverage aggregation; Lean checks the formal fixture;
 Python assists discovery and orchestrates reproduction.
 The repository holds the evidence, decisions, and execution record. There is no deployed API,
 queue, or database in the present implementation.
@@ -95,6 +107,9 @@ flowchart LR
   as external context. It validates actual bytes, inherited labels, and mapped flaw locations.
 - [`engine/pair/`](engine/pair/) implements the fixed ADR-0007 archive/canonical pair contract,
   with executable-input provenance, actual-byte validation, full output preflight and fresh receipts.
+- [`analysis/s1-4/`](analysis/s1-4/) publishes the Rust-owned inventory, qualified coverage,
+  frozen length bins and interim-power statement. The example target lives outside the
+  pair producer's frozen source closure; Python only orchestrates reproducibility checks.
 - [`groundtruth/`](groundtruth/) retains the archival item and its written evidence.
   [`lean/`](lean/) supplies the separate formal build and axiom-audit path.
 
