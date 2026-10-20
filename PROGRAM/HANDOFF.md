@@ -2775,3 +2775,54 @@ ESCALATIONS:
 STOP-REASON: context budget — a clean boundary (three candidates fully recorded, the resume point
 set). Repo green on the committed tree (gate run detached with a log, every edit staged, before
 the commit); this commit pushes to `origin/main`.
+
+---
+
+SESSION: 2026-10-20 UTC @ 8e222a4 (Session 21 — README architecture and operating guide;
+base commit shown, documentation branch `codex/institutional-readme`)
+PHASE / GATE: S1 — ground-truth corpus; S1 remains open. Al requested the README upgrade instead
+of the next harvest. No research gate or standing ruling changes.
+ADVANCED:
+- Rewrote README.md as an architectural guide: current implementation and dated research
+  snapshot, artifact identity and storage contracts, the planned calibration/validation/contact
+  boundary, exact toolchain pins, a fixture-only dry run, repository map, and governance.
+- Added three native Mermaid diagrams with circular nodes, fine curved relationships,
+  restrained red emphasis, and accessible titles/descriptions. Solid relationships depict
+  implemented ingestion/identity; dashed paths depict the planned research workflow.
+- Checked the account against source code, manifests, the constitution, and ADRs. Independently
+  counted 31 archival manifests, 30 external originals and one committed original, ten
+  undetermined statement statuses, five represented flaw classes, and 14 taxonomy entries.
+  These are inventory checks, not calibration or corpus-coverage results.
+- Validation: all 49 relative links and seven navigation anchors resolve; README is UTF-8/LF,
+  without BOM, with a trailing newline. Mermaid 11.17.2 parsed and rendered all three diagrams;
+  visual inspection and node-bounds checks found no overlapping nodes. The README's exact
+  dry-run command succeeded, emitted `s1_ingest-v0.1.0-d2134e7fd2c3` under `/2`, and created no
+  corpus item. Rendering dependencies and QA files are outside the repository.
+- Full repository gate: `GATE: GREEN`, exit 0 at **2026-10-20 03:10:57Z**. The local cache-plus-gate
+  run began at 02:54:20Z; Lean completed 8,926 jobs; the golden theorem's axioms were `[propext]`;
+  Rust fmt and clippy passed; all 29 tests passed (24 manifest, five ingest); 122 tracked files
+  passed byte checks; Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 65/65, with no undefined
+  references. Logs: `gate-verified.stdout.log` and `gate-verified.stderr.log` in the local
+  documentation QA scratch directory (not committed). Final recording edits also passed the
+  byte/register and diff checks before committing.
+BELIEF DELTAS: the README needs an explicit implementation boundary. The manifest library and
+ingestion producer exist, but canonical derivation, generation, detectors, calibration, and contact
+scoring remain future work. Evidence: workspace members, source code, and STATE's S1 checklist.
+CONFUSIONS: a fresh checkout's direct `lake build` began rebuilding uncached dependencies.
+Stopped that session-owned process tree, ran the pinned `lake exe cache get`, and resumed the
+gate. The README documents the cache-first sequence. No repository build code was changed.
+HONESTY CHECK: no CLAIM, SOURCE, FLAW, or ADR entry changed. No scientific result was added; the
+research snapshot is explicitly dated to Session 20. “Proven” remains subject to SD2.
+LEAKAGE CHECK: only the rules in `contact/README.md` were read; the directory contains no contact
+subjects. No contact behavior informed a design decision.
+DETERMINISM CHECK: no engine, Lean source, toolchain, manifest, or proof bytes changed. The
+documented dry run uses checked-in fixture bytes and the actual engine commit.
+MANIFEST CHECK: no proof artifact was created or altered; all 31 ground-truth manifests remain
+unchanged. The dry-run fixture was not admitted as real evidence.
+DRIFT CHECK: no verdict on a real manuscript, no understanding claims, no detector design or
+tuning, and no referee contact.
+NEXT-SINGLE-ACTION: S1.1 — the tenth Route A harvest, resuming at candidate 28 (`1403.6317`),
+in ascending id with no skipping, following STATE.md's existing procedure.
+ESCALATIONS: no new research escalation. The standing items recorded in Session 20 remain.
+STOP-REASON: natural boundary — README complete and verified; documentation branch prepared for
+review. Historical HANDOFF bytes are preserved exactly; the new session is appended.
