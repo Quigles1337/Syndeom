@@ -132,3 +132,57 @@ no undefined references. The new log and final recording edits were then checked
 `python -I -X utf8 scripts/check_registers.py .` and `git diff --cached --check`; no
 producer or artifact input changed after the gate. This is an informed working-session gate,
 not the Gate S1 cold-start exam and not a Lean verification of the source proof.
+
+## PR 2 review correction and integration verification
+
+On 2026-10-20 the owner explicitly requested the supplied chronology correction, a complete
+gate, and merging [PR 2](https://github.com/Quigles1337/Syndeom/pull/2). This supersedes the
+earlier no-merge boundary recorded above; those historical paragraphs remain unchanged.
+The reviewed merge was `64ed84ef16df982468cd386a5b2803e1a022e8ef`, with main at
+`be7d1445edf942821716b2d5c0d7b02c0d9f2257`.
+
+Applied the supplied patch to put Session 21 before S1.3 and restore STATE's continuation
+indentation. HANDOFF now begins with main's exact 235,705 bytes, followed by the original
+9,269-byte S1.3 block; the last NEXT is S1.2. The new review note follows both blocks.
+STATE's Session 20 label is explicitly historical. README now describes the derivation
+producer, one existing-parent canonical child, reproduction instructions and current paths.
+Its three diagrams are unchanged; 58 relative links and nine anchors resolve.
+
+[`pr2-preservation.json`](pr2-preservation.json) records exact preservation of 144 existing
+files against `d2a33062435b5fbc21cb1562b2a33b5a8c0ca20e`, including production/proof inputs,
+dependency pins, source records, recipes and retained verification receipts/logs. This README's
+original bytes are also preserved as a prefix. No real artifact was regenerated for this fix.
+
+The correction-tree gate passed at **2026-10-20 04:26:20Z**, exit 0 / **GATE: GREEN**:
+8,926 Lean jobs, golden axioms `[propext]`, clean fmt/clippy, 37 tests (24 + 5 + 8),
+149 tracked files, and coherent Q/SD/FLAW/CLAIM/S- registers (17/17/14/7/66).
+[`gate-pr2-review.txt`](gate-pr2-review.txt) records that run's checked index tree and transcript.
+It is separate from the original `gate-final.txt`. Raw terminal CRLF is normalized to LF in
+the committed copy; the original capture remains outside the repository.
+
+Commands executed for the correction (from the repository root, PowerShell):
+
+```powershell
+$reviewWork = 'C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical-work\pr2-fix-2026-10-20'
+git apply --check "$reviewWork\pr2-fix.patch"
+git apply "$reviewWork\pr2-fix.patch"
+python -I -X utf8 "$reviewWork\verify_pr2.py"
+python -I -X utf8 scripts/check_registers.py .
+git diff --cached --check
+python -I -X utf8 "$reviewWork\run_gate.py" corrected
+```
+
+The local capture wrapper executes exactly
+`C:\Program Files\Git\bin\bash.exe scripts/check.sh`, records the actual HEAD and staged tree,
+and refuses an existing log destination. To reproduce the gate from any checkout:
+
+```powershell
+& 'C:\Program Files\Git\bin\bash.exe' scripts/check.sh
+```
+
+The final recording commit is checked once more with the same full gate before push and merge,
+using `python -I -X utf8 "$reviewWork\run_gate.py" final-commit`. Its clean revision/tree,
+actual completion time, exit code and raw-log SHA-256 are recorded in PR 2 and the integration
+merge message. The separate local files are `gate-final-commit.log` and
+`gate-final-commit.json` under `$reviewWork`. This keeps the final checked file tree fixed
+while preserving its verification result. Gate S1 remains open; the next task remains S1.2.

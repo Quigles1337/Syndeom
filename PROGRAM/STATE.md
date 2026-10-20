@@ -5,7 +5,7 @@
   producer committed first at `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, real generation
   and independent regeneration passed. Source text remains external; one separate parent
   promotion hold recorded. No harvest advancement. S1.2/S1.4 and Gate S1 remain open.)
-- **Research snapshot:** 2026-10-14 UTC (Session 20 — the ninth Route A harvest: candidates 25–27
+- **Previous update (historical):** 2026-10-14 UTC (Session 20 — the ninth Route A harvest: candidates 25–27
   examined in order, all three admitted yielding 6 items — four from one published erratum (a
   main theorem withdrawn to a conjecture, the proposition and the assertion its proof needed,
   and a moduli theorem shown false by the erratum's own example), one true theorem whose proof
@@ -70,17 +70,25 @@
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
-   2026-10-20 03:47:27Z (S1.3 staged artifact/evidence tree)** — Lean 8,926 jobs, golden axioms
-   `[propext]`, fmt/clippy clean, 37 tests passed (24 manifest + 5 ingest + 8 derivation),
-   147 tracked files checked, registers coherent (Q 17, SD 17, FLAW 14, CLAIM 7, S- 66),
-   exit 0. Log: `analysis/s1-3/gate-final.txt`. Final recording-only edits also pass byte/register
-   and diff checks before commit. **Previous GREEN:
-   2026-10-20 03:10:57Z (Session 21, documentation branch)** — local gate after populating the
-   pinned Mathlib cache: Lean 8,926 jobs, axioms `[propext]`, Rust fmt and clippy clean, 29/29
-   tests, 122 tracked files checked, registers coherent; exit 0. Final recording edits also passed
-   the byte/register and diff checks before the documentation commit.
-   **Previous GREEN: 2026-10-14 21:48:44Z–21:50:35Z (Session 20, detached run with a log) on the Session-20 harvest
-   tree with every edit staged, and again on the final tree before the harvest commit** — Lean `Build completed successfully (8926 jobs)`,
+  2026-10-20 04:26:20Z (PR 2 corrected documentation tree)** — Lean 8,926 jobs, golden axioms
+  `[propext]`, fmt/clippy clean, 37 tests passed (24 manifest + 5 ingest + 8 derivation),
+  149 tracked files checked; Q 17, SD 17, FLAW 14, CLAIM 7, S- 66; exit 0. Log:
+  `analysis/s1-3/gate-pr2-review.txt`. HANDOFF retains main's exact historical prefix, followed
+  by the original S1.3 block; its last NEXT and this file's single NEXT both name S1.2.
+  The final recording commit is gated again before integration; PR 2 and the integration
+  merge message record that exact checked revision/tree and result without rewriting the
+  checked files. **Previous GREEN:
+  2026-10-20 03:47:27Z (S1.3 staged artifact/evidence tree)** — Lean 8,926 jobs, golden axioms
+  `[propext]`, fmt/clippy clean, 37 tests passed (24 manifest + 5 ingest + 8 derivation),
+  147 tracked files checked, registers coherent (Q 17, SD 17, FLAW 14, CLAIM 7, S- 66),
+  exit 0. Log: `analysis/s1-3/gate-final.txt`. Final recording-only edits also pass byte/register
+  and diff checks before commit. **Previous GREEN:
+  2026-10-20 03:10:57Z (Session 21, documentation branch)** — local gate after populating the
+  pinned Mathlib cache: Lean 8,926 jobs, axioms `[propext]`, Rust fmt and clippy clean, 29/29
+  tests, 122 tracked files checked, registers coherent; exit 0. Final recording edits also passed
+  the byte/register and diff checks before the documentation commit.
+  **Previous GREEN: 2026-10-14 21:48:44Z–21:50:35Z (Session 20, detached run with a log) on the Session-20 harvest
+  tree with every edit staged, and again on the final tree before the harvest commit** — Lean `Build completed successfully (8926 jobs)`,
   axioms `[propext]`; Rust fmt and clippy clean, 29/29 tests (24 manifest + 5 ingest); 112 text files `i/lf` + 10 binaries;
   registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 65/65). Earlier GREEN runs:
   Session 4 (before the S0.6 commit), Session 5 (at `132788c`), Session 6 (at `2b7c573` and on its

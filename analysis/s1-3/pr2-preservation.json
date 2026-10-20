@@ -1,0 +1,26 @@
+{
+  "reviewed_merge_commit": "64ed84ef16df982468cd386a5b2803e1a022e8ef",
+  "main_before_merge": "be7d1445edf942821716b2d5c0d7b02c0d9f2257",
+  "original_artifact_evidence_commit": "d2a33062435b5fbc21cb1562b2a33b5a8c0ca20e",
+  "main_handoff_exact_prefix": {
+    "bytes": 235705,
+    "sha256": "406130d2c53082403487361acea3442fc4542b26af57af4bff24ba6313b66668",
+    "pass": true
+  },
+  "original_s1_3_block_exactly_preserved_after_main": {
+    "bytes": 9269,
+    "sha256": "d88adbf8485be19eb70ef61d48c30bcee9b01d38484a7095b77dec61d4a995ce",
+    "pass": true
+  },
+  "handoff_last_next_action": "S1.2",
+  "state_single_next_action": "S1.2",
+  "protected_existing_files": 144,
+  "protected_inventory_sha256": "f06e96395c78c94c2713942f5b4c3bc0640850bdb0d921618f47fbf515941278",
+  "protected_existing_bytes_match": true,
+  "historical_evidence_readme_exact_prefix": true,
+  "readme_relative_links_resolve": 58,
+  "readme_anchors_resolve": 9,
+  "readme_mermaid_blocks_unchanged": 3,
+  "conflict_markers_absent": true,
+  "scope": "Documentation reconciliation only; no production, proof, source, recipe, dependency or retained verification evidence changed."
+}
