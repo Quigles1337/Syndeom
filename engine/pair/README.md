@@ -116,5 +116,7 @@ provenance. The Git subprocess refusal controls are explicitly development fixtu
 The unit tests do not redistribute the book or pretend synthetic bytes are its raw hash.
 Actual full-source archive/canonical success, emitted Lean/type/axiom checking, fresh
 generation replay and real-CLI refusal evidence run after the producer commit and are
-recorded separately under `analysis/s1-2/implementation/`. Corpus acceptance remains
-the draft implementation/admission PR's review boundary.
+recorded separately under `analysis/s1-2/implementation/`. The owner merged that
+admission packet in PR 4 on 2026-10-20 at 18:10:13Z. The post-merge dispositions and
+current coverage/qualifications are in `analysis/s1-4/`; no PROVEN promotion or separate
+independent reviewer is inferred. The producer contract and all 20 inputs are unchanged.

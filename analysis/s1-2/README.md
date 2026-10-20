@@ -20,10 +20,11 @@ before computing its identity. The table below contains those corrected prospect
 and transcripts still describe the original configurations and are byte-for-byte retained.
 
 **Implementation follow-up:** the original procedural statements below describe PR 3's
-review boundary. The tested producer and real proposed pair now exist on the implementation
-branch; full actual-byte/parent-child, emitted Lean, replay and refusal checks are in
-[implementation/](implementation/README.md). No old receipt is rewritten as production evidence.
-The current next action is admission review of that draft.
+review boundary. The tested producer and real pair were admitted by the owner's PR 4
+merge at 2026-10-20 18:10:13Z; full actual-byte/parent-child, emitted Lean, replay and
+refusal evidence remains in [implementation/](implementation/README.md). No old receipt
+is rewritten. [S1.4](../s1-4/README.md) now reports the merged corpus and remaining obligations.
+The original procedure-only assertions below remain a historical record.
 
 ## Independent primary source and rights
 
@@ -281,14 +282,14 @@ tests or admission, because no production pair producer/manifest exists yet. Pur
 success is not advertised as full manifest validation. The repository gate and preservation
 results are in [VERIFICATION.md](VERIFICATION.md); its Lean audit remains the existing golden.
 
-## Remaining obligation and exact next action
+## Current disposition after PR 4
 
-The procedure and corrected source map have now been implemented. Review the new draft's
-[implementation evidence](implementation/README.md) and both actual admission RECORDs;
-accept or reject the one proposed pair before counting it on main. The original procedure
-and correction evidence remain separate and unchanged.
+The owner merged the actual producer and admission packet on 2026-10-20 at 18:10:13Z.
+Main contains **32 raw parents and two canonical children**, one logical positive pair.
+Both RECORDs append the owner action and distinguish it from retained correspondence,
+kernel and byte-validation evidence. No independent reviewer or PROVEN transition is invented.
 
-The accepted-main baseline remains **31 raw parents plus one canonical representation,
-zero positive pairs**. This branch proposes **32 raw plus two canonical**, one additional
-independent positive item. The first-parent promotion hold remains unresolved; paused
-harvest resumes candidate 28, `1403.6317`. Gate S1 and S1.4 remain open.
+[S1.4 coverage and interim power](../s1-4/README.md) is complete for the existing prefix.
+The [remaining-obligations ledger](../s1-4/OBLIGATIONS.md) identifies the first-parent
+status-support review as the single next action. Gate S1 remains open; the harvest
+resume at candidate 28, `1403.6317`, is unchanged.

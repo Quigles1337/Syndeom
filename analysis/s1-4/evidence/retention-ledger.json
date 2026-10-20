@@ -1,0 +1,142 @@
+[
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\execution-receipt.json",
+    "committed_path": "analysis/s1-4/evidence/execution-receipt.json",
+    "original_sha256": "8f07d8142cabc611e9f702b7163cdd56446b184818239ed3d423f22fc29091ba",
+    "committed_sha256": "8f07d8142cabc611e9f702b7163cdd56446b184818239ed3d423f22fc29091ba",
+    "transform": "none"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\logs\\existing-output-refusal.log",
+    "committed_path": "analysis/s1-4/evidence/logs/existing-output-refusal.txt",
+    "original_sha256": "30c3700284566e98a4c0a80104f65028010c9e17f6d076e1fbd59119a69edc27",
+    "committed_sha256": "30c3700284566e98a4c0a80104f65028010c9e17f6d076e1fbd59119a69edc27",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\logs\\fresh-pair-build.log",
+    "committed_path": "analysis/s1-4/evidence/logs/fresh-pair-build.txt",
+    "original_sha256": "a097bd1eb4e0e6fad0b3959e65abf1b29b4ca0d7b597e361395e713c189c60ab",
+    "committed_sha256": "a097bd1eb4e0e6fad0b3959e65abf1b29b4ca0d7b597e361395e713c189c60ab",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\logs\\pair-replay-archive.log",
+    "committed_path": "analysis/s1-4/evidence/logs/pair-replay-archive.txt",
+    "original_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "committed_sha256": "6e3503c495c216f84c534096025f89e7c5defbea50bad66539a6f0221fc81c10",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\logs\\pair-replay-canonical.log",
+    "committed_path": "analysis/s1-4/evidence/logs/pair-replay-canonical.txt",
+    "original_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "committed_sha256": "f9fab0e011e52f035af65bba27fc5e6054c8047904a96aa5fb1d4c801141daf5",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\logs\\report-a.log",
+    "committed_path": "analysis/s1-4/evidence/logs/report-a.txt",
+    "original_sha256": "fdb6bf785043e8f88d49d7463b512dd689ecd1f33f25b55686f36c7925e093cf",
+    "committed_sha256": "fdb6bf785043e8f88d49d7463b512dd689ecd1f33f25b55686f36c7925e093cf",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\logs\\report-b.log",
+    "committed_path": "analysis/s1-4/evidence/logs/report-b.txt",
+    "original_sha256": "4367e6d9ec0714978966afb0a2b44d79a0583604dd1586794d7895615836936a",
+    "committed_sha256": "4367e6d9ec0714978966afb0a2b44d79a0583604dd1586794d7895615836936a",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\logs\\rustc-version.log",
+    "committed_path": "analysis/s1-4/evidence/logs/rustc-version.txt",
+    "original_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "committed_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\pair-receipts\\archive\\receipt.json",
+    "committed_path": "analysis/s1-4/evidence/pair-archive.json",
+    "original_sha256": "37d55efb2af21b8125f3c7f05cc93b2ecd8461e4f3556ea5ce171b25c98c11b8",
+    "committed_sha256": "37d55efb2af21b8125f3c7f05cc93b2ecd8461e4f3556ea5ce171b25c98c11b8",
+    "transform": "none"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-01\\pair-receipts\\canonical\\receipt.json",
+    "committed_path": "analysis/s1-4/evidence/pair-canonical.json",
+    "original_sha256": "121d0de2573cb554764b23a3b2f43ad3c1330d2d5f366c9fbeab1c09b2029ddd",
+    "committed_sha256": "121d0de2573cb554764b23a3b2f43ad3c1330d2d5f366c9fbeab1c09b2029ddd",
+    "transform": "none"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\gate-orientation.json",
+    "committed_path": "analysis/s1-4/evidence/gate-orientation.json",
+    "original_sha256": "4514e92b3cf79cc260b7c45d38f6425c556198805521bdeee4f6dad6c214c566",
+    "committed_sha256": "f9a3553eb3014cfa019d1db9d8736c149f9ce2bd39d569acb5bf083517960675",
+    "transform": "CRLF to LF; JSON values unchanged; original retained"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\gate-orientation.log",
+    "committed_path": "analysis/s1-4/evidence/gate-orientation.txt",
+    "original_sha256": "9629ee0411835ba8e87b25dc4f5f49597e058c5ddfaaa4e47a603b58268a9f98",
+    "committed_sha256": "9629ee0411835ba8e87b25dc4f5f49597e058c5ddfaaa4e47a603b58268a9f98",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\gate-implementation.json",
+    "committed_path": "analysis/s1-4/evidence/gate-implementation.json",
+    "original_sha256": "aa9abd9d5fe79ea280ea937f361873d2b4a3fab4e0c86079d8ff88f844af618c",
+    "committed_sha256": "93e7b9d0ffddc830a5afdcb7a36629833c879e65f03d196478782b2d020077fe",
+    "transform": "CRLF to LF; JSON values unchanged; original retained"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\gate-implementation.log",
+    "committed_path": "analysis/s1-4/evidence/gate-implementation.txt",
+    "original_sha256": "8eaa2870f6e4a8bef6cfcea7720d2340039d746dd2403855a6cc556bc6a9890a",
+    "committed_sha256": "f262012b948acd1787ec18c23314172b727b8664dffb2fa386bf3301ba52ea1f",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-02\\execution-receipt.json",
+    "committed_path": "analysis/s1-4/evidence/execution-final.json",
+    "original_sha256": "7d0c9b430113915765a9f385faad7fc693c52490353a06988e57644b657e374f",
+    "committed_sha256": "7d0c9b430113915765a9f385faad7fc693c52490353a06988e57644b657e374f",
+    "transform": "none"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-02\\logs\\existing-output-refusal.log",
+    "committed_path": "analysis/s1-4/evidence/final-logs/existing-output-refusal.txt",
+    "original_sha256": "73176b2e3c8844de004a7a04a41307de5f1c6ead7ea6e7abc072e86ff3ca69cb",
+    "committed_sha256": "73176b2e3c8844de004a7a04a41307de5f1c6ead7ea6e7abc072e86ff3ca69cb",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-02\\logs\\report-a.log",
+    "committed_path": "analysis/s1-4/evidence/final-logs/report-a.txt",
+    "original_sha256": "58dc6b8657ea8076925516b9e712da728a57357daa5cdbfdd99ce6f8d59d50d2",
+    "committed_sha256": "58dc6b8657ea8076925516b9e712da728a57357daa5cdbfdd99ce6f8d59d50d2",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-02\\logs\\report-b.log",
+    "committed_path": "analysis/s1-4/evidence/final-logs/report-b.txt",
+    "original_sha256": "795f52f0fbb10a15ff12c198e1ea7820aaa7efc29467bda87b56a136caefb09d",
+    "committed_sha256": "795f52f0fbb10a15ff12c198e1ea7820aaa7efc29467bda87b56a136caefb09d",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\production-02\\logs\\rustc-version.log",
+    "committed_path": "analysis/s1-4/evidence/final-logs/rustc-version.txt",
+    "original_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "committed_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "transform": "CRLF to LF; empty stdout explicitly marked; terminal LF ensured"
+  },
+  {
+    "original_path": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-s1-4-20261020\\preservation-final-packet.json",
+    "committed_path": "analysis/s1-4/evidence/preservation.json",
+    "original_sha256": "4429d80c0de6cd301abdc4af9d1a7524d9835ccbe4f5889ad09f166874bdb869",
+    "committed_sha256": "4429d80c0de6cd301abdc4af9d1a7524d9835ccbe4f5889ad09f166874bdb869",
+    "transform": "none"
+  }
+]

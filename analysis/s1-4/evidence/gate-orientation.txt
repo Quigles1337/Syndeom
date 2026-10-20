@@ -1,0 +1,107 @@
+== lean: lake build (toolchain leanprover/lean4:v4.34.1) ==
+Build completed successfully (8926 jobs).
+== lean: axiom audit of the golden fixture ==
+'syndeom_golden_nat_le_sq' depends on axioms: [propext]
+== engine: cargo fmt --check ==
+Diff in \\?\C:\Users\LEET\Documents\ChatGPT\Syndeom\engine\manifest\examples\support\coverage.rs:1073:
+         &fs::read(repo.join(format!("{CONFIG}/dispositions.json"))).map_err(|e| e.to_string())?,
+     )
+     .map_err(|e| e.to_string())?;
+-    let merge: Value = serde_json::from_slice(&fs::read(repo.join(&dispositions.merge_evidence)).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+-    if merge["state"] != "MERGED" || merge["mergeCommit"]["oid"] != corpus || merge["number"] != 4 || merge["mergedBy"]["login"] != "Quigles1337" || !merge["reviews"].as_array().is_some_and(Vec::is_empty) {
++    let merge: Value = serde_json::from_slice(
++        &fs::read(repo.join(&dispositions.merge_evidence)).map_err(|e| e.to_string())?,
++    )
++    .map_err(|e| e.to_string())?;
++    if merge["state"] != "MERGED"
++        || merge["mergeCommit"]["oid"] != corpus
++        || merge["number"] != 4
++        || merge["mergedBy"]["login"] != "Quigles1337"
++        || !merge["reviews"].as_array().is_some_and(Vec::is_empty)
++    {
+         return Err("merge evidence differs from reviewed admission disposition".into());
+     }
+     let items = items(&reps, &candidates, &dispositions)?;
+Diff in \\?\C:\Users\LEET\Documents\ChatGPT\Syndeom\engine\manifest\examples\support\coverage.rs:1124:
+                 .push(i.root_id.clone());
+         }
+     }
+-    let mut candidate_counts = zeros(&["admitted","rejected","found-but-unclassifiable","pending","pending-truth","escalated"]);
++    let mut candidate_counts = zeros(&[
++        "admitted",
++        "rejected",
++        "found-but-unclassifiable",
++        "pending",
++        "pending-truth",
++        "escalated",
++    ]);
+     for c in &candidates {
+         bump(&mut candidate_counts, c.verdict.clone());
+     }
+Diff in \\?\C:\Users\LEET\Documents\ChatGPT\Syndeom\engine\manifest\examples\support\coverage.rs:1207:
+         for r in report[key].as_array().ok_or("missing coverage")? {
+             let steps = &r["steps"];
+             let bins = report["bins"]["boundaries"]["informal"]
+-                .as_array().unwrap().windows(2)
+-                .map(|w| {let key=format!("[{}, {})",w[0],w[1]);format!("{key}: {}",r["informal_bins"][key])})
++                .as_array()
++                .unwrap()
++                .windows(2)
++                .map(|w| {
++                    let key = format!("[{}, {})", w[0], w[1]);
++                    format!("{key}: {}", r["informal_bins"][key])
++                })
+                 .collect::<Vec<_>>()
+                 .join("; ");
+             out.push_str(&format!(
+Diff in \\?\C:\Users\LEET\Documents\ChatGPT\Syndeom\engine\manifest\examples\support\coverage.rs:1073:
+         &fs::read(repo.join(format!("{CONFIG}/dispositions.json"))).map_err(|e| e.to_string())?,
+     )
+     .map_err(|e| e.to_string())?;
+-    let merge: Value = serde_json::from_slice(&fs::read(repo.join(&dispositions.merge_evidence)).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+-    if merge["state"] != "MERGED" || merge["mergeCommit"]["oid"] != corpus || merge["number"] != 4 || merge["mergedBy"]["login"] != "Quigles1337" || !merge["reviews"].as_array().is_some_and(Vec::is_empty) {
++    let merge: Value = serde_json::from_slice(
++        &fs::read(repo.join(&dispositions.merge_evidence)).map_err(|e| e.to_string())?,
++    )
++    .map_err(|e| e.to_string())?;
++    if merge["state"] != "MERGED"
++        || merge["mergeCommit"]["oid"] != corpus
++        || merge["number"] != 4
++        || merge["mergedBy"]["login"] != "Quigles1337"
++        || !merge["reviews"].as_array().is_some_and(Vec::is_empty)
++    {
+         return Err("merge evidence differs from reviewed admission disposition".into());
+     }
+     let items = items(&reps, &candidates, &dispositions)?;
+Diff in \\?\C:\Users\LEET\Documents\ChatGPT\Syndeom\engine\manifest\examples\support\coverage.rs:1124:
+                 .push(i.root_id.clone());
+         }
+     }
+-    let mut candidate_counts = zeros(&["admitted","rejected","found-but-unclassifiable","pending","pending-truth","escalated"]);
++    let mut candidate_counts = zeros(&[
++        "admitted",
++        "rejected",
++        "found-but-unclassifiable",
++        "pending",
++        "pending-truth",
++        "escalated",
++    ]);
+     for c in &candidates {
+         bump(&mut candidate_counts, c.verdict.clone());
+     }
+Diff in \\?\C:\Users\LEET\Documents\ChatGPT\Syndeom\engine\manifest\examples\support\coverage.rs:1207:
+         for r in report[key].as_array().ok_or("missing coverage")? {
+             let steps = &r["steps"];
+             let bins = report["bins"]["boundaries"]["informal"]
+-                .as_array().unwrap().windows(2)
+-                .map(|w| {let key=format!("[{}, {})",w[0],w[1]);format!("{key}: {}",r["informal_bins"][key])})
++                .as_array()
++                .unwrap()
++                .windows(2)
++                .map(|w| {
++                    let key = format!("[{}, {})", w[0], w[1]);
++                    format!("{key}: {}", r["informal_bins"][key])
++                })
+                 .collect::<Vec<_>>()
+                 .join("; ");
+             out.push_str(&format!(

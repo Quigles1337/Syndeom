@@ -122,3 +122,30 @@ candidate 28, `1403.6317`, remain unchanged.
 **Next action:** review the correction, producer and both admission RECORDs with the
 actual-byte, Lean, replay, refusal, preservation and final-gate evidence; accept or
 reject this one proposed pair before counting it on main. This task leaves the draft open.
+
+
+## Post-merge disposition — 2026-10-20 UTC
+
+The owner, Quigles1337, merged PR 4 at **18:10:13Z**. Main/merge commit
+`e6a7cae4392dd1565ee57f9fb727cc01e453687d` and PR head
+`0b30d782163ed961262dbf70328dc1d16cf58746` share tree
+`2e4d454048ac916a0047bd908ae3051ba1b981af`. This is the owner's completed admission
+action; the earlier proposed/pending wording is the preserved original record.
+
+The ADR-0007 D6 evidence was re-examined: actual raw/canonical file checks, stronger
+parent/child metadata checks, emitted full-type/axiom audit, replay/refusal tests and
+the final exact-commit gate are recorded in the implementation packet and PR 4. The
+source correspondence and selected Mathlib argument are documented separately from
+kernel acceptance and vacuous mechanical fidelity PASS. No substantive unmet D6
+obligation was identified in that retained packet. GitHub has no separate reviewer
+approval; this addendum invents none and claims no new Lean execution or PROVEN promotion.
+
+Count the archive and canonical child as **one admitted logical positive pair**.
+The informal selection remains statement-only (zero proof steps), development-exposed,
+and unsuitable as a positive-length informal proof control. Storage and source labels
+are unchanged. The S1.4 compatibility replay separately rebuilt the unchanged producer
+and reproduced all 11 output files from retained bytes in fresh destinations; its scope
+and execution evidence are in `analysis/s1-4/`.
+
+Gate S1 remains open. The separate first-parent hold is unresolved; current qualifications
+and next action are in `analysis/s1-4/OBLIGATIONS.md`. All preceding bytes are preserved.

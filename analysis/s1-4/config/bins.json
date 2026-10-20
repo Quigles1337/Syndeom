@@ -1,0 +1,19 @@
+{
+  "schema": "s1-4-coverage/1",
+  "population": "all canonical files at e6a7cae4392dd1565ee57f9fb727cc01e453687d, grouped by modality; includes statement-only positive control; one representation per root/modality",
+  "edge_rule": "lower-inclusive upper-exclusive; retain empty bins; explicit underflow/overflow",
+  "role_rule": "informal n_steps=0 is statement-only, >0 proof-bearing; formal reviewed-statement-mathlib-alias/1 is theorem-alias. Shared informal edges, separately counted roles; no pooling across modalities.",
+  "boundaries": {
+    "formal": [
+      14,
+      28
+    ],
+    "informal": [
+      7,
+      14,
+      28,
+      56,
+      112
+    ]
+  }
+}

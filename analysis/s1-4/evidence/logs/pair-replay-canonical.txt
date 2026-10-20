@@ -1,0 +1,4 @@
+s1_pair-v0.1.0-62fe0c816a6b
+reviewed contract and both-file checks: PASS
+all-output preflight: PASS
+complete output set verified; admission review remains

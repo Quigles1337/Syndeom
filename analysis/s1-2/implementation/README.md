@@ -1,9 +1,12 @@
-# S1.2 producer implementation and proposed admission
+# S1.2 producer implementation and owner-merged admission
 
 The narrow Rust `syndeom-pair` producer is implemented and committed. Its real archival
 pair and canonical child passed actual-byte validation, emitted Lean/type/axiom checks,
-fresh deterministic replay and refusal controls. **Admission is proposed on this branch;
-the new implementation/admission PR stays draft and unmerged.**
+fresh deterministic replay and refusal controls. **The owner merged PR 4 on 2026-10-20
+at 18:10:13Z**, accepting this admission packet. Main and the reviewed PR head share
+tree `2e4d454048ac916a0047bd908ae3051ba1b981af`. No separate GitHub reviewer approval is
+recorded. The execution evidence below is historical; this reconciliation does not claim
+a new Lean audit or PROVEN promotion. Current coverage: [S1.4](../../s1-4/README.md).
 
 | Revision | Exact identity |
 |---|---|
@@ -95,13 +98,14 @@ python -I -X utf8 analysis/s1-2/implementation/check_preservation.py --root C:\U
 No retained evidence path is a default output. The historical procedure-only checker retains
 its original 31+1/no-pair assertions and is not the implementation preservation command.
 
-## Counts and single next action
+## Counts and current next action
 
-Accepted main at `1a8388b03017e4044cad01ac10e7e89f8fb5e38f`: **31 raw + 1 canonical, zero admitted positive pairs**.
-Proposed branch: **32 raw + 2 canonical**, representing **one additional independent
-positive item**. No PROVEN promotion; Gate S1 and S1.4 remain open. The separate first-parent
-promotion hold is unchanged; paused harvest resumes at candidate 28, `1403.6317`.
+The PR 3 baseline at `1a8388b03017e4044cad01ac10e7e89f8fb5e38f` held 31 raw + one
+canonical and zero admitted positive pairs. After owner merge of PR 4, main at
+`e6a7cae4392dd1565ee57f9fb727cc01e453687d` holds **32 raw + two canonical**, including
+one logical positive pair. This is not two independent observations or a PROVEN promotion.
 
-**Review the correction, producer and both admission RECORDs with their actual generation,
-audit, replay, refusal, preservation and final-gate evidence; accept or reject the one
-proposed pair before counting it on main. Leave this draft open until that review.**
+The [S1.4 report](../../s1-4/report/report.md) recomputes the inventory, qualifications
+and length limitations. The [ledger](../../s1-4/OBLIGATIONS.md) selects the first-parent
+source-status review as the next action. Gate S1 remains open; harvest is paused before
+candidate 28, `1403.6317`. All original receipts, logs, configurations and source labels stand.

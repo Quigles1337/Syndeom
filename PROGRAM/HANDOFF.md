@@ -3154,3 +3154,80 @@ ESCALATIONS: no new implementation blocker; admission review/merge deferred by i
 The first-parent promotion hold remains; paused harvest resumes candidate 28, `1403.6317`.
 STOP-REASON: implementation and verification complete; publish the new draft for review,
 leave unmerged, and do not promote any CLAIM or close Gate S1.
+
+
+---
+
+SESSION: 2026-10-20 UTC, post-merge reconciliation and S1.4; reporting implementation
+`4e46564ac62bc2bd7a5bef54265e9b2dd26772bb`; final report/documentation revision identified
+by this task's draft PR and external exact-commit gate receipt.
+PHASE / GATE: S1.4 complete for the existing prefix; Gate S1 open. Informed session, not cold.
+BASELINE: fetched main `e6a7cae4392dd1565ee57f9fb727cc01e453687d`, tree
+`2e4d454048ac916a0047bd908ae3051ba1b981af`; initial worktree clean, no open PRs. Owner
+merged PR 4 at 18:10:13Z; main push CI run 39472403912 succeeded. PR head/tree and merge
+metadata confirmed; no separate GitHub reviewer approval was recorded.
+ADVANCED: separately versioned Rust report using the typed manifest library, lineage
+validation, tracked Git inputs and exact hashes; canonical/role-specific frozen octave
+bins; review overlays for holds and older escalations; per-item inventory, all-class D9
+tables, source-group completeness, interim power and remaining-obligations ledger.
+Reconciled current STATE/README/ADR and pair summaries; appended pair/source dispositions.
+RESULTS: 34 representations, 32 roots, two canonical children; 46 flaw instances in five
+observed classes, nine zero classes; 30 roots missing canonical length; one valid positive
+pair, zero positive-length informal proof controls; 22 documentary source-array groups.
+Truth 5 true / 17 false / 10 undetermined; offered proofs 1 valid / 31 invalid. Historical
+counts retain the first-parent hold. Seven truth and seven severity questions plus the
+hold give 15 flagged roots; unflagged subset 17, truth-qualified 5 true / 9 false / 18
+excluded. Categories overlap missing canonical lengths and undetermined truth.
+VERIFICATION: full gate on initial tool `9375af283e748e915ffc6e31df12f1bb81122e1d` ended 2026-10-20T20:23:14.733002+00:00, exit 0 / GATE: GREEN,
+Lean 8,926 jobs; golden axioms `[propext]`; fmt/clippy clean; 67 Rust tests, including
+16 report integration tests; 301 tracked files and register references passed.
+Initial report and compatibility production 20:11:26Z–20:12:26Z: both fresh report destinations byte-identical across
+four artifacts; retained-output refusal exited 2 and preserved bytes. Fresh pair build
+in an empty Cargo target and archive/canonical replay exited 0, all 11 deterministic
+output files identical. All 20 producer inputs preserved. No historical mutation suite
+or emitted-file Lean audit was rerun; prior evidence remains explicitly prior.
+FINAL REPORT: review separated known statement-only role exclusions from genuinely
+missing proof lengths and made matrix admission/status evidence explicit. Corrected tool
+`4e46564ac62bc2bd7a5bef54265e9b2dd26772bb` was committed before final generation; 16 focused tests and clippy passed.
+Two new final report runs ended 2026-10-20T20:25:44.186035+00:00; all four artifacts were
+byte-identical and existing-output refusal preserved them. Frozen bins and historical
+pair inputs did not change. The earlier pair build/replay remains applicable to its
+unchanged 20-file producer closure; no redundant historical mutation suite was run.
+FINAL TREE GATE: the final report/documentation commit is gated again as a clean commit;
+exact SHA/tree/result and external receipt/log are placed in the draft PR without editing
+the checked tree to embed its own identity. The implementation gate is not a substitute.
+FAILURES: the orientation run passed Lean build/audit but failed fmt because untracked
+report drafts changed while it ran; not a clean-base certificate. A development test/
+clippy invocation exposed a moved String used in report formatting; borrowing the key
+fixed it before the implementation commit. Actual report/replay commands had no execution failure; the first report remains retained
+externally as the pre-correction version, not substituted for the final artifacts.
+BELIEF DELTAS: the current summary omitted seven truth and seven severity questions that
+HANDOFF Sessions 19–20 still carried. An admitted archive count is not an unqualified
+analysis denominator, and one source-backed pair is not two samples or a full proof control.
+CONFUSIONS: current PR 4 pending-admission prose was stale after the owner merge. Current
+summaries now separate the owner action, source evidence, kernel evidence and CLAIM status.
+HONESTY CHECK: no historical label changed; first-parent false/source-document attribution
+remains recorded and disputed. No independent reviewer, fresh primary retrieval, PROVEN
+promotion, numerical power, AUC, measured false-positive rate or N_min is invented.
+LEAKAGE CHECK: only existing S1 evidence and public merge/CI metadata used. No contact
+data, private Eigenverse material, detector or model evaluation; exposure remains known
+development/harvest review or unknown additional exposure, never asserted unseen/blinded.
+DETERMINISM CHECK: code/config committed before generation; Rust owns all parsing, counts,
+eligibility and deterministic outputs. Python only orchestrates, records exits/hashes and
+compares bytes. Corpus/tool revisions and exact closures are retained in provenance.json.
+MANIFEST CHECK: all tracked real manifests validated with the existing API; parent/child
+and committed bytes checked. Missing external bytes are explicitly not newly verified
+by the inventory. Analysis files are reporting artifacts, not synthetic corpus examples.
+DRIFT CHECK: no frozen producer file, source label, historical receipt, manifest, proof,
+recipe, dependency pin or taxonomy changed. HANDOFF/SOURCES and both pair RECORDs retain
+their exact historical prefixes. No schema/admission/statistical-policy amendment.
+NEXT-SINGLE-ACTION: resolve the status-support hold on `s1_ingest-v0.1.0-63e23a952084`
+from its appended RECORD, S-0024/S-0025 and retained S1.3 retrieval evidence; record actual
+primary support or a separately checked counterexample and an explicit ADR-0003 D3
+disposition. Preserve labels unless an attributed amendment is authorized and supported.
+ESCALATIONS: the explicit hold and earlier truth/severity/unnamed-result questions remain
+visible in STATE and `analysis/s1-4/OBLIGATIONS.md`; no new implementation permission needed.
+Cold-start closure requires a later fresh session with §6 verbatim and alone. Harvest
+resume remains candidate 28, `1403.6317`; the fixed prefix ends at `1403.4485`.
+STOP-REASON: authorized report and verification complete; publish one draft PR, keep unmerged,
+leave Gate S1 open and carry the concrete source-status review forward.
