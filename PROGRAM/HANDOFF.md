@@ -3075,3 +3075,30 @@ promotion hold remains unresolved. Harvest resume is candidate 28, `1403.6317`; 
 other standing S1 criteria remain open. Counts remain 31 raw parents + one canonical child.
 STOP-REASON: procedure/selection boundary reached; publish scoped evidence as a draft PR only,
 leave unmerged, and defer implementation/admission to the next authorized slice.
+
+
+---
+
+SESSION: 2026-10-20 UTC, S1.2 implementation Phase A, baseline
+`1a8388b03017e4044cad01ac10e7e89f8fb5e38f` (merged PR 3 at 05:48:01Z).
+PHASE / GATE: S1 open; bounded procedure/config correction before producer implementation.
+ADVANCED: confirmed pinned raw Git blob declaration/body at lines 27–28, not 28–29.
+Corrected ADR-0007, current packet links/maps and both configs. Rust calculated archive
+hash `094625fa10ffde723ba3a3ae47ff75db2b1994b8f96f26f6eb562dcbf653ede0`, propagated its parent ID/hash, then
+child hash `62fe0c816a6b0ef928f3e4c2fb7e2bd2e215171ebf6b6130202e851e1e9664a3`. Original output/source bytes unchanged.
+VERIFICATION: corrected rehearsal ended 2026-10-20T06:00:46.510404+00:00; all four commands exit 0;
+actual interval/canonical location passed; old interval, missing proof body and wrong
+canonical line controls rejected. Target/alias remain within standard-three axioms.
+Fresh evidence is `analysis/s1-2/correction/`; merged-main preservation checks recorded there.
+BELIEF DELTAS: a valid content hash and self-consistent config hash do not validate a locator.
+CONFUSIONS: the former interval started on the proof line; exact blob enumeration resolves it.
+HONESTY CHECK: old receipts still describe old configs; no regeneration or claimed admission.
+LEAKAGE CHECK: same development-exposed Judson candidate; no contact/private material used.
+DETERMINISM CHECK: Rust identity authority; input/helper hashes and actual source lines retained.
+MANIFEST CHECK: no producer/manifest generated in Phase A; 31 raw + one canonical, zero positive pairs.
+DRIFT CHECK: no production inputs, pins, source statuses or historical bytes changed.
+NEXT-SINGLE-ACTION: commit this correction, then implement the narrow ADR-0007 pair producer
+on this branch, test/gate and commit it before real generation; prepare an unmerged draft
+implementation/admission PR. STATE's existing implementation next action remains consistent.
+ESCALATIONS: none new; first-parent hold unchanged; harvest resumes candidate 28, `1403.6317`.
+STOP-REASON: Phase A correction boundary; continue authorized Phase B after its separate commit.

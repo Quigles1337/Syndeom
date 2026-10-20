@@ -1,0 +1,94 @@
+{
+  "started_at": "2026-10-20T05:58:17.199119+00:00",
+  "commands": [
+    {
+      "argv": [
+        "cargo",
+        "build",
+        "--locked",
+        "-p",
+        "syndeom-manifest",
+        "--message-format=json"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine",
+      "exit_code": 0,
+      "log_sha256": "304eb87398f3a32a82055a923c44e112d78b799fdd19cf0b020ca716ad8fe161"
+    },
+    {
+      "argv": [
+        "rustc",
+        "--edition=2024",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\correction\\config_identity.rs",
+        "--extern",
+        "syndeom_manifest=C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\libsyndeom_manifest.rlib",
+        "-L",
+        "dependency=C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\target\\debug\\deps",
+        "-o",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\config-identity.exe"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\config-identity.exe",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\canonical-config.proposed.json",
+        "s1_pair"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "log_sha256": "f9bc4f7df3037e7525b70c33716e0a6803ba369c9c45479ad8befd109c8431d7"
+    },
+    {
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\config-identity.exe",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\archive-config.proposed.json",
+        "s1_pair_archive"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "log_sha256": "c318a3194bebdb3f93d22959a1fff3cc6fd6eaadfc8633d8bf3c449c9bb924f2"
+    },
+    {
+      "argv": [
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\config-identity.exe",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\analysis\\s1-2\\canonical-config.proposed.json",
+        "s1_pair"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "log_sha256": "e75d05aa7ab9a7171dbb5dc44eb40e99b5063c309eca98695625ab18665b5006"
+    },
+    {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "exit_code": 0,
+      "log_sha256": "de77206521b72c7b0ec3943971e4277e6ccb5840699babe53915791a403ccdb0"
+    }
+  ],
+  "checkout_revision": "1a8388b03017e4044cad01ac10e7e89f8fb5e38f",
+  "helper_sha256": "3d46ebe001a8bdb75986cf1ef9ac6e2fc20670b971b7656887cfa2ec10d3f1a7",
+  "rust_helper_sha256": "3b47005987e02e970be8f0b7232eccae1629d89a20b7a6d3a4f9cca1a490aaed",
+  "old": {
+    "parent_config_hash": "ad12b7ada4490b5011a231941dee44e00968a5b8ec6f1863c1183db905d7e46b",
+    "parent_id": "s1_pair_archive-v0.1.0-ad12b7ada449",
+    "child_config_hash": "7d397688349807e8ae35d9a7987512fda49ddd8caad8a83b2f2225b99eba3eea",
+    "child_id": "s1_pair-v0.1.0-7d3976883498"
+  },
+  "corrected": {
+    "parent_config_hash": "094625fa10ffde723ba3a3ae47ff75db2b1994b8f96f26f6eb562dcbf653ede0",
+    "parent_id": "s1_pair_archive-v0.1.0-094625fa10ff",
+    "child_config_hash": "62fe0c816a6b0ef928f3e4c2fb7e2bd2e215171ebf6b6130202e851e1e9664a3",
+    "child_id": "s1_pair-v0.1.0-62fe0c816a6b"
+  },
+  "config_file_sha256": {
+    "archive-config.proposed.json": "5c65abfd981955e1e64d52f9cdfb2795c3bd88ad819be585344d755dded939a1",
+    "canonical-config.proposed.json": "6564d83d0e7a68d491ab79e653ab2fd278cd494aab62360641ec4ba4441741da"
+  },
+  "completed_at": "2026-10-20T05:58:22.862851+00:00"
+}

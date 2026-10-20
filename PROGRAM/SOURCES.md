@@ -2220,3 +2220,15 @@ The existing external-only decision is retained for source and canonical child/c
   relation are recorded, not substituted for the source-object digests.
 - **Bears on:** ADR-0007 / S1.2 source correspondence and candidate feasibility only;
   this does not certify every statement/proof in Mathlib or the Judson book.
+
+
+### Locator correction for S-0068 — 2026-10-20, after merged PR 3
+
+The historical S-0068 entry above says lines 28–29 and links to `#L28`.
+The exact pinned 5,328-byte Git blob places the declaration at **line 27** and its proof
+at **line 28**; line 29 is blank. Correct interval: **27–28, one-based inclusive**.
+[Correct declaration anchor](https://github.com/leanprover-community/mathlib4/blob/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean#L27).
+The source hash, declaration/type/argument, licence and VERIFIED source status are unchanged.
+`analysis/s1-2/correction/` records Rust-computed corrected config identities, a fresh
+successful rehearsal and negative controls that reject the old interval even with valid
+source bytes. The original entry and all original receipts remain historical evidence.

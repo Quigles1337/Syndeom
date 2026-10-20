@@ -1,0 +1,72 @@
+[
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\correction-rehearsal-01\\api-probe.log",
+    "raw_sha256": "145a4f8775a029fc1b9629c8f501c12dec4348e1ef8adcdb981fb0cd2e0eba8e",
+    "committed_copy": "api-probe.txt",
+    "committed_sha256": "145a4f8775a029fc1b9629c8f501c12dec4348e1ef8adcdb981fb0cd2e0eba8e",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\correction-rehearsal-01\\candidate-audit.log",
+    "raw_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3",
+    "committed_copy": "candidate-audit.txt",
+    "committed_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\correction-rehearsal-01\\compile-api-probe.log",
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "committed_copy": "compile-api-probe.txt",
+    "committed_sha256": "02a713f76226c52a198adae80526740fc4d6057636326bc8dec49635db8ae7a7",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\correction-rehearsal-01\\manifest-library-build.log",
+    "raw_sha256": "8b6ddca64c3877c2335dafff16a000563466f23ecef4c33b39a07cfa277e5a2c",
+    "committed_copy": "manifest-library-build.txt",
+    "committed_sha256": "8b6ddca64c3877c2335dafff16a000563466f23ecef4c33b39a07cfa277e5a2c",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\identity-compile.log",
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "committed_copy": "identity-compile.txt",
+    "committed_sha256": "02a713f76226c52a198adae80526740fc4d6057636326bc8dec49635db8ae7a7",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\identity-corrected-archive.log",
+    "raw_sha256": "c318a3194bebdb3f93d22959a1fff3cc6fd6eaadfc8633d8bf3c449c9bb924f2",
+    "committed_copy": "identity-corrected-archive.txt",
+    "committed_sha256": "c318a3194bebdb3f93d22959a1fff3cc6fd6eaadfc8633d8bf3c449c9bb924f2",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\identity-corrected-child.log",
+    "raw_sha256": "e75d05aa7ab9a7171dbb5dc44eb40e99b5063c309eca98695625ab18665b5006",
+    "committed_copy": "identity-corrected-child.txt",
+    "committed_sha256": "e75d05aa7ab9a7171dbb5dc44eb40e99b5063c309eca98695625ab18665b5006",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\identity-head.log",
+    "raw_sha256": "de77206521b72c7b0ec3943971e4277e6ccb5840699babe53915791a403ccdb0",
+    "committed_copy": "identity-head.txt",
+    "committed_sha256": "de77206521b72c7b0ec3943971e4277e6ccb5840699babe53915791a403ccdb0",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\identity-library.log",
+    "raw_sha256": "304eb87398f3a32a82055a923c44e112d78b799fdd19cf0b020ca716ad8fe161",
+    "committed_copy": "identity-library.txt",
+    "committed_sha256": "304eb87398f3a32a82055a923c44e112d78b799fdd19cf0b020ca716ad8fe161",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  },
+  {
+    "source": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-implementation-work-2026-10-20\\identity-old-child.log",
+    "raw_sha256": "f9bc4f7df3037e7525b70c33716e0a6803ba369c9c45479ad8befd109c8431d7",
+    "committed_copy": "identity-old-child.txt",
+    "committed_sha256": "f9bc4f7df3037e7525b70c33716e0a6803ba369c9c45479ad8befd109c8431d7",
+    "transformation": "CRLF to LF only; empty output displayed as (no output)"
+  }
+]

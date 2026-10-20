@@ -11,6 +11,14 @@ Branch: `codex/s1-2-positive-pair-procedure`. Base: main
 candidate was examined; none was rejected and no alternative candidate was investigated.
 The candidate has been exposed during development; it is not unseen evaluation data.
 
+**Post-merge locator correction (2026-10-20):** PR 3's original 28–29 formal interval
+omitted the declaration. Current links/maps/configs use **27–28, one-based inclusive**,
+checked against the exact pinned Git blob, and canonical declaration line 3. The corrected
+archive identity was computed first with the Rust library, then propagated to the child
+before computing its identity. The table below contains those corrected prospective IDs.
+[Correction evidence](correction/README.md) is separate; the original `evidence/` receipts
+and transcripts still describe the original configurations and are byte-for-byte retained.
+
 ## Independent primary source and rights
 
 Thomas W. Judson, *Abstract Algebra: Theory and Applications*, **Annual Edition 2025**,
@@ -75,8 +83,8 @@ digests. Nothing was silently substituted for the frozen book.
 
 Pin: **Mathlib `d13f23b723b8a846827a245b89c10fc7d3f11612`**, with existing Lean
 **`leanprover/lean4:v4.34.1`**, Rust **1.91.0**, and unchanged transitive lockfiles.
-Select [`Nat.infinite_setOfPred_prime`](https://github.com/leanprover-community/mathlib4/blob/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean#L28),
-lines 28–29. Its module directly imports `Mathlib.Basic.Countable.Defs`,
+Select [`Nat.infinite_setOfPred_prime`](https://github.com/leanprover-community/mathlib4/blob/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean#L27),
+lines 27–28. Its module directly imports `Mathlib.Basic.Countable.Defs`,
 `Mathlib.Data.Nat.Factors`, `Mathlib.Data.Nat.Prime.Infinite`, and
 `Mathlib.Data.Set.Finite.Lattice`. The candidate imports only `Mathlib.Data.Nat.PrimeFin`.
 The deprecated alias `Nat.infinite_setOf_prime` is not used.
@@ -180,7 +188,7 @@ ID; there is no admitted parent with that name yet.
 The canonical statement is an exact sentence transcription. Number/Euclid label is retained
 in source metadata/title; the required Markdown delimiters add no proof. The source map in
 the recipe links printed theorem 2.2.6 to statement step 0, scalar span `[0,41)`, and
-Mathlib lines 28–29 to wrapper declaration line 3. No fabricated PDF byte offsets are given.
+Mathlib lines 27–28 to wrapper declaration line 3. No fabricated PDF byte offsets are given.
 Config hashes cover the frozen transcription, wrapper identity/type, all target/raw hashes,
 statuses, source/attribution/storage decisions and toolchain. Local paths/timestamps are
 receipt data, not generation inputs. Raw blob bytes remain distinct from the Windows
@@ -190,10 +198,10 @@ dependency checkout's CRLF bytes.
 |---|---|
 | Canonical informal bytes | `56983d03aa658d0315659b88147f6277e7cb6b883e3ce5a6db099094b5949b95` |
 | Canonical formal bytes | `038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2` |
-| Archival config, Rust JCS | `ad12b7ada4490b5011a231941dee44e00968a5b8ec6f1863c1183db905d7e46b` |
-| Archival prospective ID, not admitted | `s1_pair_archive-v0.1.0-ad12b7ada449` |
-| Canonical config, Rust JCS | `7d397688349807e8ae35d9a7987512fda49ddd8caad8a83b2f2225b99eba3eea` |
-| Canonical prospective ID, not admitted | `s1_pair-v0.1.0-7d3976883498` |
+| Archival config, Rust JCS | `094625fa10ffde723ba3a3ae47ff75db2b1994b8f96f26f6eb562dcbf653ede0` |
+| Archival prospective ID, not admitted | `s1_pair_archive-v0.1.0-094625fa10ff` |
+| Canonical config, Rust JCS | `62fe0c816a6b0ef928f3e4c2fb7e2bd2e215171ebf6b6130202e851e1e9664a3` |
+| Canonical prospective ID, not admitted | `s1_pair-v0.1.0-62fe0c816a6b` |
 
 The current `Manifest::check` accepts the pair shape, `status.kind = mathlib`,
 `formalized-in-mathlib`, valid/true distinction and zero-step informal syntax.

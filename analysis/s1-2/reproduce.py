@@ -5,6 +5,7 @@ Python orchestrates pinned Rust pure APIs and Lean inspection, not manifest gene
 import argparse
 from datetime import datetime, timezone
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
@@ -49,13 +50,16 @@ def main():
     receipt = {
         "kind": "candidate-feasibility-only", "started_at": utc(),
         "base_revision": "8adcb4865abd3f6c3ac882b70563d82caca6207c",
+        "reviewed_procedure_revision": "c157e4e50b011fd11fc08b31d6963900923d2564",
+        "source_map_correction_main_baseline": "1a8388b03017e4044cad01ac10e7e89f8fb5e38f",
         "checkout_revision": git("rev-parse", "HEAD"),
         "index_tree": git("write-tree"), "checkout_status": git("status", "--porcelain=v1"),
         "helper_sha256": digest(Path(__file__).read_bytes()),
         "packet_input_sha256": {
             name: digest((PACKET / name).read_bytes()) for name in
             ("Proof.lean", "inspection-tail.lean", "api_probe.rs",
-             "archive-config.proposed.json", "canonical-config.proposed.json", "retrieval.json")
+             "archive-config.proposed.json", "canonical-config.proposed.json", "retrieval.json",
+             "source_locator.py")
         },
         "sources": [], "commands": [], "full_manifest_validation": "not run: no producer or manifest",
         "corpus_admission": False,
@@ -118,6 +122,12 @@ def main():
         formal = (PACKET / "Proof.lean").read_bytes()
         assert digest(informal) == recipe["informal_sha256"]
         assert digest(formal) == recipe["formal_sha256"]
+        spec = importlib.util.spec_from_file_location("source_locator", PACKET / "source_locator.py")
+        locator = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(locator)
+        receipt["source_locator_verification"] = locator.check_with_controls(
+            (out / "PrimeFin.lean").read_bytes(), formal,
+            json.loads((PACKET / "archive-config.proposed.json").read_text()), config)
         (out / "Proof.lean").write_bytes(formal)
         audit = formal + (PACKET / "inspection-tail.lean").read_bytes()
         (out / "CandidateAudit.lean").write_bytes(audit)
