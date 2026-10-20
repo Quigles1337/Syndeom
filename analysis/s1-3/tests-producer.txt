@@ -1,0 +1,80 @@
+   Compiling syndeom-derive v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\derive)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.61s
+     Running unittests src\lib.rs (engine\target\debug\deps\syndeom_derive-fd784cdf23e64cb4.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src\main.rs (engine\target\debug\deps\syndeom_derive-9c9be92a80ff9a72.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\procedure.rs (engine\target\debug\deps\procedure-539b8b379149c51a.exe)
+
+running 8 tests
+test refuses_changed_source_and_parent_bytes ... ok
+test refuses_missing_context_omissions_and_unsupported_transformations ... ok
+test refuses_comments_and_multiple_gzip_members ... ok
+test refuses_invalid_location_mapping ... ok
+test refuses_ambiguous_boundaries_and_non_utf8_selected_text ... ok
+test refuses_incompatible_inherited_metadata ... ok
+test mechanical_golden_and_independent_regeneration ... ok
+test collision_preflight_preserves_all_existing_outputs ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running unittests src\main.rs (engine\target\debug\deps\syndeom_ingest-9e262db76097d040.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\golden.rs (engine\target\debug\deps\golden-1aef302258002db4.exe)
+
+running 5 tests
+test fixture_bytes_are_the_golden_bytes ... ok
+test dry_run_prints_the_manifest_and_writes_nothing ... ok
+test golden_b_undetermined_truth_committed_storage ... ok
+test golden_a_boolean_truth_external_storage ... ok
+test refusals ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
+     Running unittests src\lib.rs (engine\target\debug\deps\syndeom_manifest-492301ce1d684bd8.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\goldens.rs (engine\target\debug\deps\goldens-2b91b8b9638ffc71.exe)
+
+running 24 tests
+test d2_artifact_id_has_two_forms ... ok
+test d6_adr0004_vectors ... ok
+test d3_lean_format_rejections_and_declaration_names ... ok
+test d8_golden_a_bytes_and_hash ... ok
+test d8_golden_a_segmentation ... ok
+test d4_check_reports_every_discrepancy_not_just_the_first ... ok
+test d4_timestamp_and_unknown_fields_are_rejected ... ok
+test d8_golden_a_span_example ... ok
+test d8_golden_a_config_and_id ... ok
+test d3_informal_format_rejections ... ok
+test d8_golden_b_bytes_counts_config_and_id ... ok
+test d8_lean_project_module_is_the_golden_b_bytes ... ok
+test d4_nullable_fields_must_be_present ... ok
+test d4_contact_artifacts_carry_no_ground_truth_and_no_seed ... ok
+test d3_informal_span_bounds_are_checked_against_the_bytes ... ok
+test rfc8785_nan_and_infinity_are_errors_not_output ... ok
+test rfc8785_appendix_b_number_serialization ... ok
+test rfc8785_section_3_2_sample_canonicalizes_to_the_printed_bytes ... ok
+test d8_prompt_hash_example ... ok
+test d4_a_false_statement_cannot_have_a_valid_proof_and_valid_proofs_carry_cosmetic_flaws_only ... ok
+test rfc8785_property_sorting_is_by_utf16_code_units ... ok
+test d8_example_manifest_from_adr_text ... ok
+test d4_amendment_2026_10_13_null_statement_truth ... ok
+test d4_derived_canonical_artifact_against_its_raw_parent ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s

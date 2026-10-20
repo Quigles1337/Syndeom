@@ -71,3 +71,24 @@ The `artifact_id` is the name of this directory and is in `manifest.json`.
   single TeX file).
 - **Written by:** the executor (Claude Fable 5.1), Session 11; a reading of public documents, not
   a verdict on the paper (SD3).
+
+
+## S1.3 promotion review — 2026-10-20 UTC
+
+**HOLD canonical promotion.** This addendum preserves the historical manifest, source archive,
+prior record and labels as recorded; it assigns no replacement statement-truth label.
+Fresh retrieval of S-0024 (v70) and S-0025 (v71) is logged in
+`analysis/s1-3/retrieval.json`. Both source archives match their historical digests.
+The executor reread the primary notice and the affected identities/proofs in both versions.
+The notice identifies an error in Lemma 1.1. The corrected identity adds a prime-power term
+and changes its orthogonality hypothesis. Those facts establish a correction, but do not by
+themselves establish the old statement's false/source-document status as attributed here.
+The original record's noncancellation argument is an executor inference: positive magnitudes
+of separate complex summands do not alone establish that their sum is nonzero. This is a
+provenance discrepancy, not a newly certified mathematical verdict on the lemma.
+
+Required resolution: a reviewed status determination under ADR-0003 D3 / ADR-0000 Addendum 3,
+with the actual primary testimony or a separately checked counterexample clearly attributed,
+then an explicit evidence trail for any historical-label amendment. Do not infer an alternative
+truth value from this hold. The short CC BY source is therefore not this session's engineering
+parent. The supported separate parent `s1_ingest-v0.1.0-00f28e252823` serves ADR-0006.

@@ -85,3 +85,26 @@ The `artifact_id` is the name of this directory and is in `manifest.json`.
   2.1, and the cited equivalence [GHR, Prop. 5.24] / [Mueg2, Thm. 6.4].
 - **Written by:** the executor (Claude Fable 5.1), Session 18; a reading of public documents,
   not a verdict on the paper (SD3).
+
+
+## S1.3 source and status review — 2026-10-20 UTC
+
+Freshly retrieved S-0052/S-0053 abstract pages and e-prints match the historical hashes;
+URLs, times, HTTP status and complete digests are in `analysis/s1-3/retrieval.json`.
+The executor read the original affected statement and entire offered proof, its preamble,
+unitary-fusion and center definitions, Remark 2.1 and bibliography; also the v3 revision
+comment, acknowledgement and replacement remark. Unlike a notice that merely says a result
+was corrected, the v3 remark explicitly supplies a counterexample attributed to Tian Lan.
+It supports inheritance of the existing false/counterexample and invalid-proof statuses.
+This is a source-status reading (SD3), not an independent proof of the counterexample.
+The existing distinction between source testimony and the executor's proposed failure
+mechanism remains intact; no narrower proof-step flaw is added.
+
+This parent is suitable for one engineering slice because its original statement and proof
+have short, unambiguous source boundaries and documented status. It is not a new admission
+or representative calibration sample. Rights remain external/digest-only under SD16 and
+ADR-0003 D5: the non-exclusive distribution grant is to arXiv, not this repository.
+No original or derived source text is added to Git. The complete decompressed source,
+including non-UTF-8 bibliography bytes, is required external context under ADR-0006.
+The public recipe is `groundtruth/derivations/1209.2022v2-proposition3.1.json`.
+The resulting child and completed verification are recorded in the later evidence commit.

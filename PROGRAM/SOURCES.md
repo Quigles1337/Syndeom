@@ -2096,3 +2096,56 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page;
   copy not committed.
 - **Bears on:** S1.1 item 31 (its status document); no CLAIM.
+
+
+---
+
+### S1.3 fresh retrieval addendum — 2026-10-20 UTC (S-0024/S-0025, S-0052/S-0053)
+
+This adds a new reading; all historical access records above remain unchanged. The executor
+retrieved and read both abstract pages and gzip sources for arXiv:0706.0357v70/v71 and
+arXiv:1209.2022v2/v3 at 03:13:13–03:13:17Z. All eight responses were HTTP 200.
+The complete URL/final-URL/time/size/SHA-256 ledger is `analysis/s1-3/retrieval.json`.
+The downloaded bytes match the historical source digests. Restricted originals remain outside
+the repository. The first source's notice and changed identity support the precise promotion
+hold appended to its RECORD; no replacement status is inferred. The selected Galindo parent
+has direct counterexample testimony in v3; its existing status is retained, with the
+executor's interpretation still distinguished from the author's statement.
+
+The selected original's complete decompressed source is 20,953 bytes, SHA-256
+`25ba26029915d23c5591361c337c20d4b5fc667c6dd704af08933a490b0ecc4f`.
+Its proof slices are UTF-8; the bibliography contains legacy bytes. It is preserved as opaque
+external context rather than decoded with replacement. The selected byte ranges and hashes
+are recorded in the recipe; no corrected proof is substituted.
+
+The arXiv non-exclusive licence text was freshly read at
+<https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html>, 03:25:46Z, 1,415 bytes,
+SHA-256 `1991765e2079370736d4dedf217375799ad19aab6700ebdf42ae3dd84690067a`.
+It grants distribution to arXiv; it supplies no additional repository redistribution grant.
+The existing external-only decision is retained for source and canonical child/context.
+
+
+---
+
+## S-0066 — flate2 1.1.10 and the locked Rust decompression dependency closure
+
+- **State:** VERIFIED (package metadata and relevant licence texts retrieved/read 2026-10-20).
+- **Primary:** <https://crates.io/api/v1/crates/flate2/1.1.10>, accessed 03:25:45Z;
+  2,328 bytes, SHA-256 `6a50d4e078faf0d553c693acfba054682c86ed3d9b6c11c0cbbc0733971b4839`.
+  Upstream <https://github.com/rust-lang/flate2-rs>; versioned API documentation
+  <https://docs.rs/flate2/1.1.10/flate2/bufread/struct.GzDecoder.html>.
+- **Content used:** one-member gzip decoding with the buffered decoder, which exposes unconsumed
+  input so trailing data is refused. Default Rust backend, no C library selection. The new
+  producer pins `=1.1.10`; the existing Rust 1.91.0 satisfies its declared minimum 1.67.0.
+- **Locked closure / licences:** flate2 1.1.10 and crc32fast 1.5.2 (MIT OR Apache-2.0),
+  miniz_oxide 0.9.1 (MIT OR Zlib OR Apache-2.0), adler2 2.0.1 (0BSD OR MIT OR Apache-2.0),
+  simd-adler32 0.3.10 (MIT), zlib-rs 0.6.8 (Zlib; locked optional backend, not selected by
+  this producer's default features). All are compatible with repository software distribution;
+  their notices remain in their upstream packages. Package manifests are primary records;
+  checksums, declared licences, repositories and manifest hashes are in
+  `analysis/s1-3/dependencies.json`. The selected Rust backend compiles flate2, crc32fast,
+  miniz_oxide, adler2 and simd-adler32. Cargo may download the locked optional package as well.
+- **Pin review:** all 26 baseline Cargo.lock packages are identical, including their dependency
+  arrays and checksums. Six registry packages plus the new workspace crate produce 33 entries.
+  No Lean, Mathlib, existing Rust dependency, compiler or manifest-schema pin changes.
+- **Bears on:** ADR-0006 / S1.3 implementation only; no CLAIM or mathematical status.

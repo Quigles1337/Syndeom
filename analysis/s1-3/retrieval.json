@@ -1,0 +1,74 @@
+[
+  {
+    "url": "https://arxiv.org/abs/0706.0357v70",
+    "final_url": "https://arxiv.org/abs/0706.0357v70",
+    "accessed_utc": "2026-10-20T03:13:13.442067+00:00",
+    "http_status": 200,
+    "bytes": 49164,
+    "sha256": "4a1cd5dc8663424fbb6c582cd708404d34e312cce12f2d743f6a525e64209013",
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://arxiv.org/e-print/0706.0357v70",
+    "final_url": "https://arxiv.org/src/0706.0357v70",
+    "accessed_utc": "2026-10-20T03:13:14.304587+00:00",
+    "http_status": 200,
+    "bytes": 8236,
+    "sha256": "5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8",
+    "content_type": "application/gzip"
+  },
+  {
+    "url": "https://arxiv.org/abs/0706.0357v71",
+    "final_url": "https://arxiv.org/abs/0706.0357v71",
+    "accessed_utc": "2026-10-20T03:13:14.683774+00:00",
+    "http_status": 200,
+    "bytes": 49049,
+    "sha256": "1dbf356c8d01e9a60e66a7db043d332655697deaf3dab5694e7c35e1b5774e29",
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://arxiv.org/e-print/0706.0357v71",
+    "final_url": "https://arxiv.org/src/0706.0357v71",
+    "accessed_utc": "2026-10-20T03:13:15.439986+00:00",
+    "http_status": 200,
+    "bytes": 8750,
+    "sha256": "fffd0fdc3a868deb642102a1f72f23cd92ee89bf118c92a4b992cb5a6fdfd263",
+    "content_type": "application/gzip"
+  },
+  {
+    "url": "https://arxiv.org/abs/1209.2022v2",
+    "final_url": "https://arxiv.org/abs/1209.2022v2",
+    "accessed_utc": "2026-10-20T03:13:15.789765+00:00",
+    "http_status": 200,
+    "bytes": 38028,
+    "sha256": "788378057c63d7645c1696b4cf801eb3e7317cc8ddf268a5e8b101dfe8b9be31",
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://arxiv.org/e-print/1209.2022v2",
+    "final_url": "https://arxiv.org/src/1209.2022v2",
+    "accessed_utc": "2026-10-20T03:13:16.718457+00:00",
+    "http_status": 200,
+    "bytes": 7300,
+    "sha256": "21f63ae00385cda7216c843cfc4730e994f1fe0c40f645bb49bb323a2456d0ed",
+    "content_type": "application/gzip"
+  },
+  {
+    "url": "https://arxiv.org/abs/1209.2022v3",
+    "final_url": "https://arxiv.org/abs/1209.2022v3",
+    "accessed_utc": "2026-10-20T03:13:17.060671+00:00",
+    "http_status": 200,
+    "bytes": 38328,
+    "sha256": "093d48181d3dd3b6590de732217d07016c19f2501c1956546ec523806f108de5",
+    "content_type": "text/html; charset=utf-8"
+  },
+  {
+    "url": "https://arxiv.org/e-print/1209.2022v3",
+    "final_url": "https://arxiv.org/src/1209.2022v3",
+    "accessed_utc": "2026-10-20T03:13:17.899788+00:00",
+    "http_status": 200,
+    "bytes": 7668,
+    "sha256": "59b919282e273cadb2a12baa8a48b90cdb79468ce3beb6931cd0c37bc2fb89a7",
+    "content_type": "application/gzip"
+  }
+]
