@@ -16,33 +16,39 @@ never verdicts.
 [Calibration](#calibration-and-validation) · [Quick start](#quick-start) ·
 [Repository](#repository-map) · [Governance](#governance-and-contribution)
 
-> **Research stage: S1 — ground-truth corpus.** The manifest library, ingestion CLI, and Lean
-> verification fixture are implemented. Synthetic generation, the detector battery, calibration
-> reports, and contact scoring remain planned work. This repository does not yet provide a
+> **Research stage: S1 — ground-truth corpus.** The manifest library, ingestion CLI, first canonical
+> derivation producer, and Lean verification fixture are implemented. Synthetic generation,
+> the detector battery, calibration reports, and contact scoring remain planned work.
+> This repository does not yet provide a
 > calibrated proof-triage service.
 
 ## Status
 
-The research snapshot below corresponds to **Session 20, 2026-10-14 UTC**. The authoritative
+The research snapshot below includes **the first S1.3 canonical derivation, 2026-10-20 UTC**.
+The harvest remains at the Session 20 prefix of 2026-10-14. The authoritative
 gate checklist, evidence, and next action are maintained in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
 
 | Surface | Implemented or recorded | Remaining boundary |
 |---|---|---|
 | Foundation | Ratified constitution; 14 flaw classes in taxonomy `0.1.0`; S0 closed | Constitutional and taxonomy changes require an ADR |
-| Ground truth | 31 `raw/1` manifests from 21 admitted candidates; 27 candidates examined | S1 remains open; canonical derivatives, informal–formal pairs, and coverage analysis are pending |
-| Rust engine | `syndeom-manifest` library and `syndeom-ingest` CLI, both `0.1.0` | Ingestion records supplied evidence; it does not determine mathematical truth |
+| Ground truth | 31 `raw/1` manifests from 21 admitted candidates; 27 candidates examined; one canonical child of an existing parent | S1 remains open; additional canonical derivatives, informal–formal pairs, and coverage analysis are pending |
+| Rust engine | `syndeom-manifest` library, `syndeom-ingest` and `syndeom-derive` CLIs, all `0.1.0` | Ingestion and derivation preserve reviewed evidence; they do not determine mathematical truth |
 | Formal verification | Pinned Lean/Mathlib project, golden theorem, and axiom audit | A successful build alone does not establish statement fidelity |
 | Calibration | Experimental design and phase gates specified | No synthetic corpus, calibrated battery, freeze tag, or contact report yet |
 
 The 31 archival items span five taxonomy classes; this is a corpus inventory, not a coverage or
 performance result. Thirty originals use `external` storage and one is committed under its
-recorded licence. See the [harvest log](groundtruth/HARVEST-LOG.md) and
-[source register](PROGRAM/SOURCES.md).
+recorded licence. The canonical child is another representation of one parent, not a 32nd
+independent item; its proof and source context remain external. See the
+[harvest log](groundtruth/HARVEST-LOG.md), [source register](PROGRAM/SOURCES.md), and
+[S1.3 evidence and reproduction](analysis/s1-3/README.md). The next action is the S1.2 positive
+informal–formal pair procedure; no such pair has been admitted.
 
 ## Architecture
 
 SYNDEOM currently operates as a **local, file-based research pipeline**. Rust owns canonical
-manifest construction and validation; Lean checks the formal fixture; Python assists discovery.
+manifest construction, canonical derivation, and validation; Lean checks the formal fixture;
+Python assists discovery and orchestrates reproduction.
 The repository holds the evidence, decisions, and execution record. There is no deployed API,
 queue, or database in the present implementation.
 
@@ -79,6 +85,9 @@ flowchart LR
   rejects inconsistent inputs and refuses conflicting content under an existing artifact ID.
 - [`engine/manifest/`](engine/manifest/) implements schema checks, byte-format parsing, hashes,
   commanded-versus-achieved fidelity, and parent/derivative consistency checks.
+- [`engine/derive/`](engine/derive/) implements `s1_derive`: reviewed statement/proof slices from
+  one gzip TeX source become canonical informal Markdown, with the full original source retained
+  as external context. It validates actual bytes, inherited labels, and mapped flaw locations.
 - [`groundtruth/`](groundtruth/) retains the archival item and its written evidence.
   [`lean/`](lean/) supplies the separate formal build and axiom-audit path.
 
@@ -137,7 +146,14 @@ commanded/achieved statistics with fidelity verdicts. Formal files carry their t
 interface is specified for `syndeom-informal-md/1` (`proof.md`) and `syndeom-lean/1` (`Proof.lean`).
 A real item to be scored needs a derived canonical artifact naming `config.derived_from` and
 `config.method`, preserving its parent's status and flaw labels, and documenting re-expressed
-locations. The consistency checker exists; the derivation producer and corpus derivatives do not.
+locations. The first derivation producer and one canonical child now exist under
+[ADR-0006](PROGRAM/DECISIONS/ADR-0006.md): `s1_derive-v0.1.0-c08f9e3ec092`, derived from
+`s1_ingest-v0.1.0-00f28e252823`. The reviewed procedure preserves the original offered proof;
+it does not repair its argument. Metadata, the source map, and the
+[source-fidelity review](groundtruth/s1_derive-v0.1.0-c08f9e3ec092/RECORD.md) are committed;
+restricted proof/context bytes are external. The existing Lean golden audit does not formalize
+or certify this informal child. Canonical promotion of a separate parent remains on hold as
+documented in [the evidence record](analysis/s1-3/README.md#evidence-and-limits).
 
 **Statement truth and proof validity are independent fields.** Schema `/2` permits an undetermined
 statement (`value: null`, `method: "undetermined"`) only with an invalid proof. Ten current items
@@ -273,6 +289,14 @@ harvest-log entry. Test fixtures are never admitted as real evidence.
 For a Rust-only development check, run `cargo test --locked --manifest-path engine/Cargo.toml
 --all-targets --all-features`. This is a partial check; it does not replace the repository gate.
 
+### Reproduce the first canonical derivation
+
+Follow the [S1.3 reproduction instructions](analysis/s1-3/README.md#reproduce-the-real-example).
+The Python helper verifies the original source hash and invokes the Rust producer twice,
+comparing exact proof, context, manifest, and source-map bytes. Choose a new external work
+directory for each run; existing destinations are refused. The retained evidence pins producer
+commit `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, which predates generation of the real child.
+
 ## Repository map
 
 | Path | Responsibility |
@@ -280,14 +304,17 @@ For a Rust-only development check, run `cargo test --locked --manifest-path engi
 | [`PROGRAM/`](PROGRAM/) | Constitution, current state, claims, sources, taxonomy, ADRs, and session history |
 | [`engine/manifest/`](engine/manifest/) | Canonical Rust schema, identity, byte formats, fidelity, and consistency library |
 | [`engine/ingest/`](engine/ingest/) | Deterministic S1 ingestion CLI and golden tests |
+| [`engine/derive/`](engine/derive/) | Deterministic reviewed TeX derivation CLI and mechanical tests |
 | [`lean/`](lean/) | Pinned formal project, golden theorem, and axiom audit |
 | [`lab/`](lab/) | Exploratory Python candidate discovery and examination |
-| [`groundtruth/`](groundtruth/) | Real archival manifests, item records, permitted originals, and harvest log |
+| [`groundtruth/`](groundtruth/) | Real archival manifests, canonical child metadata and recipes, item records, permitted originals, and harvest log |
 | [`corpora/`](corpora/) | Reserved for manifested synthetic artifacts in S2 |
 | [`contact/`](contact/) | Reserved for quarantined AI-generated corpora in S5 |
-| [`analysis/`](analysis/) | Reserved for experimental designs and calibration/validation/contact reports |
+| [`analysis/`](analysis/) | Engineering evidence and future experimental designs and calibration/validation/contact reports |
+| [`analysis/s1-3/`](analysis/s1-3/) | First canonical derivation receipts, preservation checks, and reproduction instructions |
 | [`sources/`](sources/) | Source copies whose licences permit redistribution |
 | [`scripts/`](scripts/) | Local verification gate and register checks |
+| [`scripts/reproduce_s1_3.py`](scripts/reproduce_s1_3.py) | Source retrieval and orchestration of two independent Rust derivations |
 
 ## Governance and contribution
 

@@ -1,0 +1,18 @@
+[
+  {
+    "file": "flate2-1.1.10.json",
+    "url": "https://crates.io/api/v1/crates/flate2/1.1.10",
+    "final_url": "https://crates.io/api/v1/crates/flate2/1.1.10",
+    "retrieved_utc": "2026-10-20T03:25:45.830501+00:00",
+    "n_bytes": 2328,
+    "sha256": "6a50d4e078faf0d553c693acfba054682c86ed3d9b6c11c0cbbc0733971b4839"
+  },
+  {
+    "file": "arxiv-licence.html",
+    "url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+    "final_url": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+    "retrieved_utc": "2026-10-20T03:25:46.397450+00:00",
+    "n_bytes": 1415,
+    "sha256": "1991765e2079370736d4dedf217375799ad19aab6700ebdf42ae3dd84690067a"
+  }
+]

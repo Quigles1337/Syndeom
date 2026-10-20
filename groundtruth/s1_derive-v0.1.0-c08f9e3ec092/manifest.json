@@ -1,0 +1,163 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "79929ff56666b0f80283625f683e3d5598e521010ab7426dd3071aa6525bbc5d",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 770,
+        "n_lemmas": 0,
+        "n_steps": 1,
+        "n_tokens": 75,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_derive-v0.1.0-c08f9e3ec092",
+  "commanded": {},
+  "config": {
+    "context": {
+      "content_hash": "25ba26029915d23c5591361c337c20d4b5fc667c6dd704af08933a490b0ecc4f",
+      "file": "context.tex",
+      "n_bytes": 20953,
+      "storage": "external"
+    },
+    "derived_from": "s1_ingest-v0.1.0-00f28e252823",
+    "item": "arXiv:1209.2022v2 (the original; corrected by v3, 6 December 2024) - Proposition 3.1 (TeX label 'centro igual a centro unitario')",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v2): not redistributable by this repository",
+    "method": "reviewed-tex-slices/1",
+    "recipe": {
+      "context": [
+        {
+          "role": "preamble",
+          "slice": {
+            "range": [
+              0,
+              4736
+            ],
+            "sha256": "6e153c1a6319f97fcf934556ca84faa08dc4dfb32ad5093a09f781bc4750f540"
+          }
+        },
+        {
+          "role": "definitions",
+          "slice": {
+            "range": [
+              8514,
+              12015
+            ],
+            "sha256": "21bd639566e40a734000445c45f5dd87afefc6b15e4eccf1cbec0a3f3bedd0db"
+          }
+        },
+        {
+          "role": "prerequisite",
+          "slice": {
+            "range": [
+              9163,
+              9431
+            ],
+            "sha256": "39026635870e19f0376440b8b3b10375b9e31691cf7cbad483397dc945b947a1"
+          }
+        },
+        {
+          "role": "bibliography",
+          "slice": {
+            "range": [
+              17966,
+              20937
+            ],
+            "sha256": "2e5e81a2638838b4a68ffb523833552de5d42ed152eb6cbef36322ebf8e44957"
+          }
+        }
+      ],
+      "context_sha256": "25ba26029915d23c5591361c337c20d4b5fc667c6dd704af08933a490b0ecc4f",
+      "environment": "proposition",
+      "label": "centro igual a centro unitario",
+      "mappings": [
+        {
+          "instance": 1,
+          "span": [
+            0,
+            79
+          ],
+          "step": 0,
+          "text_sha256": "4e6f5d7d5c99f1c3495c9a45b8e4de5d3411c9dbc6f8e1890f6b21e182ff298d"
+        }
+      ],
+      "method": "reviewed-tex-slices/1",
+      "parent_manifest_sha256": "9d10d35d3ec3455276b3b9fce4beed7824053b8d071d3c38845961c5f57e4de6",
+      "proof": [
+        {
+          "range": [
+            12186,
+            12783
+          ],
+          "sha256": "b4c45e5af9139edac8dd7bb3b5ea705c59fa8f0839608ce7ba72c85f58697004"
+        }
+      ],
+      "statement": {
+        "range": [
+          12073,
+          12152
+        ],
+        "sha256": "9ec6cfc0d8a7c572aaf5342b9440f0f0ace466c330b4ad910587380527483c32"
+      },
+      "title": "arXiv:1209.2022v2, Proposition 3.1 (original)",
+      "transformation": "ascii-whitespace/1"
+    },
+    "sources": [
+      "S-0052",
+      "S-0053"
+    ],
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0053"
+    }
+  },
+  "config_hash": "c08f9e3ec092dee456e101c583a1fee2966e235bb3ade344f69cd5b40b9e1018",
+  "engine_commit": "49e47237924eddf0c39c24aefad0eb9aa02ee8b3",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_derive",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            79
+          ],
+          "step": 0
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "S-0053: the v3 remark - Tian Lan's counterexample Hilb_G, the category of finite-dimensional Hilbert spaces graded over a finite group G, in whose center Rep(G) sits with URep(G) a proper, non-replete subcategory, while URep(G) lies in the unitary center: 'in general, Z*(C) != Z(C); in other words, Z*(C) is not a replete subcategory of Z(C)'",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "ADR-0006 reviewed transcription; complete external context.tex is required. Canonical syntax and inherited labels are not a mathematical verification. This child is a representation of its raw parent, not an independent sample.",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

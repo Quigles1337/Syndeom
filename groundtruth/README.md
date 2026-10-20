@@ -11,10 +11,19 @@ Items arrive as `raw/1` and are scored through derived canonical artifacts whose
 re-expressions are argued in writing in the S1.3 record (ADR-0001 D4 convention); the `raw/1`
 item remains the item of record. Nothing synthetic is ever placed here.
 
-Procedure: ADR-0003 (the errata-and-retraction harvest). Every item directory is written by the
+Raw-parent procedure: ADR-0003 (the errata-and-retraction harvest). Each raw item is written by the
 deterministic producer `syndeom-ingest` (`engine/ingest/`, `generator.id` `s1_ingest`; ADR-0003
 D6) from a per-item config and the original's bytes — never by hand — and carries `RECORD.md`,
 the written record of provenance, the notice's locating sentences, the diff summary and the
 FLAWS.md class argument (ADR-0003 D4). `HARVEST-LOG.md` beside this file is the append-only log
 of every candidate examined, with its verdict and the last candidate processed (ADR-0003 D7, D8).
-Manifests carry `syndeom-manifest/2` (ADR-0001 as amended 2026-10-13). No item yet.
+Manifests carry `syndeom-manifest/2` (ADR-0001 as amended 2026-10-13). The current prefix
+contains 31 raw parents; the log records the counts and resume point.
+
+Canonical procedure: [ADR-0006](../PROGRAM/DECISIONS/ADR-0006.md) and
+[`syndeom-derive`](../engine/derive/README.md), version 0.1.0. Reviewed recipes live under
+`derivations/`; manifests and source maps live under their child IDs. Source text and the
+complete required context remain external for this first example. A child is another
+representation of its parent and must not be counted as another independent real item.
+Promotion holds in parent records must be resolved before using those parents for derivation.
+The S1.3 evidence and single-command reproduction are in `analysis/s1-3/`.

@@ -1,0 +1,81 @@
+{
+  "artifact_id": "s1_derive-v0.1.0-c08f9e3ec092",
+  "context": [
+    {
+      "role": "preamble",
+      "slice": {
+        "range": [
+          0,
+          4736
+        ],
+        "sha256": "6e153c1a6319f97fcf934556ca84faa08dc4dfb32ad5093a09f781bc4750f540"
+      }
+    },
+    {
+      "role": "definitions",
+      "slice": {
+        "range": [
+          8514,
+          12015
+        ],
+        "sha256": "21bd639566e40a734000445c45f5dd87afefc6b15e4eccf1cbec0a3f3bedd0db"
+      }
+    },
+    {
+      "role": "prerequisite",
+      "slice": {
+        "range": [
+          9163,
+          9431
+        ],
+        "sha256": "39026635870e19f0376440b8b3b10375b9e31691cf7cbad483397dc945b947a1"
+      }
+    },
+    {
+      "role": "bibliography",
+      "slice": {
+        "range": [
+          17966,
+          20937
+        ],
+        "sha256": "2e5e81a2638838b4a68ffb523833552de5d42ed152eb6cbef36322ebf8e44957"
+      }
+    }
+  ],
+  "context_hash": "25ba26029915d23c5591361c337c20d4b5fc667c6dd704af08933a490b0ecc4f",
+  "derived_from": "s1_ingest-v0.1.0-00f28e252823",
+  "flaws": [
+    {
+      "canonical": {
+        "artifact": "informal",
+        "span": [
+          0,
+          79
+        ],
+        "step": 0
+      },
+      "instance": 1,
+      "raw_locator": "Proposition 3.1 (TeX label 'centro igual a centro unitario', Subsection 3.1), statement 'Let C be a unitary fusion category then Z*(C) = Z(C)' and its one-paragraph proof; the notice locates the error to the proposition (removed in v3) without naming the step",
+      "text_sha256": "4e6f5d7d5c99f1c3495c9a45b8e4de5d3411c9dbc6f8e1890f6b21e182ff298d"
+    }
+  ],
+  "method": "reviewed-tex-slices/1",
+  "offsets": "half-open decompressed source bytes; spans are Unicode scalars in marker-free steps",
+  "proof": [
+    {
+      "range": [
+        12186,
+        12783
+      ],
+      "sha256": "b4c45e5af9139edac8dd7bb3b5ea705c59fa8f0839608ce7ba72c85f58697004"
+    }
+  ],
+  "source_hash": "21f63ae00385cda7216c843cfc4730e994f1fe0c40f645bb49bb323a2456d0ed",
+  "statement": {
+    "range": [
+      12073,
+      12152
+    ],
+    "sha256": "9ec6cfc0d8a7c572aaf5342b9440f0f0ace466c330b4ad910587380527483c32"
+  }
+}

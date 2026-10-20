@@ -1,0 +1,13 @@
+[package]
+name = "syndeom-derive"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+description = "S1.3 reviewed TeX slice derivation, ADR-0006; no TeX evaluation or mathematical judgment"
+publish = false
+
+[dependencies]
+flate2 = "=1.1.10"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.154", features = ["float_roundtrip"] }
+syndeom-manifest = { path = "../manifest" }

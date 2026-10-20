@@ -1,0 +1,10 @@
+{
+  "artifact_id": "s1_derive-v0.1.0-9a493194d950",
+  "config_sha256": "9a493194d950051fd3fbc844d896b82c055209cd7d6193138cea114b1464cc6b",
+  "independent_check": "Python hashlib and compact/sorted JSON for this integer-only ASCII-key configuration; no canonical result authority",
+  "kind": "artificial mechanical fixture only",
+  "manifest_sha256": "e740bfc62c7d86598f9fa0adacd3ffe2820c6008e5e6b8d559fc432660fe0c2f",
+  "n_bytes": 113,
+  "parent_manifest_sha256": "bb4c9c92fff0ff9a32cdf373f70452b1ec55c0404ac1e2de93234673dcd9db9e",
+  "proof_sha256": "90da82a426d54dad8a6772d2d75ea500eb249fd79e598ba22561a1e2cc54d15b"
+}

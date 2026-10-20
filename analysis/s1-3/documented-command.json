@@ -1,0 +1,88 @@
+{
+  "checkout_revision": "49e47237924eddf0c39c24aefad0eb9aa02ee8b3",
+  "child_id": "s1_derive-v0.1.0-c08f9e3ec092",
+  "commands": [
+    {
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "-q",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-derive",
+        "--",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\groundtruth\\derivations\\1209.2022v2-proposition3.1.json",
+        "--parent",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\groundtruth\\s1_ingest-v0.1.0-00f28e252823\\manifest.json",
+        "--bytes",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical-work\\documented-command-check\\original-1209.2022v2.tex.gz",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical-work\\documented-command-check\\first",
+        "--engine-commit",
+        "49e47237924eddf0c39c24aefad0eb9aa02ee8b3"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "-q",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-derive",
+        "--",
+        "--config",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\groundtruth\\derivations\\1209.2022v2-proposition3.1.json",
+        "--parent",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\groundtruth\\s1_ingest-v0.1.0-00f28e252823\\manifest.json",
+        "--bytes",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical-work\\documented-command-check\\original-1209.2022v2.tex.gz",
+        "--root",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "--external-dir",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical-work\\documented-command-check\\regenerated",
+        "--engine-commit",
+        "49e47237924eddf0c39c24aefad0eb9aa02ee8b3"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "identical_regeneration": true,
+  "outputs": {
+    "context.tex": {
+      "n_bytes": 20953,
+      "sha256": "25ba26029915d23c5591361c337c20d4b5fc667c6dd704af08933a490b0ecc4f"
+    },
+    "manifest.json": {
+      "n_bytes": 4984,
+      "sha256": "7ce4a924866a5ce58f9f670d74e6b5cbd39192d8013e8856b7f1eb1c6d09d97b"
+    },
+    "proof.md": {
+      "n_bytes": 770,
+      "sha256": "79929ff56666b0f80283625f683e3d5598e521010ab7426dd3071aa6525bbc5d"
+    },
+    "source-map.json": {
+      "n_bytes": 2158,
+      "sha256": "7c0db9ca74344405b8b2e7d5454f9256914fca0d24bce44324a3e5bc50d70517"
+    }
+  },
+  "parent_id": "s1_ingest-v0.1.0-00f28e252823",
+  "producer_commit": "49e47237924eddf0c39c24aefad0eb9aa02ee8b3",
+  "reproducer_sha256": "73eb6b092add93e89fb0da6d2ca08421f2bd0d065870b0e45607c9a213fba8ad",
+  "retrieval": {
+    "accessed_utc": "2026-10-20T03:41:14.359055+00:00",
+    "final_url": "https://arxiv.org/src/1209.2022v2",
+    "http_status": 200,
+    "url": "https://arxiv.org/e-print/1209.2022v2"
+  },
+  "source_sha256": "21f63ae00385cda7216c843cfc4730e994f1fe0c40f645bb49bb323a2456d0ed",
+  "validation": "Both Rust runs executed Manifest::check with actual bytes and check_derived; source-fidelity review is a separate recorded reading, not this script's verdict."
+}

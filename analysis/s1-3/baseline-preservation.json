@@ -1,0 +1,223 @@
+{
+  "baseline": "8e222a49a64273c9cefc35bca5ae15a0a05fb9ee",
+  "historical_handoff_prefix_preserved": true,
+  "historical_record_prefixes_preserved": 2,
+  "unchanged": [
+    {
+      "path": "PROGRAM/CLAIMS.md",
+      "sha256": "148b45839aa62be8a655156128e6f28489b4b0df4a9c97d62430a5af105be62b"
+    },
+    {
+      "path": "PROGRAM/FLAWS.md",
+      "sha256": "3e3db28c8ef259aa1c13aab8357c8856e8d6a25695e41720921aa5651d1c23b8"
+    },
+    {
+      "path": "PROGRAM/SYNDEOM-PROGRAM.md",
+      "sha256": "89c198b0f1ca7b44f96c9d13816409f65acfb0b8eb3e119cf37003ff15d48102"
+    },
+    {
+      "path": "engine/ingest/Cargo.toml",
+      "sha256": "b685e02f6f9276812362d02c4ca9c2ed17e86167a548a9e8d570d4a19c7e5c5c"
+    },
+    {
+      "path": "engine/ingest/src/main.rs",
+      "sha256": "8c0a94ccc171a0851246abfdaef4ed666e64851212b342406771e8bf2f3b3540"
+    },
+    {
+      "path": "engine/ingest/tests/fixtures/item-a.json",
+      "sha256": "b8e3d4f219d97c0b25b813404b35af2b357ff8228899df4c2da0444e3d40c644"
+    },
+    {
+      "path": "engine/ingest/tests/fixtures/item-b.json",
+      "sha256": "4675b9c2a84421d117e21ecc4f5881d60ec1d015cf3ebcb1e48e6433f1c009f2"
+    },
+    {
+      "path": "engine/ingest/tests/fixtures/original.bin",
+      "sha256": "915d3ed6d9f7e388466bd03ea1f11f603fa57477fdf3724e6327537698ad1390"
+    },
+    {
+      "path": "engine/ingest/tests/golden.rs",
+      "sha256": "7f9f4c951afb0fb6fd2c05e07a999c6ccd0c82c4ce179e5193a9086c177f5670"
+    },
+    {
+      "path": "engine/manifest/Cargo.toml",
+      "sha256": "7142e5046b7411516edf7a845a5ab4894b00efdadf1dc476f6b182205e496fb9"
+    },
+    {
+      "path": "engine/manifest/src/lib.rs",
+      "sha256": "549223c7b84fbf639c9e37fb3757b1484ad22879a82702f125c8cd52f7cdb01d"
+    },
+    {
+      "path": "engine/manifest/tests/fixtures/Proof.lean",
+      "sha256": "c568a98188da217920cecec74ac4a44da5fb1321653e61852f25d6817e11458e"
+    },
+    {
+      "path": "engine/manifest/tests/fixtures/proof.md",
+      "sha256": "0ac164476b6cedcd3c68194d8e65d3a602c0a7aa97e9e30f133602600712a6a1"
+    },
+    {
+      "path": "engine/manifest/tests/goldens.rs",
+      "sha256": "bf1cf1620dba4bf3787caccc8d9771711c1b9ef0080c41cd36f8ea4bbf441665"
+    },
+    {
+      "path": "groundtruth/HARVEST-LOG.md",
+      "sha256": "77a58b44cbfdf0e6f0bbe52a23a101cb8f8b6f97eef0755c3c0441790bd2b5fd"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-003a35498654/manifest.json",
+      "sha256": "cca1f438efeebb326e4e3e598013e50254306c2e4ced46517174509832b5ace8"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-00f28e252823/manifest.json",
+      "sha256": "9d10d35d3ec3455276b3b9fce4beed7824053b8d071d3c38845961c5f57e4de6"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-0833f61c748c/manifest.json",
+      "sha256": "a3e6539c94ec04ba0b6388c651e5968c12c93f4438fa0ab84f393d71252fd92e"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-1c4c9a7747d0/manifest.json",
+      "sha256": "ca2091bce08c9036f9362c52d50616d7656ce29b03f6b0532a6ab8ef018b567b"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-22ae000cb879/manifest.json",
+      "sha256": "9021027d21cf8319361b7a30fa1f59d3649e1b7c562bc4e8dfa7f095ff9846d2"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-2d93a266558a/manifest.json",
+      "sha256": "91f63c2c079e961b478829031fb8484c20686ac78846a94459c9fb210b27a8c9"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-315546e87259/manifest.json",
+      "sha256": "b13a6eae6a8c49a5173a57a0b158e252eb7c5ac34abebf1a5e1033eddee12329"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-40e6c0da8821/manifest.json",
+      "sha256": "0bb78c98890364de0ad3f87777c38765a25a9b59f5a215feb0afc2f2e8836619"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-448d7aefa486/manifest.json",
+      "sha256": "d97105bbbe109be433b24a8ea8e55ac077f6894147993092a58f64ee0be40a99"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-45c3ee8319d5/manifest.json",
+      "sha256": "9e7aef24f4f9bd8871129636dded86549598e3f9aed9e4988469ae5f5e011106"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-486ef22f632b/manifest.json",
+      "sha256": "16ec6ada84135556c37d908418405eeb6b1386ee8e888e6137812be64dcc279e"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-5ba6c0f07557/manifest.json",
+      "sha256": "e8918ca58875c39e6a8b58b0ee8f3d39d3f7a3bc8d98f0a7b23fcd1d4416afe8"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-63e23a952084/manifest.json",
+      "sha256": "8b20b577b7501b80f47a85ead2a82d214f9395e76d9a274be3ad9201410c5f11"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-63e23a952084/original-0706.0357v70.tar.gz",
+      "sha256": "5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-685b874cf579/manifest.json",
+      "sha256": "e5719bc4b522624e326ff274edd69a9e6d7c6d943690527da554fc485d556d99"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-68ed1abfecb4/manifest.json",
+      "sha256": "97644f3622835c6681f03700cfce103bd723a9432dfa2d2730ccbcf328705830"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-6ae03b18a1bd/manifest.json",
+      "sha256": "1f3dfe76e1638b7f1966fe81daab4a87bf83217e32335268ceef3f40cf68e6fd"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-72415457dce4/manifest.json",
+      "sha256": "54fc0980639a18856eff39a7df1f2923469795152179e99d326fac9ec8b8661c"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-744652f4b95f/manifest.json",
+      "sha256": "ff5b3c4ff1d001818d3c80a79284ccad34738afbbbd04f6003dc536f67c6ea3f"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-82b4e66d0016/manifest.json",
+      "sha256": "f3e2a9795e5f75967be975018b4a560c73121817b0ced7799272cb31a48a4326"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-a4822a4be06e/manifest.json",
+      "sha256": "1c9c0f156e64fa4c716b95ad7efdbb618052e1a9e11d7d5124d70ae95603f8c0"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-a8ac73896464/manifest.json",
+      "sha256": "74c53f4f36e7494d5aeb2592583c3f1128278cf030eb5ab4ce273b944658c850"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-a93badadec27/manifest.json",
+      "sha256": "1a3c12482d69e35d786b98c1ef8e99d8a730da07efaa8d599b1e69a81c3dbb68"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-be3b17e73425/manifest.json",
+      "sha256": "229826c2cf2fc12229ee251a3ecf3ce4234937d29f1a6452d496301af1251639"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-cafb56cb27fb/manifest.json",
+      "sha256": "e9cc285d1e92b86a9d1520dee09a4cc91121b6d93814ecefec8f26cdc42b694a"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-da3a4784c2be/manifest.json",
+      "sha256": "40b53c8c2fde5404bb9165dd07614d7d26b0c30772e87c9fcb1f3f1910caaeed"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-dc0e0b0d5b87/manifest.json",
+      "sha256": "a502c4e0363913941d4bd3ab04a153e27601159cccbb094a9333103810cadf95"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-dc1e44f39bb9/manifest.json",
+      "sha256": "567f52ad15cb76e4f9d9bcfb1dc7c642dd677b7adfa51b79437d5f9ec67bf41f"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-e0c199d3c60a/manifest.json",
+      "sha256": "41be26127a9c7671b1677bf39f7237305a55124cc3ebb99db1c33fb70d00dc5c"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-e3cbdfa7ad1c/manifest.json",
+      "sha256": "254d0580a13b46e4de371974c6cc2ce5a9610138360bf9df9548f1f3a7efd40f"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-f634c259799f/manifest.json",
+      "sha256": "d740089a8f93725b5e4a704521acfd5e48e99aaba8e5f95bcd5f68596427a9df"
+    },
+    {
+      "path": "groundtruth/s1_ingest-v0.1.0-fd2bfef40d31/manifest.json",
+      "sha256": "4de1fed3e8d84d51541401afcc91724229bb06e6ad3e174bb01a00e7724a57ed"
+    },
+    {
+      "path": "lean/Audit.lean",
+      "sha256": "73040b3c7ee4aa51ff48f493d5e97018802979e75cf5d9c792a3732c3da1bb64"
+    },
+    {
+      "path": "lean/Syndeom.lean",
+      "sha256": "f182dbf2cc081d0ab5fb957cc84749d69c0c67091fd3e08e9a2f9fe51442a337"
+    },
+    {
+      "path": "lean/Syndeom/Fixtures/GoldenB.lean",
+      "sha256": "c568a98188da217920cecec74ac4a44da5fb1321653e61852f25d6817e11458e"
+    },
+    {
+      "path": "lean/lake-manifest.json",
+      "sha256": "6cbd1dccf13a06b64fce2f50b9d3f9ca2c463cff3033c1ff611b727e3b383af5"
+    },
+    {
+      "path": "lean/lakefile.toml",
+      "sha256": "07795417392fca1382f27ac6ad4a2d3d8c088add408efdb772785c0e2865b755"
+    },
+    {
+      "path": "lean/lean-toolchain",
+      "sha256": "d5edba4e4b8faad9c1baeadb265716d20d03be4d1a2647dc5e35b0c0325bea7b"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "7157527d1a56f14e9c980b3d18e7332f16efdd2fb16c5b7974ca2aa86586129c"
+    }
+  ]
+}

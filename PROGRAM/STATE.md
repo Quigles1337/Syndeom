@@ -1,8 +1,11 @@
 # STATE
 
-- **Updated:** 2026-10-20 UTC (Session 21 — documentation: README architecture, artifact contract,
-  research boundaries, and reproducible quick start; the S1 research snapshot and NEXT are unchanged).
-- **Research snapshot:** 2026-10-14 UTC (Session 20 — the ninth Route A harvest: candidates 25–27
+- **Updated:** 2026-10-20 UTC (S1.3 first canonical derivation: `syndeom-derive` 0.1.0;
+  parent `s1_ingest-v0.1.0-00f28e252823`, child `s1_derive-v0.1.0-c08f9e3ec092`;
+  producer committed first at `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, real generation
+  and independent regeneration passed. Source text remains external; one separate parent
+  promotion hold recorded. No harvest advancement. S1.2/S1.4 and Gate S1 remain open.)
+- **Previous update (historical):** 2026-10-14 UTC (Session 20 — the ninth Route A harvest: candidates 25–27
   examined in order, all three admitted yielding 6 items — four from one published erratum (a
   main theorem withdrawn to a conjecture, the proposition and the assertion its proof needed,
   and a moduli theorem shown false by the erratum's own example), one true theorem whose proof
@@ -23,7 +26,11 @@
   2026-10-13 (ADR-0001 `/2`, ADR-0003 resolved, ADR-0005) and built the producer; Session 9
   decided ADR-0003; Session 8 closed R3; Session 7 recorded the earlier rulings)
 - **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
-- **Gate:** S1 open; no S1 criterion has evidence yet (table below). **Gate S0 CLOSED 2026-10-13
+- **Gate:** S1 open; S1.1 and the raw-parent part of S1.3 have partial evidence (table below).
+  Orientation reconciliation, 2026-10-20: the former "no S1 criterion has evidence" and
+  "harvest log / first items empty" statements were stale against the 31 manifests and log.
+  The owner's current priority is one S1.3 canonical derivation; the harvest prefix and
+  resume at candidate 28, `1403.6317`, remain unchanged. **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
   verbatim and alone, re-derived the program state from the repo in one pass without guessing and
   found the gate GREEN at `2b7c573`; result **PASS**; record in HANDOFF Session 6, whose first
@@ -54,9 +61,28 @@
   README.md § Licence; text provenance S-0019).
   **ORIENT note (SD7):** `git symbolic-ref refs/remotes/origin/HEAD` resolves to `main`; if it ever
   fails, fallback `git remote show origin`, repair `git remote set-head origin -a`.
+- **S1.3 orientation verification (2026-10-20):** existing Lean/Rust code passed the gate,
+  with documentation reconciliation in progress; 29 existing tests passed, axioms `[propext]`.
+  The new crate was enabled only after this gate. Its focused producer checks now pass
+  37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
+  Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
+  tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
+  2026-10-20 04:26:20Z (PR 2 corrected documentation tree)** — Lean 8,926 jobs, golden axioms
+  `[propext]`, fmt/clippy clean, 37 tests passed (24 manifest + 5 ingest + 8 derivation),
+  149 tracked files checked; Q 17, SD 17, FLAW 14, CLAIM 7, S- 66; exit 0. Log:
+  `analysis/s1-3/gate-pr2-review.txt`. HANDOFF retains main's exact historical prefix, followed
+  by the original S1.3 block; its last NEXT and this file's single NEXT both name S1.2.
+  The final recording commit is gated again before integration; PR 2 and the integration
+  merge message record that exact checked revision/tree and result without rewriting the
+  checked files. **Previous GREEN:
+  2026-10-20 03:47:27Z (S1.3 staged artifact/evidence tree)** — Lean 8,926 jobs, golden axioms
+  `[propext]`, fmt/clippy clean, 37 tests passed (24 manifest + 5 ingest + 8 derivation),
+  147 tracked files checked, registers coherent (Q 17, SD 17, FLAW 14, CLAIM 7, S- 66),
+  exit 0. Log: `analysis/s1-3/gate-final.txt`. Final recording-only edits also pass byte/register
+  and diff checks before commit. **Previous GREEN:
   2026-10-20 03:10:57Z (Session 21, documentation branch)** — local gate after populating the
   pinned Mathlib cache: Lean 8,926 jobs, axioms `[propext]`, Rust fmt and clippy clean, 29/29
   tests, 122 tracked files checked, registers coherent; exit 0. Final recording edits also passed
@@ -94,9 +120,10 @@
   `lean/lake-manifest.json`, eight transitive Lake deps locked) — the Q8 rule, chosen as the newest
   Mathlib release tag with a stable Lean (a load-bearing divergence from KOBER's v4.33.1/no-Mathlib).
   Rust `1.91.0` with clippy + rustfmt (`rust-toolchain.toml` at the root), workspace
-  `engine/Cargo.toml`, crate `syndeom-manifest`. `engine/Cargo.lock` lists 25 packages: the 24
-  dependencies S-0008 enumerates (5 direct, 19 transitive) plus the workspace crate itself
-  (clarified Session 6; the ADR and S-0008 say "24 crates" and mean the dependencies). JCS
+  `engine/Cargo.toml`, crates `syndeom-manifest`, `syndeom-ingest`, `syndeom-derive`.
+  `engine/Cargo.lock` lists 33 packages: the 26 unchanged baseline entries (24 dependencies
+  plus two workspace crates), six new decompression dependencies (S-0066), and `syndeom-derive`.
+  The former 25-entry sentence predated the ingest crate. JCS
   serializer `serde_json_canonicalizer 0.3.2`. CI advisory on `actions/*@v5`. Licences of
   everything pinned: S-0008. Machine inventory as of 2026-10-12 in `PROGRAM/SIBLING-MAP-2026-10.md`
   §8. For the record (S5, not a reason for any pin — SD8): the contact corpus `openai/math` happens
@@ -206,9 +233,9 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `1403.4485` (candidates 1–27 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20): 27 examined, 21 admitted yielding 31 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; NEXT resumes at candidate 28** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Evidence slots still empty: the harvest log, the first admitted items |
+| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `1403.4485` (candidates 1–27 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20): 27 examined, 21 admitted yielding 31 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; harvest resume remains candidate 28** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Orientation reconciliation (2026-10-20): the log and 31 admitted items exist; the former empty-slots sentence was stale. |
 | S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | open | — |
-| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **`raw/1` parents: 31 manifested (Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20); derived canonical artifacts: none — the derivation producer and its ADR do not exist yet** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; statement false; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
+| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **`raw/1` parents: 31 manifested (Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20); derived canonical artifacts: 1 — `s1_derive-v0.1.0-c08f9e3ec092`, external, from parent `s1_ingest-v0.1.0-00f28e252823`; two identical runs with actual-byte and parent/child validation; ADR-0006 and `analysis/s1-3/` hold the procedure/review/evidence. One representation, not an extra independent item. Parent `s1_ingest-v0.1.0-63e23a952084` is held for promotion pending its documented status review** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; historically recorded statement false, canonical promotion held pending status review; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | open | — |
 | Licences recorded for anything touched (SD16) | open | — |
 | Repo green under the gate | **standing** | Build status above |
@@ -261,7 +288,7 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 - Human-referee participants are Al's decision whenever S4.3 arrives (SD13); any output about a
   specific real manuscript beyond SD3 is escalated.
 
-## NEXT-SINGLE-ACTION
+## Preserved harvest resume procedure (not this session's priority)
 
 **S1.1 — the tenth Route A harvest session, resuming from the log's last candidate** (ADR-0003
 D7, D8 as amended: a prefix is enough). Procedure, executable cold:
@@ -318,3 +345,27 @@ and last-candidate line, this file's Gate S1 table (S1.1, S1.3 rows), and set NE
 prefix. Grey zones are `escalated` and listed under standing escalations; nothing ambiguous is
 ingested. Run the gate detached with a log before the commit (expect `GATE: GREEN`); commit
 `[S1][ADR-0003] harvest Route A prefix through arXiv id <last id processed>: <n> admitted`.
+
+
+## NEXT-SINGLE-ACTION
+
+**S1.2 — specify the first positive informal–formal pair procedure.** In a fresh informed
+working session, read constitution §2 S1.2, ADR-0001 D3/D4 and the pinned
+`lean/lakefile.toml` / `lean/lake-manifest.json`; discover the next free ADR identifier (0007
+at this revision), and write the procedure for one source-backed, licensed informal statement
+paired with an existing declaration at the pinned Mathlib commit. Require primary retrieval,
+statement-fidelity review and actual-byte validation before admission. Do not relabel the
+synthetic golden fixture as a real pair. This is one procedure/selection task; the pair is not
+already present. Start with:
+
+```powershell
+Get-Content PROGRAM/SYNDEOM-PROGRAM.md
+Get-Content PROGRAM/DECISIONS/ADR-0001.md
+Get-Content lean/lakefile.toml
+Get-Content lean/lake-manifest.json
+```
+
+S1.4's class coverage/length/power table is also outstanding. The saved harvest procedure
+above remains at candidate 28, `1403.6317`; no further candidate was retrieved. The separate
+promotion hold on `s1_ingest-v0.1.0-63e23a952084` requires a reviewed evidentiary status decision
+before that parent can supply an accepted child. No replacement label has been assigned.
