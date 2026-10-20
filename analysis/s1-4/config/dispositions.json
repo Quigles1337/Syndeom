@@ -1,0 +1,208 @@
+{
+  "schema": "s1-4-coverage/1",
+  "pair_root": "s1_pair_archive-v0.1.0-094625fa10ff",
+  "merge_evidence": "analysis/s1-4/config/merge-evidence.json",
+  "reviews": [
+    {
+      "root_id": "s1_ingest-v0.1.0-63e23a952084",
+      "issues": [
+        {
+          "kind": "promotion-hold",
+          "reason": "Canonical promotion held: primary correction does not by itself establish the historical false/source-document label; preserve it without assigning a replacement.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-63e23a952084/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2914"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-448d7aefa486",
+      "issues": [
+        {
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-448d7aefa486/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-2d93a266558a",
+      "issues": [
+        {
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-2d93a266558a/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-e3cbdfa7ad1c",
+      "issues": [
+        {
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-e3cbdfa7ad1c/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-dc1e44f39bb9",
+      "issues": [
+        {
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-dc1e44f39bb9/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-68ed1abfecb4",
+      "issues": [
+        {
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-68ed1abfecb4/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-685b874cf579",
+      "issues": [
+        {
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-685b874cf579/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-40e6c0da8821",
+      "issues": [
+        {
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-40e6c0da8821/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-fd2bfef40d31",
+      "issues": [
+        {
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-fd2bfef40d31/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-a4822a4be06e",
+      "issues": [
+        {
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-a4822a4be06e/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-cafb56cb27fb",
+      "issues": [
+        {
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-cafb56cb27fb/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-dc0e0b0d5b87",
+      "issues": [
+        {
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-dc0e0b0d5b87/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-003a35498654",
+      "issues": [
+        {
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-003a35498654/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-0833f61c748c",
+      "issues": [
+        {
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-0833f61c748c/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ]
+        }
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-315546e87259",
+      "issues": [
+        {
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking.",
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-315546e87259/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ]
+        }
+      ]
+    }
+  ],
+  "scope_notes": [
+    "HANDOFF Session 20 also asks whether unnamed dependent results under candidate 25's erratum should become items. No new items are invented; the admitted named four remain the scope.",
+    "Source statuses and historical labels are unchanged. Owner merge is an admission action supported by the existing packet, not proof of an independent review, new Lean execution, or a PROVEN transition.",
+    "All observed canonical informal files define one octave grid, then split by statement-only/proof-bearing role. Formal files use their own grid; wrapper tokens are not transitive proof size.",
+    "Every real-item cell is expected underpowered until S3 computes N_min and freezes its protocol. S1 remains open and requires a later genuinely cold examination."
+  ]
+}
