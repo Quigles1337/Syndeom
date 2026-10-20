@@ -2979,3 +2979,99 @@ NEXT-SINGLE-ACTION: S1.2 — specify the first positive informal–formal pair p
 the detailed starting instructions in STATE.md and the original S1.3 entry above.
 ESCALATIONS: the separate first-parent promotion hold and prior standing S1 questions remain.
 STOP-REASON: review correction complete; integrate only after the final committed-tree gate.
+
+---
+
+SESSION: 2026-10-20 UTC @ base 8adcb4865abd3f6c3ac882b70563d82caca6207c
+(S1.2 positive-pair procedure and first candidate review; final recording revision in the
+draft PR). This is an informed working session, not a cold-start exam.
+PHASE / GATE: S1 open. The owner requested procedure/selection, a concrete primary-source
+candidate, actual feasibility evidence, and an unmerged draft PR. No admission in this slice.
+ADVANCED:
+- Read the constitution/instructions, STATE/latest HANDOFF, relevant source/claim/taxonomy
+  registers, ADR-0001/0002/0003/0006, manifest library, both specialized producers and pins.
+  Confirmed default branch main; a fresh `codex/s1-2-positive-pair-procedure` branch started
+  at `8adcb48`, with no earlier S1.2 packet. Existing local caches were reused outside OneDrive.
+- Wrote ADR-0007 as ordinary procedure under existing authority. It defines primary-source
+  eligibility, claim/offered-proof roles, source correspondence, genuine archival/canonical
+  pairing, storage, deterministic executable provenance, both-file/parent-child validation,
+  exact-type/axiom review, refusals, counting and the next implementation/admission sequence.
+  No schema/constitution or S1.1 policy amendment. STATE now correctly names ADR-0008 next.
+- Retrieved and visually read Judson's official Annual Edition 2025 PDF: Theorem 2.2.6,
+  section 2.2.2, printed p.28 / PDF page 41. It states infinitude of primes; the same-page
+  definition resolves the domain/divisor conventions. GFDL-1.2-or-later notice and full
+  licence appendix were read. One mathematical candidate examined; no alternatives needed.
+  S-0067/S-0068 append fresh primary evidence without changing existing source labels.
+- Matched exact pinned `Nat.infinite_setOfPred_prime` and audited its type, dependency bodies
+  and transitive axioms with Lean 4.34.1 / Mathlib `d13f23b...`. The target and the SYNDEOM alias
+  have the same closed elaborated type, with no extra parameters/typeclass assumptions.
+  Both depend on only `propext`, `Classical.choice`, `Quot.sound`; `Nat.prime_def` on `propext`.
+  The initial focused audit and later replays exited 0, with identical audit transcript hash.
+- `analysis/s1-2/` gives a clause-by-clause mapping. Statement fidelity is supported for the
+  selected source claim. The Mathlib proof is the offered argument; Judson's printed proof
+  remains source context, with no line-by-line proof-argument fidelity claim. No informal
+  proof steps were invented. The existing parser accepts zero proof steps.
+- Designed an actual raw pair from the full retrieved PDF and full pinned Mathlib source
+  module, with a canonical statement/alias pair linked by `derived_from`. No fake parent,
+  erratum, authorship or producer SHA. Raw sources and canonical informal bytes stay external;
+  the small original alias can be committed. Rights are explicit; no owner decision blocks
+  this external-source design. Public redistribution of a GFDL derivative is a separate choice.
+- Rehearsed only existing Rust pure APIs in external development output: informal 118 bytes,
+  7 tokens, 0 steps/lemmas; formal 142 bytes, 14 tokens, 4 lines, 1 declaration.
+  Proposed config hashes/IDs, raw/target hashes, full configurations and exact commands are
+  in the packet. No Manifest was created; full candidate byte/parent-child validation
+  remains an obligation of the future producer/admission slice.
+- Corrected `engine/derive/README.md`: dry run validates inputs/derivation/manifests but
+  skips `write_outputs` content-collision preflight. No producer behavior changed.
+VERIFICATION:
+- Final staged packet `bash scripts/check.sh`: exit 0 / GATE: GREEN at 2026-10-20 05:17:18Z,
+  tree `1034c92f7724e9f86f590c3ae344c1d3291c9c71`; 8,926 Lean jobs, golden `[propext]`,
+  fmt/clippy clean, 37 tests, 172 tracked files, Q17/SD17/FLAW14/CLAIM7/S68.
+  Index/status identical before and after. New `evidence/gate-staged-packet.json`
+  and `gate-staged-packet.txt`; all 146 protected files and both historical prefixes
+  pass `check_preservation.py`. The recording commit is gated again before publication.
+- Orientation `bash scripts/check.sh` exited 0 / GATE: GREEN at 04:58:19Z: Lean 8,926 jobs,
+  existing golden `[propext]`, fmt/clippy clean, 37 tests (24 manifest + 5 ingest + 8 derive),
+  150 tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 68. It began on main and finished
+  while documentation was being drafted, so it is not represented as the final packet gate.
+  New receipt/log: `analysis/s1-2/evidence/gate-orientation.json` / `gate-orientation.txt`.
+- Successful candidate rehearsal ended 04:57:22.757990Z; all four subprocesses exited 0.
+  `evidence/rehearsal-03.json`, `candidate-audit.txt`, `api-probe.txt` retain its result.
+  Two corrected harness failures are retained: (01) comparing downloaded LF blobs directly
+  to a clean CRLF Windows dependency checkout; (02) passing the wrong transitive-library
+  search directory to standalone rustc. Neither was a failed theorem audit. Current helper
+  checks Git blobs, records checkout EOL separately and uses Cargo's `deps` directory.
+- Final scoped gate and preservation evidence are recorded in `analysis/s1-2/VERIFICATION.md`.
+  The final committed revision is gated again before push and the unmerged draft PR records
+  that exact revision/tree and transcript digest without changing the checked files.
+BELIEF DELTAS: the existing pair contract already supports mathlib status, positive truth/valid
+proof, genuine raw/formal parents and zero-step informal statements. A specialized CLI's
+restrictions do not imply a schema blocker. A successful empty-statistics fidelity verdict
+would be vacuous for semantic alignment; the source table supplies the actual argument.
+CONFUSIONS: old editions/search snippets have different theorem numbers; the fixed PDF settles
+2.2.6. A pinned clean Windows checkout need not have Git-blob byte endings. The two harness
+mistakes above are recorded with failed receipts and concrete fixes, not hidden as successes.
+HONESTY CHECK: no existing source statuses, CLAIMS or FLAWS entries changed. Candidate feasibility
+is not source-wide certification, corpus admission, PROVEN promotion, or a source-proof audit.
+LEAKAGE CHECK: `contact/` remains its original README and is byte-identical; no contact corpus,
+real-AI-proof behavior, detector result, private Eigenverse evidence or calibration material
+was used for selection/design. Development exposure of this candidate is explicit.
+DETERMINISM CHECK: frozen source bytes, full proposed configs, source map, Rust hashes/counts,
+toolchain pins, audit command/output and exact helper/input hashes are retained. The dynamic
+discovery page is not a generation input. No claimed producer SHA exists before implementation.
+MANIFEST CHECK: no corpus artifact touched or admitted; no synthetic fixture relabeled real.
+The proposed pair's truth and offered-proof validity are distinct fields. Full manifest and
+parent/child checks have not been executed for a nonexistent producer; this is stated openly.
+DRIFT CHECK: no source-proof verdict creep, S1.4 work, S2 family, detector, referee contact,
+schema change or broadened ingestion. The default branch and all historical evidence stay intact.
+NEXT-SINGLE-ACTION: after this draft procedure/candidate review is accepted, implement only
+the narrow Rust archive/canonical pair producer of ADR-0007, using the two proposed configs.
+Test and commit it first; freshly verify frozen source bytes, generate the genuine raw pair
+and canonical child from its actual SHA, run both-file/parent-child/kernel/axiom/refusal/replay
+checks and the gate, and review the admission RECORD before counting the first S1.2 pair.
+Start with ADR-0007 and `analysis/s1-2/README.md`; STATE gives the same executable next action.
+ESCALATIONS: no new owner rights/policy choice for this design. The separate first-parent
+promotion hold remains unresolved. Harvest resume is candidate 28, `1403.6317`; S1.4 and
+other standing S1 criteria remain open. Counts remain 31 raw parents + one canonical child.
+STOP-REASON: procedure/selection boundary reached; publish scoped evidence as a draft PR only,
+leave unmerged, and defer implementation/admission to the next authorized slice.

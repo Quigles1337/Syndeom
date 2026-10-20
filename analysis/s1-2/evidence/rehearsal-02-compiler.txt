@@ -1,0 +1,9 @@
+error[E0463]: can't find crate for `syndeom_manifest`
+ --> C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\analysis\s1-2\api_probe.rs:3:5
+  |
+3 | use syndeom_manifest::{artifact_id, config_hash, content_hash, parse_informal_md, parse_lean};
+  |     ^^^^^^^^^^^^^^^^ can't find crate
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0463`.

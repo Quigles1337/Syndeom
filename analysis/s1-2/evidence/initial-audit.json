@@ -1,0 +1,14 @@
+{
+  "command": [
+    "C:\\Users\\LEET\\.elan\\bin\\lake.exe",
+    "env",
+    "lean",
+    "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\candidate-audit.lean"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\lean",
+  "started_at": "2026-10-20T04:50:50.674771+00:00",
+  "source_sha256": "76cad90b70f93d2b6a311be0f7602fba6415757e5c30c14185148ba61c3572fa",
+  "exit_code": 0,
+  "completed_at": "2026-10-20T04:51:53.156402+00:00",
+  "log_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3"
+}

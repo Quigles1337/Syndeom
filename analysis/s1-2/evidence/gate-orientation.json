@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Program Files\\Git\\bin\\bash.exe",
+    "scripts/check.sh"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+  "head_revision": "8adcb4865abd3f6c3ac882b70563d82caca6207c",
+  "head_tree": "a1b2d003950972741a9768408554a9764a973f26",
+  "index_tree_before": "a1b2d003950972741a9768408554a9764a973f26",
+  "status_before": "",
+  "started_at": "2026-10-20T04:49:30.791476+00:00",
+  "stdout_stderr_log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\gate-orientation.log",
+  "completed_at": "2026-10-20T04:58:19.439313+00:00",
+  "exit_code": 0,
+  "index_tree_after": "a1b2d003950972741a9768408554a9764a973f26",
+  "status_after": "M PROGRAM/SOURCES.md\n M engine/derive/README.md\n?? PROGRAM/DECISIONS/ADR-0007.md\n?? analysis/s1-2/",
+  "log_sha256": "28e9b7381a7300a134024b10f8140d456c695c383d71903d73288a7e49da1c00"
+}

@@ -1,6 +1,12 @@
 # STATE
 
-- **Updated:** 2026-10-20 UTC (S1.3 first canonical derivation: `syndeom-derive` 0.1.0;
+- **Updated:** 2026-10-20 UTC (S1.2 procedure and first candidate review: ADR-0007;
+  Judson 2025 Theorem 2.2.6 paired prospectively with `Nat.infinite_setOfPred_prime`
+  at the existing Mathlib pin. Primary source/rights and statement correspondence reviewed;
+  focused Lean/axiom and Rust pure-API checks passed. No pair admitted or producer built;
+  31 raw parents plus one canonical representation, the separate promotion hold and harvest
+  resume point are unchanged. Gate S1 remains open. Draft review packet: `analysis/s1-2/`.)
+- **Previous update (S1.3):** 2026-10-20 UTC (S1.3 first canonical derivation: `syndeom-derive` 0.1.0;
   parent `s1_ingest-v0.1.0-00f28e252823`, child `s1_derive-v0.1.0-c08f9e3ec092`;
   producer committed first at `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, real generation
   and independent regeneration passed. Source text remains external; one separate parent
@@ -29,7 +35,7 @@
 - **Gate:** S1 open; S1.1 and the raw-parent part of S1.3 have partial evidence (table below).
   Orientation reconciliation, 2026-10-20: the former "no S1 criterion has evidence" and
   "harvest log / first items empty" statements were stale against the 31 manifests and log.
-  The owner's current priority is one S1.3 canonical derivation; the harvest prefix and
+  The owner's current priority is the first S1.2 positive-pair procedure/candidate; the harvest prefix and
   resume at candidate 28, `1403.6317`, remain unchanged. **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
   verbatim and alone, re-derived the program state from the repo in one pass without guessing and
@@ -70,6 +76,20 @@
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
+  2026-10-20 05:17:18Z (S1.2 staged procedure/candidate packet)** — Lean 8,926 jobs,
+  golden axioms `[propext]`, fmt/clippy clean, 37 tests, 172 tracked files;
+  Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 68, exit 0. Tested index tree
+  `1034c92f7724e9f86f590c3ae344c1d3291c9c71`; new log/receipt:
+  `analysis/s1-2/evidence/gate-staged-packet.txt` / `gate-staged-packet.json`.
+  Final recording-only edits are checked before commit; the final committed-tree gate
+  is recorded in the unmerged draft PR without modifying the checked tree. **Previous GREEN:
+  2026-10-20 04:58:19Z (S1.2 orientation, documentation drafting in progress)** — Lean 8,926
+  jobs, golden axioms `[propext]`, fmt/clippy clean, 37 tests, 150 tracked files checked;
+  registers Q 17, SD 17, FLAW 14, CLAIM 7, S- 68; exit 0. This run began on main `8adcb48`
+  and finished with source/doc drafts; it is not a certification of the final packet tree.
+  Receipt/log: `analysis/s1-2/evidence/gate-orientation.json` and `gate-orientation.txt`.
+  The separate S1.2 candidate audit uses the standard three axioms; it is not the golden
+  audit and does not admit a pair. **Previous GREEN:
   2026-10-20 04:26:20Z (PR 2 corrected documentation tree)** — Lean 8,926 jobs, golden axioms
   `[propext]`, fmt/clippy clean, 37 tests passed (24 manifest + 5 ingest + 8 derivation),
   149 tracked files checked; Q 17, SD 17, FLAW 14, CLAIM 7, S- 66; exit 0. Log:
@@ -195,7 +215,9 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   five choices (i)–(v) ruled by Al 2026-10-13 (Session 10; Amendments); ADR-0004 constitution
   amendment to §2 S3.2 (Al's ruling R2 of 2026-10-13) — written Session 7; ADR-0005 constitution
   amendment to SD15 (count-only exam disclosure; Al's SD15 audit ruling of 2026-10-13) — written
-  Session 10. **ADR-0006 is the next free number.**
+  Session 10; ADR-0006 reviewed TeX derivation — written 2026-10-20 (S1.3);
+  ADR-0007 first positive-pair procedure and candidate — written 2026-10-20 (S1.2).
+  **ADR-0008 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -234,7 +256,7 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 | Criterion | Status | Evidence |
 |---|---|---|
 | S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `1403.4485` (candidates 1–27 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20): 27 examined, 21 admitted yielding 31 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; harvest resume remains candidate 28** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Orientation reconciliation (2026-10-20): the log and 31 admitted items exist; the former empty-slots sentence was stale. |
-| S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | open | — |
+| S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | **procedure/candidate reviewed; zero admitted pairs; open** | ADR-0007; `analysis/s1-2/`: Judson 2025 Theorem 2.2.6, exact pinned `Nat.infinite_setOfPred_prime`, source correspondence, focused Lean/standard-three audit, zero-step informal parser and hash/count rehearsal. Genuine raw pair plus canonical child designed under the current schema; narrow producer and full byte/parent-child admission checks remain. S-0067/S-0068; development-exposed, not unseen evaluation data. |
 | S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **`raw/1` parents: 31 manifested (Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20); derived canonical artifacts: 1 — `s1_derive-v0.1.0-c08f9e3ec092`, external, from parent `s1_ingest-v0.1.0-00f28e252823`; two identical runs with actual-byte and parent/child validation; ADR-0006 and `analysis/s1-3/` hold the procedure/review/evidence. One representation, not an extra independent item. Parent `s1_ingest-v0.1.0-63e23a952084` is held for promotion pending its documented status review** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; historically recorded statement false, canonical promotion held pending status review; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | open | — |
 | Licences recorded for anything touched (SD16) | open | — |
@@ -349,20 +371,23 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S1.2 — specify the first positive informal–formal pair procedure.** In a fresh informed
-working session, read constitution §2 S1.2, ADR-0001 D3/D4 and the pinned
-`lean/lakefile.toml` / `lean/lake-manifest.json`; discover the next free ADR identifier (0007
-at this revision), and write the procedure for one source-backed, licensed informal statement
-paired with an existing declaration at the pinned Mathlib commit. Require primary retrieval,
-statement-fidelity review and actual-byte validation before admission. Do not relabel the
-synthetic golden fixture as a real pair. This is one procedure/selection task; the pair is not
-already present. Start with:
+**S1.2 — implement the narrow positive-pair producer, then prepare its first admission
+under ADR-0007 after the draft procedure/candidate review is accepted.** Read the candidate
+packet and its two proposed configurations. Add only the dedicated Rust archive/canonical
+producer reusing `syndeom-manifest`, preserving the specialized S1.1 and S1.3 CLIs.
+Test and commit the producer first; use its actual SHA, freshly verify frozen source bytes,
+then create the genuine raw pair and its canonical representation in fresh destinations.
+Run both-file byte checks, parent/child checks, exact-type Lean/axiom checks, refusal tests,
+independent replay and the repository gate; review the admission RECORD before counting it.
+Do not claim the pure-API rehearsal was full manifest validation or prior admission.
+Start with:
 
 ```powershell
 Get-Content PROGRAM/SYNDEOM-PROGRAM.md
-Get-Content PROGRAM/DECISIONS/ADR-0001.md
-Get-Content lean/lakefile.toml
-Get-Content lean/lake-manifest.json
+Get-Content PROGRAM/DECISIONS/ADR-0007.md
+Get-Content analysis/s1-2/README.md
+Get-Content analysis/s1-2/archive-config.proposed.json
+Get-Content analysis/s1-2/canonical-config.proposed.json
 ```
 
 S1.4's class coverage/length/power table is also outstanding. The saved harvest procedure
