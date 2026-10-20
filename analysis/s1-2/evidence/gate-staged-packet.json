@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Program Files\\Git\\bin\\bash.exe",
+    "scripts/check.sh"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+  "head_revision": "8adcb4865abd3f6c3ac882b70563d82caca6207c",
+  "head_tree": "a1b2d003950972741a9768408554a9764a973f26",
+  "index_tree_before": "1034c92f7724e9f86f590c3ae344c1d3291c9c71",
+  "status_before": "A  PROGRAM/DECISIONS/ADR-0007.md\nM  PROGRAM/HANDOFF.md\nM  PROGRAM/SOURCES.md\nM  PROGRAM/STATE.md\nA  analysis/s1-2/Proof.lean\nA  analysis/s1-2/README.md\nA  analysis/s1-2/VERIFICATION.md\nA  analysis/s1-2/api_probe.rs\nA  analysis/s1-2/archive-config.proposed.json\nA  analysis/s1-2/canonical-config.proposed.json\nA  analysis/s1-2/check_preservation.py\nA  analysis/s1-2/evidence/api-probe.txt\nA  analysis/s1-2/evidence/candidate-audit.txt\nA  analysis/s1-2/evidence/gate-orientation.json\nA  analysis/s1-2/evidence/gate-orientation.txt\nA  analysis/s1-2/evidence/initial-audit.json\nA  analysis/s1-2/evidence/preservation.json\nA  analysis/s1-2/evidence/rehearsal-01.failed.json\nA  analysis/s1-2/evidence/rehearsal-02-compiler.txt\nA  analysis/s1-2/evidence/rehearsal-02.failed.json\nA  analysis/s1-2/evidence/rehearsal-03.json\nA  analysis/s1-2/evidence/transcripts.json\nA  analysis/s1-2/inspection-tail.lean\nA  analysis/s1-2/reproduce.py\nA  analysis/s1-2/retrieval.json\nM  engine/derive/README.md",
+  "started_at": "2026-10-20T05:04:55.503167+00:00",
+  "stdout_stderr_log": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\gate-staged-packet.log",
+  "completed_at": "2026-10-20T05:17:18.734356+00:00",
+  "exit_code": 0,
+  "index_tree_after": "1034c92f7724e9f86f590c3ae344c1d3291c9c71",
+  "status_after": "A  PROGRAM/DECISIONS/ADR-0007.md\nM  PROGRAM/HANDOFF.md\nM  PROGRAM/SOURCES.md\nM  PROGRAM/STATE.md\nA  analysis/s1-2/Proof.lean\nA  analysis/s1-2/README.md\nA  analysis/s1-2/VERIFICATION.md\nA  analysis/s1-2/api_probe.rs\nA  analysis/s1-2/archive-config.proposed.json\nA  analysis/s1-2/canonical-config.proposed.json\nA  analysis/s1-2/check_preservation.py\nA  analysis/s1-2/evidence/api-probe.txt\nA  analysis/s1-2/evidence/candidate-audit.txt\nA  analysis/s1-2/evidence/gate-orientation.json\nA  analysis/s1-2/evidence/gate-orientation.txt\nA  analysis/s1-2/evidence/initial-audit.json\nA  analysis/s1-2/evidence/preservation.json\nA  analysis/s1-2/evidence/rehearsal-01.failed.json\nA  analysis/s1-2/evidence/rehearsal-02-compiler.txt\nA  analysis/s1-2/evidence/rehearsal-02.failed.json\nA  analysis/s1-2/evidence/rehearsal-03.json\nA  analysis/s1-2/evidence/transcripts.json\nA  analysis/s1-2/inspection-tail.lean\nA  analysis/s1-2/reproduce.py\nA  analysis/s1-2/retrieval.json\nM  engine/derive/README.md",
+  "log_sha256": "f25501a69ace5d40bb5b1518022ba21e9c1f37b170cc7d0d76b0ecb79e67611e"
+}

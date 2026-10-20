@@ -16,8 +16,10 @@ From the repository root, after committing the producer:
 cargo run --locked -q --manifest-path engine/Cargo.toml -p syndeom-derive -- --config <recipe.json> --parent <parent/manifest.json> --bytes <original.gz> --root . --external-dir <existing-directory-outside-repo> --engine-commit <producer-commit>
 ```
 
-`--dry-run` runs the same checks without writing. The real CLI verifies the commit against
-its tracked producer/library/lock/toolchain inputs. Manifests and metadata go under
+`--dry-run` performs input, derivation and manifest validation without writing, but skips
+the existing-output content-collision preflight in `write_outputs`. It does not certify
+that a subsequent write will find no conflicting output. Both modes verify the commit against
+the tracked producer/library/lock/toolchain inputs. Manifests and metadata go under
 `groundtruth/<child-id>`; proof and full context go under `<external-dir>/<child-id>`.
 Identical retry is accepted; changed existing output is refused before writing anything.
 After a crash, identical complete files can be retried to add missing siblings; incomplete

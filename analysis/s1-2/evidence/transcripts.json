@@ -1,0 +1,79 @@
+[
+  {
+    "file": "gate-orientation.json",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\gate-orientation.json",
+    "raw_sha256": "07f96320a249556cc7df9f481e032279ff94bc9c81d7c4a67f24aa5c6ff21e38",
+    "committed_sha256": "07f96320a249556cc7df9f481e032279ff94bc9c81d7c4a67f24aa5c6ff21e38",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "gate-orientation.txt",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\gate-orientation.log",
+    "raw_sha256": "28e9b7381a7300a134024b10f8140d456c695c383d71903d73288a7e49da1c00",
+    "committed_sha256": "35332b21413727a9ae1d8346ee4869de49ac3be80caf05b1bae39ca45e989631",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "initial-audit.json",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\candidate-audit.json",
+    "raw_sha256": "42f5e62c5fc15da7e1a3a2cfb054581a75f1f1403e6f5256e4618184758d4514",
+    "committed_sha256": "42f5e62c5fc15da7e1a3a2cfb054581a75f1f1403e6f5256e4618184758d4514",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "rehearsal-01.failed.json",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\rehearsal-01\\receipt.json",
+    "raw_sha256": "527d7af060f54c7c27a5f669f01b208e05298bc0b46ae9bd81ae8d5105772ba5",
+    "committed_sha256": "527d7af060f54c7c27a5f669f01b208e05298bc0b46ae9bd81ae8d5105772ba5",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "rehearsal-02.failed.json",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\rehearsal-02\\receipt.json",
+    "raw_sha256": "4f206fe61088656d92726fd5854fa7992653370cb3bdb124bca750676204c733",
+    "committed_sha256": "4f206fe61088656d92726fd5854fa7992653370cb3bdb124bca750676204c733",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "rehearsal-02-compiler.txt",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\rehearsal-02\\compile-api-probe.log",
+    "raw_sha256": "02ef72aa0ae6d7df44ed65630bab3b78dcfb211a1d6dfa45db2b73ef80f1d5a8",
+    "committed_sha256": "02ef72aa0ae6d7df44ed65630bab3b78dcfb211a1d6dfa45db2b73ef80f1d5a8",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "rehearsal-03.json",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\rehearsal-03\\receipt.json",
+    "raw_sha256": "6ab3770a037cad4a24d88f229e506a721abc9d045d67caa77a4b7bb855bcfed0",
+    "committed_sha256": "6ab3770a037cad4a24d88f229e506a721abc9d045d67caa77a4b7bb855bcfed0",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "candidate-audit.txt",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\rehearsal-03\\candidate-audit.log",
+    "raw_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3",
+    "committed_sha256": "7ed258afaefc2cbb83d166592c9a9d64a4d834e6df0fa1c523e9cf9a7bed09c3",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "api-probe.txt",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\rehearsal-03\\api-probe.log",
+    "raw_sha256": "cf44e679b07fd7a6b3a4c7e9535d8585bfa0964fac0b8f9539ce58b547d08155",
+    "committed_sha256": "cf44e679b07fd7a6b3a4c7e9535d8585bfa0964fac0b8f9539ce58b547d08155",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "gate-staged-packet.json",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\gate-staged-packet.json",
+    "raw_sha256": "44a98e09b94688999bf427db67de7811578663ce4029b4d29dd7c4e2ed5c7304",
+    "committed_sha256": "44a98e09b94688999bf427db67de7811578663ce4029b4d29dd7c4e2ed5c7304",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  },
+  {
+    "file": "gate-staged-packet.txt",
+    "external_original": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\gate-staged-packet.log",
+    "raw_sha256": "f25501a69ace5d40bb5b1518022ba21e9c1f37b170cc7d0d76b0ecb79e67611e",
+    "committed_sha256": "1a29b47c672ca5b0e16779d860851bb41ea5e81eed07b1de3c5a70290d2d1575",
+    "normalization": "CRLF to LF for repository text hygiene; original retained"
+  }
+]

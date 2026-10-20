@@ -1,0 +1,56 @@
+{
+  "sources": [
+    "S-0067",
+    "S-0068"
+  ],
+  "item": "Judson, AATA Annual Edition 2025, Theorem 2.2.6, printed p.28 / PDF page 41; Nat.infinite_setOfPred_prime",
+  "licence": "Informal source: GFDL-1.2-or-later, no invariant sections or cover texts; Mathlib source: Apache-2.0; SYNDEOM alias wrapper: Apache-2.0",
+  "status": {
+    "kind": "mathlib",
+    "reference": "S-0068: Nat.infinite_setOfPred_prime at mathlib d13f23b723b8a846827a245b89c10fc7d3f11612; S-0067 claim correspondence in analysis/s1-2/README.md"
+  },
+  "method": "reviewed-published-statement-and-mathlib-source/1",
+  "claim_role": "Judson theorem statement only; definitions resolved from section 2.2.2",
+  "offered_argument": "Mathlib Nat.infinite_setOfPred_prime proof; not Judson's printed argument",
+  "ground_truth": {
+    "derivation": "formalized-in-mathlib",
+    "statement_status": {
+      "value": true,
+      "method": "mathlib",
+      "reference": "S-0068: Nat.infinite_setOfPred_prime at mathlib d13f23b723b8a846827a245b89c10fc7d3f11612; S-0067 claim correspondence in analysis/s1-2/README.md"
+    },
+    "proof_status": "valid",
+    "correct": true,
+    "flaws": [],
+    "taxonomy_version": "0.1.0"
+  },
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "attribution": {
+    "informal": "Thomas W. Judson; book copyright 1997-2025 Thomas W. Judson and Robert A. Beezer; annual edition dated August 1, 2025",
+    "formal": "Mathlib; source header copyright 2015 Microsoft Corporation; authors Leonardo de Moura, Jeremy Avigad, Mario Carneiro",
+    "pairing_and_transcription": "SYNDEOM executor, 2026-10-20; development review, no source-author endorsement"
+  },
+  "files": {
+    "informal": {
+      "file": "aata-20250801.pdf",
+      "storage": "external",
+      "format": "raw/1",
+      "sha256": "4f74587b61861b4790d613f2adb64699f90fd1d07760204f1d8fc9fcaf63d14f",
+      "n_bytes": 2207438,
+      "url": "https://judsonbooks.org/aata-files/aata-20250801.pdf",
+      "locator": "Theorem 2.2.6, section 2.2.2, printed p.28, PDF page 41 (one-based)"
+    },
+    "formal": {
+      "file": "PrimeFin.lean",
+      "storage": "external",
+      "format": "raw/1",
+      "sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6",
+      "n_bytes": 5328,
+      "url": "https://raw.githubusercontent.com/leanprover-community/mathlib4/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean",
+      "locator": "Nat.infinite_setOfPred_prime, lines 28-29"
+    }
+  }
+}

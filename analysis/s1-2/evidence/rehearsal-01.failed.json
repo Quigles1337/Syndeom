@@ -1,0 +1,66 @@
+{
+  "kind": "candidate-feasibility-only",
+  "started_at": "2026-10-20T04:54:09.856792+00:00",
+  "base_revision": "8adcb4865abd3f6c3ac882b70563d82caca6207c",
+  "checkout_revision": "8adcb4865abd3f6c3ac882b70563d82caca6207c",
+  "index_tree": "a1b2d003950972741a9768408554a9764a973f26",
+  "checkout_status": "?? analysis/s1-2/",
+  "helper_sha256": "4d283d7accdf23b70492a0945d94d1a9158db6fd9df0dd540c1fa17f52541fc4",
+  "packet_input_sha256": {
+    "Proof.lean": "038c70bf73cacf9eca975bd58ac6d64c23f3227474654d0c18ee2a93f5be09a2",
+    "inspection-tail.lean": "9a0d71a7afe800456c43977a940ead173f14bc3eed827c2a1d84528e558ad4ad",
+    "api_probe.rs": "b7e27170ac1181b9e8fe0925932ada1fa71cc708420566daa2891081e23a2a2a",
+    "archive-config.proposed.json": "08e89e3769fe0523db62afec3139d4c0730a6f79b682566b40600b0329998bc4",
+    "canonical-config.proposed.json": "f74fb1a25474a5185365e002bae9ec6db5ea68c687ce7b701ada658a13758df7",
+    "retrieval.json": "bf199f77e3201f527ab2e4790f60771db0a38a56a02b07b22738a1d9bc08d9f8"
+  },
+  "sources": [
+    {
+      "file": "aata-20250801.pdf",
+      "sha256": "4f74587b61861b4790d613f2adb64699f90fd1d07760204f1d8fc9fcaf63d14f",
+      "started_at": "2026-10-20T04:54:10.008778+00:00",
+      "completed_at": "2026-10-20T04:54:10.011798+00:00",
+      "method": "retained bytes",
+      "path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\sources\\aata-20250801.pdf"
+    },
+    {
+      "file": "PrimeFin.lean",
+      "sha256": "92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6",
+      "started_at": "2026-10-20T04:54:10.011798+00:00",
+      "completed_at": "2026-10-20T04:54:10.012801+00:00",
+      "method": "retained bytes",
+      "path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\sources\\PrimeFin.lean"
+    },
+    {
+      "file": "Infinite.lean",
+      "sha256": "ede54daa0f432b403dfd402d96c682fc892f371fcbec26fb003c3fece9aea3f5",
+      "started_at": "2026-10-20T04:54:10.012801+00:00",
+      "completed_at": "2026-10-20T04:54:10.020802+00:00",
+      "method": "retained bytes",
+      "path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\sources\\Infinite.lean"
+    },
+    {
+      "file": "PrimeDefs.lean",
+      "sha256": "aebd695f444b13ff056ba32c43c88d31b327a5e65d2a3e0ed4784643c542a59c",
+      "started_at": "2026-10-20T04:54:10.020802+00:00",
+      "completed_at": "2026-10-20T04:54:10.028462+00:00",
+      "method": "retained bytes",
+      "path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\sources\\PrimeDefs.lean"
+    },
+    {
+      "file": "mathlib-LICENSE",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "started_at": "2026-10-20T04:54:10.028462+00:00",
+      "completed_at": "2026-10-20T04:54:10.035868+00:00",
+      "method": "retained bytes",
+      "path": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.2-work-2026-10-20\\sources\\mathlib-LICENSE"
+    }
+  ],
+  "commands": [],
+  "full_manifest_validation": "not run: no producer or manifest",
+  "corpus_admission": false,
+  "result": "failed",
+  "error": "Mathlib/Data/Nat/PrimeFin.lean",
+  "exit_code": 1,
+  "completed_at": "2026-10-20T04:54:10.036372+00:00"
+}

@@ -2149,3 +2149,74 @@ The existing external-only decision is retained for source and canonical child/c
   arrays and checksums. Six registry packages plus the new workspace crate produce 33 entries.
   No Lean, Mathlib, existing Rust dependency, compiler or manifest-schema pin changes.
 - **Bears on:** ADR-0006 / S1.3 implementation only; no CLAIM or mathematical status.
+
+---
+
+## S-0067 — Judson, AATA Annual Edition 2025, Euclid's infinitude of primes
+
+- **State:** VERIFIED (primary publication retrieved and selected passage/definitions/rights
+  read 2026-10-20 UTC; external bytes; S1.2 development candidate only, not corpus admission).
+- **Author/title/edition:** Thomas W. Judson, *Abstract Algebra: Theory and Applications*,
+  Annual Edition 2025, dated August 1, 2025. The title page separately credits Robert A.
+  Beezer for Sage exercises and Antonio Behn for Spanish translation. The copyright page
+  names Thomas W. Judson and Robert A. Beezer, 1997–2025.
+- **Primary:** <https://judsonbooks.org/aata-files/aata-20250801.pdf>, HTTP 200,
+  accessed **2026-10-20T04:50:55.721358Z**, 2,207,438 bytes, SHA-256
+  `4f74587b61861b4790d613f2adb64699f90fd1d07760204f1d8fc9fcaf63d14f`.
+  The author's [book page](https://judsonbooks.org/abstract-algebra-theory-and-applications/)
+  links this fixed edition; its dynamic discovery-page bytes are separately recorded.
+- **Exact locator/content used:** Theorem **2.2.6 (Euclid)**, subsection **2.2.2 Prime Numbers**,
+  printed **p.28**, physical PDF **page 41** (one-based). The statement says:
+  "There exist an infinite number of primes." The same-page definition restricts primes to
+  integers greater than one whose positive divisors are one and themselves. The printed
+  proof is present and was read for context; it is not the offered argument selected for
+  this pair. The candidate selects the statement, with zero informal proof steps, and offers
+  the Mathlib proof identified by S-0068. Executor transcription/pairing is separately credited.
+- **Licence actually read:** copyright page (PDF page 3) grants GFDL version 1.2 or later,
+  with no invariant sections and no front/back cover texts. Appendix A, printed pp.461–467,
+  reproduces GFDL 1.3, including copying/modification conditions. The grant is not Apache-2.0.
+  Complete source and canonical informal bytes remain external by choice; this record does
+  not claim the licence prohibits redistribution. Public metadata/review contains a short
+  attributed mathematical quotation, not the book's proof. A separate request to distribute
+  a modified extract must satisfy that licence and preserve attribution.
+- **Evidence:** `analysis/s1-2/retrieval.json`, candidate correspondence and external byte
+  locations in `analysis/s1-2/README.md`. The page and copyright notice were rendered and
+  visually read, alongside `pdftotext -layout`. Earlier inaccessible old-host URLs and an
+  optional GNU-host licence fetch are retrieval-route failures, not a failed candidate;
+  the primary book itself supplies the grant and complete licence.
+- **Bears on:** ADR-0007 and prospective S1.2 pairing only; development-exposed; no CLAIM.
+
+## S-0068 — Pinned Mathlib prime-infinitude declaration and source licence
+
+- **State:** VERIFIED (pinned primary blobs freshly retrieved/read 2026-10-20 UTC;
+  focused Lean inspection executed; no corpus admission or PROVEN promotion).
+- **Primary declaration:** `Nat.infinite_setOfPred_prime` in
+  `Mathlib/Data/Nat/PrimeFin.lean`, lines 28–29 at commit
+  `d13f23b723b8a846827a245b89c10fc7d3f11612`.
+  [Immutable source](https://github.com/leanprover-community/mathlib4/blob/d13f23b723b8a846827a245b89c10fc7d3f11612/Mathlib/Data/Nat/PrimeFin.lean#L28).
+  Exact raw URL, access time and companion-source digests: `analysis/s1-2/retrieval.json`.
+  Module fetched HTTP 200 at **2026-10-20T04:50:56.017343Z**, 5,328 bytes, SHA-256
+  `92a5630a19bff74ade4088f1253cf75b0ac8143c002e6b604ac0b77a39c9ecf6`.
+- **Content used:** the exact set-infinitude theorem, `Nat.Prime` / `Nat.prime_def`,
+  the unbounded-primes proof in `Mathlib/Data/Nat/Prime/Infinite.lean`,
+  `Set.Finite` / `Set.Infinite` and `Set.infinite_of_not_bddAbove`.
+  The full elaborated type has no free theorem parameters, implicit binders or typeclass
+  assumptions. The selected import is `Mathlib.Data.Nat.PrimeFin`; the existing alias
+  `Nat.infinite_setOf_prime` is deprecated and is not selected.
+- **Audit:** `lake env lean <CandidateAudit.lean>` under the pinned project exited 0.
+  The selected theorem, SYNDEOM wrapper and principal infinitude dependencies use only
+  `propext`, `Classical.choice`, `Quot.sound`; `Nat.prime_def` uses `propext`.
+  `pp.all` prints universes on two axiom names; these are the same standard constants.
+  Full type/dependency output and separate receipts are in `analysis/s1-2/`.
+- **Licence actually read:** pinned `LICENSE`, freshly retrieved at
+  **2026-10-20T04:50:56.859508Z**, 11,357 bytes, SHA-256
+  `b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1`,
+  Apache-2.0; headers credit copyright 2015 Microsoft Corporation and authors Leonardo
+  de Moura, Jeremy Avigad, Mario Carneiro. Source and notices remain external with the
+  pinned dependency; the small SYNDEOM alias references the existing declaration.
+  S-0008 remains the historical toolchain-licence record.
+- **Byte identity:** downloaded raw bytes match the pinned Git blobs. This Windows
+  dependency checkout has CRLF working files; their distinct hashes and exact LF/CRLF
+  relation are recorded, not substituted for the source-object digests.
+- **Bears on:** ADR-0007 / S1.2 source correspondence and candidate feasibility only;
+  this does not certify every statement/proof in Mathlib or the Judson book.
