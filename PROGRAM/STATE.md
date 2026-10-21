@@ -1,6 +1,18 @@
 # STATE
 
-- **Updated:** 2026-10-21 UTC (Session 22) — a session launched with the §6 resume prompt ran
+- **Updated:** 2026-10-21 UTC (Session 23 — the orientation repair under Al's decisions of
+  2026-10-21, an informed working session on branch `claude/s1-orientation-repair` from `main`
+  `d8c0d9cbcef0af5249cbf439808b74d8828bd69d`): **ADR-0008**, the accepted addendum governing
+  §4.1 (fetch and identify the examined snapshot before reconstructing state; preflight
+  `scripts/orient_preflight.py` with receipts; offline cases all passed), is the governing
+  orientation procedure (bullet below). Al's decision 1 preserves the held harvest branch at
+  `c3a3d36` and defers its admission review until after Gate S1 closes; decision 3 keeps the
+  existing dispositions. Session 22's retrieval evidence for candidates 28–31 is preserved
+  externally with full hashes; the accepted corpus (35 archived representations, 32 effective
+  logical items), registers, frozen packets and the constitution's bytes are unchanged. Gate S1
+  stays OPEN; the next action is the separate genuine examination, opened per ADR-0008 D1.
+  Event: `analysis/s1-orientation-repair/`.
+- **Previous update (Session 22):** 2026-10-21 UTC — a session launched with the §6 resume prompt ran
   the paused harvest from an unfetched working copy (its `origin/main` ref was 24 commits stale,
   so §4.1 reconstructed the Session-20 state); its candidates 28–30, all admitted (five items),
   are held on branch `claude/s1-harvest-candidates-28-30` for Al's disposition and are **not on
@@ -135,7 +147,27 @@
   `gh pr list --state merged`): a working copy's remote ref is a claim until fetched, and on
   2026-10-21 a §6-launched session reconstructed a 24-commit-stale state through §4.1 without
   noticing and ran the superseded harvest NEXT. A diverged local commit goes to a branch, never a
-  force-push.
+  force-push. (Historical note; the binding procedure is ADR-0008, next bullet.)
+- **GOVERNING ORIENTATION AMENDMENT — `PROGRAM/DECISIONS/ADR-0008.md` (accepted by Al,
+  2026-10-21; decision 2 in `analysis/s1-orientation-repair/OWNER-DECISIONS.md`).** Before any
+  program state is reconstructed or any NEXT is executed: verify the repository and remote
+  identity; `git fetch --prune origin` (a failed fetch stops the session — no cached NEXT);
+  discover the default branch from the remote; record the fetched tip's full SHA and tree, the
+  checked-out SHA, tree and branch, the working-tree status and the ahead/behind commit lists;
+  select the snapshot — a synchronized clean checkout is it, a clean behind-only checkout of the
+  default branch is fast-forwarded (ff-only) and re-verified, anything ahead, diverged or dirty is
+  left untouched and examined from an isolated worktree at the fetched tip; reconstruct only from
+  that checkout; re-fetch and compare before every push or PR, and stop if the target moved.
+  Never force-push, reset, discard or blind-merge. `python -I -X utf8
+  scripts/orient_preflight.py orient [--sync | --worktree DIR] [--allow-dirty PROGRAM/HANDOFF.md]
+  --receipt FILE` performs and records it (exit 0 snapshot established; 2 fetch failed; 3
+  checkout not current; `recheck --baseline SHA` exits 4 when the target moved); the gate does
+  not call it. For an examination, SD15's disclosure (ADR-0005) precedes the preflight, its
+  HANDOFF append is the one declared change, and it is never erased or rewritten; a
+  synchronized clean workspace may be prepared by an informed session beforehand, but the fresh
+  executor still performs its own disclosure and its own preflight and records the fetched SHA.
+  The constitution's bytes are unchanged (SHA-256 `89c198b0…8102`, in the preservation
+  baseline); SD15, ADR-0005 and the §6 prompt are unchanged.
 - **S1.3 orientation verification (2026-10-20):** existing Lean/Rust code passed the gate,
   with documentation reconciliation in progress; 29 existing tests passed, axioms `[propext]`.
   The new crate was enabled only after this gate. Its focused producer checks now pass
@@ -341,8 +373,9 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   amendment to §2 S3.2 (Al's ruling R2 of 2026-10-13) — written Session 7; ADR-0005 constitution
   amendment to SD15 (count-only exam disclosure; Al's SD15 audit ruling of 2026-10-13) — written
   Session 10; ADR-0006 reviewed TeX derivation — written 2026-10-20 (S1.3);
-  ADR-0007 first positive-pair procedure and candidate — written 2026-10-20 (S1.2).
-  **ADR-0008 is the next free number.**
+  ADR-0007 first positive-pair procedure and candidate — written 2026-10-20 (S1.2);
+  ADR-0008 orientation synchronization and snapshot selection, the accepted addendum governing
+  §4.1 — written and accepted 2026-10-21 (Session 23). **ADR-0009 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -432,7 +465,22 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   meet ADR-0003 D2.3. They were recorded as nonblocking and remain undecided. Exact IDs,
   evidence and analysis consequences: `analysis/s1-4/config/dispositions.json` and
   `analysis/s1-4/OBLIGATIONS.md`. Nothing is relabeled or newly harvested.
-- **Later harvest held off main — Al's decision (Session 22, 2026-10-21):** branch
+- **Later harvest held off main — DECIDED by Al on 2026-10-21 (decision 1, transcribed in
+  `analysis/s1-orientation-repair/OWNER-DECISIONS.md`): preserve branch
+  `claude/s1-harvest-candidates-28-30` at its original recorded commit
+  `c3a3d369689d56bab3678f519904087b313daf4e`; defer its admission review and integration until
+  after Gate S1 closes. This preserves the work and approves nothing: the five proposed labels
+  are not approved, no future source identifiers are reserved, accepted main's harvest position
+  stays at candidate 27 / `1403.4485` (candidate 28 / `1403.6317` saved), and merging or
+  cherry-picking the stale branch is not authorized. The branch's manifests, producer provenance
+  (`engine_commit` `8e222a4`), records and rows stay as recorded; Session 22's retrieval
+  evidence (originals, saved pages, receipts, diffs, configs; 147 files, 17,824,213 bytes) is
+  preserved with full SHA-256 pins under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\held-evidence\`, manifest
+  copied to `analysis/s1-orientation-repair/evidence/held-evidence-manifest.json`; ten abstract
+  pages exist only as hash-and-size receipts (listed there). Candidate 31 remains undecided.
+  Do not request this decision again. The integration conditions recorded in Session 22 remain
+  the description of the later review. — Session 22's original record of the hold: branch
   `claude/s1-harvest-candidates-28-30` (commit `c3a3d36` on base `8e222a4`, pushed) holds Route A
   candidates 28–30, examined in order and all admitted — five items: arXiv 1403.6317 Theorem 1
   (FLAW-0012, false by source document); 1403.8075 Proposition 4.1 (FLAW-0004), Theorems 4.3 and
@@ -449,6 +497,17 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   re-run on 36 items; (c) discard and re-harvest later from the log. Until Al rules, main's
   harvest resume point stays candidate 28 / `1403.6317`; the branch's HARVEST-LOG rows, records
   and HANDOFF Session 22 hold the full account, including candidate 31 opened but undecided.
+- **Older questions — RETAINED by Al on 2026-10-21 (decision 3):** the seven truth questions,
+  seven severity questions and the unnamed-result question keep their existing dispositions
+  (`analysis/s1-4/config/dispositions.json`, `analysis/s1-4/OBLIGATIONS.md`). The questions the
+  held branch introduced (an eighth truth reading, two further severity readings, further unnamed
+  results, its item 36's "overcome in a later paper" wording) remain pending that branch's later
+  admission review. Do not request this decision again.
+- **Conditional projections, not inventory (Session 23):** the accepted population remains 35
+  archived representations and 32 effective logical items. If all five held items were admitted
+  unchanged, the errata/retraction-only total would be 36 items; the whole-corpus projection
+  would be 37 effective logical items and 40 archived representations, absent other changes.
+  These are projections conditional on a review that has not happened, not measured results.
 
 - **Q3 — RESOLVED 2026-10-13 (Session 7).** Al: SPDX `Apache-2.0` for SYNDEOM's original software
   and technical documentation, with the release boundary recorded in ADR-0000 Addendum 2 R1 and
@@ -544,14 +603,22 @@ preamble, handoff or extra task text; a full-history continuation or subagent is
 not cold. The session must honor SD15 disclosure, reconstruct from the repo via
 §4.1, run the required checks and determine whether every criterion supports closure.
 This readiness assessment is not a PASS; Gate S1 remains OPEN until that examination.
-The examination session runs `git fetch origin` before §4.1's commands and reconstructs from
-the fetched `origin/main`, recording its SHA: Session 22 showed that an unfetched working copy
-reproduces a stale state and passes §4.1 silently.
+The examination opens per **ADR-0008 D1** (the governing orientation amendment, bullet above):
+step 0, the SD15 disclosure appended to HANDOFF before any orientation command (ADR-0005); then
+steps 1–5, `python -I -X utf8 scripts/orient_preflight.py orient --expect-url
+https://github.com/Quigles1337/Syndeom.git --allow-dirty PROGRAM/HANDOFF.md --receipt <file>`
+(a failed fetch stops the session; a checkout that is not the fetched tip is examined from an
+isolated worktree); the examination's record states the fetched `origin/main` SHA and tree and
+the examined checkout. Session 22 showed that an unfetched working copy reproduces a stale state
+and passes §4.1 silently; its attempt stays recorded as unsuccessful. Preparing a synchronized
+clean checkout beforehand (this repair leaves `C:\Users\LEET\Syndeom` on the repair branch;
+`main` there equals the fetched tip) is not part of the examination.
 
 The seven truth/seven severity/unnamed-result questions keep their existing
 dispositions and exclusions. Missing lengths and external-byte verification remain
 scoring prerequisites; canonical production needs selection, context and locator
 review. The frozen S1.4 packet and bins remain historical. Harvest stays paused
 through candidate 27 / `1403.4485`, with candidate 28 / `1403.6317` saved for later; a later
-harvest of candidates 28–30 exists on branch `claude/s1-harvest-candidates-28-30`, held for Al's
-disposition (dispositions above) and not part of the state under examination.
+harvest of candidates 28–30 is preserved on branch `claude/s1-harvest-candidates-28-30` at
+`c3a3d36` for admission review after Gate S1 closes (Al's decision 1, dispositions above) and is
+not part of the state under examination.

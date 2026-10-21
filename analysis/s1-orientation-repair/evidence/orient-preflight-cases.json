@@ -1,0 +1,1022 @@
+{
+ "schema": "syndeom-orient-preflight-cases/1",
+ "recorded_utc": "2026-10-21T23:37:59.910720+00:00",
+ "work_dir": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases",
+ "python": "3.11.9",
+ "git": "git version 2.49.0.windows.1",
+ "all_passed": true,
+ "cases": [
+  {
+   "case": "setup",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "B at c1 after clone",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "git",
+      "init",
+      "--bare",
+      "-b",
+      "main",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\remote.git"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases",
+     "exit_code": 0,
+     "stdout": "Initialized empty Git repository in C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/orientation-cases/remote.git/\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "init",
+      "-q",
+      "-b",
+      "main",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "config",
+      "core.autocrlf",
+      "false"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "add",
+      "-A"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "commit",
+      "-q",
+      "-m",
+      "add c1"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "7034f3706d5df72ff147c439d78d959354ead8b2\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "add",
+      "-A"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "commit",
+      "-q",
+      "-m",
+      "add SESSION: fixture"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "b272b13c878f101ae65d5bc6983e236ffd77e433\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "b272b13c878f101ae65d5bc6983e236ffd77e433\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "remote",
+      "add",
+      "origin",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\remote.git"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "push",
+      "-q",
+      "-u",
+      "origin",
+      "main"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "clone",
+      "-q",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\remote.git",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "config",
+      "core.autocrlf",
+      "false"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "b272b13c878f101ae65d5bc6983e236ffd77e433\n",
+     "stderr": ""
+    }
+   ]
+  },
+  {
+   "case": "1-stale-tracking-branch-appears-synchronized",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "git status -sb shows no behind count before fetch",
+     "ok": true,
+     "detail": "## main...origin/main"
+    },
+    {
+     "expect": "cached origin/main equals HEAD (0 behind) before fetch",
+     "ok": true,
+     "detail": "0"
+    },
+    {
+     "expect": "yet the remote tip differs from B's HEAD",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "git",
+      "add",
+      "-A"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "commit",
+      "-q",
+      "-m",
+      "add c2"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "b2c9a8dbf8b798c7193d8e994f63adba7794f723\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "push",
+      "-q",
+      "origin",
+      "main"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "status",
+      "-sb"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "## main...origin/main\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-list",
+      "--count",
+      "HEAD..origin/main"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "0\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "b272b13c878f101ae65d5bc6983e236ffd77e433\n",
+     "stderr": ""
+    }
+   ]
+  },
+  {
+   "case": "2-3-fetch-exposes-newer-snapshot-and-stale-checkout-is-not-current",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "exit 3 (checkout not current)",
+     "ok": true,
+     "detail": "3"
+    },
+    {
+     "expect": "classification behind",
+     "ok": true,
+     "detail": "behind"
+    },
+    {
+     "expect": "fetched sha is the remote's c2",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "one remote-only commit listed",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "HEAD unchanged (still c1)",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "fetch recorded with exit 0 and times",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "receipt records head, fetched, trees, remote, default branch",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case2.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 3,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": \"behind\",\n \"action\": \"stop: the checkout is not the fetched snapshot (behind); nothing was changed. Use --sync on a clean checkout of the default branch that is only behind, or --worktree DIR for an isolated checkout at the snapshot.\",\n \"result\": \"CHECKOUT-NOT-CURRENT\",\n \"exit_code\": 3,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"b2c9a8dbf8b798c7193d8e994f63adba7794f723\",\n  \"tree\": \"3eff19eb2b6ef69c48801d84d7582aa499ac229c\"\n },\n \"head\": {\n  \"sha\": \"b272b13c878f101ae65d5bc6983e236ffd77e433\",\n  \"tree\": \"fd62b9b622030b6acc9901fbfdae7f8f60005876\",\n  \"branch\": \"main\"\n },\n \"examined_checkout\": \"C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/orientation-cases/B\"\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "b272b13c878f101ae65d5bc6983e236ffd77e433\n",
+     "stderr": ""
+    }
+   ]
+  },
+  {
+   "case": "4-clean-behind-only-sync-fast-forwards",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "exit 0",
+     "ok": true,
+     "detail": "0"
+    },
+    {
+     "expect": "HEAD now equals fetched c2",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "fast-forward recorded",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "working tree clean",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--sync",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case4.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": \"behind\",\n \"action\": \"fast-forwarded the default branch to the fetched tip (ff-only)\",\n \"result\": \"SNAPSHOT-ESTABLISHED\",\n \"exit_code\": 0,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"b2c9a8dbf8b798c7193d8e994f63adba7794f723\",\n  \"tree\": \"3eff19eb2b6ef69c48801d84d7582aa499ac229c\"\n },\n \"head\": {\n  \"sha\": \"b272b13c878f101ae65d5bc6983e236ffd77e433\",\n  \"tree\": \"fd62b9b622030b6acc9901fbfdae7f8f60005876\",\n  \"branch\": \"main\"\n },\n \"examined_checkout\": \"C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/orientation-cases/B\"\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "b2c9a8dbf8b798c7193d8e994f63adba7794f723\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "status",
+      "--porcelain"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    }
+   ]
+  },
+  {
+   "case": "5-ahead-diverged-and-dirty-work-preserved",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "exit 3 even with --sync",
+     "ok": true,
+     "detail": "3"
+    },
+    {
+     "expect": "classification diverged",
+     "ok": true,
+     "detail": "diverged"
+    },
+    {
+     "expect": "unrelated dirty paths reported",
+     "ok": true,
+     "detail": "['base.txt', 'untracked.txt']"
+    },
+    {
+     "expect": "local commit preserved",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "uncommitted edit preserved",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "untracked file preserved",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "remote commit not merged",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "exit 0 with an isolated worktree",
+     "ok": true,
+     "detail": "0"
+    },
+    {
+     "expect": "worktree HEAD is the fetched c3",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "examined checkout is the worktree",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "original checkout still at its local commit",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "original dirty work still present",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "git",
+      "add",
+      "-A"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "commit",
+      "-q",
+      "-m",
+      "add local work"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "683ab41718df758b83a74728be64cf259df4822c\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "add",
+      "-A"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "commit",
+      "-q",
+      "-m",
+      "add c3"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "push",
+      "-q",
+      "origin",
+      "main"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--sync",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case5a.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 3,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": \"diverged\",\n \"action\": \"stop: the checkout is not the fetched snapshot (diverged; 2 unrelated working-tree change(s)); nothing was changed. Use --sync on a clean checkout of the default branch that is only behind, or --worktree DIR for an isolated checkout at the snapshot.\",\n \"result\": \"CHECKOUT-NOT-CURRENT\",\n \"exit_code\": 3,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\",\n  \"tree\": \"5d09d3ae72fcad5b974f848d4ad2a764495b760e\"\n },\n \"head\": {\n  \"sha\": \"683ab41718df758b83a74728be64cf259df4822c\",\n  \"tree\": \"0c9a6b224b8c1b9f4895c632cdbea6e585fa8dd3\",\n  \"branch\": \"main\"\n },\n \"examined_checkout\": \"C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/orientation-cases/B\"\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "683ab41718df758b83a74728be64cf259df4822c\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "merge-base",
+      "--is-ancestor",
+      "adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 1,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--worktree",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B-worktree",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case5b.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": \"diverged\",\n \"action\": \"isolated worktree created at the fetched tip; the original checkout (diverged; unrelated changes: 2) is untouched\",\n \"result\": \"SNAPSHOT-ESTABLISHED-IN-WORKTREE\",\n \"exit_code\": 0,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\",\n  \"tree\": \"5d09d3ae72fcad5b974f848d4ad2a764495b760e\"\n },\n \"head\": {\n  \"sha\": \"683ab41718df758b83a74728be64cf259df4822c\",\n  \"tree\": \"0c9a6b224b8c1b9f4895c632cdbea6e585fa8dd3\",\n  \"branch\": \"main\"\n },\n \"examined_checkout\": \"C:\\\\Users\\\\LEET\\\\Codex\\\\Temp\\\\syndeom-orientation-repair-20261021\\\\orientation-cases\\\\B-worktree\"\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "683ab41718df758b83a74728be64cf259df4822c\n",
+     "stderr": ""
+    }
+   ]
+  },
+  {
+   "case": "6-fetch-failure-stops",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "exit 2",
+     "ok": true,
+     "detail": "2"
+    },
+    {
+     "expect": "result FETCH-FAILED",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "no snapshot recorded",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "HEAD unchanged",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "git",
+      "remote",
+      "set-url",
+      "origin",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\missing.git"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "683ab41718df758b83a74728be64cf259df4822c\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--sync",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case6.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 2,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": null,\n \"action\": \"stop: no current snapshot (fetch failed); the cached checkout is not evidence\",\n \"result\": \"FETCH-FAILED\",\n \"exit_code\": 2\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "683ab41718df758b83a74728be64cf259df4822c\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "remote",
+      "set-url",
+      "origin",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\remote.git"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\B",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    }
+   ]
+  },
+  {
+   "case": "7-target-moved-before-publication",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "C synchronized at the baseline",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "exit 4 (target moved)",
+     "ok": true,
+     "detail": "4"
+    },
+    {
+     "expect": "moved_to is c4",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "baseline is an ancestor of the new tip",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "nothing was published (remote tip is A's c4)",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "recheck against the current tip exits 0",
+     "ok": true,
+     "detail": "0"
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "git",
+      "clone",
+      "-q",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\remote.git",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case7a.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+     "exit_code": 0,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": \"synchronized\",\n \"action\": \"none: HEAD is the fetched default-branch tip\",\n \"result\": \"SNAPSHOT-ESTABLISHED\",\n \"exit_code\": 0,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\",\n  \"tree\": \"5d09d3ae72fcad5b974f848d4ad2a764495b760e\"\n },\n \"head\": {\n  \"sha\": \"adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\",\n  \"tree\": \"5d09d3ae72fcad5b974f848d4ad2a764495b760e\",\n  \"branch\": \"main\"\n },\n \"examined_checkout\": \"C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/orientation-cases/C\"\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "add",
+      "-A"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "commit",
+      "-q",
+      "-m",
+      "add c4"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "rev-parse",
+      "HEAD"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "7df204d808cf9badbefe75edfa3c218587b5ab0b\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "push",
+      "-q",
+      "origin",
+      "main"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\A",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "recheck",
+      "--baseline",
+      "adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case7b.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+     "exit_code": 4,
+     "stdout": "{\n \"mode\": \"recheck\",\n \"classification\": null,\n \"action\": \"stop: the target moved since the baseline; re-orient on the new tip and integrate deliberately (fast-forward, rebase or merge you have read); never force-push\",\n \"result\": \"TARGET-MOVED\",\n \"exit_code\": 4,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\",\n  \"tree\": \"558d379a568d95cb313f9b4e2ff8dec076e8e05f\"\n },\n \"head\": {\n  \"sha\": \"adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\",\n  \"tree\": \"5d09d3ae72fcad5b974f848d4ad2a764495b760e\",\n  \"branch\": \"main\"\n },\n \"baseline\": \"adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\",\n \"moved_to\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\"\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "git",
+      "ls-remote",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\remote.git",
+      "refs/heads/main"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+     "exit_code": 0,
+     "stdout": "7df204d808cf9badbefe75edfa3c218587b5ab0b\trefs/heads/main\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "recheck",
+      "--baseline",
+      "7df204d808cf9badbefe75edfa3c218587b5ab0b",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case7c.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+     "exit_code": 0,
+     "stdout": "{\n \"mode\": \"recheck\",\n \"classification\": null,\n \"action\": \"target unchanged since the baseline; publication may proceed as planned\",\n \"result\": \"TARGET-UNCHANGED\",\n \"exit_code\": 0,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\",\n  \"tree\": \"558d379a568d95cb313f9b4e2ff8dec076e8e05f\"\n },\n \"head\": {\n  \"sha\": \"adbb36a3c4fab463fc3ff79fb2d5600cfd3cd3cb\",\n  \"tree\": \"5d09d3ae72fcad5b974f848d4ad2a764495b760e\",\n  \"branch\": \"main\"\n },\n \"baseline\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\"\n}\n",
+     "stderr": ""
+    }
+   ]
+  },
+  {
+   "case": "8-examination-handoff-append-accounted-for",
+   "passed": true,
+   "checks": [
+    {
+     "expect": "without an allowance the append counts as an unrelated change (exit 3)",
+     "ok": true,
+     "detail": "3"
+    },
+    {
+     "expect": "with the allowance the snapshot is established (exit 0)",
+     "ok": true,
+     "detail": "0"
+    },
+    {
+     "expect": "the allowed path is reported as present",
+     "ok": true,
+     "detail": ""
+    },
+    {
+     "expect": "the disclosure text is still there",
+     "ok": true,
+     "detail": ""
+    }
+   ],
+   "steps": [
+    {
+     "argv": [
+      "git",
+      "merge",
+      "-q",
+      "--ff-only",
+      "origin/main"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+     "exit_code": 0,
+     "stdout": "",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case8a.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+     "exit_code": 3,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": \"synchronized\",\n \"action\": \"stop: the checkout is not the fetched snapshot (1 unrelated working-tree change(s)); nothing was changed. Use --sync on a clean checkout of the default branch that is only behind, or --worktree DIR for an isolated checkout at the snapshot.\",\n \"result\": \"CHECKOUT-NOT-CURRENT\",\n \"exit_code\": 3,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\",\n  \"tree\": \"558d379a568d95cb313f9b4e2ff8dec076e8e05f\"\n },\n \"head\": {\n  \"sha\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\",\n  \"tree\": \"558d379a568d95cb313f9b4e2ff8dec076e8e05f\",\n  \"branch\": \"main\"\n },\n \"examined_checkout\": \"C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/orientation-cases/C\"\n}\n",
+     "stderr": ""
+    },
+    {
+     "argv": [
+      "C:\\Users\\LEET\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-I",
+      "-X",
+      "utf8",
+      "C:\\Users\\LEET\\Syndeom\\scripts\\orient_preflight.py",
+      "orient",
+      "--allow-dirty",
+      "HANDOFF.md",
+      "--repo",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+      "--receipt",
+      "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\case8b.receipt.json"
+     ],
+     "cwd": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\orientation-cases\\C",
+     "exit_code": 0,
+     "stdout": "{\n \"mode\": \"orient\",\n \"classification\": \"synchronized\",\n \"action\": \"none: HEAD is the fetched default-branch tip\",\n \"result\": \"SNAPSHOT-ESTABLISHED\",\n \"exit_code\": 0,\n \"fetched\": {\n  \"ref\": \"refs/remotes/origin/main\",\n  \"sha\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\",\n  \"tree\": \"558d379a568d95cb313f9b4e2ff8dec076e8e05f\"\n },\n \"head\": {\n  \"sha\": \"7df204d808cf9badbefe75edfa3c218587b5ab0b\",\n  \"tree\": \"558d379a568d95cb313f9b4e2ff8dec076e8e05f\",\n  \"branch\": \"main\"\n },\n \"examined_checkout\": \"C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/orientation-cases/C\"\n}\n",
+     "stderr": ""
+    }
+   ]
+  }
+ ],
+ "note": "offline fixture; establishes nothing about any live remote's current state"
+}

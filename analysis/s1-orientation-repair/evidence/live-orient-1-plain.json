@@ -1,0 +1,259 @@
+{
+ "schema": "syndeom-orient-preflight/1",
+ "mode": "orient",
+ "started_utc": "2026-10-21T23:38:00.442832+00:00",
+ "commands": [
+  {
+   "argv": [
+    "git",
+    "rev-parse",
+    "--show-toplevel"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:00.442832+00:00",
+   "finished_utc": "2026-10-21T23:38:00.460912+00:00",
+   "exit_code": 0,
+   "stdout_head": "C:/Users/LEET/Syndeom\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "rev-parse",
+    "--git-dir"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:00.460912+00:00",
+   "finished_utc": "2026-10-21T23:38:00.478130+00:00",
+   "exit_code": 0,
+   "stdout_head": ".git\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "remote",
+    "get-url",
+    "origin"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:00.478130+00:00",
+   "finished_utc": "2026-10-21T23:38:00.496145+00:00",
+   "exit_code": 0,
+   "stdout_head": "https://github.com/Quigles1337/Syndeom.git\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "fetch",
+    "--prune",
+    "origin"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:00.496145+00:00",
+   "finished_utc": "2026-10-21T23:38:01.330040+00:00",
+   "exit_code": 0,
+   "stdout_head": "",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "ls-remote",
+    "--symref",
+    "origin",
+    "HEAD"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.330040+00:00",
+   "finished_utc": "2026-10-21T23:38:01.680050+00:00",
+   "exit_code": 0,
+   "stdout_head": "ref: refs/heads/main\tHEAD\nd8c0d9cbcef0af5249cbf439808b74d8828bd69d\tHEAD\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "rev-parse",
+    "refs/remotes/origin/main"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.680050+00:00",
+   "finished_utc": "2026-10-21T23:38:01.698556+00:00",
+   "exit_code": 0,
+   "stdout_head": "d8c0d9cbcef0af5249cbf439808b74d8828bd69d\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "rev-parse",
+    "refs/remotes/origin/main^{tree}"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.698556+00:00",
+   "finished_utc": "2026-10-21T23:38:01.717070+00:00",
+   "exit_code": 0,
+   "stdout_head": "f98e7832b3f8c4371e7fae7c6deeffff737f3c84\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "rev-parse",
+    "HEAD"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.718070+00:00",
+   "finished_utc": "2026-10-21T23:38:01.734145+00:00",
+   "exit_code": 0,
+   "stdout_head": "d8c0d9cbcef0af5249cbf439808b74d8828bd69d\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "symbolic-ref",
+    "-q",
+    "--short",
+    "HEAD"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.734145+00:00",
+   "finished_utc": "2026-10-21T23:38:01.754555+00:00",
+   "exit_code": 0,
+   "stdout_head": "claude/s1-orientation-repair\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "rev-parse",
+    "HEAD^{tree}"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.754555+00:00",
+   "finished_utc": "2026-10-21T23:38:01.775155+00:00",
+   "exit_code": 0,
+   "stdout_head": "f98e7832b3f8c4371e7fae7c6deeffff737f3c84\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "status",
+    "--porcelain=v1",
+    "--untracked-files=normal"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.775155+00:00",
+   "finished_utc": "2026-10-21T23:38:01.800188+00:00",
+   "exit_code": 0,
+   "stdout_head": "?? scripts/orient_preflight.py\n?? scripts/orient_preflight_cases.py\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "rev-list",
+    "--left-right",
+    "--count",
+    "HEAD...refs/remotes/origin/main"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.800188+00:00",
+   "finished_utc": "2026-10-21T23:38:01.820197+00:00",
+   "exit_code": 0,
+   "stdout_head": "0\t0\n",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "log",
+    "--format=%H %s",
+    "-n",
+    "50",
+    "refs/remotes/origin/main..HEAD"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.820197+00:00",
+   "finished_utc": "2026-10-21T23:38:01.841321+00:00",
+   "exit_code": 0,
+   "stdout_head": "",
+   "stderr_head": ""
+  },
+  {
+   "argv": [
+    "git",
+    "log",
+    "--format=%H %s",
+    "-n",
+    "50",
+    "HEAD..refs/remotes/origin/main"
+   ],
+   "cwd": "C:\\Users\\LEET\\Syndeom",
+   "started_utc": "2026-10-21T23:38:01.841321+00:00",
+   "finished_utc": "2026-10-21T23:38:01.860843+00:00",
+   "exit_code": 0,
+   "stdout_head": "",
+   "stderr_head": ""
+  }
+ ],
+ "repo_toplevel": "C:/Users/LEET/Syndeom",
+ "git_dir": ".git",
+ "remote": {
+  "name": "origin",
+  "url": "https://github.com/Quigles1337/Syndeom.git"
+ },
+ "fetch": {
+  "remote": "origin",
+  "started_utc": "2026-10-21T23:38:00.496145+00:00",
+  "finished_utc": "2026-10-21T23:38:01.330040+00:00",
+  "exit_code": 0,
+  "stderr_tail": ""
+ },
+ "default_branch": {
+  "name": "main",
+  "source": "git ls-remote --symref"
+ },
+ "fetched": {
+  "ref": "refs/remotes/origin/main",
+  "sha": "d8c0d9cbcef0af5249cbf439808b74d8828bd69d",
+  "tree": "f98e7832b3f8c4371e7fae7c6deeffff737f3c84"
+ },
+ "head": {
+  "sha": "d8c0d9cbcef0af5249cbf439808b74d8828bd69d",
+  "tree": "f98e7832b3f8c4371e7fae7c6deeffff737f3c84",
+  "branch": "claude/s1-orientation-repair"
+ },
+ "working_tree": {
+  "changed": [
+   {
+    "status": "??",
+    "path": "scripts/orient_preflight.py"
+   },
+   {
+    "status": "??",
+    "path": "scripts/orient_preflight_cases.py"
+   }
+  ],
+  "allowed": [],
+  "allowed_present": [],
+  "unrelated": [
+   "scripts/orient_preflight.py",
+   "scripts/orient_preflight_cases.py"
+  ]
+ },
+ "ahead": 0,
+ "behind": 0,
+ "local_only": [],
+ "remote_only": [],
+ "classification": "synchronized",
+ "examined_checkout": "C:/Users/LEET/Syndeom",
+ "action": "stop: the checkout is not the fetched snapshot (2 unrelated working-tree change(s)); nothing was changed. Use --sync on a clean checkout of the default branch that is only behind, or --worktree DIR for an isolated checkout at the snapshot.",
+ "result": "CHECKOUT-NOT-CURRENT",
+ "exit_code": 3,
+ "finished_utc": "2026-10-21T23:38:01.860843+00:00"
+}

@@ -80,6 +80,17 @@ This informed session does not close Gate S1. S1.1 supports the admitted, unskip
 prefix; the harvest is not exhausted. Harvest remains paused through candidate 27 /
 `1403.4485`, with candidate 28 / `1403.6317` saved for a later harvest.
 
+Orientation is governed by [ADR-0008](PROGRAM/DECISIONS/ADR-0008.md), the addendum to
+constitution §4.1 accepted by the owner on 2026-10-21: before any program state is
+reconstructed or any NEXT executed, a session fetches, discovers the default branch, records
+the fetched and checked-out SHAs and trees, selects the examined snapshot (fast-forward only
+for a clean behind-only checkout; an isolated worktree otherwise) and rechecks the target
+before publishing; [`scripts/orient_preflight.py`](scripts/orient_preflight.py) performs and
+records it, outside the build gate. A later harvest of candidates 28–30 is preserved on branch
+`claude/s1-harvest-candidates-28-30` at its recorded commit for admission review after Gate S1
+closes (owner decision 1); its retrieval evidence is pinned in
+[`analysis/s1-orientation-repair/`](analysis/s1-orientation-repair/README.md).
+
 ## Architecture
 
 SYNDEOM currently operates as a **local, file-based research pipeline**. Rust owns canonical
@@ -380,6 +391,9 @@ retained result when inputs are unchanged; provenance names the actual checkout 
 | [`sources/`](sources/) | Source copies whose licences permit redistribution |
 | [`scripts/`](scripts/) | Local verification gate and register checks |
 | [`scripts/reproduce_s1_3.py`](scripts/reproduce_s1_3.py) | Source retrieval and orchestration of two independent Rust derivations |
+| [`scripts/orient_preflight.py`](scripts/orient_preflight.py) | ADR-0008 orientation preflight: fetch, snapshot selection, receipt, pre-publication recheck (not part of the gate) |
+| [`scripts/orient_preflight_cases.py`](scripts/orient_preflight_cases.py) | Offline verification of the preflight against temporary Git repositories |
+| [`analysis/s1-orientation-repair/`](analysis/s1-orientation-repair/) | Owner decisions of 2026-10-21, held-harvest evidence pins, preflight cases and live receipts, preservation and gate receipts |
 
 ## Governance and contribution
 
