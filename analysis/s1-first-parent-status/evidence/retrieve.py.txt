@@ -1,0 +1,37 @@
+import datetime, hashlib, io, json, pathlib, tarfile, urllib.request
+work=pathlib.Path(r'C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020')
+out=work/'retrieval-01'
+out.mkdir()
+urls=[('v70-archive.gz','https://arxiv.org/src/0706.0357v70'),('v71-archive.gz','https://arxiv.org/src/0706.0357v71'),('v70-abstract.html','https://arxiv.org/abs/0706.0357v70'),('v71-abstract.html','https://arxiv.org/abs/0706.0357v71'),('dlmf-27-8.html','https://dlmf.nist.gov/27.8'),('dlmf-25-15.html','https://dlmf.nist.gov/25.15'),('dlmf-27-4.html','https://dlmf.nist.gov/27.4'),('dlmf-27-2.html','https://dlmf.nist.gov/27.2')]
+records=[]
+for name,url in urls:
+    r=dict(name=name,url=url,accessed_utc=datetime.datetime.now(datetime.timezone.utc).isoformat())
+    try:
+        request=urllib.request.Request(url,headers={'User-Agent':'SYNDEOM-source-review/1.0'})
+        with urllib.request.urlopen(request,timeout=45) as response:
+            data=response.read()
+            r.update(final_url=response.url,http_status=response.status,content_type=response.headers.get('Content-Type'),bytes=len(data),sha256=hashlib.sha256(data).hexdigest())
+        with (out/name).open('xb') as stream: stream.write(data)
+    except Exception as e:
+        r['error']=str(e)
+    records.append(r)
+    print(json.dumps(r),flush=True)
+with (out/'retrieval.json').open('x',encoding='utf-8',newline='\n') as f: f.write(json.dumps(records,indent=2)+'\n')
+expected={'v70':(8236,'5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8'),'v71':(8750,'fffd0fdc3a868deb642102a1f72f23cd92ee89bf118c92a4b992cb5a6fdfd263')}
+correspondence=[]
+old=pathlib.Path(r'C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical-work\retrieval')
+for version,(size,digest) in expected.items():
+    data=(out/(version+'-archive.gz')).read_bytes()
+    assert len(data)==size and hashlib.sha256(data).hexdigest()==digest
+    assert data==(old/('0706.0357'+version+'.source.gz')).read_bytes()
+    with tarfile.open(fileobj=io.BytesIO(data),mode='r:gz') as t:
+        members=[m for m in t if m.isfile() and m.name.endswith('.tex')]
+        assert len(members)==1
+        m=members[0]; tex=t.extractfile(m).read()
+    with (out/(version+'.tex')).open('xb') as f:f.write(tex)
+    lines=tex.decode('utf-8').splitlines()
+    numbered='\n'.join(f'{i}: {line}' for i,line in enumerate(lines,1))+'\n'
+    with (out/(version+'-numbered.txt')).open('x',encoding='utf-8',newline='\n') as f:f.write(numbered)
+    correspondence.append(dict(version=version,archive_bytes=size,archive_sha256=digest,retained_archive_identical=True,member=m.name,tex_bytes=len(tex),tex_sha256=hashlib.sha256(tex).hexdigest()))
+with (out/'correspondence.json').open('x',encoding='utf-8',newline='\n') as f:f.write(json.dumps(correspondence,indent=2)+'\n')
+print('Archive identity checks PASS')

@@ -1,0 +1,32 @@
+C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\Witness-01.lean:18:65: error: unsolved goals
+case «0»
+χ : DirichletCharacter ℂ 2
+⊢ χ 0 = 1 0
+
+case «1»
+χ : DirichletCharacter ℂ 2
+⊢ χ 1 = 1 1
+C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\Witness-01.lean:25:43: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\Witness-01.lean:25:55: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\Witness-01.lean:33:79: error: unsolved goals
+χ : DirichletCharacter ℂ 2
+⊢ χ 2 = 0
+C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\Witness-01.lean:37:37: error: unsolved goals
+χ : DirichletCharacter ℂ 2
+⊢ ¬1 = χ 2 * coefficient χ
+C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\Witness-01.lean:42:41: error: `simp` made no progress
+C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\Witness-01.lean:46:55: warning: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+'FirstParentWitness.character_unique' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'FirstParentWitness.phase_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.phase_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'FirstParentWitness.coefficient_value' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'FirstParentWitness.finite_step_fails' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'FirstParentWitness.geometric_tail' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'FirstParentWitness.residual_series' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+'FirstParentWitness.residual_positive' depends on axioms: [propext, Classical.choice, Quot.sound]

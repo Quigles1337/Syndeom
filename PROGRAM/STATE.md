@@ -1,6 +1,20 @@
 # STATE
 
-- **Updated:** 2026-10-20 UTC — post-merge reconciliation and S1.4 completed for the
+- **Updated:** 2026-10-20 UTC — PR 5 owner merge reconciled; first-parent mathematical
+  status-support witness checked, metadata amendment proposed, canonical promotion held.
+  PR 5 merged at 20:41:46Z to main `1a76d9ac21cd5d2e4311f9164178327c0ca128bb`, tree
+  `3b9028c0502add53ac646108132d89ba5f1e5666` (same as PR head
+  `618271daf7b8b091382f800826dbe03156f4d803`); initial worktree clean, no open PRs.
+  At a=1,b=2,k=2 the displayed expansion gives 1 versus 0; at s=2 the original lemma's
+  residual is log(2)/3>0, derived with convergence/nonvanishing and checked again via
+  the missing Euler factor. Author testimony, executor reasoning and partial Lean
+  support are distinct. New packet: `analysis/s1-first-parent-status/`.
+  Actual Rust ingest generated and validated candidate `s1_ingest-v0.1.0-15ab865466d6`
+  twice outside the live corpus. Its false/counterexample reference replaces the old
+  source-document attribution prospectively; both embedded statuses agree. Owner ruling
+  and integration remain pending. Old metadata, all S1.4 bytes and 34 representations /
+  32 logical items remain unchanged. No canonical production or Gate S1 closure.
+- **Previous update (S1.4 before PR 5 merge):** 2026-10-20 UTC — post-merge reconciliation and S1.4 completed for the
   existing prefix, with Gate S1 open. Owner merged PR 4 at 18:10:13Z; actual base/corpus
   `e6a7cae4392dd1565ee57f9fb727cc01e453687d`, tree
   `2e4d454048ac916a0047bd908ae3051ba1b981af`; initial worktree clean, no open PRs.
@@ -55,7 +69,8 @@
   Orientation reconciliation, 2026-10-20: the former "no S1 criterion has evidence" and
   "harvest log / first items empty" statements were stale against the 31 manifests and log.
   The owner merged that admission in PR 4. S1.4 is now complete for the pinned prefix;
-  the next action is the first-parent status-support review. Harvest resume at candidate 28,
+  PR 5 merged S1.4 on 2026-10-20. The first-parent witness is now checked; the next action
+  is owner review of its exact ruling and validated metadata amendment. Harvest resume at candidate 28,
   `1403.6317`, remains unchanged. **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
   verbatim and alone, re-derived the program state from the repo in one pass without guessing and
@@ -93,7 +108,19 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification:** full `bash scripts/check.sh` on the initial reporting implementation
+- **Current build verification:** clean-base `bash scripts/check.sh` at
+  `1a76d9ac21cd5d2e4311f9164178327c0ca128bb`, tree
+  `3b9028c0502add53ac646108132d89ba5f1e5666`, passed 2026-10-20T21:44:58Z:
+  Lean build, golden axioms `[propext]`, fmt/clippy, all 67 Rust tests, 328 tracked files
+  and registers. Both actual orientation runs are retained in the new packet; the second
+  was an unnecessary retry while a sandbox process listing hid the first running process.
+  The exact packet Lean file separately compiles with all eight audited theorems using
+  `[propext, Classical.choice, Quot.sound]`; no complete analytic bridge is claimed.
+  Candidate validation and two fresh generations passed. The final clean committed tree
+  receives its own full gate, focused Lean audit and preservation check; actual revision,
+  tree, results and external receipts belong in this task's draft PR, without a self-referential
+  recording commit. Details and retained development failures: new packet `VERIFICATION.md`.
+- **Historical build verification (S1.4):** full `bash scripts/check.sh` on the initial reporting implementation
   `9375af283e748e915ffc6e31df12f1bb81122e1d`, tree
   `96cf29f99656b039561170cc9356d0839f97a6ef`, ended **2026-10-20T20:23:14.733002+00:00**:
   exit 0 / GATE: GREEN; Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy clean,
@@ -300,8 +327,8 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 |---|---|---|
 | S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `1403.4485` (candidates 1–27 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20): 27 examined, 21 admitted yielding 31 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; harvest resume remains candidate 28** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Orientation reconciliation (2026-10-20): the log and 31 admitted items exist; the former empty-slots sentence was stale. |
 | S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | **one positive pair admitted by owner merge PR 4** | ADR-0007; both pair RECORD post-merge dispositions; actual producer/both-file/lineage/type/axiom/replay evidence in `analysis/s1-2/implementation/`; merge metadata in `analysis/s1-4/config/merge-evidence.json`. No separate GitHub reviewer approval, no PROVEN promotion; statement-only informal selection, zero steps. |
-| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **32 raw parents + two canonical children, 32 logical items; 30 missing canonical lengths. One explicit promotion hold; historical labels retained.** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; historically recorded statement false, canonical promotion held pending status review; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
-| S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **complete for pinned prefix; qualified and reproducible** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` records the limits. |
+| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **32 raw parents + two canonical children, 32 logical items; 30 missing canonical lengths. One explicit promotion hold; historical labels retained.** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; historically recorded statement false, witness now checked, attribution amendment proposed and canonical promotion held; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
+| S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` records the limits. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. Source-status support is a separate outstanding hold. |
 | Repo green under the gate | **standing** | Build status above |
 | Cold-start test (§2, SD15) | open | a fresh conversation launched with the §6 Session-N prompt verbatim and alone, as for S0 (HANDOFF Session 5 reproduces the prompt) |
@@ -323,16 +350,20 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 
 ## Blockers
 
-- Gate S1 remains open: the first-parent source-status hold needs an explicit supported
-  disposition, and the genuine cold-start test has not run. No implementation blocker
-  remains for this S1.4 report. The older owner questions below retain their historical
+- Gate S1 remains open: the first-parent witness is checked, but its evidence category,
+  metadata amendment and effective-item treatment need the exact proposed owner ruling
+  and consistent integration; canonical eligibility remains held. The genuine cold-start
+  test has not run. S1.4 is merged and frozen. The older owner questions below retain their historical
   nonblocking classification; conservative report subsets expose their effect.
 
 ## Standing escalations (awaiting Al)
 
 - **First-parent promotion hold:** `s1_ingest-v0.1.0-63e23a952084`, appended RECORD review
   of 2026-10-20. Primary correction evidence did not establish the stored false/source-document
-  attribution. Resolve source support before canonical promotion; no replacement label assigned.
+  attribution. The new separately checked witness supports the narrow mathematical result,
+  not that historical attribution. `analysis/s1-first-parent-status/PROPOSED-RULING.md`
+  presents the D3/SD12 boundary and candidate `s1_ingest-v0.1.0-15ab865466d6`; no effective
+  metadata replacement or promotion is authorized yet. One logical item, never two samples.
 - **Carried questions restored from HANDOFF Session 20:** seven false-versus-undetermined
   readings (items 8, 10, 11, 14, 15, 18, 25); seven gap-versus-fatal severity readings
   (items 13, 16, 21, 24, 26, 27, 29); whether unnamed downstream results under candidate 25
@@ -427,12 +458,15 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**Resolve the documented status-support hold on `s1_ingest-v0.1.0-63e23a952084`.**
-Read its appended RECORD review, S-0024/S-0025 and `analysis/s1-3/retrieval.json`;
-record the actual primary testimony or separately checked counterexample and an explicit
-disposition under ADR-0003 D3. Preserve the historical manifest unless an authorized,
-attributed label amendment is supported. This is a source-status review, not another
-canonical-production or harvest task. The full gap ledger is `analysis/s1-4/OBLIGATIONS.md`.
+**Owner reviews the exact first-parent ruling and generated amendment.**
+Read `analysis/s1-first-parent-status/PROPOSED-RULING.md`, the checked `WITNESS.md`,
+candidate `s1_ingest-v0.1.0-15ab865466d6` and its validation/preservation evidence.
+Accept or reject the case-specific evidence-category and one-item amendment decision.
+If accepted, a separate verified integration must record the ruling, consistent effective
+metadata and counting before releasing the hold; the old object stays historical.
+The frozen `analysis/s1-4/OBLIGATIONS.md` remains the historical gap ledger, qualified
+by this later event. The seven truth/seven severity/unnamed-result questions remain
+nonblocking and unchanged; no further harvest or canonical production occurs here.
 
 Gate S1 remains open. Only a later fresh conversation launched with the constitution's
 §6 Session-N prompt verbatim and alone can attempt its cold-start requirement. The paused

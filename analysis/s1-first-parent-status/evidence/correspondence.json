@@ -1,0 +1,20 @@
+[
+  {
+    "version": "v70",
+    "archive_bytes": 8236,
+    "archive_sha256": "5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8",
+    "retained_archive_identical": true,
+    "member": "On_a_new_approach_to_the_Riemann_hypothesis.tex",
+    "tex_bytes": 29544,
+    "tex_sha256": "17d3f102b355618c6aec9daa0187b35c2d3c4b8a78c62c9a38bb97a7bcb00db1"
+  },
+  {
+    "version": "v71",
+    "archive_bytes": 8750,
+    "archive_sha256": "fffd0fdc3a868deb642102a1f72f23cd92ee89bf118c92a4b992cb5a6fdfd263",
+    "retained_archive_identical": true,
+    "member": "On_a_new_approach_to_the_Riemann_hypothesis_2.tex",
+    "tex_bytes": 30890,
+    "tex_sha256": "2bdf0dc0e10601f547e196442f78a377e100cab369bc6fc1b5ef862cd48c81f4"
+  }
+]

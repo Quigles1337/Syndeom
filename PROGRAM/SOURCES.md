@@ -2267,3 +2267,74 @@ this is byte/provenance replay, not a newly executed emitted-file Lean audit. Th
 correspondence and earlier audit remain the scientific evidence. The pair is one logical
 positive item with zero informal proof steps, not an independent population sample or
 a PROVEN promotion. `analysis/s1-4/` records the scope and remaining obligations.
+
+
+### S-0024 / S-0025 status-support review — 2026-10-20 UTC
+
+The original source entries and storage decisions stand. Fresh archives match the
+retained S1.3 bytes: v70 8,236 bytes / SHA-256
+`5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8`;
+v71 8,750 bytes / SHA-256
+`fffd0fdc3a868deb642102a1f72f23cd92ee89bf118c92a4b992cb5a6fdfd263`.
+Both version pages still identify CC BY 4.0. v70 remains committed; v71 remains
+external/digest-only. The fresh dynamic abstract pages have new hashes, retained
+separately from the older HTML receipts. Actual URLs, access times, lengths/hashes,
+archive equality and exact TeX member locators are in
+`analysis/s1-first-parent-status/evidence/retrieval.json`, `correspondence.json` and
+`WITNESS.md`. New external retrieval directory:
+`C:\Users\LEET\Codex\Temp\syndeom-first-parent-20261020\retrieval-01`.
+
+Codex (GPT-6), this review session, read the original definitions, Lemma 1.1 and its
+proof, and the corresponding v71 correction. The author notice says only “To fix an
+error in Lemma 1.1.” The finite 1-versus-0 witness and analytic log(2)/3 residual are
+separately attributed executor reasoning; neither is retroactively author testimony.
+No source status changes and no CLAIM promotion. The old parent remains held while
+the exact case-specific ruling and validated replacement metadata are proposed.
+
+## S-0069 — NIST DLMF §27.8, Dirichlet characters
+
+- **State:** VERIFIED (primary page freshly retrieved and relevant definitions/equations
+  read this session, 2026-10-20 UTC).
+- **Primary:** NIST Digital Library of Mathematical Functions,
+  [§27.8](https://dlmf.nist.gov/27.8), E1–E6: character normalization, periodicity,
+  vanishing on nonunits, principal character and coprimality in orthogonality.
+- **Access:** 2026-10-20T21:36:43.746745Z; HTTP 200; 68,162 bytes; SHA-256
+  `34f7100585b68af0dbc868e51038f22c4c91c6efb482bf1481f7cbc9ce3d54e5`.
+- **Rights/storage:** no redistribution permission asserted here; digest-only in the
+  repository, complete HTML retained externally in the directory above. No full source
+  copy ingested. Supports standard identities, not author testimony about the v70 lemma.
+
+## S-0070 — NIST DLMF §25.15, Dirichlet L-functions
+
+- **State:** VERIFIED (primary page freshly retrieved and relevant identities/domain
+  read this session, 2026-10-20 UTC).
+- **Primary:** [§25.15](https://dlmf.nist.gov/25.15), E1/E2 and nonvanishing discussion:
+  L-series and Euler product for Re(s)>1. The witness also gives direct nonvanishing
+  at s=2 from the positive odd-integer series.
+- **Access:** 2026-10-20T21:36:44.495977Z; HTTP 200; 100,871 bytes; SHA-256
+  `ca746b3571f06cdd2a53530059cdfc6d1c12cc66b7457ec30023212e0b90a54f`.
+- **Rights/storage:** no redistribution permission asserted; external HTML, digest-only
+  in the repository. Standard analytic support, not a new ground-truth item.
+
+## S-0071 — NIST DLMF §27.4, multiplicative functions and Dirichlet series
+
+- **State:** VERIFIED (primary page freshly retrieved and relevant equation/domain
+  read this session, 2026-10-20 UTC).
+- **Primary:** [§27.4 E12](https://dlmf.nist.gov/27.4#E12), the Mangoldt series equals
+  -zeta'/zeta for Re(s)>1; used in the second derivation of the residual.
+- **Access:** 2026-10-20T21:36:45.205913Z; HTTP 200; 86,532 bytes; SHA-256
+  `9765f56ffb3b2b79125b516780c55654243230fe81296b348d1427afdb86c208`.
+- **Rights/storage:** no redistribution permission asserted; external HTML, digest-only
+  in the repository. The executor's application is attributed in WITNESS.md.
+
+## S-0072 — NIST DLMF §27.2, Mangoldt function
+
+- **State:** VERIFIED (primary page freshly retrieved and definition read this session,
+  2026-10-20 UTC).
+- **Primary:** [§27.2 E14](https://dlmf.nist.gov/27.2#E14), Mangoldt's prime-power
+  definition, including zero otherwise. Used to identify the even support as powers
+  2^ell with ell>=1 and to bound the convergent series.
+- **Access:** 2026-10-20T21:36:45.889969Z; HTTP 200; 160,061 bytes; SHA-256
+  `6256c868078ac904ff6e0e55027c84d8aad63d438fd339957689980e26b6d510`.
+- **Rights/storage:** no redistribution permission asserted; external HTML, digest-only
+  in the repository. No source text is newly ingested into the live corpus.

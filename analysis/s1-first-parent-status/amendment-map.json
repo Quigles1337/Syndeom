@@ -1,0 +1,14 @@
+{
+  "event_id": "first-parent-status-2026-10-20",
+  "state": "proposed-not-effective",
+  "relation": "raw-metadata-amendment",
+  "logical_item_key": "s1_ingest-v0.1.0-63e23a952084",
+  "old_artifact_id": "s1_ingest-v0.1.0-63e23a952084",
+  "proposed_artifact_id": "s1_ingest-v0.1.0-15ab865466d6",
+  "effective_now": "s1_ingest-v0.1.0-63e23a952084",
+  "effective_if_accepted_and_integrated": "s1_ingest-v0.1.0-15ab865466d6",
+  "effective_items_contributed": 1,
+  "corpus_logical_items_now": 32,
+  "corpus_logical_items_if_accepted": 32,
+  "canonical_eligibility": "held-pending-policy-and-integration"
+}

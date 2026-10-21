@@ -1,0 +1,8 @@
+cargo 1.91.0 (ea2d97820 2025-10-10)
+release: 1.91.0
+commit-hash: ea2d97820c16195b0ca3fadb4319fe512c199a43
+commit-date: 2025-10-10
+host: x86_64-pc-windows-msvc
+libgit2: 1.9.1 (sys:0.20.2 vendored)
+libcurl: 8.15.0-DEV (sys:0.4.83+curl-8.15.0 vendored ssl:Schannel)
+os: Windows 10.0.26200 (Windows 11 Core) [64-bit]
