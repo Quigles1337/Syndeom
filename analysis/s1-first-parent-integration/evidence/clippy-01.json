@@ -1,0 +1,25 @@
+{
+  "command": [
+    "cargo",
+    "clippy",
+    "--locked",
+    "--manifest-path",
+    "engine/Cargo.toml",
+    "--all-targets",
+    "--all-features",
+    "--",
+    "-D",
+    "warnings"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+  "head": "37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f",
+  "tree": "aadce1d6332ad3a43f7f31b6779ee52083287215",
+  "status_before": "M PROGRAM/DECISIONS/ADR-0003.md\n M PROGRAM/HANDOFF.md\n M groundtruth/README.md\n?? analysis/s1-first-parent-integration/OWNER-DECISION.md\n?? analysis/s1-first-parent-integration/README.md\n?? analysis/s1-first-parent-integration/preservation-inputs.json\n?? analysis/s1-first-parent-integration/reproduce.py\n?? engine/ingest/examples/s1_effective_inventory.rs\n?? engine/ingest/examples/support/effective.rs\n?? engine/ingest/tests/first_parent_amendment.rs\n?? groundtruth/amendment-map.json\n?? groundtruth/s1_ingest-v0.1.0-15ab865466d6/RECORD.md\n?? groundtruth/s1_ingest-v0.1.0-15ab865466d6/manifest.json\n?? groundtruth/s1_ingest-v0.1.0-15ab865466d6/original-0706.0357v70.tar.gz",
+  "started": "2026-10-21T03:02:24.158505+00:00",
+  "exit_code": 101,
+  "finished": "2026-10-21T03:02:25.280086+00:00",
+  "log_sha256": "f883d3981e4a13f546eebaca9d25deb178926b72f9feb87732503a176ab57c8f",
+  "head_after": "37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f",
+  "tree_after": "aadce1d6332ad3a43f7f31b6779ee52083287215",
+  "status_after": "M PROGRAM/DECISIONS/ADR-0003.md\n M PROGRAM/HANDOFF.md\n M groundtruth/README.md\n?? analysis/s1-first-parent-integration/OWNER-DECISION.md\n?? analysis/s1-first-parent-integration/README.md\n?? analysis/s1-first-parent-integration/preservation-inputs.json\n?? analysis/s1-first-parent-integration/reproduce.py\n?? engine/ingest/examples/s1_effective_inventory.rs\n?? engine/ingest/examples/support/effective.rs\n?? engine/ingest/tests/first_parent_amendment.rs\n?? groundtruth/amendment-map.json\n?? groundtruth/s1_ingest-v0.1.0-15ab865466d6/RECORD.md\n?? groundtruth/s1_ingest-v0.1.0-15ab865466d6/manifest.json\n?? groundtruth/s1_ingest-v0.1.0-15ab865466d6/original-0706.0357v70.tar.gz"
+}

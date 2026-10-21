@@ -1,0 +1,115 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "5987d8106ae69669b10c876a0915d5ad52ce44a814ea7fe63600c1737642cca8",
+        "file": "original-0706.0357v70.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 8236,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "committed"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-15ab865466d6",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-0706.0357v70.tar.gz",
+      "storage": "committed"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma 1.1, statement: the identity M(s, a/b) = - sum over chi of A(a, b; chi) (L'/L)(s, chi) for all s (v70); v71 adds the term - sum_{q | b} sum_{l >= 1} (log q) q^{-sl} e^{-2 pi i a q^l / b} on the left",
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Lemma 1.1, proof: the character orthogonality formula (valid for (a, m) = 1, i.e. for n coprime to the modulus) applied to every n, including prime powers q^l with q | b, for which every chi(n) vanishes",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:0706.0357v70 (the original; corrected by v71, 7 June 2026)",
+    "licence": "CC BY 4.0 (http://creativecommons.org/licenses/by/4.0/, stated on the arXiv abstract page of v70)",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0024",
+      "S-0025"
+    ],
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "analysis/s1-first-parent-status/WITNESS.md; SHA-256 c88af9c0d8b1ac2a65e8bdb634d41fbf3a8bbc1f31c168f81e3caff9e8573917; sections 2-3; Codex GPT-6, 2026-10-20",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0025"
+    }
+  },
+  "config_hash": "15ab865466d67dfd18ed487b4e51a3dc1719b07a00b89b3627e92dc111c95364",
+  "engine_commit": "1a76d9ac21cd5d2e4311f9164178327c0ca128bb",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma 1.1, statement: the identity M(s, a/b) = - sum over chi of A(a, b; chi) (L'/L)(s, chi) for all s (v70); v71 adds the term - sum_{q | b} sum_{l >= 1} (log q) q^{-sl} e^{-2 pi i a q^l / b} on the left"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Lemma 1.1, proof: the character orthogonality formula (valid for (a, m) = 1, i.e. for n coprime to the modulus) applied to every n, including prime powers q^l with q | b, for which every chi(n) vanishes"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "counterexample",
+      "reference": "analysis/s1-first-parent-status/WITNESS.md; SHA-256 c88af9c0d8b1ac2a65e8bdb634d41fbf3a8bbc1f31c168f81e3caff9e8573917; sections 2-3; Codex GPT-6, 2026-10-20",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "PROPOSED ONLY, outside live corpus. Same source claim as s1_ingest-v0.1.0-63e23a952084; evidence attribution amendment, not a new independent item or canonical child. Author notice remains S-0025. Counterexample is separately checked executor reasoning (Codex GPT-6, 2026-10-20); see WITNESS.md and PROPOSED-RULING.md. Admission policy, metadata integration and canonical eligibility remain held pending an explicit owner ruling.",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

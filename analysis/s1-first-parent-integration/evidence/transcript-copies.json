@@ -1,0 +1,47 @@
+[
+  {
+    "receipt": "base-gate.json",
+    "raw_log": "base-gate.log.gz",
+    "raw_uncompressed_sha256": "c5495813bdc297ec330f13762d5584464c7e190f5e69096209e8d8d7e4d016ad",
+    "compressed_sha256": "1e93044b4cae43bedfd0151d77369a8cd9dd5e0ef611fb243d1eb7d757f9476b",
+    "readable_log": "base-gate.log",
+    "readable_sha256": "23f3e605cd50e720794982d4f04a3642f17abb9428ba5dd836e0e5a461446253",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw bytes retained in gzip"
+  },
+  {
+    "receipt": "focused-01.json",
+    "raw_log": "focused-01.log.gz",
+    "raw_uncompressed_sha256": "10a78bddce835b0f66cce5fa9aee6eeb7500e90d8b5b0c74e1703d1e416266ad",
+    "compressed_sha256": "129c981cc3759947f9040fc051be4e98c7e03920ec7a0f2abc14b6d031b50e3c",
+    "readable_log": "focused-01.log",
+    "readable_sha256": "10a78bddce835b0f66cce5fa9aee6eeb7500e90d8b5b0c74e1703d1e416266ad",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw bytes retained in gzip"
+  },
+  {
+    "receipt": "focused-02.json",
+    "raw_log": "focused-02.log.gz",
+    "raw_uncompressed_sha256": "de592be6dc93fd4f50d5e0aaabfe019fb4d56183c6506e0b913499d18014a31b",
+    "compressed_sha256": "5a37d3f7308fa06346f48c6e10ef0388eac655390182a036841e0b78e6803ffd",
+    "readable_log": "focused-02.log",
+    "readable_sha256": "2a1a0ef67f428a53ab82bedfb95138c38fb6c927428d7fa3a2e270a6def5e3e5",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw bytes retained in gzip"
+  },
+  {
+    "receipt": "clippy-01.json",
+    "raw_log": "clippy-01.log.gz",
+    "raw_uncompressed_sha256": "f883d3981e4a13f546eebaca9d25deb178926b72f9feb87732503a176ab57c8f",
+    "compressed_sha256": "1fe24a615d34b6423971c24b9b99526c8e0a8c127b7ac5c0c2b6f8b1b92759eb",
+    "readable_log": "clippy-01.log",
+    "readable_sha256": "f883d3981e4a13f546eebaca9d25deb178926b72f9feb87732503a176ab57c8f",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw bytes retained in gzip"
+  },
+  {
+    "receipt": "clippy-02.json",
+    "raw_log": "clippy-02.log.gz",
+    "raw_uncompressed_sha256": "c40399f04314889790d56f1e5909ba9f64d3841b10b1edf442ab595702372305",
+    "compressed_sha256": "c58e49b900a615d23284ca75af6783cbcdc57057a7c925cbbef7a20ac0d51411",
+    "readable_log": "clippy-02.log",
+    "readable_sha256": "c40399f04314889790d56f1e5909ba9f64d3841b10b1edf442ab595702372305",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw bytes retained in gzip"
+  }
+]

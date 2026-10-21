@@ -3336,3 +3336,105 @@ requirement. Cold-start examination uses §6 verbatim and alone in a separate fr
 Harvest prefix stays through `1403.4485`; candidate 28 / `1403.6317` remains saved next.
 STOP-REASON: evidence and candidate preparation complete; publish one draft PR for review,
 keep unmerged and Gate S1 open. No harvest advancement, canonical production or S2/S3 start.
+
+
+---
+
+OWNER DECISION EVENT: 2026-10-20 America/New_York — accepted first-parent amendment
+
+Al / Quigles1337 explicitly accepted in full the “Exact proposed owner ruling” in
+`analysis/s1-first-parent-status/PROPOSED-RULING.md` at
+`37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f`. Actual instruction and scope:
+`analysis/s1-first-parent-integration/OWNER-DECISION.md`; normative record: appended
+ADR-0003 amendment of this date. The decision is final for this case and requires no
+second acceptance. It covers only Lemma 1.1 of arXiv:0706.0357v70 and candidate
+`s1_ingest-v0.1.0-15ab865466d6` for old logical key `s1_ingest-v0.1.0-63e23a952084`.
+
+The separately attributed written counterexample supplies this case's statement-truth
+support under the narrow D3/SD12 exception. S-0025 remains author error/locator evidence.
+The full analytic source-to-Lean bridge is not formalized and no PROVEN claim is made.
+Integration must still verify bytes, witness binding, configuration, identity, effective
+mapping, one-item counting and historical preservation before releasing status support.
+The old object, retained candidate, original producing revisions, proposed map and frozen
+S1.4 packet remain evidence. The acceptance does not itself assert that integration has
+passed or reached main. A subsequent verification entry records the actual result.
+Canonical selection, context and locator review remain separate; Gate S1 stays open.
+
+
+---
+
+SESSION: 2026-10-20 America/New_York / 2026-10-21 UTC — accepted first-parent integration
+@ implementation `c87c827a27ce40af7e08101d452ba5532704c9c5`; final recording revision
+and exact-tree gate are identified in the unmerged draft PR and external receipts.
+PHASE / GATE: S1 / OPEN. This is an informed continuation, not a cold-start examination.
+
+ADVANCED: recorded Al's actual acceptance of the exact ruling at main/accepted packet
+`37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f`. PRs 4/5/6 were already merged.
+The owner decision event above and appended ADR-0003 record the narrow D3/SD12
+exception for Lemma 1.1 of arXiv:0706.0357v70. No second approval was requested.
+The accepted candidate was copied exactly into live groundtruth, preserving its original
+producing revision `1a76d9ac21cd5d2e4311f9164178327c0ca128bb` and historical notes.
+The old object and its producing revision remain immutable. The one-case raw amendment
+map keeps `s1_ingest-v0.1.0-63e23a952084` as the stable logical key and selects
+`s1_ingest-v0.1.0-15ab865466d6` for exactly one effective status, never `derived_from`.
+
+EVIDENCE: `analysis/s1-first-parent-integration/` retains decision, baseline preservation
+pins, Rust inventory/provenance, actual logs/receipts and reproduction instructions.
+The consumer checks exact source/candidate bytes, witness/config/hash/ID and both
+status copies, mapping, historical prefixes, the complete old corpus and packets,
+and all 20 original pair inputs. Two actual reports match byte-for-byte and existing
+output is refused unchanged. All four fresh historical S1.4 replay outputs match
+the frozen packet; no historical receipt or first-write bin was replaced.
+
+ACTUAL COUNTS: 35 archived representations (33 raw, two canonical), 32 effective logical
+items, 46 flaws across five classes, nine zero classes, 30 without canonical lengths.
+Statement truth 5/17/10 true/false/undetermined; proof status 1 valid/31 invalid.
+Unflagged subset 18; truth-qualified 5 true/10 false. The seven older truth and seven
+severity questions plus unnamed-result question retain their dispositions/exclusions.
+
+CHECKS: clean accepted baseline full gate passed at 2026-10-21T02:57:48.435698Z
+(67 tests, 375 files). Fifteen focused integration tests pass. Clean implementation
+full gate ended `2026-10-21T03:18:43.794933+00:00`, exit 0 / GATE: GREEN:
+Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, all 82 Rust tests, 403 files
+and coherent registers. Rust verified 370 exact historical files, three exact-prefix
+appends, all 35 frozen S1.4 files, all 47 accepted packet files and the original pair
+closure. The final recording commit is separately gated and reproduced externally;
+its exact head/tree/log/hash/receipt is published in the draft PR without editing it.
+
+DISPOSITION: accepted ruling + verified integration conditions discharge this case's
+status-support hold on the branch. Main remains at the accepted baseline until the
+integration is reviewed and merged; only that later merge makes the change effective
+there. Canonical production still requires selection, context and locator review.
+The full manuscript M/L analytic bridge is not formalized. Written executor reasoning
+and scoped Lean support remain separate from S-0025 author testimony. No PROVEN claim.
+
+BELIEF DELTAS: accepting the scoped evidence category permits consistent metadata
+integration; keeping the old logical key and one effective representative prevents an
+amendment from manufacturing another example or retaining the superseded attribution.
+CONFUSIONS: the first checker compared ingest input notes as hashed config; the existing
+producer keeps notes outside config. Corrected the check, not the candidate. The first
+focused run (12 pass/3 fail) and first clippy run (collapsible if) remain retained; their
+corrected runs pass. Initial path/sandbox and staging/edit-guard misses changed no
+historical files. LF-readable transcripts have explicit hash maps to lossless raw gzip.
+HONESTY CHECK: owner acceptance, branch integration, final-tree gate and main activation
+are distinct. The witness investigation was not repeated; there is no new independent
+human or blind review and no new source verification or mathematical status transition.
+LEAKAGE CHECK: examined only existing governance, archived development inputs, tooling
+and integration evidence; no contact corpus or held-out AI-proof behavior informed this
+change. No external researcher or referee contact occurred.
+DETERMINISM CHECK: Rust owns metadata/counting under SD10. The complete baseline Git
+tree and compiled source are bound; outputs replay exactly. Python only orchestrates
+commands and compares/retains bytes. New inventory is separately dated and revision-bound.
+MANIFEST CHECK: both raw objects retain their original IDs/configs/producing revisions;
+the accepted candidate and its committed source match the original packet. Available
+committed bytes are checked; absent external originals are disclosed, not re-verified.
+DRIFT CHECK: no schema change, generator, adapter, detector, pair regeneration, new
+canonical artifact or harvest. Old labels, historical mathematics/contexts and all
+dependency pins are intact; no general amendment platform or executor label authority.
+NEXT-SINGLE-ACTION: review the draft integration PR and merge only after review; this
+execution leaves it unmerged. After reviewed merge, record actual main activation and
+assess readiness for the separate genuine cold-start examination using §6 verbatim
+and alone. No readiness pass or cold-start result is asserted now.
+ESCALATIONS: no renewed ruling request. Older truth/severity/unnamed-result dispositions
+remain nonblocking; canonical review and later cold-start work remain distinct.
+STOP-REASON: verified integration and evidence ready for draft review; keep Gate S1 open.

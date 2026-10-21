@@ -1,0 +1,52 @@
+    Checking syndeom-ingest v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\ingest)
+error: this `if` statement can be collapsed
+   --> ingest\examples\support\effective.rs:275:9
+    |
+275 | /         if let Some(status) = m.config.get("statement_status") {
+276 | |             if *status
+277 | |                 != serde_json::to_value(&m.ground_truth.as_ref().unwrap().statement_status)
+278 | |                     .map_err(|e| e.to_string())?
+...   |
+282 | |         }
+    | |_________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+275 ~         if let Some(status) = m.config.get("statement_status")
+276 ~             && *status
+277 |                 != serde_json::to_value(&m.ground_truth.as_ref().unwrap().statement_status)
+...
+280 |                 return Err(format!("ambiguous duplicated status in {}", m.artifact_id));
+281 ~             }
+    |
+
+error: this `if` statement can be collapsed
+   --> ingest\tests\..\examples\support\effective.rs:275:9
+    |
+275 | /         if let Some(status) = m.config.get("statement_status") {
+276 | |             if *status
+277 | |                 != serde_json::to_value(&m.ground_truth.as_ref().unwrap().statement_status)
+278 | |                     .map_err(|e| e.to_string())?
+...   |
+282 | |         }
+    | |_________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#collapsible_if
+    = note: `-D clippy::collapsible-if` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::collapsible_if)]`
+help: collapse nested if block
+    |
+275 ~         if let Some(status) = m.config.get("statement_status")
+276 ~             && *status
+277 |                 != serde_json::to_value(&m.ground_truth.as_ref().unwrap().statement_status)
+...
+280 |                 return Err(format!("ambiguous duplicated status in {}", m.artifact_id));
+281 ~             }
+    |
+
+error: could not compile `syndeom-ingest` (example "s1_effective_inventory") due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `syndeom-ingest` (test "first_parent_amendment") due to 1 previous error

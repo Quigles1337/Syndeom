@@ -1,0 +1,86 @@
+{
+  "started_utc": "2026-10-21T03:05:46.212876+00:00",
+  "checkout_revision": "c87c827a27ce40af7e08101d452ba5532704c9c5",
+  "checkout_tree": "c874c8d7bd4af341d135e7d47db80258f1cfc9a2",
+  "commands": [
+    {
+      "name": "report-a",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-ingest",
+        "--example",
+        "s1_effective_inventory",
+        "--",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\integration-01\\report-a"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_utc": "2026-10-21T03:05:46.281176+00:00",
+      "finished_utc": "2026-10-21T03:05:50.767349+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "log_sha256": "228f6fe3419e39794a33e994554afe9232236f8052528b82ef0f70ea1a685ccb"
+    },
+    {
+      "name": "report-b",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-ingest",
+        "--example",
+        "s1_effective_inventory",
+        "--",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\integration-01\\report-b"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_utc": "2026-10-21T03:05:50.777396+00:00",
+      "finished_utc": "2026-10-21T03:05:53.105670+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "log_sha256": "9dd1b4c44fa51bece54f6c20e429b346408d156953cf353932f7f0175bb419c6"
+    },
+    {
+      "name": "existing-output-refused",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-ingest",
+        "--example",
+        "s1_effective_inventory",
+        "--",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\integration-01\\report-a"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_utc": "2026-10-21T03:05:53.118449+00:00",
+      "finished_utc": "2026-10-21T03:05:53.274383+00:00",
+      "exit_code": 1,
+      "expected_exit": "nonzero",
+      "log_sha256": "05428868055704c459aac8205ef04261f6b8926a489dd7363c7baab51c1aa30b"
+    }
+  ],
+  "authority": "Rust s1_effective_inventory; Python only orchestration and byte comparison",
+  "replay_hashes": {
+    "inventory.json": "b626d1b53f50a23ee5eae9e99fc6ea387bb83f51c807d843d68a29dd1651b803",
+    "provenance.json": "12f4706af2b4bdbf861bc917c6d50d7aabb78b3297bf556f4e4a77c3bed2f4bc"
+  },
+  "overwrite_refusal_preserved_outputs": true,
+  "passed": true,
+  "finished_utc": "2026-10-21T03:05:53.283890+00:00",
+  "head_after": "c87c827a27ce40af7e08101d452ba5532704c9c5",
+  "status_after": ""
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "raw_log": "implementation-gate.log.gz",
+    "raw_uncompressed_sha256": "d22a986969019f9b33d13dc9e2ca234d3ee660f20d16fd9c8e4802a61f042888",
+    "compressed_sha256": "babad30b7446e7980345b1a80047a9cc1e966a16ffd86025e1fbf21d2f7f7ea9",
+    "readable_log": "implementation-gate.log",
+    "readable_sha256": "c4f318a95a21e70b2bce6852caa3769cc385633bf80d5883e8a1d015a40908df",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "raw_log": "existing-output-refusal.log.gz",
+    "raw_uncompressed_sha256": "3413a88a3af19dd5668b7234335c29db0e6320b7d2c117c13651a09030869168",
+    "compressed_sha256": "6d83341fff70e70898e374be748117b0db0b12ff54f2b1c1598dd633e54356ba",
+    "readable_log": "existing-output-refusal.log",
+    "readable_sha256": "3413a88a3af19dd5668b7234335c29db0e6320b7d2c117c13651a09030869168",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  },
+  {
+    "raw_log": "report-a.log.gz",
+    "raw_uncompressed_sha256": "d7162a80fc3b80abda4af93a3ab352eddf481cdcdb19e0b0f08af1b17b260129",
+    "compressed_sha256": "85fc556eccb0abf6437a3dc20a6caaa26989f2ac7e986c8f888ff546f34b0cf5",
+    "readable_log": "report-a.log",
+    "readable_sha256": "d7162a80fc3b80abda4af93a3ab352eddf481cdcdb19e0b0f08af1b17b260129",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  },
+  {
+    "raw_log": "report-b.log.gz",
+    "raw_uncompressed_sha256": "7c7599203960e08cb2ce7115faedba0a89ff734d716d9ef5c7d91e80d93d8459",
+    "compressed_sha256": "1da25451184ef75edcb906165fcbee0d5ae3d7452abe34a4ed83ef1b754515d0",
+    "readable_log": "report-b.log",
+    "readable_sha256": "7c7599203960e08cb2ce7115faedba0a89ff734d716d9ef5c7d91e80d93d8459",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  },
+  {
+    "raw_log": "rustc-version.log.gz",
+    "raw_uncompressed_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "compressed_sha256": "e55d1dc21fb4c095ede8975827e26dc8ca4035b5682f1f417c046f67494e46ca",
+    "readable_log": "rustc-version.log",
+    "readable_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  }
+]

@@ -1,0 +1,4 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.06s
+     Running `target\debug\examples\s1_4_coverage.exe report C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical e6a7cae4392dd1565ee57f9fb727cc01e453687d 4e46564ac62bc2bd7a5bef54265e9b2dd26772bb C:\Users\LEET\Codex\Temp\syndeom-first-parent-integration-20261020\frozen-s1-4-replay-01\report-a`
+S1.4 refused: output already exists
+error: process didn't exit successfully: `target\debug\examples\s1_4_coverage.exe report C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical e6a7cae4392dd1565ee57f9fb727cc01e453687d 4e46564ac62bc2bd7a5bef54265e9b2dd26772bb C:\Users\LEET\Codex\Temp\syndeom-first-parent-integration-20261020\frozen-s1-4-replay-01\report-a` (exit code: 2)

@@ -24,50 +24,55 @@ never verdicts.
 
 ## Status
 
-**PR 5 was merged by the owner on 2026-10-20 at 20:41:46 UTC.** Main contains the first
-Judson/Mathlib positive statement pair and the reproducible
-[S1.4 coverage and interim-power report](analysis/s1-4/report/report.md).
-The [first-parent status review](analysis/s1-first-parent-status/README.md) now supplies
-two checked witnesses and a validated metadata amendment proposal. The owner decision
-and canonical-promotion hold remain open. The harvest stays at the Session 20 prefix
-of 2026-10-14. The authoritative
-gate checklist, evidence, and next action are maintained in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
+**The owner accepted the exact first-parent ruling on 2026-10-20 America/New_York.**
+PRs 4, 5 and 6 are merged; the accepted packet is main commit
+`37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f` (PR 6 merged 2026-10-21T01:55:53Z).
+The [separate integration event](analysis/s1-first-parent-integration/README.md)
+records actual acceptance and verified implementation. This branch's effective change
+reaches main only after review and merge of its draft PR. Gate S1 remains open.
+The authoritative checklist and next action are in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
 
 | Surface | Implemented or recorded | Remaining boundary |
 |---|---|---|
-| Foundation | Ratified constitution; 14 flaw classes in taxonomy `0.1.0`; S0 closed | Constitutional and taxonomy changes require an ADR |
-| Ground truth | 34 representations: 32 logical roots, two canonical children, one admitted positive pair; frozen S1.4 report | First-parent witness checked; evidence-attribution amendment proposed outside the corpus; promotion held and Gate S1 open |
-| Rust engine | `syndeom-manifest` library; `syndeom-ingest`, `syndeom-derive` and `syndeom-pair` CLIs, all `0.1.0` | Ingestion and derivation preserve reviewed evidence; they do not determine mathematical truth |
-| Formal verification | Pinned Lean/Mathlib project, golden theorem, and axiom audit | A successful build alone does not establish statement fidelity |
-| Calibration | Experimental design and phase gates specified | No synthetic corpus, calibrated battery, freeze tag, or contact report yet |
+| Foundation | Ratified constitution; 14 flaw classes in taxonomy `0.1.0`; S0 closed | Case-specific D3/SD12 exception is recorded in ADR-0003; no general classifier authority |
+| Ground truth | Verified branch: 35 archived representations, 32 effective logical items, two canonical children, one admitted positive pair | Main remains at the baseline until reviewed integration merge; canonical selection/context/locator review is separate |
+| Rust engine | Manifest library; ingestion, derivation and pair CLIs; one-case effective inventory consumer | Producers and counting tools do not adjudicate other mathematical truth questions |
+| Formal verification | Pinned Lean/Mathlib project, golden theorem and axiom audit | The witness's full analytic bridge is not formalized; no PROVEN transition |
+| Calibration | Experimental design and phase gates specified | No synthetic corpus, calibrated battery, freeze tag or contact report yet |
 
-The [Rust inventory](analysis/s1-4/README.md) distinguishes representations, logical items,
-source families and flaw instances. The 32 roots carry **46 flaw instances across five classes**;
-nine classes have no real examples and cannot be validated by S4 on this prefix. **Thirty roots
-have no canonical length.** Two canonical informal selections supply 75 tokens / one proof step
-and seven tokens / zero proof steps; the latter is the positive statement pair, not a
-positive-length informal proof control. Its 14-token Lean alias does not measure the transitive
-Mathlib proof. No detector performance or numerical power is inferred from these counts.
+The [effective map](groundtruth/amendment-map.json) keeps
+`s1_ingest-v0.1.0-63e23a952084` as the stable logical key, selecting
+`s1_ingest-v0.1.0-15ab865466d6` exactly once for status. Both raw objects and their
+original producing revisions survive unchanged. The replacement carries the exact
+executor-written, hash-bound counterexample; S-0025 remains author error/locator
+evidence, not the source of that witness. It is a raw metadata amendment, not a
+canonical-child relation. The accepted candidate's historical proposed notes remain
+unchanged; the later owner decision and validated map activate its use.
 
-Historical labels remain visible: statement truth is 5 true / 17 false / 10 undetermined;
-offered-proof validity is 1 valid / 31 invalid. The first-parent promotion hold, seven truth
-questions and seven severity questions qualify use without rewriting labels. The explicitly
-unflagged subset contains 17 roots; documentary grouping yields 22 source-ID arrays, not an
-effective sample size. All real-item cells are **expected underpowered** for the equivalence
-test pending S3's design-derived N_min and frozen protocol.
+The [new Rust inventory](analysis/s1-first-parent-integration/report/inventory.json)
+reports 35 archived representations (33 raw, two canonical), **32 effective logical
+items**, 46 flaw instances across five classes, nine zero-coverage classes and 30
+logical items without canonical representations. Statement truth is 5 true / 17 false /
+10 undetermined; offered-proof validity is 1 valid / 31 invalid. The unflagged subset
+is 18; truth-qualified counts are 5 true / 10 false. The seven older truth questions,
+seven severity questions and unnamed-result question retain their documented
+dispositions and exclusions. Missing raw lengths are not zero lengths.
 
-The owner merge and [retained pair checks](analysis/s1-2/implementation/VERIFICATION.md)
-support the positive-pair admission. No separate GitHub reviewer approval is recorded, no
-new mathematical claim is promoted to PROVEN, and this informed session does not close S1.
-The [historical obligation ledger](analysis/s1-4/OBLIGATIONS.md) remains frozen.
-Its first-parent review now has an exact residual, **log(2)/3 > 0**, at a=1,b=2,s=2,
-and a separate finite proof-step witness, **1 versus 0**, at k=2. These are attributed
-executor checks, with partial Lean support; the author's notice is not their source.
-The next action is owner review of the [exact proposed ruling and candidate amendment](analysis/s1-first-parent-status/PROPOSED-RULING.md).
-The old metadata and canonical hold remain in force until a consistent amendment is
-approved and integrated. This adds no independent example and changes no S1.4 report
-or bin. Harvest remains paused after candidate 27, `1403.4485`; candidate 28,
-`1403.6317`, remains next.
+The complete [frozen S1.4 packet](analysis/s1-4/README.md) remains byte-for-byte
+historical: its 34-representation/32-root census, 17-item unflagged subset, first-parent
+hold, first-write bins and receipts describe the original pinned snapshot. The new
+event does not replace that report. Its canonical selections still measure 75 tokens /
+one informal proof step and seven tokens / zero informal proof steps; the latter is
+a statement pair. The 14-token Lean alias does not measure a transitive Mathlib proof.
+All real-item cells remain expected underpowered pending S3's design-derived N_min;
+no detector performance or numerical power follows from these metadata counts.
+
+The status-support hold is discharged on the verified integration branch. Canonical
+production still needs its own authorized selection, context and locator review.
+After the integration is reviewed and merged, assess readiness for a separate genuine
+cold-start examination using constitution §6's resume prompt verbatim and alone.
+This informed session does not close Gate S1. Harvest remains paused through
+candidate 27 / `1403.4485`; candidate 28 / `1403.6317` remains saved next.
 
 ## Architecture
 
@@ -184,8 +189,9 @@ locations. The first derivation producer and one canonical child now exist under
 it does not repair its argument. Metadata, the source map, and the
 [source-fidelity review](groundtruth/s1_derive-v0.1.0-c08f9e3ec092/RECORD.md) are committed;
 restricted proof/context bytes are external. The existing Lean golden audit does not formalize
-or certify this informal child. Canonical promotion of a separate parent remains on hold as
-documented in [the evidence record](analysis/s1-3/README.md#evidence-and-limits).
+or certify this informal child. The separate first-parent status-support hold is discharged
+on the [verified integration branch](analysis/s1-first-parent-integration/README.md); main
+activation awaits reviewed merge. Canonical selection/context/locator review remains separate.
 
 **Statement truth and proof validity are independent fields.** Schema `/2` permits an undetermined
 statement (`value: null`, `method: "undetermined"`) only with an invalid proof. Ten current items
@@ -329,13 +335,13 @@ comparing exact proof, context, manifest, and source-map bytes. Choose a new ext
 directory for each run; existing destinations are refused. The retained evidence pins producer
 commit `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, which predates generation of the real child.
 
-### Reproduce the proposed first positive pair
+### Reproduce the admitted first positive pair
 
 Follow [the S1.2 implementation instructions](analysis/s1-2/implementation/README.md#reproduce-into-a-new-destination).
 The helper retrieves frozen sources, invokes the committed Rust producer, compiles/audits the
 actual emitted alias, compares a fresh replay and runs labeled refusal controls. Every run
-uses a new external destination. This branch proposes one pair for review; it does not claim
-accepted-main admission or PROVEN promotion.
+uses a new external destination. The owner admitted this pair by merging PR 4; this
+reproduction preserves its original producing revision and does not imply PROVEN promotion.
 
 ## Repository map
 
@@ -343,7 +349,7 @@ accepted-main admission or PROVEN promotion.
 |---|---|
 | [`PROGRAM/`](PROGRAM/) | Constitution, current state, claims, sources, taxonomy, ADRs, and session history |
 | [`engine/manifest/`](engine/manifest/) | Canonical Rust schema, identity, byte formats, fidelity, and consistency library |
-| [`engine/ingest/`](engine/ingest/) | Deterministic S1 ingestion CLI and golden tests |
+| [`engine/ingest/`](engine/ingest/) | Deterministic S1 ingestion CLI, tests and the one-case effective inventory example |
 | [`engine/derive/`](engine/derive/) | Deterministic reviewed TeX derivation CLI and mechanical tests |
 | [`engine/pair/`](engine/pair/) | Narrow reviewed positive-pair archive/canonical CLI, provenance and refusal tests |
 | [`lean/`](lean/) | Pinned formal project, golden theorem, and axiom audit |
@@ -354,6 +360,8 @@ accepted-main admission or PROVEN promotion.
 | [`analysis/`](analysis/) | Engineering evidence and future experimental designs and calibration/validation/contact reports |
 | [`analysis/s1-3/`](analysis/s1-3/) | First canonical derivation receipts, preservation checks, and reproduction instructions |
 | [`analysis/s1-2/`](analysis/s1-2/) | Historical procedure evidence, separate source-map correction, implementation and proposed-admission evidence |
+| [`analysis/s1-4/`](analysis/s1-4/) | Complete frozen historical coverage packet and first-write bins |
+| [`analysis/s1-first-parent-integration/`](analysis/s1-first-parent-integration/) | Accepted ruling, separate effective inventory and integration/preservation evidence |
 | [`sources/`](sources/) | Source copies whose licences permit redistribution |
 | [`scripts/`](scripts/) | Local verification gate and register checks |
 | [`scripts/reproduce_s1_3.py`](scripts/reproduce_s1_3.py) | Source retrieval and orchestration of two independent Rust derivations |
