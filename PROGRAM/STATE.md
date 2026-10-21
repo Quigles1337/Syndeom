@@ -1,6 +1,13 @@
 # STATE
 
-- **Updated:** 2026-10-21 UTC — PR 7's actual main activation and S1 readiness reconciled.
+- **Updated:** 2026-10-21 UTC (Session 22) — a session launched with the §6 resume prompt ran
+  the paused harvest from an unfetched working copy (its `origin/main` ref was 24 commits stale,
+  so §4.1 reconstructed the Session-20 state); its candidates 28–30, all admitted (five items),
+  are held on branch `claude/s1-harvest-candidates-28-30` for Al's disposition and are **not on
+  main**. Main's corpus, registers, frozen S1.4 packet and readiness packet are unchanged; the
+  ORIENT note now says to fetch first; Gate S1 stays OPEN for the separate cold-start
+  examination, which remains the next action (HANDOFF Session 22).
+- **Previous update (PR 8 readiness):** 2026-10-21 UTC — PR 7's actual main activation and S1 readiness reconciled.
   Owner acceptance remains dated 2026-10-20 America/New_York, at the exact ruling
   `37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f`; the hash-bound decision and ADR-0003
   are unchanged. PR 7 merged at **2026-10-21T03:33:35Z** (2026-10-20 23:33:35
@@ -123,6 +130,12 @@
   README.md § Licence; text provenance S-0019).
   **ORIENT note (SD7):** `git symbolic-ref refs/remotes/origin/HEAD` resolves to `main`; if it ever
   fails, fallback `git remote show origin`, repair `git remote set-head origin -a`.
+  **Fetch first (Session 22, 2026-10-21):** run `git fetch origin` before §4.1's `git status` /
+  `git log`, then compare `main` with `origin/main` (`git status -sb`; `git log main..origin/main`;
+  `gh pr list --state merged`): a working copy's remote ref is a claim until fetched, and on
+  2026-10-21 a §6-launched session reconstructed a 24-commit-stale state through §4.1 without
+  noticing and ran the superseded harvest NEXT. A diverged local commit goes to a branch, never a
+  force-push.
 - **S1.3 orientation verification (2026-10-20):** existing Lean/Rust code passed the gate,
   with documentation reconciliation in progress; 29 existing tests passed, axioms `[propext]`.
   The new crate was enabled only after this gate. Its focused producer checks now pass
@@ -145,6 +158,11 @@
   exact head/tree, actual results and external receipts are recorded in its associated
   PR, outside the tree certified. No earlier gate substitutes for that final result.
   See [event and verification convention](../analysis/s1-post-merge-readiness/README.md).
+- **Session 22 build verification (2026-10-21):** clean `main` `26c2555` (PR 8's merge) full gate,
+  detached with a log, 22:47:14Z–22:48:06Z: Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy,
+  82 Rust tests, 447 tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 72, exit 0 —
+  `GATE: GREEN`; and again on the final tree of the Session-22 reconciliation commit before it was
+  committed (detached run with a log immediately before the commit; its times are left out of this file to avoid a self-referential edit, `GATE: GREEN`).
 - **Historical build verification (first-parent proposal):** clean-base `bash scripts/check.sh` at
   `1a76d9ac21cd5d2e4311f9164178327c0ca128bb`, tree
   `3b9028c0502add53ac646108132d89ba5f1e5666`, passed 2026-10-20T21:44:58Z:
@@ -414,6 +432,23 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   meet ADR-0003 D2.3. They were recorded as nonblocking and remain undecided. Exact IDs,
   evidence and analysis consequences: `analysis/s1-4/config/dispositions.json` and
   `analysis/s1-4/OBLIGATIONS.md`. Nothing is relabeled or newly harvested.
+- **Later harvest held off main — Al's decision (Session 22, 2026-10-21):** branch
+  `claude/s1-harvest-candidates-28-30` (commit `c3a3d36` on base `8e222a4`, pushed) holds Route A
+  candidates 28–30, examined in order and all admitted — five items: arXiv 1403.6317 Theorem 1
+  (FLAW-0012, false by source document); 1403.8075 Proposition 4.1 (FLAW-0004), Theorems 4.3 and
+  4.4 (FLAW-0005), all undetermined; 1404.4599 Proposition 2.22 (FLAW-0005, undetermined) — produced
+  by a session that had not fetched and so ran the paused harvest instead of the examination. It
+  is **not mergeable as it stands**: its S-0066..S-0072 collide with main's (they become
+  the seven numbers after S-0072, 0073–0079), so every config hash, artifact id, record, log row and STATE row must be
+  regenerated at the integration commit (the originals' bytes are pinned by SHA-256 in its
+  S-entries and manifests); main's Rust inventory consumers fail closed on any manifest beyond the
+  35 archived representations, so a later prefix needs its own snapshot and coverage run under
+  ADR-0003 D8/D9 and never rewrites the Gate S1 table or the frozen S1.4 packet. Options for Al:
+  (a) integrate after Gate S1 closes, as the first later prefix under its own record (the
+  executor recommends this); (b) integrate before the examination with a new snapshot and an S1.4
+  re-run on 36 items; (c) discard and re-harvest later from the log. Until Al rules, main's
+  harvest resume point stays candidate 28 / `1403.6317`; the branch's HARVEST-LOG rows, records
+  and HANDOFF Session 22 hold the full account, including candidate 31 opened but undecided.
 
 - **Q3 — RESOLVED 2026-10-13 (Session 7).** Al: SPDX `Apache-2.0` for SYNDEOM's original software
   and technical documentation, with the release boundary recorded in ADR-0000 Addendum 2 R1 and
@@ -509,9 +544,14 @@ preamble, handoff or extra task text; a full-history continuation or subagent is
 not cold. The session must honor SD15 disclosure, reconstruct from the repo via
 §4.1, run the required checks and determine whether every criterion supports closure.
 This readiness assessment is not a PASS; Gate S1 remains OPEN until that examination.
+The examination session runs `git fetch origin` before §4.1's commands and reconstructs from
+the fetched `origin/main`, recording its SHA: Session 22 showed that an unfetched working copy
+reproduces a stale state and passes §4.1 silently.
 
 The seven truth/seven severity/unnamed-result questions keep their existing
 dispositions and exclusions. Missing lengths and external-byte verification remain
 scoring prerequisites; canonical production needs selection, context and locator
 review. The frozen S1.4 packet and bins remain historical. Harvest stays paused
-through candidate 27 / `1403.4485`, with candidate 28 / `1403.6317` saved for later.
+through candidate 27 / `1403.4485`, with candidate 28 / `1403.6317` saved for later; a later
+harvest of candidates 28–30 exists on branch `claude/s1-harvest-candidates-28-30`, held for Al's
+disposition (dispositions above) and not part of the state under examination.
