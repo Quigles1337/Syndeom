@@ -3336,3 +3336,26 @@ requirement. Cold-start examination uses §6 verbatim and alone in a separate fr
 Harvest prefix stays through `1403.4485`; candidate 28 / `1403.6317` remains saved next.
 STOP-REASON: evidence and candidate preparation complete; publish one draft PR for review,
 keep unmerged and Gate S1 open. No harvest advancement, canonical production or S2/S3 start.
+
+
+---
+
+OWNER DECISION EVENT: 2026-10-20 America/New_York — accepted first-parent amendment
+
+Al / Quigles1337 explicitly accepted in full the “Exact proposed owner ruling” in
+`analysis/s1-first-parent-status/PROPOSED-RULING.md` at
+`37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f`. Actual instruction and scope:
+`analysis/s1-first-parent-integration/OWNER-DECISION.md`; normative record: appended
+ADR-0003 amendment of this date. The decision is final for this case and requires no
+second acceptance. It covers only Lemma 1.1 of arXiv:0706.0357v70 and candidate
+`s1_ingest-v0.1.0-15ab865466d6` for old logical key `s1_ingest-v0.1.0-63e23a952084`.
+
+The separately attributed written counterexample supplies this case's statement-truth
+support under the narrow D3/SD12 exception. S-0025 remains author error/locator evidence.
+The full analytic source-to-Lean bridge is not formalized and no PROVEN claim is made.
+Integration must still verify bytes, witness binding, configuration, identity, effective
+mapping, one-item counting and historical preservation before releasing status support.
+The old object, retained candidate, original producing revisions, proposed map and frozen
+S1.4 packet remain evidence. The acceptance does not itself assert that integration has
+passed or reached main. A subsequent verification entry records the actual result.
+Canonical selection, context and locator review remain separate; Gate S1 stays open.

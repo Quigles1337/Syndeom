@@ -1,0 +1,48 @@
+   Compiling syndeom-ingest v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\ingest)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.10s
+     Running tests\first_parent_amendment.rs (engine\target\debug\deps\first_parent_amendment-94b2696700093965.exe)
+
+running 15 tests
+test duplicate_or_multiple_effective_status_mapping_is_refused ... ok
+test witness_and_actual_owner_decision_are_hash_bound ... ok
+test no_note_rewrite_under_existing_candidate_identity ... ok
+test same_source_bytes_required_in_all_three_locations ... FAILED
+test both_status_fields_must_bind_the_same_exact_witness ... ok
+test append_only_history_preserves_exact_baseline_prefix ... ok
+test acceptance_without_adr_or_history_cannot_release_status_support ... ok
+test candidate_identity_and_original_producer_revision_are_bound ... ok
+test inconsistent_mapping_and_old_effective_status_are_refused ... ok
+test missing_mapping_never_falls_back_to_directory_counting ... ok
+test integrated_counts_use_one_effective_status_and_keep_stable_key ... FAILED
+test extra_raw_item_cannot_silently_double_count_this_lemma ... ok
+test older_dispositions_and_scope_notes_survive_exactly ... FAILED
+test both_archived_representations_are_required ... ok
+test complete_historical_object_packets_and_bins_are_immutable ... ok
+
+failures:
+
+---- same_source_bytes_required_in_all_three_locations stdout ----
+
+thread 'same_source_bytes_required_in_all_three_locations' (3132) panicked at ingest\tests\first_parent_amendment.rs:206:5:
+assertion failed: validate_case(&blobs).unwrap_err().contains("source bytes mismatch")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- integrated_counts_use_one_effective_status_and_keep_stable_key stdout ----
+
+thread 'integrated_counts_use_one_effective_status_and_keep_stable_key' (30668) panicked at ingest\tests\first_parent_amendment.rs:41:40:
+called `Result::unwrap()` on an `Err` value: "admitted candidate differs from exact accepted packet/config"
+
+---- older_dispositions_and_scope_notes_survive_exactly stdout ----
+
+thread 'older_dispositions_and_scope_notes_survive_exactly' (54536) panicked at ingest\tests\first_parent_amendment.rs:81:36:
+called `Result::unwrap()` on an `Err` value: "admitted candidate differs from exact accepted packet/config"
+
+
+failures:
+    integrated_counts_use_one_effective_status_and_keep_stable_key
+    older_dispositions_and_scope_notes_survive_exactly
+    same_source_bytes_required_in_all_three_locations
+
+test result: FAILED. 12 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.07s
+
+error: test failed, to rerun pass `-p syndeom-ingest --test first_parent_amendment`

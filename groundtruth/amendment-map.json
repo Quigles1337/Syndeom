@@ -1,0 +1,13 @@
+{
+  "event_id": "first-parent-accepted-integration-2026-10-20",
+  "relation": "raw-metadata-amendment",
+  "accepted_packet_revision": "37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f",
+  "owner_decision_date": "2026-10-20",
+  "owner_decision_timezone": "America/New_York",
+  "owner_decision_path": "analysis/s1-first-parent-integration/OWNER-DECISION.md",
+  "owner_decision_sha256": "e9eae1ecbe0858df7edeeebec2f0f21019a0c174774ed02eba3d5cd748e0379b",
+  "logical_item_key": "s1_ingest-v0.1.0-63e23a952084",
+  "superseded_artifact_id": "s1_ingest-v0.1.0-63e23a952084",
+  "effective_artifact_id": "s1_ingest-v0.1.0-15ab865466d6",
+  "activation": "effective in a tree only after successful Rust integration validation; main after reviewed merge"
+}

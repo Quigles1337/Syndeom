@@ -38,3 +38,28 @@ selects a zero-step informal statement and a formal theorem alias. The S1.4
 [coverage report](../analysis/s1-4/report/report.md) distinguishes archive, qualified,
 truth-dependent and length-bearing populations, with the first-parent hold retained.
 Gate S1 remains open; [remaining obligations](../analysis/s1-4/OBLIGATIONS.md).
+
+
+## Accepted first-parent amendment — 2026-10-20 America/New_York
+
+The owner accepted the exact PR 6 ruling; see the [actual decision](../analysis/s1-first-parent-integration/OWNER-DECISION.md)
+and appended ADR-0003 amendment. The one-case [effective map](amendment-map.json)
+keeps `s1_ingest-v0.1.0-63e23a952084` as the logical key and selects
+`s1_ingest-v0.1.0-15ab865466d6` for effective status after validation. The latter
+is the retained candidate copied byte-for-byte, including its historical proposed
+notes and original producing revision. The old raw object is preserved, so directory
+counts are not logical-item counts. This relation is not a canonical-child edge.
+
+Use the [Rust effective inventory](../analysis/s1-first-parent-integration/README.md)
+for the amended tree: 35 archived representations (33 raw plus two canonical),
+32 effective logical items. It refuses a missing or inconsistent map and validates
+historical preservation before counting. Its effective statement support for this
+lemma is the explicitly attributed, hash-bound written counterexample; the author's
+error/locator evidence remains S-0025. The historical S1.4 consumer and outputs above
+remain valid for their explicitly pinned pre-amendment corpus, with the old hold.
+
+The status-support hold is discharged only on the verified integration tree. This
+draft does not change main until reviewed and merged. Canonical selection, context
+and locator review remain separate. No producer should select a raw parent by merely
+walking directories; resolve the stable logical key using the validated effective
+inventory first. This metadata check does not itself authorize canonical production.
