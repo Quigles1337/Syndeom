@@ -1,0 +1,23 @@
+{
+  "recorded_utc": "2026-10-21T03:52:09.956416+00:00",
+  "checkout_revision": "1c56028532ea135603dbad5423d5555313bfd9ec",
+  "checkout_tree": "14b451866491dc4a2b866ec0b1d726d792385916",
+  "authority": "Existing Rust s1_effective_inventory; Python compares exact bytes only",
+  "receipt_sha256": "512abfc7d57d6863f6c1f2dadf2604e3d6048b5461b69254e2ad49a06f004165",
+  "comparisons": {
+    "inventory.json": {
+      "fresh_sha256": "b626d1b53f50a23ee5eae9e99fc6ea387bb83f51c807d843d68a29dd1651b803",
+      "retained_sha256": "b626d1b53f50a23ee5eae9e99fc6ea387bb83f51c807d843d68a29dd1651b803",
+      "independent_replay_equal": true,
+      "retained_bytes_equal": true
+    },
+    "provenance.json": {
+      "fresh_sha256": "ec0d888eac1d9ad8b1187e0cfb754b529cbd7687ce793215a1960dd15972e708",
+      "retained_sha256": "12f4706af2b4bdbf861bc917c6d50d7aabb78b3297bf556f4e4a77c3bed2f4bc",
+      "independent_replay_equal": true,
+      "retained_bytes_equal": false
+    }
+  },
+  "provenance_identity_verified": true,
+  "passed": true
+}

@@ -1,0 +1,17 @@
+{
+  "command": [
+    "C:\\Program Files\\Git\\bin\\bash.exe",
+    "scripts/check.sh"
+  ],
+  "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+  "head": "1c56028532ea135603dbad5423d5555313bfd9ec",
+  "tree": "14b451866491dc4a2b866ec0b1d726d792385916",
+  "status_before": "",
+  "started": "2026-10-21T03:49:46.740006+00:00",
+  "exit_code": 0,
+  "finished": "2026-10-21T04:00:41.304180+00:00",
+  "log_sha256": "c86f844457d1680774ca3c79c7ddc75385247616e4d7aa538a6b8fb67c9a1fd0",
+  "head_after": "1c56028532ea135603dbad5423d5555313bfd9ec",
+  "tree_after": "14b451866491dc4a2b866ec0b1d726d792385916",
+  "status_after": ""
+}

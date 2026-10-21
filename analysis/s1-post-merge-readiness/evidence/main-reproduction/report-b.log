@@ -1,0 +1,3 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.07s
+     Running `engine\target\debug\examples\s1_effective_inventory.exe C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical C:\Users\LEET\Codex\Temp\syndeom-post-merge-readiness-20261021\main-reproduction\report-b`
+PASS: 35 archived representations / 32 effective logical items; historical bytes preserved; s1_ingest-v0.1.0-63e23a952084 -> s1_ingest-v0.1.0-15ab865466d6

@@ -1,0 +1,20 @@
+{
+  "baseRefName": "main",
+  "headRefName": "codex/s1-first-parent-accepted-integration",
+  "headRefOid": "a337375dbae49150a1a40fa46f6d1417835aadd2",
+  "isDraft": false,
+  "mergeCommit": {
+    "oid": "1c56028532ea135603dbad5423d5555313bfd9ec"
+  },
+  "mergedAt": "2026-10-21T03:33:35Z",
+  "mergedBy": {
+    "id": "U_kgDOClmTLg",
+    "is_bot": false,
+    "login": "Quigles1337",
+    "name": ""
+  },
+  "number": 7,
+  "state": "MERGED",
+  "title": "[S1] Integrate the accepted first-parent status amendment",
+  "url": "https://github.com/Quigles1337/Syndeom/pull/7"
+}
