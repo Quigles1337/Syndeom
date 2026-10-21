@@ -63,3 +63,27 @@ draft does not change main until reviewed and merged. Canonical selection, conte
 and locator review remain separate. No producer should select a raw parent by merely
 walking directories; resolve the stable logical key using the validated effective
 inventory first. This metadata check does not itself authorize canonical production.
+
+
+## Default-branch activation — 2026-10-21 UTC / 2026-10-20 America/New_York
+
+The owner merged PR 7 at **2026-10-21T03:33:35Z** (23:33:35 America/New_York),
+creating main `1c56028532ea135603dbad5423d5555313bfd9ec`. Its tree
+`14b451866491dc4a2b866ec0b1d726d792385916` equals the tested integration head
+`a337375dbae49150a1a40fa46f6d1417835aadd2`. The prior proposed/draft wording above
+is the record of earlier events. Acceptance, verified integration and this later
+main activation are distinct; the ruling requires no second acceptance.
+
+The unchanged Rust consumer passes on merged main and reproduces the retained
+effective inventory exactly: 35 archived representations, 32 effective logical
+items, unflagged subset 18. The old logical key resolves once to the accepted
+replacement, and this case's status-support hold is discharged **on main**.
+The [post-merge event](../analysis/s1-post-merge-readiness/README.md) retains fresh
+receipt/provenance/checks; the [readiness assessment](../analysis/s1-post-merge-readiness/READINESS.md)
+maps every S1 criterion and carries the existing exclusions. Canonical selection,
+context, locator review and external-byte verification remain separate scoring
+prerequisites. All prior content above, raw objects and evidence packets are preserved.
+
+Gate S1 remains OPEN. The next action after this reconciliation reaches main is a
+separate genuinely fresh examination under §2/SD15, launched with the constitution's
+§6 Session-N resume prompt verbatim and alone. This informed session is not that exam.

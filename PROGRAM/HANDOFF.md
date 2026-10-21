@@ -3438,3 +3438,104 @@ and alone. No readiness pass or cold-start result is asserted now.
 ESCALATIONS: no renewed ruling request. Older truth/severity/unnamed-result dispositions
 remain nonblocking; canonical review and later cold-start work remain distinct.
 STOP-REASON: verified integration and evidence ready for draft review; keep Gate S1 open.
+
+
+---
+
+SESSION: 2026-10-21 UTC (began 2026-10-20 America/New_York) — post-merge activation/readiness
+@ merged-main orientation `1c56028532ea135603dbad5423d5555313bfd9ec`;
+the final reconciliation revision/tree and exact-final-commit results are retained
+externally and in the PR associated with this commit, without a self-referential commit.
+PHASE / GATE: S1 / OPEN. Informed working session; no cold-start examination.
+
+ADVANCED: re-fetched origin/main and verified PR 7 actually merged at
+2026-10-21T03:33:35Z / 2026-10-20 23:33:35 America/New_York. Main is
+`1c56028532ea135603dbad5423d5555313bfd9ec`, parents `37f1d59` and `a337375`;
+its tree `14b451866491dc4a2b866ec0b1d726d792385916` exactly equals the tested
+PR head `a337375dbae49150a1a40fa46f6d1417835aadd2`. Both head and main-push
+workflows concluded success. No intervening main changes or unrelated local work
+were present. Created `codex/s1-post-merge-readiness` from that clean merged main.
+
+The owner's acceptance, verified branch integration and actual default-branch
+activation are now distinguished in the separate event
+`analysis/s1-post-merge-readiness/README.md`. The accepted decision, original
+candidate and proposal, old integration evidence and frozen S1.4 ledger retain
+their historical wording. The unchanged Rust consumer validates merged main:
+logical key `s1_ingest-v0.1.0-63e23a952084` selects only
+`s1_ingest-v0.1.0-15ab865466d6`, so this case's status-support hold is discharged
+on main. The S-0025 author error/locator and separately attributed written witness
+remain distinct. No repeated owner acceptance or new mathematical investigation.
+
+Reconciled only current README/STATE sections and appended this entry plus a dated
+groundtruth README clarification. All prior HANDOFF and groundtruth README bytes
+remain exact prefixes. The new readiness assessment maps the constitution's S1
+criteria to actual evidence: the admitted prefix is sufficient under ADR-0003 D8;
+one positive statement-fidelity pair is admitted; manifests and qualified coverage
+are recorded; no additional substantive S1 exit criterion is identified as unmet.
+Gate S1 remains OPEN for the separate genuine cold-start examination. A zero-step
+statement pair is not an informal proof control. Thirty missing canonical lengths,
+external-byte verification and canonical selection/context/locator review remain
+future scoring prerequisites, not invented requirements to canonicalize all items.
+
+ACTUAL VERIFICATION: the existing reproduction completed at
+2026-10-21T03:50:28.787156+00:00 on clean merged main, two Rust exits 0 and expected
+overwrite refusal exit 1 with outputs preserved. Inventory SHA-256
+`b626d1b53f50a23ee5eae9e99fc6ea387bb83f51c807d843d68a29dd1651b803` equals
+the retained inventory; fresh provenance names the actual merge/tree and differs
+appropriately from the original producing checkout. Counts remain 35 representations
+(33 raw, two canonical), 32 effective logical items, 18 unflagged, statement truth
+5/17/10, qualified truth 5/10, offered-proof status 1 valid/31 invalid, 46 flaws,
+five observed/nine zero classes and 30 logical items without canonical representation.
+Clean merged-main full gate ended `2026-10-21T04:00:41.304180+00:00`, exit 0 /
+GATE: GREEN: Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, 82 Rust tests,
+428 tracked files and register checks. Receipt/log are in the new event; main's
+HEAD/tree and clean state were unchanged before/after.
+The exact final committed reconciliation tree is checked separately with the full
+gate and existing Rust reproduction; its actual receipt, logs, byte comparison and
+head/tree stay outside the tree they certify and in the associated PR. No earlier
+implementation or merged-main gate substitutes for that exact-final-tree result.
+
+PRESERVATION: Rust rechecks 370 exact accepted-baseline files, three historical
+prefixes, all 35 S1.4 files, all 47 witness/proposal packet files and all 20 frozen
+pair producer inputs. The later reconciliation additionally compares every file
+against merged main: only README/STATE reconciliation and two exact-prefix appends
+are permitted; the new event is separate. No earlier evidence, failed-run record,
+first-write bin, object, producer revision, accepted manifest/source, decision/map,
+source record/licence, taxonomy, ADR or dependency pin is changed.
+
+BELIEF DELTAS: GitHub's actual merge and identical tree activate the already accepted
+and verified one-case change on main; a fresh Rust run confirms its effective count
+and status. The first-parent hold is no longer a gate obstacle. The remaining S1
+action is a genuine cold examination, with the existing qualifications visible.
+CONFUSIONS: current summaries had retained branch-only pending-merge language after
+PR 7 landed. Reconciled those statements and placed chronology in a later event,
+leaving historical records intact. Different checkout provenance is expected even
+when inventory bytes are identical. The gate's quiet Lean axiom stage is not treated
+as a failure or a reason to start duplicate runs.
+HONESTY CHECK: re-read CLAIM statuses and FLAWS version; no transitions or relabeling.
+No complete analytic source-to-Lean bridge, PROVEN claim, numerical power, detector
+reliability, positive-length informal proof control or blind evaluation is established.
+LEAKAGE CHECK: inspected existing governance, corpus metadata, prior evidence and
+merge/check metadata only; no contact-corpus or real-AI-proof behavior informed a
+design decision. No contact data, researcher outreach or referee participation.
+DETERMINISM CHECK: existing Rust retains all metadata/count authority under SD10;
+Python only orchestrates and compares bytes. Receipts bind actual commands, exits,
+checkout/tree and raw-log hashes; readable copies have separate hashes and lossless
+raw gzip companions. No output destination or historical receipt was reused.
+MANIFEST CHECK: no new proof artifact; both raw objects and their original producing
+revisions, candidate manifest/source and effective map remain exact. Available
+committed bytes are verified; absent external originals retain historical evidence
+only and must be retrieved/reverified before scoring.
+DRIFT CHECK: no producer/detector changes, schema, generator family, canonical artifact,
+candidate regeneration, harvest or witness reinvestigation. The seven truth questions,
+seven severity questions and unnamed-result question keep their existing nonblocking
+dispositions and exclusions. S1.4 remains the frozen original-snapshot report.
+NEXT-SINGLE-ACTION: once this reconciliation is on main, a separate genuinely fresh
+session attempts Gate S1's cold-start examination under §2/SD15 using §6's Session-N
+resume prompt verbatim and alone. Do not carry program state in its launching prompt
+or use a full-history continuation as the exam. This session does not close S1.
+ESCALATIONS: no renewed owner ruling is needed. Existing older questions and future
+scoring prerequisites remain as documented; no additional substantive S1 blocker
+was identified. Temporary draft/review status belongs to PR metadata, not STATE's next action.
+STOP-REASON: bounded activation/readiness reconciliation complete for review; leave
+the reconciliation PR unmerged and Gate S1 OPEN pending the separate fresh examination.
