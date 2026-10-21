@@ -1,0 +1,26 @@
+[
+  {
+    "raw_log": "report-a.log.gz",
+    "raw_uncompressed_sha256": "228f6fe3419e39794a33e994554afe9232236f8052528b82ef0f70ea1a685ccb",
+    "compressed_sha256": "811eca6b9d04a202e31801dae5d5509adc7550a812303ca6ef9fbbd9a655b7c0",
+    "readable_log": "report-a.log",
+    "readable_sha256": "228f6fe3419e39794a33e994554afe9232236f8052528b82ef0f70ea1a685ccb",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  },
+  {
+    "raw_log": "report-b.log.gz",
+    "raw_uncompressed_sha256": "9dd1b4c44fa51bece54f6c20e429b346408d156953cf353932f7f0175bb419c6",
+    "compressed_sha256": "a3dab14a70823c5caf5f7c96e4819d8979ced2cae802787e96c9a15daea68651",
+    "readable_log": "report-b.log",
+    "readable_sha256": "9dd1b4c44fa51bece54f6c20e429b346408d156953cf353932f7f0175bb419c6",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  },
+  {
+    "raw_log": "existing-output-refused.log.gz",
+    "raw_uncompressed_sha256": "05428868055704c459aac8205ef04261f6b8926a489dd7363c7baab51c1aa30b",
+    "compressed_sha256": "73b741f1f32fceca13aed0f45cd3098e873f0850022d2a2fd37a344daf0243eb",
+    "readable_log": "existing-output-refused.log",
+    "readable_sha256": "05428868055704c459aac8205ef04261f6b8926a489dd7363c7baab51c1aa30b",
+    "transformation": "CRLF/CR to LF; trailing blank lines trimmed; one final LF; raw preserved in gzip"
+  }
+]

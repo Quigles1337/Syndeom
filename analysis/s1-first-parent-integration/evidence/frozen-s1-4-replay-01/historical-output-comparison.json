@@ -1,0 +1,18 @@
+{
+  "coverage.json": {
+    "matches_retained": true,
+    "sha256": "394003309e58e716c2b39882662a008936194420ac2a5d6bce5701961945fa02"
+  },
+  "inventory.json": {
+    "matches_retained": true,
+    "sha256": "882c05d0cb5207beebb9f94b583dbfa9080dca0a0d34832b75ad96be838e33ec"
+  },
+  "provenance.json": {
+    "matches_retained": true,
+    "sha256": "2364ffc77ccdf275b13300331348ce96033d5fa7f89695b2468ccc0277d162f9"
+  },
+  "report.md": {
+    "matches_retained": true,
+    "sha256": "38c02f7d411ec6e1d95049b94788cdfa10fe7ff68e24513973050fd4ba945492"
+  }
+}

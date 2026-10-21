@@ -1,0 +1,110 @@
+{
+  "started_at": "2026-10-21T03:06:39.526158+00:00",
+  "helper_sha256": "02a4cca196c87074ac2b00ceba8ab328c9243ea38fdcc04c05e215b26513786b",
+  "corpus_revision": "e6a7cae4392dd1565ee57f9fb727cc01e453687d",
+  "tool_revision": "4e46564ac62bc2bd7a5bef54265e9b2dd26772bb",
+  "output": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01",
+  "commands": [
+    {
+      "label": "rustc-version",
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+      "started_at": "2026-10-21T03:06:39.604492+00:00",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "ended_at": "2026-10-21T03:06:39.676388+00:00",
+      "log_sha256": "573e0f05fa50b8b397383b890dd59ba38c60ec17d2820525f51f1ff9b534cfde",
+      "log": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01\\logs\\rustc-version.log"
+    },
+    {
+      "label": "report-a",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "-p",
+        "syndeom-manifest",
+        "--example",
+        "s1_4_coverage",
+        "--",
+        "report",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "e6a7cae4392dd1565ee57f9fb727cc01e453687d",
+        "4e46564ac62bc2bd7a5bef54265e9b2dd26772bb",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01\\report-a"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine",
+      "started_at": "2026-10-21T03:06:39.678662+00:00",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "ended_at": "2026-10-21T03:06:53.024852+00:00",
+      "log_sha256": "d7162a80fc3b80abda4af93a3ab352eddf481cdcdb19e0b0f08af1b17b260129",
+      "log": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01\\logs\\report-a.log"
+    },
+    {
+      "label": "report-b",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "-p",
+        "syndeom-manifest",
+        "--example",
+        "s1_4_coverage",
+        "--",
+        "report",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "e6a7cae4392dd1565ee57f9fb727cc01e453687d",
+        "4e46564ac62bc2bd7a5bef54265e9b2dd26772bb",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01\\report-b"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine",
+      "started_at": "2026-10-21T03:06:53.033363+00:00",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "ended_at": "2026-10-21T03:07:04.188357+00:00",
+      "log_sha256": "7c7599203960e08cb2ce7115faedba0a89ff734d716d9ef5c7d91e80d93d8459",
+      "log": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01\\logs\\report-b.log"
+    },
+    {
+      "label": "existing-output-refusal",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "-p",
+        "syndeom-manifest",
+        "--example",
+        "s1_4_coverage",
+        "--",
+        "report",
+        "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical",
+        "e6a7cae4392dd1565ee57f9fb727cc01e453687d",
+        "4e46564ac62bc2bd7a5bef54265e9b2dd26772bb",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01\\report-a"
+      ],
+      "cwd": "C:\\Users\\LEET\\Codex\\Projects\\Syndeom-S1.3-Canonical\\engine",
+      "started_at": "2026-10-21T03:07:04.204165+00:00",
+      "expected_exit": 2,
+      "exit_code": 2,
+      "ended_at": "2026-10-21T03:07:04.355509+00:00",
+      "log_sha256": "3413a88a3af19dd5668b7234335c29db0e6320b7d2c117c13651a09030869168",
+      "log": "C:\\Users\\LEET\\Codex\\Temp\\syndeom-first-parent-integration-20261020\\frozen-s1-4-replay-01\\logs\\existing-output-refusal.log"
+    }
+  ],
+  "success": true,
+  "checkout_revision": "c87c827a27ce40af7e08101d452ba5532704c9c5",
+  "checkout_tree": "c874c8d7bd4af341d135e7d47db80258f1cfc9a2",
+  "rustc": "rustc 1.91.0 (f8297e351 2025-10-28)",
+  "deterministic_artifacts": {
+    "coverage.json": "394003309e58e716c2b39882662a008936194420ac2a5d6bce5701961945fa02",
+    "inventory.json": "882c05d0cb5207beebb9f94b583dbfa9080dca0a0d34832b75ad96be838e33ec",
+    "provenance.json": "2364ffc77ccdf275b13300331348ce96033d5fa7f89695b2468ccc0277d162f9",
+    "report.md": "38c02f7d411ec6e1d95049b94788cdfa10fe7ff68e24513973050fd4ba945492"
+  },
+  "fresh_destinations_identical": true,
+  "ended_at": "2026-10-21T03:07:04.368157+00:00"
+}

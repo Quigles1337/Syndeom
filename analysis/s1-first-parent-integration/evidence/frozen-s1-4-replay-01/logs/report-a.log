@@ -1,0 +1,3 @@
+   Compiling syndeom-manifest v0.1.0 (C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical\engine\manifest)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.96s
+     Running `target\debug\examples\s1_4_coverage.exe report C:\Users\LEET\Codex\Projects\Syndeom-S1.3-Canonical e6a7cae4392dd1565ee57f9fb727cc01e453687d 4e46564ac62bc2bd7a5bef54265e9b2dd26772bb C:\Users\LEET\Codex\Temp\syndeom-first-parent-integration-20261020\frozen-s1-4-replay-01\report-a`
