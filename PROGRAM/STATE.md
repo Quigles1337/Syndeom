@@ -1,11 +1,17 @@
 # STATE
 
-- **Updated:** 2026-10-14 UTC (Session 20 — the ninth Route A harvest: candidates 25–27
-  examined in order, all three admitted yielding 6 items — four from one published erratum (a
+- **Updated:** 2026-10-21 UTC (Session 21 — the tenth Route A harvest: candidates 28–30
+  examined in order, all three admitted yielding 5 items — a Hofer-distance theorem withdrawn
+  for an error in its assumptions, a proposition whose decisive equivalence its author calls
+  incorrect together with the two theorems whose derivation it invalidated, and a
+  groupoid-construction proposition whose induction does not stabilise; prefix through
+  `1404.4599`; `groundtruth/` holds thirty-six `raw/1` items. Session 20 — the ninth Route A
+  harvest: candidates 25–27 examined in order, all three admitted yielding 6 items — four from one
+  published erratum (a
   main theorem withdrawn to a conjecture, the proposition and the assertion its proof needed,
   and a moduli theorem shown false by the erratum's own example), one true theorem whose proof
   invoked a comparison principle outside its hypotheses, one wrong degree shift; prefix through
-  `1403.4485`; `groundtruth/` holds thirty-one `raw/1` items. Session 19 — candidates 22–24: all
+  `1403.4485`. Session 19 — candidates 22–24: all
   three admitted yielding 5 items (four undetermined). Session 18 — candidates 19–21: 2 admitted
   (3 items), 1 rejected (D8, a cumulative comment). Session 17 — candidates 16–18: all three
   admitted yielding 4 items (the third undetermined statement truth; the first
@@ -55,10 +61,10 @@
 - **Build status:** the gate is `bash scripts/check.sh` (ADR-0002 D6): `lake build` + axiom audit
   of the golden fixture + `cargo fmt --check` + `cargo clippy -D warnings` + `cargo test` + LF check
   + register cross-reference check; it prints `GATE: GREEN` on success. **Last verified GREEN:
-  2026-10-14 21:48:44Z–21:50:35Z (Session 20, detached run with a log) on the Session-20 harvest
+  2026-10-21 22:17:08Z–22:23:24Z (Session 21, detached run with a log) on the Session-21 harvest
   tree with every edit staged, and again on the final tree before the harvest commit** — Lean `Build completed successfully (8926 jobs)`,
-  axioms `[propext]`; Rust fmt and clippy clean, 29/29 tests (24 manifest + 5 ingest); 112 text files `i/lf` + 10 binaries;
-  registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 65/65). Earlier GREEN runs:
+  axioms `[propext]`; Rust fmt and clippy clean, 29/29 tests (24 manifest + 5 ingest); 122 text files `i/lf` + 10 binaries;
+  registers coherent (Q 17/17, SD 17/17, FLAW 14/14, CLAIM 7/7, S- 72/72). Earlier GREEN runs:
   Session 4 (before the S0.6 commit), Session 5 (at `132788c`), Session 6 (at `2b7c573` and on its
   own tree), Session 7 (22:54:28Z–23:04:29Z, cold OS cache), Session 8 (23:21:33Z–23:31:44Z and
   23:32:45Z–23:33:19Z), Session 9 (23:35:52Z–23:36:23Z and 23:36:55Z–23:37:25Z) and Session 10's
@@ -70,8 +76,10 @@
   the final-tree run, detached), Session 16 (04:52:05Z–05:02:27Z cold, 05:07:44Z–05:09:07Z and
   05:09:56Z–05:10:25Z, detached), Session 17 (08:08:51Z–08:18:18Z cold, 08:30:22Z–08:30:47Z
   and 08:30:57Z–08:31:23Z, detached), Session 18 (19:44:55Z–19:55:18Z cold, 20:05:35Z–20:09:55Z
-  and 20:10:27Z–20:11:44Z, detached) and Session 19 (20:14:35Z–20:15:39Z, 20:35:33Z–20:43:22Z
-  and 20:43:48Z–20:49:47Z, detached), each on its own tree before its commit. A run the harness
+  and 20:10:27Z–20:11:44Z, detached) Session 19 (20:14:35Z–20:15:39Z, 20:35:33Z–20:43:22Z
+  and 20:43:48Z–20:49:47Z, detached), Session 20 (21:27:41Z–21:38:17Z cold, 21:48:44Z–21:50:35Z
+  and the final-tree run, detached) and Session 21 (2026-10-21 21:44:16Z–21:54:48Z, cold OS
+  cache, at `8e222a4`, detached), each on its own tree before its commit. A run the harness
   killed for system memory (00:21:40Z, in the axiom audit) is not a GREEN run; since then the
   gate is run detached with a log (HANDOFF Session 10). **Standing instruction:** update this line at every GREEN run a HANDOFF entry
   records, so it never lags HANDOFF. **Timing:** about 30 s with a warm `lean/.lake` *and* a warm
@@ -123,7 +131,9 @@
   S-0044..S-0049 (Route A items 14–17, Session 17, digest-only);
   S-0050..S-0053 (Route A items 18–20, Session 18, digest-only);
   S-0054..S-0059 (Route A items 21–25, Session 19, digest-only);
-  S-0060..S-0065 (Route A items 26–31, Session 20, digest-only).
+  S-0060..S-0065 (Route A items 26–31, Session 20, digest-only);
+  S-0066..S-0072 (Route A items 32–36 and the later paper the item-36 notice names, Session 21,
+  digest-only).
 - **Manifest schema:** `syndeom-manifest/2` since 2026-10-13 (ADR-0001 amended, Session 10:
   `statement_status.value` admits `null` with `method: "undetermined"`, `null ⇒ proof_status
   invalid`; `/1` remains accepted and names the pre-amendment schema — the D8 goldens), ADR-0001
@@ -200,9 +210,9 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `1403.4485` (candidates 1–27 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20): 27 examined, 21 admitted yielding 31 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; NEXT resumes at candidate 28** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Evidence slots still empty: the harvest log, the first admitted items |
+| S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **in progress — prefix through arXiv id `1404.4599` (candidates 1–30 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20, 21): 30 examined, 24 admitted yielding 36 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; NEXT resumes at candidate 31** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Evidence slots still empty: the harvest log, the first admitted items |
 | S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | open | — |
-| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **`raw/1` parents: 31 manifested (Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20); derived canonical artifacts: none — the derivation producer and its ADR do not exist yet** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; statement false; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
+| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **`raw/1` parents: 36 manifested (Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20, 21); derived canonical artifacts: none — the derivation producer and its ADR do not exist yet** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; statement false; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`); `s1_ingest-v0.1.0-eeea00c52724/` (arXiv 1403.6317 v1, Theorem 1; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-b77cf8e312d0/`, `s1_ingest-v0.1.0-c38c8c65dd2c/` and `s1_ingest-v0.1.0-e8075d1f1a0d/` (arXiv 1403.8075 v9, Proposition 4.1, Theorem 4.3 and Theorem 4.4; FLAW-0004 fatal, FLAW-0005 gap and FLAW-0005 gap; **all three undetermined — `value: null`, the eleventh to thirteenth uses of ruling (ii)**; `status.kind` `retraction`; `external`); `s1_ingest-v0.1.0-22b1b48f3565/` (arXiv 1404.4599 v4, Proposition 2.22; FLAW-0005 fatal; **undetermined — `value: null`, the fourteenth use of ruling (ii)**, the `true` reading by the author's later paper named as the alternative; `status.kind` `retraction`; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0072 |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | open | — |
 | Licences recorded for anything touched (SD16) | open | — |
 | Repo green under the gate | **standing** | Build status above |
@@ -252,61 +262,94 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   in HANDOFF Session 10); the count-only convention is now SD15 by ADR-0005. Nothing awaited.
 - **Q14 / Q15 — resolved in S0.** The sweep was ferried and placed (Session 3); no retrieval
   failed outright in S0.1 (the IAS page, HTTP 403, is corroborative only). Nothing awaited.
+- **For Al's attention, not a blocker (carried from Sessions 16–21, now eight records):** items 8,
+  10, 11, 14, 15, 18, 25 and 32 carry `statement_status` false by source document with
+  `undetermined` named in their records as the alternative, where the author writes "corrected",
+  "incorrect", "error", "false in the stated generality" or "the wrong theorem" without giving a
+  counterexample. A standing ruling either way would make the eight records uniform.
+- **For Al's attention, not a blocker (carried from Session 19):** ADR-0003 D3's severity clause
+  "withdrawn, weakened or shown false → fatal" against the FLAW-0004/0005 entries' own ranges for
+  statements left open: items 13, 16, 21, 24, 26, 27, 29, 34 and 35 (gap) follow the entries'
+  ranges. A one-line clarification in D3 would settle it.
+- **For Al's attention, not a blocker (carried from Session 20):** D2.3 "the status document names
+  the result" is read as named results only — candidate 25's three unnamed links, candidate 28's
+  Corollary 12 and demoted Theorem 3, and candidate 30's Lemmas 2.9 and 2.21 are described in the
+  records and are not items. If Al prefers every result the status document voids by its own
+  words to be an item, they can be added from the same S-entries without re-examination.
+- **For Al's attention, not a blocker (new, Session 21):** item 36 (arXiv 1404.4599, Proposition
+  2.22) records `statement_status` null / `undetermined` although its withdrawal comment says
+  "This problem has been overcome in arXiv:1806.08664" — a later paper by the same author with
+  reworked concepts (S-0072). The `true` reading (the result stands by the later paper) is named
+  in the record as the alternative; a ruling on "overcome elsewhere" wording would settle this and
+  any later case of the shape.
 - Human-referee participants are Al's decision whenever S4.3 arrives (SD13); any output about a
   specific real manuscript beyond SD3 is escalated.
 
 ## NEXT-SINGLE-ACTION
 
-**S1.1 — the tenth Route A harvest session, resuming from the log's last candidate** (ADR-0003
+**S1.1 — the eleventh Route A harvest session, resuming from the log's last candidate** (ADR-0003
 D7, D8 as amended: a prefix is enough). Procedure, executable cold:
 (a) read `groundtruth/HARVEST-LOG.md`: run 1's query, window 2023-01-01..2026-09-30, ascending
-arXiv id, **last candidate processed `1403.4485` (candidate 27 of 2,472)**; the next candidate is
-`1403.6317` (v3 of 2024-10-15, math.SG, "Comparison of spectral invariants in Lagrangian and
-Hamiltonian Floer theory", comment "We removed the wrong theorem from the first version, which was
-brought to our attention by R. Leclercq" — identify the removed theorem from the diff, and read
-v2's comment and date first: if v2 removed it, the correction may lie outside the window), then
-`1403.8075` (v11 of 2026-01-09, math.GM, "Algorithm, probability, and prime numbers", a withdrawal
-whose comment reads "Withdrawn due to a logical error in Section 4. In Proposition 4.1, the
-argument incorrectly treats primality verification as equivalent to checking leading digits in
-multiple base representations, and the subsequent independence assumption for fp(1),...,fp(n) is
-unjustified. This invalidates the derivation of Theorems 4.3-4.4" — the helper fails on a withdrawn
-version's missing e-print, decide from the abstract pages and v10 as for candidate 18; math.GM is
-general mathematics, so read D2.1 and D2.6 with care), then `1404.4599` (v5 of 2024-01-12,
-math.CO, comment beginning "The construction of finite n-acyclic groupoids in Section 2.4 is
-flawed and I know of no direct repair: completion turns out to be incompatible with restriction to
-proper subsets of the generator set, so that the induction towards Proposition 2.22 does not
-stabilise as claimed. This problem has been overcome in arxiv:1806.08664 …"). A cumulative revision
-comment can carry correction language from a version outside the window (candidate 20): read every
-version's comment on its own abstract page before deciding D8. A comment's theorem number may
-follow the corrected version's numbering (candidate 23): resolve the number in both versions
-before locating. A remark or erratum in the corrected version that names further results is part
-of the status document and yields further items (candidate 23, three; candidate 25, four from one
-published erratum naming results at several depths of one dependency chain); links the erratum
-does not name are not items (D2.3), and the records say which.
+arXiv id, **last candidate processed `1404.4599` (candidate 30 of 2,472)**; the next candidate is
+`1406.7174` (v3 of 2023-12-27, math.SG, "Circle-actions, quantum cohomology, and the Fukaya
+category of Fano toric varieties", comment "71 pages (51 pages + appendices). Version 3 (updated
+compared to the published version): fixed a typo in Theorem 1.5(2), made notation consistent in
+(1.6) and (1.7), fixed SH computation in Cor 4.16, added two footnotes: one for Lemma 1.6, and
+one in Section 3.2" — "typo" and "fixed … computation" are decided by the diff against D2.3 and
+D2.7, as candidate 20's "minor correction" was: a typo in a statement with no error in an offered
+proof is not an item, a corrected computation in a corollary's proof may be), then `1409.7585`
+(v5 of 2024-07-30, math.CV, "(Weak) m-extremals and m-geodesics", comment "Corrected proof of
+Proposition 4.13" — located but undescribed: the class must come from the v4→v5 diff of that
+proof, else found-but-unclassifiable), then `1410.3009` (v3 of 2024-07-01, math.AG, "Positivity
+properties of relative complete intersections", comment "This paper contains a mistake in main
+Theorem 2.1. The mistake has been mended, with a slight change of the statement, in
+arXiv:2207.11485v1 [math.AG], where also new results are obtained" — if v3 is a stub or a note
+with the mistake undescribed, read arXiv:2207.11485's account of it as candidate 30's S-0072 was
+read: the same author's later paper may describe the error and is supplementary to the notice,
+never the notice itself). A cumulative revision comment can carry correction language from a
+version outside the window (candidate 20): read every version's comment on its own abstract page
+before deciding D8. A comment's theorem number may follow the corrected version's numbering
+(candidate 23): resolve the number in both versions before locating. A remark or erratum in the
+corrected version that names further results is part of the status document and yields further
+items (candidates 23 and 25); links the erratum does not name are not items (D2.3), and the
+records say which. A withdrawal comment that locates and describes the error is a complete status
+document (candidates 18, 29, 30); a withdrawal stub's abstract page carries no licence link — the
+original's own abstract page governs the licence (D5). When the notice says the problem "has been
+overcome" in a later paper by the same author, read that paper's account of the flaw (it may name
+the finder and the mechanism) and register it as a supplementary S-entry, but do not equate its
+reworked statement with the withdrawn one: the truth stays `undetermined` unless the notice says
+the result stands (candidate 30; escalated). Paper-wide or per-section shared counters: confirm a
+result's number by counting the environments (candidates 28 and 30).
 If a correcting version is itself a withdrawal (no e-print), the helper prints the abstract data
-and fails on the source fetch (candidates 11, 13 and 18): decide from the abstract pages and the
-original (candidate 18 was admitted that way, its comment describing and locating the error), or
-add a `--no-sources` fallback first; a page-and-line reference is resolved against the arXiv PDF
-(`pdftotext -layout`, as for candidate 18); the helper takes the correcting version as a bare
-number (`4`, not `v4`);
+and fails on the source fetch (candidates 11, 13, 18, 29 and 30): decide from the abstract pages
+and the original — fetch the original's e-print and scan it for AI-assistance words by hand, since
+the helper's scan never runs in that case — or add a `--no-sources` fallback first; a
+page-and-line reference is resolved against the arXiv PDF (`pdftotext -layout`, as for candidate
+18); the helper takes the correcting version as a bare number (`4`, not `v4`);
 (b) regenerate the candidate list — `python -I -X utf8 lab/route_a_candidates.py 2023-01-01
-2026-09-30 <scratchpad>/route-a` (pages are cached under that directory only for the session
-that fetched them; a fresh run re-fetches 57 ranges in about 30 minutes) — and confirm its
-digest against the log's run record or record the new digest as run 2 with the difference stated
-(arXiv adds and revises papers; the examined prefix is unaffected because ids are assigned at
-submission and the finder sorts by id);
-(c) examine candidates from `1403.6317` onward **in ascending id, skipping none**, each with
+2026-09-30 <scratchpad>/route-a` — and confirm its digest against the log's run record or record
+the new digest as run 2 with the difference stated (arXiv adds and revises papers; the examined
+prefix is unaffected because ids are assigned at submission and the finder sorts by id). The 73
+API pages are cached only under the scratchpad of the session that fetched them; copying that
+directory's `pages/*.xml` and `finder-state.json` into the new session's `<scratchpad>/route-a/`
+before the run regenerates the list with 0 requests (Session 21; locate an earlier scratchpad with
+`ls -d <Temp>/claude/C--Users-LEET/*/scratchpad/route-a`); a fresh run re-fetches 57 ranges in
+about 30 minutes;
+(c) examine candidates from `1406.7174` onward **in ascending id, skipping none**, each with
 `python -I -X utf8 lab/route_a_examine.py <id> <correcting version> <scratchpad>/exam/<id>`
 (both versions' abstract pages for licence and submission history, both e-prints, the TeX diff,
 the AI-assistance scan) against ADR-0003 D2's seven criteria; log every verdict with its reason;
 (d) for each admitted item, in this order: the S-entries for original and notice in SOURCES.md
 (licence per D5 as amended: CC0 / CC BY / CC BY-SA / public domain → `committed`, NC, ND,
-arXiv non-exclusive or assumed → `external`); the per-item config (the thirty-one Session-11/13/14/15/16/17/18/19/20 configs
-are the pattern, including the null-truth one and the two-items-from-one-notice cases: ADR-0003 D4 fields, `statement_status` `null` + `"undetermined"` when the notice
-leaves the truth open); then from `engine/`: `cargo run -q -p syndeom-ingest -- --config
-<item.json> --bytes <original bytes> --root .. --engine-commit $(git rev-parse HEAD)`; then
-`RECORD.md` into the item directory (the thirty-one Session-11/13/14/15/16/17/18/19/20 records are the pattern); the `.gz`
-originals are binary in `.gitattributes` and the register checker;
+arXiv non-exclusive or assumed → `external`); the per-item config (the thirty-six
+Session-11/13/14/15/16/17/18/19/20/21 configs — each recoverable from its manifest's `config`
+block, with `notes` lifted to the manifest's top level — are the pattern, including the null-truth
+ones, the two-to-four-items-from-one-notice cases and the three-source item 36: ADR-0003 D4
+fields, `statement_status` `null` + `"undetermined"` when the notice leaves the truth open); then
+from `engine/`: `cargo run -q -p syndeom-ingest -- --config <item.json> --bytes <original bytes>
+--root .. --engine-commit $(git rev-parse HEAD)`; then `RECORD.md` into the item directory (the
+thirty-six records are the pattern); the `.gz` originals are binary in `.gitattributes` and the
+register checker;
 (e) stop at the session's budget before examining the next candidate; update the log's counts
 and last-candidate line, this file's Gate S1 table (S1.1, S1.3 rows), and set NEXT to the next
 prefix. Grey zones are `escalated` and listed under standing escalations; nothing ambiguous is

@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "c171e3381684cb051dcf77333de7e51d75e08ca92580b9dc14d24d73e6999270",
+        "file": "original-1403.8075v9.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 136883,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-c38c8c65dd2c",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1403.8075v9.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.3, proof, the sentence 'The assumptions of Theorem 3.4 are then satisfied if we consider n to be k' and the application 'By applying Theorem 3.4, we deduce that pi(n) - m(n) = o(M(m(n)) sqrt(m(n))) a.c.': Theorem 3.4 is applied to pi(n) = sum f_p(i) as a sum of independent random variables (Section 3's standing assumption that omega'_1, ..., omega'_n are independent) on the strength of the paragraph after Proposition 4.1 - 'Furthermore, f_p(1), ..., f_p(n) are independent, and f_p(n) is determined by n' and 'the prime counting function ... behaves as the sum of the independent random variables' - which the notice calls unjustified, and of Proposition 4.1 (item 33) for the random-variable status",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1403.8075v9 (the original; withdrawn by v10, 27 December 2025, and again by v11, 9 January 2026) - Theorem 4.3 (Section 4, its third numbered environment: pi(n) - Li(n) = o(M(m(n)) sqrt(m(n))) almost certainly, with m(n) = E(pi(n)))",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v9): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0068",
+      "S-0069"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0069: 'These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4' (v10) and 'This invalidates the derivation of Theorems 4.3-4.4' (v11) - the derivation is withdrawn; the statement is neither re-proved nor disproved",
+      "value": null
+    },
+    "status": {
+      "kind": "retraction",
+      "reference": "S-0069"
+    }
+  },
+  "config_hash": "c38c8c65dd2cb5c9e73ea5583bc39001882cd0da6df55bf1586abfdd7e5a39e4",
+  "engine_commit": "8e222a49a64273c9cefc35bca5ae15a0a05fb9ee",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.3, proof, the sentence 'The assumptions of Theorem 3.4 are then satisfied if we consider n to be k' and the application 'By applying Theorem 3.4, we deduce that pi(n) - m(n) = o(M(m(n)) sqrt(m(n))) a.c.': Theorem 3.4 is applied to pi(n) = sum f_p(i) as a sum of independent random variables (Section 3's standing assumption that omega'_1, ..., omega'_n are independent) on the strength of the paragraph after Proposition 4.1 - 'Furthermore, f_p(1), ..., f_p(n) are independent, and f_p(n) is determined by n' and 'the prime counting function ... behaves as the sum of the independent random variables' - which the notice calls unjustified, and of Proposition 4.1 (item 33) for the random-variable status"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0069: 'These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4' (v10) and 'This invalidates the derivation of Theorems 4.3-4.4' (v11) - the derivation is withdrawn; the statement is neither re-proved nor disproved",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 34 (candidate 29), Session 21. Ground truth as the author's withdrawal comments document it ('the probabilistic step leading to Theorems 4.3 -- 4.4'), confirmed against the v9 text; severity gap by the FLAW-0005 entry's range (the hypothesis called unjustified, not false), as items 13, 16, 21, 24, 26, 27 and 29 - the D3 severity-clause reading (withdrawn -> fatal) is the carried escalation. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

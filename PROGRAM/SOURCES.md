@@ -2096,3 +2096,234 @@ calibration; neither bears on CLAIM-0006's two axes. Not re-entered.
 - **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page;
   copy not committed.
 - **Bears on:** S1.1 item 31 (its status document); no CLAIM.
+
+---
+
+## S-0066 — Jovana Đuretić, Jelena Katić and Darko Milinković, "Comparison of spectral invariants in Lagrangian and Hamiltonian Floer theory", arXiv:1403.6317 **v1** (the original of Route A item 32)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 28 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 21, 2026-10-21.
+- **Citation (from the abstract page):** Jovana Đuretić, Jelena Katić, Darko Milinković,
+  "Comparison of spectral invariants in Lagrangian and Hamiltonian Floer theory", arXiv:1403.6317,
+  Symplectic Geometry (math.SG); **v1 submitted 25 March 2014** (124 KB; no comment); v2 28 March
+  2014 (1 KB, withdrawn — S-0067); v3 15 October 2024 (S-0067). No journal reference or DOI on the
+  abstract page (the v3 source file is named `DKM_filomat_v3.tex`). Three authors.
+- **Primary:** abstract page <https://arxiv.org/abs/1403.6317v1>, accessed 2026-10-21T21:46:38Z
+  (HTTP 200), 39,781 bytes, SHA-256
+  `1e5d5c9673d90d6a20c07fa2481bd50349ad6d2f1bad07a0c290e1c8e13628fd` (re-fetched at 21:47:21Z
+  and 21:51:53Z, byte-identical); e-print <https://arxiv.org/e-print/1403.6317v1>
+  (`application/gzip`), accessed in the examination run of 21:47:21Z, 126,877 bytes, SHA-256
+  `97b28cf24aa4cc4bb6e810ceb12aebad481df0840cb5a3389b5eca1c2e599bce` — a tar bundle whose TeX
+  file is `Djuretic_Katic_Milinkovic.tex` (851 lines).
+- **Content used:** the introduction's Theorem 1 (TeX label `thm:HD`; every theorem-like
+  environment of the paper is numbered on one shared counter, so Theorem 1 is the first), its
+  hypotheses and conclusion; Subsection 2.4 "Hofer's distance" (Definitions 5 and 6 —
+  quasi-autonomous, admissible — Schwarz's theorem cited as Theorem 7, the Lagrangian Hofer
+  distance Δ); Section 3 "Proof of Theorem 1" (the chain (i)–(vii)); Theorems 10 and 11 and
+  Corollary 12; quoted in `RECORD.md`.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v1 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 32); no CLAIM.
+
+---
+
+## S-0067 — Đuretić, Katić and Milinković, arXiv:1403.6317 **v3** — the correcting version and its comment, with the v2 withdrawal comment (the status document of Route A item 32)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed).
+- **Citation:** as S-0066; **v2 submitted 28 March 2014** (1 KB, withdrawn), comment: "This paper
+  has been withdrawn by the authors due to an error in the assumptions of the Theorem 1"; **v3
+  submitted 15 October 2024**, comment: "We removed the wrong theorem from the first version,
+  which was brought to our attention by R. Leclercq".
+- **Primary:** abstract page <https://arxiv.org/abs/1403.6317v3>, accessed 2026-10-21T21:46:38Z
+  (HTTP 200), 38,733 bytes, SHA-256
+  `5b32eedd88fe1b0a4972c956bbc5742f210c61e84a066065b387301eaa6da531` (re-fetched at 21:47:21Z
+  and 21:51:56Z, byte-identical); abstract page of the withdrawn v2
+  <https://arxiv.org/abs/1403.6317v2>, accessed 2026-10-21T21:47:40Z (HTTP 200), 39,708 bytes,
+  SHA-256 `81d0d559b9f39506e35193889d29923874cc69ff6fa309d00128d43a66f8f907` (a withdrawal stub:
+  no e-print, no licence link); e-print <https://arxiv.org/e-print/1403.6317v3>
+  (`application/gzip`), accessed in the examination run of 21:47:21Z, 125,994 bytes, SHA-256
+  `3e95b88f70673c6d42813c7e9f43a62a272060078a0ef01b726e06df15c1f2ed` — a tar bundle whose TeX
+  file is `DKM_filomat_v3.tex` (798 lines).
+- **Content used:** the two comments; the v1 → v3 TeX diff (645 lines): Theorem 1 (`thm:HD`), the
+  sentence announcing its proof, Section 3 "Proof of Theorem 1" with its seven-step chain,
+  Subsection 2.4 "Hofer's distance" (the definitions of quasi-autonomous and admissible
+  Hamiltonians, Schwarz's theorem, the distance Δ) and Corollary 12 are removed; the abstract's
+  sentence "From this result, we derive a corollary considering comparison of Hofer's distance in
+  periodic orbits and Lagrangian case" and the keyword "Hofer's distance" are dropped; Theorem 3
+  (the Morse-homology product inequality) becomes a remark with its derivation; the invariants are
+  reduced from four (ρ, η for periodic orbits; c, σ for the Lagrangian case) to two (ρ, σ)
+  normalised through the PSS isomorphisms, with a new theorem that σ(·, H) − σ(·, K) is a
+  constant C(H, K) whenever φ¹_H(L) = φ¹_K(L) replacing v1's sentence "In [L], Leclercq showed
+  that c(β) does not depend on H, but only on L and φ¹_H(L)"; the introduction adds "We would
+  like to thank Rémi Leclerq for pointing to us an error in the previous version of the paper."
+  and a referee acknowledgement. The AI-assistance scan of the v3 sources: no hit.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v3 abstract page;
+  copy not committed.
+- **Bears on:** S1.1 item 32 (its status document); no CLAIM.
+
+---
+
+## S-0068 — Yasuo Nishii, "Algorithm, probability, and prime numbers", arXiv:1403.8075 **v9** (the original of Route A items 33–35)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The items' `raw/1` file records are `external`.
+- **How found:** Route A, candidate 29 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 21, 2026-10-21.
+- **Citation (from the abstract page):** Yasuo Nishii, "Algorithm, probability, and prime
+  numbers", arXiv:1403.8075, General Mathematics (math.GM); v1 23 March 2014; v2–v5 April–May
+  2014; v6 20 December 2016; v7 30 September 2018; v8 8 December 2020; **v9 submitted 23 March
+  2023** (134 KB; comment "Revision of the contents over the whole range of the paper" — a
+  revision inside the window that reports no error and is not a notice); v10 27 December 2025
+  and v11 9 January 2026, both withdrawn (S-0069). No journal reference or DOI on the abstract
+  page. One author.
+- **Primary:** abstract page <https://arxiv.org/abs/1403.8075v9>, accessed 2026-10-21T21:48:05Z
+  (HTTP 200), 41,098 bytes, SHA-256
+  `1cd0cb15c6e65b322aed751bda1ee6bb96e80628085a3b2d922e327be1635d77` (re-fetched at about
+  21:52:03Z, byte-identical); e-print <https://arxiv.org/e-print/1403.8075v9>
+  (`application/gzip`), accessed 2026-10-21T21:52:06Z, 136,883 bytes, SHA-256
+  `c171e3381684cb051dcf77333de7e51d75e08ca92580b9dc14d24d73e6999270` — a tar bundle
+  (`rev_math1.tex`, 595 lines; `rev_math1.bbl`; `rev_math1.synctex`).
+- **Content used:** Section 2 (Definition 2.7, the "property of an infinite number of steps";
+  Remark 2.4); Section 3's standing independence assumption and Theorem 3.4; Section 4
+  "Distribution of prime numbers": Proposition 4.1 and its proof, the paragraph following it (the
+  independence claim and its footnote), Lemma 4.2, Theorems 4.3 and 4.4 and their proofs (the
+  counter is per section and shared, so these are the first to fourth numbered environments of
+  Section 4); quoted in the three `RECORD.md` files. The AI-assistance scan of the v9 sources: no
+  hit.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v9 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` items 33, 34 and 35); no CLAIM.
+
+---
+
+## S-0069 — Nishii, arXiv:1403.8075 **v10** and **v11** — the withdrawal comments (the status document of Route A items 33–35)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed; the
+  withdrawn versions have no e-print).
+- **Citation:** as S-0068; **v10 submitted 27 December 2025** (1 KB, withdrawn), comment:
+  "Withdrawn: Section 4 contains a critical logical error. In Proposition 4.1 the argument
+  incorrectly treats primality verification as equivalent to checking leading digits in multiple
+  base representations, and the subsequent claim that fp(1),...,fp(n) are independent is
+  unjustified. These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4"; **v11
+  submitted 9 January 2026** (1 KB, withdrawn), comment: "Withdrawn due to a logical error in
+  Section 4. In Proposition 4.1, the argument incorrectly treats primality verification as
+  equivalent to checking leading digits in multiple base representations, and the subsequent
+  independence assumption for fp(1),...,fp(n) is unjustified. This invalidates the derivation of
+  Theorems 4.3-4.4".
+- **Primary:** abstract page <https://arxiv.org/abs/1403.8075v10>, accessed
+  2026-10-21T21:52:00Z (HTTP 200), 39,877 bytes, SHA-256
+  `b01ae085d31ce38869d53d8f6fab91ff5878b8f7865c6960f9af87148478d42f`; abstract page
+  <https://arxiv.org/abs/1403.8075v11>, accessed 2026-10-21T21:48:05Z (HTTP 200), 40,895 bytes,
+  SHA-256 `5726f969962deed8b5d8f840cda7fe80e497486521c1b698b93c64cb874f397b`. Neither stub page
+  carries a licence link; the comments are the whole document.
+- **Content used:** the two comments, read against the v9 text (S-0068): the equivalence
+  sentence in the proof of Proposition 4.1, the independence sentence of the paragraph following
+  it, and the applications of Theorem 3.4 in the proofs of Theorems 4.3 and 4.4.
+- **Licence:** no licence link on the withdrawal stubs; nothing copied beyond the comments quoted
+  above.
+- **Bears on:** S1.1 items 33, 34 and 35 (their status document); no CLAIM.
+
+---
+
+## S-0070 — Martin Otto, "Finite Groupoids, Finite Coverings and Symmetries in Finite Structures", arXiv:1404.4599 **v4** (the original of Route A item 36)
+
+- **State:** VERIFIED (retrieved and read this session). **Digest-only; no copy committed**
+  (licence below). The item's `raw/1` file record is `external`.
+- **How found:** Route A, candidate 30 of the finder's ascending-id stream (HARVEST-LOG run 1);
+  examined Session 21, 2026-10-21.
+- **Citation (from the abstract page):** Martin Otto, "Finite Groupoids, Finite Coverings and
+  Symmetries in Finite Structures", arXiv:1404.4599, Combinatorics (math.CO), cross-listed Logic
+  in Computer Science (cs.LO) and Logic (math.LO); MSC 05E18, 05C65, 05C25, 05C38, 20F05, 57M12;
+  v1 17 April 2014; v2 14 July 2014; v3 24 March 2015; **v4 submitted 15 October 2015** (47 KB),
+  comment: "This paper extends and supersedes earlier expositions in LICS 2013 and
+  arXiv:1211.5656. Version (v2) of this paper fixes a false claim in Lemma 2.9 of the original
+  version. Version (v4) eliminates confusion around "covering of A" vs "realisation of H(A)"
+  (Definition 3.14 and adaptation of Lemma 3.16) and corrects a mistake in the "excursion" on
+  Herwig's thm in section 4.4" — the v2 (2014) and v4 (2015) corrections it reports are outside
+  the ADR-0003 D8 window and not harvested; v5 12 January 2024, withdrawn (S-0071). No journal
+  reference or DOI on the abstract page. One author.
+- **Primary:** abstract page <https://arxiv.org/abs/1404.4599v4>, accessed 2026-10-21T21:52:08Z
+  (HTTP 200), 41,567 bytes, SHA-256
+  `84cb82628e4efab4b00b65555e29be87738382e6117c24d317903f40afda559d` (re-fetched at 22:02:25Z to
+  read the journal fields, byte-identical); e-print <https://arxiv.org/e-print/1404.4599v4>
+  (`application/gzip`), accessed in the examination run of 21:52:08Z, 48,382 bytes, SHA-256
+  `2e326a3380ac4068d70de4685e3b306eb693677716fa6c920d8deb747f923cd2` — a single gzipped TeX file
+  (`main.tex`, 4,733 lines).
+- **Content used:** Section 2 "Highly acyclic finite groupoids" (TeX label `groupoidsec`): Lemma
+  2.9 (`completionandsubgroupslem`, completion and α-reducts); Section 2.4 "Eliminating short
+  coset cycles" — Definitions 2.17–2.19, Remark 2.20, Lemma 2.21 (`amalgamationlem`) with its
+  proof, Proposition 2.22 (`Nacycgroupoidprop`) with its proof, Observation 2.23 (the counter
+  `theo` is per section and shared by every environment, so the numbers were confirmed by
+  counting the environments of Section 2); quoted in `RECORD.md`. The AI-assistance scan of the v4
+  source: no hit.
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the v4 abstract page
+  (ADR-0003 D5: `external`): **no copy committed**; the hashes above pin what was read.
+- **Bears on:** S1.1 (`groundtruth/` item 36); no CLAIM.
+
+---
+
+## S-0071 — Otto, arXiv:1404.4599 **v5** — the withdrawal comment (the status document of Route A item 36)
+
+- **State:** VERIFIED (retrieved and read this session; digest-only, no copy committed; the
+  withdrawn version has no e-print).
+- **Citation:** as S-0070; **v5 submitted 12 January 2024** (1 KB, withdrawn), comment: "The
+  construction of finite n-acyclic groupoids in Section 2.4 is flawed and I know of no direct
+  repair: completion turns out to be incompatible with restriction to proper subsets of the
+  generator set, so that the induction towards Proposition 2.22 does not stabilise as claimed.
+  This problem has been overcome in arXiv:1806.08664. Also compare arXiv:1709.00031 and
+  arXiv:2208.03273".
+- **Primary:** abstract page <https://arxiv.org/abs/1404.4599v5>, accessed 2026-10-21T21:52:08Z
+  (HTTP 200), 40,117 bytes, SHA-256
+  `4f36fad483db20aec042a381cf0fa315f28c0e2979e0d9b7d8b23bc9464cd8ac` (re-fetched at 22:02:29Z,
+  byte-identical); no licence link on the stub page; the e-print request fails (the examination
+  helper stopped there, as for candidates 11, 13 and 18).
+- **Content used:** the comment, read against the v4 text (S-0070) and against the author's later
+  account in S-0072. The two "compare" references (arXiv:1709.00031, arXiv:2208.03273) were not
+  retrieved.
+- **Licence:** none stated on the stub; nothing copied beyond the comment quoted above.
+- **Bears on:** S1.1 item 36 (its status document); no CLAIM.
+
+---
+
+## S-0072 — Martin Otto, "Acyclicity in finite groups and groupoids", arXiv:1806.08664 **v6** — the paper the S-0071 notice names as overcoming the problem, with the author's account of the flaw
+
+- **State:** VERIFIED (retrieved and read in part this session; digest-only, no copy committed).
+  Supplementary to the status document of item 36 — the author's own later account of the flaw
+  and of who found it; it is not the notice.
+- **Citation (from the abstract page):** Martin Otto, "Acyclicity in finite groups and
+  groupoids", arXiv:1806.08664, Combinatorics (math.CO), cross-listed Discrete Mathematics
+  (cs.DM) and Group Theory (math.GR); v1 22 June 2018; v2 27 December 2018 (withdrawn); v3 5
+  February 2020; v4 2 July 2021; v5 12 October 2022; **v6 submitted 15 February 2024**, comment:
+  "An error in (v1) invalidated a more direct reduction of the groupoidal case to the group case.
+  The current version further corrects and expands some of the core technical arguments, and
+  introduces some core concepts more systematically (partly in dedicated new sections). See
+  acknowledgements for a more detailed account; (v5/6) contain minor corrections and updates". No
+  journal reference or DOI on the abstract page. One author.
+- **Primary:** abstract page <https://arxiv.org/abs/1806.08664> (the current version, v6),
+  accessed 2026-10-21T21:53:27Z (HTTP 200), 40,695 bytes, SHA-256
+  `ffccecdf45d9751e7885081aa8d0c10ad341b2109646fdaebc90ffe521fac30a`; e-print
+  <https://arxiv.org/e-print/1806.08664v6> (`application/gzip`), accessed 2026-10-21T21:54:01Z,
+  59,896 bytes, SHA-256 `02f6c59b3e992c6c2f6831cab991e1d7b23ae84299b4a9b3d3101b8d38247ac7` — a
+  single gzipped TeX file (`main.tex`, 5,129 lines).
+- **Content used:** the abstract ("We expound a concise construction of finite groups and
+  groupoids whose Cayley graphs satisfy graded acyclicity requirements …"); the introduction's
+  "The present exposition not only serves to correct a serious mistake in the construction of the
+  relevant groupoids that was sketched in [lics2013]" (with [lics2013] = M. Otto, "Groupoids,
+  hypergraphs and symmetries in finite models", LICS 2013 — the exposition that arXiv:1404.4599
+  "extends and supersedes" per its own comment); the footnote "Indeed the proposal of a naive
+  completion operation accounts for the major flaw in [lics2013]" beside "A major difference is
+  the absence of a simple completion operation for I-graphs"; the conclusion's "a conceptual
+  improvement and correction of the proposed constructions for groupoids from [lics2013]"; and
+  the acknowledgements: "The proposed construction of N-acyclic groupoids in [lics2013], however,
+  contained a serious flaw that was also carried in the arXiv preprints. This mistake from
+  [lics2013] was finally found out in 2019 by Julian Bitterlich …"; "I am deeply indebted to
+  Julian Bitterlich for identifying and clarifying the gap in my earlier attempts at the
+  construction of finite N-acyclic groupoids." Whether this paper proves Proposition 2.22 of
+  arXiv:1404.4599 as there stated was not established: its concepts are reworked, and the item
+  records the statement's truth as undetermined (`RECORD.md`).
+- **Licence:** `http://arxiv.org/licenses/nonexclusive-distrib/1.0/` on the abstract page; copy
+  not committed.
+- **Bears on:** S1.1 item 36 (the record's truth discussion and the finder of the error); no
+  CLAIM.

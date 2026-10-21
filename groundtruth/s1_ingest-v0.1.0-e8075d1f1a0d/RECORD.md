@@ -1,0 +1,53 @@
+# RECORD — Route A item 35 (candidate 29): arXiv:1403.8075 v9, Theorem 4.4 (ADR-0003 D4; the S1.3 record for this item)
+
+The `artifact_id` is the name of this directory and is in `manifest.json`.
+
+- **Route and identifiers:** Route A; arXiv `1403.8075`; original = v9 (23 March 2023); correcting
+  versions = v10 (27 December 2025) and v11 (9 January 2026), both withdrawals, inside the
+  window; examined Session 21, 2026-10-21 (access 21:48:05Z–21:52:06Z). One author; General
+  Mathematics (math.GM). The paper, its versions and its status document are described in the
+  record of item 33 (`s1_ingest-v0.1.0-b77cf8e312d0`); the application of Theorem 3.4 that this
+  theorem inherits is described in the record of item 34 (`s1_ingest-v0.1.0-c38c8c65dd2c`).
+- **Status document (SD12; D2.2):** the v10 and v11 withdrawal comments, whose closing sentences
+  name this theorem: "These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4"
+  (v10); "This invalidates the derivation of Theorems 4.3-4.4" (v11). S-entries: S-0068 (the
+  original, v9), S-0069 (the withdrawal comments), shared with items 33 and 34.
+- **Provenance and digests:** as item 33; the same e-print v9 (136,883 B, `c171e338…9270`),
+  **not committed**.
+- **The claim of record (quoted from v9, Section 4, Theorem 4.4 — the section's fourth numbered
+  environment):** "π(n) − Li(n) = o(M(n)√Li(n)) is almost certainly true." (M an arbitrary
+  function tending to infinity, as in Theorem 4.3; the Conclusions call this "Theorem 4.4, which
+  is stronger than the Riemann hypothesis"). Its proof: "Replace m → ∞ with n → ∞ as above.
+  Because |m(n) − Li(n)| ≤ |m(n) − π(n)| + |π(n) − Li(n)|, we can deduce that m(n) − Li(n) =
+  o(M₀(m(n))√m(n)) a.c. by applying Theorems 3.4 and 4.3, where M₀(n) → ∞." — then a bound
+  m < 2Li(n) a.c. for large n, "In addition, Theorem 4.3 implies that π(n) − Li(n) =
+  o(M₀(m(n))√m(n)) a.c. Therefore, π(n) − Li(n) = o(M₀(2Li(n))√(2Li(n))) a.c.", and the change of
+  M₀ to an arbitrary M.
+- **The notice's locating and describing sentences (quoted):** "Theorems 4.3 -- 4.4" (v10);
+  "Theorems 4.3-4.4" (v11), in the sentences quoted above.
+- **Confirmation against the text (executor's reading):** every step of the proof is either an
+  application of Theorem 3.4 to π(n) (the step the notice invalidates, item 34) or an application
+  of Theorem 4.3 (item 34); nothing else in the proof is reported wrong, and nothing else is
+  recorded.
+- **Location (D3, `raw/1` locator):** "Theorem 4.4, proof: 'by applying Theorems 3.4 and 4.3' and
+  'Theorem 4.3 implies that …'".
+- **Class argument (D3):** **FLAW-0005 (theorem applied without its hypotheses), severity gap,
+  lean_catchable YES-KERNEL.** The proof reduces to Theorem 4.3, whose derivation is withdrawn,
+  and applies Theorem 3.4 again under the same unestablished independence hypothesis — the
+  reduction shape of items 13, 24 and 29 (a result whose proof rests on a withdrawn one). Severity
+  gap by the entry's range, with the D3 clause reading carried as in item 34. Other classes
+  considered: FLAW-0012 — the notice does not say the theorem is false; FLAW-0011 — its truth is
+  not established either.
+- **Statement status (D3):** `value: null`, `method: "undetermined"`, `reference: S-0069` (the
+  thirteenth use of ruling (ii)).
+- **Proof status:** `invalid` (S1.1 by construction).
+- **Human-authored (D2.6), licence (D5, SD16):** as item 33; `original-1403.8075v9.tar.gz`,
+  `external`, digest-only.
+- **What this item is and is not:** the paper's final theorem, whose proof the author withdraws
+  with Theorem 4.3's; the Conclusions' claim about the Riemann hypothesis is quoted only to
+  identify the statement and is not assessed (SD3). The claim of record is Theorem 4.4 as stated
+  in v9.
+- **Derived canonical artifact (S1.3):** not yet produced; the theorem and its proof are about
+  thirty source lines and consume Theorems 3.4 and 4.3.
+- **Written by:** the executor (Claude Fable 5.1), Session 21; a reading of public documents,
+  not a verdict on the paper (SD3).
