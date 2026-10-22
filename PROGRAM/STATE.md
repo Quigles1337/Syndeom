@@ -190,6 +190,17 @@
   exact head/tree, actual results and external receipts are recorded in its associated
   PR, outside the tree certified. No earlier gate substitutes for that final result.
   See [event and verification convention](../analysis/s1-post-merge-readiness/README.md).
+- **Session 23 build verification (2026-10-21):** implementation commit
+  `d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23` (tree `4a8155dfecfbe422781a832e6550b257c55c84f6`):
+  full gate on that exact staged tree, detached with a log, 23:44:48Z–23:55:37Z, exit 0 /
+  `GATE: GREEN` — Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, 82 Rust tests, 455
+  tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 72; the unchanged Rust reproduction on the
+  clean committed tree passed (23:58:50Z–23:58:54Z; inventory SHA-256 `b626d1b5…1b803` identical
+  to the retained integration inventory; 35 archived representations / 32 effective logical
+  items unchanged). Receipts and logs: `analysis/s1-orientation-repair/evidence/`. The recording
+  commit that adds them with the event README and HANDOFF Session 23 receives its own gate and
+  reproduction, recorded in its pull request and under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\`, not in the tree it certifies.
 - **Session 22 build verification (2026-10-21):** clean `main` `26c2555` (PR 8's merge) full gate,
   detached with a log, 22:47:14Z–22:48:06Z: Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy,
   82 Rust tests, 447 tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 72, exit 0 —

@@ -1,0 +1,33 @@
+{
+ "schema": "syndeom-gate-receipt/1",
+ "event": "s1-orientation-repair-2026-10-21",
+ "command": [
+  "C:\\Program Files\\Git\\bin\\bash.exe",
+  "scripts/check.sh"
+ ],
+ "cwd": "C:\\Users\\LEET\\Syndeom",
+ "launched_as": "detached Start-Process of Git Bash on a wrapper that echoes UTC start/end and the exit code; stdout redirected to the log",
+ "tree_checked": "4a8155dfecfbe422781a832e6550b257c55c84f6",
+ "tree_meaning": "the fully staged implementation tree; committed unchanged as d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23",
+ "head_at_run": "d8c0d9cbcef0af5249cbf439808b74d8828bd69d",
+ "commit_of_tree": "d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23",
+ "started_utc": "2026-10-21T23:44:48Z",
+ "finished_utc": "2026-10-21T23:55:37Z",
+ "exit_code": 0,
+ "result": "GATE: GREEN",
+ "lean_jobs": 8926,
+ "golden_axioms": "[propext]",
+ "rust_tests": 82,
+ "tracked_files_checked": 455,
+ "registers": {
+  "Q": 17,
+  "SD": 17,
+  "FLAW": 14,
+  "CLAIM": 7,
+  "S": 72
+ },
+ "raw_log_sha256": "6b091166609db4a8afc0f496d5425f60073ae4877a072312168ff9f4c6d48c30",
+ "raw_log_bytes": 6618,
+ "readable_log_sha256": "fe7ffa1c9f3bf89234b7f351c844ee3d23fbacac0a3b414eab3ffed7cd6e805f",
+ "readable_log_note": "CR-normalized copy of the raw log (lake's progress uses carriage returns); the raw bytes are gate-implementation.log.gz"
+}
