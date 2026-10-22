@@ -3742,3 +3742,125 @@ STOP-REASON: natural boundary — the reconciliation is complete and the NEXT-SI
 examination this session cannot perform; the held branch's disposition awaits Al and blocks
 nothing. Repo green on the committed tree (gate run detached with a log on the final tree before
 the commit); this commit pushes to `origin/main` as a fast-forward.
+
+SESSION: 2026-10-21 UTC @ d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23 (Session 23 — orientation repair under Al's decisions of
+2026-10-21: ADR-0008 accepted, held-harvest evidence preserved, Gate S1 OPEN; branch
+`claude/s1-orientation-repair` from main `d8c0d9cbcef0af5249cbf439808b74d8828bd69d`; this entry
+lands in the recording commit on top of the implementation commit `d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23`)
+LAUNCH CONTEXT (SD15; an informed working session, not an examination): the same conversation as
+Session 22, continued with Al's task text carrying the three owner decisions and the task; not
+cold. Memory written: two machine hazards (a second checkout of this repository exists on this
+machine; use `git -C`), no program state.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 OPEN, awaiting the separate genuine cold-start
+examination (unchanged). Accepted population unchanged: 35 archived representations, 32 effective
+logical items. The held harvest branch is preserved at `c3a3d369689d56bab3678f519904087b313daf4e`
+(decision 1); the existing dispositions stand (decision 3).
+ORIENT (ADR-0008 D1 as this session ran it): identity `C:/Users/LEET/Syndeom`, remote
+`https://github.com/Quigles1337/Syndeom.git`; `git fetch origin` at 2026-10-21T23:30:27Z, exit 0;
+default branch `main` (`refs/remotes/origin/HEAD`); fetched `origin/main` =
+`d8c0d9cbcef0af5249cbf439808b74d8828bd69d` (tree `f98e7832b3f8c4371e7fae7c6deeffff737f3c84`) =
+local `main` = HEAD; working tree clean; no local-only or remote-only commits; the held branch at
+`c3a3d369689d56bab3678f519904087b313daf4e` on `origin` — all three observed references verified.
+Repair branch created in place (the checkout was clean and at the fetched tip, so no worktree was
+needed). Live preflight receipts: `analysis/s1-orientation-repair/evidence/live-orient-*.json`.
+PLAN NOTE: Al's task — preserve the held evidence, write the accepted addendum, verify the
+failure mode, preserve the accepted corpus and checks, deliver on a reviewable PR. One thing.
+ADVANCED:
+- **Owner decisions recorded** verbatim in `analysis/s1-orientation-repair/OWNER-DECISIONS.md`
+  and bound in STATE's dispositions, ADR-0008 and this entry: (1) the held branch preserved at
+  its recorded commit, admission review and integration deferred until after Gate S1 closes,
+  nothing approved, reserved, advanced or merged; (2) ADR-0008 as the accepted addendum
+  governing §4.1 with the constitution's bytes preserved; (3) existing dispositions retained,
+  the held branch's questions pending its later review. Not to be requested again.
+- **A. Held evidence preserved:** Session 22's scratchpad (147 files, 17,824,213 bytes) copied to
+  `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\held-evidence\`, every file
+  hashed before and verified after the copy; manifest SHA-256
+  `d3ea78799dd3e4bbe660368660c17473065768e5ba0b27c7b8c34c89660b87ce`, copied into the event.
+  Every saved e-print matches its printed receipt. **Unavailable bytes, reported exactly:** the
+  abstract pages of 1403.6317 v1 and v3, 1403.8075 v9 and v11, 1404.4599 v4 and v5, 1406.7174 v2
+  and v3, and 1806.08664 — receipts (size, SHA-256, UTC time) exist; the helper never saved the
+  bytes; nothing was re-downloaded to stand in for them. Candidate 31's partial inspection (both
+  e-prints with full hashes, the 72-line diff, the helper output) is pinned; it remains undecided.
+  The branch's manifests and provenance are untouched.
+- **B. ADR-0008 written** (`PROGRAM/DECISIONS/ADR-0008.md`): context (the §4.1 block as written
+  and the Session-22 failure), options, D1 the complete amended procedure (step 0 SD15 disclosure
+  for an examination; identity; fetch or stop; default-branch discovery; snapshot and checkout
+  identification with full SHAs, trees, status, ahead/behind lists; selection — synchronized,
+  ff-only for clean behind-only on the default branch, isolated worktree otherwise; reconstruct
+  only from the examined checkout; recheck before publication; prohibitions), D2 the preflight
+  and its receipt and exit codes, D3 the examination accounting (the HANDOFF append is the one
+  declared change, never erased; carry-forward through a worktree; preparing a synchronized
+  workspace outside the examination; eligibility stays with SD15/ADR-0005), D4 verification, D5
+  what is unchanged. The constitution's SHA-256 `89c198b0f1ca7b44f96c9d13816409f65acfb0b8eb3e119cf37003ff15d48102`
+  equals the preservation pin; SD15, ADR-0005 and the §6 prompt unchanged.
+- **C. Implementation and verification:** `scripts/orient_preflight.py` (orient/recheck, JSON
+  receipt, exit 0/2/3/4/1; never force-push, reset, discard or non-ff merge; not in the gate)
+  and `scripts/orient_preflight_cases.py` (temporary bare remote and clones). The run of
+  2026-10-21 (git 2.49.0.windows.1, Python 3.11.9) passed all eight cases: stale tracking branch
+  appears synchronized; fetch exposes the newer snapshot; the stale checkout is not current;
+  clean behind-only sync fast-forwards; ahead/diverged commit and dirty work preserved, worktree
+  provided; fetch failure stops; target movement detected before publication; the examination's
+  HANDOFF append accounted for. Every command and outcome: `evidence/orient-preflight-cases.json`.
+  Live: `orient` plain exit 3 (synchronized; two new scripts untracked), with the two scripts
+  declared exit 0 at `d8c0d9c`.
+- **D. Corpus and checks preserved:** no groundtruth, register, analysis packet, ADR other than
+  the new ADR-0008, engine source or pin changed. STATE and README summaries updated (ADR-0008
+  bullet, decisions, projections 36/37/40 as conditional, NEXT per ADR-0008 D1); the
+  Session-22 attempt record stands as unsuccessful.
+- Implementation commit `d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23` (tree `4a8155dfecfbe422781a832e6550b257c55c84f6`): gate on
+  the exact staged tree, detached with a log, 2026-10-21T23:44:48Z–23:55:37Z, exit 0 / `GATE: GREEN` (Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, 82 Rust tests); 455 tracked files; registers Q 17 / SD 17
+  / FLAW 14 / CLAIM 7 / S- 72. Rust reproduction (`reproduce.py`, unchanged consumer) on the
+  clean committed tree: **passed** at 2026-10-21T23:58:50Z–23:58:54Z — two Rust runs exit 0 with byte-identical outputs, the overwrite attempt refused (exit 1) with outputs unchanged; inventory SHA-256 `b626d1b53f50a23ee5eae9e99fc6ea387bb83f51c807d843d68a29dd1651b803`, identical to the retained integration inventory (35 archived representations / 32 effective logical items unchanged); provenance bound to `d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23` / `4a8155dfecfbe422781a832e6550b257c55c84f6`. Receipts in `analysis/s1-orientation-repair/evidence/`.
+- **E. Unrelated local work observed, preserved:** `C:\Users\LEET\Documents\ChatGPT\Syndeom`
+  (another executor's checkout) on local branch `codex/s1-cold-start-attempt` at
+  `af43198324f414687040ef214a3ecb3e71c97e58`, three commits beyond `26c2555` not on `origin` (two
+  non-counting cold-start attempt records and a root `AGENTS.md` placing the disclosure before
+  orientation). Read only; not fetched, merged, modified or reset. ADR-0008 agrees with its
+  ordering and does not depend on it.
+- The recording commit (event README, this entry, STATE's build bullet) receives its own gate
+  and reproduction, recorded in the pull request and under the external root. The branch is
+  pushed and a draft PR opened, left unmerged for review; the pre-publication recheck
+  (`orient_preflight.py recheck --baseline d8c0d9c…`) runs immediately before the push.
+BELIEF DELTAS:
+- The accepted baseline's Rust consumer refuses a dirty checkout, so a preservation reproduction
+  certifies only a committed tree; the two-commit pattern (implementation, then recording) is the
+  honest way to put its receipt in the repository. Evidence: the exit-1 run on the staged tree.
+- Fixtures prove a check; only a live receipt speaks about the live remote. Evidence: the eight
+  passing cases say nothing about `origin`; the two live receipts do.
+- This machine holds two checkouts and two executors; the remote is the only shared truth, and a
+  checkout's remote-tracking ref is a claim until fetched (ADR-0008's premise). Evidence: the
+  Codex checkout's three unpushed commits beside Session 22's stale-ref failure.
+CONFUSIONS:
+- The Bash tool's working directory drifted after a `cd`, so a bare `git checkout -b` failed
+  with "not a git repository"; every git command now uses `git -C`. Cost: one retry. Doc fix:
+  the memory file.
+- The reproduction consumer's clean-checkout requirement was not visible from its usage line;
+  the first run failed on the staged tree. Cost: one five-second run. Doc fix: the event README
+  records the failed run as a development run and the rule.
+HONESTY CHECK: no CLAIM changed status; no register changed; nothing labeled, promoted or
+re-measured. The held branch's five labels remain proposals (decision 1). The projections
+36/37/40 are stated as conditional. Session 22's ineligibility is restated, not softened.
+LEAKAGE CHECK: checked, not assumed — no contact corpus, no AI-generated proof, no detector; the
+session touched governance, evidence pins, scripts and summaries only. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. The held evidence is pinned by SHA-256
+before and after the copy; the preflight receipts record exact commands; the case run is
+re-runnable from a fresh work directory. Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed on main; the held branch's five manifests are
+untouched. "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript; no understanding claims; no detectors; no referee
+contact; no S2 work; no examination conducted or implied; no fresh-context subagent described as
+cold; the frozen constitution, packets and pins untouched.
+NEXT-SINGLE-ACTION: once this repair is on `main`, the separate genuine Gate S1 cold-start
+examination in a fresh session launched with the §6 Session-N resume prompt verbatim and alone,
+opened per ADR-0008 D1 (step 0 the SD15 disclosure appended first; steps 1–5 the preflight with
+`--allow-dirty PROGRAM/HANDOFF.md`, its receipt recorded with the fetched `origin/main` SHA and
+tree and the examined checkout) — exactly as STATE.md states it.
+ESCALATIONS:
+- The draft pull request for this repair awaits Al's review and merge; it is left unmerged.
+- The Codex checkout's unpushed branch (above) is Al's to dispose of; nothing here depends on it.
+- The held branch's admission review (after Gate S1 closes) will decide the questions it
+  introduced; the integration conditions recorded in Session 22 describe that review.
+- Human-referee participants remain Al's decision (SD13) — unchanged.
+STOP-REASON: task complete at its boundary — the bounded repair is implemented, verified,
+recorded and delivered on a reviewable branch; the next action is an examination this session
+cannot perform. Repo green on each committed tree (gates recorded above and in the PR).

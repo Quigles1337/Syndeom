@@ -1,0 +1,86 @@
+{
+  "started_utc": "2026-10-21T23:58:50.700820+00:00",
+  "checkout_revision": "d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23",
+  "checkout_tree": "4a8155dfecfbe422781a832e6550b257c55c84f6",
+  "commands": [
+    {
+      "name": "report-a",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Syndeom\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-ingest",
+        "--example",
+        "s1_effective_inventory",
+        "--",
+        "C:\\Users\\LEET\\Syndeom",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\reproduction-d4dd5da956a0\\report-a"
+      ],
+      "cwd": "C:\\Users\\LEET\\Syndeom",
+      "started_utc": "2026-10-21T23:58:50.755339+00:00",
+      "finished_utc": "2026-10-21T23:58:52.594847+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "log_sha256": "1e3e27900ffc2f8d706483ea6c7173e45ea208b7b16d5ecf0d77feb9ed9aafa7"
+    },
+    {
+      "name": "report-b",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Syndeom\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-ingest",
+        "--example",
+        "s1_effective_inventory",
+        "--",
+        "C:\\Users\\LEET\\Syndeom",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\reproduction-d4dd5da956a0\\report-b"
+      ],
+      "cwd": "C:\\Users\\LEET\\Syndeom",
+      "started_utc": "2026-10-21T23:58:52.600847+00:00",
+      "finished_utc": "2026-10-21T23:58:54.196759+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "log_sha256": "009e4115f391622acf6201458913867e1849986148b5ccc84eb36b0601ce5248"
+    },
+    {
+      "name": "existing-output-refused",
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--manifest-path",
+        "C:\\Users\\LEET\\Syndeom\\engine\\Cargo.toml",
+        "-p",
+        "syndeom-ingest",
+        "--example",
+        "s1_effective_inventory",
+        "--",
+        "C:\\Users\\LEET\\Syndeom",
+        "C:\\Users\\LEET\\Codex\\Temp\\syndeom-orientation-repair-20261021\\reproduction-d4dd5da956a0\\report-a"
+      ],
+      "cwd": "C:\\Users\\LEET\\Syndeom",
+      "started_utc": "2026-10-21T23:58:54.207057+00:00",
+      "finished_utc": "2026-10-21T23:58:54.335921+00:00",
+      "exit_code": 1,
+      "expected_exit": "nonzero",
+      "log_sha256": "e76ce8d11ddaaf5eaaebb897a732f33fa6688bdbf669b7c0e27ca0ad911dd08c"
+    }
+  ],
+  "authority": "Rust s1_effective_inventory; Python only orchestration and byte comparison",
+  "replay_hashes": {
+    "inventory.json": "b626d1b53f50a23ee5eae9e99fc6ea387bb83f51c807d843d68a29dd1651b803",
+    "provenance.json": "54c2df55c9651c8fb49926ce758a2f5d5f3e48990d863b62fa0c1ec14f04e151"
+  },
+  "overwrite_refusal_preserved_outputs": true,
+  "passed": true,
+  "finished_utc": "2026-10-21T23:58:54.344505+00:00",
+  "head_after": "d4dd5da956a02bbb4895dc6f6e15d0e16bcf9f23",
+  "status_after": ""
+}
