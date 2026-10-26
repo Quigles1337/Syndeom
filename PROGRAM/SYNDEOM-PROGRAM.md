@@ -21,7 +21,9 @@ in the ADR-0000 addendum. From that commit onward this file changes only via ADR
 **Amendments:** ADR-0004 (2026-10-13, Session 7; Al's ruling of 2026-10-13) — §2 S3.2, the fooling
 length redefined as equivalence to chance with a design-derived N_min. ADR-0005 (2026-10-13,
 Session 10; Al's ruling of 2026-10-13) — SD15, count-only disclosure of unrelated memory index
-lines in a cold-start exam.
+lines in a cold-start exam. ADR-0009 (2026-10-26, Session 26; Al's acceptance of 2026-10-26) —
+SD15 and the §6 Session-N prompt, memory disclosure first in every session launched with that
+prompt.
 
 ---
 
@@ -132,18 +134,23 @@ source IDs (`S-NNNN`). The siblings use `E` (KOBER) and `F` (FRIEDMAN). Ratified
   Schema evolution is a new version string; consumers pin the string they understand.
 - **SD15 — Executor memory discipline.** Executor memories outside the repo hold environment and
   tooling hazards and the repo *location* only — never program state (phase, gate status, CLAIM or
-  FLAW statuses, file contents, commit SHAs as state markers, next actions, escalations). In any
-  session attempting a gate's cold-start test, every recalled memory that names this program or a
-  sibling program — and this program's own memory file in full, with its SHA-256 — is reproduced
-  verbatim as the first entry of the HANDOFF block before any other action; index lines that
-  concern unrelated programs are withheld by count, with the count and a recorded check that none
-  of them names this program or a sibling, because this repository is public (amended by
-  ADR-0005, 2026-10-13); the exam counts only if no reproduced memory holds program state; no
-  memory writes during an exam session. A session running in the
-  conversation context that built the state under test is not cold, regardless of memory, and this
-  extends to launching prompts: a cold session is launched with the §6 resume prompt verbatim and
-  nothing that carries program state. (FRIEDMAN ADR-0003 D1–D3, cited and not duplicated; the
-  conversation-context corollary is ratified for SYNDEOM by Al, 2026-10-12 — ADR-0000 addendum, Q13.)
+  FLAW statuses, file contents, commit SHAs as state markers, next actions, escalations). Every
+  session launched with the §6 Session-N resume prompt, whether or not it will attempt a gate's
+  cold-start test, makes a memory disclosure the first entry of its HANDOFF block, before any other
+  action except reading this constitution and ADR-0005 in full and reading and hashing the memory
+  it reproduces (amended by ADR-0009, 2026-10-26): every recalled memory that names this program or
+  a sibling program — and this program's own memory file in full, with its SHA-256 — is reproduced
+  verbatim; index lines that concern unrelated programs are withheld by count, with the count and
+  a recorded check that none of them names this program or a sibling, because this repository is
+  public (amended by ADR-0005, 2026-10-13). A session that reads program state before disclosing —
+  any repository file but this constitution and ADR-0005, a listing of the checkout's directories,
+  Git history or status, or a build — cannot be an examination. The exam counts only if no
+  reproduced memory holds program state; no memory writes during an exam session. A session
+  running in the conversation context that built the state under test is not cold, regardless of
+  memory, and this extends to launching prompts: a cold session is launched with the §6 resume
+  prompt verbatim and nothing that carries program state. (FRIEDMAN ADR-0003 D1–D3, cited and not
+  duplicated; the conversation-context corollary is ratified for SYNDEOM by Al, 2026-10-12 —
+  ADR-0000 addendum, Q13.)
 - **SD16 — Licences and credit.** Published proofs, errata, mathlib, and AI-generated corpora have
   owners and licences. Record licence terms in SOURCES.md before ingesting; store derived data with
   attribution; commit a stored copy only when its licence permits redistribution (this repo is
@@ -471,13 +478,22 @@ next action to S0.1.
 
 ### Session N — resume
 ```
-You are the executor of the SYNDEOM program. Read PROGRAM/SYNDEOM-PROGRAM.md in full, then run
-the metacognitive loop (§4) exactly: ORIENT from the repo (state files are claims; builds are
-evidence), ASSESS, PLAN one thing, EXECUTE under the §1 constitution, VERIFY, RECORD+REFLECT per
-the §4.5 schema — including the LEAKAGE, DETERMINISM, MANIFEST, and DRIFT checks — and stop clean
-per §4.6. Honor escalations — some decisions are Al's, not yours.
+Before anything else, make the SD15 memory disclosure: read PROGRAM/SYNDEOM-PROGRAM.md and
+PROGRAM/DECISIONS/ADR-0005.md in full, read and hash the executor memory they tell you to
+reproduce, and append the disclosure as the first entry of a new block at the end of
+PROGRAM/HANDOFF.md — whether or not this session will attempt a gate's cold-start test, and with
+no other command or file read first. Append it without reading HANDOFF's existing contents (a
+shell append or a script, not a file-editing tool that reads the file first), under a provisional
+block header that you complete after orientation without changing the disclosure. You are the
+executor of the SYNDEOM program. Having disclosed, orient per PROGRAM/DECISIONS/ADR-0008.md D1,
+which governs §4.1, and run the metacognitive loop (§4) exactly: ORIENT from the repo (state
+files are claims; builds are evidence), ASSESS, PLAN one thing, EXECUTE under the §1
+constitution, VERIFY, RECORD+REFLECT per the §4.5 schema — including the LEAKAGE, DETERMINISM,
+MANIFEST, and DRIFT checks — and stop clean per §4.6. Honor escalations — some decisions are
+Al's, not yours.
 ```
 
 ---
 *SYNDEOM v1.0 — συνδέω, to bind together: Friedman's calibration, Kober's rigor. Ratified 2026-10-12.
-Amended 2026-10-13 (ADR-0004, §2 S3.2; ADR-0005, SD15). Constitution amendments via ADR only.*
+Amended 2026-10-13 (ADR-0004, §2 S3.2; ADR-0005, SD15) and 2026-10-26 (ADR-0009, SD15 and §6).
+Constitution amendments via ADR only.*

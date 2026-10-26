@@ -1,6 +1,31 @@
 # STATE
 
-- **Updated:** 2026-10-26 UTC (Session 25 — a fresh conversation launched with the §6 Session-N
+- **Updated:** 2026-10-26 UTC (Session 26 — an informed working session launched with Al's task
+  text, not the §6 prompt; not an examination, and it certifies nothing about Gate S1). **PR 11
+  (Session 25's record) merged** at 2026-10-26T19:55:55Z (15:55:55 America/New_York; merge
+  committer stamp 19:55:54Z), merged by Al, creating main
+  `3cd5558223294571dd85164eb0d2730cb1911637`. Its parents are the PR's base `5356412…` and its
+  head `e1c81505017bd772dc4cb9caf36aaaf41cd90717`, and its tree
+  `125b1ed56d8dcab8074119eb51fc3467dbb09dda` equals the head's, which Session 25 gated GREEN
+  (receipt `C:\Users\LEET\Codex\Temp\syndeom-s1-exam-attempt-20261026\gate-staged.json`, raw log
+  re-hashed and matching). CI pull_request run 40389787616 and push run 40391129353 both
+  succeeded. **ADR-0009 accepted by Al (2026-10-26) and applied:** every session launched with
+  the §6 Session-N resume prompt now makes the SD15 disclosure first, whether or not it attempts
+  a gate test, before any action but reading the constitution and ADR-0005 in full and reading and
+  hashing the memory; it appends the disclosure to HANDOFF without reading that file, under a
+  provisional block header completed after orientation; a session that reads program state before
+  disclosing cannot be an examination. The §6 prompt's first sentence now says so, and the prompt
+  points to ADR-0008 for orientation. ADR-0008 D1 step 0 follows (bullet below). The
+  constitution's SHA-256 is now `110f5360af60075a8e799dce0dc235d1ef8785bd40b0b34c38fa53ddb1d5479c`
+  (38,958 bytes; previously `89c198b0…8102`). The Session-25 escalation is decided. The first
+  staged-tree gate failed (4 S1.3 reproduction tests rejected the amended constitution); by Al's
+  option-1 ruling the reproduction tool now skips the constitution, which changes only by ADR, as
+  it skips README and STATE (ADR-0009 D5; one line). **S1.3 reproduces at both revisions:** at
+  `3cd5558` the retained `inventory.json` is byte-identical; at HEAD the reproduction passes and
+  differs only in `preservation.exact_files_checked`, 370 → 369 (bullet below). Registers, frozen
+  packets and the accepted corpus (35 archived representations, 32 effective logical items) are
+  unchanged; Gate S1 stays OPEN.
+- **Previous update (Session 25):** 2026-10-26 UTC (Session 25 — a fresh conversation launched with the §6 Session-N
   resume prompt; it attempted the Gate S1 cold-start examination and is **ineligible as an
   examination**: before appending its SD15 disclosure it ran orientation commands (including a
   fetch) and read STATE, HANDOFF entries, Git history and ADR-0008, contrary to ADR-0008 D1 step 0
@@ -147,7 +172,8 @@
 - **Gate:** **S1 OPEN — ready for the separate cold-start examination; the readiness
   reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are
   on main. Session 25's attempt (2026-10-26) is ineligible — late SD15 disclosure, HANDOFF
-  Session 25 — and certifies nothing.** S1.1 has evidence for
+  Session 25 — and certifies nothing. ADR-0009 (2026-10-26) puts the disclosure first in the §6
+  Session-N prompt itself.** S1.1 has evidence for
   the admitted unskipped prefix,
   not an exhausted harvest (ADR-0003 D8). PR 4 admitted one positive statement-fidelity
   pair; PR 5 merged the frozen S1.4 report; PR 6 archived the witness/proposal; the
@@ -206,19 +232,57 @@
   scripts/orient_preflight.py orient [--sync | --worktree DIR] [--allow-dirty PROGRAM/HANDOFF.md]
   --receipt FILE` performs and records it (exit 0 snapshot established; 2 fetch failed; 3
   checkout not current; `recheck --baseline SHA` exits 4 when the target moved); the gate does
-  not call it. For an examination, SD15's disclosure (ADR-0005) precedes the preflight, its
-  HANDOFF append is the one declared change, and it is never erased or rewritten; a
-  synchronized clean workspace may be prepared by an informed session beforehand, but the fresh
-  executor still performs its own disclosure and its own preflight and records the fetched SHA.
-  The constitution's bytes are unchanged (SHA-256 `89c198b0…8102`, in the preservation
-  baseline); SD15, ADR-0005 and the §6 prompt are unchanged.
+  not call it. For every session launched with the §6 Session-N prompt (ADR-0009, amending
+  step 0), SD15's disclosure (ADR-0005) precedes the preflight, appended to HANDOFF without
+  reading that file, under a provisional block header completed after step 5; its HANDOFF append
+  is the one declared change, and it is never erased or rewritten; a synchronized clean workspace
+  may be prepared by an informed session beforehand, but the fresh executor still performs its
+  own disclosure and its own preflight and records the fetched SHA. ADR-0009 (2026-10-26)
+  amended SD15, the §6 Session-N prompt and ADR-0008 step 0: the constitution's SHA-256 is now
+  `110f5360af60075a8e799dce0dc235d1ef8785bd40b0b34c38fa53ddb1d5479c` (38,958 bytes), and the
+  preservation baseline `89c198b0…8102` is historical. ADR-0005 is unchanged.
+- **S1.3 REPRODUCTION AFTER ADR-0009 — two facts (ADR-0009 D5; Al's option-1 ruling of
+  2026-10-26).** The effective-inventory reproduction (`cargo run --locked --manifest-path
+  engine/Cargo.toml -p syndeom-ingest --example s1_effective_inventory -- <clean clone> <new
+  output directory outside it>`; packet `analysis/s1-first-parent-integration/`) checks its
+  accepted baseline byte for byte at the clone's HEAD. ADR-0009 amended the constitution, and the
+  tool's `preserve()` now skips `PROGRAM/SYNDEOM-PROGRAM.md` beside `README.md` and
+  `PROGRAM/STATE.md`, because the constitution changes only by ADR and never belonged in a
+  data-reproduction byte check (source `engine/ingest/examples/support/effective.rs` SHA-256
+  `516bd44e…9775` → `92a816bc…b30c`; nothing else in the tool changed). **(1) At main
+  `3cd5558223294571dd85164eb0d2730cb1911637`** (that revision's tool) the reproduction prints
+  `PASS: 35 archived representations / 32 effective logical items` and the retained
+  `inventory.json` is reproduced **byte-identical** (SHA-256 `b626d1b5…1b803`). **(2) At HEAD**
+  (ADR-0009's tree and later, unless a later change says otherwise) it prints the same `PASS`,
+  and its `inventory.json` differs from the retained one **only** in
+  `preservation.exact_files_checked`, **370 → 369** — the constitution is no longer counted among
+  the exact files; every count and item is unchanged (SHA-256 `df3a2c7f…a7f5`). An examiner
+  should expect exactly that one difference at HEAD; it is not a broken S1.3. Evidence, in
+  scratch clones: R1 at `3cd5558` (`repro.log`) and R5 on ADR-0009's staged tree
+  (`repro-R5.log`), both under `C:\Users\LEET\Codex\Temp\syndeom-adr-0009-20261026\`. The gate's
+  `first_parent_amendment` tests, whose fixture reads the same baseline from the working tree,
+  pass 15 of 15 with the fix; without it four of them failed (the first staged-tree gate, same
+  root, `gate-staged.json`).
 - **S1.3 orientation verification (2026-10-20):** existing Lean/Rust code passed the gate,
   with documentation reconciliation in progress; 29 existing tests passed, axioms `[propext]`.
   The new crate was enabled only after this gate. Its focused producer checks now pass
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 25):** main `535641227f408095f36a92000e808ed5b65e135c`
+- **Current build verification (Session 26):** no separate ORIENT gate on main `3cd5558`: its
+  tree `125b1ed56d8dcab8074119eb51fc3467dbb09dda` is the tree Session 25's final staged-tree gate
+  certified (2026-10-26T19:44:55Z–19:45:36Z, GREEN; `gate-staged.json`, raw log SHA-256
+  `b003ccee…054b` re-hashed and matching, under
+  `C:\Users\LEET\Codex\Temp\syndeom-s1-exam-attempt-20261026\`). The commit that adds ADR-0009,
+  the amendments, this bullet and HANDOFF Session 26 receives its own full gate on its exact
+  staged tree, recorded in its pull request and under
+  `C:\Users\LEET\Codex\Temp\syndeom-adr-0009-20261026\`, not in the tree it certifies. The first
+  staged-tree gate (2026-10-26T20:16:14Z–20:16:51Z, nothing committed) was RED: four
+  `first_parent_amendment` tests rejected the amended constitution (`gate-staged.json`); the
+  tool's one-line fix (ADR-0009 D5) followed Al's ruling. The S1.3 reproduction was rerun at
+  `3cd5558` and on the amended tree (bullet near the top of this file); no other Rust
+  reproduction was rerun, because only `PROGRAM/` text and that one tool line change.
+- **Session 25 build verification:** main `535641227f408095f36a92000e808ed5b65e135c`
   (tree `1fdeda3eca982fbaec04ab2b1f8fdaaeb82c70ea`) with one declared change, the unstaged SD15
   disclosure appended to `PROGRAM/HANDOFF.md`: full gate, detached with a log,
   2026-10-26T19:36:57Z–19:41:40Z, exit 0 / `GATE: GREEN` — Lean 8,926 jobs, golden axioms
@@ -387,9 +451,11 @@
   to pin the same Lean and Mathlib commit (S-0001); the ADR-0002 criterion was fixed before that
   was compared.
 - **Constitution:** `PROGRAM/SYNDEOM-PROGRAM.md` v1.0, ratified by Al 2026-10-12 (Session 2);
-  **amended twice: ADR-0004 (2026-10-13, Session 7) — §2 S3.2, fooling length as equivalence to
+  **amended three times: ADR-0004 (2026-10-13, Session 7) — §2 S3.2, fooling length as equivalence to
   chance with a design-derived N_min; ADR-0005 (2026-10-13, Session 10) — SD15, count-only
-  disclosure of unrelated memory index lines in a cold-start exam.** Rulings of record: the
+  disclosure of unrelated memory index lines in a cold-start exam; ADR-0009 (2026-10-26, Session
+  26) — SD15 and the §6 Session-N prompt, memory disclosure first in every session launched with
+  that prompt (SHA-256 now `110f5360…479c`).** Rulings of record: the
   ADR-0000 addendum (Session 2, Q1–Q17), Addendum 2 (Al's rulings of 2026-10-13, R1–R4) and
   Addendum 3 (Al's rulings of 2026-10-13 on ADR-0003 (i)–(v) and the SD15 audit). ADR-only; the
   constitution's version string is unchanged because no rule assigns version numbers to
@@ -435,6 +501,10 @@ sibling and the SYNDEOM memory file in full with its digest, and withholds unrel
 index lines by count with a recorded name-search check, because this repository is public. The
 memory file was trimmed in Session 10 on Al's order (the paragraph paraphrasing §0.3, §0.4 and
 SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Session-6 one.
+**Disclosure timing (ADR-0009, 2026-10-26):** every session launched with the §6 Session-N prompt
+makes this disclosure first, whether or not it attempts a gate test, appended to HANDOFF without
+reading that file; a session that reads program state before disclosing cannot be an examination;
+such a session writes memory only once it has established that it is not an examination.
 
 ## Standing rulings (recorded; their ADRs come later)
 
@@ -495,11 +565,11 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 |---|---|---|
 | S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **evidenced for the admitted unskipped prefix; harvest not exhausted — prefix through arXiv id `1403.4485` (candidates 1–27 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20): 27 examined, 21 admitted yielding 31 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; harvest resume remains candidate 28** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Orientation reconciliation (2026-10-20): the log and 31 admitted items exist; the former empty-slots sentence was stale. |
 | S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | **one positive pair admitted by owner merge PR 4** | ADR-0007; both pair RECORD post-merge dispositions; actual producer/both-file/lineage/type/axiom/replay evidence in `analysis/s1-2/implementation/`; merge metadata in `analysis/s1-4/config/merge-evidence.json`. No separate GitHub reviewer approval, no PROVEN promotion; statement-only informal selection, zero steps. |
-| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **35 archived representations (33 raw + two canonical), 32 effective logical items; 30 without canonical lengths. First-parent status support discharged on verified main by PR 7; fresh Rust reproduction and preservation evidence in `analysis/s1-post-merge-readiness/`.** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; old raw retained; stable logical key resolves to accepted false/counterexample representation `s1_ingest-v0.1.0-15ab865466d6`; canonical selection/context/locator review still required; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
+| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **35 archived representations (33 raw + two canonical), 32 effective logical items; 30 without canonical lengths. First-parent status support discharged on verified main by PR 7; fresh Rust reproduction and preservation evidence in `analysis/s1-post-merge-readiness/`. After ADR-0009 the reproduction gives the retained inventory byte-identical at main `3cd5558`, and at HEAD a PASS differing only in `preservation.exact_files_checked` 370 → 369 (bullet near the top of this file).** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; old raw retained; stable logical key resolves to accepted false/counterexample representation `s1_ingest-v0.1.0-15ab865466d6`; canonical selection/context/locator review still required; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` is the historical ledger. The later effective inventory records 35 representations / 32 logical items / 18 unflagged; current requirements and limits are mapped in `analysis/s1-post-merge-readiness/READINESS.md`. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. First-parent status support is discharged on verified main under the accepted scoped ruling. External bytes retain historical evidence and must be retrieved/reverified before scoring; the older dispositions and exclusions remain unchanged. |
 | Repo green under the gate | **standing** | Build status above |
-| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure)** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
+| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure)** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt (as amended by ADR-0009, disclosure first) verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
 
 ## Gate S0 exit criteria — CLOSED 2026-10-13 (Session 6)
 
@@ -527,35 +597,34 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   verification remain future scoring prerequisites, not an obligation to canonicalize
   the entire prefix or fill every flaw class before S1. This informed session cannot
   certify the examination. The readiness reconciliation (PR 8), the orientation repair
-  (PR 9) and the cold-start preparation (PR 10) are merged; their review records are those
-  merged pull requests. Session 25, launched as the examination, disclosed late and is
-  ineligible; the reason step 0 was easy to miss is escalated (Standing escalations, first
-  bullet). That escalation does not block the next attempt.
+  (PR 9), the cold-start preparation (PR 10) and Session 25's record (PR 11) are merged; their
+  review records are those merged pull requests. Session 25, launched as the examination,
+  disclosed late and is ineligible; Al decided the step-0 escalation by ADR-0009 (2026-10-26),
+  which puts the disclosure first in the §6 prompt itself (Standing escalations, first bullet).
 
 ## Standing escalations and dispositions
 
-- **Examination step 0 is stated only where a cold executor may not yet read it — OPEN, Al's
-  decision (Session 25, 2026-10-26).** ADR-0008 D1 step 0 lets an examination read only the
-  constitution and ADR-0005 before its SD15 disclosure. Neither file says that a session launched
-  in a fresh conversation with the §6 prompt should treat itself as an examination: SD15 binds
-  "any session attempting a gate's cold-start test", and the fact that an examination is
-  scheduled appears only in STATE's NEXT-SINGLE-ACTION and in ADR-0008, both off limits until
-  step 5. The constitution never names ADR-0008, whose bytes Al chose to keep frozen. A cold
-  executor therefore has to *infer* step 0 from SD15's last sentence (a cold session is the one
-  launched with the §6 prompt). Session 25 did not make that inference. It also ran its first
-  commands before reading the constitution at all, which is an executor error the §6 prompt's
-  order already forbids. It is ineligible (HANDOFF Session 25). Options: **(a) recommended** —
-  an ADR under §3.5 amending SD15 with one sentence: every session launched with the §6
-  Session-N prompt in a fresh conversation makes the SD15 disclosure its first action, before
-  any command and before reading anything but the constitution and ADR-0005, whether or not it
-  later finds an examination scheduled (a session that finds none has lost nothing); (b) amend
-  the §6 Session-N prompt itself so that it opens with that instruction (the new text becomes the
-  verbatim launch); (c) no amendment: rely on the inference and accept that a later cold attempt
-  may fail the same way. (a) and (b) change the constitution's bytes and its preservation hash
-  `89c198b0…8102`. A one-line hazard in executor memory is not offered: it would paraphrase a
-  rule, which Al's Session-10 ruling keeps out of memory, and memory is never written in an
-  examination session. Nothing is drafted or applied until Al rules. The next attempt does not
-  wait for this ruling (NEXT-SINGLE-ACTION).
+- **Examination step 0 — DECIDED by Al on 2026-10-26: ADR-0009, accepted with rulings 1–4 and
+  additions 5–6 (transcribed verbatim in the ADR).** Options (a) and (b) together: SD15 and the §6
+  Session-N prompt are amended so that every session launched with that prompt discloses first,
+  whether or not it attempts a gate test; the prompt's first sentence instructs the disclosure,
+  says to append it to HANDOFF without reading that file, allows a provisional block header, and
+  points to ADR-0008 for orientation; ADR-0008 D1 step 0 applies to every such session. A session
+  that reads program state before disclosing (any repository file but the constitution and
+  ADR-0005, a directory listing, Git history or status, or a build) cannot be an examination.
+  Not retroactive: Sessions 22 and 25 stay ineligible. The constitution's preservation hash
+  `89c198b0…8102` is historical; the amended SHA-256 is `110f5360…479c`. Records of past
+  baselines (HANDOFF entries, ADR-0008's header, the frozen packets under `analysis/`) are left
+  byte-identical (ADR-0009 D4). The escalation as Session 25 wrote it is in HANDOFF Session 25 and
+  in PR 11's STATE.
+- **Non-blocking note — S1.3 reproduction tool (Al, 2026-10-26; ADR-0009 D5) — PARTLY DONE.** A
+  future revision of the effective-inventory reproduction tool should limit its byte checks to
+  the inputs it depends on, so that an amendment of a file it does not use does not stop it
+  running at HEAD or fail the gate's `first_parent_amendment` tests. Done for the constitution
+  only (ADR-0009 D5: `preserve()` skips it, as it skips README and STATE). Still open for every
+  other non-input file in the baseline — ADR-0005 and SIBLING-MAP among them: an edit to ADR-0005
+  failed the reproduction (Session 26 probe), and the gate's tests run the same check on the
+  working tree. Not an action and not a blocker.
 
 - **First-parent status support — accepted, verified and activated on main:**
   Al accepted the exact ruling on 2026-10-20 America/New_York; appended ADR-0003 and
@@ -703,16 +772,20 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**Unchanged in substance after Session 25.** Session 25 was launched for this examination and
-is ineligible: it oriented before it disclosed (HANDOFF Session 25). The next attempt is again a
-separate fresh session launched with the §6 Session-N prompt verbatim and alone, opened per
-ADR-0008 D1. Its **very first action**, before any command and before reading anything but the
-constitution and ADR-0005, is the SD15 disclosure. A cold executor cannot read this paragraph
-in time, so Al may want to rule on the step-0 escalation first (Standing escalations, first
-bullet), but the attempt does not depend on that ruling.
+**Unchanged in substance after Session 26; the launch text is new.** The next action is the Gate
+S1 cold-start examination in a separate fresh session launched with the constitution's §6
+Session-N resume prompt **as amended by ADR-0009**, verbatim and alone, opened per ADR-0008 D1.
+The prompt's first sentence now instructs the SD15 disclosure as the session's first action:
+read the constitution and ADR-0005 in full, read and hash the executor memory, and append the
+disclosure to `PROGRAM/HANDOFF.md` without reading that file (a shell append or a script), under
+a provisional block header completed after the preflight — before any other command or read.
+Sessions 22 and 25 were ineligible attempts (HANDOFF). An examiner who reruns the S1.3
+effective-inventory reproduction gets the retained `inventory.json` byte-identical at `3cd5558`,
+and at HEAD a PASS whose output differs only in `preservation.exact_files_checked`, 370 → 369
+(bullet near the top of this file).
 
-**The readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start
-preparation (PR 10) are on main. A
+**The readiness reconciliation (PR 8), the orientation repair (PR 9), the cold-start
+preparation (PR 10) and Session 25's record (PR 11) are on main. A
 separate genuinely fresh session should attempt Gate S1's cold-start examination under
 §2/SD15 using the constitution's
 §6 Session-N resume prompt verbatim and alone.** Launch without a state-bearing
@@ -721,7 +794,8 @@ not cold. The session must honor SD15 disclosure, reconstruct from the repo via
 §4.1, run the required checks and determine whether every criterion supports closure.
 This readiness assessment is not a PASS; Gate S1 remains OPEN until that examination.
 The examination opens per **ADR-0008 D1** (the governing orientation amendment, bullet above):
-step 0, the SD15 disclosure appended to HANDOFF before any orientation command (ADR-0005); then
+step 0, the SD15 disclosure appended to HANDOFF without reading it, before any orientation
+command (ADR-0005; ADR-0009); then
 steps 1–5, `python -I -X utf8 scripts/orient_preflight.py orient --expect-url
 https://github.com/Quigles1337/Syndeom.git --allow-dirty PROGRAM/HANDOFF.md --receipt <file>`
 (a failed fetch stops the session; a checkout that is not the fetched tip is examined from an
