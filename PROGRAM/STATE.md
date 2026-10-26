@@ -1,6 +1,23 @@
 # STATE
 
-- **Updated:** 2026-10-26 UTC (Session 26 — an informed working session launched with Al's task
+- **Updated:** 2026-10-26 UTC (Session 27 — launched with the §6 Session-N resume prompt in its
+  ADR-0009 wording, but inside the conversation that built Session 26: **not cold** under SD15's
+  conversation-context corollary, so **not an examination**, and it certifies nothing; recorded
+  as a non-cold §6 launch, not as a Gate S1 attempt). It opened exactly as ADR-0009 prescribes —
+  SD15 disclosure first, appended to HANDOFF without reading it, under a provisional header
+  completed after the preflight (HANDOFF Session 27) — and its ADR-0008 preflight found the
+  checkout **synchronized** with fetched `origin/main`
+  `6e198e066c128976d55d0194f278cc645baf9249`, tree `4ad8422654cb56d9ffe68a717100df5af240a22e`
+  (receipt `C:\Users\LEET\Codex\Temp\syndeom-sec6-launch-20261026\preflight-orient.json`). **PR 12
+  (ADR-0009) merged** at 2026-10-26T21:03:28Z (17:03:28 America/New_York), merged by Al, creating
+  that main; its parents are the PR's base `3cd5558…` and its head
+  `61cc974ca67bb47d0ac7aaa5f2a9b6c219969b19`, and its tree equals the head's, which Session 26
+  gated GREEN (receipt `C:\Users\LEET\Codex\Temp\syndeom-adr-0009-20261026\gate-final.json`, raw
+  log re-hashed and matching). CI pull_request run 40397221741 and push run 40401087386 both
+  succeeded. ADR-0009, the amended SD15 and §6 Session-N prompt, and the reproduction tool's
+  one-line fix are on main. Registers, frozen packets and the accepted corpus (35 archived
+  representations, 32 effective logical items) are unchanged; Gate S1 stays OPEN.
+- **Previous update (Session 26):** 2026-10-26 UTC (Session 26 — an informed working session launched with Al's task
   text, not the §6 prompt; not an examination, and it certifies nothing about Gate S1). **PR 11
   (Session 25's record) merged** at 2026-10-26T19:55:55Z (15:55:55 America/New_York; merge
   committer stamp 19:55:54Z), merged by Al, creating main
@@ -269,7 +286,16 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 26):** no separate ORIENT gate on main `3cd5558`: its
+- **Current build verification (Session 27):** no separate ORIENT gate on main `6e198e0`: its
+  tree `4ad8422654cb56d9ffe68a717100df5af240a22e` is the tree Session 26's final staged-tree gate
+  certified (2026-10-26T20:34:44Z–20:35:33Z, GREEN; `gate-final.json`, raw log SHA-256
+  `b25710de…c96e` re-hashed and matching, under
+  `C:\Users\LEET\Codex\Temp\syndeom-adr-0009-20261026\`). The commit that adds this bullet and
+  HANDOFF Session 27 receives its own full gate on its exact staged tree, recorded in its pull
+  request and under `C:\Users\LEET\Codex\Temp\syndeom-sec6-launch-20261026\`, not in the tree it
+  certifies. No Rust reproduction was rerun: this session changes only `PROGRAM/STATE.md` and
+  `PROGRAM/HANDOFF.md`.
+- **Session 26 build verification:** no separate ORIENT gate on main `3cd5558`: its
   tree `125b1ed56d8dcab8074119eb51fc3467dbb09dda` is the tree Session 25's final staged-tree gate
   certified (2026-10-26T19:44:55Z–19:45:36Z, GREEN; `gate-staged.json`, raw log SHA-256
   `b003ccee…054b` re-hashed and matching, under
@@ -569,7 +595,7 @@ such a session writes memory only once it has established that it is not an exam
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` is the historical ledger. The later effective inventory records 35 representations / 32 logical items / 18 unflagged; current requirements and limits are mapped in `analysis/s1-post-merge-readiness/READINESS.md`. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. First-parent status support is discharged on verified main under the accepted scoped ruling. External bytes retain historical evidence and must be retrieved/reverified before scoring; the older dispositions and exclusions remain unchanged. |
 | Repo green under the gate | **standing** | Build status above |
-| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure)** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt (as amended by ADR-0009, disclosure first) verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
+| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure); Session 27, a §6 launch inside the conversation that built Session 26, not cold and not an attempt** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt (as amended by ADR-0009, disclosure first) verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
 
 ## Gate S0 exit criteria — CLOSED 2026-10-13 (Session 6)
 
@@ -597,8 +623,8 @@ such a session writes memory only once it has established that it is not an exam
   verification remain future scoring prerequisites, not an obligation to canonicalize
   the entire prefix or fill every flaw class before S1. This informed session cannot
   certify the examination. The readiness reconciliation (PR 8), the orientation repair
-  (PR 9), the cold-start preparation (PR 10) and Session 25's record (PR 11) are merged; their
-  review records are those merged pull requests. Session 25, launched as the examination,
+  (PR 9), the cold-start preparation (PR 10), Session 25's record (PR 11) and ADR-0009 (PR 12)
+  are merged; their review records are those merged pull requests. Session 25, launched as the examination,
   disclosed late and is ineligible; Al decided the step-0 escalation by ADR-0009 (2026-10-26),
   which puts the disclosure first in the §6 prompt itself (Standing escalations, first bullet).
 
@@ -772,9 +798,12 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**Unchanged in substance after Session 26; the launch text is new.** The next action is the Gate
-S1 cold-start examination in a separate fresh session launched with the constitution's §6
-Session-N resume prompt **as amended by ADR-0009**, verbatim and alone, opened per ADR-0008 D1.
+**Unchanged in substance after Session 27; ADR-0009 (PR 12) is on main.** The next action is
+the Gate S1 cold-start examination in a separate fresh session — **a new conversation that holds
+no transcript of earlier sessions** — launched with the constitution's §6 Session-N resume prompt
+**as amended by ADR-0009**, verbatim and alone, opened per ADR-0008 D1. Session 27 showed that
+the same prompt pasted into a conversation that already holds the program's state yields a
+procedurally complete disclosure and a session that is still not cold (SD15's corollary).
 The prompt's first sentence now instructs the SD15 disclosure as the session's first action:
 read the constitution and ADR-0005 in full, read and hash the executor memory, and append the
 disclosure to `PROGRAM/HANDOFF.md` without reading that file (a shell append or a script), under
@@ -785,7 +814,7 @@ and at HEAD a PASS whose output differs only in `preservation.exact_files_checke
 (bullet near the top of this file).
 
 **The readiness reconciliation (PR 8), the orientation repair (PR 9), the cold-start
-preparation (PR 10) and Session 25's record (PR 11) are on main. A
+preparation (PR 10), Session 25's record (PR 11) and ADR-0009 (PR 12) are on main. A
 separate genuinely fresh session should attempt Gate S1's cold-start examination under
 §2/SD15 using the constitution's
 §6 Session-N resume prompt verbatim and alone.** Launch without a state-bearing
