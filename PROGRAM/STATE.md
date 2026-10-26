@@ -1,6 +1,29 @@
 # STATE
 
-- **Updated:** 2026-10-26 UTC (an informed preparation session, not the Gate S1 examination,
+- **Updated:** 2026-10-26 UTC (Session 25 — a fresh conversation launched with the §6 Session-N
+  resume prompt; it attempted the Gate S1 cold-start examination and is **ineligible as an
+  examination**: before appending its SD15 disclosure it ran orientation commands (including a
+  fetch) and read STATE, HANDOFF entries, Git history and ADR-0008, contrary to ADR-0008 D1 step 0
+  and SD15's "before any other action". The disclosure was then appended late, in full, and
+  stands (HANDOFF Session 25). Its ADR-0008 preflight then found the checkout **synchronized**
+  with fetched `origin/main` `535641227f408095f36a92000e808ed5b65e135c`, tree
+  `1fdeda3eca982fbaec04ab2b1f8fdaaeb82c70ea` (receipt
+  `C:\Users\LEET\Codex\Temp\syndeom-s1-exam-attempt-20261026\preflight-orient.json`). **PR 10 (the
+  Session-24 cold-start preparation) merged** at 2026-10-26T19:28:28Z (15:28:28
+  America/New_York; merge committer stamp 19:28:27Z), merged by Al, creating that main. Its tree
+  exactly equals tested head `3f0171a7dc36f90154739b5bbafce11da8f37dc2` (`git diff --quiet`
+  exit 0; full gate GREEN on that tree 2026-10-26T19:22:04Z–19:22:58Z, receipt
+  `C:\Users\LEET\Codex\Temp\syndeom-cold-start-prep-20261026\gate-commit-3f0171a.json`); its first
+  parent is the PR's base `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`, so main has no intervening
+  commits. Tested-head CI (run 40386340630) and main-push CI (run 40387061357) both succeeded.
+  `git ls-remote --heads origin` now lists only `main` and the held
+  `claude/s1-harvest-candidates-28-30` at `c3a3d36`. The external root's
+  `deleted-branches-manifest.txt` (written 19:29Z) lists ten merged branches removed after the
+  merge, the cleanup Session 24's escalation records as authorized by Al. Registers,
+  frozen packets, the accepted corpus (35 archived representations, 32 effective logical items)
+  and the constitution's bytes are unchanged; Gate S1 stays OPEN; the reason step 0 was easy to
+  miss is escalated (Standing escalations, first bullet).
+- **Previous update (Session 24):** 2026-10-26 UTC (an informed preparation session, not the Gate S1 examination,
   opened per ADR-0008 D1 steps 1–5 from fetched `origin/main`
   `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`, tree `b5fe517fb4fa58846df83187aaa11ee7c2954762`):
   PR 9 (the Session-23 orientation repair) merged at **2026-10-22T00:07:26Z** (2026-10-21
@@ -122,7 +145,9 @@
   decided ADR-0003; Session 8 closed R3; Session 7 recorded the earlier rulings)
 - **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
 - **Gate:** **S1 OPEN — ready for the separate cold-start examination; the readiness
-  reconciliation (PR 8) and the orientation repair (PR 9) are on main.** S1.1 has evidence for
+  reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are
+  on main. Session 25's attempt (2026-10-26) is ineligible — late SD15 disclosure, HANDOFF
+  Session 25 — and certifies nothing.** S1.1 has evidence for
   the admitted unskipped prefix,
   not an exhausted harvest (ADR-0003 D8). PR 4 admitted one positive statement-fidelity
   pair; PR 5 merged the frozen S1.4 report; PR 6 archived the witness/proposal; the
@@ -193,7 +218,20 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification:** PR 10's first commit
+- **Current build verification (Session 25):** main `535641227f408095f36a92000e808ed5b65e135c`
+  (tree `1fdeda3eca982fbaec04ab2b1f8fdaaeb82c70ea`) with one declared change, the unstaged SD15
+  disclosure appended to `PROGRAM/HANDOFF.md`: full gate, detached with a log,
+  2026-10-26T19:36:57Z–19:41:40Z, exit 0 / `GATE: GREEN` — Lean 8,926 jobs, golden axioms
+  `[propext]`, fmt/clippy, 82 Rust tests, 461 tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 /
+  S- 72. Receipt and raw log (SHA-256
+  `a97599f8c585071fb9c7a1fa3773f27133a1ab0840d4603a4c47816b831fe2ff`) under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-s1-exam-attempt-20261026\` (`gate-orient.json`,
+  `gate-orient.raw.log`). PR 10's second commit `3f0171a`, whose tree main carries, was gated
+  GREEN by Session 24 (previous update above). The commit that adds this bullet and HANDOFF
+  Session 25 receives its own full gate, recorded in its pull request and under the same
+  external root, not in the tree it certifies. The Rust reproduction was not rerun: this session
+  changes only `PROGRAM/STATE.md` and `PROGRAM/HANDOFF.md`.
+- **PR 10 build verification:** PR 10's first commit
   `0801ecb52d4ec839bed90291527b11ca8c3e1281`, tree `78a30035d7137eb0a52ab200b3ba25406331c855`
   (main `ffb63a6` plus this session's first STATE edits): full gate on that exact staged tree,
   committed unchanged, detached with a log, 2026-10-26T19:02:21Z–19:12:29Z, exit 0 /
@@ -461,7 +499,7 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` is the historical ledger. The later effective inventory records 35 representations / 32 logical items / 18 unflagged; current requirements and limits are mapped in `analysis/s1-post-merge-readiness/READINESS.md`. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. First-parent status support is discharged on verified main under the accepted scoped ruling. External bytes retain historical evidence and must be retrieved/reverified before scoring; the older dispositions and exclusions remain unchanged. |
 | Repo green under the gate | **standing** | Build status above |
-| Cold-start test (§2, SD15) | **OPEN — next examination** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt verbatim and alone; the readiness reconciliation (PR 8) and the orientation repair (PR 9) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. |
+| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure)** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
 
 ## Gate S0 exit criteria — CLOSED 2026-10-13 (Session 6)
 
@@ -488,10 +526,36 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   Canonical selection/context/locator review, missing canonical lengths and external-byte
   verification remain future scoring prerequisites, not an obligation to canonicalize
   the entire prefix or fill every flaw class before S1. This informed session cannot
-  certify the examination. The readiness reconciliation (PR 8) and the orientation repair
-  (PR 9) are merged; their review records are those merged pull requests.
+  certify the examination. The readiness reconciliation (PR 8), the orientation repair
+  (PR 9) and the cold-start preparation (PR 10) are merged; their review records are those
+  merged pull requests. Session 25, launched as the examination, disclosed late and is
+  ineligible; the reason step 0 was easy to miss is escalated (Standing escalations, first
+  bullet). That escalation does not block the next attempt.
 
 ## Standing escalations and dispositions
+
+- **Examination step 0 is stated only where a cold executor may not yet read it — OPEN, Al's
+  decision (Session 25, 2026-10-26).** ADR-0008 D1 step 0 lets an examination read only the
+  constitution and ADR-0005 before its SD15 disclosure. Neither file says that a session launched
+  in a fresh conversation with the §6 prompt should treat itself as an examination: SD15 binds
+  "any session attempting a gate's cold-start test", and the fact that an examination is
+  scheduled appears only in STATE's NEXT-SINGLE-ACTION and in ADR-0008, both off limits until
+  step 5. The constitution never names ADR-0008, whose bytes Al chose to keep frozen. A cold
+  executor therefore has to *infer* step 0 from SD15's last sentence (a cold session is the one
+  launched with the §6 prompt). Session 25 did not make that inference. It also ran its first
+  commands before reading the constitution at all, which is an executor error the §6 prompt's
+  order already forbids. It is ineligible (HANDOFF Session 25). Options: **(a) recommended** —
+  an ADR under §3.5 amending SD15 with one sentence: every session launched with the §6
+  Session-N prompt in a fresh conversation makes the SD15 disclosure its first action, before
+  any command and before reading anything but the constitution and ADR-0005, whether or not it
+  later finds an examination scheduled (a session that finds none has lost nothing); (b) amend
+  the §6 Session-N prompt itself so that it opens with that instruction (the new text becomes the
+  verbatim launch); (c) no amendment: rely on the inference and accept that a later cold attempt
+  may fail the same way. (a) and (b) change the constitution's bytes and its preservation hash
+  `89c198b0…8102`. A one-line hazard in executor memory is not offered: it would paraphrase a
+  rule, which Al's Session-10 ruling keeps out of memory, and memory is never written in an
+  examination session. Nothing is drafted or applied until Al rules. The next attempt does not
+  wait for this ruling (NEXT-SINGLE-ACTION).
 
 - **First-parent status support — accepted, verified and activated on main:**
   Al accepted the exact ruling on 2026-10-20 America/New_York; appended ADR-0003 and
@@ -639,7 +703,16 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**The readiness reconciliation (PR 8) and the orientation repair (PR 9) are on main. A
+**Unchanged in substance after Session 25.** Session 25 was launched for this examination and
+is ineligible: it oriented before it disclosed (HANDOFF Session 25). The next attempt is again a
+separate fresh session launched with the §6 Session-N prompt verbatim and alone, opened per
+ADR-0008 D1. Its **very first action**, before any command and before reading anything but the
+constitution and ADR-0005, is the SD15 disclosure. A cold executor cannot read this paragraph
+in time, so Al may want to rule on the step-0 escalation first (Standing escalations, first
+bullet), but the attempt does not depend on that ruling.
+
+**The readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start
+preparation (PR 10) are on main. A
 separate genuinely fresh session should attempt Gate S1's cold-start examination under
 §2/SD15 using the constitution's
 §6 Session-N resume prompt verbatim and alone.** Launch without a state-bearing
