@@ -1,6 +1,24 @@
 # STATE
 
-- **Updated:** 2026-10-21 UTC (Session 23 — the orientation repair under Al's decisions of
+- **Updated:** 2026-10-26 UTC (an informed preparation session, not the Gate S1 examination,
+  opened per ADR-0008 D1 steps 1–5 from fetched `origin/main`
+  `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`, tree `b5fe517fb4fa58846df83187aaa11ee7c2954762`):
+  PR 9 (the Session-23 orientation repair) merged at **2026-10-22T00:07:26Z** (2026-10-21
+  20:07:26 America/New_York), creating main `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`. Its tree
+  `b5fe517fb4fa58846df83187aaa11ee7c2954762` exactly equals tested head
+  `5e24d37d8a1882d182a27076ba03905588513542` (full gate GREEN on that tree,
+  2026-10-22T00:00:49Z–00:04:39Z; receipt in PR 9 and under
+  `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\final-gate-5e24d37d8a18\`); its
+  first parent is the PR's base `d8c0d9cbcef0af5249cbf439808b74d8828bd69d`, so fetched main has
+  no intervening commits. Tested-head and main-push CI both succeeded. Stale statements are
+  corrected: Blockers; the checkout note in NEXT-SINGLE-ACTION; the conditional "after/once this
+  reconciliation is on main" wording in the Gate line, the Gate S1 table's cold-start row and
+  NEXT; and Current build verification (the PR 8 readiness bullet is kept as historical). The
+  session is recorded in HANDOFF Session 24. Registers, frozen packets, the constitution's bytes
+  and the accepted corpus (35 archived representations, 32 effective logical items) are
+  unchanged; Gate S1 stays OPEN and the next action is still the separate genuine examination,
+  opened per ADR-0008 D1.
+- **Previous update (Session 23):** 2026-10-21 UTC (the orientation repair under Al's decisions of
   2026-10-21, an informed working session on branch `claude/s1-orientation-repair` from `main`
   `d8c0d9cbcef0af5249cbf439808b74d8828bd69d`): **ADR-0008**, the accepted addendum governing
   §4.1 (fetch and identify the examined snapshot before reconstructing state; preflight
@@ -103,8 +121,9 @@
   2026-10-13 (ADR-0001 `/2`, ADR-0003 resolved, ADR-0005) and built the producer; Session 9
   decided ADR-0003; Session 8 closed R3; Session 7 recorded the earlier rulings)
 - **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
-- **Gate:** **S1 OPEN — ready for the separate cold-start examination after this
-  reconciliation is on main.** S1.1 has evidence for the admitted unskipped prefix,
+- **Gate:** **S1 OPEN — ready for the separate cold-start examination; the readiness
+  reconciliation (PR 8) and the orientation repair (PR 9) are on main.** S1.1 has evidence for
+  the admitted unskipped prefix,
   not an exhausted harvest (ADR-0003 D8). PR 4 admitted one positive statement-fidelity
   pair; PR 5 merged the frozen S1.4 report; PR 6 archived the witness/proposal; the
   owner accepted its exact ruling and PR 7 activated verified integration on main.
@@ -174,7 +193,19 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification:** clean merged main
+- **Current build verification:** PR 10's first commit
+  `0801ecb52d4ec839bed90291527b11ca8c3e1281`, tree `78a30035d7137eb0a52ab200b3ba25406331c855`
+  (main `ffb63a6` plus this session's first STATE edits): full gate on that exact staged tree,
+  committed unchanged, detached with a log, 2026-10-26T19:02:21Z–19:12:29Z, exit 0 /
+  `GATE: GREEN` — Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, 82 Rust tests, 461
+  tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 72. Receipt and raw log (SHA-256
+  `112787b8c0c5fca28b40926171e090c6f9f13788f0cee04dc39fb8e0b643bf13`) under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-cold-start-prep-20261026\` (`gate-staged.json`,
+  `gate-staged.raw.log`). The Rust reproduction was not rerun: PR 10 changes only
+  `PROGRAM/STATE.md` and `PROGRAM/HANDOFF.md`. The commit that adds this bullet and HANDOFF
+  Session 24 receives its own full gate, recorded in PR 10 and under the same external root,
+  not in the tree it certifies.
+- **Historical build verification (PR 8 readiness):** clean merged main
   `1c56028532ea135603dbad5423d5555313bfd9ec`, tree
   `14b451866491dc4a2b866ec0b1d726d792385916`, full local gate **GREEN** at
   `2026-10-21T04:00:41.304180+00:00`: Lean 8,926 jobs, golden axioms `[propext]`,
@@ -430,7 +461,7 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` is the historical ledger. The later effective inventory records 35 representations / 32 logical items / 18 unflagged; current requirements and limits are mapped in `analysis/s1-post-merge-readiness/READINESS.md`. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. First-parent status support is discharged on verified main under the accepted scoped ruling. External bytes retain historical evidence and must be retrieved/reverified before scoring; the older dispositions and exclusions remain unchanged. |
 | Repo green under the gate | **standing** | Build status above |
-| Cold-start test (§2, SD15) | **OPEN — next examination** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt verbatim and alone after this reconciliation is on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. |
+| Cold-start test (§2, SD15) | **OPEN — next examination** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt verbatim and alone; the readiness reconciliation (PR 8) and the orientation repair (PR 9) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. |
 
 ## Gate S0 exit criteria — CLOSED 2026-10-13 (Session 6)
 
@@ -457,7 +488,8 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   Canonical selection/context/locator review, missing canonical lengths and external-byte
   verification remain future scoring prerequisites, not an obligation to canonicalize
   the entire prefix or fill every flaw class before S1. This informed session cannot
-  certify the examination. Temporary reconciliation review status lives in PR metadata.
+  certify the examination. The readiness reconciliation (PR 8) and the orientation repair
+  (PR 9) are merged; their review records are those merged pull requests.
 
 ## Standing escalations and dispositions
 
@@ -607,8 +639,9 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**Once this reconciliation is on main, a separate genuinely fresh session should
-attempt Gate S1's cold-start examination under §2/SD15 using the constitution's
+**The readiness reconciliation (PR 8) and the orientation repair (PR 9) are on main. A
+separate genuinely fresh session should attempt Gate S1's cold-start examination under
+§2/SD15 using the constitution's
 §6 Session-N resume prompt verbatim and alone.** Launch without a state-bearing
 preamble, handoff or extra task text; a full-history continuation or subagent is
 not cold. The session must honor SD15 disclosure, reconstruct from the repo via
@@ -622,8 +655,9 @@ https://github.com/Quigles1337/Syndeom.git --allow-dirty PROGRAM/HANDOFF.md --re
 isolated worktree); the examination's record states the fetched `origin/main` SHA and tree and
 the examined checkout. Session 22 showed that an unfetched working copy reproduces a stale state
 and passes §4.1 silently; its attempt stays recorded as unsuccessful. Preparing a synchronized
-clean checkout beforehand (this repair leaves `C:\Users\LEET\Syndeom` on the repair branch;
-`main` there equals the fetched tip) is not part of the examination.
+clean checkout beforehand (ADR-0008 D3) is not part of the examination, and this file makes no
+claim about any local checkout's branch or position: the examination establishes its own
+snapshot with its own preflight and records the fetched SHA it verified.
 
 The seven truth/seven severity/unnamed-result questions keep their existing
 dispositions and exclusions. Missing lengths and external-byte verification remain

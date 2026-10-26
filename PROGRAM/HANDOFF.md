@@ -3864,3 +3864,103 @@ ESCALATIONS:
 STOP-REASON: task complete at its boundary — the bounded repair is implemented, verified,
 recorded and delivered on a reviewable branch; the next action is an examination this session
 cannot perform. Repo green on each committed tree (gates recorded above and in the PR).
+
+SESSION: 2026-10-26 UTC @ 0801ecb52d4ec839bed90291527b11ca8c3e1281 (Session 24 — informed
+preparation for the Gate S1 cold-start examination, not the examination; branch
+`claude/s1-cold-start-prep` from main `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`; this entry lands
+in the second commit on top of `0801ecb52d4ec839bed90291527b11ca8c3e1281`, PR 10)
+LAUNCH CONTEXT (SD15; an informed working session, not an examination): launched with Al's task
+text (record PR 9's merge, correct stale STATE statements, review executor memory under SD15,
+prepare the checkout), not with the §6 prompt; not cold, and it attempts and certifies nothing
+about the §2/SD15 test. Memory: reviewed and changed only with Al's approval (ADVANCED, C); no
+program state written.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 OPEN, awaiting the separate genuine cold-start
+examination (unchanged). Accepted population unchanged: 35 archived representations, 32 effective
+logical items. The held branch stays at `c3a3d369689d56bab3678f519904087b313daf4e` (decision 1).
+ORIENT (ADR-0008 D1 steps 1–5, `orient_preflight.py orient --sync`): identity
+`C:/Users/LEET/Syndeom`, remote `https://github.com/Quigles1337/Syndeom.git`; `git fetch --prune
+origin` exit 0, 2026-10-26T18:59:20.94Z–18:59:21.70Z; default branch `main` (from `git ls-remote
+--symref`); fetched `origin/main` = `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10` (tree
+`b5fe517fb4fa58846df83187aaa11ee7c2954762`); HEAD before = `main` at
+`d8c0d9cbcef0af5249cbf439808b74d8828bd69d` (tree `f98e7832b3f8c4371e7fae7c6deeffff737f3c84`),
+clean, behind 3 / ahead 0, remote-only `d4dd5da`, `5e24d37`, `ffb63a6`; classification behind;
+fast-forwarded (ff-only) and re-verified: examined checkout `C:/Users/LEET/Syndeom` at `ffb63a6…`,
+tree `b5fe517f…`, clean. Receipt:
+`C:\Users\LEET\Codex\Temp\syndeom-cold-start-prep-20261026\orient-1-sync.json`. No separate ORIENT gate on `ffb63a6`: its tree is the tree PR 9's final gate
+certified (that receipt's raw log re-hashed, matching); this session's first gate ran on its own
+edited tree (below).
+PLAN NOTE: Al's task — make the repository, the local checkout and the executor memory ready for
+a genuine cold-start examination, without conducting it. One thing.
+ADVANCED:
+- **A. PR 9's merge recorded in STATE** (the form of PR 7's record), every value read from git
+  before it was written: merge commit `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`, parents
+  `d8c0d9c…` (the PR's base) and `5e24d37…` (its head); merged 2026-10-22T00:07:26Z
+  (2026-10-21 20:07:26 America/New_York; `gh pr view 9` mergedAt and the merge commit's committer
+  stamp agree); `ffb63a6^{tree}` = `5e24d37^{tree}` = `b5fe517f…` and `git diff --quiet` exits
+  0, so the merge tree exactly equals the tested head; that head's gate (external receipt
+  `final-gate-5e24d37d8a18\final-gate.json`, 00:00:49Z–00:04:39Z, GATE: GREEN); CI `check`
+  pull_request run 39697685870 and push run 39697756714 both success.
+- **B. Stale STATE statements corrected:** Blockers no longer says review status lives in PR
+  metadata (PRs 8 and 9 are merged); NEXT no longer claims where a local checkout sits (any such
+  claim goes stale when the checkout moves; the examination establishes its own snapshot); the
+  Gate line, the Gate S1 table's cold-start row and NEXT say plainly that PRs 8 and 9 are on main
+  instead of "after/once this reconciliation is on main"; Current build verification names this
+  PR's first committed tree, the PR 8 readiness bullet kept as historical. No register, frozen
+  packet, ADR, groundtruth item, engine source or pin changed; the constitution's SHA-256 remains
+  `89c198b0f1ca7b44f96c9d13816409f65acfb0b8eb3e119cf37003ff15d48102`.
+- **C. SD15 memory review** of every executor memory file naming SYNDEOM, KOBER or FRIEDMAN
+  (eight files: the index, the three program files, three pre-trim `.bak` backups, one memory
+  for unrelated public repositories). Every state-bearing line was reported to Al verbatim; with
+  Al's approval: (a) the SYNDEOM memory file — a dated incident narrative and a description of
+  the constitution's §4.1 text replaced with a hazard-only line, a run count and a default-branch
+  value removed; SHA-256 now `163c7b066d8e36392a218599e6b41958e8a947684e3ed2a2e8bae205dfc22787`
+  (10,573 bytes; before this session
+  `5b0505d1c06855e515eddb84039e32017a3330c975c8803a36b11cf9a7aad1df`); (b) the three `.bak`
+  backups, which held sibling programs' state, moved (not deleted) out of the memory folder to
+  `C:\Users\LEET\memory-archive\claude-memory-bak-20261026\`, hashes verified after the move;
+  (c) the unrelated memory reworded so it no longer names this program or a sibling. The current
+  KOBER and FRIEDMAN files and the index lines hold no program state and are unchanged.
+- **D. Gates.** First commit `0801ecb52d4ec839bed90291527b11ca8c3e1281` (tree
+  `78a30035d7137eb0a52ab200b3ba25406331c855`): full gate on the exact staged tree, committed
+  unchanged, detached with a log, 2026-10-26T19:02:21Z–19:12:29Z, exit 0 / `GATE: GREEN` (Lean
+  8,926 jobs, golden axioms `[propext]`, fmt/clippy, 82 Rust tests, 461 tracked files, Q 17 /
+  SD 17 / FLAW 14 / CLAIM 7 / S- 72); receipt and raw log under the external root. Pre-publication
+  recheck (`recheck --baseline ffb63a6…`) exit 0, target unchanged. The commit carrying this
+  entry receives its own gate, recorded in PR 10 and under the external root.
+BELIEF DELTAS:
+- A statement in STATE about where a local checkout sits is true only until the checkout moves.
+  Evidence: Session 23's note placed this checkout on the repair branch; at this session's start
+  it was on `main`, three commits behind the fetched tip.
+- A memory trim leaves the untrimmed text behind unless its backups are removed. Evidence: three
+  unindexed `.bak` files beside the trimmed ones still held sibling phases, gate closures, SHAs
+  and next actions.
+CONFUSIONS:
+- The behind checkout lacked `scripts/orient_preflight.py` (added by the commits it was behind).
+  The preflight ran from a copy extracted from the fetched ref (`git show
+  origin/main:scripts/orient_preflight.py`, blob `c09abc5d…` identical). Cost: none. Doc fix:
+  this line.
+HONESTY CHECK: no CLAIM, FLAW or SOURCE entry changed status; nothing labeled, promoted or
+re-measured. The Rust reproduction was not rerun (only STATE and HANDOFF change), and STATE says
+so. Session 22's ineligibility stands; nothing here counts toward Gate S1.
+LEAKAGE CHECK: checked, not assumed — no contact corpus, AI-generated proof or detector touched;
+the session changed summaries and executor memory only. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. Receipts record exact commands, trees and
+digests. Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed. "Proven" applied to nothing.
+DRIFT CHECK: no verdict on any manuscript; no understanding claims; no detectors; no referee
+contact; no S2 work; no examination conducted or implied.
+NEXT-SINGLE-ACTION: the separate genuine Gate S1 cold-start examination in a fresh session
+launched with the §6 Session-N resume prompt verbatim and alone, opened per ADR-0008 D1 (step 0
+the SD15 disclosure appended first; steps 1–5 the preflight with `--allow-dirty
+PROGRAM/HANDOFF.md`, its receipt recorded with the fetched `origin/main` SHA and tree and the
+examined checkout) — exactly as STATE.md states it.
+ESCALATIONS:
+- PR 10 awaits Al's review and merge; it is left unmerged. After the merge Al has authorized the
+  executor to fetch, leave this checkout on `main` at the fetched tip with a clean tree, and
+  delete remote branches git confirms are fully merged into `main`, excluding
+  `claude/s1-harvest-candidates-28-30` (decision 1).
+- The held branch's admission review (after Gate S1 closes), the Codex checkout's unpushed branch
+  (Session 23, E; not re-inspected) and human-referee participants (SD13) remain Al's — unchanged.
+STOP-REASON: natural boundary — the preparation is complete and delivered on a reviewable PR; the
+next action is an examination this session cannot perform. Repo green on each committed tree
+(gates recorded above and in the PR).
