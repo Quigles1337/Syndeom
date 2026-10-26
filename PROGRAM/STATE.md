@@ -1,6 +1,21 @@
 # STATE
 
-- **Updated:** 2026-10-21 UTC (Session 23 — the orientation repair under Al's decisions of
+- **Updated:** 2026-10-26 UTC (an informed preparation session, not the Gate S1 examination,
+  opened per ADR-0008 D1 steps 1–5 from fetched `origin/main`
+  `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`, tree `b5fe517fb4fa58846df83187aaa11ee7c2954762`):
+  PR 9 (the Session-23 orientation repair) merged at **2026-10-22T00:07:26Z** (2026-10-21
+  20:07:26 America/New_York), creating main `ffb63a6cf30ff7a78cdf9b99944cb17433a1bf10`. Its tree
+  `b5fe517fb4fa58846df83187aaa11ee7c2954762` exactly equals tested head
+  `5e24d37d8a1882d182a27076ba03905588513542` (full gate GREEN on that tree,
+  2026-10-22T00:00:49Z–00:04:39Z; receipt in PR 9 and under
+  `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\final-gate-5e24d37d8a18\`); its
+  first parent is the PR's base `d8c0d9cbcef0af5249cbf439808b74d8828bd69d`, so fetched main has
+  no intervening commits. Tested-head and main-push CI both succeeded. Two stale statements are
+  corrected (Blockers; the checkout note in NEXT-SINGLE-ACTION). Registers, frozen packets, the
+  constitution's bytes and the accepted corpus (35 archived representations, 32 effective
+  logical items) are unchanged; Gate S1 stays OPEN and the next action is still the separate
+  genuine examination, opened per ADR-0008 D1.
+- **Previous update (Session 23):** 2026-10-21 UTC (the orientation repair under Al's decisions of
   2026-10-21, an informed working session on branch `claude/s1-orientation-repair` from `main`
   `d8c0d9cbcef0af5249cbf439808b74d8828bd69d`): **ADR-0008**, the accepted addendum governing
   §4.1 (fetch and identify the examined snapshot before reconstructing state; preflight
@@ -457,7 +472,8 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
   Canonical selection/context/locator review, missing canonical lengths and external-byte
   verification remain future scoring prerequisites, not an obligation to canonicalize
   the entire prefix or fill every flaw class before S1. This informed session cannot
-  certify the examination. Temporary reconciliation review status lives in PR metadata.
+  certify the examination. The readiness reconciliation (PR 8) and the orientation repair
+  (PR 9) are merged; their review records are those merged pull requests.
 
 ## Standing escalations and dispositions
 
@@ -622,8 +638,9 @@ https://github.com/Quigles1337/Syndeom.git --allow-dirty PROGRAM/HANDOFF.md --re
 isolated worktree); the examination's record states the fetched `origin/main` SHA and tree and
 the examined checkout. Session 22 showed that an unfetched working copy reproduces a stale state
 and passes §4.1 silently; its attempt stays recorded as unsuccessful. Preparing a synchronized
-clean checkout beforehand (this repair leaves `C:\Users\LEET\Syndeom` on the repair branch;
-`main` there equals the fetched tip) is not part of the examination.
+clean checkout beforehand (ADR-0008 D3) is not part of the examination, and this file makes no
+claim about any local checkout's branch or position: the examination establishes its own
+snapshot with its own preflight and records the fetched SHA it verified.
 
 The seven truth/seven severity/unnamed-result questions keep their existing
 dispositions and exclusions. Missing lengths and external-byte verification remain
