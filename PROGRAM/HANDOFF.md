@@ -4717,3 +4717,392 @@ STOP-REASON: natural boundary — the only open Gate S1 criterion is an examinat
 cannot perform; the reconciliation is delivered on a reviewable PR. Repo green: Session 26's
 final gate on this session's base tree, and the staged-tree gate before the commit (recorded in
 the PR).
+
+SESSION: 2026-10-26 UTC (Session 28 — a fresh conversation launched with the §6 Session-N resume
+prompt in its ADR-0009 wording, verbatim and alone, but inside the checkout `C:\Users\LEET\Syndeom`:
+the harness attached Git status and history before the first action, so it is not an
+examination; finished as a recorded non-exam session at Al's direction; branch
+`claude/s1-session-28-launch-directory` from main `0afbbd17cdc5e9e93691612a95bd5950e3243e10`;
+header completed after ADR-0008 step 5 — it was written provisionally with the disclosure, which
+is unchanged; the session-end SHA is the commit carrying this block, recorded in its pull request)
+
+### SD15 memory disclosure (first entry of this block)
+
+Written before any other action and appended by a shell `cat >>` without reading this file
+(ADR-0009; the §6 Session-N prompt). Actions taken before this entry, in order, and nothing else:
+(1) read `PROGRAM/SYNDEOM-PROGRAM.md` in full; (2) read `PROGRAM/DECISIONS/ADR-0005.md` in full;
+(3) listed and hashed this session's project memory directory; (4) located executor memory
+outside it by a bounded search of `~/.claude/projects/*/memory` (directory names, file counts,
+and the names of files matching the program's or a sibling's name); (5) read and hashed the
+memory reproduced below and ran the ADR-0005 D3 check. No other repository file was read, no
+directory of the checkout was listed, no git command was run, and no build was started.
+
+**Launch.** A fresh conversation with no prior turns, so not the builder's conversation. The
+whole first message is a paste that reads, on visual comparison, word for word as the §6
+Session-N prompt; it is not byte-verified (a paste is not bytes).
+
+**Harness context before the first action: Git status and history.** Before the first tool
+call, the harness attached a gitStatus snapshot to the conversation. Verbatim:
+
+~~~text
+Current branch: main
+
+Main branch (you will usually use this for PRs): main
+
+Git user: Quigles1337
+
+Status:
+(clean)
+
+Recent commits:
+0afbbd1 Merge pull request #13 from Quigles1337/claude/s1-session-27-sec6-launch
+fbadee3 [S1][INFRA] Session 27: a §6 launch in the builder's conversation, not cold; PR 12's merge in STATE
+6e198e0 Merge pull request #12 from Quigles1337/claude/s1-adr-0009-disclosure-first
+61cc974 [S1][ADR-0009] disclosure first in every §6-launched session: amend SD15, the §6 Session-N prompt and ADR-0008 step 0
+3cd5558 Merge pull request #11 from Quigles1337/claude/s1-session-25-exam-attempt
+~~~
+
+That is Git status and history (a phase marker, session numbers, ADR and PR numbers) received
+before disclosing. SD15: "A session that reads program state before disclosing — any repository
+file but this constitution and ADR-0005, a listing of the checkout's directories, Git history or
+status, or a build — cannot be an examination." **This session therefore cannot be an
+examination**, whatever its memory holds. The executor did not request the snapshot; the harness
+attached it at launch. The harness also attached the account e-mail address (withheld; not
+program-related) and the tool and skill catalogue (no program content).
+
+**Recalled memory (what the harness loaded): none.** The working directory is
+`C:\Users\LEET\Syndeom`. Its project memory directory
+`~/.claude/projects/C--Users-LEET-Syndeom/memory/` holds 0 files (directory mtime
+2026-10-26 17:45:30 -0400, this session's launch), so no memory index was loaded into context.
+No user-level `~/.claude/CLAUDE.md` exists.
+
+**Executor memory read for this disclosure.** The machine-wide memory used by sessions launched
+from `C:\Users\LEET` is in `~/.claude/projects/C--Users-LEET/memory/`. Its index, `MEMORY.md`, has
+110 lines and 15,420 bytes, is LF only (0 CR), has mtime 2026-10-26 15:30:13 -0400, and has
+SHA-256 `cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69`.
+
+(a) Index lines naming this program or a sibling, verbatim (ADR-0005 D1(a)), concatenated from
+the file's bytes: lines 85, 86, 88, 89, 106 and 107, in order:
+
+~~~text
+## KOBER (Linear A falsification infrastructure)
+- [Repo pointer + machine hazards](project_kober.md) — `C:\Users\LEET\KOBER`, remote `Quigles1337/KOBER` (**public**); the constitution `PROGRAM/KOBER-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (memory-policy ADR).
+## FR13DMAN (FRIEDMAN — designedness-detection instrument)
+- [Repo pointer + machine hazards](project_friedman.md) — `C:\Users\LEET\FR13DMAN` / `Quigles1337/FR13DMAN` (**public**, leetspeak name); sibling of KOBER; the constitution `PROGRAM/FRIEDMAN-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (ADR-0003).
+## SYNDEOM (AI-proof calibration — third sibling of KOBER/FRIEDMAN)
+- [Repo pointer + machine hazards](project_syndeom.md) — `C:\Users\LEET\Syndeom` / `Quigles1337/Syndeom` (**public**); the constitution `PROGRAM/SYNDEOM-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (SD15 / FR13DMAN ADR-0003).
+~~~
+
+(b) This program's memory file, `project_syndeom.md`, in full and exactly as read, concatenated
+from the file's bytes rather than transcribed. It has 0 CR, no BOM, mtime 2026-10-26 15:18:39
+-0400, and SHA-256 `163c7b066d8e36392a218599e6b41958e8a947684e3ed2a2e8bae205dfc22787`:
+
+~~~markdown
+---
+name: project-syndeom
+description: "SYNDEOM program - repo C:\\Users\\LEET\\Syndeom (remote Quigles1337/Syndeom, public); constitution and ALL program state live IN the repo, never here"
+metadata:
+  node_type: memory
+  type: project
+  originSessionId: 07cebf44-c690-47a3-8c97-d4b909c4e75b
+  modified: 2026-10-26T19:18:39.389Z
+---
+
+**SYNDEOM** — repo `C:\Users\LEET\Syndeom`, remote `https://github.com/Quigles1337/Syndeom`
+(**public**). Third sibling of [[project-kober]] and [[project-friedman]].
+
+This file locates the repo and records machine hazards. Per the constitution's memory-discipline
+rule (adopting FR13DMAN ADR-0003) it records NO program state: no phase, gate, claims, commits,
+toolchain versions, escalations, or next actions.
+
+**Standing rule:** the repo is the sole memory of the program (constitution at
+`PROGRAM/SYNDEOM-PROGRAM.md`). Every session: read the constitution, then run its §4 loop from
+`PROGRAM/STATE.md` and `PROGRAM/HANDOFF.md`. Never resume from this file. Discover the default
+branch, toolchain, and every other value from the repo — never assume one, and never carry a value
+across from a sibling program.
+
+**Never work in the sibling KOBER or FR13DMAN trees** — identical `PROGRAM/` schema, and their
+sessions may be live concurrently.
+
+Machine and harness hazards:
+- System-level git config has `core.autocrlf=true`; the repo pins LF via `.gitattributes`. Verify
+  with `git ls-files --eol` and a byte-level CR/BOM check, never by eye.
+- The Python console is cp1252: set `PYTHONIOENCODING=utf-8` before any script that prints
+  non-ASCII (`§`, `→`, `—`), or it dies with a UnicodeEncodeError after doing its work.
+- Cloning an empty GitHub repo yields the server's default branch; `git init` on this
+  machine yields `master` (system `init.defaultBranch`). Read the branch, don't infer it.
+- Long heredocs fail to parse in this harness; write multi-line files with the Write/Edit tools and
+  pass commit messages via `-F file`. A `grep` inside an `&&` chain is not a guard.
+- The Bash tool's working directory persists between calls (a `cd` in one call moves later calls);
+  use absolute paths.
+- Deep `find` over the home dir hangs on OneDrive reparse points; bound searches.
+- Publisher pages (ScienceDirect, MDPI, Taylor & Francis, academia.edu) return 403 to tool
+  fetches; Crossref, arXiv, the GitHub API, and institutional repositories work.
+- `git symbolic-ref refs/remotes/origin/HEAD` may fail on a working copy cloned from an empty
+  remote until the first push and fetch; fallback `git remote show origin`.
+- elan resolves the Lean toolchain from the working directory; `cd` into the Lean project before
+  `lake build`. elan's `stable` may resolve to a version that is not installed.
+- Reachability is per site, not per tool: openai.com serves `curl` (browser UA) but 403s the
+  WebFetch tool; ias.edu 403s both (Cloudflare interstitial); Zenodo 403s its REST API to curl but
+  serves record pages and `?download=1` file links. Try the other tool before recording a failure.
+- `python script.py | grep …` masks the script's exit code; never put a verifier behind a pipe
+  when its verdict gates a commit. Run it alone, then act on `$?`.
+- Python needs `-X utf8` (or `PYTHONIOENCODING=utf-8`) to print `§`, `→`, `π` on this console.
+- The GitHub trees API truncates large repos (`"truncated": true`); use per-directory contents
+  calls for counts. The contents API returns base64 content only for files under 1 MB.
+- Hashing every recent file under the home dir (`find … | xargs sha256sum`) blows a 60–90 s
+  timeout even at maxdepth 4 with OneDrive/AppData excluded. Search by name only; verify a ferried
+  file by its digest once a candidate (or a paste) is in hand — the digest is the identity.
+- The console clock is local but `date -u` and web access times are UTC; a session that starts late
+  on day D records retrievals dated D+1 UTC. Write the session date and access times separately.
+- A `lake build` that imports all of Mathlib prints nothing for minutes when piped through `tail`
+  (first build of a one-module project took ~3 min after the cache); run it in the background
+  with a log and read the log with `tr '\r' '\n'` — the cache tool writes progress with CRs.
+  The full cold Lean setup (toolchain + nine clones + ~8,900 cache files + build) took 14 min.
+- Never `du` the `lean/.lake` tree while lake is writing it; it blew the 120 s tool timeout.
+- `cargo fmt` rewrites freshly written Rust; the gate runs `fmt --check`, so commit the formatted
+  form. Rust byte-string literals cannot hold `\u{…}` escapes — use `"…".as_bytes()`.
+- For arXiv papers, `arxiv.org/html/<id>` is the better text source for sentence-level checks;
+  poppler's `pdftotext` (at `C:\Users\LEET\tools\poppler-26.02.0\poppler-26.02.0\Library\bin`)
+  splits sentences across columns and figures. Read licence, version count and dates from the
+  `arxiv.org/abs/<id>` `<meta name="citation_*">` tags; ACL Anthology pages put `content=` before
+  `name=` in their meta tags, so match either attribute order.
+- A ferried file pasted into the chat never matches its stated digest: the harness rendering of a
+  Markdown file flattens tables to spaced text, drops `=` lines out of display math, strips heading
+  and bullet markers, and prefixes/suffixes stray quotes. Transcribe and hash the paste once to
+  show the mismatch, then ask for a path on disk holding the exact bytes. Never "repair" a paste
+  into the ferried artifact.
+- `www.apache.org` / `apache.org` (Fastly, 151.101.x) refused TCP connections from both curl and
+  the fetch tool for a whole session while DNS resolved; the SPDX License List
+  (`spdx.org/licenses/<id>.txt`, no trailing newline) and the GitHub Licenses API
+  (`gh api licenses/<key>` — no leading slash, or Git Bash rewrites it as a path) both serve
+  licence texts and cross-check each other after whitespace normalization.
+- Project Euclid sits behind an Incapsula bot challenge (HTTP 200 with a ~1 KB challenge page to
+  curl, empty content to the fetch tool). The Internet Archive's raw-capture route
+  `web.archive.org/web/<timestamp>id_/<url>` serves the archived publisher PDF; find the timestamp
+  with `archive.org/wayback/available?url=…`. Old JSTOR scans have no text layer — `pdftotext`
+  returns only the JSTOR footer — so render pages with `pdftoppm -r 110 -png` and read the images.
+- `scripts/check.sh` can take 10+ minutes after a reboot even with `lean/.lake` warm: the axiom
+  audit (`lake env lean Audit.lean`) loads all of Mathlib's oleans from a cold disk cache
+  (lean.exe grows past 1.4 GB). Run the gate in the background with a log; the ~30 s figure holds
+  only with a warm OS file cache.
+- arXiv API: `http://export.arxiv.org/api/query` answers 301 with an empty body (looks dead to a
+  plain curl); use `https://export.arxiv.org/api/query`. The `co:` field prefix searches the
+  revision comment (`search_query=co:erratum+AND+cat:math.*`); results are Atom XML.
+- Crossref REST: `https://api.crossref.org/works?filter=update-type:erratum,type:journal-article`
+  works (also `correction`, `corrigendum`, `retraction`); each hit carries `update-to`
+  `[{type, DOI}]`; always pass `mailto=` for the polite pool. No subject filter — use zbMATH
+  (`https://api.zbmath.org/v1/document/_search?search_string=ti:erratum`, JSON with
+  `status.nr_total_results` and DOI `links`) to confine to mathematics.
+- PowerShell's `bash` on this machine resolves to the Windows WSL stub (`C:\WINDOWS\system32\bash.exe`),
+  which exits immediately; a launcher must name `C:\Program Files\Git\bin\bash.exe` explicitly.
+- Run the gate detached with a log under the session scratchpad — `Start-Process` of Git Bash on a
+  wrapper script that echoes start/end timestamps and the exit code, with `-RedirectStandardOutput`
+  — so a harness kill (it reaps background shells when system memory is low) does not lose the
+  result; a background `until grep -q 'GATE end' <log>; do sleep 10; done` is the notifier.
+- Never run two gates at once: each axiom audit loads Mathlib's oleans (lean.exe past 1.4 GB), and
+  two together starve the machine. Wait for `=== GATE end` with a foreground
+  `until grep -q '=== GATE end' <log>; do sleep 10; done` loop (this harness tolerates it), and
+  launch the pre-commit gate only after the ORIENT gate has ended.
+- Python launched from Git Bash does not resolve `/c/Users/...` paths (FileNotFoundError on open);
+  write `C:/Users/...` inside Python strings, and keep `/c/...` for the shell side only.
+- The Route A finder caches its arXiv API pages only under the scratchpad of the session that
+  fetched them (`<Temp>/claude/C--Users-LEET/<session-id>/scratchpad/route-a/pages/`). Copy
+  `pages/*.xml` and `finder-state.json` from an earlier session's scratchpad (find it with
+  `ls -d .../C--Users-LEET/*/scratchpad/route-a`) into the new one before running the finder:
+  0 requests instead of ~30 min of fetching, and the digest check still proves identity.
+- In `grep -E` / `awk` on this machine a pattern written `'^\\b[A-Z]'` matches a word boundary,
+  not a literal backslash-b; write `'^[\\]b[A-Z]'` to match TeX macros such as `\bD`, `\bL`.
+  A `\\section` pattern that found nothing in one call and everything in another was the same
+  trap; prefer a bracket expression for a literal backslash. A quoted heredoc (`<<'EOF'`) fed
+  to the Bash tool also strips one backslash level from Python source, leaving backspace
+  characters where `\b` was meant: write backslash-bearing text with the Write/Edit tools.
+- A working copy's `origin/<branch>` ref is only as fresh as its last fetch: `git status` can
+  report a checkout as in sync while the remote is many commits ahead. Never treat a checkout's
+  tracking ref as the remote's state. Never force-push; a diverged local commit goes to a branch.
+- **A second checkout of this repository exists on this machine** at
+  `C:\Users\LEET\Documents\ChatGPT\Syndeom` (used by another executor, Codex; it can hold its
+  own unpushed local branches). Never work in it, reset it, or treat its refs as the remote's;
+  `C:\Users\LEET\Syndeom` is this executor's checkout, and `origin` is the only shared truth.
+  Durable external evidence roots for this program live under `C:\Users\LEET\Codex\Temp\`
+  (one new directory per event, never reused); the session scratchpad is not durable.
+- Use `git -C <path>` for every git command in the Bash tool: its working directory drifts
+  between calls (a `cd` persists), and a bare `git` then fails with "not a git repository".
+~~~
+
+(c) Other memory naming this program: none. The sibling files `project_kober.md` (SHA-256
+`b093bc495be4bedc56f421c2cc6852dab6a66ab5b621a108cbf49112ed64f7d6`) and `project_friedman.md`
+(SHA-256 `1d7d173d6a97ba086fd663878c24d87e2bf3ee29414831ae71648e4022ff5832`) each contain 0
+case-insensitive matches for `syndeom`. The harness loaded neither, neither was read beyond that
+count, and neither is reproduced (Session-6 practice per ADR-0005: the index lines plus this
+program's file). The three other non-empty project memory directories on the machine (names
+withheld; unrelated programs) hold no file matching `syndeom|kober|friedman|fr13dman`.
+
+**Withheld by count (ADR-0005 D2):** 104 index lines, at lines 1–84, 87, 90–105 and 108–110
+(33 blank, 71 non-blank). In step (5), a `stat` also printed into this session's context the
+names and mtimes of the other `project_*.md` files in that directory. Their names are withheld
+here, and their contents were not read.
+
+**Check (ADR-0005 D3):** `grep -n -i -E 'syndeom|kober|friedman|fr13dman'` over the whole index
+matched lines 85, 86, 88, 89, 106 and 107, exactly the lines reproduced under (a). `fr13dman` is
+added to the ADR's list of names because FRIEDMAN's repository name is leetspeak; it matched no
+line beyond those. No withheld line names the program or a sibling.
+
+**Assessment against SD15's enumeration** (phase, gate status, CLAIM or FLAW statuses, file
+contents, commit SHAs as state markers, next actions, escalations): no reproduced line states
+any of these. Some items are hazards in form but sit next to program state; they are recorded
+here for Al's audit:
+- the gate hazards name `scripts/check.sh` and its axiom audit `lake env lean Audit.lean`, which
+  gives away the gate's existence and composition;
+- the "Route A finder" hazard names a program tool, its cache layout and its arXiv use;
+- the Crossref/zbMATH erratum-query and Project Euclid/JSTOR hazards imply that errata retrieval
+  (S1.1-type work) has been done.
+
+None says what is done or what comes next. For this session the point is moot, since it is
+already excluded from examination above.
+
+**Memory writes:** none this session.
+
+MEMORY JUDGMENT (after orientation): no reproduced memory holds program state in SD15's
+enumeration. The index (`cd943842…fc69`) and the SYNDEOM memory file (`163c7b06…2787`) are
+byte-identical to those Sessions 25 and 27 disclosed and judged. The lines the disclosure flagged
+as state-adjacent (the gate's axiom audit, the Route A page cache, the erratum-query routes) are
+hazards in form, of the kind Session 27 judged environment and tooling hazards, and this session
+agrees. Eligibility does not turn on this judgment: the harness's Git snapshot already excludes
+this session. No value in STATE or in this block was taken from memory or from the snapshot;
+every value was read again from git, `gh` and the files after the preflight.
+LAUNCH-DIRECTORY FINDING (recorded in STATE's Memory policy at Al's direction of 2026-10-26): a
+session launched inside the checkout receives a Git status and history snapshot from the harness
+before its first action. Here that was the current branch, `git status` and the last five commit
+subjects, reproduced in the disclosure. The session therefore holds program state before it can
+disclose (SD15: "Git history or status"), so it can never be an examination, whatever its
+prompt, memory or disclosure order. The launch directory also selects the memory store the
+harness loads: this session's key, `C--Users-LEET-Syndeom`, has an empty memory directory, so no
+index was loaded. `C:\Users\LEET` is not a git work tree: `git -C /c/Users/LEET rev-parse
+--is-inside-work-tree` exits 128 with "not a git repository". HANDOFF Sessions 6, 7, 25 and 27
+each record the harness loading the executor's memory index at start (the `C--Users-LEET`
+index), so they were launched from `C:\Users\LEET`, and none records a Git snapshot. The
+examination is therefore launched from `C:\Users\LEET`, outside the checkout, as those sessions
+were. No constitution or ADR text changes: SD15 already names Git history and status, and already
+requires a cold launch to carry "nothing that carries program state".
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 OPEN. This session is not an examination and
+certifies nothing. At Al's direction it is recorded as a non-exam §6 launch, not as a Gate S1
+attempt. Accepted population unchanged: 35 archived representations, 32 effective logical items.
+The held branch stays at `c3a3d369689d56bab3678f519904087b313daf4e` (decision 1).
+ORIENT (ADR-0008 D1 steps 1–5, run after the disclosure: `python -I -X utf8
+C:/Users/LEET/Syndeom/scripts/orient_preflight.py orient --repo C:/Users/LEET/Syndeom --expect-url
+https://github.com/Quigles1337/Syndeom --allow-dirty PROGRAM/HANDOFF.md --receipt …`, exit 0,
+SNAPSHOT-ESTABLISHED):
+- identity `C:/Users/LEET/Syndeom`, remote `https://github.com/Quigles1337/Syndeom.git`;
+- `git fetch --prune origin` exit 0, 2026-10-26T21:50:02.64Z–21:50:03.41Z;
+- default branch `main` (from `git ls-remote --symref`);
+- fetched `origin/main` = `0afbbd17cdc5e9e93691612a95bd5950e3243e10` (tree
+  `27106131f522357184171e19d0e0e51ba2f30d54`); HEAD = `main` at the same SHA and tree;
+- ahead 0 / behind 0, no local-only or remote-only commits;
+- working tree: `PROGRAM/HANDOFF.md` modified (`allowed_present`), nothing unrelated;
+- classification synchronized; examined checkout `C:/Users/LEET/Syndeom`;
+- receipt SHA-256 `5f62151301ef8e27ccf114be6b5d40aaef06dff5077610b94316b8145f8ea393`, filed as
+  `preflight-orient.json` under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-session-28-launch-dir-20261026\`.
+Step 5's confirmation: the constitution (`110f5360…479c`, 38,958 bytes), ADR-0005 and ADR-0008
+on disk equal HEAD's (`git diff --quiet HEAD` exit 0). Then, in §4.1 order: STATE, HANDOFF
+Session 27, CLAIMS statuses (VERIFIED ×5, CONDITIONAL 0006, VERIFIED 0007 existence only), FLAWS
+`0.1.0` (14 entries), ADR-0008 in full and ADR-0009's header. Two disagreements:
+- STATE did not yet record PR 13's merge;
+- STATE's ADR-numbers line still called ADR-0009 the next free number, but
+  `PROGRAM/DECISIONS/` holds ADR-0000..0009.
+No separate ORIENT gate: the snapshot's tree `27106131…` is the tree Session 27's staged-tree
+gate certified (2026-10-26T21:09:57Z–21:19:09Z, GREEN; `gate-staged.json`, raw log
+`d6fd8942…79d1` re-hashed and matching). Orientation paused once (a harness interruption); the
+executor reported to Al and resumed on Al's direction to finish as a recorded non-exam session.
+PLAN NOTE: the inherited NEXT (the Gate S1 cold-start examination) survived ORIENT but cannot be
+carried out here, because the Git snapshot excludes this session. One thing, at Al's direction:
+record the launch-directory finding (STATE and this block) so that the next launch can be cold,
+with NEXT naming the launch directory. The two §4.1 reconciliations go with it (PR 13's merge;
+the next free ADR number).
+ADVANCED:
+- **A. The ADR-0009 opening, executed as written.**
+  - The constitution and ADR-0005 were read in full, the memory read and hashed, and the
+    harness-attached context recorded.
+  - The disclosure was composed from prose parts and the memory files' own bytes: the reproduced
+    index lines are `cmp`-identical to lines 85/86/88/89/106/107, and the memory file re-hashes to
+    `163c7b06…2787` inside the composed text. It was checked for CR and BOM.
+  - It was appended by `cat >>` without reading HANDOFF; the clock read 2026-10-26T21:49:42Z
+    immediately after the append. The tail then compared byte-equal to the composed file
+    (SHA-256 `e210faa6…0334`, 17,730 bytes, including a leading newline and the provisional
+    header).
+  - The header was completed after step 5 (this block's first lines). The disclosure body, from
+    its `###` heading to "**Memory writes:** none this session.", is unchanged: 236 lines,
+    17,619 bytes, SHA-256 `481ac774f6553c285a9c6a62b8a4792805a901913b3540da023b982a36b6e2ac`,
+    re-checked before the commit.
+  - HANDOFF's committed prefix (392,025 bytes) is unchanged. A copy of the appended bytes is
+    `disclosure-appended.md` under the external root.
+- **B. The launch-directory finding recorded** (above; in STATE: the Updated bullet, the Gate
+  line, Memory policy, Blockers, the Gate S1 table's cold-start row and NEXT).
+- **C. PR 13's merge recorded in STATE**, every value read from git and `gh`:
+  - merge commit `0afbbd17cdc5e9e93691612a95bd5950e3243e10`, with parents
+    `6e198e066c128976d55d0194f278cc645baf9249` (the PR's base) and
+    `fbadee37b5148e25cd803e6df01d5346dd9e05b9` (its head);
+  - `gh pr view 13`: mergedAt 2026-10-26T21:42:45Z, mergedBy `Quigles1337`; committer stamp
+    2026-10-26T17:42:45-04:00;
+  - `0afbbd1^{tree}` = `fbadee3^{tree}` = `27106131…`, and `git diff --quiet` exits 0;
+  - CI pull_request run 40403469499 and push run 40406649416 both succeeded; no open pull
+    requests.
+  STATE also gains: Session 27's Updated bullet kept as "Previous update", Current build
+  verification, and the ADR-numbers line (ADR-0009 written and accepted; ADR-0010 the next free
+  number).
+- **D. A memory hazard line proposed for Al's approval** (ESCALATIONS); nothing written to memory.
+- **E. Gate.** The commit carrying this block gets a full gate on its exact staged tree, detached
+  with a log, recorded in its pull request and under the external root.
+BELIEF DELTAS:
+- The launch directory, not the prompt, decides what the harness puts in context before the
+  first action. Inside a git work tree that includes a Git status and history snapshot, and the
+  memory store is keyed by the directory. Evidence: this session's disclosure; Sessions 6, 7, 25
+  and 27.
+- SD15's eligibility has three independent channels, and each has now failed once: disclosure
+  order (Session 25), conversation context (Session 27) and harness launch context (this
+  session). A procedurally complete disclosure settles neither of the other two.
+CONFUSIONS:
+- At launch the executor did not expect harness context beyond memory. It noticed the snapshot
+  while composing the disclosure and recorded it there, before any other action. Cost: none to
+  the repository; the examination is still owed. Doc fix: STATE's Memory policy and NEXT.
+- `grep -c $'\r'` inside a double-quoted `"$(…)"` in the Bash tool counted every line (239 of
+  239), not CR bytes; `tr -cd '\r' < file | wc -c` gave 0. Cost: one extra check before the
+  append. Doc fix: this line (for CR checks, count bytes with `tr`, not `grep`).
+HONESTY CHECK: no CLAIM, FLAW or SOURCE entry changed status; nothing labeled, promoted, measured
+or reproduced. This session is recorded as a non-exam §6 launch, neither as a PASS nor as an
+ineligible attempt. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed — `contact/` not opened; no AI-generated proof, detector,
+generator or threshold touched. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results; receipts record exact commands, trees and
+digests. Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing; nothing synthetic
+labeled real.
+DRIFT CHECK: no statement about any real manuscript (SD3); no understanding claims (SD17); no
+detectors; no referee contact (SD13); no S2 work; no examination conducted or implied; the held
+branch untouched.
+NEXT-SINGLE-ACTION: the Gate S1 cold-start examination in a separate fresh session, exactly as
+STATE.md states it:
+- a new conversation that holds no transcript of earlier sessions;
+- **launched from `C:\Users\LEET`, outside the checkout, as Sessions 6, 7, 25 and 27 were**;
+- with the constitution's §6 Session-N resume prompt (ADR-0009 wording), verbatim and alone;
+- opened by that prompt's disclosure, which records what the harness attached before the first
+  action, and then ADR-0008 D1.
+ESCALATIONS:
+- This session's branch `claude/s1-session-28-launch-directory` and its pull request await Al's
+  review and merge; they are left unmerged.
+- **Proposed executor-memory hazard line, awaiting Al's approval — nothing written to memory**
+  (for the hazard list of the SYNDEOM memory file; harness behaviour only, no program state):
+  "- Launched inside a git work tree (e.g. `C:\Users\LEET\Syndeom`), Claude Code attaches a
+  gitStatus snapshot (branch, `git status`, the last five commit subjects) to the conversation
+  before the first tool call, and loads memory from that directory's own project key
+  (`C--Users-LEET-Syndeom`, empty) instead of the `C--Users-LEET` index; `C:\Users\LEET` is not a
+  git work tree."
+- The merged branches `claude/s1-adr-0009-disclosure-first`, `claude/s1-session-25-exam-attempt`
+  and `claude/s1-session-27-sec6-launch` remain on the remote; deleting them is Al's call.
+- Unchanged: the held branch's admission review after Gate S1 closes (decision 1); the Codex
+  checkout's unpushed branch (Session 23, E; not re-inspected); human-referee participants (SD13).
+STOP-REASON: natural boundary, at Al's direction. The only open Gate S1 criterion is an
+examination this session cannot perform; the record is delivered on a reviewable PR, and the
+session stops for Al's review. Repo green: Session 27's final gate on this session's base tree,
+and the staged-tree gate before the commit (recorded in the PR).

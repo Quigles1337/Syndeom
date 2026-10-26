@@ -1,6 +1,27 @@
 # STATE
 
-- **Updated:** 2026-10-26 UTC (Session 27 — launched with the §6 Session-N resume prompt in its
+- **Updated:** 2026-10-26 UTC (Session 28 — a fresh conversation launched with the §6 Session-N
+  resume prompt in its ADR-0009 wording, verbatim and alone, but **inside the checkout**
+  `C:\Users\LEET\Syndeom`. Before its first action the harness attached a Git status and history
+  snapshot (branch, `git status`, the last five commit subjects) to the conversation, which SD15
+  counts as program state read before disclosing, so it is **not an examination**. It certifies
+  nothing and is recorded as a non-exam session at Al's direction of 2026-10-26.) It opened as
+  ADR-0009 prescribes: SD15 disclosure first, appended to HANDOFF without reading it, under a
+  provisional header completed after the preflight (HANDOFF Session 28). Its ADR-0008 preflight
+  found the checkout **synchronized** with fetched `origin/main`
+  `0afbbd17cdc5e9e93691612a95bd5950e3243e10`, tree `27106131f522357184171e19d0e0e51ba2f30d54`
+  (receipt `C:\Users\LEET\Codex\Temp\syndeom-session-28-launch-dir-20261026\preflight-orient.json`).
+  **PR 13 (Session 27's record) merged** at 2026-10-26T21:42:45Z (17:42:45 America/New_York),
+  merged by Al, creating that main. Its parents are the PR's base `6e198e0…` and its head
+  `fbadee37b5148e25cd803e6df01d5346dd9e05b9`, and its tree equals the head's, which Session 27
+  gated GREEN (receipt `C:\Users\LEET\Codex\Temp\syndeom-sec6-launch-20261026\gate-staged.json`,
+  raw log re-hashed and matching). CI pull_request run 40403469499 and push run 40406649416 both
+  succeeded. **Launch-directory finding** (Memory policy below): a session launched inside the
+  checkout receives that snapshot before its first action, so it can never be an examination.
+  The examination is launched from outside the checkout, from `C:\Users\LEET`, as earlier
+  sessions were. Registers, frozen packets and the accepted corpus (35 archived representations,
+  32 effective logical items) are unchanged; Gate S1 stays OPEN.
+- **Previous update (Session 27):** 2026-10-26 UTC (Session 27 — launched with the §6 Session-N resume prompt in its
   ADR-0009 wording, but inside the conversation that built Session 26: **not cold** under SD15's
   conversation-context corollary, so **not an examination**, and it certifies nothing; recorded
   as a non-cold §6 launch, not as a Gate S1 attempt). It opened exactly as ADR-0009 prescribes —
@@ -190,7 +211,9 @@
   reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are
   on main. Session 25's attempt (2026-10-26) is ineligible — late SD15 disclosure, HANDOFF
   Session 25 — and certifies nothing. ADR-0009 (2026-10-26) puts the disclosure first in the §6
-  Session-N prompt itself.** S1.1 has evidence for
+  Session-N prompt itself. Session 28 (2026-10-26) was launched inside the checkout, received the
+  harness's Git snapshot before its first action, and is not an examination (Memory policy).**
+  S1.1 has evidence for
   the admitted unskipped prefix,
   not an exhausted harvest (ADR-0003 D8). PR 4 admitted one positive statement-fidelity
   pair; PR 5 merged the frozen S1.4 report; PR 6 archived the witness/proposal; the
@@ -286,7 +309,17 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 27):** no separate ORIENT gate on main `6e198e0`: its
+- **Current build verification (Session 28):** no separate ORIENT gate on main `0afbbd1`. Its
+  tree `27106131f522357184171e19d0e0e51ba2f30d54` is the tree Session 27's staged-tree gate
+  certified (2026-10-26T21:09:57Z–21:19:09Z, GREEN; `gate-staged.json`, raw log SHA-256
+  `d6fd8942…79d1` re-hashed and matching, under
+  `C:\Users\LEET\Codex\Temp\syndeom-sec6-launch-20261026\`). The commit that adds this bullet and
+  HANDOFF Session 28 receives its own full gate on its exact staged tree. That gate is recorded
+  in its pull request and under
+  `C:\Users\LEET\Codex\Temp\syndeom-session-28-launch-dir-20261026\`, not in the tree it
+  certifies. No Rust reproduction was rerun: this session changes only `PROGRAM/STATE.md` and
+  `PROGRAM/HANDOFF.md`.
+- **Session 27 build verification:** no separate ORIENT gate on main `6e198e0`: its
   tree `4ad8422654cb56d9ffe68a717100df5af240a22e` is the tree Session 26's final staged-tree gate
   certified (2026-10-26T20:34:44Z–20:35:33Z, GREEN; `gate-final.json`, raw log SHA-256
   `b25710de…c96e` re-hashed and matching, under
@@ -531,6 +564,22 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 makes this disclosure first, whether or not it attempts a gate test, appended to HANDOFF without
 reading that file; a session that reads program state before disclosing cannot be an examination;
 such a session writes memory only once it has established that it is not an examination.
+**Launch directory (Session 28, 2026-10-26; recorded at Al's direction):** whenever Claude Code
+is launched inside a git work tree, it attaches a Git status and history snapshot to the
+conversation before the first action: the current branch, `git status` and the last five commit
+subjects. A session launched inside the checkout `C:\Users\LEET\Syndeom` therefore holds program
+state before it can disclose (SD15's "Git history or status"), so it **can never be an
+examination**, whatever its prompt, memory or disclosure order.
+The launch directory also selects the memory store the harness loads:
+- inside the checkout, the key `C--Users-LEET-Syndeom`, whose memory directory is empty, so no
+  index is loaded;
+- from `C:\Users\LEET`, the machine-wide index that ADR-0005's disclosure handles.
+
+`C:\Users\LEET` is not a git work tree (`git rev-parse` exits 128 there). Sessions 6, 7, 25 and
+27 record the harness loading that index at start, so they were launched from it, and none
+records a Git snapshot. The examination is launched from `C:\Users\LEET`, outside the checkout.
+Its disclosure records what the harness attached before the first action. No constitution or ADR
+text changes: this applies SD15 as written.
 
 ## Standing rulings (recorded; their ADRs come later)
 
@@ -551,7 +600,9 @@ such a session writes memory only once it has established that it is not an exam
   Session 10; ADR-0006 reviewed TeX derivation — written 2026-10-20 (S1.3);
   ADR-0007 first positive-pair procedure and candidate — written 2026-10-20 (S1.2);
   ADR-0008 orientation synchronization and snapshot selection, the accepted addendum governing
-  §4.1 — written and accepted 2026-10-21 (Session 23). **ADR-0009 is the next free number.**
+  §4.1 — written and accepted 2026-10-21 (Session 23); ADR-0009 constitution amendment to SD15
+  and the §6 Session-N prompt (disclosure first) — written and accepted 2026-10-26 (Session 26).
+  **ADR-0010 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -595,7 +646,7 @@ such a session writes memory only once it has established that it is not an exam
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` is the historical ledger. The later effective inventory records 35 representations / 32 logical items / 18 unflagged; current requirements and limits are mapped in `analysis/s1-post-merge-readiness/READINESS.md`. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. First-parent status support is discharged on verified main under the accepted scoped ruling. External bytes retain historical evidence and must be retrieved/reverified before scoring; the older dispositions and exclusions remain unchanged. |
 | Repo green under the gate | **standing** | Build status above |
-| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure); Session 27, a §6 launch inside the conversation that built Session 26, not cold and not an attempt** | Separate genuinely fresh session launched with the constitution's §6 Session-N resume prompt (as amended by ADR-0009, disclosure first) verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
+| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure); Session 27, a §6 launch inside the conversation that built Session 26, not cold and not an attempt; Session 28, a fresh §6 launch inside the checkout that received the harness's Git snapshot before its first action, not an examination** | Separate genuinely fresh session launched from `C:\Users\LEET`, outside the checkout (launch-directory finding, Memory policy), with the constitution's §6 Session-N resume prompt (as amended by ADR-0009, disclosure first) verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
 
 ## Gate S0 exit criteria — CLOSED 2026-10-13 (Session 6)
 
@@ -623,10 +674,14 @@ such a session writes memory only once it has established that it is not an exam
   verification remain future scoring prerequisites, not an obligation to canonicalize
   the entire prefix or fill every flaw class before S1. This informed session cannot
   certify the examination. The readiness reconciliation (PR 8), the orientation repair
-  (PR 9), the cold-start preparation (PR 10), Session 25's record (PR 11) and ADR-0009 (PR 12)
-  are merged; their review records are those merged pull requests. Session 25, launched as the examination,
+  (PR 9), the cold-start preparation (PR 10), Session 25's record (PR 11), ADR-0009 (PR 12) and
+  Session 27's record (PR 13) are merged; their review records are those merged pull requests.
+  Session 25, launched as the examination,
   disclosed late and is ineligible; Al decided the step-0 escalation by ADR-0009 (2026-10-26),
   which puts the disclosure first in the §6 prompt itself (Standing escalations, first bullet).
+  Session 28, a fresh §6 launch inside the checkout, received the harness's Git snapshot before
+  its first action and is not an examination; the examination is launched from `C:\Users\LEET`
+  (Memory policy).
 
 ## Standing escalations and dispositions
 
@@ -798,10 +853,19 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**Unchanged in substance after Session 27; ADR-0009 (PR 12) is on main.** The next action is
-the Gate S1 cold-start examination in a separate fresh session — **a new conversation that holds
-no transcript of earlier sessions** — launched with the constitution's §6 Session-N resume prompt
-**as amended by ADR-0009**, verbatim and alone, opened per ADR-0008 D1. Session 27 showed that
+**After Session 28 the action is unchanged, except that it now names the launch directory.** The next action
+is the Gate S1 cold-start examination in a separate fresh session:
+- **a new conversation that holds no transcript of earlier sessions;**
+- **launched from `C:\Users\LEET`, outside the checkout, as Sessions 6, 7, 25 and 27 were;**
+- with the constitution's §6 Session-N resume prompt **as amended by ADR-0009**, verbatim and
+  alone;
+- opened per ADR-0008 D1.
+
+A session launched inside the checkout (`C:\Users\LEET\Syndeom`) receives a Git status and
+history snapshot from the harness before its first action, so it can never be an examination
+(Session 28; Memory policy). The examination's disclosure records what the harness attached
+before the first action. If a Git snapshot of this repository is among it, the session is not an
+examination. Session 27 showed that
 the same prompt pasted into a conversation that already holds the program's state yields a
 procedurally complete disclosure and a session that is still not cold (SD15's corollary).
 The prompt's first sentence now instructs the SD15 disclosure as the session's first action:
@@ -827,7 +891,8 @@ step 0, the SD15 disclosure appended to HANDOFF without reading it, before any o
 command (ADR-0005; ADR-0009); then
 steps 1–5, `python -I -X utf8 scripts/orient_preflight.py orient --expect-url
 https://github.com/Quigles1337/Syndeom.git --allow-dirty PROGRAM/HANDOFF.md --receipt <file>`
-(a failed fetch stops the session; a checkout that is not the fetched tip is examined from an
+(launched from `C:\Users\LEET`, name the script by its full path and add `--repo
+C:/Users/LEET/Syndeom`, as Session 28 ran it; a failed fetch stops the session; a checkout that is not the fetched tip is examined from an
 isolated worktree); the examination's record states the fetched `origin/main` SHA and tree and
 the examined checkout. Session 22 showed that an unfetched working copy reproduces a stale state
 and passes §4.1 silently; its attempt stays recorded as unsuccessful. Preparing a synchronized
