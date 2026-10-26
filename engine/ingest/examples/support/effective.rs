@@ -105,7 +105,11 @@ pub fn preserve(blobs: &Blobs, frozen: &Frozen) -> Result<Value> {
     let mut appended = Vec::new();
     for (path, pin) in &frozen.files {
         let current = bytes(blobs, path)?;
-        if matches!(path.as_str(), "README.md" | "PROGRAM/STATE.md") {
+        // The constitution changes only by ADR, never as reproduction data (ADR-0009 D5).
+        if matches!(
+            path.as_str(),
+            "README.md" | "PROGRAM/STATE.md" | "PROGRAM/SYNDEOM-PROGRAM.md"
+        ) {
             continue;
         }
         let preserved = if matches!(

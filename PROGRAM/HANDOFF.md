@@ -4291,3 +4291,153 @@ no longer perform. Session-end SHA: the commit carrying this block, on top of ma
 `535641227f408095f36a92000e808ed5b65e135c` on branch `claude/s1-session-25-exam-attempt`; its hash
 and its gate are recorded in the pull request, not here (that would be a self-reference). Repo
 green: the ORIENT gate above, and the final staged-tree gate before the commit.
+
+SESSION: 2026-10-26 UTC (Session 26 — informed working session: ADR-0009, the SD15 / §6 disclosure-first
+amendment; branch `claude/s1-adr-0009-disclosure-first` from main
+`3cd5558223294571dd85164eb0d2730cb1911637`; the session-end SHA is the commit carrying this block,
+recorded in its pull request, not here)
+LAUNCH CONTEXT (SD15; an informed working session, not an examination): launched with Al's task
+text (draft ADR-0009 proposing Session 25's options (a) and (b) and ADR-0008 step 0 beyond
+examinations; show the exact before/after text; change nothing until accepted; then apply, record,
+update every record of the constitution's SHA-256, update STATE and HANDOFF, gate, open a PR and
+stop), not with the §6 prompt. Not cold; it attempts and certifies nothing about Gate S1. The
+amended step 0 does not bind it (it was not launched with the §6 prompt). Memory: the harness
+loaded the executor's memory index; the SYNDEOM memory file was read at session start; no
+executor memory was written.
+PHASE / GATE: S1 — GROUND-TRUTH CORPUS / Gate S1 OPEN, awaiting the separate cold-start
+examination (unchanged). Accepted population unchanged: 35 archived representations, 32 effective
+logical items. The held branch stays at `c3a3d369689d56bab3678f519904087b313daf4e` (decision 1).
+ORIENT: at session start, before the preflight, the session ran `git status -sb`, `git log
+--oneline -10` and `ls` in this checkout, then `git fetch --all --prune` (exit 0; `origin/main`
+moved `5356412..3cd5558`, PR 11's merge), and read the constitution, ADR-0005, ADR-0008, STATE and
+HANDOFF Sessions 24–25 from branch `claude/s1-session-25-exam-attempt` at `e1c8150`, whose tree
+`125b1ed56d8dcab8074119eb51fc3467dbb09dda` equals the fetched tip's (`git diff --quiet e1c8150
+3cd5558` exit 0): what it read was the fetched snapshot's content. The ADR-0008 D1 steps 1–5
+receipt came afterwards, before any edit: `git checkout main` (clean), then `python -I -X utf8
+scripts/orient_preflight.py orient --expect-url https://github.com/Quigles1337/Syndeom.git --sync
+--receipt …\preflight-orient.json`, exit 0, SNAPSHOT-ESTABLISHED: identity
+`C:/Users/LEET/Syndeom`, remote `https://github.com/Quigles1337/Syndeom.git`; `git fetch --prune
+origin` exit 0, 2026-10-26T20:10:11.20Z–20:10:12.04Z; default branch `main` (from `git ls-remote
+--symref`); fetched `origin/main` = `3cd5558…` (tree `125b1ed5…`); HEAD before = `main` at
+`535641227f408095f36a92000e808ed5b65e135c` (tree `1fdeda3e…`), clean, behind 2 / ahead 0,
+remote-only `e1c8150`, `3cd5558`; classification behind; fast-forwarded (ff-only); examined
+checkout `C:/Users/LEET/Syndeom` at `3cd5558…`. Receipt SHA-256
+`a6de02956584746b701d59df9aece098ee918fd8637e1b0c5a5a42a672458ea7` under the external root
+`C:\Users\LEET\Codex\Temp\syndeom-adr-0009-20261026\`. No separate ORIENT gate: tree `125b1ed5…`
+is the tree Session 25's final staged-tree gate certified (19:44:55Z–19:45:36Z, GREEN; its raw log
+re-hashed, `b003ccee…054b`, matching).
+PLAN NOTE: Al's task, one thing — decide and apply the step-0 escalation by ADR. Draft first (no
+repository change), stop for Al's decision, then apply exactly what Al accepted.
+ADVANCED:
+- **A. Draft, measured before it was offered.** Mapping every record of the constitution's
+  SHA-256 (`git grep 89c198b0` at `3cd5558`: 17 lines in 15 files) found that the S1.3
+  effective-inventory reproduction checks its accepted baseline byte for byte at HEAD,
+  constitution and ADR-0005 included. A scratch-clone probe (2026-10-26T20:01:43Z–20:01:58Z):
+  `3cd5558` PASS with `inventory.json` identical to the retained `b626d1b5…1b803`; one word of the
+  constitution changed → `FAIL: historical bytes changed: PROGRAM/SYNDEOM-PROGRAM.md`; one word of
+  ADR-0005 changed → the same on ADR-0005. The draft therefore left ADR-0005 and SIBLING-MAP
+  unedited and offered the break to Al as D5. The before/after text of every change went to Al
+  with four decision points; nothing in the repository changed until Al's acceptance.
+- **B. Al's acceptance (2026-10-26)**, with rulings 1–4 (accept the break, STATE to say plainly
+  that S1.3 is reproduced at `3cd5558`, and a non-blocking note on the tool; scope "launched with
+  the §6 Session-N resume prompt"; keep the memory-reading allowance and the ADR-0008 pointer; add
+  a directory listing to the definition of reading program state) and additions 5–6 (append
+  without reading HANDOFF; provisional block header). Transcribed verbatim in ADR-0009.
+- **C. Applied.** Constitution: SD15 (the rest of the paragraph reflowed, words unchanged), the §6
+  Session-N prompt (first sentence: the disclosure; then appending without reading, the
+  provisional header, and ADR-0008 for orientation), the header and footer *Amendments* lines;
+  version string unchanged. SHA-256 `89c198b0f1ca7b44f96c9d13816409f65acfb0b8eb3e119cf37003ff15d48102`
+  (37,609 bytes) → `110f5360af60075a8e799dce0dc235d1ef8785bd40b0b34c38fa53ddb1d5479c` (38,958
+  bytes), LF, no BOM. ADR-0008: the line before step 0, step 0 (scope, appending without reading,
+  provisional header, ADR-0008 readable after disclosing, directory listings, memory), step 4,
+  D3's first two bullets, and a new *Amendments* section naming both digests. ADR-0009 recorded,
+  accepted.
+- **D. Records of the constitution's SHA-256.** Updated: STATE (the ADR-0008 orientation bullet;
+  the Session-25 escalation, now decided, and its text removed from STATE — it stands in HANDOFF
+  Session 25 and in PR 11). Left byte-identical as records of their own baselines (ADR-0009 D4):
+  HANDOFF lines 3794, 3910, 4183; ADR-0008 line 23 (annotated by its *Amendments* entry); the
+  eleven frozen evidence files under `analysis/` listed in ADR-0009.
+- **E. STATE:** new Updated bullet (PR 11's merge: 2026-10-26T19:55:55Z, by Al, parents `5356412`
+  and `e1c8150`, tree equal to the head's, CI runs 40389787616 and 40391129353 success, all read
+  from `gh` and git); a bullet stating the two S1.3 reproduction facts after ADR-0009 (G); the
+  Gate line, the
+  Constitution line, Memory policy (disclosure timing), the Gate S1 table's S1.3 and cold-start
+  rows, Blockers, the escalation decided, the non-blocking note on the reproduction tool, Current
+  build verification and NEXT.
+- **F. Reproduction evidence** (`run-repro.sh`, log `repro.log` under the external root,
+  2026-10-26T20:12:33Z–20:12:44Z, scratch clones of this checkout): R1 at `3cd5558` (tree
+  `125b1ed5…`) PASS, `inventory.json` `b626d1b5…1b803` = retained; R2 with the constitution,
+  ADR-0008 and ADR-0009 as amended (clone tree `d23b2e1b…`) `FAIL: historical bytes changed:
+  PROGRAM/SYNDEOM-PROGRAM.md`; R3 the same with the constitution restored (tree `c300eabc…`) PASS,
+  inventory identical. So the constitution is the only file of this change the tool rejects;
+  STATE is a named summary and HANDOFF a preserved prefix for it.
+- **G. The first staged-tree gate was RED; Al's option 1 fixed it.** Full gate on staged tree
+  `1e43f5d5…` (2026-10-26T20:16:14Z–20:16:51Z, exit 101, nothing committed; `gate-staged.json`):
+  4 of the 15 `first_parent_amendment` tests failed with `historical bytes changed:
+  PROGRAM/SYNDEOM-PROGRAM.md` — their fixture reads the frozen baseline from the working tree.
+  Ruling 1's premise (the historical-byte tests use in-memory fixtures) was wrong, as Al recorded;
+  this session's draft had missed the same test. Extent (`tests-extent.log`, `--no-fail-fast`,
+  scratch clones): on that tree only those four failed; with the constitution restored all 82
+  passed; with a one-line `preserve()` skip all 82 passed and the reproduction passed at HEAD,
+  differing only in `preservation.exact_files_checked` 370 → 369. Four options went to Al; Al
+  chose option 1. Applied: `preserve()` skips `PROGRAM/SYNDEOM-PROGRAM.md` beside `README.md` and
+  `PROGRAM/STATE.md`, one comment line citing ADR-0009; `cargo fmt --check` clean; source
+  `effective.rs` SHA-256 `516bd44e20a73259f7577ffd6a41230d99141d33ca16147d0b0b7719eea99775` →
+  `92a816bcc7cf02acec98bcda1fc7775444f331aede1ca9786c23d750d4dcb30c`; nothing else in the tool
+  changed. R5 (`run-repro-2.sh`, `repro-R5.log`, 2026-10-26T20:32:02Z–20:32:11Z) on the staged tree
+  then holding the fix: PASS, `inventory.json` `df3a2c7f…a7f5`, one field difference from the
+  retained file, `preservation.exact_files_checked` 370 → 369. ADR-0009 (Status, Scope, Context,
+  D5, Consequences, the ruling verbatim) and STATE (both facts; the non-blocking note marked
+  partly done) record it. The commit carrying this block gets a full gate on its exact staged
+  tree, detached with a log, recorded in its pull request and under the external root.
+BELIEF DELTAS:
+- A rule that tells a cold session how to *disclose* has to tell it how to *write*, too. Evidence:
+  file-editing tools read a file before changing it, and HANDOFF's earlier entries are program
+  state (Al's addition 5); the block header's session number is likewise unknowable before
+  orientation (addition 6). Session-start me had covered only the order of reading.
+- Amending the constitution was not free: a frozen reproduction and the gate's tests built on it
+  treat it as an input. Evidence: R1–R3 and the red gate (G). Consequence: the tool skips the
+  constitution (D5); narrowing the rest of its byte checks is a note, partly done.
+- "The gate is unaffected" was a claim, and only the gate could settle it. Evidence: the red
+  gate. A test that mutates blobs in memory can still load them from the working tree.
+CONFUSIONS:
+- I fetched and read STATE, HANDOFF and the ADRs before running the ADR-0008 preflight, which D1
+  orders first for every session. No consequence here — the checkout's tree equalled the fetched
+  tip's, and the receipt was taken before any edit — but the order was wrong. Doc fix: none; D1
+  already says it, and the amended §6 prompt now names ADR-0008 for a §6-launched session.
+- My draft looked for tests that read HEAD only under `examples/` and missed
+  `engine/ingest/tests/first_parent_amendment.rs`, whose fixture reads the working tree; Al's
+  ruling 1 then rested on the same miss. Cost: one red staged-tree gate and a second ruling;
+  nothing was committed red. Doc fix: ADR-0009 Context and D5, and STATE's non-blocking note,
+  which says the gate's tests run the same check.
+HONESTY CHECK: no CLAIM, FLAW or SOURCE entry changed status; nothing labeled, promoted, measured
+or reproduced as a new result (R1–R5 re-ran an existing reproduction to locate a constraint and
+check the fix). Sessions 22 and 25 stay ineligible; ADR-0009 is not retroactive. Downgrades: the
+premise of ruling 1 is recorded as wrong in ADR-0009, and the first gate is recorded as RED, not
+omitted.
+LEAKAGE CHECK: checked, not assumed — `contact/` not opened; no AI-generated proof, detector,
+generator or threshold touched; the amendment concerns session procedure only. Verdict: no
+leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED results. R1–R5 record exact revisions, trees and
+digests and rerun from `run-repro.sh` and `run-repro-2.sh`. Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing; nothing synthetic
+labeled real.
+DRIFT CHECK: no statement about any real manuscript (SD3); no understanding claims (SD17); no
+detectors; no referee contact (SD13); no S2 work; no examination conducted or implied; the held
+branch untouched.
+NEXT-SINGLE-ACTION: the Gate S1 cold-start examination in a separate fresh session launched with
+the constitution's §6 Session-N resume prompt as amended by ADR-0009, verbatim and alone; its
+first action is the SD15 disclosure appended to HANDOFF without reading that file, under a
+provisional header; then ADR-0008 D1 steps 1–5 with `--allow-dirty PROGRAM/HANDOFF.md` — exactly
+as STATE.md states it. An examiner rerunning the S1.3 reproduction gets the retained inventory
+byte-identical at `3cd5558` and, at HEAD, a PASS differing only in
+`preservation.exact_files_checked` 370 → 369.
+ESCALATIONS:
+- This session's branch `claude/s1-adr-0009-disclosure-first` and its pull request await Al's
+  review and merge; they are left unmerged.
+- Unchanged: the held branch's admission review after Gate S1 closes (decision 1); the Codex
+  checkout's unpushed branch (Session 23, E; not re-inspected); human-referee participants (SD13).
+STOP-REASON: natural boundary — the accepted amendment is applied, recorded and delivered on a
+reviewable PR; Al reviews before merge. Repo green: Session 25's gate on this session's base tree,
+and the final staged-tree gate before the commit (recorded in the PR); the first staged-tree gate
+was RED and nothing was committed until the fix was in.
