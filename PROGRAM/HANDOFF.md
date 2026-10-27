@@ -5565,3 +5565,28 @@ STOP-REASON: gate reached — Gate S1 closed by the cold-start examination (effe
 Repo green: the ORIENT gate on the snapshot, and the staged-tree gate before the commit (recorded
 in the pull request).
 **Memory writes:** none this session (an examination writes none).
+AL'S RULINGS (2026-10-26, received in this session's conversation after PR #15 opened; recorded at
+Al's direction; transcribed verbatim from Al's message):
+
+~~~text
+Rulings on your three judgments: I uphold all three.
+1. The memory holds no program state, including the new hazard line, which records harness behavior only.
+2. The test -f existence check is not a read of program state: the prompt names the file, and checking that it exists reveals nothing more.
+3. Recording the other attached context after the disclosure is fine: none of it is memory, and none of it names this program or a sibling.
+
+Order of work: keep NEXT at ADR-0010 per the phase order, with the held harvest review scheduled after it. I will rule on the Mnemosyne seed family when ADR-0010's draft is in front of me.
+
+Record these rulings verbatim in STATE and in your HANDOFF block within PR #15, rerun the gate on the committed tree, push, and stop. Change nothing else.
+~~~
+
+Effect, recorded in STATE:
+- The three SD15 judgments are upheld, so this examination's PASS and Gate S1's closure are not
+  conditional (Standing escalations, where the rulings are verbatim; the Updated bullet).
+- NEXT stays at ADR-0010, with the held harvest review scheduled after it (the held-branch bullet
+  and NEXT's ordering note).
+- The Mnemosyne seed family, ADR-0010 item (h), is ruled on when the draft is before Al; NEXT
+  already flags it for Al.
+
+Nothing else changed. The commit carrying this entry is gated on its committed tree; the result
+is recorded under the external root `C:\Users\LEET\Codex\Temp\syndeom-s1-cold-start-exam-20261026\`
+(`gate-committed.json`), not in the tree it certifies. **Memory writes:** none.

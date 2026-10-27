@@ -26,8 +26,8 @@
   was GREEN, and the S1.3 reproduction on a fresh clone printed `PASS: 35 archived
   representations / 32 effective logical items`, differing from the retained inventory only in
   `exact_files_checked` 370 → 369, as this file predicted. Every Gate S1 criterion has evidence
-  (table below). Three SD15 judgments are stated for Al's audit (Standing escalations); if one is
-  overruled, the result becomes CONDITIONAL PASS and the closure provisional. Registers, frozen
+  (table below). Three SD15 judgments were stated for Al's audit; **Al upheld all three on
+  2026-10-26** (Standing escalations, verbatim), so the PASS is not conditional. Registers, frozen
   packets and the accepted corpus are unchanged.
 - **Previous update (Session 28):** 2026-10-26 UTC (Session 28 — a fresh conversation launched with the §6 Session-N
   resume prompt in its ADR-0009 wording, verbatim and alone, but **inside the checkout**
@@ -759,8 +759,22 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 ## Standing escalations and dispositions
 
-- **SD15 audit request — Gate S1 examination (Session 29, 2026-10-26) — AWAITING AL.** Al, please
-  confirm or overrule three judgments on which the PASS rests (HANDOFF Session 29):
+- **SD15 audit request — Gate S1 examination (Session 29, 2026-10-26) — DECIDED by Al on
+  2026-10-26: all three judgments upheld; the PASS is not conditional.** Al's rulings,
+  transcribed verbatim from Al's message in the Session 29 conversation (also in HANDOFF
+  Session 29):
+
+  ~~~text
+  Rulings on your three judgments: I uphold all three.
+  1. The memory holds no program state, including the new hazard line, which records harness behavior only.
+  2. The test -f existence check is not a read of program state: the prompt names the file, and checking that it exists reveals nothing more.
+  3. Recording the other attached context after the disclosure is fine: none of it is memory, and none of it names this program or a sibling.
+
+  Order of work: keep NEXT at ADR-0010 per the phase order, with the held harvest review scheduled after it. I will rule on the Mnemosyne seed family when ADR-0010's draft is in front of me.
+  ~~~
+
+  The request as Session 29 wrote it: Al, please confirm or overrule three judgments on which
+  the PASS rests (HANDOFF Session 29):
   1. no reproduced memory holds program state, including the launch-directory hazard appended
      after PR 14 and the state-adjacent hazards the disclosure names;
   2. the `test -f` existence check in the disclosure's append command is not a read of program
@@ -818,8 +832,9 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   `analysis/s1-4/OBLIGATIONS.md`. Nothing is relabeled or newly harvested.
 - **Held branch now eligible for review (Session 29):** decision 1 below deferred the held
   branch's admission review "until after Gate S1 closes". With Gate S1 closed (at the merge of
-  Session 29's pull request), the review is eligible. **Its order relative to S2's ADR-0010 is
-  Al's call;** NEXT defaults to the phase order. Nothing on the branch is approved by this
+  Session 29's pull request), the review is eligible. **Order decided by Al on 2026-10-26
+  (verbatim in the SD15 audit bullet above): NEXT stays at ADR-0010 per the phase order, with
+  the held harvest review scheduled after it.** Nothing on the branch is approved by this
   eligibility.
 - **Later harvest held off main — DECIDED by Al on 2026-10-21 (decision 1, transcribed in
   `analysis/s1-orientation-repair/OWNER-DECISIONS.md`): preserve branch
@@ -989,8 +1004,8 @@ is launched with the §6 prompt. Commit `[S2][ADR-0010] decide the first generat
 branch, run the staged-tree gate before the commit, and open a pull request; Al merges.
 
 **Ordering note:** the held harvest branch's admission review is now eligible (Al's decision 1;
-Standing escalations). Its order relative to this ADR is Al's call; absent a ruling, this action
-follows the phase order. The harvest itself stays paused through candidate 27 / `1403.4485`, with
+Standing escalations). Al ruled on 2026-10-26 (verbatim under Standing escalations): NEXT stays at
+ADR-0010 per the phase order, with the held harvest review scheduled after it. The harvest itself stays paused through candidate 27 / `1403.4485`, with
 candidate 28 / `1403.6317` saved. The seven truth questions, the seven severity questions and the
 unnamed-result question keep their existing dispositions. Missing canonical lengths and
 external-byte verification remain prerequisites for scoring real items (S4), not for S2.
