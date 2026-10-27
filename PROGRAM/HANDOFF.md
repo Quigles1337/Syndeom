@@ -6994,3 +6994,140 @@ committed-tree gate recorded in the pull request.
 **Memory writes:** none. (This session established at its launch that it is not an examination,
 so a hazard write would have been permitted; none was needed — the one new observation, not
 editing engine sources before `=== GATE end`, is a corollary of a hazard already recorded.)
+
+---
+
+SESSION: 2026-10-27 UTC (2026-10-27 America/New_York) (Session 36 — an informed working session,
+not an examination, continuing Session 35's conversation at Al's direction after PR 21's merge;
+not launched with the §6 prompt, so no SD15 disclosure; examined fetched `origin/main`
+`f8d71b8c8034638f14e9a5885ae348c8fdde24c4`, tree `35bb1439f4d7ac4ca54734ca61192ec4a68b3ff1`, in
+the checkout `C:\Users\LEET\Syndeom` on `main` after a fast-forward; branch
+`claude/s2-adr-0012-freeze-register`; the session-end SHA is the commit carrying this block,
+recorded in its pull request)
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (S2.1: ADR-0011 accepted; no code). Gate S1 CLOSED
+(Session 29).
+LAUNCH CONTEXT: Al's direction of 2026-10-27, received in Session 35's conversation after PR 21
+merged (quoted in substance): PR 21 is merged (`f8d71b8`); before ordering step 3, one more
+package on a new branch from main — (1) a test that, with every outside file mutated as in the
+existing input-set tests, the inventory's content outside the preservation object stays
+byte-identical; (2) close ADR-0012 D7's gap with a separate freeze check in the gate, independent
+of the S1.3 reproduction: every file STATE records as frozen byte-identical to its version at the
+commit where it was frozen (for the S1 packets, the `gate-s1-registration` tag), every file STATE
+records as append-only with both its freeze-point version and its default-branch version as exact
+prefixes; derive both lists from STATE's records, list and ask where STATE gives no freeze point,
+put both lists in the PR description, test both directions; (3) record it as an amendment to
+ADR-0012, NEXT returns to ordering step 3 after this PR; gate the committed tree, fetch fresh
+before pushing, open a PR and stop. Not cold; not an examination.
+ORIENT (ADR-0008 D1 steps 1–5 by the preflight; receipt `orient-1-sync.json` under the external
+root `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-freeze-20261027\`):
+- **Identity:** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main` (`git ls-remote --symref`).
+- **Fetch and snapshot:** 2026-10-27T21:39:45Z, exit 0; the clean checkout on `main` at
+  `6d89eb2f…` was **behind** by one commit, PR 21's merge `f8d71b8c8034638f14e9a5885ae348c8fdde24c4`
+  (by Al, 2026-10-27T21:36:26Z; parents `6d89eb2f…` and `9dc0d1e6…`), and was fast-forwarded
+  (ff-only) to it: `SNAPSHOT-ESTABLISHED`. Its tree `35bb1439…` equals PR 21's head tree, which
+  Session 35 gated GREEN on the committed tree (`gate-committed.json`, 21:17:49Z–21:21:08Z); no
+  separate ORIENT gate (the Sessions 30–33 convention).
+- **Step 6:** STATE's records of what is frozen, append-only, unchanged, immutable or
+  digest-bound (every line matching those words, read in context); ADR-0012; the tag's tree
+  (466 files; `analysis/` holds seven `s1-*` packets); `git diff --stat gate-s1-registration HEAD`
+  for `analysis/`, `groundtruth/`, `sources/`, the sweep, the advisory, ADR-0003 and FLAWS:
+  **empty**; HANDOFF and SOURCES since the tag: no removed or changed line, the tag's bytes an
+  exact prefix (476,214 → 568,823; 180,782 → 180,782); the tag's blobs for the sweep and the
+  advisory carry exactly the digests STATE records (`f4bfb2ad…b03e`, `f3e40b68…fa2c`);
+  `refs/remotes/origin/HEAD` → `refs/remotes/origin/main`. Files changed since the tag anywhere:
+  twelve, all `PROGRAM/`, README, `CITATION.cff` and the ingest tool and tests.
+ADVANCED:
+- **A. The invariance test** (`engine/ingest/tests/input_set.rs`,
+  `inventory_is_byte_identical_under_every_outside_mutation`): four worlds — every one of the 31
+  outside files appended, flipped, rewritten (the two marker files to their marker alone) or
+  removed (the two marker files kept), plus three additions outside `groundtruth/` — each yields
+  a report byte-identical to the unmutated one, `preservation` included; a byte appended to the
+  taxonomy still stops the report. `cargo fmt`, clippy at deny-warnings (after one type alias for
+  the closure array) and the crate's tests (15 + 5 + 7) pass.
+- **B. The freeze check:** `scripts/check_freeze.py` (register parser; `GitEnv` over one
+  `cat-file --batch` process with memoized answers; `run_check` with injectable environment;
+  CLI printing one line per row and `RESULT: ALL PASS`) and `scripts/check_freeze_test.py` (8
+  unittest cases, in memory over the live register and the real objects). `scripts/check.sh`
+  runs both after the register cross-reference check. `.github/workflows/check.yml`: full
+  history and tags, then `git remote set-head origin -a`.
+- **C. The register** (STATE, new section *Freeze register*): seven frozen rows at
+  `gate-s1-registration` (296 files) and two append-only rows (HANDOFF, SOURCES), each citing the
+  STATE records it derives from; an *Awaiting a freeze point* list with proposals; a *Not
+  proposed* list with reasons. On the working tree: 9 rows, ALL PASS, about one second.
+- **D. ADR-0012:** Status accepted (PR 21's merge; the amendment directed the same day);
+  *Amendments* 1 (the test, the check, the lists, the two flagged choices, D7's second bullet
+  superseded).
+- **E. STATE:** the Updated bullet; Current build verification (Session 36); the ADR-numbers
+  line; a new standing escalation (the freeze-register rulings); the S1.3-tool escalation
+  (PR 21 merged; the register checks what the tool no longer does); NEXT's sentence on the
+  unmerged pull request. NEXT stays at ordering step 3.
+- **F. HANDOFF:** this block. **G. Gate** on the committed tree with a clean working tree,
+  recorded in the pull request and under the external root, not in the tree it certifies.
+- No register status, manifest, frozen packet, retained report, constitution byte, licence, tag,
+  corpus file or S2 code changed; the held branch untouched.
+BELIEF DELTAS:
+- **A freeze is a claim STATE can make in a parsable form, and the gate can check it against Git
+  objects.** The same shape as §4.1's "state files are claims; builds are evidence": the register
+  says what froze and where, `git cat-file` says whether it is still so. Evidence: 9 rows, 296
+  files, two prefixes, ALL PASS in about a second. Consequence: D7's gap closed without widening
+  the reproduction.
+- **Nothing the program calls frozen has moved since the tag.** Evidence: empty diffs under
+  every candidate scope; HANDOFF only grown; SOURCES unchanged. Consequence: the register passes
+  at `HEAD` with no exception of any kind.
+- **The derivation surfaces what STATE never pinned.** The corpus, the ferried files, `sources/`
+  and ADR-0003 are recorded as unchanged, immutable or digest-bound, but no record names the
+  commit at which they froze. Consequence: the *Awaiting a freeze point* list and the escalation,
+  as Al's rule requires, rather than a choice.
+- **Memoizing Git answers is the difference between a test suite in the gate and one outside
+  it.** Evidence: 40 s with a process per answer, 1.8 s memoized. Consequence: the eight tests
+  run in every gate.
+CONFUSIONS:
+- **clippy's `type_complexity`** on an array of boxed-closure tuples; one type alias. Cost: one
+  rerun.
+- **The first freeze-test run took 40 s**, every `run_check` spawning its own `git ls-tree`,
+  `ls-files`, `rev-parse` and `symbolic-ref`; memoization fixed it. Cost: one rerun. Doc fix:
+  none; the checker documents the memo.
+- **The append-only rows' freeze point.** Al's rule says to list and ask where STATE gives no
+  freeze point; STATE records HANDOFF and SOURCES as append-only but names no commit. Leaving
+  the append-only kind empty would have left the mechanism unexercised by the live register, so
+  the rows take the tag and the choice is flagged in STATE, the ADR and the pull request. Recorded
+  as a choice, not a derivation.
+- **A frozen scope's additions.** Al's spec speaks of files being byte-identical; refusing
+  additions under a frozen directory is the executor's reading of "frozen packet" (the former
+  `preserve()` did the same). Flagged.
+HONESTY CHECK:
+- Register entries re-examined: none changed; the gate prints the seven CLAIM statuses and the
+  73 source states as before. Downgrades: none.
+- ADR-0012's Status moved to **accepted** on the strength of Al's merge of PR 21 and the direction
+  to amend it; no sentence of Al's says "accepted". Flagged here; Al may word it otherwise.
+- Every row of the register cites the STATE records it comes from; the two choices that are not
+  derivations are named as such in three places. The file counts (121, 17, 35, 47, 46, 19, 11,
+  296) and byte lengths are the tools' output, not hand sums.
+- The invariance test asserts the whole report byte-identical, which is stronger than the
+  property Al named (content outside the `preservation` object); the stronger property holds
+  because `preserve()` derives its output from the baseline list, not from the mutated files.
+LEAKAGE CHECK: checked, not assumed — `contact/` not opened; no detector, threshold or generator
+code exists or was written; the inputs to this package are STATE's records, the tag's tree, the
+tool's tests and Al's direction. Verdict: no leakage.
+DETERMINISM CHECK: every number here is regenerable: the freeze check from `scripts/check_freeze.py`
+on any checkout holding the tag and `origin/HEAD`; the tests from the gate; the diffs from `git`.
+Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing; nothing synthetic
+labeled real.
+DRIFT CHECK:
+- no statement about any real manuscript (SD3);
+- no understanding claims (SD17);
+- no detector chosen or tuned; no referee contact (SD13);
+- no S2 code; the held branch untouched; the SD8 quarantine untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT — S2 ordering step 3, the held harvest's admission review,
+after this pull request's merge; then step 4, ADR-0011's crate, after Al rules on the review.
+ESCALATIONS:
+- **Freeze register, for Al's rulings** (STATE, Standing escalations, first bullet): the scopes
+  awaiting a freeze point, each with a proposal; the two executor choices (additions refused
+  under frozen scopes; the tag as the append-only rows' freeze point). Both lists are in the pull
+  request's description.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction — stop at the pull request for review. Repo green: the gate on the
+committed tree, recorded in the pull request.
+**Memory writes:** none.

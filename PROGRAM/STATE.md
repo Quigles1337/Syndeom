@@ -1,6 +1,29 @@
 # STATE
 
-- **Updated:** 2026-10-27 UTC (Session 35 — a session launched from `C:\Users\LEET` with the §6
+- **Updated:** 2026-10-27 UTC (Session 36 — an informed working session, not an examination,
+  continuing Session 35's conversation at Al's direction after PR 21's merge; not launched with
+  the §6 prompt, so no SD15 disclosure): **ADR-0012 *Amendments* 1 — the narrowing's safety
+  property tested, and the freeze register checked by the gate (Al's direction of 2026-10-27).**
+  - **Orientation:** the ADR-0008 preflight (receipt `orient-1-sync.json` under
+    `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-freeze-20261027\`) fast-forwarded the clean `main`
+    from `6d89eb2f…` to fetched `origin/main` `f8d71b8c8034638f14e9a5885ae348c8fdde24c4`, tree
+    `35bb1439f4d7ac4ca54734ca61192ec4a68b3ff1`. That is **PR 21's merge** (2026-10-27T21:36:26Z,
+    by Al); its tree equals PR 21's head tree (`9dc0d1e`), which Session 35 gated GREEN.
+    **ADR-0012 is accepted** at that merge.
+  - **The invariance test:** `inventory_is_byte_identical_under_every_outside_mutation` in
+    `engine/ingest/tests/input_set.rs` — every outside file mutated four ways at once, three
+    files added outside `groundtruth/`, the whole report byte-identical. Gate Rust tests 88 → 89.
+  - **The freeze register** (section below): seven S1 packets frozen at `gate-s1-registration`
+    (296 files) and two append-only registers, derived from this file's records;
+    `scripts/check_freeze.py` and `scripts/check_freeze_test.py` (8 tests) join the gate after the
+    register cross-reference check; the advisory CI fetches history and tags and sets
+    `origin/HEAD`. Scopes without a recorded freeze point are listed for Al's ruling and not
+    checked; two executor choices are flagged (Standing escalations).
+  - **Unchanged:** registers' statuses, manifests, frozen packets, the retained report, the
+    accepted corpus, the constitution, the licence, the tag, the held branch and the S1.3
+    reproduction's input set. **NEXT** stays at ordering step 3 and follows this pull request's
+    merge.
+- **Previous update (Session 35):** 2026-10-27 UTC (Session 35 — a session launched from `C:\Users\LEET` with the §6
   Session-N resume prompt verbatim followed by an owner note; SD15 disclosure first (HANDOFF
   Session 35, appended without reading the file, under a provisional header completed after
   ADR-0008 step 5); **not an examination** — the owner note carries program state, and Gate S2
@@ -604,7 +627,18 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 35):** ORIENT gate on the checkout `C:\Users\LEET\Syndeom`
+- **Current build verification (Session 36):** no separate ORIENT gate on main `f8d71b8`. Its
+  tree `35bb1439f4d7ac4ca54734ca61192ec4a68b3ff1` is the tree Session 35 gated GREEN on PR 21's
+  head `9dc0d1e` (run 2026-10-27T21:17:49Z–21:21:08Z, `gate-committed.json`, raw log SHA-256
+  `6cba5569…bc28`, under `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-20261027\`). During the work,
+  `cargo fmt --check`, `cargo clippy -D warnings` and the ingest crate's tests (15 + 5 + 7)
+  passed; `scripts/check_freeze.py` reported ALL PASS on the working tree (9 rows: 296 frozen
+  files byte-identical, no additions; both append-only prefixes intact), in about one second;
+  `scripts/check_freeze_test.py` passed 8 of 8. The commit carrying this amendment receives its
+  own full gate on its committed tree, with a clean working tree, recorded in its pull request
+  and under `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-freeze-20261027\`, not in the tree it
+  certifies.
+- **Session 35 build verification:** ORIENT gate on the checkout `C:\Users\LEET\Syndeom`
   at fetched `origin/main` `6d89eb2f8a138a53d824d035febffc93423e1e0d` (tree
   `93ded916fb8cbfaea21f7d2a2367f86415fe3fc9`) with one declared change, the SD15 disclosure
   appended to `PROGRAM/HANDOFF.md`: full gate, detached with a log, 2026-10-27T20:54:16Z–21:03:15Z,
@@ -924,6 +958,59 @@
   arithmetic by reference; contact artifacts carry `ground_truth: null`; real items get a derived
   canonical artifact per D4 (iii).
 
+## Freeze register
+
+Checked by the gate — `scripts/check_freeze.py`, with both directions tested by
+`scripts/check_freeze_test.py` (ADR-0012 *Amendments* 1; Al's direction of 2026-10-27). A
+**frozen** scope (a directory ending in `/`, or one file) is byte-identical to its version at the
+freeze point, with no file added or removed under it. An **append-only** file has both its version
+at the freeze point and its version on the default branch (`refs/remotes/origin/HEAD` as last
+fetched; ADR-0008) as exact prefixes. A freeze point is a tag or a full commit id. Every row is
+derived from this file's records, cited in the last column, and the S1 packets' freeze point is
+the `gate-s1-registration` tag by Al's direction; a scope this file records as unchanged without a
+freeze point is listed below the table and is **not checked** until Al rules. The register is a
+claim; the gate's run is the evidence. The table's rows must have exactly this column form, or
+the gate fails.
+
+| Path | Kind | Freeze point | Derived from |
+|---|---|---|---|
+| `analysis/s1-2/` | frozen | `gate-s1-registration` | the S1.2 packet (121 files): Gate S1 table, S1.2 row; "the frozen packets under `analysis/`" left byte-identical (Standing escalations, examination step 0 bullet, ADR-0009 D4); Bounds under NEXT |
+| `analysis/s1-3/` | frozen | `gate-s1-registration` | the S1.3 packet (17 files): "S1.3 orientation verification" bullet; the same frozen-packets records |
+| `analysis/s1-4/` | frozen | `gate-s1-registration` | "the frozen S1.4 packet" / "the frozen S1.4 report": Gate S1 table, S1.4 row ("reproducible and frozen"); Gate bullet; Previous update (Session 22); Standing escalations ("never rewrites … the frozen S1.4 packet") |
+| `analysis/s1-first-parent-status/` | frozen | `gate-s1-registration` | the first-parent proposal packet: "all 47 accepted packet files" byte-identical (Historical build verification, PR 8 readiness); Previous update (first-parent proposal) |
+| `analysis/s1-first-parent-integration/` | frozen | `gate-s1-registration` | the integration packet and "the retained report" (Updated bullet, Session 35; `preservation-inputs.json` among the records left byte-identical, ADR-0009 D4) |
+| `analysis/s1-post-merge-readiness/` | frozen | `gate-s1-registration` | "readiness packet … unchanged" (Previous update, Session 22); Historical build verification (PR 8 readiness) |
+| `analysis/s1-orientation-repair/` | frozen | `gate-s1-registration` | the orientation-repair event packet: its README among the records left byte-identical (ADR-0009 D4); Previous update (Session 23) |
+| `PROGRAM/HANDOFF.md` | append-only | `gate-s1-registration` | §3.6 append-only session log; "its HANDOFF append … is never erased or rewritten" (ADR-0008 bullet); "HANDOFF entries (append-only)" (examination step 0 bullet) |
+| `PROGRAM/SOURCES.md` | append-only | `gate-s1-registration` | "`PROGRAM/SOURCES.md` append-only (ADR-0010)" (S1.3 reproduction tool bullet); "SOURCES historical prefix unchanged" (Gate S1 table, licences row) |
+
+Awaiting a freeze point (recorded here as unchanged, immutable or digest-bound, but without a
+commit at which the record says they froze; listed in the pull request that adds this section,
+for Al's ruling; not checked):
+- `groundtruth/` — the accepted corpus, "35 archived representations, 32 effective logical items"
+  unchanged in every update since Session 23; `s1_ingest-v0.1.0-63e23a952084` "stays immutable".
+  Proposed: every item directory frozen at `gate-s1-registration` (the corpus at Gate S1's
+  closure; the S1.3 reproduction already byte-checks the 34 baseline item directories, hash-binds
+  the effective representation and refuses additions under `groundtruth/`, ADR-0012 D2);
+  `groundtruth/HARVEST-LOG.md` append-only (a later prefix appends rows; ADR-0003 D7, D8);
+  `groundtruth/README.md` append-only (the former tool's treatment); `groundtruth/derivations/`
+  frozen (the reviewed TeX derivation, ADR-0006).
+- `PROGRAM/SWEEP-2026-10.md` and `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md` — ferried
+  files whose identity is the digest this file records (Founding sweep and Advisory note
+  bullets); the tag's blobs carry exactly those digests. Proposed: frozen at
+  `gate-s1-registration`.
+- `sources/` — nine stored copies whose SHA-256 the source register records (SD11); re-hashed in
+  Session 6. Proposed: frozen at `gate-s1-registration`.
+- `PROGRAM/DECISIONS/ADR-0003.md` — "appended ADR-0003" (first-parent status support bullet);
+  its prefix was pinned by the S1.3 tool until ADR-0012. Proposed: append-only at
+  `gate-s1-registration`.
+- Not proposed: the 20 pair-producer inputs (pinned to `eb1b96d5…` for the replay range only;
+  two changed at ADR-0010 and two change at S2's first code commit — "S1.2 pair replay" bullet);
+  `PROGRAM/CLAIMS.md` and `PROGRAM/FLAWS.md` (append-only registers in §3's sense, but a CLAIM's
+  Status line and a FLAW example have been updated in place, so they are not byte-append-only);
+  the constitution, `LICENSE`, `LICENSES/`, `THIRD-PARTY-NOTICES.md` and `CITATION.cff` (change
+  only by ADR or by the deposit procedure); the other ADRs (Status lines and *Amendments* change).
+
 ## Memory policy
 
 SD15 adopts FRIEDMAN ADR-0003 D1–D3 and the conversation-context corollary; the corollary is
@@ -990,10 +1077,11 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   ADR-0010 relicense to PolyForm Noncommercial 1.0.0, with three preservation-check exceptions —
   written and accepted 2026-10-26 (Session 30); ADR-0011 the first generator family (S2.1) —
   written Session 34 (2026-10-27), decision only, accepted by Al's rulings 1–4 of 2026-10-27 on
-  PR 20, in effect since its merge (2026-10-27T20:28:10Z); **ADR-0012 the S1.3 effective-inventory
+  PR 20, in effect since its merge (2026-10-27T20:28:10Z); ADR-0012 the S1.3 effective-inventory
   reproduction's byte checks narrowed to its input set — written, implemented and measured
-  Session 35 (2026-10-27), proposed, awaiting Al's review of its pull request; ADR-0013 is the
-  next free number.**
+  Session 35 (2026-10-27), accepted at PR 21's merge (2026-10-27T21:36:26Z); **amended Session 36
+  (*Amendments* 1: the invariance test and the freeze register; awaiting Al's review of its pull
+  request); ADR-0013 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -1093,6 +1181,14 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 ## Standing escalations and dispositions
 
+- **Freeze register — awaiting Al's rulings (Session 36; the pull request carrying ADR-0012
+  *Amendments* 1):** (1) the scopes listed under *Awaiting a freeze point* in the Freeze
+  register section — `groundtruth/` (item directories frozen; `HARVEST-LOG.md` and `README.md`
+  append-only; `derivations/` frozen), the ferried sweep and advisory note, `sources/`, ADR-0003
+  — each with the executor's proposal, none checked until ruled; (2) two choices made in the
+  rows that are checked: a frozen scope refuses additions and removals as well as changes, and
+  the two append-only rows take `gate-s1-registration` as their freeze point. Both lists are in
+  the pull request's description.
 - **ADR-0011 — DECIDED by Al on 2026-10-27 (rulings 1–4 on PR 20, verbatim in ADR-0011
   *Amendments* and HANDOFF Session 34); PR 20 merged 2026-10-27T20:28:10Z, creating `main`
   `6d89eb2f8a138a53d824d035febffc93423e1e0d` (Session 35's orientation).** (1) Independence from the S1 corpus: no seed, grammar or template derived from
@@ -1241,9 +1337,10 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   Session 26's probe). **DONE — ADR-0012 (Session 35, 2026-10-27): the byte checks are limited to
   the reproduction's input set (79 of the 375 baseline files, derived from the baseline list), the
   four exceptions are replaced by the rule, and the pair-input comparison with the checkout is
-  removed; awaiting Al's review of its pull request. The population pin (35 archived
-  representations / 32 logical items) stands, so a later prefix still needs its own inventory
-  event (ADR-0012 D7).**
+  removed; on `main` since PR 21's merge (2026-10-27T21:36:26Z). The freeze register (ADR-0012
+  *Amendments* 1, Session 36) byte-checks the frozen packets and the append-only registers in
+  the gate, independently of the tool. The population pin (35 archived representations / 32
+  logical items) stands, so a later prefix still needs its own inventory event (ADR-0012 D7).**
 
 - **First-parent status support — accepted, verified and activated on main:**
   Al accepted the exact ruling on 2026-10-20 America/New_York; appended ADR-0003 and
@@ -1440,8 +1537,9 @@ Executable cold:
    <n> items, <verdicts>` on a branch, gate the committed tree, open a pull request; Al merges.
    Then step 4, ADR-0011's crate — only after Al rules on the review.
 
-If ADR-0012's pull request is still unmerged when this action is picked up, the review may
-proceed (it does not depend on the tool revision); the integration waits for both.
+ADR-0012 is on `main` (PR 21). If the pull request carrying its *Amendments* 1 (the freeze
+register, Session 36) is still unmerged when this action is picked up, the review may proceed;
+the integration waits for it.
 
 Bounds: the frozen packets, the registers, the constitution, the licence, the tag, the accepted
 corpus and the held branch's commits are untouched; nothing on the branch is approved by the

@@ -16,6 +16,14 @@ jobs:
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v5
+        with:
+          # The freeze check (scripts/check_freeze.py) reads the gate-s1-registration tag and
+          # refs/remotes/origin/HEAD; a shallow, tagless checkout has neither.
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Default-branch ref for the freeze check
+        run: git remote set-head origin -a
 
       - name: Install elan (Lean version from lean/lean-toolchain)
         run: |

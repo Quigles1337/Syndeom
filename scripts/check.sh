@@ -37,4 +37,8 @@ fi
 echo "== repo: register cross-reference check =="
 python -I -X utf8 scripts/check_registers.py "$ROOT"
 
+echo "== repo: freeze register (frozen scopes and append-only files; ADR-0012 amendment 1) =="
+python -I -X utf8 scripts/check_freeze.py "$ROOT"
+python -I -X utf8 scripts/check_freeze_test.py "$ROOT"
+
 echo "GATE: GREEN"
