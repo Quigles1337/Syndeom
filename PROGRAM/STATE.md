@@ -1,6 +1,35 @@
 # STATE
 
-- **Updated:** 2026-10-26 UTC (Session 28 — a fresh conversation launched with the §6 Session-N
+- **Updated:** 2026-10-26 UTC (Session 29 — **the Gate S1 cold-start examination: PASS; Gate S1
+  CLOSED; phase S2 opens**, effective on `main` when Al merges this session's pull request). A
+  fresh conversation with no prior turns, launched from `C:\Users\LEET` (not a git work tree; no
+  Git snapshot attached) with the §6 Session-N resume prompt in its ADR-0009 wording, verbatim and
+  alone. It opened as ADR-0009 prescribes: SD15 disclosure first, appended to HANDOFF without
+  reading it (2026-10-26T23:14:39Z), under a provisional header completed after the preflight
+  (HANDOFF Session 29). Its ADR-0008 preflight found the checkout **synchronized** with fetched
+  `origin/main` `e029c80e1be149bef8fe6ceb76eed59c235ed8b4`, tree
+  `67023777965d5747c5e3e5fe3f655825f658c046` (receipt
+  `C:\Users\LEET\Codex\Temp\syndeom-s1-cold-start-exam-20261026\preflight-orient.json`). **PR 14
+  (Session 28's record) merged** at 2026-10-26T22:35:49Z (18:35:49 America/New_York), merged by
+  Al, creating that main. Its parents are the PR's base `0afbbd1…` and its head
+  `fea670843d85212148be5995d244a97c83829d4e`, and its tree equals the head's, which Session 28's
+  staged-tree gate certified GREEN (receipt
+  `C:\Users\LEET\Codex\Temp\syndeom-session-28-launch-dir-20261026\gate-staged.json`). CI
+  pull_request run 40413519657 and push run 40413650650 both succeeded. Two later events are
+  recorded only in that external root and are reconciled here:
+  - the launch-directory hazard line Session 28 proposed was appended to the executor's SYNDEOM
+    memory file on Al's approval, after the merge (`memory-change.txt`; Memory policy below);
+  - four merged branches were deleted from `origin` on Al's instruction
+    (`deleted-branches-manifest.txt`); the held branch was kept.
+
+  The examination re-derived the program state from the repository in one pass. The ORIENT gate
+  was GREEN, and the S1.3 reproduction on a fresh clone printed `PASS: 35 archived
+  representations / 32 effective logical items`, differing from the retained inventory only in
+  `exact_files_checked` 370 → 369, as this file predicted. Every Gate S1 criterion has evidence
+  (table below). Three SD15 judgments were stated for Al's audit; **Al upheld all three on
+  2026-10-26** (Standing escalations, verbatim), so the PASS is not conditional. Registers, frozen
+  packets and the accepted corpus are unchanged.
+- **Previous update (Session 28):** 2026-10-26 UTC (Session 28 — a fresh conversation launched with the §6 Session-N
   resume prompt in its ADR-0009 wording, verbatim and alone, but **inside the checkout**
   `C:\Users\LEET\Syndeom`. Before its first action the harness attached a Git status and history
   snapshot (branch, `git status`, the last five commit subjects) to the conversation, which SD15
@@ -206,21 +235,25 @@
   position paper's §0 disclosure; memory hazard added. Session 10 recorded Al's rulings of
   2026-10-13 (ADR-0001 `/2`, ADR-0003 resolved, ADR-0005) and built the producer; Session 9
   decided ADR-0003; Session 8 closed R3; Session 7 recorded the earlier rulings)
-- **Phase:** S1 — GROUND-TRUTH CORPUS (real proofs as unit tests)
-- **Gate:** **S1 OPEN — ready for the separate cold-start examination; the readiness
-  reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are
-  on main. Session 25's attempt (2026-10-26) is ineligible — late SD15 disclosure, HANDOFF
-  Session 25 — and certifies nothing. ADR-0009 (2026-10-26) puts the disclosure first in the §6
-  Session-N prompt itself. Session 28 (2026-10-26) was launched inside the checkout, received the
-  harness's Git snapshot before its first action, and is not an examination (Memory policy).**
-  S1.1 has evidence for
-  the admitted unskipped prefix,
-  not an exhausted harvest (ADR-0003 D8). PR 4 admitted one positive statement-fidelity
-  pair; PR 5 merged the frozen S1.4 report; PR 6 archived the witness/proposal; the
-  owner accepted its exact ruling and PR 7 activated verified integration on main.
-  The criterion-by-criterion readiness assessment above carries all qualifications.
-  This is an informed session and cannot perform or certify the §2/SD15 examination.
-  Harvest resume at candidate 28 / `1403.6317` remains saved for a later harvest.
+- **Phase:** S2 — GENERATOR (entered 2026-10-26, Session 29, at Gate S1's closure; effective on
+  `main` at the merge of Session 29's pull request). S1 — GROUND-TRUTH CORPUS is closed on the
+  admitted prefix.
+- **Gate:** **S2 OPEN** (Gate S2 exit criteria below; nothing evidenced yet).
+  **Gate S1 CLOSED 2026-10-26 (Session 29):** the cold-start examination met every launch
+  condition. It was a fresh conversation launched from `C:\Users\LEET` with the §6 Session-N
+  prompt (ADR-0009 wording) verbatim and alone, and the SD15 disclosure came first. It re-derived
+  the program state from the repository in one pass without guessing, and found the gate GREEN at
+  `e029c80`; result **PASS**; record in HANDOFF Session 29, whose first entry is the disclosure.
+  The PASS rests on three SD15 judgments stated for Al's audit (Standing escalations). Earlier
+  attempts stay as recorded: Sessions 22 and 25 ineligible; Session 27 not cold; Session 28 not an
+  examination. S1.1 closed on the admitted unskipped prefix through candidate 27 / `1403.4485`,
+  not an exhausted harvest (ADR-0003 D8, Al's ruling (iii)). PR 4 admitted one positive
+  statement-fidelity pair; PR 5 merged the frozen S1.4 report; PR 6 archived the
+  witness/proposal; the owner accepted its exact ruling and PR 7 activated verified integration on
+  main. The criterion-by-criterion readiness assessment above carries all qualifications. Harvest
+  resume at candidate 28 / `1403.6317` remains saved; any later harvest is a later prefix under
+  its own gate record and never rewrites the Gate S1 table (ADR-0003 D8). The closed S1 table is
+  retained below as the record.
   **Gate S0 CLOSED 2026-10-13
   (Session 6):** the cold-start exam, run in a fresh conversation launched with the §6 prompt
   verbatim and alone, re-derived the program state from the repo in one pass without guessing and
@@ -309,7 +342,22 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 28):** no separate ORIENT gate on main `0afbbd1`. Its
+- **Current build verification (Session 29):** ORIENT gate on main
+  `e029c80e1be149bef8fe6ceb76eed59c235ed8b4` (tree `67023777965d5747c5e3e5fe3f655825f658c046`)
+  with one declared change, the unstaged SD15 disclosure appended to `PROGRAM/HANDOFF.md`: full
+  gate, detached with a log, 2026-10-26T23:16:58Z–23:25:02Z, exit 0 / `GATE: GREEN` — Lean 8,926
+  jobs, golden axioms `[propext]`, fmt/clippy, 82 Rust tests, 462 tracked files, Q 17 / SD 17 /
+  FLAW 14 / CLAIM 7 / S- 72. Receipt and raw log (SHA-256
+  `04c556afd76e90e3aacf940de3376087e9394c2832ab15118f581f37fb620943`) are under the external
+  root `C:\Users\LEET\Codex\Temp\syndeom-s1-cold-start-exam-20261026\` (`gate-orient.json`,
+  `gate-orient.raw.log`). The S1.3 effective-inventory reproduction ran on a fresh clone of
+  `origin` at `e029c80` (2026-10-26T23:25:45Z–23:25:50Z) and printed the expected `PASS`. Its
+  `inventory.json` (SHA-256 `df3a2c7f…a7f5`) differs from the retained one only in
+  `preservation.exact_files_checked` 370 → 369 (`repro-head/`, `repro-head.log` under the same
+  root). The commit that adds this bullet and HANDOFF Session 29 receives its own full gate on
+  its exact staged tree, recorded in its pull request and under the same root, not in the tree it
+  certifies.
+- **Session 28 build verification:** no separate ORIENT gate on main `0afbbd1`. Its
   tree `27106131f522357184171e19d0e0e51ba2f30d54` is the tree Session 27's staged-tree gate
   certified (2026-10-26T21:09:57Z–21:19:09Z, GREEN; `gate-staged.json`, raw log SHA-256
   `d6fd8942…79d1` re-hashed and matching, under
@@ -580,6 +628,15 @@ The launch directory also selects the memory store the harness loads:
 records a Git snapshot. The examination is launched from `C:\Users\LEET`, outside the checkout.
 Its disclosure records what the harness attached before the first action. No constitution or ADR
 text changes: this applies SD15 as written.
+**Hazard line added after PR 14 (2026-10-26; Al's approval):** the launch-directory hazard
+Session 28 proposed was appended to the executor's SYNDEOM memory file after PR 14 merged. The file
+went from SHA-256 `163c7b06…2787` to `ce2ce6de…2cc0`; the old bytes are an exact prefix, and the
+index is unchanged at `cd943842…fc69`. The record of the write is Session 28's external root
+(`memory-change.txt`). Session 29 disclosed the new file in full, diffed it against Session 28's
+reproduced copy (the only change is the appended five lines), and judged it a harness hazard, not
+program state, subject to Al's audit (Standing escalations). Session 29, launched from
+`C:\Users\LEET`, confirms the finding from the other side: the environment block read "Is a git
+repository: false", no Git snapshot was attached, and the `C--Users-LEET` index loaded.
 
 ## Standing rulings (recorded; their ADRs come later)
 
@@ -636,7 +693,19 @@ text changes: this applies SD15 as written.
   Retrieve one only when an S1 item or a later claim needs it; Gate S0's closure did not close
   this.
 
-## Gate S1 exit criteria
+## Gate S2 exit criteria — OPEN (opened 2026-10-26, Session 29)
+
+| Criterion | Status | Evidence |
+|---|---|---|
+| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **open** — ADR-0010 is the next action | — |
+| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **open** | — |
+| S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **open** | — |
+| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **open** | — |
+| Fidelity sweep report (commanded vs achieved flaw presence across the parameter grid, tolerances stated) | **open** | — |
+| Goldens green; lint and audit clean | **open** | — |
+| Cold-start test (§2, SD15) | **open** | — |
+
+## Gate S1 exit criteria — CLOSED 2026-10-26 (Session 29)
 
 | Criterion | Status | Evidence |
 |---|---|---|
@@ -645,8 +714,8 @@ text changes: this applies SD15 as written.
 | S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **35 archived representations (33 raw + two canonical), 32 effective logical items; 30 without canonical lengths. First-parent status support discharged on verified main by PR 7; fresh Rust reproduction and preservation evidence in `analysis/s1-post-merge-readiness/`. After ADR-0009 the reproduction gives the retained inventory byte-identical at main `3cd5558`, and at HEAD a PASS differing only in `preservation.exact_files_checked` 370 → 369 (bullet near the top of this file).** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; old raw retained; stable logical key resolves to accepted false/counterexample representation `s1_ingest-v0.1.0-15ab865466d6`; canonical selection/context/locator review still required; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` is the historical ledger. The later effective inventory records 35 representations / 32 logical items / 18 unflagged; current requirements and limits are mapped in `analysis/s1-post-merge-readiness/READINESS.md`. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. First-parent status support is discharged on verified main under the accepted scoped ruling. External bytes retain historical evidence and must be retrieved/reverified before scoring; the older dispositions and exclusions remain unchanged. |
-| Repo green under the gate | **standing** | Build status above |
-| Cold-start test (§2, SD15) | **OPEN — next examination; Session 25's attempt ineligible (late SD15 disclosure); Session 27, a §6 launch inside the conversation that built Session 26, not cold and not an attempt; Session 28, a fresh §6 launch inside the checkout that received the harness's Git snapshot before its first action, not an examination** | Separate genuinely fresh session launched from `C:\Users\LEET`, outside the checkout (launch-directory finding, Memory policy), with the constitution's §6 Session-N resume prompt (as amended by ADR-0009, disclosure first) verbatim and alone; the readiness reconciliation (PR 8), the orientation repair (PR 9) and the cold-start preparation (PR 10) are on main. `analysis/s1-post-merge-readiness/READINESS.md` records readiness, not an examination result. Session 25 (HANDOFF Session 25) disclosed after orienting and is not an examination result either; it is recorded as an unsuccessful attempt, like Session 22. |
+| Repo green under the gate | **done (and standing)** | ORIENT gate GREEN at `e029c80` plus the declared disclosure append, 2026-10-26T23:16:58Z–23:25:02Z (Current build verification above); the closing commit's staged-tree gate is recorded in its pull request |
+| Cold-start test (§2, SD15) | **done — PASS (Session 29, 2026-10-26)**; earlier: Sessions 22 and 25 ineligible attempts; Session 27 not cold; Session 28 not an examination | HANDOFF Session 29, whose first entry is the SD15 disclosure (index and memory file reproduced per ADR-0005; memory judged to hold no program state, for Al's audit). The session was a fresh conversation launched from `C:\Users\LEET` (no Git snapshot) with the §6 Session-N prompt (ADR-0009 wording) verbatim and alone. The ADR-0008 preflight found it synchronized at fetched `origin/main` `e029c80e1be149bef8fe6ceb76eed59c235ed8b4`, tree `67023777…`. It re-derived in one pass from the repository: phase and gate; S1.1 (harvest-log tally: 27 rows, 21 admitted yielding 31 items, 4 rejected, 2 found-but-unclassifiable; last `1403.4485`; ADR-0003 D8 prefix rule); S1.2; S1.3 (fresh-clone Rust reproduction `PASS: 35 / 32`, only `exact_files_checked` 370 → 369); S1.4 (prefix sentence, zero coverage, power statement); registers, pins, escalations and the next action. It compared these with this file: agreement, with three reconciliations of events after this file was written (PR 14's merge; the post-merge memory line and branch deletions recorded in Session 28's external root; the frozen packets' historical `gate_s1` fields). Gate GREEN (row above). The PASS rests on three SD15 judgments stated for Al's audit (Standing escalations). |
 
 ## Gate S0 exit criteria — CLOSED 2026-10-13 (Session 6)
 
@@ -665,7 +734,12 @@ text changes: this applies SD15 as written.
 
 ## Blockers
 
-- **Gate S1 remains OPEN for the genuine cold-start examination** (constitution §2,
+- **None for S2's first action.** Gate S1's last open criterion, the cold-start
+  examination, passed in Session 29 (2026-10-26). The closure takes effect on `main` at
+  the merge of that session's pull request and rests on the SD15 judgments under Standing
+  escalations. The paragraph below is the S1 blocker as it stood before the examination,
+  kept as the record.
+- *(Historical, before Session 29)* **Gate S1 remains OPEN for the genuine cold-start examination** (constitution §2,
   SD15, §4.1 and §6). No additional substantive S1 exit criterion is identified as
   unmet for the admitted prefix in `analysis/s1-post-merge-readiness/READINESS.md`.
   The first-parent status-support hold is discharged on verified main. The frozen
@@ -685,6 +759,40 @@ text changes: this applies SD15 as written.
 
 ## Standing escalations and dispositions
 
+- **SD15 audit request — Gate S1 examination (Session 29, 2026-10-26) — DECIDED by Al on
+  2026-10-26: all three judgments upheld; the PASS is not conditional.** Al's rulings,
+  transcribed verbatim from Al's message in the Session 29 conversation (also in HANDOFF
+  Session 29):
+
+  ~~~text
+  Rulings on your three judgments: I uphold all three.
+  1. The memory holds no program state, including the new hazard line, which records harness behavior only.
+  2. The test -f existence check is not a read of program state: the prompt names the file, and checking that it exists reveals nothing more.
+  3. Recording the other attached context after the disclosure is fine: none of it is memory, and none of it names this program or a sibling.
+
+  Order of work: keep NEXT at ADR-0010 per the phase order, with the held harvest review scheduled after it. I will rule on the Mnemosyne seed family when ADR-0010's draft is in front of me.
+  ~~~
+
+  The request as Session 29 wrote it: Al, please confirm or overrule three judgments on which
+  the PASS rests (HANDOFF Session 29):
+  1. no reproduced memory holds program state, including the launch-directory hazard appended
+     after PR 14 and the state-adjacent hazards the disclosure names;
+  2. the `test -f` existence check in the disclosure's append command is not a read of program
+     state;
+  3. recording the non-memory harness context (account e-mail, withheld; the tool catalogue; the
+     environment block) after the disclosure rather than in it does not affect eligibility.
+
+  If any is overruled, the examination becomes CONDITIONAL PASS. Gate S1's closure is then
+  provisional until a cold re-run, and memory is changed only in a non-exam session.
+- **Session 29's branch and pull request** (`claude/s1-session-29-cold-start-exam`) await Al's
+  review and merge; Gate S1's closure takes effect on `main` at the merge.
+- **Merged branches deleted (Al's instruction, 2026-10-26, after Session 28):**
+  `claude/s1-adr-0009-disclosure-first`, `claude/s1-session-25-exam-attempt`,
+  `claude/s1-session-27-sec6-launch` and `claude/s1-session-28-launch-directory`. Their tips are
+  recorded with restore commands in `deleted-branches-manifest.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-session-28-launch-dir-20261026\`. Session 29's
+  `git ls-remote --heads origin` lists only `main` and the held branch. Session 28's escalation on
+  those branches is closed.
 - **Examination step 0 — DECIDED by Al on 2026-10-26: ADR-0009, accepted with rulings 1–4 and
   additions 5–6 (transcribed verbatim in the ADR).** Options (a) and (b) together: SD15 and the §6
   Session-N prompt are amended so that every session launched with that prompt discloses first,
@@ -722,6 +830,12 @@ text changes: this applies SD15 as written.
   meet ADR-0003 D2.3. They were recorded as nonblocking and remain undecided. Exact IDs,
   evidence and analysis consequences: `analysis/s1-4/config/dispositions.json` and
   `analysis/s1-4/OBLIGATIONS.md`. Nothing is relabeled or newly harvested.
+- **Held branch now eligible for review (Session 29):** decision 1 below deferred the held
+  branch's admission review "until after Gate S1 closes". With Gate S1 closed (at the merge of
+  Session 29's pull request), the review is eligible. **Order decided by Al on 2026-10-26
+  (verbatim in the SD15 audit bullet above): NEXT stays at ADR-0010 per the phase order, with
+  the held harvest review scheduled after it.** Nothing on the branch is approved by this
+  eligibility.
 - **Later harvest held off main — DECIDED by Al on 2026-10-21 (decision 1, transcribed in
   `analysis/s1-orientation-repair/OWNER-DECISIONS.md`): preserve branch
   `claude/s1-harvest-candidates-28-30` at its original recorded commit
@@ -853,58 +967,45 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**After Session 28 the action is unchanged, except that it now names the launch directory.** The next action
-is the Gate S1 cold-start examination in a separate fresh session:
-- **a new conversation that holds no transcript of earlier sessions;**
-- **launched from `C:\Users\LEET`, outside the checkout, as Sessions 6, 7, 25 and 27 were;**
-- with the constitution's §6 Session-N resume prompt **as amended by ADR-0009**, verbatim and
-  alone;
-- opened per ADR-0008 D1.
+**S2.1 — write `PROGRAM/DECISIONS/ADR-0010.md`, the first generator family's design. The
+session decides only; it writes no generator code.** Gate S1 closed in Session 29 (cold-start
+examination PASS, effective at the merge of its pull request), and phase S2 opens with the ADR
+the standing rulings reserve ("ADR at S2"). If that pull request is not yet merged when this
+action is picked up, stop: the closure is not on `main`, and the only action is to ask Al.
 
-A session launched inside the checkout (`C:\Users\LEET\Syndeom`) receives a Git status and
-history snapshot from the harness before its first action, so it can never be an examination
-(Session 28; Memory policy). The examination's disclosure records what the harness attached
-before the first action. If a Git snapshot of this repository is among it, the session is not an
-examination. Session 27 showed that
-the same prompt pasted into a conversation that already holds the program's state yields a
-procedurally complete disclosure and a session that is still not cold (SD15's corollary).
-The prompt's first sentence now instructs the SD15 disclosure as the session's first action:
-read the constitution and ADR-0005 in full, read and hash the executor memory, and append the
-disclosure to `PROGRAM/HANDOFF.md` without reading that file (a shell append or a script), under
-a provisional block header completed after the preflight — before any other command or read.
-Sessions 22 and 25 were ineligible attempts (HANDOFF). An examiner who reruns the S1.3
-effective-inventory reproduction gets the retained `inventory.json` byte-identical at `3cd5558`,
-and at HEAD a PASS whose output differs only in `preservation.exact_files_checked`, 370 → 369
-(bullet near the top of this file).
+The ADR decides, under constitution §2 S2 and the standing rulings in this file:
+- (a) **the one shared interface** behind which the four S2.1 modules sit: the informal proof
+  generator, the Lean 4 formal-variant generator, the flaw injector and the padding module
+  (FLAW-0013);
+- (b) **the first family is deterministic** — seeded Rust templates and grammars. Any
+  LLM-assisted generator is a separate family needing its own ADR under SD6 and is excluded from
+  `battery-freeze-v1` without it (standing ruling);
+- (c) **the dial schema** — every FLAWS.md `0.1.0` recipe as a dial (presence, location,
+  severity), and the padding ratio;
+- (d) **commanded vs achieved statistics** (tokens, steps, lemmas, flaws per class, severity,
+  padding ratio) and **the per-artifact fidelity verdict** (S2.2). For Lean-catchable flaws the
+  kernel or tooling must reject the formal variant exactly as predicted; for the others, a
+  recorded check. FAIL artifacts are kept as findings;
+- (e) **manifests** under `syndeom-manifest/2` (ADR-0001): `origin: synthetic`, derivation
+  `by-construction`, ids with `-s<seed>`, and the `corpus_id` invariant tested (S2.3);
+- (f) **verification** (S2.4): property tests; goldens from the FLAWS.md examples; `cargo clippy`
+  at deny-warnings; `cargo audit`;
+- (g) **placement** — a new `engine/` workspace member, and any new dependency pins with their
+  licences (SD16), read from the tools and the registry, never assumed (SD7);
+- (h) **flagged for Al, not decided:** whether R4's Mnemosyne-derived seed family enters as a
+  candidate golden family, and its licence line under the R1 release boundary (ADR-0000
+  Addendum 2).
 
-**The readiness reconciliation (PR 8), the orientation repair (PR 9), the cold-start
-preparation (PR 10), Session 25's record (PR 11) and ADR-0009 (PR 12) are on main. A
-separate genuinely fresh session should attempt Gate S1's cold-start examination under
-§2/SD15 using the constitution's
-§6 Session-N resume prompt verbatim and alone.** Launch without a state-bearing
-preamble, handoff or extra task text; a full-history continuation or subagent is
-not cold. The session must honor SD15 disclosure, reconstruct from the repo via
-§4.1, run the required checks and determine whether every criterion supports closure.
-This readiness assessment is not a PASS; Gate S1 remains OPEN until that examination.
-The examination opens per **ADR-0008 D1** (the governing orientation amendment, bullet above):
-step 0, the SD15 disclosure appended to HANDOFF without reading it, before any orientation
-command (ADR-0005; ADR-0009); then
-steps 1–5, `python -I -X utf8 scripts/orient_preflight.py orient --expect-url
-https://github.com/Quigles1337/Syndeom.git --allow-dirty PROGRAM/HANDOFF.md --receipt <file>`
-(launched from `C:\Users\LEET`, name the script by its full path and add `--repo
-C:/Users/LEET/Syndeom`, as Session 28 ran it; a failed fetch stops the session; a checkout that is not the fetched tip is examined from an
-isolated worktree); the examination's record states the fetched `origin/main` SHA and tree and
-the examined checkout. Session 22 showed that an unfetched working copy reproduces a stale state
-and passes §4.1 silently; its attempt stays recorded as unsuccessful. Preparing a synchronized
-clean checkout beforehand (ADR-0008 D3) is not part of the examination, and this file makes no
-claim about any local checkout's branch or position: the examination establishes its own
-snapshot with its own preflight and records the fetched SHA it verified.
+Read first: constitution §2 S2; `PROGRAM/FLAWS.md` (every recipe and example); ADR-0001
+(manifest schema); ADR-0002 (toolchain, gate); the Standing rulings section of this file.
+Interface with the siblings only through the manifest schema already pinned in ADR-0001 (SD14);
+never import their code. Open the session per ADR-0008 D1, preceded by the SD15 disclosure if it
+is launched with the §6 prompt. Commit `[S2][ADR-0010] decide the first generator family` on a
+branch, run the staged-tree gate before the commit, and open a pull request; Al merges.
 
-The seven truth/seven severity/unnamed-result questions keep their existing
-dispositions and exclusions. Missing lengths and external-byte verification remain
-scoring prerequisites; canonical production needs selection, context and locator
-review. The frozen S1.4 packet and bins remain historical. Harvest stays paused
-through candidate 27 / `1403.4485`, with candidate 28 / `1403.6317` saved for later; a later
-harvest of candidates 28–30 is preserved on branch `claude/s1-harvest-candidates-28-30` at
-`c3a3d36` for admission review after Gate S1 closes (Al's decision 1, dispositions above) and is
-not part of the state under examination.
+**Ordering note:** the held harvest branch's admission review is now eligible (Al's decision 1;
+Standing escalations). Al ruled on 2026-10-26 (verbatim under Standing escalations): NEXT stays at
+ADR-0010 per the phase order, with the held harvest review scheduled after it. The harvest itself stays paused through candidate 27 / `1403.4485`, with
+candidate 28 / `1403.6317` saved. The seven truth questions, the seven severity questions and the
+unnamed-result question keep their existing dispositions. Missing canonical lengths and
+external-byte verification remain prerequisites for scoring real items (S4), not for S2.
