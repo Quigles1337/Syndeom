@@ -293,3 +293,83 @@ fn additions_under_groundtruth_fail_and_additions_elsewhere_pass() {
         passes(&blobs);
     }
 }
+
+/// The working tree's bytes for every baseline file plus the files the one-case validation
+/// reads that are not baseline files (as `first_parent_amendment.rs` loads them).
+fn fixture_with_case() -> Blobs {
+    let repo = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    let mut blobs = fixture();
+    for p in [
+        MAP.to_string(),
+        format!("{PACKET}/OWNER-DECISION.md"),
+        manifest_path(NEW),
+        format!("groundtruth/{NEW}/RECORD.md"),
+        format!("groundtruth/{NEW}/original-0706.0357v70.tar.gz"),
+    ] {
+        let b = std::fs::read(repo.join(&p)).unwrap_or_else(|e| panic!("{p}: {e}"));
+        blobs.insert(p, b);
+    }
+    blobs
+}
+
+const ADR_MARKER: &str =
+    "### 2026-10-20 America/New_York — accepted first-parent D3/SD12 exception";
+const HANDOFF_MARKER: &str =
+    "OWNER DECISION EVENT: 2026-10-20 America/New_York — accepted first-parent amendment";
+
+/// One in-memory mutation of one path of the working tree.
+type Mutation<'a> = &'a dyn Fn(&mut Blobs, &str);
+
+#[test]
+fn inventory_is_byte_identical_under_every_outside_mutation() {
+    // ADR-0012 amendment 1: the property that makes the narrowing safe. With every file outside
+    // the input set mutated as the tests above mutate them — appended, flipped, rewritten,
+    // removed — and files added outside `groundtruth/`, the whole report is byte-identical, the
+    // `preservation` object included (it is derived from the baseline list, not from the
+    // mutated files). The two acceptance-marker files are rewritten to their marker alone and are
+    // not removed, because `validate_case` requires the markers: that is the acceptance binding,
+    // not preservation.
+    let expected = serde_json::to_vec_pretty(&inventory(&fixture_with_case()).unwrap()).unwrap();
+    let marker_text = |path: &str| -> Option<String> {
+        match path {
+            "PROGRAM/DECISIONS/ADR-0003.md" => Some(format!("{ADR_MARKER}\n")),
+            "PROGRAM/HANDOFF.md" => Some(format!("{HANDOFF_MARKER}\n")),
+            _ => None,
+        }
+    };
+    let worlds: [(&str, Mutation); 4] = [
+        ("appended", &|b, p| b.get_mut(p).unwrap().push(b' ')),
+        ("flipped", &|b, p| b.get_mut(p).unwrap()[0] ^= 1),
+        ("rewritten", &|b, p| {
+            let text = marker_text(p).unwrap_or_else(|| "any text at all\n".into());
+            b.insert(p.into(), text.into_bytes());
+        }),
+        ("removed", &|b, p| {
+            if marker_text(p).is_none() {
+                b.remove(p);
+            }
+        }),
+    ];
+    for (label, mutate) in worlds {
+        let mut blobs = fixture_with_case();
+        for path in OUTSIDE {
+            mutate(&mut blobs, path);
+        }
+        blobs.insert("analysis/s1-4/new-receipt.json".into(), b"{}".to_vec());
+        blobs.insert("PROGRAM/DECISIONS/ADR-0013.md".into(), b"{}".to_vec());
+        blobs.insert("engine/generate/src/lib.rs".into(), b"{}".to_vec());
+        let actual = serde_json::to_vec_pretty(&inventory(&blobs).unwrap()).unwrap();
+        assert!(
+            actual == expected,
+            "the report changed under the {label} world"
+        );
+    }
+    // A byte inside the input set still stops the whole report.
+    let mut blobs = fixture_with_case();
+    blobs.get_mut("PROGRAM/FLAWS.md").unwrap().push(b' ');
+    assert!(
+        inventory(&blobs)
+            .unwrap_err()
+            .contains("historical bytes changed")
+    );
+}
