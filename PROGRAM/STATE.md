@@ -1,6 +1,34 @@
 # STATE
 
-- **Updated:** 2026-10-27 UTC (Session 30 — an informed working session, not an examination,
+- **Updated:** 2026-10-27 UTC (Session 31 — an informed working session, not an examination,
+  continuing Session 30's conversation at Al's direction; not launched with the §6 prompt, so no
+  SD15 disclosure): **third-party notices and the Apache-2.0 text, ahead of the Gate S1
+  registration deposit (Al's rulings of 2026-10-27; ADR-0010 *Amendments*).**
+  - **Orientation:** the ADR-0008 preflight (receipt
+    `C:\Users\LEET\Codex\Temp\syndeom-registration-licence-20261027\orient-1-sync.json`)
+    fast-forwarded the clean `main` to fetched `origin/main`
+    `368bcfb5c05c23536a32bfc15b9537173fb0fef7`, tree `d33402ca2bfa0efcee577b2855b0741c07cdbe6e`.
+    That is **PR 16's merge** (2026-10-27T02:09:06Z, by Al). Its tree equals the PR's head tree,
+    which Session 30 gated GREEN.
+  - **The audit**, file by file against the SD16 records at `368bcfb`, found:
+    - one file whose recorded rights permit no redistribution (the advisory note, R1(b));
+    - one CC BY-NC 4.0 copy (S-0005);
+    - Apache-2.0 files, with no Apache-2.0 text in the tree;
+    - 30 ground-truth items whose derived records had no licence recorded for themselves.
+  - **Added:**
+    - `LICENSES/Apache-2.0.txt`: S-0019's text, fetched again from SPDX. Its SHA-256 equals
+      S-0019's record, and it is byte-identical to `LICENSE` through `c9372b1`.
+    - `THIRD-PARTY-NOTICES.md`: every file not under PolyForm, with its licence and attribution.
+    - A pointer in README § Licence, and an S-0019 addendum (no new S-number).
+  - **The registration deposit** (rulings 1, 2 and 4) follows this pull request's merge (Standing
+    escalations):
+    - the tag `gate-s1-registration` on the merge commit;
+    - a zip from the tag that excludes the advisory note and the Leiden PDF.
+  - **Unchanged:**
+    - the licence (ADR-0010 D1–D7) and the preservation tool;
+    - registers' statuses, manifests, frozen packets and the accepted corpus;
+    - NEXT.
+- **Previous update (Session 30):** 2026-10-27 UTC (Session 30 — an informed working session, not an examination,
   continuing the conversation of Session 29 at Al's direction): **ADR-0010, the relicense to the
   PolyForm Noncommercial License 1.0.0, accepted by Al on 2026-10-26 with rulings C1–C5.**
   - **Orientation:** the ADR-0008 preflight (receipt
@@ -318,7 +346,10 @@
   It was Apache-2.0 from Session 7 through `c9372b1` (Q3, ADR-0000 Addendum 2 R1; text S-0019),
   and copies obtained under Apache-2.0 remain under it. The release boundary (third-party
   material; DARQ Labs proprietary material) is carried forward and stated in README.md §
-  Licence.
+  Licence. **Since Session 31 (Al's rulings of 2026-10-27; ADR-0010 *Amendments*):**
+  - `THIRD-PARTY-NOTICES.md` lists every file not under PolyForm, with its licence and
+    attribution;
+  - `LICENSES/Apache-2.0.txt` holds the Apache-2.0 text (S-0019 addendum) for the files under it.
   **ORIENT note (SD7):** `git symbolic-ref refs/remotes/origin/HEAD` resolves to `main`; if it ever
   fails, fallback `git remote show origin`, repair `git remote set-head origin -a`.
   **Fetch first (Session 22, 2026-10-21):** run `git fetch origin` before §4.1's `git status` /
@@ -453,7 +484,17 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 30):** no separate ORIENT gate on main `c9372b1`. Its
+- **Current build verification (Session 31):** no separate ORIENT gate on main `368bcfb`. Its
+  tree `d33402ca2bfa0efcee577b2855b0741c07cdbe6e` is the tree Session 30 gated GREEN on PR 16's
+  head `0470684`:
+  - run 2026-10-27T01:32:57Z–01:42:06Z, recorded in `gate-committed-2.json`;
+  - raw log SHA-256 `dadddea6…7594`, under `C:\Users\LEET\Codex\Temp\syndeom-relicense-20261026\`.
+
+  The commit adding the notices receives a full gate on the exact tree it commits. That gate is
+  recorded in its pull request and under
+  `C:\Users\LEET\Codex\Temp\syndeom-registration-licence-20261027\`, not in the tree it
+  certifies.
+- **Session 30 build verification:** no separate ORIENT gate on main `c9372b1`. Its
   tree `4caa81f0c56416a02830d19d4a11eb45c9c4a9f4` is the tree Session 29 gated GREEN on its
   committed rulings commit `6b3dbda` (2026-10-27T00:00:33Z–00:08:28Z; `gate-committed.json`,
   raw log SHA-256 `437716ec…58f7`, under
@@ -881,6 +922,18 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 ## Standing escalations and dispositions
 
+- **Gate S1 registration deposit — Al's rulings of 2026-10-27 (ADR-0010 *Amendments*); pending
+  the merge of Session 31's pull request.** Al is publishing a design registration of SYNDEOM on
+  Zenodo. After that pull request merges:
+  - **The tag.** The executor tags the merge commit `gate-s1-registration`, annotated, with the
+    message "SYNDEOM design registration at Gate S1 closure", and pushes it. No GitHub release.
+  - **The archive.** It builds `git archive --format=zip --prefix=Syndeom-gate-s1-registration/`
+    from the tag, outside the repository. The archive **excludes** two files:
+    - `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md` (proprietary, R1(b));
+    - `sources/leiden-declaration-2026-06-02-zenodo-20302944.pdf` (CC BY-NC 4.0; S-0005 keeps its
+      locator and SHA-256).
+  - **The report.** The archive's path, size, SHA-256, MD5 and its file list compared with the
+    tag's tree go to Al and are recorded outside the tree. Al makes the deposit.
 - **SD15 audit request — Gate S1 examination (Session 29, 2026-10-26) — DECIDED by Al on
   2026-10-26: all three judgments upheld; the PASS is not conditional.** Al's rulings,
   transcribed verbatim from Al's message in the Session 29 conversation (also in HANDOFF
@@ -1024,6 +1077,8 @@ ADR-0010 registered S-0073**), so every config hash, artifact id, record, log ro
   (`www.apache.org`) refused connections from both tools throughout Session 7, so the committed
   text is the SPDX License List's rendering, cross-checked whitespace-for-whitespace against an
   independent copy (S-0019); a later session can diff it against the ASF file when the host answers.
+  Session 31 (2026-10-27): the host still refused connections. The same SPDX text, fetched again
+  and equal to S-0019's digest, is now `LICENSES/Apache-2.0.txt` (S-0019 addendum).
 - **Advisory note ferry (Al's ruling R3 of 2026-10-13) — RESOLVED 2026-10-13 (Session 8).** In
   Session 7 the file was absent and a mid-session paste hashed to 25,652 bytes /
   `0ee1eda0…baa80` (lossy chat rendering), so the executor stopped and escalated. Al then placed
