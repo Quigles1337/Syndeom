@@ -232,37 +232,45 @@ fn extra_raw_item_cannot_silently_double_count_this_lemma() {
 }
 
 #[test]
-fn complete_historical_object_packets_and_bins_are_immutable() {
+fn accepted_inputs_in_every_scope_are_immutable() {
+    // ADR-0012: the input set spans the corpus, the accepted candidate packet and the S1.4
+    // dispositions overlay; a byte added to any read file fails in each scope.
     let f = frozen().unwrap();
-    for prefix in [
-        format!("groundtruth/{OLD}/"),
-        "analysis/s1-first-parent-status/".into(),
-        "analysis/s1-4/".into(),
-        "engine/pair/".into(),
+    for path in [
+        manifest_path(OLD),
+        format!("groundtruth/{OLD}/RECORD.md"),
+        WITNESS.into(),
+        CANDIDATE_CONFIG.into(),
+        format!("{}manifest.json", candidate_dir()),
+        DISPOSITIONS.into(),
+        "PROGRAM/FLAWS.md".into(),
     ] {
-        let path = f.files.keys().find(|p| p.starts_with(&prefix)).unwrap();
         let mut blobs = fixture();
-        blobs.get_mut(path).unwrap().push(b' ');
+        blobs.get_mut(&path).unwrap().push(b' ');
         assert!(
             preserve(&blobs, &f)
                 .unwrap_err()
-                .contains("historical bytes changed")
+                .contains("historical bytes changed"),
+            "{path}"
         );
     }
     let mut blobs = fixture();
-    blobs.insert("analysis/s1-4/new-receipt.json".into(), b"{}".to_vec());
+    blobs.insert(
+        "groundtruth/unreviewed-item/RECORD.md".into(),
+        b"{}".to_vec(),
+    );
     assert!(preserve(&blobs, &f).is_err());
 }
 
 #[test]
-fn append_only_history_preserves_exact_baseline_prefix() {
+fn history_outside_the_acceptance_markers_is_not_pinned() {
+    // ADR-0012: HANDOFF and ADR-0003 are read only for the acceptance markers, which
+    // `validate_case` requires; their other bytes are outside the input set.
     let mut blobs = fixture();
     blobs.get_mut("PROGRAM/HANDOFF.md").unwrap()[0] ^= 1;
-    assert!(
-        preserve(&blobs, &frozen().unwrap())
-            .unwrap_err()
-            .contains("historical bytes changed")
-    );
+    blobs.get_mut("PROGRAM/DECISIONS/ADR-0003.md").unwrap()[0] ^= 1;
+    preserve(&blobs, &frozen().unwrap()).unwrap();
+    validate_case(&blobs).unwrap();
 }
 
 #[test]
