@@ -1,6 +1,42 @@
 # STATE
 
-- **Updated:** 2026-10-27 UTC (Session 33 — an informed working session, not an examination,
+- **Updated:** 2026-10-27 UTC (Session 34 — a session launched from `C:\Users\LEET` with the §6
+  Session-N resume prompt verbatim; SD15 disclosure first (HANDOFF Session 34, appended without
+  reading the file, under a provisional header completed after ADR-0008 step 5); **not an
+  examination** — Gate S2 has nothing to examine, which the session could establish only after
+  orienting; it certifies nothing): **ADR-0011, the first generator family's design, written —
+  decision only, no code (S2.1; STATE's NEXT as it stood).**
+  - **Orientation:** the ADR-0008 preflight found the checkout `C:\Users\LEET\Syndeom` on branch
+    `claude/s2-citation-cff` at `8ae94316f327194da86e3ce64b58d2573987e325`, **behind** fetched
+    `origin/main` `a741ebf956be0bd87ebf1b606f0b9c6df1853043` (**PR 19's merge**, by Al; the same
+    tree `a5e7df5488530c560ab7ec9eb608037f92a03820`, which Session 33 gated GREEN on `8ae9431`),
+    with the disclosure append the only change. Not on the default branch, so no fast-forward:
+    the preflight created the isolated worktree `C:\Users\LEET\Syndeom-wt-20261027` at the fetched
+    tip (exit 0, `SNAPSHOT-ESTABLISHED-IN-WORKTREE`; receipts `orient-1-worktree-refused.json` and
+    `orient-2-worktree.json` under `C:\Users\LEET\Codex\Temp\syndeom-adr-0011-20261027\`), and the
+    disclosure was carried into it as the first action there (ADR-0008 D3). The original
+    checkout's append stands uncommitted (Standing escalations).
+  - **ADR-0011** (`PROGRAM/DECISIONS/ADR-0011.md`, proposed): one plan data structure as the shared
+    interface behind the four S2.1 modules; two producers, `s2_template` (hand-authored seed
+    theorems — the FLAWS.md examples — with aligned informal and formal proofs) and `s2_grammar`
+    (derivation grammars with a commanded length); `syndeom-rng/1`, specified in the ADR, no new
+    dependency; one dial per FLAWS.md `0.1.0` recipe with its kernel or tooling confirmation
+    check; commanded and achieved keys with tolerances; `syndeom-manifest/2` manifests with
+    `regenerable` storage; goldens from the FLAWS.md examples; `cargo audit` outside the offline
+    gate; the crate `engine/generate/` under PolyForm, implemented only after the byte-check
+    narrowing. **D12 flags for Al, undecided:** whether the R4 Mnemosyne-derived seed family
+    enters, and its licence line under R1(b).
+  - **Unchanged:** registers' statuses, manifests, frozen packets, the accepted corpus, the
+    constitution, the licence and the tag. **NEXT** moves to ordering step 2, the narrowing.
+  - **Al's rulings on PR 20 (2026-10-27; a second commit on the same branch, verbatim in ADR-0011
+    *Amendments* and HANDOFF Session 34):** (1) independence from the S1 corpus — no seed, grammar
+    or template derived from any `groundtruth/` item; every seed record states its source;
+    binding on later producer versions (ADR-0011 D6); (2) the R4 seed family stays out of this
+    repository, option (iii) (D12); (3) the non-blocking clarifications accepted as recorded, the
+    `scripts/check.sh` and `lean/Audit.lean` edits after the narrowing with their own review;
+    (4) housekeeping for the first session after the merge (Standing escalations; NEXT).
+    **ADR-0011 is accepted, in effect at the merge.**
+- **Previous update (Session 33):** 2026-10-27 UTC (Session 33 — an informed working session, not an examination,
   continuing Session 32's conversation at Al's direction; not launched with the §6 prompt, so no
   SD15 disclosure): **`CITATION.cff` added, and its refresh joins the deposit procedure, before
   the tag (Al's ruling of 2026-10-27, Al's rulings on PR 19's two calls and Al's ruling on the
@@ -529,7 +565,17 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 33):** no separate ORIENT gate on main `99bdf03`. Its
+- **Current build verification (Session 34):** ORIENT gate on the examined worktree at fetched
+  `origin/main` `a741ebf956be0bd87ebf1b606f0b9c6df1853043` (tree
+  `a5e7df5488530c560ab7ec9eb608037f92a03820`) with one declared change, the carried SD15
+  disclosure appended to `PROGRAM/HANDOFF.md`: full gate, detached with a log, 2026-10-27T19:30:55Z–19:41:28Z, exit 0 / `GATE: GREEN` — Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, 88 Rust tests, 467 tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 73 (raw log SHA-256 `245980cdba01e84de7541471091b0b74a3a9b3b4b55156ec0a0364e06778067e`). Receipt and raw log are under the
+  external root `C:\Users\LEET\Codex\Temp\syndeom-adr-0011-20261027\` (`gate-orient.raw.log`,
+  `gate-orient.json`). The Rust reproduction was not rerun: this session changes only `PROGRAM/`
+  text. Each of this pull request's commits (adding ADR-0011, then recording Al's rulings on PR
+  20) receives its own full gate on its committed tree, with a clean working tree, recorded in
+  the pull request and under the same root (`gate-committed.json`, `gate-committed-2.json`), not
+  in the tree it certifies.
+- **Session 33 build verification:** no separate ORIENT gate on main `99bdf03`. Its
   tree `c063cc6589fc4f5d7605690ae7103cbd87993f5c` is the tree Session 32 gated GREEN on PR 18's
   head `d1e4d75`:
   - run 2026-10-27T05:46:42Z–05:57:09Z, recorded in `gate-committed.json`;
@@ -888,8 +934,10 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   §4.1 — written and accepted 2026-10-21 (Session 23); ADR-0009 constitution amendment to SD15
   and the §6 Session-N prompt (disclosure first) — written and accepted 2026-10-26 (Session 26);
   ADR-0010 relicense to PolyForm Noncommercial 1.0.0, with three preservation-check exceptions —
-  written and accepted 2026-10-26 (Session 30). **ADR-0011 is the S2 generator decision (NEXT);
-  ADR-0012 is the next free number.**
+  written and accepted 2026-10-26 (Session 30); **ADR-0011 the first generator family (S2.1) —
+  written Session 34 (2026-10-27), decision only, accepted by Al's rulings 1–4 of 2026-10-27 on
+  PR 20 (in effect at the merge); ADR-0012 is the next free number, reserved by NEXT for the
+  byte-check narrowing.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -927,7 +975,7 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **open** — ADR-0011 (decision only) is the next action; the byte-check narrowing precedes any S2 code | — |
+| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*) |
 | S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **open** | — |
 | S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **open** | — |
 | S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **open** | — |
@@ -989,6 +1037,29 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 ## Standing escalations and dispositions
 
+- **ADR-0011 — DECIDED by Al on 2026-10-27 (rulings 1–4 on PR 20, verbatim in ADR-0011
+  *Amendments* and HANDOFF Session 34); the pull request (branch `claude/s2-adr-0011-generator`)
+  awaits merge.** (1) Independence from the S1 corpus: no seed, grammar or template derived from
+  any item under `groundtruth/`, which is what the frozen battery is validated against in S4;
+  seeds come from FLAWS.md or other material outside the S1 corpus, and every seed record states
+  its source; binding on later producer versions (ADR-0011 D6). (2) D12 (h1)/(h2): option (iii) —
+  the R4 Mnemosyne-derived family stays out of this repository as a private fixture under an
+  external root, for private pipeline tests only, never calibration data, never in the public
+  goldens, the seeds directory or any artifact here; making it public would be its own
+  amendment. (3) The non-blocking clarifications are accepted as recorded; the
+  `scripts/check.sh` and `lean/Audit.lean` edits come after the narrowing and get their own
+  review. (4) Housekeeping, next bullet. Nothing else is awaited from Al on ADR-0011.
+- **Two checkouts — Al's instruction (ruling 4 of 2026-10-27) for the first session after PR 20's
+  merge:** remove the worktree `C:\Users\LEET\Syndeom-wt-20261027`; in the original checkout
+  `C:\Users\LEET\Syndeom` (branch `claude/s2-citation-cff` at `8ae9431`), confirm the uncommitted
+  `PROGRAM/HANDOFF.md` append is the same disclosure now committed by comparing the body's
+  SHA-256 — the committed body, from the `MEMORY DISCLOSURE (SD15 as amended …` line through the
+  `Conversation-context corollary` line, is
+  `36dda70ceeb161b49069dfca5b43bf85be77f584fbdd4ddfc89792e83eb88d2f` (14,931 bytes; the original
+  append's whole entry, provisional header included, was 15,108 bytes, `ef8239fd…9429`) — then
+  discard it. Al's ruling authorizes that discard: ADR-0008's prohibition covers undeclared work,
+  and this append is declared, verified and committed. Not done in Session 34, because the merge
+  had not happened.
 - **Gate S1 registration deposit — DONE: published on Zenodo on 2026-10-27** (Al's rulings of
   2026-10-27, ADR-0010 *Amendments*; HANDOFF Session 32). Nothing awaited.
   - **The tag.** `gate-s1-registration`, annotated, with the message "SYNDEOM design registration
@@ -1108,7 +1179,8 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   which are frozen exact files and two of the 20 pinned pair-producer inputs, so the current
   check would turn the gate RED. Still exact-checked today: every other non-input file in the
   baseline, ADR-0005 and SIBLING-MAP among them (an edit to ADR-0005 failed the reproduction in
-  Session 26's probe).
+  Session 26's probe). **It is the next action (Session 34): NEXT-SINGLE-ACTION below, recorded
+  as ADR-0012.**
 
 - **First-parent status support — accepted, verified and activated on main:**
   Al accepted the exact ruling on 2026-10-20 America/New_York; appended ADR-0003 and
@@ -1270,54 +1342,52 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2.1 — write `PROGRAM/DECISIONS/ADR-0011.md`, the first generator family's design. The
-session decides only; it writes no generator code.** (ADR-0010 took the number 0010 for the
-relicense; this is the decision STATE's NEXT previously called ADR-0010.) If the pull request
-carrying ADR-0010 is not yet merged when this action is picked up, stop and ask Al: the
-numbering and the preservation-check exceptions are not on `main`.
+**S2 ordering step 2 — the full narrowing of the S1.3 effective-inventory reproduction tool's
+byte checks, decided and recorded as ADR-0012.** It lands before any S2 code, including
+ADR-0011's crate (ADR-0010 D7; Al, 2026-10-26). The session decides and implements the tool
+revision only: it writes no generator code and does not integrate the held branch.
 
-**Ordering (Al, 2026-10-26; ADR-0010 D7):**
-1. ADR-0011, decision only (this action).
-2. **The full narrowing of the S1.3 tool's byte checks** (Standing escalations). It lands
-   **before any S2 code, including ADR-0011's crate**, because S2's first code commit edits
-   `engine/Cargo.toml` and `engine/Cargo.lock`. Both are frozen exact files and pinned
-   pair-producer inputs, so the current check would turn the gate RED.
-3. The held harvest's admission review is scheduled after ADR-0011 (Al's ruling). Its
-   integration also needs the narrowing, because it adds `groundtruth/` members.
-4. Then S2 code.
+**First, housekeeping (Al's ruling 4 of 2026-10-27), in the first session after PR 20's merge:**
+remove the worktree `C:\Users\LEET\Syndeom-wt-20261027` (`git worktree remove`); in
+`C:\Users\LEET\Syndeom`, compare the uncommitted HANDOFF append's body SHA-256 with the committed
+disclosure's (`36dda70c…8d2f`; Standing escalations, "Two checkouts") and, if equal, discard the
+append. With the checkout clean, Sessions 30–33 switched it to `main` before the preflight so that
+`--sync` could fast-forward; a §6 launch on a non-default branch lands in a worktree again
+(Session 34). Then this action.
 
-ADR-0011 decides, under constitution §2 S2 and the standing rulings in this file:
-- (a) **the one shared interface** behind which the four S2.1 modules sit: the informal proof
-  generator, the Lean 4 formal-variant generator, the flaw injector and the padding module
-  (FLAW-0013);
-- (b) **the first family is deterministic** — seeded Rust templates and grammars. Any
-  LLM-assisted generator is a separate family needing its own ADR under SD6 and is excluded from
-  `battery-freeze-v1` without it (standing ruling);
-- (c) **the dial schema** — every FLAWS.md `0.1.0` recipe as a dial (presence, location,
-  severity), and the padding ratio;
-- (d) **commanded vs achieved statistics** (tokens, steps, lemmas, flaws per class, severity,
-  padding ratio) and **the per-artifact fidelity verdict** (S2.2). For Lean-catchable flaws the
-  kernel or tooling must reject the formal variant exactly as predicted; for the others, a
-  recorded check. FAIL artifacts are kept as findings;
-- (e) **manifests** under `syndeom-manifest/2` (ADR-0001): `origin: synthetic`, derivation
-  `by-construction`, ids with `-s<seed>`, and the `corpus_id` invariant tested (S2.3);
-- (f) **verification** (S2.4): property tests; goldens from the FLAWS.md examples; `cargo clippy`
-  at deny-warnings; `cargo audit`;
-- (g) **placement** — a new `engine/` workspace member under `PolyForm-Noncommercial-1.0.0`
-  (ADR-0010), and any new dependency pins with their licences (SD16), read from the tools and the
-  registry, never assumed (SD7). It is implemented only after step 2 above;
-- (h) **flagged for Al, not decided:** whether R4's Mnemosyne-derived seed family enters as a
-  candidate golden family, and its licence line under the R1 release boundary (ADR-0000
-  Addendum 2, carried forward by ADR-0010). Al rules on this when ADR-0011's draft is in front of
-  him.
+What it does, under Al's direction of 2026-10-26 (Standing escalations, "S1.3 reproduction tool"):
+1. In `engine/ingest/examples/support/effective.rs`, limit `preserve()` and the pair-input check
+   (`pair_input_unchanged()`) to the inputs the reproduction depends on, so that an amendment of
+   a file it does not use — a constitution amendment, an ADR, SIBLING-MAP, `scripts/check.sh`,
+   `lean/Audit.lean` — neither stops it running at HEAD nor fails the gate's
+   `first_parent_amendment` tests, while any byte change to an input it depends on still fails.
+   Read the input set from the tool, its tests and its packets (SD7), never from a summary;
+   `analysis/s1-first-parent-integration/preservation-inputs.json` is compiled into the
+   reproduction and checked against itself.
+2. Decide in ADR-0012 how the narrowed check treats `engine/Cargo.toml` and `engine/Cargo.lock`:
+   S2's first code commit edits both, and both are two of the 20 pinned pair-producer inputs
+   (replay from HEAD already ended at ADR-0010; the replay revision range is recorded in this
+   file). The current `license`-line exception and the three other case-by-case exceptions are
+   replaced by the narrowed rule or kept, as ADR-0012 argues.
+3. Keep the `relicense_exceptions` (6) and `first_parent_amendment` (15) suites green and add
+   tests that show the new boundary: an edit outside the input set passes; an edit inside it
+   fails.
+4. Record, as ADR-0009 D5 and ADR-0010 D6 did: the tool's source SHA-256 before and after; that
+   the retained `inventory.json` is reproduced byte-identical at `3cd5558` with that revision's
+   tool; and exactly which `preservation` fields of the output change at HEAD, with everything
+   else unchanged.
+5. Write ADR-0012 (context, options, decision, the tests, the measurements); update this file's
+   "S1.3 reproduction tool" escalation, the ADR-numbers line and this NEXT.
 
-Read first: constitution §2 S2; `PROGRAM/FLAWS.md` (every recipe and example); ADR-0001
-(manifest schema); ADR-0002 (toolchain, gate); ADR-0010 (licence, the preservation exceptions);
-the Standing rulings section of this file. Interface with the siblings only through the manifest
-schema already pinned in ADR-0001 (SD14); never import their code. Open the session per ADR-0008
-D1, preceded by the SD15 disclosure if it is launched with the §6 prompt. Commit `[S2][ADR-0011]
-decide the first generator family` on a branch, gate the committed tree, and open a pull request;
-Al merges.
+Bounds: the frozen packets, the registers, the constitution, the licence, the tag and the
+accepted corpus are untouched; the held branch stays held; no generator code. If ADR-0011's pull
+request is still unmerged when this action is picked up, this step may proceed — it does not
+depend on ADR-0011 — and the ADR-0011 rulings stay awaited (Standing escalations). Open the
+session per ADR-0008 D1, preceded by the SD15 disclosure if it is launched with the §6 prompt;
+note the two checkouts under Standing escalations. Commit `[S2][ADR-0012] narrow the S1.3
+reproduction's byte checks to its inputs` on a branch, gate the committed tree, open a pull
+request; Al merges. Then step 3, the held harvest's admission review (Al's order), and only then
+step 4, ADR-0011's crate.
 
 The harvest itself stays paused through candidate 27 / `1403.4485`, with candidate 28 /
 `1403.6317` saved. The seven truth questions, the seven severity questions and the

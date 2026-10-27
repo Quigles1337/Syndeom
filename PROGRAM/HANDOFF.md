@@ -6269,3 +6269,382 @@ request still await Al's review. Nothing else changed. The commit carrying this 
 on its committed tree. The result is recorded in the pull request and under the external root
 `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\` (`gate-committed-3.json`), not in the
 tree it certifies. **Memory writes:** none.
+
+---
+
+SESSION: 2026-10-27 UTC (2026-10-27 America/New_York) (Session 34 — a session launched from
+`C:\Users\LEET`, outside the checkout, with the §6 Session-N resume prompt verbatim; SD15
+disclosure first; not an examination, because Gate S2 has nothing to examine, which could be
+established only after orienting; examined fetched `origin/main`
+`a741ebf956be0bd87ebf1b606f0b9c6df1853043`, tree `a5e7df5488530c560ab7ec9eb608037f92a03820`, from
+the isolated worktree `C:\Users\LEET\Syndeom-wt-20261027`; branch `claude/s2-adr-0011-generator`;
+header completed after ADR-0008 step 5 — it was written provisionally with the disclosure, which is
+unchanged, and the CARRIED line below is part of the header; the session-end SHA is the commit
+carrying this block, recorded in its pull request)
+CARRIED (ADR-0008 D3): the disclosure below was first appended at 2026-10-27T19:17:58Z to the original checkout C:/Users/LEET/Syndeom (branch claude/s2-citation-cff @ 8ae94316f327194da86e3ce64b58d2573987e325, tree a5e7df5488530c560ab7ec9eb608037f92a03820; that append is uncommitted and left as it stands). The ADR-0008 preflight classified that checkout behind origin/main a741ebf956be0bd87ebf1b606f0b9c6df1853043 (same tree) and created this worktree; the same disclosure bytes are appended here as the first action in this checkout.
+
+MEMORY DISCLOSURE (SD15 as amended by ADR-0005 and ADR-0009; first entry, before any other action)
+- Order of operations: launched from the home directory C:/Users/LEET (not the work tree) with the §6 Session-N prompt verbatim. Read first, in full: the constitution and ADR-0005. Then the memory index and the memory file below were read and hashed. Nothing else was read before this append: no other repository file, no directory listing, no git history or status, no build. Appended by shell (cat >>) without reading HANDOFF; the block header above is provisional.
+- Recalled memory loaded by the harness: the C--Users-LEET index MEMORY.md, 110 lines, SHA-256 cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69. No other memory file was loaded.
+- D1(a) index lines naming this program or a sibling (KOBER, FRIEDMAN), exactly as loaded, line-number prefixed:
+
+```
+85: ## KOBER (Linear A falsification infrastructure)
+86: - [Repo pointer + machine hazards](project_kober.md) — `C:\Users\LEET\KOBER`, remote `Quigles1337/KOBER` (**public**); the constitution `PROGRAM/KOBER-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (memory-policy ADR).
+88: ## FR13DMAN (FRIEDMAN — designedness-detection instrument)
+89: - [Repo pointer + machine hazards](project_friedman.md) — `C:\Users\LEET\FR13DMAN` / `Quigles1337/FR13DMAN` (**public**, leetspeak name); sibling of KOBER; the constitution `PROGRAM/FRIEDMAN-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (ADR-0003).
+106: ## SYNDEOM (AI-proof calibration — third sibling of KOBER/FRIEDMAN)
+107: - [Repo pointer + machine hazards](project_syndeom.md) — `C:\Users\LEET\Syndeom` / `Quigles1337/Syndeom` (**public**); the constitution `PROGRAM/SYNDEOM-PROGRAM.md` is the sole authority — always run its §4 loop from the repo, never from memory. No program state is recorded here or in the linked file (SD15 / FR13DMAN ADR-0003).
+```
+
+- D1(b) the program memory file project_syndeom.md in full, exactly as read from disk (10957 bytes), SHA-256 ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0:
+
+```
+---
+name: project-syndeom
+description: "SYNDEOM program - repo C:\\Users\\LEET\\Syndeom (remote Quigles1337/Syndeom, public); constitution and ALL program state live IN the repo, never here"
+metadata:
+  node_type: memory
+  type: project
+  originSessionId: 07cebf44-c690-47a3-8c97-d4b909c4e75b
+  modified: 2026-10-26T19:18:39.389Z
+---
+
+**SYNDEOM** — repo `C:\Users\LEET\Syndeom`, remote `https://github.com/Quigles1337/Syndeom`
+(**public**). Third sibling of [[project-kober]] and [[project-friedman]].
+
+This file locates the repo and records machine hazards. Per the constitution's memory-discipline
+rule (adopting FR13DMAN ADR-0003) it records NO program state: no phase, gate, claims, commits,
+toolchain versions, escalations, or next actions.
+
+**Standing rule:** the repo is the sole memory of the program (constitution at
+`PROGRAM/SYNDEOM-PROGRAM.md`). Every session: read the constitution, then run its §4 loop from
+`PROGRAM/STATE.md` and `PROGRAM/HANDOFF.md`. Never resume from this file. Discover the default
+branch, toolchain, and every other value from the repo — never assume one, and never carry a value
+across from a sibling program.
+
+**Never work in the sibling KOBER or FR13DMAN trees** — identical `PROGRAM/` schema, and their
+sessions may be live concurrently.
+
+Machine and harness hazards:
+- System-level git config has `core.autocrlf=true`; the repo pins LF via `.gitattributes`. Verify
+  with `git ls-files --eol` and a byte-level CR/BOM check, never by eye.
+- The Python console is cp1252: set `PYTHONIOENCODING=utf-8` before any script that prints
+  non-ASCII (`§`, `→`, `—`), or it dies with a UnicodeEncodeError after doing its work.
+- Cloning an empty GitHub repo yields the server's default branch; `git init` on this
+  machine yields `master` (system `init.defaultBranch`). Read the branch, don't infer it.
+- Long heredocs fail to parse in this harness; write multi-line files with the Write/Edit tools and
+  pass commit messages via `-F file`. A `grep` inside an `&&` chain is not a guard.
+- The Bash tool's working directory persists between calls (a `cd` in one call moves later calls);
+  use absolute paths.
+- Deep `find` over the home dir hangs on OneDrive reparse points; bound searches.
+- Publisher pages (ScienceDirect, MDPI, Taylor & Francis, academia.edu) return 403 to tool
+  fetches; Crossref, arXiv, the GitHub API, and institutional repositories work.
+- `git symbolic-ref refs/remotes/origin/HEAD` may fail on a working copy cloned from an empty
+  remote until the first push and fetch; fallback `git remote show origin`.
+- elan resolves the Lean toolchain from the working directory; `cd` into the Lean project before
+  `lake build`. elan's `stable` may resolve to a version that is not installed.
+- Reachability is per site, not per tool: openai.com serves `curl` (browser UA) but 403s the
+  WebFetch tool; ias.edu 403s both (Cloudflare interstitial); Zenodo 403s its REST API to curl but
+  serves record pages and `?download=1` file links. Try the other tool before recording a failure.
+- `python script.py | grep …` masks the script's exit code; never put a verifier behind a pipe
+  when its verdict gates a commit. Run it alone, then act on `$?`.
+- Python needs `-X utf8` (or `PYTHONIOENCODING=utf-8`) to print `§`, `→`, `π` on this console.
+- The GitHub trees API truncates large repos (`"truncated": true`); use per-directory contents
+  calls for counts. The contents API returns base64 content only for files under 1 MB.
+- Hashing every recent file under the home dir (`find … | xargs sha256sum`) blows a 60–90 s
+  timeout even at maxdepth 4 with OneDrive/AppData excluded. Search by name only; verify a ferried
+  file by its digest once a candidate (or a paste) is in hand — the digest is the identity.
+- The console clock is local but `date -u` and web access times are UTC; a session that starts late
+  on day D records retrievals dated D+1 UTC. Write the session date and access times separately.
+- A `lake build` that imports all of Mathlib prints nothing for minutes when piped through `tail`
+  (first build of a one-module project took ~3 min after the cache); run it in the background
+  with a log and read the log with `tr '\r' '\n'` — the cache tool writes progress with CRs.
+  The full cold Lean setup (toolchain + nine clones + ~8,900 cache files + build) took 14 min.
+- Never `du` the `lean/.lake` tree while lake is writing it; it blew the 120 s tool timeout.
+- `cargo fmt` rewrites freshly written Rust; the gate runs `fmt --check`, so commit the formatted
+  form. Rust byte-string literals cannot hold `\u{…}` escapes — use `"…".as_bytes()`.
+- For arXiv papers, `arxiv.org/html/<id>` is the better text source for sentence-level checks;
+  poppler's `pdftotext` (at `C:\Users\LEET\tools\poppler-26.02.0\poppler-26.02.0\Library\bin`)
+  splits sentences across columns and figures. Read licence, version count and dates from the
+  `arxiv.org/abs/<id>` `<meta name="citation_*">` tags; ACL Anthology pages put `content=` before
+  `name=` in their meta tags, so match either attribute order.
+- A ferried file pasted into the chat never matches its stated digest: the harness rendering of a
+  Markdown file flattens tables to spaced text, drops `=` lines out of display math, strips heading
+  and bullet markers, and prefixes/suffixes stray quotes. Transcribe and hash the paste once to
+  show the mismatch, then ask for a path on disk holding the exact bytes. Never "repair" a paste
+  into the ferried artifact.
+- `www.apache.org` / `apache.org` (Fastly, 151.101.x) refused TCP connections from both curl and
+  the fetch tool for a whole session while DNS resolved; the SPDX License List
+  (`spdx.org/licenses/<id>.txt`, no trailing newline) and the GitHub Licenses API
+  (`gh api licenses/<key>` — no leading slash, or Git Bash rewrites it as a path) both serve
+  licence texts and cross-check each other after whitespace normalization.
+- Project Euclid sits behind an Incapsula bot challenge (HTTP 200 with a ~1 KB challenge page to
+  curl, empty content to the fetch tool). The Internet Archive's raw-capture route
+  `web.archive.org/web/<timestamp>id_/<url>` serves the archived publisher PDF; find the timestamp
+  with `archive.org/wayback/available?url=…`. Old JSTOR scans have no text layer — `pdftotext`
+  returns only the JSTOR footer — so render pages with `pdftoppm -r 110 -png` and read the images.
+- `scripts/check.sh` can take 10+ minutes after a reboot even with `lean/.lake` warm: the axiom
+  audit (`lake env lean Audit.lean`) loads all of Mathlib's oleans from a cold disk cache
+  (lean.exe grows past 1.4 GB). Run the gate in the background with a log; the ~30 s figure holds
+  only with a warm OS file cache.
+- arXiv API: `http://export.arxiv.org/api/query` answers 301 with an empty body (looks dead to a
+  plain curl); use `https://export.arxiv.org/api/query`. The `co:` field prefix searches the
+  revision comment (`search_query=co:erratum+AND+cat:math.*`); results are Atom XML.
+- Crossref REST: `https://api.crossref.org/works?filter=update-type:erratum,type:journal-article`
+  works (also `correction`, `corrigendum`, `retraction`); each hit carries `update-to`
+  `[{type, DOI}]`; always pass `mailto=` for the polite pool. No subject filter — use zbMATH
+  (`https://api.zbmath.org/v1/document/_search?search_string=ti:erratum`, JSON with
+  `status.nr_total_results` and DOI `links`) to confine to mathematics.
+- PowerShell's `bash` on this machine resolves to the Windows WSL stub (`C:\WINDOWS\system32\bash.exe`),
+  which exits immediately; a launcher must name `C:\Program Files\Git\bin\bash.exe` explicitly.
+- Run the gate detached with a log under the session scratchpad — `Start-Process` of Git Bash on a
+  wrapper script that echoes start/end timestamps and the exit code, with `-RedirectStandardOutput`
+  — so a harness kill (it reaps background shells when system memory is low) does not lose the
+  result; a background `until grep -q 'GATE end' <log>; do sleep 10; done` is the notifier.
+- Never run two gates at once: each axiom audit loads Mathlib's oleans (lean.exe past 1.4 GB), and
+  two together starve the machine. Wait for `=== GATE end` with a foreground
+  `until grep -q '=== GATE end' <log>; do sleep 10; done` loop (this harness tolerates it), and
+  launch the pre-commit gate only after the ORIENT gate has ended.
+- Python launched from Git Bash does not resolve `/c/Users/...` paths (FileNotFoundError on open);
+  write `C:/Users/...` inside Python strings, and keep `/c/...` for the shell side only.
+- The Route A finder caches its arXiv API pages only under the scratchpad of the session that
+  fetched them (`<Temp>/claude/C--Users-LEET/<session-id>/scratchpad/route-a/pages/`). Copy
+  `pages/*.xml` and `finder-state.json` from an earlier session's scratchpad (find it with
+  `ls -d .../C--Users-LEET/*/scratchpad/route-a`) into the new one before running the finder:
+  0 requests instead of ~30 min of fetching, and the digest check still proves identity.
+- In `grep -E` / `awk` on this machine a pattern written `'^\\b[A-Z]'` matches a word boundary,
+  not a literal backslash-b; write `'^[\\]b[A-Z]'` to match TeX macros such as `\bD`, `\bL`.
+  A `\\section` pattern that found nothing in one call and everything in another was the same
+  trap; prefer a bracket expression for a literal backslash. A quoted heredoc (`<<'EOF'`) fed
+  to the Bash tool also strips one backslash level from Python source, leaving backspace
+  characters where `\b` was meant: write backslash-bearing text with the Write/Edit tools.
+- A working copy's `origin/<branch>` ref is only as fresh as its last fetch: `git status` can
+  report a checkout as in sync while the remote is many commits ahead. Never treat a checkout's
+  tracking ref as the remote's state. Never force-push; a diverged local commit goes to a branch.
+- **A second checkout of this repository exists on this machine** at
+  `C:\Users\LEET\Documents\ChatGPT\Syndeom` (used by another executor, Codex; it can hold its
+  own unpushed local branches). Never work in it, reset it, or treat its refs as the remote's;
+  `C:\Users\LEET\Syndeom` is this executor's checkout, and `origin` is the only shared truth.
+  Durable external evidence roots for this program live under `C:\Users\LEET\Codex\Temp\`
+  (one new directory per event, never reused); the session scratchpad is not durable.
+- Use `git -C <path>` for every git command in the Bash tool: its working directory drifts
+  between calls (a `cd` persists), and a bare `git` then fails with "not a git repository".
+- Launched inside a git work tree (e.g. `C:\Users\LEET\Syndeom`), Claude Code attaches a
+  gitStatus snapshot (branch, `git status`, the last five commit subjects) to the conversation
+  before the first tool call, and loads memory from that directory's own project key
+  (`C--Users-LEET-Syndeom`, empty) instead of the `C--Users-LEET` index; `C:\Users\LEET` is not a
+  git work tree.
+```
+
+- D1(c) other recalled memory naming this program: none was loaded. A case-insensitive search of every file in the memory directory for the program name matched only the two files reproduced above.
+- D2 withheld by count: 104 of the 110 index lines, at line numbers 1-84, 87, 90-105, 108-110. They concern unrelated programs and non-program sections of the index; none names this program or a sibling (D3).
+- D3 check: case-insensitive search of the whole index for syndeom, kober, friedman and fr13dman (the FRIEDMAN repository name, added as an extra), by awk tolower() because grep -i aborts on this Git Bash; exit status 0; awk line count equals wc -l. Matched lines: 85, 86, 88, 89, 106, 107. Every matched line is reproduced under D1(a); no withheld line names the program or a sibling.
+- D4 assessment: no reproduced memory holds program state under the SD15 enumeration (phase, gate status, CLAIM or FLAW status, file contents, commit SHA as state marker, next action, escalation). The index lines are repo pointers; the memory file holds the repo location, the second-checkout and evidence-root locations, and environment and tooling hazards. Borderline, flagged for audit by Al: two hazard lines name program tooling without its state (Audit.lean in the gate-duration hazard; the Route A finder page cache). No memory has been written this session; none will be if a cold-start exam is attempted.
+- Conversation-context corollary: before the launch prompt the conversation held only the index above and a model-selection command; nothing carrying program state. Cold as of this entry; whether a gate exam is attempted is decided after ORIENT and recorded in this block.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (S2.1: ADR-0011 proposed — the decision, no code;
+nothing else evidenced). Gate S1 CLOSED (Session 29).
+ORIENT (ADR-0008 D1: step 0, then steps 1–5 by `python -I -X utf8
+C:/Users/LEET/Syndeom/scripts/orient_preflight.py orient --repo C:/Users/LEET/Syndeom --remote
+origin --expect-url https://github.com/Quigles1337/Syndeom --allow-dirty PROGRAM/HANDOFF.md
+--receipt …`, then step 6 from the worktree):
+- **Step 0.** The disclosure above was assembled from the memory files' bytes by a script and
+  appended with `cat >>` to the original checkout's HANDOFF at 2026-10-27T19:17:58Z (the file's
+  mtime; entry 15,108 bytes, SHA-256 `ef8239fd338da5fc0b945c22b0d1427b329f2c72354fb74ca745ef48f6759429`;
+  the script and the entry are under the external root). The only byte of HANDOFF inspected
+  beforehand was its last one (`tail -c1`, to decide whether a newline was needed), in the spirit
+  of Session 29's `test -f` check, which Al ruled is not a read of program state. The
+  constitution's `cat` output was persisted by the harness to a file, which was then read in
+  full; that copy is byte-identical to the snapshot's constitution (step 5).
+- **Identity:** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`.
+- **Run 1** (receipt `orient-1-worktree-refused.json`, SHA-256
+  `5a8eb680cea4b57f2d157c0769c7e1a08c39f6bcebb199e97e59614ef095e6fe`): `git fetch --prune origin`
+  exit 0, 2026-10-27T19:18:40.10Z–19:18:40.82Z; default branch `main` (`git ls-remote --symref`);
+  fetched `origin/main` `a741ebf956be0bd87ebf1b606f0b9c6df1853043`, tree
+  `a5e7df5488530c560ab7ec9eb608037f92a03820`; `HEAD` `8ae94316f327194da86e3ce64b58d2573987e325` on
+  branch `claude/s2-citation-cff`, the same tree; working tree ` M PROGRAM/HANDOFF.md` only
+  (`allowed_present`; `unrelated: []`); ahead 0, behind 1 — the one remote-only commit is PR 19's
+  merge (by Al). Classification **behind**, but not on the default branch, so no fast-forward:
+  exit 3, `CHECKOUT-NOT-CURRENT`, nothing changed.
+- **Run 2** (receipt `orient-2-worktree.json`, SHA-256
+  `f29521a9a3716263b714e00487aeb49c4730e66cdce07016444a87cfb1a381a2`): the same facts after a
+  second fetch (19:19:46Z–19:19:48Z); `--worktree C:/Users/LEET/Syndeom-wt-20261027` added a
+  detached worktree at `a741ebf9…`, clean; exit 0, `SNAPSHOT-ESTABLISHED-IN-WORKTREE`. The
+  original checkout is untouched.
+- **Step 5.** The disclosure's body (14,931 bytes, SHA-256 `36dda70ceeb161b49069dfca5b43bf85be77f584fbdd4ddfc89792e83eb88d2f` — the entry
+  less its provisional header) was appended to the worktree's HANDOFF as the first action there,
+  under a provisional header with the CARRIED line (ADR-0008 D3); the original checkout's append
+  stands. The constitution read in step 0 is byte-identical to the snapshot's (SHA-256
+  `110f5360af60075a8e799dce0dc235d1ef8785bd40b0b34c38fa53ddb1d5479c`, 38,958 bytes); ADR-0005
+  (`873f0751745155c96b30f3a1d40f8cacc1ed9fca478e3e2488449f8152e87595`), ADR-0008 and ADR-0009 are
+  byte-identical in both checkouts.
+- **Step 6, from the worktree only:** STATE → HANDOFF Sessions 30–33 → CLAIMS (seven entries;
+  statuses as the gate prints them) → FLAWS (`0.1.0`, fourteen entries) → ADR-0001, ADR-0002,
+  ADR-0010, the `syndeom-manifest`, `-ingest`, `-derive` and `-pair` crates, the S1.2 packet's
+  audit convention, `scripts/check.sh` and `scripts/check_registers.py`. `git ls-files --eol`:
+  every tracked text file `i/lf`; the only `i/-text` entries are the `.gz` binaries. Tool
+  versions read: Lean `v4.34.1` / Mathlib `d13f23b7…` (pins unchanged), `cargo 1.91.0`,
+  `cargo-audit 0.22.2`, `Lake 5.0.0-src+5045d00`. No pull request was open; the only tag is
+  `gate-s1-registration` → `2018d5e`.
+- **ORIENT gate, GREEN** on the worktree at `a741ebf9…` with the carried append as the only tracked
+  change: full gate, detached with a log, 2026-10-27T19:30:55Z–19:41:28Z, exit 0 / `GATE: GREEN` —
+  Lean `Build completed successfully (8926 jobs)`, golden axioms `[propext]`, fmt and clippy
+  clean, 88 Rust tests (82 plus Session 30's six `relicense_exceptions`), 467 tracked files,
+  Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 73; raw log SHA-256
+  `245980cdba01e84de7541471091b0b74a3a9b3b4b55156ec0a0364e06778067e` (`gate-orient.raw.log`,
+  `gate-orient.json` under `C:\Users\LEET\Codex\Temp\syndeom-adr-0011-20261027\`). Before the run,
+  `lean/.lake` and `engine/target` were copied from the original checkout into the worktree with
+  robocopy (untracked build products; the Mathlib package's `HEAD` verified at the pin), so the
+  gate did not start cold; lake then rebuilt what it needed. The ADR-0011 draft was being written
+  into the worktree during the run, untracked and therefore outside the gate's `git ls-files`
+  scope; it is gated by the committed-tree run recorded in the pull request.
+WHAT THE PROMPT ASKED: the §6 Session-N resume prompt, verbatim (compared by reading against
+`PROGRAM/SYNDEOM-PROGRAM.md` lines 481–493: the same text), and nothing else — no instruction
+from Al. STATE's NEXT-SINGLE-ACTION survived ORIENT: ADR-0010 is on `main` (PR 16), the numbering
+holds, and nothing after Session 33 changed the S2 position.
+ADVANCED:
+- **A. The SD15 disclosure**, first entry of this block, carried into the worktree (ORIENT).
+- **B. `PROGRAM/DECISIONS/ADR-0011.md`, proposed** (50,079 bytes; decides STATE's items (a)–(g),
+  flags (h)): D1 one family, two producers `s2_template` 0.1.0 and `s2_grammar` 0.1.0, no new
+  dependency; D2 the plan — aligned informal steps and formal fragments — as the one shared
+  interface, with the pipeline plan → inject → pad → render → measure → manifest → write; D3 the
+  full config and `FlawSpec` shapes, refusals, controls; D4 `syndeom-rng/1` (SplitMix64 seeding,
+  xoshiro256** labelled streams, loop-free bounded draws, no floating point in decisions); D5 the
+  dial table for FLAW-0001..FLAW-0014 with each instance's `lean_catchable`, predicted
+  `lean_build` and confirmation check (K: kernel rejects at the recorded line; T: the audit tail's
+  axioms and used-constants); D6 the v0.1 seed set (the FLAWS.md examples and ADR-0001 D8's
+  theorem) and four grammars (`ring_chain`, `ineq_chain`, `case_split`, `nat_induction`) with
+  what each realizes; D7 ground truth by construction and the witness modules under
+  `lean/Syndeom/Seeds/`; D8 commanded keys and tolerances, achieved estimators, the one-process
+  Lean harness in the S1.2 audit pattern, FAIL artifacts as findings, the fidelity sweep; D9
+  manifests, `engine_commit` verification, the id invariant's four tests, the CLI, receipts; D10
+  property tests, goldens (Golden A's and B's bytes reproduced as a writer test), the gate's audit
+  generalization after the narrowing, `cargo audit` outside the offline gate; D11 placement,
+  licence, ordering, cost; D12 flagged for Al — (h1) the R4 Mnemosyne-derived seed family, (h2)
+  its licence line under R1(b), with three costed options and no recommendation.
+- **C. STATE:** the Updated bullet; Current build verification (Session 34); the ADR-numbers
+  line; the Gate S2 table's S2.1 row; two new standing escalations (ADR-0011 awaiting Al; two
+  checkouts to tidy); the S1.3-tool escalation now points at NEXT; NEXT rewritten to ordering
+  step 2 — the narrowing, recorded as ADR-0012.
+- **D. HANDOFF:** this block.
+- **E. Gate** on the committed tree with a clean working tree, recorded in the pull request and
+  under the external root, not in the tree it certifies.
+- No code, no register status, no manifest, no frozen packet, no preservation-tool source, no
+  constitution byte, no README line, no S-entry.
+BELIEF DELTAS:
+- **A §6 launch lands on whatever branch the checkout was left on, and ADR-0008 then routes it to
+  a worktree even when no byte differs.** The checkout was on Session 33's branch at main's own
+  tree; the fast-forward case requires the default branch, so run 1 exited 3. Evidence: receipt 1.
+  Consequence: the two-checkouts escalation; an informed session that ends on `main` (ADR-0008
+  D3's last bullet) spares the next §6 launch a worktree.
+- **The S2 family needs an alignment structure, not a text interface.** A pair's two records share
+  one `instance` (ADR-0001 D4) and a kernel check must name the fragment's line range; both need
+  the plan. Consequence: ADR-0011 D2.
+- **ADR-0001 D8's Golden A and B are byte fixtures, not generator goldens.** Golden B's config has
+  no `style` or `padding_ratio`, so no single full-config producer emits both D8 ids. Consequence:
+  phase-prefixed producer ids and a writer test that reproduces the bytes (ADR-0011 D1, D10).
+- **`cargo audit` cannot live in the gate**, which must stay offline (ADR-0008). Consequence:
+  ADR-0011 D10 puts it beside the gate with its advisory-database commit recorded.
+- **The gate runs 88 Rust tests now, not 82.** Evidence: the ORIENT log's fifteen `test result`
+  lines. Consequence: STATE's build line.
+CONFUSIONS:
+- **ADR-0009 was read after the disclosure and before step 5**, beside ADR-0008. ADR-0008 step 0
+  allows only ADR-0008 there. SD15's ineligibility clause concerns reads *before* disclosing, and
+  this session is not an examination in any case, but the deviation is recorded here so that a
+  future examination reads ADR-0008 alone between its disclosure and step 5. No document change
+  is proposed: the rule is already written.
+- **The harness reports robocopy's exit code 1 as a failure**; for robocopy, 1 means files were
+  copied. Cost: one extra check. Not written to memory (Memory writes below).
+- **A `cat` of the constitution came back as a harness-persisted file**, not inline. Reading that
+  file is reading the constitution; its bytes were compared to the snapshot's (step 5). Cost:
+  none.
+HONESTY CHECK:
+- Register entries re-examined: none changed; the gate prints the seven CLAIM statuses and the
+  73 source states as before. Downgrades: none.
+- ADR-0011 is **proposed**, not accepted; nothing in it is MEASURED; its cost statements are
+  expectations and say so. Its D4 constants are written from the executor's knowledge of the
+  published algorithms, not from a retrieved source: the ADR makes its own definition normative
+  and leaves the attribution to be checked against retrieved vectors at implementation. Its D6
+  seed names are the executor's, and the Lean feasibility of each seed (the real-analysis ones in
+  particular) is not demonstrated here.
+- The 88-test count was summed by hand from the log's `test result` lines.
+- The word "proven" appears in ADR-0011 D10 only inside a quotation of ADR-0001's own phrase about
+  goldens ("wrong until proven otherwise"); no SD2 use.
+LEAKAGE CHECK: checked, not assumed — `contact/` holds only its README (read for the house rules)
+and nothing else was opened; no detector, threshold or generator code exists; every design input
+is FLAWS.md's executor-authored examples, ADR-0001's fixtures and the existing producers; S-0001
+and S-0006 are cited in the ADR only for their existence. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED claims. The gate run is recorded with its log
+digest. Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing (the one occurrence is
+a quotation, above); nothing synthetic labeled real.
+DRIFT CHECK:
+- no statement about any real manuscript (SD3);
+- no understanding claims (SD17); FLAW-0013 stays a cost in the ADR;
+- no detector chosen or tuned; no referee contact (SD13);
+- no S2 code; the held branch untouched; the SD8 quarantine untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT — S2 ordering step 2, the full narrowing of the S1.3
+reproduction tool's byte checks, decided and recorded as ADR-0012; before any S2 code.
+ESCALATIONS:
+- **ADR-0011 D12 for Al:** (h1) whether the R4 Mnemosyne-derived seed family enters as an
+  `s2_template` seed; (h2) its licence line under R1(b) — three options costed, none recommended.
+  Three non-blocking clarifications are listed there. This session's pull request awaits Al's
+  review; left unmerged.
+- **Two checkouts to tidy (Al's call):** the original checkout's uncommitted disclosure append on
+  `claude/s2-citation-cff` (never erased by the session, ADR-0008 D3) and the worktree
+  `C:\Users\LEET\Syndeom-wt-20261027` (STATE, Standing escalations).
+- Unchanged: the held branch's admission review, scheduled by Al after ADR-0011; human-referee
+  participants (SD13).
+STOP-REASON: natural boundary — the inherited NEXT-SINGLE-ACTION ends at a gated, reviewable pull
+request, and the next action is a different task. Repo green: the ORIENT gate above, and the
+committed-tree gate recorded in the pull request.
+**Memory writes:** none. (This session established after orienting that it is not an
+examination, so a hazard write would have been permitted; none was made.)
+AL'S RULINGS ON PR 20 (2026-10-27, received in this session's conversation after PR #20 opened;
+recorded at Al's direction in a second commit on the same branch, no force-push; transcribed
+verbatim from Al's message; exact copy `owner-rulings-pr20-2026-10-27.txt` under the external
+root, SHA-256 `c5ac5ec64a0ca3a80c95cc48390c658e07d553fe1ce97bef28a4d7d121a4ba6c`):
+
+~~~text
+Rulings on PR #20 (ADR-0011):
+
+1. Independence from the S1 corpus. Add to ADR-0011, before merge: no seed, grammar or template may be derived from any item under groundtruth/, because that corpus is what the frozen battery is validated against in S4. Seeds come from FLAWS.md or other material outside the S1 corpus, and every seed record states its source. This binds later producer versions as the seed set grows.
+
+2. D12, the R4 seed family: option (iii). Keep it out of this repository as a private fixture under an external root, for private pipeline tests only; it never becomes calibration data. Do not author it into the public goldens, the seeds directory or any artifact here. If I want it public later, that will be its own amendment.
+
+3. The non-blocking clarifications in D12: accepted as recorded. The edits to scripts/check.sh and lean/Audit.lean come after the narrowing and get their own review.
+
+4. Housekeeping, for the first session after the merge: remove the worktree at C:\Users\LEET\Syndeom-wt-20261027. In the original checkout, confirm the uncommitted HANDOFF append is the same disclosure now committed by comparing the body's SHA-256, then discard it.
+
+Record these rulings in ADR-0011's Amendments and wherever STATE tracks them, as a new commit on PR #20's branch (no force-push). Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before writing: `recheck --baseline a741ebf9…` re-fetched (exit 0, `TARGET-UNCHANGED`; receipt
+`recheck-2-before-rulings.json` under the external root). `main` was still `a741ebf9…`, the branch
+was at `eba1462` locally and on the remote, and PR 20 was open.
+
+Effect:
+- **Ruling 1** → ADR-0011 D6 gains the independence rule: no seed, grammar or template derived
+  from any `groundtruth/` item (the S4 validation corpus); seeds from FLAWS.md or other material
+  outside the S1 corpus; every seed record states its source (a `source` field); a grammar's atoms
+  and the padding material bound the same way; binding on later producer versions. The v0.1 seed
+  set already complies; the admitted S1.2 pair is therefore not a seed.
+- **Ruling 2** → D12 (h1)/(h2) resolved: option (iii). The R4 Mnemosyne-derived family stays out
+  of this repository as a private fixture under an external root, for private pipeline tests
+  only; never calibration data; never in the public goldens, the seeds directory or any artifact
+  here. Recorded in D12 and *Consequences*; D6's seed set unchanged.
+- **Ruling 3** → the non-blocking clarifications stand as recorded; the `scripts/check.sh` and
+  `lean/Audit.lean` edits (D10) come after the narrowing and get their own review.
+- **Ruling 4** → housekeeping for the first session after the merge: remove the worktree; in the
+  original checkout compare the uncommitted append's body SHA-256 with the committed disclosure's
+  (`36dda70c…8d2f`) and discard it. Recorded in STATE's "Two checkouts" escalation and at the head
+  of NEXT; **not executed now** — the merge has not happened.
+- ADR-0011's Status: accepted, in effect at the merge; *Amendments*: the rulings verbatim and
+  their effect. STATE: the Updated bullet, Current build verification, the ADR-numbers line, the
+  Gate S2 S2.1 row, the two standing escalations, NEXT. HANDOFF: this addendum.
+
+Nothing else changed: no register status, manifest, frozen packet, preservation-tool source,
+constitution byte, README line or code. The commit carrying this addendum is gated on its
+committed tree; the result is recorded in the pull request and under the external root
+(`gate-committed-2.json`), not in the tree it certifies. **Memory writes:** none.
