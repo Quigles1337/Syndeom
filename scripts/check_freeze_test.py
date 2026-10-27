@@ -32,8 +32,7 @@ OUTSIDE = [
     "engine/Cargo.lock",
     "engine/manifest/src/lib.rs",
     "engine/ingest/examples/support/effective.rs",
-    "groundtruth/HARVEST-LOG.md",
-    "groundtruth/README.md",
+    "groundtruth/amendment-map.json",
     "analysis/README.md",
     ".github/workflows/check.yml",
 ]
@@ -182,7 +181,9 @@ class FreezeCheck(unittest.TestCase):
             changes[path] = bytes([original[0] ^ 1]) + original[1:] + b" "
         changes["engine/generate/src/lib.rs"] = b"// an S2 crate\n"
         changes["PROGRAM/DECISIONS/ADR-0013.md"] = b"# ADR-0013\n"
-        changes["groundtruth/HARVEST-LOG.md"] = self.env.read_working("groundtruth/HARVEST-LOG.md") + b"| row |\n"
+        # A later prefix's new item directory and new stored copy sit beside the rows (ruling 3).
+        changes["groundtruth/s1_ingest-v0.1.0-000000000000/manifest.json"] = b"{}"
+        changes["sources/new-stored-copy.pdf"] = b"%PDF-1.4\n"
         self.assertEqual(self.problems(changes), [])
         removed = {path: None for path in OUTSIDE if path != "PROGRAM/STATE.md"}
         self.assertEqual(self.problems(removed), [])

@@ -7131,3 +7131,53 @@ ESCALATIONS:
 STOP-REASON: Al's direction — stop at the pull request for review. Repo green: the gate on the
 committed tree, recorded in the pull request.
 **Memory writes:** none.
+AL'S RULINGS ON PR 22 (2026-10-27, received in this session's conversation after PR #22 opened;
+recorded at Al's direction in a second commit on the same branch, no force-push; transcribed
+verbatim from Al's message; exact copy `owner-rulings-pr22-2026-10-27.txt` under the external
+root, 1,214 bytes, SHA-256 `da23f9efa2d5549456aafc66f3bc7b710aa5bc9b42b4b68a8aadba70655b2bda`):
+
+~~~text
+Rulings on PR #22:
+
+1. Accepted: the invariance test as written (the whole report byte-identical is stronger than I asked), the freeze checker and its tests, the CI changes, and the nine enforced rows.
+
+2. Your two choices: accepted. A frozen scope also refuses additions and removals, and the two append-only rows use the gate-s1-registration tag as their freeze point.
+
+3. The awaiting scopes, all at gate-s1-registration:
+- groundtruth/: accepted as proposed. One frozen row per accepted item directory, so later prefixes can add new item directories; HARVEST-LOG.md and README.md append-only; derivations/ frozen.
+- The sweep and the advisory note: frozen as proposed. Any later change or removal is then a deliberate register edit under a ruling.
+- sources/: freeze each of the nine stored copies as its own file row, not the directory, so new sources can still be stored when a later prefix registers them.
+- ADR-0003: append-only as proposed.
+- The scopes you did not propose stay unchecked.
+
+4. Record these rulings in ADR-0012's Amendments and the Freeze register, as a new commit on PR #22's branch (no force-push). Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before writing: `recheck --baseline f8d71b8c…` re-fetched at 2026-10-27T22:05:53Z (exit 0,
+`TARGET-UNCHANGED`; receipt `recheck-2-before-rulings.json`). `main` was still `f8d71b8c…`, the
+branch at `73a16eb` locally and on the remote, PR 22 open; the clean checkout was switched from
+`main` back to the branch.
+
+Effect:
+- **Ruling 1** → the invariance test, the checker and its tests, the CI changes and the nine
+  rows stand as committed.
+- **Ruling 2** → the two choices are ruled: a frozen scope refuses additions and removals; the
+  append-only rows' freeze point is the tag. The register's preamble now says so.
+- **Ruling 3** → fifty rows join the register, all at `gate-s1-registration`, generated from the
+  tag's tree by a script rather than typed: one frozen row per accepted item directory under
+  `groundtruth/` (35 rows, 76 files; a later prefix adds new directories beside them),
+  `groundtruth/derivations/` frozen, `groundtruth/HARVEST-LOG.md` and `groundtruth/README.md`
+  append-only, the sweep and the advisory note frozen, each of the nine stored copies under
+  `sources/` as its own frozen row with its register entry (S-0004, S-0005, S-0010..S-0016, read
+  from SOURCES.md), ADR-0003 append-only. 59 rows: 54 frozen (384 files), 5 append-only; the
+  check reports ALL PASS in about a second; the tests 8 of 8 in about three seconds (each
+  working-tree file is now read once per process). The scopes not proposed stay unchecked by
+  ruling, `groundtruth/amendment-map.json` among them.
+- **Ruling 4** → recorded in ADR-0012 *Amendments* (the rulings verbatim and their effect), the
+  Freeze register (rows and preamble), STATE (the Updated bullet, Current build verification,
+  the ADR-numbers line, the standing escalation closed) and this addendum.
+
+Nothing else changed: no register status, manifest, frozen packet, retained report,
+constitution byte, licence, tag, corpus file or S2 code. The commit carrying this addendum is
+gated on its committed tree; the result is recorded in the pull request and under the external
+root (`gate-committed-2.json`), not in the tree it certifies. **Memory writes:** none.

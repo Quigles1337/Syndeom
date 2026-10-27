@@ -13,12 +13,15 @@
   - **The invariance test:** `inventory_is_byte_identical_under_every_outside_mutation` in
     `engine/ingest/tests/input_set.rs` — every outside file mutated four ways at once, three
     files added outside `groundtruth/`, the whole report byte-identical. Gate Rust tests 88 → 89.
-  - **The freeze register** (section below): seven S1 packets frozen at `gate-s1-registration`
-    (296 files) and two append-only registers, derived from this file's records;
+  - **The freeze register** (section below): 59 rows, all at `gate-s1-registration` — the seven
+    S1 packets, one row per accepted item directory (35), `groundtruth/derivations/`, the sweep,
+    the advisory note and the nine stored copies frozen (54 rows, 384 files); HANDOFF, SOURCES,
+    `groundtruth/HARVEST-LOG.md`, `groundtruth/README.md` and ADR-0003 append-only — the first
+    nine derived from this file's records, the other fifty added by Al's rulings 1–4 of
+    2026-10-27 on PR 22 (verbatim in ADR-0012 *Amendments*; Standing escalations).
     `scripts/check_freeze.py` and `scripts/check_freeze_test.py` (8 tests) join the gate after the
     register cross-reference check; the advisory CI fetches history and tags and sets
-    `origin/HEAD`. Scopes without a recorded freeze point are listed for Al's ruling and not
-    checked; two executor choices are flagged (Standing escalations).
+    `origin/HEAD`. The scopes not proposed stay unchecked by ruling.
   - **Unchanged:** registers' statuses, manifests, frozen packets, the retained report, the
     accepted corpus, the constitution, the licence, the tag, the held branch and the S1.3
     reproduction's input set. **NEXT** stays at ordering step 3 and follows this pull request's
@@ -634,10 +637,12 @@
   `cargo fmt --check`, `cargo clippy -D warnings` and the ingest crate's tests (15 + 5 + 7)
   passed; `scripts/check_freeze.py` reported ALL PASS on the working tree (9 rows: 296 frozen
   files byte-identical, no additions; both append-only prefixes intact), in about one second;
-  `scripts/check_freeze_test.py` passed 8 of 8. The commit carrying this amendment receives its
-  own full gate on its committed tree, with a clean working tree, recorded in its pull request
-  and under `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-freeze-20261027\`, not in the tree it
-  certifies.
+  `scripts/check_freeze_test.py` passed 8 of 8; after Al's rulings the check reports ALL PASS
+  on 59 rows (384 frozen files, five append-only prefixes) and the tests 8 of 8 in about three
+  seconds. Each of this pull request's commits (the amendment, then Al's rulings on PR 22)
+  receives its own full gate on its committed tree, with a clean working tree, recorded in the
+  pull request and under `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-freeze-20261027\`
+  (`gate-committed.json`, `gate-committed-2.json`), not in the tree it certifies.
 - **Session 35 build verification:** ORIENT gate on the checkout `C:\Users\LEET\Syndeom`
   at fetched `origin/main` `6d89eb2f8a138a53d824d035febffc93423e1e0d` (tree
   `93ded916fb8cbfaea21f7d2a2367f86415fe3fc9`) with one declared change, the SD15 disclosure
@@ -961,16 +966,19 @@
 ## Freeze register
 
 Checked by the gate — `scripts/check_freeze.py`, with both directions tested by
-`scripts/check_freeze_test.py` (ADR-0012 *Amendments* 1; Al's direction of 2026-10-27). A
-**frozen** scope (a directory ending in `/`, or one file) is byte-identical to its version at the
-freeze point, with no file added or removed under it. An **append-only** file has both its version
-at the freeze point and its version on the default branch (`refs/remotes/origin/HEAD` as last
-fetched; ADR-0008) as exact prefixes. A freeze point is a tag or a full commit id. Every row is
-derived from this file's records, cited in the last column, and the S1 packets' freeze point is
-the `gate-s1-registration` tag by Al's direction; a scope this file records as unchanged without a
-freeze point is listed below the table and is **not checked** until Al rules. The register is a
-claim; the gate's run is the evidence. The table's rows must have exactly this column form, or
-the gate fails.
+`scripts/check_freeze_test.py` (ADR-0012 *Amendments* 1; Al's direction of 2026-10-27, and Al's
+rulings 1–4 of 2026-10-27 on PR 22, transcribed verbatim in ADR-0012 *Amendments*). A **frozen**
+scope (a directory ending in `/`, or one file) is byte-identical to its version at the freeze
+point, with no file added or removed under it (ruling 2). An **append-only** file has both its
+version at the freeze point and its version on the default branch (`refs/remotes/origin/HEAD` as
+last fetched; ADR-0008) as exact prefixes. A freeze point is a tag or a full commit id; every
+row's is the `gate-s1-registration` tag (`2018d5e79ea23fa200e560d628bec5e91edf0956`) — the S1
+packets' by Al's direction, the append-only rows' by ruling 2, the rest by ruling 3. Every row
+cites the record it derives from. A later prefix adds new item directories under `groundtruth/`
+and new stored copies under `sources/` beside the rows below, which name one item directory or
+one stored copy each, never the parent directory (ruling 3); a change to or removal of a frozen
+file is a deliberate register edit under a ruling (ruling 3). The register is a claim; the gate's
+run is the evidence. The table's rows must have exactly this column form, or the gate fails.
 
 | Path | Kind | Freeze point | Derived from |
 |---|---|---|---|
@@ -981,35 +989,68 @@ the gate fails.
 | `analysis/s1-first-parent-integration/` | frozen | `gate-s1-registration` | the integration packet and "the retained report" (Updated bullet, Session 35; `preservation-inputs.json` among the records left byte-identical, ADR-0009 D4) |
 | `analysis/s1-post-merge-readiness/` | frozen | `gate-s1-registration` | "readiness packet … unchanged" (Previous update, Session 22); Historical build verification (PR 8 readiness) |
 | `analysis/s1-orientation-repair/` | frozen | `gate-s1-registration` | the orientation-repair event packet: its README among the records left byte-identical (ADR-0009 D4); Previous update (Session 23) |
-| `PROGRAM/HANDOFF.md` | append-only | `gate-s1-registration` | §3.6 append-only session log; "its HANDOFF append … is never erased or rewritten" (ADR-0008 bullet); "HANDOFF entries (append-only)" (examination step 0 bullet) |
-| `PROGRAM/SOURCES.md` | append-only | `gate-s1-registration` | "`PROGRAM/SOURCES.md` append-only (ADR-0010)" (S1.3 reproduction tool bullet); "SOURCES historical prefix unchanged" (Gate S1 table, licences row) |
+| `PROGRAM/HANDOFF.md` | append-only | `gate-s1-registration` | §3.6 append-only session log; "its HANDOFF append … is never erased or rewritten" (ADR-0008 bullet); "HANDOFF entries (append-only)" (examination step 0 bullet); freeze point by ruling 2 |
+| `PROGRAM/SOURCES.md` | append-only | `gate-s1-registration` | "`PROGRAM/SOURCES.md` append-only (ADR-0010)" (S1.3 reproduction tool bullet); "SOURCES historical prefix unchanged" (Gate S1 table, licences row); freeze point by ruling 2 |
+| `groundtruth/s1_derive-v0.1.0-c08f9e3ec092/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-003a35498654/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-00f28e252823/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-0833f61c748c/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-15ab865466d6/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); the effective representation of the amended item (first-parent status support bullet); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-1c4c9a7747d0/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-22ae000cb879/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-2d93a266558a/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-315546e87259/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-40e6c0da8821/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-448d7aefa486/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-45c3ee8319d5/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-486ef22f632b/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-5ba6c0f07557/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-63e23a952084/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); "stays immutable and remains the logical key" (first-parent status support bullet); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-685b874cf579/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-68ed1abfecb4/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-6ae03b18a1bd/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-72415457dce4/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-744652f4b95f/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-82b4e66d0016/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-a4822a4be06e/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-a8ac73896464/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-a93badadec27/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-be3b17e73425/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-cafb56cb27fb/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-da3a4784c2be/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-dc0e0b0d5b87/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-dc1e44f39bb9/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-e0c199d3c60a/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-e3cbdfa7ad1c/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-f634c259799f/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-fd2bfef40d31/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_pair-v0.1.0-62fe0c816a6b/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_pair_archive-v0.1.0-094625fa10ff/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/derivations/` | frozen | `gate-s1-registration` | the reviewed TeX derivation recipe (ADR-0006; S1.3 bullet); Al's ruling 3 on PR 22 |
+| `groundtruth/HARVEST-LOG.md` | append-only | `gate-s1-registration` | the record of every candidate (ADR-0003 D7; Gate S1 table, S1.1 row); a later prefix appends rows (D8); Al's ruling 3 on PR 22 |
+| `groundtruth/README.md` | append-only | `gate-s1-registration` | the corpus README, append-only in the S1.3 tool until ADR-0012; Al's ruling 3 on PR 22 |
+| `PROGRAM/SWEEP-2026-10.md` | frozen | `gate-s1-registration` | Founding sweep bullet: 41,060 bytes, SHA-256 `f4bfb2ad…b03e`, verified against Al's stated digest; the tag's blob carries that digest; Al's ruling 3 on PR 22 |
+| `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md` | frozen | `gate-s1-registration` | Advisory note bullet: 27,238 bytes, SHA-256 `f3e40b68…fa2c`, verified against the stated digest; the tag's blob carries that digest; Al's ruling 3 on PR 22 |
+| `sources/arxiv-2501.03124v5-prmbench.pdf` | frozen | `gate-s1-registration` | stored copy of S-0010 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/arxiv-2510.13744v1-hard2verify.pdf` | frozen | `gate-s1-registration` | stored copy of S-0011 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/arxiv-2605.10141v1-formalrewardbench.pdf` | frozen | `gate-s1-registration` | stored copy of S-0014 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/arxiv-2605.12524v1-proofgrid.pdf` | frozen | `gate-s1-registration` | stored copy of S-0013 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/arxiv-2605.20531v3-pseudo-formalization.pdf` | frozen | `gate-s1-registration` | stored copy of S-0015 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/arxiv-2606.29493v1-faults-in-our-formal-benchmarking.pdf` | frozen | `gate-s1-registration` | stored copy of S-0016 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/arxiv-2607.11849v2-advancedmathbench.pdf` | frozen | `gate-s1-registration` | stored copy of S-0012 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/leiden-declaration-2026-06-02-zenodo-20302944.pdf` | frozen | `gate-s1-registration` | stored copy of S-0005 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `sources/mathandai-severe-misalignment-2026-09-11-zenodo-22737751.pdf` | frozen | `gate-s1-registration` | stored copy of S-0004 with its register digest (SD11; Registers bullet, re-hashed Session 6); Al's ruling 3 on PR 22 |
+| `PROGRAM/DECISIONS/ADR-0003.md` | append-only | `gate-s1-registration` | "appended ADR-0003" (first-parent status support bullet); its prefix pinned by the S1.3 tool until ADR-0012; Al's ruling 3 on PR 22 |
 
-Awaiting a freeze point (recorded here as unchanged, immutable or digest-bound, but without a
-commit at which the record says they froze; listed in the pull request that adds this section,
-for Al's ruling; not checked):
-- `groundtruth/` — the accepted corpus, "35 archived representations, 32 effective logical items"
-  unchanged in every update since Session 23; `s1_ingest-v0.1.0-63e23a952084` "stays immutable".
-  Proposed: every item directory frozen at `gate-s1-registration` (the corpus at Gate S1's
-  closure; the S1.3 reproduction already byte-checks the 34 baseline item directories, hash-binds
-  the effective representation and refuses additions under `groundtruth/`, ADR-0012 D2);
-  `groundtruth/HARVEST-LOG.md` append-only (a later prefix appends rows; ADR-0003 D7, D8);
-  `groundtruth/README.md` append-only (the former tool's treatment); `groundtruth/derivations/`
-  frozen (the reviewed TeX derivation, ADR-0006).
-- `PROGRAM/SWEEP-2026-10.md` and `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md` — ferried
-  files whose identity is the digest this file records (Founding sweep and Advisory note
-  bullets); the tag's blobs carry exactly those digests. Proposed: frozen at
-  `gate-s1-registration`.
-- `sources/` — nine stored copies whose SHA-256 the source register records (SD11); re-hashed in
-  Session 6. Proposed: frozen at `gate-s1-registration`.
-- `PROGRAM/DECISIONS/ADR-0003.md` — "appended ADR-0003" (first-parent status support bullet);
-  its prefix was pinned by the S1.3 tool until ADR-0012. Proposed: append-only at
-  `gate-s1-registration`.
-- Not proposed: the 20 pair-producer inputs (pinned to `eb1b96d5…` for the replay range only;
-  two changed at ADR-0010 and two change at S2's first code commit — "S1.2 pair replay" bullet);
-  `PROGRAM/CLAIMS.md` and `PROGRAM/FLAWS.md` (append-only registers in §3's sense, but a CLAIM's
-  Status line and a FLAW example have been updated in place, so they are not byte-append-only);
-  the constitution, `LICENSE`, `LICENSES/`, `THIRD-PARTY-NOTICES.md` and `CITATION.cff` (change
-  only by ADR or by the deposit procedure); the other ADRs (Status lines and *Amendments* change).
+Ruled unchecked (Al's ruling 3 on PR 22, 2026-10-27 — "the scopes you did not propose stay
+unchecked"): the 20 pair-producer inputs (pinned to `eb1b96d5…` for the replay range only; two
+changed at ADR-0010 and two change at S2's first code commit — "S1.2 pair replay" bullet);
+`PROGRAM/CLAIMS.md` and `PROGRAM/FLAWS.md` (append-only registers in §3's sense, but a CLAIM's
+Status line and a FLAW example have been updated in place, so they are not byte-append-only); the
+constitution, `LICENSE`, `LICENSES/`, `THIRD-PARTY-NOTICES.md` and `CITATION.cff` (change only by
+ADR or by the deposit procedure); the other ADRs (Status lines and *Amendments* change);
+`groundtruth/amendment-map.json` (not proposed; bound by the S1.3 reproduction's compiled copy,
+ADR-0012 D1).
 
 ## Memory policy
 
@@ -1080,8 +1121,8 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   PR 20, in effect since its merge (2026-10-27T20:28:10Z); ADR-0012 the S1.3 effective-inventory
   reproduction's byte checks narrowed to its input set — written, implemented and measured
   Session 35 (2026-10-27), accepted at PR 21's merge (2026-10-27T21:36:26Z); **amended Session 36
-  (*Amendments* 1: the invariance test and the freeze register; awaiting Al's review of its pull
-  request); ADR-0013 is the next free number.**
+  (*Amendments* 1: the invariance test and the freeze register; Al's rulings 1–4 of 2026-10-27 on
+  PR 22 recorded; PR 22 awaits merge); ADR-0013 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -1181,14 +1222,17 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 ## Standing escalations and dispositions
 
-- **Freeze register — awaiting Al's rulings (Session 36; the pull request carrying ADR-0012
-  *Amendments* 1):** (1) the scopes listed under *Awaiting a freeze point* in the Freeze
-  register section — `groundtruth/` (item directories frozen; `HARVEST-LOG.md` and `README.md`
-  append-only; `derivations/` frozen), the ferried sweep and advisory note, `sources/`, ADR-0003
-  — each with the executor's proposal, none checked until ruled; (2) two choices made in the
-  rows that are checked: a frozen scope refuses additions and removals as well as changes, and
-  the two append-only rows take `gate-s1-registration` as their freeze point. Both lists are in
-  the pull request's description.
+- **Freeze register — DECIDED by Al on 2026-10-27 (rulings 1–4 on PR 22, verbatim in ADR-0012
+  *Amendments* and HANDOFF Session 36; PR 22 awaits merge).** (1) The invariance test, the
+  checker and its tests, the CI changes and the nine enforced rows: accepted. (2) The two
+  choices: accepted — a frozen scope refuses additions and removals, and the append-only rows'
+  freeze point is the `gate-s1-registration` tag. (3) The awaiting scopes, all at that tag: one
+  frozen row per accepted item directory under `groundtruth/` (so later prefixes add new
+  directories), `HARVEST-LOG.md` and `README.md` append-only, `derivations/` frozen; the sweep
+  and the advisory note frozen (a later change or removal is a register edit under a ruling);
+  each of the nine stored copies under `sources/` as its own frozen row (so new copies can be
+  stored beside them); ADR-0003 append-only; the scopes not proposed stay unchecked. (4)
+  Recorded as a second commit on the branch. Nothing else is awaited from Al on the register.
 - **ADR-0011 — DECIDED by Al on 2026-10-27 (rulings 1–4 on PR 20, verbatim in ADR-0011
   *Amendments* and HANDOFF Session 34); PR 20 merged 2026-10-27T20:28:10Z, creating `main`
   `6d89eb2f8a138a53d824d035febffc93423e1e0d` (Session 35's orientation).** (1) Independence from the S1 corpus: no seed, grammar or template derived from

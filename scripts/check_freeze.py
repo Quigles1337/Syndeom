@@ -160,8 +160,14 @@ class GitEnv:
         return data
 
     def read_working(self, path):
-        p = self.root / path
-        return p.read_bytes() if p.is_file() else None
+        """Working-tree bytes, read once per process (the tree is one snapshot for one run; the
+        test harness overlays its mutations on top of these reads)."""
+
+        def compute():
+            p = self.root / path
+            return p.read_bytes() if p.is_file() else None
+
+        return self._cached(("working", path), compute)
 
     def close(self):
         if self._batch is not None:
