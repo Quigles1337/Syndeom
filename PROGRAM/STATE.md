@@ -18,7 +18,8 @@
     byte-identical; at HEAD it passes, differing only in three `preservation` fields (bullet
     below).
   - **Replay of the admitted S1.2 pair from HEAD ends here.** It runs on `e6a7cae…`..`c9372b1`
-    (procedure below). The 18 committed receipts are unchanged.
+    (procedure below; run once at `c9372b1` in a clean clone: PASS, byte-identical to the
+    original production). The 18 committed receipts are unchanged.
   - **Unchanged:** historical "Apache" statements in frozen files, and the pair's recorded wrapper
     licence (C4, C5).
   - **Ordering:** the S2 generator decision is now **ADR-0011**, and the byte-check narrowing
@@ -421,8 +422,31 @@
     destination").
   - The 18 committed receipts that record the producer's input closure — 16 under
     `analysis/s1-2/implementation/evidence/production/receipts/` and 2 under
-    `analysis/s1-4/evidence/` — are unaffected. This procedure is assembled from that README and
-    the producer's code; Session 30 did not re-run it.
+    `analysis/s1-4/evidence/` — are unaffected.
+  - **Run once, exactly as written, at Al's direction (Session 30, 2026-10-27): PASS. No step
+    needed correction.** Evidence is under the external root
+    `C:\Users\LEET\Codex\Temp\syndeom-pair-replay-20261026\`: the procedure as written, the
+    wrapper, the raw log `replay.raw.log` (SHA-256 `42383a2a…c04e`) and `replay-out/`.
+    1. Fresh clone of `origin`, detached at `c9372b1`, tree `4caa81f0…`, clean (01:16:53Z–01:16:56Z).
+    2. `lake exe cache get` (01:16:56Z–01:24:19Z) and `lake build` (01:24:19Z–01:30:05Z), both
+       exit 0, about 13 min with the machine's Mathlib cache already populated.
+    3. `reproduce.py` (01:30:05Z–01:31:14Z), exit 0.
+
+    Its `verification-receipt.json` (SHA-256 `37d7037e…cc42`) reads `PASS: generation,
+    actual-byte validation, emitted Lean audit, replay and controls; draft admission only`:
+    - checkout `c9372b1…`, producer `eb1b96d…`; rustc 1.91.0; Lean 4.34.1;
+    - all five source objects fetched over HTTP 200 and hash-verified (`--source-dir` not
+      needed);
+    - 33 commands, each with its expected exit; all 18 refusal controls refused (exit 2);
+    - emitted-file audit PASS, standard axioms only;
+    - fresh replay byte-identical (11 files).
+
+    The 11 file digests equal those of the original production receipt
+    (`analysis/s1-2/implementation/evidence/production/verification-receipt.json`), and the
+    emitted `Proof.lean` equals the original (`038c70bf…`). The five generated metadata files
+    (both manifests, both source maps, the emitted `Proof.lean`) are byte-identical to the
+    admitted pair committed under `groundtruth/`. Replay from HEAD was not attempted;
+    ADR-0010's statement that it is refused rests on the producer's code.
 - **S1.3 orientation verification (2026-10-20):** existing Lean/Rust code passed the gate,
   with documentation reconciliation in progress; 29 existing tests passed, axioms `[propext]`.
   The new crate was enabled only after this gate. Its focused producer checks now pass

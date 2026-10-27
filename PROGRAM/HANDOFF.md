@@ -5725,3 +5725,20 @@ STOP-REASON: natural boundary — the accepted ADR is applied and delivered on a
 request; the session stops for Al's review, as Al directed. Repo green: the committed-tree gate,
 recorded in the pull request.
 **Memory writes:** none.
+SESSION 30 ADDENDUM (2026-10-27 UTC, after PR 16 opened; at Al's direction, before merge):
+- **The S1.2 pair replay was run once, exactly as STATE writes it, in a clean clone at
+  `c9372b1`: PASS, with no correction needed.** This supersedes the HONESTY CHECK line above that
+  says it was not re-run.
+- Timings: clone 01:16:53Z–01:16:56Z; `lake exe cache get` 01:16:56Z–01:24:19Z; `lake build`
+  01:24:19Z–01:30:05Z; `reproduce.py` 01:30:05Z–01:31:14Z; every step exit 0.
+- Receipt: `PASS: generation, actual-byte validation, emitted Lean audit, replay and controls`
+  (SHA-256 `37d7037e…cc42`). Five sources were fetched over HTTP and hash-verified; 33 commands
+  ran as expected; 18 refusal controls refused.
+- Results: the fresh replay is byte-identical across 11 files, and those digests equal the
+  original production receipt's. The generated pair metadata and emitted `Proof.lean` are
+  byte-identical to the committed admitted pair.
+- Recorded in STATE (the S1.2 PAIR REPLAY bullet) and ADR-0010 *Consequences*. Evidence is under
+  `C:\Users\LEET\Codex\Temp\syndeom-pair-replay-20261026\`.
+- The commit carrying this addendum is gated on its committed tree, recorded in the pull request
+  and under `C:\Users\LEET\Codex\Temp\syndeom-relicense-20261026\`.
+- **Memory writes:** none.
