@@ -460,6 +460,10 @@ The licence does not cover:
 - any artifact whose own manifest records a different licence for a SYNDEOM-authored component.
   For example, the S1.2 alias wrapper is recorded as Apache-2.0.
 
+[`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md) lists every file that the licence does not
+cover, with its licence and attribution. The Apache-2.0 text for the files under that licence is
+[`LICENSES/Apache-2.0.txt`](LICENSES/Apache-2.0.txt).
+
 The engineer of record made this change on 2026-10-26 in
 [ADR-0010](PROGRAM/DECISIONS/ADR-0010.md). It supersedes the Apache-2.0 choice of
 [ADR-0000, Addendum 2](PROGRAM/DECISIONS/ADR-0000.md) and keeps its boundary. The provenance of

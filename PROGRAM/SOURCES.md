@@ -2370,3 +2370,28 @@ the exact case-specific ruling and validated replacement metadata are proposed.
   `c9372b1355a6d687dec6287f908639ac670db659`. This entry records its successor from the commit
   that accepts ADR-0010. S-0019 is unchanged: the register is append-only under ADR-0010 D6, and
   copies obtained under Apache-2.0 remain under it (ADR-0010 D3).
+
+### S-0019 addendum — 2026-10-27 UTC (Session 31): the same text, re-fetched, committed as `LICENSES/Apache-2.0.txt`
+
+- **As named:** Al's ruling 3 of 2026-10-27 (ADR-0010 *Amendments*): add the Apache-2.0 text
+  verbatim as `LICENSES/Apache-2.0.txt`, fetched from an official source, with its checksum
+  verified against this entry. `THIRD-PARTY-NOTICES.md` lists the files it applies to.
+- **Canonical ASF host — still unreachable:** curl to `https://www.apache.org/licenses/LICENSE-2.0.txt`
+  at 2026-10-27T02:26:03Z: `Failed to connect to www.apache.org port 443 after 21132 ms: Could
+  not connect to server`; to `https://apache.org/licenses/LICENSE-2.0.txt` at 02:26:34Z: `Failed
+  to connect to apache.org port 443 after 21098 ms: Could not connect to server`. The diff note
+  above is carried unchanged.
+- **Retrieved — the SPDX License List's text:** `https://spdx.org/licenses/Apache-2.0.txt`,
+  accessed 2026-10-27T02:26:03Z (curl, HTTP 200, `Content-Type: text/plain`, `Last-Modified: Wed,
+  29 Apr 2020 17:19:07 GMT`, ETag `"ba963850f6731c74878fe839d227e675"`, both as recorded above):
+  10,279 bytes, 0 CR, no trailing newline, 72 lines, SHA-256
+  `c274f80372d90c012937370f0e1f15087d22e308ef98b27cea5dc0d2d088366c`, **equal to the digest
+  recorded above.**
+- **Committed form:** the retrieved bytes plus one trailing LF, as above: 10,280 bytes, SHA-256
+  `074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff`. Compared with `cmp`, it is
+  byte-identical to `LICENSE` at `c9372b1355a6d687dec6287f908639ac670db659`.
+- **Licence (of this material):** the Apache License 2.0 is itself the licence. The text is
+  included to apply it to the Apache-2.0 files that `THIRD-PARTY-NOTICES.md` lists.
+- **Numbering:** this addendum takes no new S-number, so the held branch's planned renumbering
+  (STATE) does not move. The entry's recorded state is unchanged.
+- **Evidence:** `C:\Users\LEET\Codex\Temp\syndeom-registration-licence-20261027\retrieval\`.

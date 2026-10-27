@@ -5742,3 +5742,121 @@ SESSION 30 ADDENDUM (2026-10-27 UTC, after PR 16 opened; at Al's direction, befo
 - The commit carrying this addendum is gated on its committed tree, recorded in the pull request
   and under `C:\Users\LEET\Codex\Temp\syndeom-relicense-20261026\`.
 - **Memory writes:** none.
+
+SESSION: 2026-10-27 UTC (2026-10-26 America/New_York) (Session 31 — an informed working session,
+not an examination, continuing Session 30's conversation at Al's direction; it was not launched
+with the §6 prompt, so it makes no SD15 disclosure; the licence audit for the Gate S1
+registration deposit and Al's rulings on it; branch `claude/s2-third-party-notices` from `main`
+`368bcfb5c05c23536a32bfc15b9537173fb0fef7`; the session-end SHA is the commit carrying this
+block, recorded in its pull request)
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (nothing evidenced). Gate S1 CLOSED (Session 29).
+ORIENT:
+- **Al's first message (read-only audit):**
+  - `git fetch --prune --tags origin`, exit 0; `main` moved `c9372b1` → `368bcfb`.
+  - `git ls-remote --symref origin HEAD` named `main`. Fetched `origin/main` =
+    `368bcfb5c05c23536a32bfc15b9537173fb0fef7`, tree `d33402ca2bfa0efcee577b2855b0741c07cdbe6e`,
+    equal to the remote's live `main`.
+  - The checkout was on `claude/s2-adr-0010-relicense` at `0470684` (the same tree), clean. It
+    was not changed. The preflight was not run for this read-only step.
+- **Al's second message (writes; ADR-0008 D1 steps 1–5):**
+  - The clean checkout was switched to `main`. Then `orient_preflight.py orient --repo
+    C:/Users/LEET/Syndeom --expect-url https://github.com/Quigles1337/Syndeom.git --sync
+    --receipt …` ran: the script at `368bcfb`, from a copy under the external root.
+  - Result: exit 0, SNAPSHOT-ESTABLISHED. `git fetch --prune origin` exit 0,
+    2026-10-27T02:25:19.50Z–02:25:20.26Z; default branch `main`.
+  - Fetched tip `368bcfb…`, tree `d33402ca…`. Classification behind; `main` fast-forwarded (ff-only)
+    from `c9372b1`.
+  - Receipt SHA-256 `7e0c774d274f962e07e60016ecbd83347a579e8cdad2b6753714b3d6dd965793`
+    (`orient-1-sync.json` under the external root
+    `C:\Users\LEET\Codex\Temp\syndeom-registration-licence-20261027\`).
+
+PR 16 merged at 2026-10-27T02:09:06Z, by Al, as `368bcfb`. Its first parent is `c9372b1` (PR 15's
+merge), and its tree `d33402ca…` equals PR 16's head `0470684`'s tree, which Session 30 gated
+GREEN. Nothing has landed after PR 16: there is no other commit and no open pull request. No tags
+existed locally or on the remote.
+WHAT AL ASKED:
+- **The first message**, verbatim in ADR-0010 *Amendments*:
+  - confirm PR 16 and record `main`;
+  - audit every file not under SYNDEOM's own licence against the SD16 records, changing nothing;
+  - only if the audit is clean, tag `gate-s1-registration` and build the zip.
+- **Then rulings 1–4**, verbatim in the same place:
+  - leave the advisory note and the Leiden PDF out of the deposit;
+  - before tagging, add `LICENSES/Apache-2.0.txt` and `THIRD-PARTY-NOTICES.md`;
+  - record the rulings, and check the frozen checks first;
+  - gate, open a pull request and stop;
+  - after the merge, tag and build.
+ADVANCED:
+- **A. Audit (read-only, 464 files at `368bcfb`). The executor stopped before tagging.**
+  - Twelve third-party copies, each hash-matched to its S-entry: seven CC BY 4.0 PDFs
+    (S-0010..S-0016); a CC0 PDF (S-0004); a CC BY-NC 4.0 PDF (S-0005); three identical CC BY 4.0
+    v70 e-prints (S-0024).
+  - **Not redistributable:** `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md`, recorded as
+    `PROPRIETARY_ALL_RIGHTS_RESERVED` (R1(b); ADR-0010 D2(b)).
+  - Apache-2.0 files (the alias wrapper; Lean's printed Mathlib declarations), with no Apache-2.0
+    text in the tree since ADR-0010.
+  - 30 ground-truth items whose manifests record their originals as not redistributable. The
+    originals are absent from the tree. No licence was recorded for the derived record files as
+    such.
+- **B. Al's rulings 1–4** (above).
+- **C. Frozen checks, read before any file was written.** None is tripped. The list is in ADR-0010
+  *Amendments*: `preserve()`'s addition scopes, its README/LICENSE skips and its SOURCES prefix
+  rule; the pair and S1.4 closures; the register check's byte and reference rules.
+- **D. Applied:**
+  - `LICENSES/Apache-2.0.txt`: SPDX text fetched at 02:26:03Z, equal to S-0019's
+    `c274f803…366c`. Plus one LF it is `074e6e32…15ff`, `cmp`-identical to `LICENSE` at
+    `c9372b1`. The ASF host refused both attempts.
+  - `THIRD-PARTY-NOTICES.md`.
+  - README § Licence (a pointer to both files).
+  - The S-0019 addendum, appended to SOURCES.md. Its prefix was verified byte-identical to HEAD's
+    file.
+  - ADR-0010 *Amendments*. STATE: Updated; Default branch; Session 31 build verification; Q3's ASF
+    note; a deposit escalation.
+- **E. Gate** on the exact staged tree, committed unchanged. Detached with a log; recorded in the
+  pull request and under the external root, not in the tree it certifies.
+BELIEF DELTAS:
+- **ADR-0010 D2(a)** placed "the ground-truth artifacts derived from sources" outside the licence.
+  Their manifests' `licence` field describes the external original, so the derived record files
+  had no recorded licence of their own. Ruling 3 now records them as SYNDEOM's, with the
+  quotations remaining their authors'. Evidence: the 30 manifests' `config.licence` and
+  `storage: external`. Consequence: ADR-0010 *Amendments*, "D2(a), read with ruling 3".
+- **Any new S-entry would shift the held branch's planned renumbering again** (0074–0080 → one
+  later). An appended addendum to S-0019 records the retrieval without a number. Evidence: STATE's
+  held-branch bullet. Consequence: the addendum form.
+CONFUSIONS:
+- **The audit's first report missed a third byte-identical file of printed Mathlib declarations,**
+  `analysis/s1-2/implementation/evidence/production/logs/emitted-type-axiom-audit.txt`. The
+  first pass looked by file type and name. A content search found the file while the notices
+  were prepared; it is listed and was reported to Al. Doc fix: look for third-party text by
+  content, not by file name.
+HONESTY CHECK:
+- **Sources and registers:** no S-entry added; the S-0019 addendum leaves its state unchanged. No
+  CLAIM or FLAW status changed, and no artifact or manifest changed.
+- **Attribution:** taken from the S-entries as recorded. Where an entry names the first and last
+  authors only, the notices say so and point to the arXiv page.
+- **Mathlib credit:** checked against `Mathlib/Data/Nat/PrimeFin.lean` in the pinned checkout at
+  `d13f23b…`.
+- Downgrades: none.
+LEAKAGE CHECK: checked, not assumed — `contact/` was not opened; no detector, generator or
+threshold was touched; the work concerns licences and notices. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED claims. The deposit archive is built after the merge,
+from the tag, outside the tree. Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing; nothing synthetic
+labeled real.
+DRIFT CHECK:
+- no statement about any real manuscript (SD3);
+- no understanding claims (SD17);
+- no detectors; no referee contact (SD13);
+- no S2 code; the held branch untouched.
+NEXT-SINGLE-ACTION: after Al merges this session's pull request, tag the merge commit
+`gate-s1-registration` and build the deposit archive exactly as STATE's Standing escalations
+state it, then report to Al. STATE's NEXT (S2.1, ADR-0011) is unchanged.
+ESCALATIONS:
+- This session's branch `claude/s2-third-party-notices` and its pull request await Al's review;
+  left unmerged.
+- The deposit, pending that merge (Standing escalations).
+- Unchanged: R4's seed family at ADR-0011's draft; the held branch's review; human-referee
+  participants (SD13).
+STOP-REASON: natural boundary — Al's ruling 3 ends at a gated, reviewable pull request; the
+session stops for Al's review. Repo green: the gate on the committed tree, recorded in the pull
+request.
+**Memory writes:** none.
