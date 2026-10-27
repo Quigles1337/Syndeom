@@ -1,6 +1,26 @@
 # STATE
 
-- **Updated:** 2026-10-27 UTC (Session 32 — an informed working session, not an examination,
+- **Updated:** 2026-10-27 UTC (Session 33 — an informed working session, not an examination,
+  continuing Session 32's conversation at Al's direction; not launched with the §6 prompt, so no
+  SD15 disclosure): **`CITATION.cff` added, and its refresh joins the deposit procedure (Al's
+  ruling of 2026-10-27, verbatim in ADR-0010 *Amendments* and HANDOFF Session 33).**
+  - **Orientation:** the ADR-0008 preflight (receipt
+    `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\orient-1-sync.json`)
+    fast-forwarded the clean `main` to fetched `origin/main`
+    `99bdf0362e12d7d7c405566396d7a1a7f01c04a1`, tree `c063cc6589fc4f5d7605690ae7103cbd87993f5c`.
+    That is **PR 18's merge** (2026-10-27T06:05:00Z, by Al). Its tree equals the PR's head tree,
+    which Session 32 gated GREEN.
+  - **`CITATION.cff`** (Citation File Format 1.2.0, schema-valid): `doi` is the concept DOI
+    `10.5281/zenodo.23682780`; the version DOI `10.5281/zenodo.23682781` is listed under
+    `identifiers` as the Gate S1 design registration; `version`, `date-released`, `commit` and
+    `title` match the latest deposit.
+  - **The deposit procedure** now refreshes `CITATION.cff` at every deposit (Standing escalations,
+    first bullet; ADR-0010 *Amendments*).
+  - **Unchanged:**
+    - the licence, the preservation tool, the README and the `gate-s1-registration` tag;
+    - registers' statuses, manifests, frozen packets and the accepted corpus;
+    - NEXT.
+- **Previous update (Session 32):** 2026-10-27 UTC (Session 32 — an informed working session, not an examination,
   continuing Session 31's conversation at Al's direction; not launched with the §6 prompt, so no
   SD15 disclosure): **the Gate S1 design registration is published on Zenodo, and the records
   now say so (Al's instruction and rulings of 2026-10-27, quoted in HANDOFF Session 32).**
@@ -506,7 +526,17 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 32):** no separate ORIENT gate on main `2018d5e`. Its
+- **Current build verification (Session 33):** no separate ORIENT gate on main `99bdf03`. Its
+  tree `c063cc6589fc4f5d7605690ae7103cbd87993f5c` is the tree Session 32 gated GREEN on PR 18's
+  head `d1e4d75`:
+  - run 2026-10-27T05:46:42Z–05:57:09Z, recorded in `gate-committed.json`;
+  - raw log SHA-256 `b37f667f…c603`, under
+    `C:\Users\LEET\Codex\Temp\syndeom-post-deposit-records-20261027\`.
+
+  The commit adding `CITATION.cff` receives a full gate on its committed tree, with a clean
+  working tree. That gate is recorded in its pull request and under
+  `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\`, not in the tree it certifies.
+- **Session 32 build verification:** no separate ORIENT gate on main `2018d5e`. Its
   tree `3d7889def475b2b2f30d8acfd3dee31589a06a6e` is the tree Session 31 gated GREEN on PR 17's
   head `a6e2038`:
   - run 2026-10-27T02:35:08Z–02:41:56Z, recorded in `gate-staged.json`;
@@ -981,6 +1011,14 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
     Session 32 confirmed each value from Zenodo's API. It also downloaded the published file,
     which is byte-identical to the built archive. README § Citation carries Zenodo's citation and
     BibTeX.
+  - **Every later deposit refreshes `CITATION.cff`** (Al's ruling of 2026-10-27, Session 33;
+    ADR-0010 *Amendments*), reading the values from the published Zenodo record:
+    - `version`, `date-released`, `commit` and `title` become the new deposit's;
+    - its version DOI is added under `identifiers`, with a description naming the deposit;
+    - `doi` stays the concept DOI `10.5281/zenodo.23682780`.
+
+    The refresh lands in the records commit that follows the deposit, so each deposited archive
+    carries the preceding `CITATION.cff`.
 - **SD15 audit request — Gate S1 examination (Session 29, 2026-10-26) — DECIDED by Al on
   2026-10-26: all three judgments upheld; the PASS is not conditional.** Al's rulings,
   transcribed verbatim from Al's message in the Session 29 conversation (also in HANDOFF

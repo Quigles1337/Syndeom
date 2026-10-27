@@ -6085,3 +6085,105 @@ ESCALATIONS:
 STOP-REASON: natural boundary — Al's instruction ends at a gated, reviewable pull request.
 Repo green: the gate on the committed tree, recorded in the pull request.
 **Memory writes:** none.
+
+SESSION: 2026-10-27 UTC (2026-10-27 America/New_York) (Session 33 — an informed working session,
+not an examination, continuing Session 32's conversation at Al's direction; it was not launched
+with the §6 prompt, so it makes no SD15 disclosure; `CITATION.cff` and its refresh at each
+deposit; branch `claude/s2-citation-cff` from `main` `99bdf0362e12d7d7c405566396d7a1a7f01c04a1`;
+the session-end SHA is the commit carrying this block, recorded in its pull request)
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (nothing evidenced). Gate S1 CLOSED (Session 29).
+ORIENT (ADR-0008 D1 steps 1–5: `python -I -X utf8 <copy of scripts/orient_preflight.py> orient
+--repo C:/Users/LEET/Syndeom --expect-url https://github.com/Quigles1337/Syndeom.git --sync
+--receipt …`, exit 0, SNAPSHOT-ESTABLISHED):
+- the clean checkout was switched from `claude/s2-post-deposit-records` (at `d1e4d75`, the same
+  tree) to `main` at `2018d5e`; the script ran from a byte-identical copy (SHA-256
+  `7f5f0ecd…e5c8`) under the external root;
+- identity `C:/Users/LEET/Syndeom`, remote `https://github.com/Quigles1337/Syndeom.git`;
+- `git fetch --prune origin` exit 0, 2026-10-27T06:06:01.54Z–06:06:02.63Z; default branch `main`
+  (`git ls-remote --symref`);
+- fetched `origin/main` `99bdf0362e12d7d7c405566396d7a1a7f01c04a1`, tree
+  `c063cc6589fc4f5d7605690ae7103cbd87993f5c`. Classification behind (two commits: `d1e4d75` and
+  PR 18's merge); `main` fast-forwarded (ff-only); examined checkout `C:/Users/LEET/Syndeom`;
+- receipt SHA-256 `bdc7bc82…33b6` (`orient-1-sync.json` under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\`).
+
+PR 18 merged at 2026-10-27T06:05:00Z, by Al, as `99bdf03`. Its parents are `2018d5e` and the PR's
+head `d1e4d75`, and its tree equals the head's, which Session 32 gated GREEN. No pull request was
+open. The constitution's SHA-256 is `110f5360…479c`, unchanged.
+WHAT AL ASKED — the ruling, verbatim:
+
+~~~text
+PR #18 merged. CITATION.cff ruling: use the concept DOI, 10.5281/zenodo.23682780, as the main doi, and list the version DOI, 10.5281/zenodo.23682781, under identifiers, described as the Gate S1 design registration. Keep version and date-released matching the latest deposit, and add updating CITATION.cff to the deposit procedure so each future deposit refreshes them. Check the frozen checks before adding the file and report before working around one. One file on its own branch and PR; run the gate, fetch fresh before pushing, and stop for my review.
+~~~
+
+THE SCOPE QUESTION, before any write. The executor reported that adding the file trips no frozen
+check, and asked how "one file on its own branch and PR" fits with adding the step to the deposit
+procedure, which lives in ADR-0010 *Amendments* and STATE's deposit item; a session also appends
+HANDOFF. Three options were offered:
+- the file plus the step recorded in those records;
+- the file alone, with the step stated in a comment inside it;
+- the file now and the records in a later pull request.
+
+Al's answer, verbatim: "Add the file and record the step (Recommended)".
+ADVANCED:
+- **A. Frozen checks, before the file was added.** None is tripped:
+  - `preserve()` rejects additions only under `analysis/s1-4/`,
+    `analysis/s1-first-parent-status/`, `engine/manifest/examples/`, `engine/manifest/src/`,
+    `engine/pair/src/` and `groundtruth/`;
+  - the S1.4 tool's `ls-files` covers only `engine/manifest/examples` and `analysis/s1-4/config`;
+  - the register check requires a non-`.md` file to have LF line endings, no BOM and a final LF;
+  - `.gitattributes` (`* text=auto eol=lf`) makes the file LF text.
+- **B. `CITATION.cff`** (1,031 bytes, LF, no BOM, final LF):
+  - valid against the Citation File Format 1.2.0 schema (`schema.json` from the
+    `citation-file-format` repository's tag `1.2.0`, SHA-256 `0b8d2214…169b`, under the external
+    root's `schema\`), whose licence list includes `PolyForm-Noncommercial-1.0.0`;
+  - every field cross-checked against Zenodo's record: `doi` equals `conceptdoi`; the one
+    identifier equals the version DOI; `version`, `date-released`, `title`, author name,
+    affiliation, ORCID and licence equal the record's; `commit` equals the tag's commit;
+  - Zenodo's API (`versions/latest`, 06:09:31Z) confirmed 23682781 as the latest and only
+    version, so the file matches the latest deposit.
+- **C. Records:**
+  - ADR-0010 *Amendments*: a dated entry with Al's ruling verbatim, the scope, the file, the added
+    procedure step and the frozen-check review;
+  - STATE: Updated; Current build verification; the deposit item's new procedure step;
+  - HANDOFF: this entry.
+- **D. Gate** on the committed tree with a clean working tree; recorded in the pull request and
+  under the external root, not in the tree it certifies.
+BELIEF DELTAS:
+- **A refresh after the deposit cannot be inside that deposit.** The version DOI and publication
+  date exist only once Zenodo publishes, so the refresh lands in the records commit after it, and
+  each archive carries the preceding `CITATION.cff`. Evidence: Session 32's sequence (tag,
+  archive, deposit, then records). Consequence: the step is recorded that way, and the
+  alternative, reserving the DOI before the tag, is put to Al in the pull request.
+CONFUSIONS:
+- "One file on its own branch and PR" alongside a procedure change that lives in three records.
+  Resolved by Al's answer above before any write.
+HONESTY CHECK:
+- Every identifier was read from Zenodo's API or from git, not copied from the ruling.
+- Two choices in the added step are the executor's and are flagged for Al in the pull request:
+  later version DOIs are added under `identifiers` rather than replacing the Gate S1 entry, and
+  `commit` and `title` are refreshed along with `version` and `date-released`.
+- No register status, manifest, frozen packet or constitution byte changed; no S-entry added; the
+  tag was not touched. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed — `contact/` was not opened; no detector, generator or
+threshold was touched; the work concerns citation metadata. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED claims. Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing; nothing synthetic
+labeled real.
+DRIFT CHECK:
+- no statement about any real manuscript (SD3);
+- no understanding claims (SD17);
+- no detectors; no referee contact (SD13);
+- no S2 code; the held branch untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT, unchanged — S2.1, `PROGRAM/DECISIONS/ADR-0011.md`, decision
+only.
+ESCALATIONS:
+- This session's branch `claude/s2-citation-cff` and its pull request await Al's review; left
+  unmerged.
+- For Al, in the pull request: whether later version DOIs add to `identifiers` or replace the
+  entry, and whether to reserve the DOI so each archive carries its own `CITATION.cff`.
+- Unchanged: R4's seed family at ADR-0011's draft; the held branch's review; human-referee
+  participants (SD13).
+STOP-REASON: natural boundary — Al's ruling ends at a gated, reviewable pull request. Repo green:
+the gate on the committed tree, recorded in the pull request.
+**Memory writes:** none.
