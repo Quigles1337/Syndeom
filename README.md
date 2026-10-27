@@ -373,7 +373,9 @@ Use the [post-merge reproduction instructions](analysis/s1-post-merge-readiness/
 The existing Rust consumer validates the one-case amendment and historical preservation,
 then emits one effective status per logical item. Choose a fresh external output directory;
 the wrapper compares two runs and confirms overwrite refusal. Inventory bytes match the
-retained result when inputs are unchanged; provenance names the actual checkout revision/tree.
+retained result when inputs are unchanged, except the `preservation` object, which describes
+the byte checks the tool now makes (ADR-0012: its input set only); provenance names the actual
+checkout revision/tree.
 
 ## Repository map
 

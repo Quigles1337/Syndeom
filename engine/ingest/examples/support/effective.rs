@@ -7,7 +7,6 @@ mod historical;
 
 use serde::Deserialize;
 use serde_json::{Value, json};
-use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 use std::io::{BufRead, BufReader, Read, Write};
@@ -100,105 +99,86 @@ pub fn json(blobs: &Blobs, path: &str) -> Result<Value> {
     serde_json::from_slice(bytes(blobs, path)?).map_err(|e| format!("{path}: {e}"))
 }
 
-/// The four crate manifests whose `license` line alone may differ from the pinned bytes (ADR-0010).
-pub const LICENSE_LINE_FILES: [&str; 4] = [
-    "engine/derive/Cargo.toml",
-    "engine/ingest/Cargo.toml",
-    "engine/manifest/Cargo.toml",
-    "engine/pair/Cargo.toml",
-];
-const LICENSE_LINE_PINNED: &[u8] = b"\nlicense = \"Apache-2.0\"\n";
-const LICENSE_LINE_CURRENT: &[u8] = b"\nlicense = \"PolyForm-Noncommercial-1.0.0\"\n";
+/// The baseline files the reproduction reads by name (ADR-0012), besides the item directories.
+pub const DISPOSITIONS: &str = "analysis/s1-4/config/dispositions.json";
+pub const CANDIDATE_CONFIG: &str = "analysis/s1-first-parent-status/candidate-config.json";
 
-/// Bytes to compare with a pin: in the four ADR-0010 manifests only, exactly one whole PolyForm
-/// `license` line is restored to the pinned Apache line; every other byte is compared unchanged.
-pub fn license_line_restored<'a>(path: &str, current: &'a [u8]) -> Cow<'a, [u8]> {
-    if !LICENSE_LINE_FILES.contains(&path) {
-        return Cow::Borrowed(current);
-    }
-    let hits: Vec<usize> = current
-        .windows(LICENSE_LINE_CURRENT.len())
-        .enumerate()
-        .filter(|(_, w)| *w == LICENSE_LINE_CURRENT)
-        .map(|(i, _)| i)
-        .collect();
-    match hits.as_slice() {
-        [i] => {
-            let mut restored = current[..*i].to_vec();
-            restored.extend_from_slice(LICENSE_LINE_PINNED);
-            restored.extend_from_slice(&current[i + LICENSE_LINE_CURRENT.len()..]);
-            Cow::Owned(restored)
-        }
-        _ => Cow::Borrowed(current),
-    }
+/// The accepted candidate's packet directory, whose manifest and source bytes are read.
+pub fn candidate_dir() -> String {
+    format!("analysis/s1-first-parent-status/candidate/{NEW}/")
 }
 
-/// A frozen pair-producer input is unchanged when equal to its producer-revision bytes, allowing
-/// only the ADR-0010 `license` line.
-pub fn pair_input_unchanged(path: &str, current: &[u8], original: &[u8]) -> bool {
-    *license_line_restored(path, current) == *original
+/// An accepted item directory is a baseline directory under `groundtruth/` holding a manifest.
+fn item_dirs(frozen: &Frozen) -> BTreeSet<&str> {
+    frozen
+        .files
+        .keys()
+        .filter_map(|p| {
+            p.strip_prefix("groundtruth/")?
+                .strip_suffix("/manifest.json")
+        })
+        .collect()
 }
 
-/// The only permitted historical edits are named current summaries and exact-prefix appends.
+/// ADR-0012 D1 — the input set: every baseline file the reproduction reads, in baseline order.
+/// The taxonomy; every file of every accepted item directory (manifest, record, committed bytes,
+/// source map); the dispositions overlay; and the accepted-candidate packet files that
+/// `validate_case` compares. Files the reproduction reads that are not in the baseline — the
+/// amendment map, the owner decision and the effective representation's directory — are bound by
+/// compiled constants and hashes instead. Nothing else in the baseline is byte-checked.
+pub fn input_set(frozen: &Frozen) -> Vec<&str> {
+    let items = item_dirs(frozen);
+    let candidate = candidate_dir();
+    frozen
+        .files
+        .keys()
+        .map(String::as_str)
+        .filter(|path| {
+            matches!(
+                *path,
+                "PROGRAM/FLAWS.md" | DISPOSITIONS | WITNESS | CANDIDATE_CONFIG
+            ) || path.starts_with(&candidate)
+                || path
+                    .strip_prefix("groundtruth/")
+                    .and_then(|rest| rest.split_once('/'))
+                    .is_some_and(|(dir, _)| items.contains(dir))
+        })
+        .collect()
+}
+
+/// ADR-0012: the input set is byte-identical to the accepted baseline, and nothing was added
+/// under `groundtruth/` besides the amendment map and the effective representation, because the
+/// census enumerates that directory. A change anywhere else in the tree is not this tool's
+/// concern: it neither stops the reproduction nor fails the gate.
 pub fn preserve(blobs: &Blobs, frozen: &Frozen) -> Result<Value> {
-    let mut exact = 0;
-    let mut appended = Vec::new();
-    let mut license_line = Vec::new();
-    for (path, pin) in &frozen.files {
+    let inputs = input_set(frozen);
+    for path in &inputs {
+        let pin = &frozen.files[*path];
         let current = bytes(blobs, path)?;
-        // The constitution changes only by ADR, never as reproduction data (ADR-0009 D5); the
-        // licence file is not an inventory input (ADR-0010).
-        if matches!(
-            path.as_str(),
-            "README.md" | "PROGRAM/STATE.md" | "PROGRAM/SYNDEOM-PROGRAM.md" | "LICENSE"
-        ) {
-            continue;
-        }
-        let restored;
-        let preserved: &[u8] = if matches!(
-            path.as_str(),
-            "PROGRAM/HANDOFF.md"
-                | "PROGRAM/DECISIONS/ADR-0003.md"
-                | "PROGRAM/SOURCES.md"
-                | "groundtruth/README.md"
-        ) {
-            appended.push(path);
-            current
-                .get(..pin.n_bytes)
-                .ok_or_else(|| format!("historical prefix truncated: {path}"))?
-        } else if LICENSE_LINE_FILES.contains(&path.as_str()) {
-            license_line.push(path);
-            restored = license_line_restored(path, current);
-            &restored[..]
-        } else {
-            exact += 1;
-            current
-        };
-        if content_hash(preserved) != pin.sha256 {
+        if current.len() != pin.n_bytes || content_hash(current) != pin.sha256 {
             return Err(format!("historical bytes changed: {path}"));
         }
     }
+    let effective = format!("groundtruth/{NEW}/");
     for path in blobs.keys().filter(|p| !frozen.files.contains_key(*p)) {
-        if path.starts_with("analysis/s1-4/")
-            || path.starts_with("analysis/s1-first-parent-status/")
-            || path.starts_with("engine/manifest/examples/")
-            || path.starts_with("engine/manifest/src/")
-            || path.starts_with("engine/pair/src/")
-            || (path.starts_with("groundtruth/")
-                && path != MAP
-                && !path.starts_with(&format!("groundtruth/{NEW}/")))
-        {
+        if path.starts_with("groundtruth/") && path != MAP && !path.starts_with(&effective) {
             return Err(format!("unexpected addition in preserved scope: {path}"));
         }
     }
+    let scope = |prefix: &str| inputs.iter().filter(|p| p.starts_with(prefix)).count();
+    let item_files = scope("groundtruth/");
+    let packet_files = scope("analysis/s1-first-parent-status/");
     Ok(
         json!({"baseline_revision": BASE, "baseline_tree": frozen.base_tree,
-        "exact_files_checked": exact, "append_only_prefixes_checked": appended,
-        "license_line_only_files_checked": license_line,
-        "s1_4_files_checked": frozen.files.keys().filter(|p| p.starts_with("analysis/s1-4/")).count(),
-        "accepted_packet_files_checked": frozen.files.keys().filter(|p| p.starts_with("analysis/s1-first-parent-status/")).count(),
-        "all_historical_groundtruth_objects": "byte-identical; no added historical members",
-        "pair_producer_and_dependency_pins": "byte-identical to accepted baseline; original producing revisions preserved"}),
+        "input_set_rule": "ADR-0012: the taxonomy, every accepted ground-truth item directory, the dispositions overlay and the accepted-candidate packet files the reproduction reads; baseline files outside this set are not byte-checked",
+        "exact_files_checked": inputs.len(),
+        "baseline_files": frozen.files.len(),
+        "baseline_files_outside_input_set": frozen.files.len() - inputs.len(),
+        "groundtruth_item_files_checked": item_files,
+        "accepted_packet_files_checked": packet_files,
+        "inputs_checked": inputs,
+        "all_historical_groundtruth_objects": "every accepted item directory byte-identical; no added members",
+        "pair_producer_and_dependency_pins": "hashed at the producer revision into provenance.json; not compared with the checkout (ADR-0012)"}),
     )
 }
 
@@ -596,14 +576,24 @@ pub fn cli() -> Result<()> {
         return Err("compiled mapping/preservation pins mismatch".into());
     }
     let result = inventory(&current)?;
+    // ADR-0012: the pair producer's inputs are hashed at the producer revision for the record.
+    // The checkout's bytes are not compared: the inventory does not read these files, and the
+    // pair's replay is pinned to the revision range STATE records (ADR-0010).
     let pair_revision = "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf";
+    let list = git(
+        &repo,
+        &[
+            "show",
+            &format!("{pair_revision}:engine/pair/input-files.txt"),
+        ],
+    )?;
     let mut pair_inputs = BTreeMap::new();
-    for path in text(&current, "engine/pair/input-files.txt")?.lines() {
+    for path in std::str::from_utf8(&list)
+        .map_err(|e| e.to_string())?
+        .lines()
+    {
         let original = git(&repo, &["show", &format!("{pair_revision}:{path}")])?;
-        if !pair_input_unchanged(path, bytes(&current, path)?, &original) {
-            return Err(format!("frozen pair producer input changed: {path}"));
-        }
-        pair_inputs.insert(path, content_hash(&original));
+        pair_inputs.insert(path.to_string(), content_hash(&original));
     }
     if pair_inputs.len() != 20 {
         return Err("unexpected frozen pair input membership".into());
@@ -613,6 +603,7 @@ pub fn cli() -> Result<()> {
         "mapping_sha256":content_hash(EXPECTED_MAP.as_bytes()),"preservation_inputs_sha256":content_hash(FREEZE.as_bytes()),
         "taxonomy_version":"0.1.0","battery_version":null,"seed":null,"uncertainty":"deterministic census of pinned metadata; not a statistical estimate",
         "pair_producer_revision":pair_revision,"pair_input_hashes":pair_inputs,
+        "pair_input_check":"hashes of the producer revision's objects; the checkout's bytes are not compared (ADR-0012)",
         "no_network_or_witness_reinvestigation":true});
     clean(&repo)?;
     if String::from_utf8(git(&repo, &["rev-parse", "HEAD"])?)

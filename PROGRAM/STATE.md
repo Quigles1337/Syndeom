@@ -1,6 +1,45 @@
 # STATE
 
-- **Updated:** 2026-10-27 UTC (Session 34 — a session launched from `C:\Users\LEET` with the §6
+- **Updated:** 2026-10-27 UTC (Session 35 — a session launched from `C:\Users\LEET` with the §6
+  Session-N resume prompt verbatim followed by an owner note; SD15 disclosure first (HANDOFF
+  Session 35, appended without reading the file, under a provisional header completed after
+  ADR-0008 step 5); **not an examination** — the owner note carries program state, and Gate S2
+  has nothing to examine; it certifies nothing): **ADR-0012, the S1.3 effective-inventory
+  reproduction's byte checks narrowed to its input set — decided, implemented and measured; no
+  S2 code (S2 ordering step 2; STATE's NEXT as it stood).**
+  - **Orientation:** the ADR-0008 preflight found the checkout `C:\Users\LEET\Syndeom` on `main`
+    **synchronized** with fetched `origin/main` `6d89eb2f8a138a53d824d035febffc93423e1e0d`
+    (**PR 20's merge**, by Al, 2026-10-27T20:28:10Z; tree
+    `93ded916fb8cbfaea21f7d2a2367f86415fe3fc9`, the tree Session 34 gated GREEN on PR 20's head
+    `751fd97`), with the disclosure append the only change (receipt `orient-1.json` under
+    `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-20261027\`). No worktree: the checkout was the
+    snapshot.
+  - **Housekeeping (Al's ruling 4 of 2026-10-27) — DONE in Session 34's conversation after the
+    merge; verified here from its receipt, not redone** (`housekeeping-receipt.json` under
+    `C:\Users\LEET\Codex\Temp\syndeom-adr-0011-20261027\`, SHA-256 `170e0d58…4670`): the worktree
+    `C:\Users\LEET\Syndeom-wt-20261027` is gone (`git worktree list` shows the one checkout); the
+    discarded append's body (14,931 bytes, `36dda70c…8d2f`, recomputed from the retained copy)
+    equals the committed body at HEAD lines 6286–6444 (recomputed from the HEAD blob); the
+    checkout was switched to `main` and fast-forwarded by the preflight
+    (`housekeeping-orient-sync.json`); the local branch `claude/s2-adr-0011-generator` was kept.
+  - **ADR-0012** (`PROGRAM/DECISIONS/ADR-0012.md`, proposed; implemented in the same commit):
+    `preserve()` checks exactly the reproduction's input set — the taxonomy, every accepted item
+    directory under `groundtruth/`, the S1.4 dispositions overlay and the four accepted-candidate
+    packet files it reads: 79 of the 375 baseline files, derived from the baseline list and listed
+    in the output — and refuses additions under `groundtruth/`; nothing else is byte-checked, so a
+    constitution amendment, an ADR, SIBLING-MAP, `scripts/check.sh`, `lean/Audit.lean`,
+    `engine/Cargo.toml` or `engine/Cargo.lock` neither stops it nor fails the gate. The four
+    case-by-case exceptions (ADR-0009 D5; ADR-0010 D6) are replaced by the rule; the pair-input
+    comparison with the checkout is removed (the hashes stay recorded from the producer revision;
+    the replay claim is the revision range below). Tests: `relicense_exceptions` (6) replaced by
+    `input_set` (6); `first_parent_amendment` keeps 15, two rewritten to the new boundary.
+    **Measured:** at `3cd5558` with that revision's tool the retained `inventory.json` is
+    byte-identical; at this revision's tree the reproduction passes and differs from the retained
+    only in the `preservation` object (ADR-0012 D6 lists the eleven paths).
+  - **Unchanged:** registers' statuses, manifests, frozen packets, the retained report, the
+    accepted corpus (35 / 32), the constitution, the licence, the tag and the held branch. **NEXT**
+    moves to ordering step 3, the held harvest's admission review.
+- **Previous update (Session 34):** 2026-10-27 UTC (Session 34 — a session launched from `C:\Users\LEET` with the §6
   Session-N resume prompt verbatim; SD15 disclosure first (HANDOFF Session 34, appended without
   reading the file, under a provisional header completed after ADR-0008 step 5); **not an
   examination** — Gate S2 has nothing to examine, which the session could establish only after
@@ -565,7 +604,22 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 34):** ORIENT gate on the examined worktree at fetched
+- **Current build verification (Session 35):** ORIENT gate on the checkout `C:\Users\LEET\Syndeom`
+  at fetched `origin/main` `6d89eb2f8a138a53d824d035febffc93423e1e0d` (tree
+  `93ded916fb8cbfaea21f7d2a2367f86415fe3fc9`) with one declared change, the SD15 disclosure
+  appended to `PROGRAM/HANDOFF.md`: full gate, detached with a log, 2026-10-27T20:54:16Z–21:03:15Z,
+  exit 0 / `GATE: GREEN` — Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, 88 Rust tests,
+  468 tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 73 (raw log SHA-256
+  `627ef560f579fa33f8e3e712bf5094b941b835149c8ea8691c277719a938a416`, under
+  `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-20261027\`). The gate's cargo phase compiled the
+  pre-ADR-0012 sources: its 88 tests include the six-test suite ADR-0012 removes, which does not
+  compile against the revised tool. The S1.3 reproduction was run twice in scratch clones, outside
+  the gate: at `3cd5558` with that revision's tool (retained inventory byte-identical) and on this
+  revision's tree with the revised tool (PASS; `preservation` object only) — ADR-0012
+  *Measurements*. This pull request's commit receives its own full gate and reproduction on its
+  committed tree, with a clean working tree, recorded in the pull request and under the same
+  root, not in the tree it certifies.
+- **Session 34 build verification:** ORIENT gate on the examined worktree at fetched
   `origin/main` `a741ebf956be0bd87ebf1b606f0b9c6df1853043` (tree
   `a5e7df5488530c560ab7ec9eb608037f92a03820`) with one declared change, the carried SD15
   disclosure appended to `PROGRAM/HANDOFF.md`: full gate, detached with a log, 2026-10-27T19:30:55Z–19:41:28Z, exit 0 / `GATE: GREEN` — Lean 8,926 jobs, golden axioms `[propext]`, fmt/clippy, 88 Rust tests, 467 tracked files, Q 17 / SD 17 / FLAW 14 / CLAIM 7 / S- 73 (raw log SHA-256 `245980cdba01e84de7541471091b0b74a3a9b3b4b55156ec0a0364e06778067e`). Receipt and raw log are under the
@@ -934,10 +988,12 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   §4.1 — written and accepted 2026-10-21 (Session 23); ADR-0009 constitution amendment to SD15
   and the §6 Session-N prompt (disclosure first) — written and accepted 2026-10-26 (Session 26);
   ADR-0010 relicense to PolyForm Noncommercial 1.0.0, with three preservation-check exceptions —
-  written and accepted 2026-10-26 (Session 30); **ADR-0011 the first generator family (S2.1) —
+  written and accepted 2026-10-26 (Session 30); ADR-0011 the first generator family (S2.1) —
   written Session 34 (2026-10-27), decision only, accepted by Al's rulings 1–4 of 2026-10-27 on
-  PR 20 (in effect at the merge); ADR-0012 is the next free number, reserved by NEXT for the
-  byte-check narrowing.**
+  PR 20, in effect since its merge (2026-10-27T20:28:10Z); **ADR-0012 the S1.3 effective-inventory
+  reproduction's byte checks narrowed to its input set — written, implemented and measured
+  Session 35 (2026-10-27), proposed, awaiting Al's review of its pull request; ADR-0013 is the
+  next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -989,7 +1045,7 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 |---|---|---|
 | S1.1 Errata and retractions: per item the original, the notice, the flaw's location, its FLAWS.md class argued in writing; derivation `documented-by-source`; licence per SD16 | **evidenced for the admitted unskipped prefix; harvest not exhausted — prefix through arXiv id `1403.4485` (candidates 1–27 of 2,472; Sessions 11, 13, 14, 15, 16, 17, 18, 19, 20): 27 examined, 21 admitted yielding 31 items, 4 rejected (two D2.1 — mis-stated quoted theorems with no proof offered; two D8 — one correcting version after the window, one cumulative comment whose only correction predates it), 2 found-but-unclassifiable (withdrawal stubs naming no describable error, one of them superseded by a paper that is silent on the mistake); `groundtruth/HARVEST-LOG.md` is the record of every candidate; harvest resume remains candidate 28** | `PROGRAM/DECISIONS/ADR-0003.md` (Session 9; Al's rulings on (i)–(v) recorded Session 10): D1 routes (arXiv comments, Crossref update relations, zbMATH index; AI-generated excluded), D2 admission, D3 class mapping (undetermined truth admitted under `syndeom-manifest/2`), D4 record (`manifest.json`, bytes, `RECORD.md`, S-entries, `groundtruth/HARVEST-LOG.md`), D5 licences (NC/ND `external`), D6 `raw/1` parent + derived artifact + the producer, D7 log, D8 window, no skipping, prefix gate, D9 the S1.4 table; routes live-checked 2026-10-13. **Producer:** `engine/ingest/` → `syndeom-ingest` (`s1_ingest` 0.1.0, Session 10): writes a `/2` manifest from a config and bytes, refuses on any ADR-0001 D4 or ADR-0003 shape violation (exit 2) and on a same-id byte conflict (exit 3); goldens over fixed bytes (fixture `915d3ed6…1390`, 72 bytes) and two fixed configs — boolean truth (`s1_ingest-v0.1.0-d2134e7fd2c3`, manifest `1f2cf7b9…1f63`) and the null case (`s1_ingest-v0.1.0-4f5d4e93adaa`, manifest `451bde2d…8340`) — config hashes cross-checked in Python. Orientation reconciliation (2026-10-20): the log and 31 admitted items exist; the former empty-slots sentence was stale. |
 | S1.2 Informal–formal pairs with the mathlib commit pinned (positive statement-fidelity pairs; drifted pairs are synthetic and live in `corpora/`, SD12) | **one positive pair admitted by owner merge PR 4** | ADR-0007; both pair RECORD post-merge dispositions; actual producer/both-file/lineage/type/axiom/replay evidence in `analysis/s1-2/implementation/`; merge metadata in `analysis/s1-4/config/merge-evidence.json`. No separate GitHub reviewer approval, no PROVEN promotion; statement-only informal selection, zero steps. |
-| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **35 archived representations (33 raw + two canonical), 32 effective logical items; 30 without canonical lengths. First-parent status support discharged on verified main by PR 7; fresh Rust reproduction and preservation evidence in `analysis/s1-post-merge-readiness/`. After ADR-0009 the reproduction gives the retained inventory byte-identical at main `3cd5558`, and at HEAD a PASS differing only in `preservation.exact_files_checked` 370 → 369 (bullet near the top of this file).** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; old raw retained; stable logical key resolves to accepted false/counterexample representation `s1_ingest-v0.1.0-15ab865466d6`; canonical selection/context/locator review still required; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
+| S1.3 Manifests for real items (`origin: ground-truth`; `raw/1` parent plus derived canonical artifact per ADR-0001 D4; nothing synthetic labeled real) | **35 archived representations (33 raw + two canonical), 32 effective logical items; 30 without canonical lengths. First-parent status support discharged on verified main by PR 7; fresh Rust reproduction and preservation evidence in `analysis/s1-post-merge-readiness/`. After ADR-0009 and ADR-0012 the reproduction gives the retained inventory byte-identical at main `3cd5558` with that revision's tool, and at HEAD a PASS differing from the retained report only in the `preservation` object, whose byte checks are now the input set alone (ADR-0012 D6; bullet near the top of this file).** | `s1_ingest-v0.1.0-63e23a952084/` (arXiv 0706.0357 v70, Lemma 1.1; FLAW-0012 + FLAW-0005; old raw retained; stable logical key resolves to accepted false/counterexample representation `s1_ingest-v0.1.0-15ab865466d6`; canonical selection/context/locator review still required; original committed, CC BY 4.0); `s1_ingest-v0.1.0-744652f4b95f/` (arXiv 0707.3799 v2, Theorem 1 b); FLAW-0011 + FLAW-0005; statement true; `external`); `s1_ingest-v0.1.0-5ba6c0f07557/` (arXiv 0902.0680 v1, the dense-subspace lemma; FLAW-0005 gap; **statement undetermined — `value: null`, the first use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-a8ac73896464/` (arXiv 0908.3213 v4, Theorem 4.4; FLAW-0001 propagated + local; statement false; `external`); `s1_ingest-v0.1.0-be3b17e73425/` and `s1_ingest-v0.1.0-72415457dce4/` (arXiv 1005.2398 v2, Proposition 3.3.5 and the lemma following it; FLAW-0012 + FLAW-0005 each; statements false — the proposition by the author's counterexample; `external`); `s1_ingest-v0.1.0-e0c199d3c60a/` (arXiv 1009.3998 v4, Lemma 13.2; FLAW-0011 + FLAW-0001 local; statement true; `external`); `s1_ingest-v0.1.0-448d7aefa486/` (arXiv 1010.2391 v9, Lemma A.3; FLAW-0012 + FLAW-0005; statement false; `external`); `s1_ingest-v0.1.0-1c4c9a7747d0/` and `s1_ingest-v0.1.0-2d93a266558a/` (arXiv 1107.0863 v3, Lemma 12 and Theorem 1; FLAW-0012 each; the lemma false by the authors' counterexample figure, the theorem by source document; `external`); `s1_ingest-v0.1.0-e3cbdfa7ad1c/` (arXiv 1112.6107 v2, Theorem 1; FLAW-0012; statement false by source document — the misstated last clause, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-22ae000cb879/` and `s1_ingest-v0.1.0-fd2bfef40d31/` (arXiv 1201.3327 v2, the former Lemma 5.8 and the former Theorem 5.9; FLAW-0012 fatal and FLAW-0005 gap; the lemma false by source document, **the theorem undetermined — `value: null`, the second use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-dc1e44f39bb9/` (arXiv 1202.5531 v3, Theorem 6; FLAW-0012; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-68ed1abfecb4/` and `s1_ingest-v0.1.0-a4822a4be06e/` (arXiv 1206.1893 v6, Propositions 34 and 35; FLAW-0012 + FLAW-0005, and FLAW-0005 gap; the first false by source document, **the second undetermined — `value: null`, the third use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-da3a4784c2be/` (arXiv 1206.2228 v1, Theorem 1; FLAW-0012; statement false by source document; **`status.kind` `retraction`, the first**; `external`); `s1_ingest-v0.1.0-685b874cf579/` (arXiv 1206.5522 v5, Proposition 5.3; FLAW-0012 + FLAW-0005; statement false by source document — the hypotheses corrected, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-00f28e252823/` and `s1_ingest-v0.1.0-a93badadec27/` (arXiv 1209.2022 v2, Proposition 3.1 and Theorem 3.2; FLAW-0012, and FLAW-0011 + FLAW-0005 gap; the proposition false by the printed counterexample, the theorem true by source document; `external`); `s1_ingest-v0.1.0-cafb56cb27fb/` (arXiv 1209.4040 v3, Theorem 4.5; FLAW-0005 gap; **undetermined — `value: null`, the fourth use of ruling (ii)**; `external`); `s1_ingest-v0.1.0-45c3ee8319d5/`, `s1_ingest-v0.1.0-486ef22f632b/` and `s1_ingest-v0.1.0-dc0e0b0d5b87/` (arXiv 1210.6709 v1, Theorems 1.6, 2.2 and 2.1; FLAW-0005 fatal, fatal and gap; **all three undetermined — `value: null`, the fifth to seventh uses of ruling (ii)**; `external`); `s1_ingest-v0.1.0-40e6c0da8821/` (arXiv 1303.3650 v2, Theorem 4.6; FLAW-0012 + FLAW-0005; statement false by source document, `undetermined` named as the alternative; `external`); `s1_ingest-v0.1.0-003a35498654/`, `s1_ingest-v0.1.0-0833f61c748c/`, `s1_ingest-v0.1.0-82b4e66d0016/` and `s1_ingest-v0.1.0-315546e87259/` (arXiv 1304.5623 v4, Proposition 3.5, Theorem 3.6 (4), Theorem 4.3 and Theorem 5.3; FLAW-0004 gap, FLAW-0005 gap, FLAW-0012 + FLAW-0004 + FLAW-0004, FLAW-0005 gap; **three undetermined — `value: null`, the eighth to tenth uses of ruling (ii)**, Theorem 4.3 false by the erratum's example; `external`); `s1_ingest-v0.1.0-f634c259799f/` (arXiv 1312.1045 v1, Theorem A.1; FLAW-0011 + FLAW-0005 gap; statement true by source document; `external`); `s1_ingest-v0.1.0-6ae03b18a1bd/` (arXiv 1403.4485 v3, Proposition 5.1; FLAW-0001 propagated + local; statement false by source document; `external`) — all under `groundtruth/`, each with `manifest.json` (`syndeom-manifest/2`, `engine_commit` of the producer's commit, self-checked by the producer) and `RECORD.md` (the D3 class argument); S-0024..S-0065 |
 | S1.4 Coverage and power: per flaw class, how many real items at what proof lengths; zero-coverage classes named as a finding | **merged in PR 5; complete for pinned prefix, qualified, reproducible and frozen** | `analysis/s1-4/report/report.md`, inventory/coverage/provenance JSON, frozen bins, two fresh byte-identical runs. Five observed classes, nine zero, 32 historical roots / 17 unflagged roots. Every real-item cell expected underpowered; no numerical power or detector run. `analysis/s1-4/OBLIGATIONS.md` is the historical ledger. The later effective inventory records 35 representations / 32 logical items / 18 unflagged; current requirements and limits are mapped in `analysis/s1-post-merge-readiness/READINESS.md`. |
 | Licences recorded for anything touched (SD16) | **recorded; existing storage choices preserved** | Per-source completeness matrix and source records in `analysis/s1-4/`; SOURCES historical prefix unchanged. No new external source ingested or rights inferred. First-parent status support is discharged on verified main under the accepted scoped ruling. External bytes retain historical evidence and must be retrieved/reverified before scoring; the older dispositions and exclusions remain unchanged. |
 | Repo green under the gate | **done (and standing)** | ORIENT gate GREEN at `e029c80` plus the declared disclosure append, 2026-10-26T23:16:58Z–23:25:02Z (Current build verification above); the closing commit's staged-tree gate is recorded in its pull request |
@@ -1038,8 +1094,8 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 ## Standing escalations and dispositions
 
 - **ADR-0011 — DECIDED by Al on 2026-10-27 (rulings 1–4 on PR 20, verbatim in ADR-0011
-  *Amendments* and HANDOFF Session 34); the pull request (branch `claude/s2-adr-0011-generator`)
-  awaits merge.** (1) Independence from the S1 corpus: no seed, grammar or template derived from
+  *Amendments* and HANDOFF Session 34); PR 20 merged 2026-10-27T20:28:10Z, creating `main`
+  `6d89eb2f8a138a53d824d035febffc93423e1e0d` (Session 35's orientation).** (1) Independence from the S1 corpus: no seed, grammar or template derived from
   any item under `groundtruth/`, which is what the frozen battery is validated against in S4;
   seeds come from FLAWS.md or other material outside the S1 corpus, and every seed record states
   its source; binding on later producer versions (ADR-0011 D6). (2) D12 (h1)/(h2): option (iii) —
@@ -1058,8 +1114,11 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   `36dda70ceeb161b49069dfca5b43bf85be77f584fbdd4ddfc89792e83eb88d2f` (14,931 bytes; the original
   append's whole entry, provisional header included, was 15,108 bytes, `ef8239fd…9429`) — then
   discard it. Al's ruling authorizes that discard: ADR-0008's prohibition covers undeclared work,
-  and this append is declared, verified and committed. Not done in Session 34, because the merge
-  had not happened.
+  and this append is declared, verified and committed. **DONE in Session 34's conversation after
+  the merge (2026-10-27T20:29:39Z–20:32:17Z; receipt `housekeeping-receipt.json`, log and
+  `housekeeping-orient-sync.json` under `C:\Users\LEET\Codex\Temp\syndeom-adr-0011-20261027\`),
+  and verified in Session 35 from the receipt, the retained copies and the HEAD blob (Updated
+  bullet). Nothing awaited.**
 - **Gate S1 registration deposit — DONE: published on Zenodo on 2026-10-27** (Al's rulings of
   2026-10-27, ADR-0010 *Amendments*; HANDOFF Session 32). Nothing awaited.
   - **The tag.** `gate-s1-registration`, annotated, with the message "SYNDEOM design registration
@@ -1179,8 +1238,12 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   which are frozen exact files and two of the 20 pinned pair-producer inputs, so the current
   check would turn the gate RED. Still exact-checked today: every other non-input file in the
   baseline, ADR-0005 and SIBLING-MAP among them (an edit to ADR-0005 failed the reproduction in
-  Session 26's probe). **It is the next action (Session 34): NEXT-SINGLE-ACTION below, recorded
-  as ADR-0012.**
+  Session 26's probe). **DONE — ADR-0012 (Session 35, 2026-10-27): the byte checks are limited to
+  the reproduction's input set (79 of the 375 baseline files, derived from the baseline list), the
+  four exceptions are replaced by the rule, and the pair-input comparison with the checkout is
+  removed; awaiting Al's review of its pull request. The population pin (35 archived
+  representations / 32 logical items) stands, so a later prefix still needs its own inventory
+  event (ADR-0012 D7).**
 
 - **First-parent status support — accepted, verified and activated on main:**
   Al accepted the exact ruling on 2026-10-20 America/New_York; appended ADR-0003 and
@@ -1203,9 +1266,10 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   (verbatim in the SD15 audit bullet above): NEXT stays at ADR-0010 per the phase order, with
   the held harvest review scheduled after it.** ADR-0010 in that ruling is the generator
   decision, renumbered ADR-0011 by ADR-0010. Nothing on the branch is approved by this
-  eligibility. Its integration would add `groundtruth/` members and SOURCES entries, which the
-  current preservation check refuses ("unexpected addition in preserved scope"), so in practice
-  it also follows the byte-check narrowing (bullet above).
+  eligibility. Its integration would add `groundtruth/` members, which `preserve()` still refuses
+  after ADR-0012 ("unexpected addition in preserved scope"), and would change the population the
+  effective-inventory tool pins (35 / 32), so the integration is its own inventory event with its
+  own snapshot and tool revision (ADR-0012 D7); SOURCES entries are no longer byte-checked.
 - **Later harvest held off main — DECIDED by Al on 2026-10-21 (decision 1, transcribed in
   `analysis/s1-orientation-repair/OWNER-DECISIONS.md`): preserve branch
   `claude/s1-harvest-candidates-28-30` at its original recorded commit
@@ -1342,54 +1406,47 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2 ordering step 2 — the full narrowing of the S1.3 effective-inventory reproduction tool's
-byte checks, decided and recorded as ADR-0012.** It lands before any S2 code, including
-ADR-0011's crate (ADR-0010 D7; Al, 2026-10-26). The session decides and implements the tool
-revision only: it writes no generator code and does not integrate the held branch.
+**S2 ordering step 3 — the held harvest's admission review (Al's order of 2026-10-26: after the
+narrowing, before ADR-0011's crate).** Review branch `claude/s1-harvest-candidates-28-30` at
+`c3a3d369689d56bab3678f519904087b313daf4e` (held by Al's decision 1 of 2026-10-21; Standing
+escalations, "Later harvest held off main") as the candidate first later prefix of the Route A
+stream (ADR-0003 D8, D9). The session reviews and records; it integrates nothing, approves
+nothing and writes no generator code.
 
-**First, housekeeping (Al's ruling 4 of 2026-10-27), in the first session after PR 20's merge:**
-remove the worktree `C:\Users\LEET\Syndeom-wt-20261027` (`git worktree remove`); in
-`C:\Users\LEET\Syndeom`, compare the uncommitted HANDOFF append's body SHA-256 with the committed
-disclosure's (`36dda70c…8d2f`; Standing escalations, "Two checkouts") and, if equal, discard the
-append. With the checkout clean, Sessions 30–33 switched it to `main` before the preflight so that
-`--sync` could fast-forward; a §6 launch on a non-default branch lands in a worktree again
-(Session 34). Then this action.
+Executable cold:
+1. Open per ADR-0008 D1 (SD15 disclosure first if launched with the §6 prompt). Do not check the
+   held branch out over the examined checkout: read it with `git show c3a3d36:<path>` and
+   `git diff main...c3a3d36 --stat`, and read Session 22's preserved retrieval evidence under
+   `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\held-evidence\`, re-verifying
+   each file against `analysis/s1-orientation-repair/evidence/held-evidence-manifest.json`.
+2. For each of the branch's five items (candidates 28–30: arXiv `1403.6317` Theorem 1;
+   `1403.8075` Proposition 4.1, Theorems 4.3 and 4.4; `1404.4599` Proposition 2.22), re-apply
+   ADR-0003 D2's seven admission criteria and D3's class mapping to the branch's `RECORD.md`,
+   manifest and `HARVEST-LOG.md` row against the preserved originals and notices. Record
+   agree/disagree per item with the evidence line. Record the branch's open readings — an eighth
+   truth reading, two further severity readings, further unnamed results, its item 36's "overcome
+   in a later paper" wording (Standing escalations, "Older questions") — as questions for Al, not
+   as relabelings.
+3. Write the review as `analysis/s1-held-harvest-review/REVIEW.md` with a `receipt.json` (branch
+   tip, evidence digests re-verified, per-item verdicts, UTC times), and state the integration
+   plan the review implies: source entries renumbered after main's last entry, config hashes,
+   artifact ids, records and log rows regenerated at the integration commit, a new inventory
+   snapshot under its own event (the effective-inventory tool pins 35 archived representations /
+   32 logical items and refuses additions under `groundtruth/`; ADR-0012 D7), never a rewrite of
+   the Gate S1 table or the frozen S1.4 packet; candidate 31 stays undecided.
+4. Escalate to Al: the per-item verdicts, the questions, and whether to proceed to the
+   integration as the first later prefix under its own record (option (a), the executor's
+   recommendation of Session 22). Commit `[S1][ADR-0003] review the held harvest branch:
+   <n> items, <verdicts>` on a branch, gate the committed tree, open a pull request; Al merges.
+   Then step 4, ADR-0011's crate — only after Al rules on the review.
 
-What it does, under Al's direction of 2026-10-26 (Standing escalations, "S1.3 reproduction tool"):
-1. In `engine/ingest/examples/support/effective.rs`, limit `preserve()` and the pair-input check
-   (`pair_input_unchanged()`) to the inputs the reproduction depends on, so that an amendment of
-   a file it does not use — a constitution amendment, an ADR, SIBLING-MAP, `scripts/check.sh`,
-   `lean/Audit.lean` — neither stops it running at HEAD nor fails the gate's
-   `first_parent_amendment` tests, while any byte change to an input it depends on still fails.
-   Read the input set from the tool, its tests and its packets (SD7), never from a summary;
-   `analysis/s1-first-parent-integration/preservation-inputs.json` is compiled into the
-   reproduction and checked against itself.
-2. Decide in ADR-0012 how the narrowed check treats `engine/Cargo.toml` and `engine/Cargo.lock`:
-   S2's first code commit edits both, and both are two of the 20 pinned pair-producer inputs
-   (replay from HEAD already ended at ADR-0010; the replay revision range is recorded in this
-   file). The current `license`-line exception and the three other case-by-case exceptions are
-   replaced by the narrowed rule or kept, as ADR-0012 argues.
-3. Keep the `relicense_exceptions` (6) and `first_parent_amendment` (15) suites green and add
-   tests that show the new boundary: an edit outside the input set passes; an edit inside it
-   fails.
-4. Record, as ADR-0009 D5 and ADR-0010 D6 did: the tool's source SHA-256 before and after; that
-   the retained `inventory.json` is reproduced byte-identical at `3cd5558` with that revision's
-   tool; and exactly which `preservation` fields of the output change at HEAD, with everything
-   else unchanged.
-5. Write ADR-0012 (context, options, decision, the tests, the measurements); update this file's
-   "S1.3 reproduction tool" escalation, the ADR-numbers line and this NEXT.
+If ADR-0012's pull request is still unmerged when this action is picked up, the review may
+proceed (it does not depend on the tool revision); the integration waits for both.
 
-Bounds: the frozen packets, the registers, the constitution, the licence, the tag and the
-accepted corpus are untouched; the held branch stays held; no generator code. If ADR-0011's pull
-request is still unmerged when this action is picked up, this step may proceed — it does not
-depend on ADR-0011 — and the ADR-0011 rulings stay awaited (Standing escalations). Open the
-session per ADR-0008 D1, preceded by the SD15 disclosure if it is launched with the §6 prompt;
-note the two checkouts under Standing escalations. Commit `[S2][ADR-0012] narrow the S1.3
-reproduction's byte checks to its inputs` on a branch, gate the committed tree, open a pull
-request; Al merges. Then step 3, the held harvest's admission review (Al's order), and only then
-step 4, ADR-0011's crate.
-
-The harvest itself stays paused through candidate 27 / `1403.4485`, with candidate 28 /
-`1403.6317` saved. The seven truth questions, the seven severity questions and the
-unnamed-result question keep their existing dispositions. Missing canonical lengths and
-external-byte verification remain prerequisites for scoring real items (S4), not for S2.
+Bounds: the frozen packets, the registers, the constitution, the licence, the tag, the accepted
+corpus and the held branch's commits are untouched; nothing on the branch is approved by the
+review; no cherry-pick, no merge, no force-push. The harvest itself stays paused through
+candidate 27 / `1403.4485`, with candidate 28 / `1403.6317` saved. The seven truth questions,
+the seven severity questions and the unnamed-result question keep their existing dispositions.
+Missing canonical lengths and external-byte verification remain prerequisites for scoring real
+items (S4), not for S2.
