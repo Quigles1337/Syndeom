@@ -1,6 +1,28 @@
 # STATE
 
-- **Updated:** 2026-10-27 UTC (Session 31 — an informed working session, not an examination,
+- **Updated:** 2026-10-27 UTC (Session 32 — an informed working session, not an examination,
+  continuing Session 31's conversation at Al's direction; not launched with the §6 prompt, so no
+  SD15 disclosure): **the Gate S1 design registration is published on Zenodo, and the records
+  now say so (Al's instruction and rulings of 2026-10-27, quoted in HANDOFF Session 32).**
+  - **Orientation:** the ADR-0008 preflight (receipt
+    `C:\Users\LEET\Codex\Temp\syndeom-post-deposit-records-20261027\orient-1-sync.json`)
+    fast-forwarded the clean `main` to fetched `origin/main`
+    `2018d5e79ea23fa200e560d628bec5e91edf0956`, tree `3d7889def475b2b2f30d8acfd3dee31589a06a6e`.
+    That is **PR 17's merge** (2026-10-27T02:48:36Z, by Al). Its tree equals the PR's head tree,
+    which Session 31 gated GREEN.
+  - **The deposit is done** (Standing escalations, first bullet): the annotated tag
+    `gate-s1-registration` on `2018d5e`, the archive built from it, and Zenodo record 23682781
+    (version DOI `10.5281/zenodo.23682781`; concept DOI `10.5281/zenodo.23682780`). Every
+    identifier was confirmed from Zenodo's API before it was written.
+  - **README:** the passages that presented Gate S1 as open now cite its closure (this file,
+    HANDOFF Session 29, PR 15) and NEXT below; a DOI badge and a Citation section were added.
+  - **Corrected here:** the Standing-escalations bullet on Session 29's pull request now records
+    PR 15's merge.
+  - **Unchanged:**
+    - the licence, the preservation tool, and the `gate-s1-registration` tag;
+    - registers' statuses, manifests, frozen packets and the accepted corpus;
+    - NEXT.
+- **Previous update (Session 31):** 2026-10-27 UTC (Session 31 — an informed working session, not an examination,
   continuing Session 30's conversation at Al's direction; not launched with the §6 prompt, so no
   SD15 disclosure): **third-party notices and the Apache-2.0 text, ahead of the Gate S1
   registration deposit (Al's rulings of 2026-10-27; ADR-0010 *Amendments*).**
@@ -484,7 +506,18 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 31):** no separate ORIENT gate on main `368bcfb`. Its
+- **Current build verification (Session 32):** no separate ORIENT gate on main `2018d5e`. Its
+  tree `3d7889def475b2b2f30d8acfd3dee31589a06a6e` is the tree Session 31 gated GREEN on PR 17's
+  head `a6e2038`:
+  - run 2026-10-27T02:35:08Z–02:41:56Z, recorded in `gate-staged.json`;
+  - raw log SHA-256 `833fde02…d951`, under
+    `C:\Users\LEET\Codex\Temp\syndeom-registration-licence-20261027\`.
+
+  The commit recording the deposit receives a full gate on its committed tree, with a clean
+  working tree. That gate is recorded in its pull request and under
+  `C:\Users\LEET\Codex\Temp\syndeom-post-deposit-records-20261027\`, not in the tree it
+  certifies.
+- **Session 31 build verification:** no separate ORIENT gate on main `368bcfb`. Its
   tree `d33402ca2bfa0efcee577b2855b0741c07cdbe6e` is the tree Session 30 gated GREEN on PR 16's
   head `0470684`:
   - run 2026-10-27T01:32:57Z–01:42:06Z, recorded in `gate-committed-2.json`;
@@ -922,18 +955,32 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 ## Standing escalations and dispositions
 
-- **Gate S1 registration deposit — Al's rulings of 2026-10-27 (ADR-0010 *Amendments*); pending
-  the merge of Session 31's pull request.** Al is publishing a design registration of SYNDEOM on
-  Zenodo. After that pull request merges:
-  - **The tag.** The executor tags the merge commit `gate-s1-registration`, annotated, with the
-    message "SYNDEOM design registration at Gate S1 closure", and pushes it. No GitHub release.
-  - **The archive.** It builds `git archive --format=zip --prefix=Syndeom-gate-s1-registration/`
-    from the tag, outside the repository. The archive **excludes** two files:
-    - `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md` (proprietary, R1(b));
-    - `sources/leiden-declaration-2026-06-02-zenodo-20302944.pdf` (CC BY-NC 4.0; S-0005 keeps its
-      locator and SHA-256).
-  - **The report.** The archive's path, size, SHA-256, MD5 and its file list compared with the
-    tag's tree go to Al and are recorded outside the tree. Al makes the deposit.
+- **Gate S1 registration deposit — DONE: published on Zenodo on 2026-10-27** (Al's rulings of
+  2026-10-27, ADR-0010 *Amendments*; HANDOFF Session 32). Nothing awaited.
+  - **The tag.** `gate-s1-registration`, annotated, with the message "SYNDEOM design registration
+    at Gate S1 closure" (tag object `a42e7c09a275157127d89cc931d35742422c0c7f`, 2026-10-27T02:51:14Z).
+    It is on PR 17's merge `2018d5e79ea23fa200e560d628bec5e91edf0956`, tree
+    `3d7889def475b2b2f30d8acfd3dee31589a06a6e`, and was pushed. No GitHub release.
+  - **The archive.** `Syndeom-gate-s1-registration.zip`, built with `git archive --format=zip
+    --prefix=Syndeom-gate-s1-registration/` from the tag, outside the repository:
+    - 13,370,992 bytes; SHA-256 `95f7d1b7d37aeb604b633b902d8f5e13ab46f5cfd5b582d8d64a299f52039cfc`;
+      MD5 `f78dab5eafc6e95f595b1f38b537c9f9`;
+    - 464 files: the tag's 466 less exactly the two excluded ones, each byte-identical to its blob;
+    - excluded: `PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md` (proprietary, R1(b)) and
+      `sources/leiden-declaration-2026-06-02-zenodo-20302944.pdf` (CC BY-NC 4.0; S-0005 keeps its
+      locator and SHA-256). Both stay in the repository.
+
+    Receipt and verification: `C:\Users\LEET\Codex\Temp\syndeom-gate-s1-registration-20261027\`.
+  - **The deposit.** Al published it as Zenodo record 23682781
+    (`https://zenodo.org/records/23682781`) on 2026-10-27, licence `polyform-noncommercial-1.0.0`:
+    - version DOI (this registration) `10.5281/zenodo.23682781`;
+    - concept DOI (all versions) `10.5281/zenodo.23682780`;
+    - the file as Zenodo reports it: `Syndeom-gate-s1-registration.zip`, 13,370,992 bytes,
+      `md5:f78dab5eafc6e95f595b1f38b537c9f9`.
+
+    Session 32 confirmed each value from Zenodo's API. It also downloaded the published file,
+    which is byte-identical to the built archive. README § Citation carries Zenodo's citation and
+    BibTeX.
 - **SD15 audit request — Gate S1 examination (Session 29, 2026-10-26) — DECIDED by Al on
   2026-10-26: all three judgments upheld; the PASS is not conditional.** Al's rulings,
   transcribed verbatim from Al's message in the Session 29 conversation (also in HANDOFF
@@ -959,8 +1006,11 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
   If any is overruled, the examination becomes CONDITIONAL PASS. Gate S1's closure is then
   provisional until a cold re-run, and memory is changed only in a non-exam session.
-- **Session 29's branch and pull request** (`claude/s1-session-29-cold-start-exam`) await Al's
-  review and merge; Gate S1's closure takes effect on `main` at the merge.
+- **Session 29's pull request merged as PR 15** at 2026-10-27T00:25:39Z (2026-10-26 20:25:39
+  America/New_York), by Al, creating `main` `c9372b1355a6d687dec6287f908639ac670db659`. Its
+  parents are `e029c80…` and the PR's head `6b3dbda5983ed3c3e41ab5d96a2863a043855a88`
+  (`claude/s1-session-29-cold-start-exam`), and its tree `4caa81f0…` equals the head's. Gate
+  S1's closure is in effect on `main`.
 - **Merged branches deleted (Al's instruction, 2026-10-26, after Session 28):**
   `claude/s1-adr-0009-disclosure-first`, `claude/s1-session-25-exam-attempt`,
   `claude/s1-session-27-sec6-launch` and `claude/s1-session-28-launch-directory`. Their tips are
