@@ -2338,3 +2338,35 @@ the exact case-specific ruling and validated replacement metadata are proposed.
   `6256c868078ac904ff6e0e55027c84d8aad63d438fd339957689980e26b6d510`.
 - **Rights/storage:** no redistribution permission asserted; external HTML, digest-only
   in the repository. No source text is newly ingested into the live corpus.
+
+## S-0073 — PolyForm Noncommercial License 1.0.0 — the repository licence text (ADR-0010; Al's decision of 2026-10-26)
+
+- **State:** INGESTED (the text is committed verbatim in `LICENSE` at the repo root, after one line
+  `Required Notice: Copyright 2026 Alexander David Zalewski (https://github.com/Quigles1337/Syndeom)`
+  and one blank line). It applies to SYNDEOM's original software and technical documentation
+  under the scope ADR-0010 states.
+- **As named:** Al's decision of 2026-10-26 (ADR-0010), with the source URL and the SHA-256 the
+  text must have. Al: stop if the digest differs.
+- **Source:**
+  `https://raw.githubusercontent.com/polyformproject/polyform-licenses/1.0.0/PolyForm-Noncommercial-1.0.0.md`
+  (the PolyForm Project's repository at tag `1.0.0`; the text names its canonical URL
+  `https://polyformproject.org/licenses/noncommercial/1.0.0`).
+- **Access:** 2026-10-27T00:48:02Z, HTTP 200, 4,563 bytes, LF, SHA-256
+  `c0ea4a896d2c8c394b29f9427589996db826cd501c512279ff0ed3ef48fabbe5`, equal to the digest Al
+  stated. A pre-check at 2026-10-27T00:34:21Z returned the same bytes. In `LICENSE` (4,662
+  bytes), the bytes after the notice line and the blank line re-hash to the same digest.
+- **Terms of the licence text itself:** the same repository's `README.md` at tag `1.0.0`
+  (retrieved 2026-10-27T00:50:21Z, HTTP 200, 2,639 bytes, SHA-256
+  `bb69919c361a2666d23b9c816e6ecfe3bb193fc0138abf4c76f8413b34d74fca`), section "License":
+  "Each contributor licenses you to do everything with PolyForm licenses that would otherwise
+  infringe that contributor's copyright in it. If you make changes to a PolyForm license, you
+  must remove all mention of "PolyForm" and polyformproject.org, as well." The text is used
+  unchanged.
+- **SPDX:** `PolyForm-Noncommercial-1.0.0`. The SPDX License List entry
+  `https://spdx.org/licenses/PolyForm-Noncommercial-1.0.0.json` (HTTP 200 at
+  2026-10-27T00:50:21Z) gives that `licenseId` and the name "PolyForm Noncommercial License
+  1.0.0". The four crates' `license` fields use this identifier.
+- **Relation to S-0019:** S-0019's Apache-2.0 text was `LICENSE` from Session 7 through `main`
+  `c9372b1355a6d687dec6287f908639ac670db659`. This entry records its successor from the commit
+  that accepts ADR-0010. S-0019 is unchanged: the register is append-only under ADR-0010 D6, and
+  copies obtained under Apache-2.0 remain under it (ADR-0010 D3).

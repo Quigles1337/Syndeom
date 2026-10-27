@@ -2,7 +2,7 @@
 name = "syndeom-ingest"
 version = "0.1.0"
 edition = "2024"
-license = "Apache-2.0"
+license = "PolyForm-Noncommercial-1.0.0"
 description = "SYNDEOM s1_ingest 0.1.0: writes a ground-truth raw/1 manifest from a per-item config and the original's bytes; decides nothing (ADR-0003 D6)"
 publish = false
 

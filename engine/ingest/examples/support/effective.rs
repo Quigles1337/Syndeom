@@ -7,6 +7,7 @@ mod historical;
 
 use serde::Deserialize;
 use serde_json::{Value, json};
+use std::borrow::Cow;
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 use std::io::{BufRead, BufReader, Read, Write};
@@ -99,27 +100,76 @@ pub fn json(blobs: &Blobs, path: &str) -> Result<Value> {
     serde_json::from_slice(bytes(blobs, path)?).map_err(|e| format!("{path}: {e}"))
 }
 
+/// The four crate manifests whose `license` line alone may differ from the pinned bytes (ADR-0010).
+pub const LICENSE_LINE_FILES: [&str; 4] = [
+    "engine/derive/Cargo.toml",
+    "engine/ingest/Cargo.toml",
+    "engine/manifest/Cargo.toml",
+    "engine/pair/Cargo.toml",
+];
+const LICENSE_LINE_PINNED: &[u8] = b"\nlicense = \"Apache-2.0\"\n";
+const LICENSE_LINE_CURRENT: &[u8] = b"\nlicense = \"PolyForm-Noncommercial-1.0.0\"\n";
+
+/// Bytes to compare with a pin: in the four ADR-0010 manifests only, exactly one whole PolyForm
+/// `license` line is restored to the pinned Apache line; every other byte is compared unchanged.
+pub fn license_line_restored<'a>(path: &str, current: &'a [u8]) -> Cow<'a, [u8]> {
+    if !LICENSE_LINE_FILES.contains(&path) {
+        return Cow::Borrowed(current);
+    }
+    let hits: Vec<usize> = current
+        .windows(LICENSE_LINE_CURRENT.len())
+        .enumerate()
+        .filter(|(_, w)| *w == LICENSE_LINE_CURRENT)
+        .map(|(i, _)| i)
+        .collect();
+    match hits.as_slice() {
+        [i] => {
+            let mut restored = current[..*i].to_vec();
+            restored.extend_from_slice(LICENSE_LINE_PINNED);
+            restored.extend_from_slice(&current[i + LICENSE_LINE_CURRENT.len()..]);
+            Cow::Owned(restored)
+        }
+        _ => Cow::Borrowed(current),
+    }
+}
+
+/// A frozen pair-producer input is unchanged when equal to its producer-revision bytes, allowing
+/// only the ADR-0010 `license` line.
+pub fn pair_input_unchanged(path: &str, current: &[u8], original: &[u8]) -> bool {
+    *license_line_restored(path, current) == *original
+}
+
 /// The only permitted historical edits are named current summaries and exact-prefix appends.
 pub fn preserve(blobs: &Blobs, frozen: &Frozen) -> Result<Value> {
     let mut exact = 0;
     let mut appended = Vec::new();
+    let mut license_line = Vec::new();
     for (path, pin) in &frozen.files {
         let current = bytes(blobs, path)?;
-        // The constitution changes only by ADR, never as reproduction data (ADR-0009 D5).
+        // The constitution changes only by ADR, never as reproduction data (ADR-0009 D5); the
+        // licence file is not an inventory input (ADR-0010).
         if matches!(
             path.as_str(),
-            "README.md" | "PROGRAM/STATE.md" | "PROGRAM/SYNDEOM-PROGRAM.md"
+            "README.md" | "PROGRAM/STATE.md" | "PROGRAM/SYNDEOM-PROGRAM.md" | "LICENSE"
         ) {
             continue;
         }
-        let preserved = if matches!(
+        let restored;
+        let preserved: &[u8] = if matches!(
             path.as_str(),
-            "PROGRAM/HANDOFF.md" | "PROGRAM/DECISIONS/ADR-0003.md" | "groundtruth/README.md"
+            "PROGRAM/HANDOFF.md"
+                | "PROGRAM/DECISIONS/ADR-0003.md"
+                | "PROGRAM/SOURCES.md"
+                | "groundtruth/README.md"
         ) {
             appended.push(path);
             current
                 .get(..pin.n_bytes)
                 .ok_or_else(|| format!("historical prefix truncated: {path}"))?
+        } else if LICENSE_LINE_FILES.contains(&path.as_str()) {
+            license_line.push(path);
+            restored = license_line_restored(path, current);
+            &restored[..]
         } else {
             exact += 1;
             current
@@ -144,6 +194,7 @@ pub fn preserve(blobs: &Blobs, frozen: &Frozen) -> Result<Value> {
     Ok(
         json!({"baseline_revision": BASE, "baseline_tree": frozen.base_tree,
         "exact_files_checked": exact, "append_only_prefixes_checked": appended,
+        "license_line_only_files_checked": license_line,
         "s1_4_files_checked": frozen.files.keys().filter(|p| p.starts_with("analysis/s1-4/")).count(),
         "accepted_packet_files_checked": frozen.files.keys().filter(|p| p.starts_with("analysis/s1-first-parent-status/")).count(),
         "all_historical_groundtruth_objects": "byte-identical; no added historical members",
@@ -549,7 +600,7 @@ pub fn cli() -> Result<()> {
     let mut pair_inputs = BTreeMap::new();
     for path in text(&current, "engine/pair/input-files.txt")?.lines() {
         let original = git(&repo, &["show", &format!("{pair_revision}:{path}")])?;
-        if bytes(&current, path)? != original {
+        if !pair_input_unchanged(path, bytes(&current, path)?, &original) {
             return Err(format!("frozen pair producer input changed: {path}"));
         }
         pair_inputs.insert(path, content_hash(&original));

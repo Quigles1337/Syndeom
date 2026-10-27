@@ -431,14 +431,37 @@ extension; neither sibling's code is imported. The
 
 ## Licence
 
-SYNDEOM's original software and technical documentation are released under the **Apache License
-2.0** (SPDX `Apache-2.0`; full text in [`LICENSE`](LICENSE)).
+SYNDEOM's original software and technical documentation are licensed under the **PolyForm
+Noncommercial License 1.0.0** (SPDX `PolyForm-Noncommercial-1.0.0`; full text in
+[`LICENSE`](LICENSE)). Copyright 2026 Alexander David Zalewski.
 
-This release excludes third-party materials under `sources/`, `groundtruth/`, and `contact/`,
-which retain the terms recorded in [`PROGRAM/SOURCES.md`](PROGRAM/SOURCES.md). It also excludes
-separately controlled DARQ Labs research materials: these are marked where they appear, remain
-proprietary, and are outside the Apache release.
+In plain terms (the licence text governs, not this summary):
 
-The engineer of record established this boundary on 2026-10-13 in
-[ADR-0000, Addendum 2](PROGRAM/DECISIONS/ADR-0000.md). Licence-text provenance is recorded as
-S-0019 in the source register.
+- **Noncommercial use is free.** You may use, change and share SYNDEOM for any noncommercial
+  purpose. That includes personal research, experiment, testing, study and hobby projects with
+  no anticipated commercial application. It also includes use by a charitable organization,
+  educational institution, public research organization, public safety or health organization,
+  environmental protection organization or government institution, whatever its funding.
+- **When you share it,** pass on the licence terms (or their URL) and the `Required Notice:` line
+  at the top of [`LICENSE`](LICENSE).
+- **Commercial use needs a separate licence.** For commercial licensing, contact Alexander David
+  Zalewski at **adz@alphx.io**.
+- **Earlier versions stay under Apache-2.0.** Every version published before 2026-10-26, through
+  commit `c9372b1`, was released under the Apache License 2.0. Copies obtained under it remain
+  under it.
+
+The licence does not cover:
+
+- third-party materials under `sources/`, `groundtruth/` and `contact/`, the Mathlib and Lean
+  toolchain sources, and the Rust dependencies, which keep the terms recorded in
+  [`PROGRAM/SOURCES.md`](PROGRAM/SOURCES.md) and in each item's manifest;
+- separately controlled DARQ Labs research materials, which are marked where they appear and
+  remain proprietary;
+- any artifact whose own manifest records a different licence for a SYNDEOM-authored component.
+  For example, the S1.2 alias wrapper is recorded as Apache-2.0.
+
+The engineer of record made this change on 2026-10-26 in
+[ADR-0010](PROGRAM/DECISIONS/ADR-0010.md). It supersedes the Apache-2.0 choice of
+[ADR-0000, Addendum 2](PROGRAM/DECISIONS/ADR-0000.md) and keeps its boundary. The provenance of
+the licence text is recorded as S-0073 in the source register (S-0019 for the earlier Apache
+text).
