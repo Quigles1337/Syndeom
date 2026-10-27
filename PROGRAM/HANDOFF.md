@@ -6187,3 +6187,45 @@ ESCALATIONS:
 STOP-REASON: natural boundary — Al's ruling ends at a gated, reviewable pull request. Repo green:
 the gate on the committed tree, recorded in the pull request.
 **Memory writes:** none.
+AL'S RULINGS ON PR 19'S TWO CALLS (2026-10-27, received in this session's conversation after PR #19
+opened; recorded at Al's direction in a second commit on the same branch; transcribed verbatim
+from Al's message):
+
+~~~text
+Rulings on PR #19's two calls:
+
+Call 1: accepted. Each deposit adds its version DOI under identifiers; none is replaced.
+
+Call 2: reserve the DOI first. For every future deposit, I reserve the version DOI in the Zenodo draft before the tag, and the CITATION.cff refresh (the new version DOI under identifiers, version, date-released and title) lands in the commit that gets tagged, so each archive cites itself. The records commit after the deposit confirms the published values instead of refreshing them. date-released is the planned publication date, and the Zenodo draft's publication date is set to match. A draft whose reserved DOI has been written into a tagged commit must be the draft that is published.
+
+Consequence: remove the commit field from CITATION.cff now. Under this timing the file can never contain the hash of the commit that contains it; version names the tag, and the README and the Zenodo record carry the full hash. Update the file's header comment to match.
+
+Record these rulings where PR #19 recorded the refresh step, add them to this PR as a new commit on the same branch (no force-push), run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before writing: `recheck --baseline 99bdf03…` re-fetched (exit 0, `TARGET-UNCHANGED`; receipt
+`recheck-2-before-rulings.json` under the external root). `main` was still `99bdf03`, and the
+branch was at `5ae0f2c` locally and on the remote.
+
+Effect:
+- **Call 1:** each deposit adds its version DOI under `identifiers`; none is replaced.
+- **Call 2:** the refresh moves before the tag:
+  - Al reserves the version DOI in the Zenodo draft, with its publication date set to the planned
+    date;
+  - the commit that is tagged carries the new version DOI, `version`, `date-released` (the
+    planned date) and `title`, so each archive cites itself;
+  - the draft whose reserved DOI is in a tagged commit is the one published;
+  - the records commit after the deposit confirms instead of refreshing.
+- **`CITATION.cff`:** the `commit` field is removed, and the header comment states the ruled
+  procedure. The file is still valid against the Citation File Format 1.2.0 schema and matches
+  Zenodo's record.
+- **Where it is recorded:**
+  - ADR-0010 *Amendments*: a new dated entry that supersedes the earlier entry's timing, its
+    refreshed `commit` and its consequence;
+  - STATE: the Updated bullet, the deposit item's step and Current build verification.
+
+This decides the alternative the belief delta above put to Al and the second escalation above (the
+two calls); the branch and its pull request still await Al's review. Nothing else changed. The
+commit carrying this addendum is gated on its committed tree. The result is recorded in the pull
+request and under the external root `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\`
+(`gate-committed-2.json`), not in the tree it certifies. **Memory writes:** none.

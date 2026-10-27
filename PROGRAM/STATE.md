@@ -2,8 +2,9 @@
 
 - **Updated:** 2026-10-27 UTC (Session 33 — an informed working session, not an examination,
   continuing Session 32's conversation at Al's direction; not launched with the §6 prompt, so no
-  SD15 disclosure): **`CITATION.cff` added, and its refresh joins the deposit procedure (Al's
-  ruling of 2026-10-27, verbatim in ADR-0010 *Amendments* and HANDOFF Session 33).**
+  SD15 disclosure): **`CITATION.cff` added, and its refresh joins the deposit procedure, before
+  the tag (Al's ruling of 2026-10-27 and Al's rulings on PR 19's two calls, verbatim in ADR-0010
+  *Amendments* and HANDOFF Session 33).**
   - **Orientation:** the ADR-0008 preflight (receipt
     `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\orient-1-sync.json`)
     fast-forwarded the clean `main` to fetched `origin/main`
@@ -12,10 +13,11 @@
     which Session 32 gated GREEN.
   - **`CITATION.cff`** (Citation File Format 1.2.0, schema-valid): `doi` is the concept DOI
     `10.5281/zenodo.23682780`; the version DOI `10.5281/zenodo.23682781` is listed under
-    `identifiers` as the Gate S1 design registration; `version`, `date-released`, `commit` and
-    `title` match the latest deposit.
-  - **The deposit procedure** now refreshes `CITATION.cff` at every deposit (Standing escalations,
-    first bullet; ADR-0010 *Amendments*).
+    `identifiers` as the Gate S1 design registration; `version`, `date-released` and `title`
+    match the latest deposit. It has no `commit` field (Al's ruling on PR 19).
+  - **The deposit procedure** now refreshes `CITATION.cff` in the commit that is tagged, after the
+    version DOI is reserved in the Zenodo draft (Standing escalations, first bullet; ADR-0010
+    *Amendments*).
   - **Unchanged:**
     - the licence, the preservation tool, the README and the `gate-s1-registration` tag;
     - registers' statuses, manifests, frozen packets and the accepted corpus;
@@ -533,9 +535,10 @@
   - raw log SHA-256 `b37f667f…c603`, under
     `C:\Users\LEET\Codex\Temp\syndeom-post-deposit-records-20261027\`.
 
-  The commit adding `CITATION.cff` receives a full gate on its committed tree, with a clean
-  working tree. That gate is recorded in its pull request and under
-  `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\`, not in the tree it certifies.
+  Each of this pull request's commits (adding `CITATION.cff`, then recording Al's rulings on it)
+  receives a full gate on its committed tree, with a clean working tree. Those gates are recorded
+  in the pull request and under `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\`, not in
+  the tree they certify.
 - **Session 32 build verification:** no separate ORIENT gate on main `2018d5e`. Its
   tree `3d7889def475b2b2f30d8acfd3dee31589a06a6e` is the tree Session 31 gated GREEN on PR 17's
   head `a6e2038`:
@@ -1011,14 +1014,25 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
     Session 32 confirmed each value from Zenodo's API. It also downloaded the published file,
     which is byte-identical to the built archive. README § Citation carries Zenodo's citation and
     BibTeX.
-  - **Every later deposit refreshes `CITATION.cff`** (Al's ruling of 2026-10-27, Session 33;
-    ADR-0010 *Amendments*), reading the values from the published Zenodo record:
-    - `version`, `date-released`, `commit` and `title` become the new deposit's;
-    - its version DOI is added under `identifiers`, with a description naming the deposit;
-    - `doi` stays the concept DOI `10.5281/zenodo.23682780`.
+  - **Every later deposit refreshes `CITATION.cff` before its tag** (Al's ruling of 2026-10-27
+    and Al's rulings on PR 19's two calls, Session 33; ADR-0010 *Amendments*):
+    1. Al reserves the version DOI in the Zenodo draft before the tag. The draft's publication
+       date is set to the planned publication date.
+    2. The commit that is tagged refreshes the file:
+       - the reserved version DOI is added under `identifiers`, with a description naming the
+         deposit; none is replaced;
+       - `version`, `date-released` (the planned publication date) and `title` become the new
+         deposit's;
+       - `doi` stays the concept DOI `10.5281/zenodo.23682780`.
 
-    The refresh lands in the records commit that follows the deposit, so each deposited archive
-    carries the preceding `CITATION.cff`.
+       Each archive therefore cites itself.
+    3. The draft whose reserved DOI has been written into a tagged commit must be the draft that
+       is published.
+    4. The records commit after the deposit confirms the published values instead of refreshing
+       them.
+
+    The file has no `commit` field: it can never hold the hash of the commit that contains it.
+    `version` names the tag, and the README and the Zenodo record give the full hash.
 - **SD15 audit request — Gate S1 examination (Session 29, 2026-10-26) — DECIDED by Al on
   2026-10-26: all three judgments upheld; the PASS is not conditional.** Al's rulings,
   transcribed verbatim from Al's message in the Session 29 conversation (also in HANDOFF
