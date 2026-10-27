@@ -3,8 +3,8 @@
 - **Updated:** 2026-10-27 UTC (Session 33 — an informed working session, not an examination,
   continuing Session 32's conversation at Al's direction; not launched with the §6 prompt, so no
   SD15 disclosure): **`CITATION.cff` added, and its refresh joins the deposit procedure, before
-  the tag (Al's ruling of 2026-10-27 and Al's rulings on PR 19's two calls, verbatim in ADR-0010
-  *Amendments* and HANDOFF Session 33).**
+  the tag (Al's ruling of 2026-10-27, Al's rulings on PR 19's two calls and Al's ruling on the
+  open point, verbatim in ADR-0010 *Amendments* and HANDOFF Session 33).**
   - **Orientation:** the ADR-0008 preflight (receipt
     `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\orient-1-sync.json`)
     fast-forwarded the clean `main` to fetched `origin/main`
@@ -16,8 +16,9 @@
     `identifiers` as the Gate S1 design registration; `version`, `date-released` and `title`
     match the latest deposit. It has no `commit` field (Al's ruling on PR 19).
   - **The deposit procedure** now refreshes `CITATION.cff` in the commit that is tagged, after the
-    version DOI is reserved in the Zenodo draft (Standing escalations, first bullet; ADR-0010
-    *Amendments*).
+    version DOI is reserved in the Zenodo draft. The tagged file is the reference: Zenodo is
+    corrected to match it, and the records commit after the deposit confirms the match (Standing
+    escalations, first bullet; ADR-0010 *Amendments*).
   - **Unchanged:**
     - the licence, the preservation tool, the README and the `gate-s1-registration` tag;
     - registers' statuses, manifests, frozen packets and the accepted corpus;
@@ -1014,8 +1015,9 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
     Session 32 confirmed each value from Zenodo's API. It also downloaded the published file,
     which is byte-identical to the built archive. README § Citation carries Zenodo's citation and
     BibTeX.
-  - **Every later deposit refreshes `CITATION.cff` before its tag** (Al's ruling of 2026-10-27
-    and Al's rulings on PR 19's two calls, Session 33; ADR-0010 *Amendments*):
+  - **Every later deposit refreshes `CITATION.cff` before its tag** (Al's ruling of 2026-10-27,
+    Al's rulings on PR 19's two calls and Al's ruling on the open point, Session 33; ADR-0010
+    *Amendments*):
     1. Al reserves the version DOI in the Zenodo draft before the tag. The draft's publication
        date is set to the planned publication date.
     2. The commit that is tagged refreshes the file:
@@ -1028,8 +1030,15 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
        Each archive therefore cites itself.
     3. The draft whose reserved DOI has been written into a tagged commit must be the draft that
        is published.
-    4. The records commit after the deposit confirms the published values instead of refreshing
-       them.
+    4. The tagged file is the reference, because the archive cannot change and Zenodo's metadata
+       can. After the deposit:
+       - a published value that differs from the tagged file is corrected on Zenodo to match it;
+       - if publication slips past the planned date, Zenodo's publication date stays at the
+         file's `date-released`, and the actual publication time stays in Zenodo's own record;
+       - the records commit confirms the match, instead of refreshing the file, and notes any
+         correction made on Zenodo;
+       - if a value cannot be brought into line on Zenodo, never retag or rebuild: that records
+         commit records the discrepancy and corrects `main`'s `CITATION.cff`.
 
     The file has no `commit` field: it can never hold the hash of the commit that contains it.
     `version` names the tag, and the README and the Zenodo record give the full hash.

@@ -6229,3 +6229,43 @@ two calls); the branch and its pull request still await Al's review. Nothing els
 commit carrying this addendum is gated on its committed tree. The result is recorded in the pull
 request and under the external root `C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\`
 (`gate-committed-2.json`), not in the tree it certifies. **Memory writes:** none.
+AL'S RULING ON THE OPEN POINT (2026-10-27, received in this session's conversation after the second
+commit was pushed; recorded at Al's direction in a third commit on the same branch; transcribed
+verbatim from Al's message):
+
+~~~text
+Ruling on the open point: the tagged CITATION.cff is the reference, because the archive cannot change and Zenodo's metadata can. If a published value differs from the tagged file, correct it on Zenodo to match the file. For a slip past the planned date, keep Zenodo's publication date at the file's date-released; the actual publication time stays in Zenodo's own record. The records commit after the deposit confirms the match and notes any correction made on Zenodo. If a value cannot be brought into line on Zenodo, never retag or rebuild: record the discrepancy in that records commit and correct main's CITATION.cff there.
+
+Record this where the procedure lives, as a new commit on PR #19's branch (no force-push), run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+The open point: the executor's report on the second commit, made in this session's conversation,
+noted that Al's rulings did not say what the records commit after a deposit does if a published
+value differs from the tagged `CITATION.cff`, for example when publication slips past the planned
+`date-released`.
+
+Before writing: `recheck --baseline 99bdf03…` re-fetched (exit 0, `TARGET-UNCHANGED`; receipt
+`recheck-4-before-ruling.json` under the external root). `main` was still `99bdf03`, the branch
+was at `0465a8a` locally and on the remote, and PR 19 was open.
+
+Effect (step 4 of the deposit procedure; steps 1–3 stand):
+- the tagged `CITATION.cff` is the reference, because the archive cannot change and Zenodo's
+  metadata can;
+- a published value that differs from the tagged file is corrected on Zenodo to match it. After a
+  slip past the planned date, Zenodo's publication date stays at the file's `date-released`, and
+  the actual publication time stays in Zenodo's own record;
+- the records commit after the deposit confirms the match and notes any correction made on Zenodo;
+- if a value cannot be brought into line on Zenodo, never retag or rebuild: that records commit
+  records the discrepancy and corrects `main`'s `CITATION.cff`.
+
+Where it is recorded:
+- ADR-0010 *Amendments*: a new dated entry that replaces step 4 of the entry above it;
+- STATE: the Updated bullet and the deposit item's step 4.
+
+`CITATION.cff` is unchanged. The `gate-s1-registration` tag's tree holds no `CITATION.cff`, and the
+file matches Zenodo's record, re-fetched before writing (saved under the external root as
+`zenodo/record-23682781-third-commit.json`). This decides the open point; the branch and its pull
+request still await Al's review. Nothing else changed. The commit carrying this addendum is gated
+on its committed tree. The result is recorded in the pull request and under the external root
+`C:\Users\LEET\Codex\Temp\syndeom-citation-cff-20261027\` (`gate-committed-3.json`), not in the
+tree it certifies. **Memory writes:** none.
