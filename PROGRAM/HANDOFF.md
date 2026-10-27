@@ -6601,3 +6601,50 @@ request, and the next action is a different task. Repo green: the ORIENT gate ab
 committed-tree gate recorded in the pull request.
 **Memory writes:** none. (This session established after orienting that it is not an
 examination, so a hazard write would have been permitted; none was made.)
+AL'S RULINGS ON PR 20 (2026-10-27, received in this session's conversation after PR #20 opened;
+recorded at Al's direction in a second commit on the same branch, no force-push; transcribed
+verbatim from Al's message; exact copy `owner-rulings-pr20-2026-10-27.txt` under the external
+root, SHA-256 `c5ac5ec64a0ca3a80c95cc48390c658e07d553fe1ce97bef28a4d7d121a4ba6c`):
+
+~~~text
+Rulings on PR #20 (ADR-0011):
+
+1. Independence from the S1 corpus. Add to ADR-0011, before merge: no seed, grammar or template may be derived from any item under groundtruth/, because that corpus is what the frozen battery is validated against in S4. Seeds come from FLAWS.md or other material outside the S1 corpus, and every seed record states its source. This binds later producer versions as the seed set grows.
+
+2. D12, the R4 seed family: option (iii). Keep it out of this repository as a private fixture under an external root, for private pipeline tests only; it never becomes calibration data. Do not author it into the public goldens, the seeds directory or any artifact here. If I want it public later, that will be its own amendment.
+
+3. The non-blocking clarifications in D12: accepted as recorded. The edits to scripts/check.sh and lean/Audit.lean come after the narrowing and get their own review.
+
+4. Housekeeping, for the first session after the merge: remove the worktree at C:\Users\LEET\Syndeom-wt-20261027. In the original checkout, confirm the uncommitted HANDOFF append is the same disclosure now committed by comparing the body's SHA-256, then discard it.
+
+Record these rulings in ADR-0011's Amendments and wherever STATE tracks them, as a new commit on PR #20's branch (no force-push). Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before writing: `recheck --baseline a741ebf9…` re-fetched (exit 0, `TARGET-UNCHANGED`; receipt
+`recheck-2-before-rulings.json` under the external root). `main` was still `a741ebf9…`, the branch
+was at `eba1462` locally and on the remote, and PR 20 was open.
+
+Effect:
+- **Ruling 1** → ADR-0011 D6 gains the independence rule: no seed, grammar or template derived
+  from any `groundtruth/` item (the S4 validation corpus); seeds from FLAWS.md or other material
+  outside the S1 corpus; every seed record states its source (a `source` field); a grammar's atoms
+  and the padding material bound the same way; binding on later producer versions. The v0.1 seed
+  set already complies; the admitted S1.2 pair is therefore not a seed.
+- **Ruling 2** → D12 (h1)/(h2) resolved: option (iii). The R4 Mnemosyne-derived family stays out
+  of this repository as a private fixture under an external root, for private pipeline tests
+  only; never calibration data; never in the public goldens, the seeds directory or any artifact
+  here. Recorded in D12 and *Consequences*; D6's seed set unchanged.
+- **Ruling 3** → the non-blocking clarifications stand as recorded; the `scripts/check.sh` and
+  `lean/Audit.lean` edits (D10) come after the narrowing and get their own review.
+- **Ruling 4** → housekeeping for the first session after the merge: remove the worktree; in the
+  original checkout compare the uncommitted append's body SHA-256 with the committed disclosure's
+  (`36dda70c…8d2f`) and discard it. Recorded in STATE's "Two checkouts" escalation and at the head
+  of NEXT; **not executed now** — the merge has not happened.
+- ADR-0011's Status: accepted, in effect at the merge; *Amendments*: the rulings verbatim and
+  their effect. STATE: the Updated bullet, Current build verification, the ADR-numbers line, the
+  Gate S2 S2.1 row, the two standing escalations, NEXT. HANDOFF: this addendum.
+
+Nothing else changed: no register status, manifest, frozen packet, preservation-tool source,
+constitution byte, README line or code. The commit carrying this addendum is gated on its
+committed tree; the result is recorded in the pull request and under the external root
+(`gate-committed-2.json`), not in the tree it certifies. **Memory writes:** none.
