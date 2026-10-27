@@ -1,5 +1,7 @@
 # SYNDEOM
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23682780.svg)](https://doi.org/10.5281/zenodo.23682780)
+
 **Calibration infrastructure for mathematical proof triage.**
 
 SYNDEOM (συνδέω, *syndéō*, “to bind together”) is a research program for measuring how reliably
@@ -16,7 +18,7 @@ never verdicts.
 [Calibration](#calibration-and-validation) · [Quick start](#quick-start) ·
 [Repository](#repository-map) · [Governance](#governance-and-contribution)
 
-> **Research stage: S1 — ground-truth corpus.** The manifest library, ingestion CLI, first canonical
+> **Research stage: Gate S1 (ground-truth corpus) is closed; S2 (generator) is next.** The manifest library, ingestion CLI, first canonical
 > derivation producer, narrow positive-pair producer, and Lean verification fixture are implemented. Synthetic generation,
 > the detector battery, calibration reports, and contact scoring remain planned work.
 > This repository does not yet provide a
@@ -33,7 +35,10 @@ merge, successful checks and fresh Rust reproduction separately from the prior
 owner acceptance and verified integration. The
 [readiness assessment](analysis/s1-post-merge-readiness/READINESS.md) finds no
 additional substantive S1 exit criterion unmet for the admitted prefix.
-**Gate S1 remains OPEN pending a separate genuine cold-start examination.**
+**Gate S1 is CLOSED: the Session 29 cold-start examination passed.** The closure is
+recorded in [`PROGRAM/STATE.md`](PROGRAM/STATE.md) and the Session 29 entry in
+[`PROGRAM/HANDOFF.md`](PROGRAM/HANDOFF.md), and it reached `main` via
+[PR #15](https://github.com/Quigles1337/Syndeom/pull/15).
 The authoritative checklist and next action are in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
 
 | Surface | Implemented or recorded | Remaining boundary |
@@ -73,10 +78,11 @@ All real-item cells remain expected underpowered pending S3's design-derived N_m
 no detector performance or numerical power follows from these metadata counts.
 
 The status-support hold is discharged on verified main. Canonical production still
-needs its own authorized selection, context and locator review. Once this reconciliation
-is on main, a separate fresh session should attempt Gate S1's cold-start examination
-under §2/SD15 using constitution §6's Session-N resume prompt verbatim and alone.
-This informed session does not close Gate S1. S1.1 supports the admitted, unskipped
+needs its own authorized selection, context and locator review. Gate S1's cold-start
+examination ran in Session 29 and passed (above). The next action is STATE's
+NEXT-SINGLE-ACTION: S2.1, write `PROGRAM/DECISIONS/ADR-0011.md`, the first generator
+family's design; that session decides only and writes no generator code.
+S1.1 supports the admitted, unskipped
 prefix; the harvest is not exhausted. Harvest remains paused through candidate 27 /
 `1403.4485`, with candidate 28 / `1403.6317` saved for a later harvest.
 
@@ -87,9 +93,10 @@ the fetched and checked-out SHAs and trees, selects the examined snapshot (fast-
 for a clean behind-only checkout; an isolated worktree otherwise) and rechecks the target
 before publishing; [`scripts/orient_preflight.py`](scripts/orient_preflight.py) performs and
 records it, outside the build gate. A later harvest of candidates 28–30 is preserved on branch
-`claude/s1-harvest-candidates-28-30` at its recorded commit for admission review after Gate S1
-closes (owner decision 1); its retrieval evidence is pinned in
-[`analysis/s1-orientation-repair/`](analysis/s1-orientation-repair/README.md).
+`claude/s1-harvest-candidates-28-30` at its recorded commit (owner decision 1); its retrieval
+evidence is pinned in [`analysis/s1-orientation-repair/`](analysis/s1-orientation-repair/README.md).
+With Gate S1 closed, its admission review is eligible; STATE records the owner's ordering, which
+schedules that review after ADR-0011. Nothing on the branch is approved.
 
 ## Architecture
 
@@ -253,7 +260,7 @@ red identifies the freeze and contact boundary. Contact observations cannot tune
 | Phase | Required outcome | State |
 |---|---|---|
 | S0 · Foundation | Verified sources, ratified rules, manifest schema, taxonomy, reproducible scaffold | Closed |
-| S1 · Ground truth | Sourced real items, canonical derivatives, informal–formal pairs, coverage and power statement | Open |
+| S1 · Ground truth | Sourced real items, canonical derivatives, informal–formal pairs, coverage and power statement | Closed |
 | S2 · Generator | Seeded informal/formal variants, flaw injection, padding, measured generation fidelity | Planned |
 | S3 · Calibration | Detector battery, ROC/AUC with intervals, fooling lengths, cost model, referee design, `battery-freeze-v1` | Planned |
 | S4 · Validation | Blind test on S1 items; class-specific recall, false-positive rates, and power analysis | Planned |
@@ -428,6 +435,39 @@ SYNDEOM combines the calibration discipline of
 [KOBER](https://github.com/Quigles1337/KOBER). The sibling interface is a versioned manifest
 extension; neither sibling's code is imported. The
 [structural map](PROGRAM/SIBLING-MAP-2026-10.md) records the relationship.
+
+## Citation
+
+Cite the registered design, the snapshot at Gate S1's closure, by its version DOI,
+[10.5281/zenodo.23682781](https://doi.org/10.5281/zenodo.23682781). The concept DOI,
+[10.5281/zenodo.23682780](https://doi.org/10.5281/zenodo.23682780), covers all versions and
+resolves to the latest. Zenodo's citation and BibTeX for the registration:
+
+> Zalewski, A. D. (2026). SYNDEOM: Calibration Infrastructure for Mathematical Proof Triage — Design Registration at Gate S1 (Version gate-s1-registration) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23682781
+
+```bibtex
+@software{zalewski_2026_23682781,
+  author       = {Zalewski, Alexander David},
+  title        = {SYNDEOM: Calibration Infrastructure for
+                   Mathematical Proof Triage — Design Registration at
+                   Gate S1
+                  },
+  month        = oct,
+  year         = 2026,
+  publisher    = {Zenodo},
+  version      = {gate-s1-registration},
+  doi          = {10.5281/zenodo.23682781},
+  url          = {https://doi.org/10.5281/zenodo.23682781},
+}
+```
+
+The deposited file is `Syndeom-gate-s1-registration.zip`: 13,370,992 bytes, checksum
+`md5:f78dab5eafc6e95f595b1f38b537c9f9` as Zenodo reports it, SHA-256
+`95f7d1b7d37aeb604b633b902d8f5e13ab46f5cfd5b582d8d64a299f52039cfc`. It is `git archive` of the
+annotated tag [`gate-s1-registration`](https://github.com/Quigles1337/Syndeom/tree/gate-s1-registration)
+(commit `2018d5e79ea23fa200e560d628bec5e91edf0956`) without the two files that
+[`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md) lists as not included in the deposit. It is a
+registration archive: the full gate runs on a full clone at the tag.
 
 ## Licence
 

@@ -5860,3 +5860,228 @@ STOP-REASON: natural boundary — Al's ruling 3 ends at a gated, reviewable pull
 session stops for Al's review. Repo green: the gate on the committed tree, recorded in the pull
 request.
 **Memory writes:** none.
+
+SESSION: 2026-10-27 UTC (2026-10-27 America/New_York) (Session 32 — an informed working session,
+not an examination, continuing Session 31's conversation at Al's direction; it was not launched
+with the §6 prompt, so it makes no SD15 disclosure; it records the Gate S1 registration deposit
+and the tag-and-archive step before it; branch `claude/s2-post-deposit-records` from `main`
+`2018d5e79ea23fa200e560d628bec5e91edf0956`; the session-end SHA is the commit carrying this
+block, recorded in its pull request)
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (nothing evidenced). Gate S1 CLOSED (Session 29).
+BEFORE THIS SESSION — THE TAG AND THE ARCHIVE (Session 31's NEXT, carried out in the same
+conversation after PR 17's merge, with no repository change, as Al instructed; recorded here at
+Al's direction):
+- **Al's instruction (2026-10-27), verbatim:**
+
+~~~text
+PR #17 is merged. On your four checks: all accepted as you did them, including the partial author lists, since CC BY 4.0 §3(a)(2) allows attribution by a link to a page that carries the full information.
+
+Proceed: fetch and confirm main is PR #17's merge with nothing after it. Then create the annotated tag gate-s1-registration on it with the message "SYNDEOM design registration at Gate S1 closure", push the tag, and build the archive as specified, excluding PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md and the Leiden Declaration PDF. Report the archive's path, size in bytes, SHA-256 and MD5, and its file list compared with the tag's tree. Change no repository file and open no PR.
+~~~
+
+- **Main:** fetched; `origin/main` was `2018d5e79ea23fa200e560d628bec5e91edf0956`, PR 17's merge
+  (2026-10-27T02:48:36Z, by Al), tree `3d7889def475b2b2f30d8acfd3dee31589a06a6e`, the tree
+  Session 31 gated GREEN. Its parents were `368bcfb…` and `a6e2038…`. Nothing had landed after
+  it, no pull request was open, and no tag existed.
+- **The tag:** `gate-s1-registration`, annotated, message "SYNDEOM design registration at Gate S1
+  closure", tagger Quigles1337 at 2026-10-27T02:51:14Z. Tag object
+  `a42e7c09a275157127d89cc931d35742422c0c7f`, peeling to `2018d5e`. Pushed; `git ls-remote
+  --tags origin` shows both. No GitHub release (`gh release list` lists none).
+- **The archive:** `git archive --format=zip --prefix=Syndeom-gate-s1-registration/ -o <path>
+  gate-s1-registration -- . ':(exclude)PROGRAM/ADVISORY-2026-10-13-MNEMOSYNE-CASES.md'
+  ':(exclude)sources/leiden-declaration-2026-06-02-zenodo-20302944.pdf'`, written at 02:51:24Z
+  to `C:\Users\LEET\Codex\Temp\syndeom-gate-s1-registration-20261027\Syndeom-gate-s1-registration.zip`:
+  13,370,992 bytes, SHA-256 `95f7d1b7d37aeb604b633b902d8f5e13ab46f5cfd5b582d8d64a299f52039cfc`,
+  MD5 `f78dab5eafc6e95f595b1f38b537c9f9` (`SHA256SUMS` and `MD5SUMS` beside it).
+- **Verification** (`archive-verification.json` beside it, SHA-256 `e1d2d71e…0068`; verdict
+  PASS):
+  - 570 entries, 464 files and 106 directories, all under the prefix;
+  - the tag's tree has 466 files. The zip holds exactly those less the two excluded files, both
+    of which are in the tree and absent from the zip; none is missing and none extra;
+  - every file is byte-identical to its blob (`git cat-file`) and every executable bit matches;
+    the zip's CRCs are sound (`testzip`); the zip comment is the commit id;
+  - a second build was byte-identical.
+- Reported to Al. Al then made the deposit.
+ORIENT (ADR-0008 D1 steps 1–5: `python -I -X utf8 <copy of scripts/orient_preflight.py> orient
+--repo C:/Users/LEET/Syndeom --expect-url https://github.com/Quigles1337/Syndeom.git --sync
+--receipt …`, exit 0, SNAPSHOT-ESTABLISHED):
+- the clean checkout was switched from `claude/s2-third-party-notices` (at `a6e2038`, the same
+  tree) to `main` at `368bcfb`; the script ran from a byte-identical copy (SHA-256
+  `7f5f0ecd…e5c8`) under the external root;
+- identity `C:/Users/LEET/Syndeom`, remote `https://github.com/Quigles1337/Syndeom.git`;
+- `git fetch --prune origin` exit 0, 2026-10-27T05:32:49.84Z–05:32:51.15Z; default branch `main`
+  (`git ls-remote --symref`);
+- fetched `origin/main` `2018d5e…`, tree `3d7889de…`. Classification behind (two commits:
+  `a6e2038` and PR 17's merge); `main` fast-forwarded (ff-only); examined checkout
+  `C:/Users/LEET/Syndeom`;
+- receipt SHA-256 `92d4ba93…e60a` (`orient-1-sync.json` under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-post-deposit-records-20261027\`).
+
+Nothing had landed after PR 17, and no pull request was open. The tag `gate-s1-registration` was
+on the remote, peeling to `2018d5e`. The constitution's SHA-256 is `110f5360…479c`, unchanged.
+WHAT AL ASKED — the instruction, verbatim except for one visibly marked edit (note after it):
+
+~~~text
+SYNDEOM — post-deposit README and records update (owner instruction, 2026-10-27)
+
+Context. The Gate S1 design registration is published on Zenodo. These values were
+verified against Zenodo's API; confirm each from Zenodo yourself before writing it
+anywhere, and stop and report if any differs:
+- Record: https://zenodo.org/records/23682781 (published 2026-10-27)
+- Version DOI (this registration): 10.5281/zenodo.23682781
+- Concept DOI (all versions): 10.5281/zenodo.23682780
+- File: Syndeom-gate-s1-registration.zip, 13,370,992 bytes,
+  md5:f78dab5eafc6e95f595b1f38b537c9f9, SHA-256 95f7d1b7d37aeb604b633b902d8f5e13ab46f5cfd5b582d8d64a299f52039cfc
+  (read the SHA-256 from your build receipt,
+  C:\Users\LEET\Codex\Temp\syndeom-gate-s1-registration-20261027\SHA256SUMS)
+- Source snapshot: annotated tag gate-s1-registration -> 2018d5e79ea23fa200e560d628bec5e91edf0956
+
+Do not assume any repository value: default branch, branch naming, commit identity,
+session number, gate command, file paths. Read each from the repository, git or the
+program records. Begin with the ADR-0008 orientation preflight, as the program requires.
+
+One bounded package, then stop for my review:
+
+1. README.md
+   a. Find every passage that presents Gate S1 as open or its cold-start examination
+      as pending (the Status section has at least two). Replace them with what
+      happened, citing the records rather than restating them: the Session 29
+      examination passed, closure is recorded in PROGRAM/STATE.md and the Session 29
+      entry in PROGRAM/HANDOFF.md, and it reached main via PR #15. Take the current
+      NEXT from STATE rather than writing your own. Where the README says something
+      happens "after Gate S1 closes" (for example, admission review of the held
+      harvest candidates 28-30), state the current position as STATE records it, and
+      do not start or imply any decision I haven't made.
+   b. Add a DOI badge near the top using the concept DOI.
+   c. Add a short Citation section. Cite the version DOI when referring to the
+      registered design; the concept DOI resolves to the latest version. Take the
+      citation text and BibTeX from Zenodo's own export of the record, not from
+      memory. Include the archive's file name, its MD5 as Zenodo reports it, and its
+      SHA-256. In one or two sentences, say that the archive omits the two files listed
+      in THIRD-PARTY-NOTICES.md (link it rather than repeating the reasons) and that it
+      is a registration archive: the full gate runs on a full clone at the tag.
+   d. Change nothing else in the README: no rewrites of other sections, no reformatting.
+
+2. Program records. Update every record that still describes the deposit as pending,
+   starting with STATE's "Gate S1 registration deposit" standing item, so the repository
+   doesn't contradict itself, and record the identifiers above. Add this session's
+   HANDOFF entry, with this message verbatim as the program does for owner instructions.
+   Do not add a new ADR or a new source number ([S-]0074 to [S-]0080 stay reserved for the
+   held branch), and do not touch the gate-s1-registration tag.
+
+3. Before writing anything, check whether these edits trip any frozen check, and report
+   before working around one. Add no new files in this package; if you think one is
+   warranted (for example CITATION.cff), propose it in the PR description instead.
+
+4. Run the full gate on the committed tree with a clean working tree. Fetch fresh before
+   pushing and confirm the default branch hasn't moved. Push a branch, open a PR, and stop.
+   Do not merge, tag or force-push.
+
+Report: commit SHA and tree, the gate's time window and result, the README diff in
+brief, the records you changed, any frozen-check findings, and the PR link.
+~~~
+
+Note on the marked edit (Al's ruling, option (a), below): in item 2 Al wrote both numbers of the
+reserved range with the `S-` prefix. Here the prefix is bracketed, `[S-]`, because the register
+check (`scripts/check_registers.py`, which the preservation baseline pins byte for byte) fails on
+any `S-`number that SOURCES.md does not define, and neither number is defined. Nothing else is
+changed. The exact message, with one final LF, is 3,768 bytes, SHA-256
+`ae971f2c990995007f63c38af5f709d0b0ebde094113779af4895815f286021f`. It is unedited in this
+session's pull request description and at
+`C:\Users\LEET\Codex\Temp\syndeom-post-deposit-records-20261027\owner-instruction-2026-10-27.txt`.
+
+AL'S RULINGS (2026-10-27, on the executor's report of the frozen-check finding and four calls),
+verbatim:
+
+~~~text
+Rulings on the frozen-check finding and your four calls:
+
+Option (a). Quote my message verbatim in HANDOFF except for the one visibly marked edit to the reserved range, with your note, the exact text's SHA-256 and its byte count. Put the unedited message in the PR description and keep the exact copy under the external root. This message contains no register numbers, so quote it verbatim as it stands.
+
+Call 1: accepted, with one constraint. The top banner should say Gate S1 is closed and S2 is next, without implying any S2 work has begun. The phase table's S1 row becomes Closed and nothing else in the table moves.
+
+Call 2: accepted as proposed, including the HANDOFF record of the tag-and-archive step after PR #17's merge, with my instruction quoted verbatim and the archive's verification results.
+
+Call 3: bring it into this package. The README will point readers to STATE as the controlling record for Gate S1's closure, so STATE should not still say that Session 29's pull request awaits review and merge. Update that bullet to record PR #15's merge, reading the merge commit and time from git and GitHub. Change only current-status statements that are now false, and leave dated history entries as they were written.
+
+Call 4: accepted. Propose CITATION.cff in the PR description; do not add it.
+
+Then build, run the gate, push, open the PR and stop for my review.
+~~~
+
+ADVANCED:
+- **A. Zenodo, confirmed before anything was written.** The exports and headers are under the
+  external root's `zenodo\`, fetched 05:33:05Z–05:33:09Z:
+  - `api/records/23682781`: HTTP 200; `status` `published`; `publication_date` 2026-10-27;
+    `doi` `10.5281/zenodo.23682781`; `conceptdoi` `10.5281/zenodo.23682780`; licence
+    `polyform-noncommercial-1.0.0`; version `gate-s1-registration`;
+  - one file, `Syndeom-gate-s1-registration.zip`, 13,370,992 bytes,
+    `md5:f78dab5eafc6e95f595b1f38b537c9f9`;
+  - the concept record resolves to this record, its only version;
+  - the published file, downloaded, is byte-identical (`cmp`) to the built archive, with the
+    SHA-256 `95f7d1b7…039cfc` of the build receipt's `SHA256SUMS`;
+  - the citation (`text/x-bibliography`, APA) and the BibTeX (`/export/bibtex`) are Zenodo's
+    exports, copied into the README unchanged by a script.
+
+  Every value in Al's instruction matched.
+- **B. Frozen checks, before any file was written.** One tripped: the register check, by the
+  verbatim quotation (above). No other: `README.md` and `PROGRAM/STATE.md` are skipped by
+  `preserve()`, `PROGRAM/HANDOFF.md` is append-only there, ADR-0010 is outside the preservation
+  baseline, and no file is added. Reported to Al before writing; Al ruled option (a).
+- **C. README:**
+  - the DOI badge (concept DOI);
+  - the banner: Gate S1 closed, S2 next;
+  - the Status section's two passages: the closure, cited to STATE, HANDOFF Session 29 and PR 15,
+    and NEXT as STATE has it;
+  - the held harvest's "after Gate S1 closes" sentence: eligible, scheduled after ADR-0011 by the
+    owner's ordering, nothing approved;
+  - the phase table's S1 row: Closed;
+  - a Citation section.
+
+  Nothing else in the README changed.
+- **D. Records:**
+  - STATE: Updated; Current build verification; the deposit escalation, now done, with the
+    identifiers; the bullet on Session 29's pull request, now PR 15's merge (read from git and
+    GitHub);
+  - ADR-0010 *Amendments*: a dated entry recording the deposit;
+  - HANDOFF: this entry.
+- **E. Gate** on the committed tree with a clean working tree; recorded in the pull request and
+  under the external root, not in the tree it certifies.
+BELIEF DELTAS:
+- **The register check reads quoted text too.** It scans every tracked Markdown file, fenced
+  blocks included. An owner message that names an undefined `S-`number therefore cannot be
+  committed byte-verbatim while the number is undefined. Evidence: the `S-` pattern in
+  `scripts/check_registers.py` runs over all `.md` text; the instruction's item 2. Consequence:
+  the marked edit above, by Al's ruling.
+CONFUSIONS:
+- The tag-and-archive step has no session number of its own. It was Session 31's NEXT, carried
+  out in the same conversation with no repository change, so it had no HANDOFF entry. This entry
+  records it, at Al's direction.
+HONESTY CHECK:
+- Every Zenodo value was read from Zenodo's API or exports in this session, not copied from the
+  instruction. The SHA-256 was read from the build receipt and recomputed on the downloaded file.
+- PR 15's merge time, parents and tree were read from GitHub and git.
+- No register status, manifest, frozen packet or constitution byte changed; no S-entry was added;
+  the tag was not touched. Downgrades: none.
+LEAKAGE CHECK: checked, not assumed — `contact/` was not opened; no detector, generator or
+threshold was touched; the work concerns the records of a deposit. Verdict: no leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED claims. The archive's build was deterministic (a
+second build was byte-identical). Nothing to quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing; nothing synthetic
+labeled real.
+DRIFT CHECK:
+- no statement about any real manuscript (SD3);
+- no understanding claims (SD17);
+- no detectors; no referee contact (SD13);
+- no S2 code; the held branch untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT, unchanged — S2.1, `PROGRAM/DECISIONS/ADR-0011.md`, decision
+only.
+ESCALATIONS:
+- This session's branch `claude/s2-post-deposit-records` and its pull request await Al's review;
+  left unmerged.
+- `CITATION.cff` is proposed in the pull request description, not added (Al's ruling on call 4).
+- Unchanged: R4's seed family at ADR-0011's draft; the held branch's review; human-referee
+  participants (SD13).
+STOP-REASON: natural boundary — Al's instruction ends at a gated, reviewable pull request.
+Repo green: the gate on the committed tree, recorded in the pull request.
+**Memory writes:** none.
