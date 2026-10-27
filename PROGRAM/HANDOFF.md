@@ -5590,3 +5590,138 @@ Effect, recorded in STATE:
 Nothing else changed. The commit carrying this entry is gated on its committed tree; the result
 is recorded under the external root `C:\Users\LEET\Codex\Temp\syndeom-s1-cold-start-exam-20261026\`
 (`gate-committed.json`), not in the tree it certifies. **Memory writes:** none.
+
+SESSION: 2026-10-27 UTC (2026-10-26 America/New_York) (Session 30 — an informed working session,
+not an examination, continuing Session 29's conversation at Al's direction; it was not launched
+with the §6 prompt, so it makes no SD15 disclosure; ADR-0010, the relicense to the PolyForm
+Noncommercial License 1.0.0; branch `claude/s2-adr-0010-relicense` from `main`
+`c9372b1355a6d687dec6287f908639ac670db659`; the session-end SHA is the commit carrying this
+block, recorded in its pull request)
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (nothing evidenced). Gate S1 CLOSED (Session 29).
+ORIENT (ADR-0008 D1 steps 1–5: `python -I -X utf8 scripts/orient_preflight.py orient --repo
+C:/Users/LEET/Syndeom --expect-url https://github.com/Quigles1337/Syndeom --sync --receipt …`,
+exit 0, SNAPSHOT-ESTABLISHED):
+- identity `C:/Users/LEET/Syndeom`, remote `https://github.com/Quigles1337/Syndeom.git`;
+- `git fetch --prune origin` exit 0, 2026-10-27T00:30:13.90Z–00:30:14.65Z;
+- default branch `main`;
+- fetched `origin/main` = `c9372b1355a6d687dec6287f908639ac670db659`, tree
+  `4caa81f0c56416a02830d19d4a11eb45c9c4a9f4`;
+- classification behind; the clean `main` was fast-forwarded (ff-only) to the fetched tip;
+- receipt SHA-256 `14e87ba102f4dd399d4c52bcf916638b1a5138d2f84f5951c2c82a07c5cd266a`
+  (`preflight-orient.json` under the external root
+  `C:\Users\LEET\Codex\Temp\syndeom-relicense-20261026\`).
+
+PR 15 merged at 2026-10-27T00:25:39Z, by Al, as `c9372b1`. Its tree `4caa81f0…` is the tree
+Session 29 gated GREEN on its committed rulings commit `6b3dbda`. STATE on `main` records Gate S1
+CLOSED and phase S2, as Al's step 1 required.
+WHAT AL ASKED (Session 30's opening message): orient and confirm PR 15; inventory every licence
+statement, whether the constitution names Apache-2.0, and which affected files the preservation
+check freezes; give options per conflict; draft ADR-0010; ask for the commercial-licensing
+contact; then, after acceptance, apply, gate the committed tree, open a PR and stop for review.
+ADVANCED:
+- **A. Inventory (changed nothing).**
+  - Licence statements: `LICENSE`; README § Licence; the four crate manifests; STATE (the
+    Default-branch, Q3 and advisory-note bullets); S-0019; ADR-0000 R1.
+  - Absent: SPDX headers, CITATION or package metadata, and any licence in
+    `lean/lakefile.toml`.
+  - The constitution names no licence for the repository (SD16 is generic).
+  - Frozen: every affected file except README and STATE is in the 375-file baseline that
+    `preserve()` checks; `LICENSE`, SOURCES.md and the crate manifests are checked exactly.
+  - Five conflicts (C1–C5) with options went to Al. The draft is
+    `ADR-0010.draft.md` under the external root (SHA-256 `75cf86e0…2c24`).
+- **B. Al accepted, with rulings C1(a), C2(a), C3(a), C4(a), C5(a)**, the Required Notice URL
+  without `.git`, and the contact adz@alphx.io. All are transcribed verbatim in ADR-0010.
+- **C. The C2 precondition (Al: confirm nothing produced embeds the Cargo licence field).**
+  - Partly true. No `CARGO_PKG_LICENSE`, and nothing reads the licence value.
+  - The pair producer embeds whole-file digests of `engine/pair/Cargo.toml` and
+    `engine/manifest/Cargo.toml` (`COMPILED_INPUTS`), and its receipts record them. The S1.3 tool
+    embeds `engine/ingest/Cargo.toml` and `engine/manifest/Cargo.toml` in `tool_source_sha256`.
+  - Reported to Al before any change. Al ruled C2 option (i), all four files, with three
+    conditions (verbatim in ADR-0010).
+  - Condition 2 checked before committing: the only gate test that calls `verify_producer`
+    (`engine/pair/tests/io_provenance.rs`) runs it against a scratch repository under
+    `engine/target/pair-tests/`, never against the checkout.
+- **D. Applied:**
+  - `LICENSE`: the Required Notice line, one blank line, then the verbatim text. It was fetched
+    2026-10-27T00:48:02Z, HTTP 200, 4,563 bytes, SHA-256 `c0ea4a89…fabbe5`, equal to Al's digest,
+    and re-hashes to that digest inside `LICENSE` (4,662 bytes; whole-file SHA-256
+    `f91dbffc…d24e`).
+  - The four `license` lines.
+  - The tool's three exceptions (ADR-0010 D6), and `engine/ingest/tests/relicense_exceptions.rs`
+    (6 narrowness tests).
+  - S-0073 appended (SOURCES.md is now HEAD's bytes plus that entry).
+  - ADR-0010; README § Licence (a plain-language summary checked against the licence text, the
+    contact, the boundary, earlier Apache grants).
+  - STATE: Updated; Default branch; the advisory bullet; the two S1.3/S1.2 facts bullets; Current
+    build verification; ADR numbers; the narrowing note; the held-branch bullets; Q3; the Gate S2
+    row; NEXT.
+- **E. Measured** on a clean clone of a local measurement commit with every change but the
+  ADR/README/STATE/HANDOFF text. That commit was folded back before the final commit and never
+  pushed.
+  - At HEAD: `PASS: 35 / 32`. `inventory.json` (`d7432889…14c5`) differs from the retained one
+    only in `preservation`: `exact_files_checked` 363; `append_only_prefixes_checked` gains
+    SOURCES.md; new `license_line_only_files_checked`. `tool_source_sha256` changes for
+    `effective.rs` and the two embedded crate manifests.
+  - At `3cd5558` with that revision's tool: the retained `inventory.json` is byte-identical
+    (`b626d1b5…1b803`).
+  - Tool source `92a816bc…b30c` → `49e6cd6d…1a67`.
+- **F. Gate** on the committed tree, detached with a log, recorded in the pull request and under
+  the external root, not in the tree it certifies.
+BELIEF DELTAS:
+- "Nothing embeds the licence field" and "nothing embeds the file" are different claims. The
+  pair producer binds its manifests by whole-file hash, so a one-line metadata change ends HEAD
+  replay of the admitted pair. Evidence: `engine/pair/build.rs`, `provenance.rs`, the 18 receipts.
+  Consequence: ADR-0010 *Consequences* and STATE's replay bullet.
+- The preservation check now has four case-by-case exceptions. Any S2 code commit edits frozen
+  pair inputs (`engine/Cargo.toml`, `engine/Cargo.lock`), so the full narrowing is a
+  precondition for S2 code, not a nicety. Evidence: `input-files.txt` and the frozen list.
+  Consequence: the ordering in NEXT.
+CONFUSIONS:
+- **Two misstatements by the executor to Al, both corrected in the record:**
+  - "26 committed receipts (24 + 2)". A `git grep -l … | head` truncated the listing; the exact
+    count is 18 (16 + 2). Al's ruling text repeats 26. ADR-0010 records 18 and says why. Doc
+    fix: count with the full listing, never through `head`.
+  - "Replay from a checkout of `eb1b96d` still works." The producer checks only its inputs, but
+    the documented helper `reproduce.py` was added in `0b30d78`, after `eb1b96d`. Replay with the
+    helper runs on `main` `e6a7cae…` through `c9372b1`, which ADR-0010 and STATE now state
+    exactly.
+- Al's condition 1 expected `inventory.json` not to change. It changes in three `preservation`
+  fields, though no count or item changes. ADR-0010 records that rather than restating the
+  expectation.
+- A STATE sentence that gave the held branch's renumbered sources with the `S-` prefix (0074–0080) tripped the register check (undefined
+  references), and S-0073's state line parsed as `INGESTED.`. Both were fixed before the
+  commit; the checker caught them. Doc fix: this line.
+HONESTY CHECK:
+- One SOURCE added (S-0073, INGESTED) with its retrieval evidence. No CLAIM or FLAW status
+  changed; no artifact, manifest or frozen packet changed.
+- The licence statements in frozen historical files are deliberately left (C4, C5).
+- The replay procedure in STATE is assembled from the S1.2 README and the producer's code and
+  was not re-run this session; it says so.
+- Downgrades: none.
+LEAKAGE CHECK: checked, not assumed — `contact/` was not opened; no detector, generator or
+threshold was touched; the decision concerns licensing and a reproduction tool. Verdict: no
+leakage.
+DETERMINISM CHECK: no MEASURED or REPRODUCED claims. The reproduction outputs are regenerable from
+the commands, SHAs and trees recorded in ADR-0010 and under the external root. Nothing to
+quarantine.
+MANIFEST CHECK: no artifact created or changed; "proven" applied to nothing; nothing synthetic
+labeled real.
+DRIFT CHECK:
+- no statement about any real manuscript (SD3);
+- no understanding claims (SD17);
+- no detectors; no referee contact (SD13);
+- no S2 code (ADR-0011 not started); the held branch untouched.
+NEXT-SINGLE-ACTION: S2.1 — write `PROGRAM/DECISIONS/ADR-0011.md`, the first generator family's
+design (decision only), exactly as STATE.md's NEXT states it. Then, before any S2 code: the full
+narrowing of the S1.3 tool's byte checks.
+ESCALATIONS:
+- This session's branch `claude/s2-adr-0010-relicense` and its pull request await Al's review;
+  left unmerged. The licence changes publicly at the merge.
+- Al rules on R4's Mnemosyne seed family when ADR-0011's draft is in front of him (Al,
+  2026-10-26).
+- Unchanged: the held branch's admission review, after ADR-0011 (Al), and in practice after the
+  narrowing; human-referee participants (SD13).
+STOP-REASON: natural boundary — the accepted ADR is applied and delivered on a reviewable pull
+request; the session stops for Al's review, as Al directed. Repo green: the committed-tree gate,
+recorded in the pull request.
+**Memory writes:** none.

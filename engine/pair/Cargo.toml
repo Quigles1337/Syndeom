@@ -2,7 +2,7 @@
 name = "syndeom-pair"
 version = "0.1.0"
 edition = "2024"
-license = "Apache-2.0"
+license = "PolyForm-Noncommercial-1.0.0"
 description = "ADR-0007 reviewed Judson/Mathlib archival and canonical pair producer"
 publish = false
 

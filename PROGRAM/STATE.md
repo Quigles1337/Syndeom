@@ -1,6 +1,30 @@
 # STATE
 
-- **Updated:** 2026-10-26 UTC (Session 29 — **the Gate S1 cold-start examination: PASS; Gate S1
+- **Updated:** 2026-10-27 UTC (Session 30 — an informed working session, not an examination,
+  continuing the conversation of Session 29 at Al's direction): **ADR-0010, the relicense to the
+  PolyForm Noncommercial License 1.0.0, accepted by Al on 2026-10-26 with rulings C1–C5.**
+  - **Orientation:** the ADR-0008 preflight (receipt
+    `C:\Users\LEET\Codex\Temp\syndeom-relicense-20261026\preflight-orient.json`) fast-forwarded
+    the clean `main` to fetched `origin/main` `c9372b1355a6d687dec6287f908639ac670db659`, tree
+    `4caa81f0c56416a02830d19d4a11eb45c9c4a9f4`. That is **PR 15's merge** (2026-10-27T00:25:39Z,
+    by Al), whose tree is the one Session 29 gated on its committed rulings commit.
+  - **The licence:** `LICENSE` now holds the Required Notice line and the verbatim PolyForm text
+    (S-0073, SHA-256 `c0ea4a89…fabbe5`, equal to Al's stated digest). Copyright is held personally
+    by Alexander David Zalewski; commercial licensing is at adz@alphx.io. The four crates'
+    `license` fields are `PolyForm-Noncommercial-1.0.0`, and README § Licence carries a
+    plain-language summary.
+  - **The preservation check** gained three narrow exceptions (ADR-0010 D6), with six narrowness
+    tests in the gate. The S1.3 reproduction at `3cd5558` still yields the retained inventory
+    byte-identical; at HEAD it passes, differing only in three `preservation` fields (bullet
+    below).
+  - **Replay of the admitted S1.2 pair from HEAD ends here.** It runs on `e6a7cae…`..`c9372b1`
+    (procedure below). The 18 committed receipts are unchanged.
+  - **Unchanged:** historical "Apache" statements in frozen files, and the pair's recorded wrapper
+    licence (C4, C5).
+  - **Ordering:** the S2 generator decision is now **ADR-0011**, and the byte-check narrowing
+    lands before any S2 code (NEXT).
+  - **Unchanged:** registers' statuses, manifests, frozen packets and the accepted corpus.
+- **Previous update (Session 29):** 2026-10-26 UTC (Session 29 — **the Gate S1 cold-start examination: PASS; Gate S1
   CLOSED; phase S2 opens**, effective on `main` when Al merges this session's pull request). A
   fresh conversation with no prior turns, launched from `C:\Users\LEET` (not a git work tree; no
   Git snapshot attached) with the §6 Session-N resume prompt in its ADR-0009 wording, verbatim and
@@ -273,16 +297,27 @@
   R3 of 2026-10-13 and verified against the stated digest before the commit, Session 8). A
   ChatGPT-produced design discussion of 2026-10-13 relayed verbatim under a provenance header,
   with Claude's verification record and its rights status under the R1 boundary (the DARQ
-  MNEMOSYNE material in it is proprietary and outside the Apache-2.0 release; the program is named
+  MNEMOSYNE material in it is proprietary and outside SYNDEOM's release — R1(b), carried forward by
+  ADR-0010; the program is named
   with its owner's authorization, Al, 2026-10-13). **SD11 banner: advisory, not evidence** —
   nothing enters any register from it; its two "recorded counterexamples" are not in the Mnemosyne
   repository (its header says so); its §6/§7 finding is Mnemosyne change control, not SYNDEOM's.
   Its only standing effect here is R4 (candidate S2 seed family, standing rulings below).
 - **Default branch:** `main` — discovered from the clone of the empty remote and the REST API
   (ADR-0000 D3); confirmed by Al (Q2). Remote: `origin` = `https://github.com/Quigles1337/Syndeom`
-  (**public**; created by Al 2026-10-12; Actions enabled; **`LICENSE` = Apache-2.0 since Session 7**
-  — Q3 resolved by Al 2026-10-13, ADR-0000 Addendum 2 R1; the release boundary is stated in
-  README.md § Licence; text provenance S-0019).
+  (**public**; created by Al 2026-10-12; Actions enabled).
+  **`LICENSE` = PolyForm Noncommercial 1.0.0 since ADR-0010 (2026-10-26)**, preceded by
+  `Required Notice: Copyright 2026 Alexander David Zalewski
+  (https://github.com/Quigles1337/Syndeom)`:
+  - copyright held personally by Alexander David Zalewski;
+  - commercial licensing at adz@alphx.io;
+  - text provenance S-0073;
+  - the four crates' `license` fields set to `PolyForm-Noncommercial-1.0.0`.
+
+  It was Apache-2.0 from Session 7 through `c9372b1` (Q3, ADR-0000 Addendum 2 R1; text S-0019),
+  and copies obtained under Apache-2.0 remain under it. The release boundary (third-party
+  material; DARQ Labs proprietary material) is carried forward and stated in README.md §
+  Licence.
   **ORIENT note (SD7):** `git symbolic-ref refs/remotes/origin/HEAD` resolves to `main`; if it ever
   fails, fallback `git remote show origin`, repair `git remote set-head origin -a`.
   **Fetch first (Session 22, 2026-10-21):** run `git fetch origin` before §4.1's `git status` /
@@ -336,13 +371,74 @@
   `first_parent_amendment` tests, whose fixture reads the same baseline from the working tree,
   pass 15 of 15 with the fix; without it four of them failed (the first staged-tree gate, same
   root, `gate-staged.json`).
+- **S1.3 REPRODUCTION AFTER ADR-0010 (2026-10-26, Session 30).** The tool gained three narrow
+  exceptions (ADR-0010 D6): `LICENSE` is skipped, `PROGRAM/SOURCES.md` is append-only, and the
+  four crate manifests may differ only in their `license` line. Tool source SHA-256: `92a816bc…b30c`
+  → `49e6cd6d…1a67`. The gate test `engine/ingest/tests/relicense_exceptions.rs` (6 tests) shows
+  each exception is narrow.
+  - **At `3cd5558`, with that revision's tool,** the retained `inventory.json` is still reproduced
+    byte-identical (`b626d1b5…1b803`).
+  - **At HEAD** the reproduction prints the same `PASS: 35 archived representations / 32
+    effective logical items`. Its `inventory.json` differs from the retained one **only** in
+    `preservation`:
+    - `exact_files_checked` **363** (370 retained, 369 after ADR-0009);
+    - `append_only_prefixes_checked` gains `PROGRAM/SOURCES.md`;
+    - the new field `license_line_only_files_checked` lists the four manifests.
+
+    Every count and item is unchanged.
+  - In `provenance.json`, `tool_source_sha256` changes for `effective.rs`,
+    `engine/ingest/Cargo.toml` and `engine/manifest/Cargo.toml`.
+
+  An examiner should expect exactly these differences. Measurements and logs are under
+  `C:\Users\LEET\Codex\Temp\syndeom-relicense-20261026\`.
+- **S1.2 PAIR REPLAY — where it runs (ADR-0010 *Consequences*).**
+  - **Replay from HEAD ended at ADR-0010.** The four crate manifests' `license` line changed, and
+    `engine/pair/Cargo.toml` and `engine/manifest/Cargo.toml` are two of the producer's 20 pinned
+    inputs. A `syndeom-pair` built at HEAD therefore embeds their new digests, and
+    `verify_producer` refuses producer revision `eb1b96d`.
+  - **Where replay runs:** any `main` revision from `e6a7cae4392dd1565ee57f9fb727cc01e453687d`
+    (PR 4's merge, the first with the helper) through `c9372b1355a6d687dec6287f908639ac670db659`
+    (the last before ADR-0010). Each descends from `eb1b96d` and holds its 20 inputs
+    byte-identical (`git diff --quiet eb1b96d c9372b1 -- $(cat engine/pair/input-files.txt)` exits
+    0). A checkout of `eb1b96d` itself holds the producer but not the helper, which was added in
+    `0b30d78`.
+  - **Procedure:**
+    1. Clone `origin` into a new directory and `git checkout --detach
+       c9372b1355a6d687dec6287f908639ac670db659` (or any revision in that range).
+    2. In its `lean/`, establish the pinned Mathlib build (`lake exe cache get`, then `lake
+       build`). The producer reads `lean/.lake/packages/mathlib` at the pinned revision and
+       compiles the emitted file.
+    3. From the checkout root, run `python -I -X utf8 analysis/s1-2/implementation/reproduce.py
+       --root <that checkout> --producer eb1b96d5b8084ceb1de734fffc90c9b480ec32bf --output <new
+       path outside the checkout>`. Omit `--artifact-root`. Add `--source-dir
+       <retained-five-object-directory>` only if the fixed upstream objects are unavailable; the
+       original retained set is at
+       `C:\Users\LEET\Codex\Projects\Syndeom-S1.2-implementation-work-2026-10-20\production-run-01\sources`.
+
+    The helper builds the producer, verifies its inputs, generates into an isolated root,
+    compiles and audits the emitted Lean file, replays into a second fresh root and runs the
+    labelled controls (`analysis/s1-2/implementation/README.md`, "Reproduce into a new
+    destination").
+  - The 18 committed receipts that record the producer's input closure — 16 under
+    `analysis/s1-2/implementation/evidence/production/receipts/` and 2 under
+    `analysis/s1-4/evidence/` — are unaffected. This procedure is assembled from that README and
+    the producer's code; Session 30 did not re-run it.
 - **S1.3 orientation verification (2026-10-20):** existing Lean/Rust code passed the gate,
   with documentation reconciliation in progress; 29 existing tests passed, axioms `[propext]`.
   The new crate was enabled only after this gate. Its focused producer checks now pass
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 29):** ORIENT gate on main
+- **Current build verification (Session 30):** no separate ORIENT gate on main `c9372b1`. Its
+  tree `4caa81f0c56416a02830d19d4a11eb45c9c4a9f4` is the tree Session 29 gated GREEN on its
+  committed rulings commit `6b3dbda` (2026-10-27T00:00:33Z–00:08:28Z; `gate-committed.json`,
+  raw log SHA-256 `437716ec…58f7`, under
+  `C:\Users\LEET\Codex\Temp\syndeom-s1-cold-start-exam-20261026\`). During the work, `cargo
+  test` for the preservation suites (15 + 6 tests), `cargo clippy -D warnings` and `cargo fmt
+  --check` passed. The commit that adds ADR-0010 receives a full gate on its committed tree,
+  recorded in its pull request and under
+  `C:\Users\LEET\Codex\Temp\syndeom-relicense-20261026\`, not in the tree it certifies.
+- **Session 29 build verification:** ORIENT gate on main
   `e029c80e1be149bef8fe6ceb76eed59c235ed8b4` (tree `67023777965d5747c5e3e5fe3f655825f658c046`)
   with one declared change, the unstaged SD15 disclosure appended to `PROGRAM/HANDOFF.md`: full
   gate, detached with a log, 2026-10-26T23:16:58Z–23:25:02Z, exit 0 / `GATE: GREEN` — Lean 8,926
@@ -658,8 +754,10 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   ADR-0007 first positive-pair procedure and candidate — written 2026-10-20 (S1.2);
   ADR-0008 orientation synchronization and snapshot selection, the accepted addendum governing
   §4.1 — written and accepted 2026-10-21 (Session 23); ADR-0009 constitution amendment to SD15
-  and the §6 Session-N prompt (disclosure first) — written and accepted 2026-10-26 (Session 26).
-  **ADR-0010 is the next free number.**
+  and the §6 Session-N prompt (disclosure first) — written and accepted 2026-10-26 (Session 26);
+  ADR-0010 relicense to PolyForm Noncommercial 1.0.0, with three preservation-check exceptions —
+  written and accepted 2026-10-26 (Session 30). **ADR-0011 is the S2 generator decision (NEXT);
+  ADR-0012 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -697,7 +795,7 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **open** — ADR-0010 is the next action | — |
+| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **open** — ADR-0011 (decision only) is the next action; the byte-check narrowing precedes any S2 code | — |
 | S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **open** | — |
 | S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **open** | — |
 | S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **open** | — |
@@ -806,14 +904,23 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   baselines (HANDOFF entries, ADR-0008's header, the frozen packets under `analysis/`) are left
   byte-identical (ADR-0009 D4). The escalation as Session 25 wrote it is in HANDOFF Session 25 and
   in PR 11's STATE.
-- **Non-blocking note — S1.3 reproduction tool (Al, 2026-10-26; ADR-0009 D5) — PARTLY DONE.** A
-  future revision of the effective-inventory reproduction tool should limit its byte checks to
-  the inputs it depends on, so that an amendment of a file it does not use does not stop it
-  running at HEAD or fail the gate's `first_parent_amendment` tests. Done for the constitution
-  only (ADR-0009 D5: `preserve()` skips it, as it skips README and STATE). Still open for every
-  other non-input file in the baseline — ADR-0005 and SIBLING-MAP among them: an edit to ADR-0005
-  failed the reproduction (Session 26 probe), and the gate's tests run the same check on the
-  working tree. Not an action and not a blocker.
+- **S1.3 reproduction tool: the full narrowing of the byte checks is the next tool revision (Al,
+  2026-10-26; ADR-0009 D5, ADR-0010 D6–D7).** The tool should limit its byte checks to the
+  inputs it depends on, so that an amendment of a file it does not use neither stops it running
+  at HEAD nor fails the gate's `first_parent_amendment` tests. It now carries four case-by-case
+  exceptions:
+  - the constitution skipped (ADR-0009 D5);
+  - `LICENSE` skipped (ADR-0010);
+  - `PROGRAM/SOURCES.md` append-only (ADR-0010);
+  - the four crate manifests' `license` line (ADR-0010).
+
+  Per Al (2026-10-26), with three exceptions added at once, the full narrowing is the right
+  next tool revision rather than a fourth exception. It **lands before any S2 code, including
+  ADR-0011's crate**: S2's first code commit edits `engine/Cargo.toml` and `engine/Cargo.lock`,
+  which are frozen exact files and two of the 20 pinned pair-producer inputs, so the current
+  check would turn the gate RED. Still exact-checked today: every other non-input file in the
+  baseline, ADR-0005 and SIBLING-MAP among them (an edit to ADR-0005 failed the reproduction in
+  Session 26's probe).
 
 - **First-parent status support — accepted, verified and activated on main:**
   Al accepted the exact ruling on 2026-10-20 America/New_York; appended ADR-0003 and
@@ -834,8 +941,11 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   branch's admission review "until after Gate S1 closes". With Gate S1 closed (at the merge of
   Session 29's pull request), the review is eligible. **Order decided by Al on 2026-10-26
   (verbatim in the SD15 audit bullet above): NEXT stays at ADR-0010 per the phase order, with
-  the held harvest review scheduled after it.** Nothing on the branch is approved by this
-  eligibility.
+  the held harvest review scheduled after it.** ADR-0010 in that ruling is the generator
+  decision, renumbered ADR-0011 by ADR-0010. Nothing on the branch is approved by this
+  eligibility. Its integration would add `groundtruth/` members and SOURCES entries, which the
+  current preservation check refuses ("unexpected addition in preserved scope"), so in practice
+  it also follows the byte-check narrowing (bullet above).
 - **Later harvest held off main — DECIDED by Al on 2026-10-21 (decision 1, transcribed in
   `analysis/s1-orientation-repair/OWNER-DECISIONS.md`): preserve branch
   `claude/s1-harvest-candidates-28-30` at its original recorded commit
@@ -858,7 +968,8 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   4.4 (FLAW-0005), all undetermined; 1404.4599 Proposition 2.22 (FLAW-0005, undetermined) — produced
   by a session that had not fetched and so ran the paused harvest instead of the examination. It
   is **not mergeable as it stands**: its S-0066..S-0072 collide with main's (they become
-  the seven numbers after S-0072, 0073–0079), so every config hash, artifact id, record, log row and STATE row must be
+  the seven numbers after main's last entry — 0073–0079 when this was written; **0074–0080 since
+ADR-0010 registered S-0073**), so every config hash, artifact id, record, log row and STATE row must be
   regenerated at the integration commit (the originals' bytes are pinned by SHA-256 in its
   S-entries and manifests); main's Rust inventory consumers fail closed on any manifest beyond the
   35 archived representations, so a later prefix needs its own snapshot and coverage run under
@@ -880,7 +991,9 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   would be 37 effective logical items and 40 archived representations, absent other changes.
   These are projections conditional on a review that has not happened, not measured results.
 
-- **Q3 — RESOLVED 2026-10-13 (Session 7).** Al: SPDX `Apache-2.0` for SYNDEOM's original software
+- **Q3 — RESOLVED 2026-10-13 (Session 7); the licence choice SUPERSEDED 2026-10-26 by ADR-0010**
+  (PolyForm Noncommercial 1.0.0; the release boundary carried forward; earlier Apache-2.0 grants
+  stand). The record as written: Al: SPDX `Apache-2.0` for SYNDEOM's original software
   and technical documentation, with the release boundary recorded in ADR-0000 Addendum 2 R1 and
   README.md § Licence. `LICENSE` committed (S-0019), `license` field set on `syndeom-manifest`.
   Nothing awaited. One note for Al, not a blocker: the Apache Software Foundation's own host
@@ -967,13 +1080,23 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2.1 — write `PROGRAM/DECISIONS/ADR-0010.md`, the first generator family's design. The
-session decides only; it writes no generator code.** Gate S1 closed in Session 29 (cold-start
-examination PASS, effective at the merge of its pull request), and phase S2 opens with the ADR
-the standing rulings reserve ("ADR at S2"). If that pull request is not yet merged when this
-action is picked up, stop: the closure is not on `main`, and the only action is to ask Al.
+**S2.1 — write `PROGRAM/DECISIONS/ADR-0011.md`, the first generator family's design. The
+session decides only; it writes no generator code.** (ADR-0010 took the number 0010 for the
+relicense; this is the decision STATE's NEXT previously called ADR-0010.) If the pull request
+carrying ADR-0010 is not yet merged when this action is picked up, stop and ask Al: the
+numbering and the preservation-check exceptions are not on `main`.
 
-The ADR decides, under constitution §2 S2 and the standing rulings in this file:
+**Ordering (Al, 2026-10-26; ADR-0010 D7):**
+1. ADR-0011, decision only (this action).
+2. **The full narrowing of the S1.3 tool's byte checks** (Standing escalations). It lands
+   **before any S2 code, including ADR-0011's crate**, because S2's first code commit edits
+   `engine/Cargo.toml` and `engine/Cargo.lock`. Both are frozen exact files and pinned
+   pair-producer inputs, so the current check would turn the gate RED.
+3. The held harvest's admission review is scheduled after ADR-0011 (Al's ruling). Its
+   integration also needs the narrowing, because it adds `groundtruth/` members.
+4. Then S2 code.
+
+ADR-0011 decides, under constitution §2 S2 and the standing rulings in this file:
 - (a) **the one shared interface** behind which the four S2.1 modules sit: the informal proof
   generator, the Lean 4 formal-variant generator, the flaw injector and the padding module
   (FLAW-0013);
@@ -990,22 +1113,23 @@ The ADR decides, under constitution §2 S2 and the standing rulings in this file
   `by-construction`, ids with `-s<seed>`, and the `corpus_id` invariant tested (S2.3);
 - (f) **verification** (S2.4): property tests; goldens from the FLAWS.md examples; `cargo clippy`
   at deny-warnings; `cargo audit`;
-- (g) **placement** — a new `engine/` workspace member, and any new dependency pins with their
-  licences (SD16), read from the tools and the registry, never assumed (SD7);
+- (g) **placement** — a new `engine/` workspace member under `PolyForm-Noncommercial-1.0.0`
+  (ADR-0010), and any new dependency pins with their licences (SD16), read from the tools and the
+  registry, never assumed (SD7). It is implemented only after step 2 above;
 - (h) **flagged for Al, not decided:** whether R4's Mnemosyne-derived seed family enters as a
   candidate golden family, and its licence line under the R1 release boundary (ADR-0000
-  Addendum 2).
+  Addendum 2, carried forward by ADR-0010). Al rules on this when ADR-0011's draft is in front of
+  him.
 
 Read first: constitution §2 S2; `PROGRAM/FLAWS.md` (every recipe and example); ADR-0001
-(manifest schema); ADR-0002 (toolchain, gate); the Standing rulings section of this file.
-Interface with the siblings only through the manifest schema already pinned in ADR-0001 (SD14);
-never import their code. Open the session per ADR-0008 D1, preceded by the SD15 disclosure if it
-is launched with the §6 prompt. Commit `[S2][ADR-0010] decide the first generator family` on a
-branch, run the staged-tree gate before the commit, and open a pull request; Al merges.
+(manifest schema); ADR-0002 (toolchain, gate); ADR-0010 (licence, the preservation exceptions);
+the Standing rulings section of this file. Interface with the siblings only through the manifest
+schema already pinned in ADR-0001 (SD14); never import their code. Open the session per ADR-0008
+D1, preceded by the SD15 disclosure if it is launched with the §6 prompt. Commit `[S2][ADR-0011]
+decide the first generator family` on a branch, gate the committed tree, and open a pull request;
+Al merges.
 
-**Ordering note:** the held harvest branch's admission review is now eligible (Al's decision 1;
-Standing escalations). Al ruled on 2026-10-26 (verbatim under Standing escalations): NEXT stays at
-ADR-0010 per the phase order, with the held harvest review scheduled after it. The harvest itself stays paused through candidate 27 / `1403.4485`, with
-candidate 28 / `1403.6317` saved. The seven truth questions, the seven severity questions and the
+The harvest itself stays paused through candidate 27 / `1403.4485`, with candidate 28 /
+`1403.6317` saved. The seven truth questions, the seven severity questions and the
 unnamed-result question keep their existing dispositions. Missing canonical lengths and
 external-byte verification remain prerequisites for scoring real items (S4), not for S2.
