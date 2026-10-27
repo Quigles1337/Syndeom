@@ -1,0 +1,23 @@
+# Refreshed for each Zenodo deposit in the commit that is tagged, before publication (ADR-0010
+# Amendments): the version DOI reserved in the Zenodo draft is added under identifiers (none is
+# replaced); version, date-released (the planned publication date) and title become that
+# deposit's; doi, the concept DOI, stays. No commit field: the file cannot hold the hash of the
+# commit that contains it. version names the tag; the README and the Zenodo record give the hash.
+cff-version: 1.2.0
+message: "To cite SYNDEOM, use the concept DOI, which resolves to the latest deposited version. To cite the Gate S1 design registration itself, use its version DOI, listed under identifiers."
+title: "SYNDEOM: Calibration Infrastructure for Mathematical Proof Triage — Design Registration at Gate S1"
+type: software
+authors:
+  - family-names: Zalewski
+    given-names: Alexander David
+    affiliation: DARQ Labs
+    orcid: "https://orcid.org/0009-0008-9019-7631"
+version: gate-s1-registration
+date-released: "2026-10-27"
+doi: 10.5281/zenodo.23682780
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23682781
+    description: "Version DOI of the Gate S1 design registration"
+repository-code: "https://github.com/Quigles1337/Syndeom"
+license: PolyForm-Noncommercial-1.0.0
