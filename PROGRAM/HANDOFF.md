@@ -7656,3 +7656,126 @@ Separate PR next (Recommended) — This PR is the integration as ruled: commit 1
 ~~~
 
 Recorded in STATE (*Standing rulings*, *Standing escalations*, NEXT).
+
+### Entry 5 — commit 2, the five frozen rows (Q-H7)
+
+Commit 1 is `d2569d61588368a60bbf7558fb9f0703f96e3a5b` (tree `1e2fafad…9bd7`), the commit that
+adds the five item directories. The second commit adds five frozen rows to STATE's *Freeze
+register*, one per new directory, each with that full id as its freeze point. It also amends the
+preamble sentence so that it names the exception, and gives commit 1's id in the Updated bullet.
+On the working tree before commit 2, `check_freeze.py` resolved the freeze point for all five
+rows: 2 files each, byte-identical, 0 added. The register has **64 rows (59 frozen, 5
+append-only): ALL PASS**, and `check_freeze_test.py` passes 8 of 8.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (S2.1: ADR-0011 accepted; no code). Gate S1 CLOSED
+(Session 29). This session's work is S1 corpus maintenance (the first later prefix, ADR-0003 D8),
+which Al ordered ahead of S2 ordering step 4.
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipt `orient-receipt.json`, SHA-256
+`6980008e…cfa8`, under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028-claude-opus\`):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-10-28T04:56:37Z–04:56:38Z, exit 0.
+- **Snapshot.** `main` at `a7939547…`, tree `bfa2ce23…`, **synchronized**: ahead 0, behind 0. The
+  only change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree, as the
+  owner note expected.
+- **Step 6.** STATE (the Updated bullet, the gate tables, Standing rulings and escalations, NEXT),
+  then HANDOFF Session 37 in full, then CLAIMS (0001–0005 VERIFIED, 0006 CONDITIONAL, 0007
+  VERIFIED existence only), then FLAWS `0.1.0` (14 entries), then ADR-0008, ADR-0012 D7 and
+  REVIEW.md. They agree with one another.
+- **ORIENT gate GREEN** on this checkout, 04:58:53Z–05:07:50Z (STATE, *Current build
+  verification*).
+- **NEXT survived ORIENT.** Its condition held: PR 23 was merged with a merge commit on fetched
+  `origin/main`.
+ADVANCED:
+- **The held harvest is integrated** as the first later prefix, on `claude/s1-held-harvest-integration`:
+  - commit 1, `d2569d6`: five item directories, S-0074..S-0080, the log section, STATE and this
+    block's Entries 1–4;
+  - commit 2: the five frozen rows and this block's close.
+- **Provenance proved, not assumed.** Each preserved Session-22 config equals its held manifest's
+  `config` and `notes`. Each regenerated manifest equals its held manifest up to the renumbering,
+  the session label, the id, the config hash and the engine commit. The originals' pins
+  (`97b28cf2…`, `c171e338…9270`, `2e326a33…`) are unchanged, and a rerun is byte-identical.
+- **New ids:** item 32 `34988f7c8306`, 33 `915251f36fc5`, 34 `bca249b3fa72`, 35 `c6179869edf7`,
+  36 `11ffe4f87954`. Manifest SHA-256 prefixes: `01913586`, `9584cacd`, `f7470f85`, `23d202e5`,
+  `fb270361`.
+- **Append-only files:** SOURCES 180,782 → 200,485 bytes, HARVEST-LOG 48,006 → 56,562 bytes
+  (the tag's bytes and HEAD's bytes an exact prefix of each), and HANDOFF.
+- **Housekeeping verified** from its receipt and the live checkout (Entry 3); STATE records it as
+  done.
+- **Al's ruling** on the inventory event's scope (Entry 4), and NEXT moved to that event.
+- **Evidence:** the configs, the integration scripts and the id map are under the external root
+  `integration/` (15 files listed in `MANIFEST-sha256.txt`, `d61f3cea…8570`).
+BELIEF DELTAS:
+- **The integration was as mechanical as REVIEW.md §4 said.** The preserved configs reproduce the
+  held manifests exactly, so the regeneration changed only what the renumbering forces. No
+  reading had to be redone.
+- **The inventory event is larger than its bullet.** The pinned effective-inventory tool is code
+  for a single event (`BASE`, a compiled preservation list, the 35 / 32 pin), so a later prefix
+  needs a new tool revision, not a parameter. That design is not mechanical, and Al split it into
+  its own pull request.
+- **The gate stays GREEN with additions under `groundtruth/`.** `cargo test --all-targets`
+  compiles the examples that refuse additions but does not run them. The refusal lives only in
+  the manual reproduction, so the gate does not enforce the population pin. That is consistent
+  with ADR-0012 D7, which does not ask the gate to.
+CONFUSIONS:
+- **The provisional header again lacked the UTC date** that ADR-0008 D1 step 0 asks for, the same
+  slip as Session 37's. The cause is structural: that form is in ADR-0008, which a session may
+  read only after it has disclosed. Cost: none, since the header is not part of the disclosure.
+  Doc fix: a note for Al (ESCALATIONS); nothing was edited.
+- **The Bash tool's `cd` persisted**, a hazard already in memory. It was noticed at once, and
+  every later command uses absolute paths. Cost: none.
+- **A `grep -c` over backslash paths printed 0** for a string `sed` showed was present (the Git
+  Bash backslash hazard). Verified by `sed` instead. Cost: one look.
+- **Entry 2's first draft dated the append "about 04:55Z".** The evidence only bounds it, before
+  the 04:56:31Z clock reading, so it was corrected before commit 1.
+HONESTY CHECK:
+- No register status changed, and nothing was downgraded or upgraded.
+- The 40 manifests are a count of files, not a MEASURED result. The inventory event measures
+  them.
+- The seven SOURCES entries remain VERIFIED by Session 22's retrievals. They were not re-fetched;
+  each now says so in its *Integrated* line. The six abstract pages held only as receipts stay
+  receipts.
+- Two of the receipt's statements could not be re-checked live: the fast-forward's commit count,
+  and the worktree's clean status before its removal. They are recorded as the receipt's.
+- The launch-prompt copy is a transcription from the prompt as rendered to the executor.
+- **`engine_commit` is `a793954`, the base the producer ran at**, as main's items do (Session 20's
+  items carry the parent of the commit that added them). REVIEW.md §4 step 3's words "at the
+  integration commit, which becomes their `engine_commit`" cannot be met literally, because a
+  commit cannot contain its own id. Flagged for Al.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened. No detector, threshold or
+generator design was touched. The inputs were the held branch, Session 22's preserved evidence,
+REVIEW.md, ADR-0003, ADR-0012 and Al's rulings. The five items are S1 corpus, and ADR-0011 D6
+bars them from seeding any generator. Verdict: no leakage.
+DETERMINISM CHECK:
+- The five manifests are regenerable from the preserved configs and originals with `s1_ingest`
+  0.1.0 at `a793954`, shown by a byte-identical rerun.
+- The records, SOURCES entries and log section are regenerable from the held branch's blobs by
+  the scripts under the external root.
+- No MEASURED result was produced, and nothing entered CLAIMS. Nothing to quarantine.
+MANIFEST CHECK:
+- Every new artifact carries a `syndeom-manifest/2` manifest, `origin: ground-truth`, written and
+  self-checked by the producer (exit 0), with derivation `documented-by-source`.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing.
+DRIFT CHECK:
+- The records remain readings of documents and make no verdict on any paper (SD3).
+- No understanding claims (SD17).
+- No detector chosen or tuned, and no referee contact (SD13).
+- No S2 code, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, the inventory event for the
+first later prefix, in its own pull request; then S2 ordering step 4.
+ESCALATIONS:
+- **This pull request:** review and merge, with a merge commit (Q-H7).
+- **`engine_commit` reading** (HONESTY CHECK): the base the producer ran at, not the integration
+  commit itself.
+- **Two readings of the digest refinement**, from Session 37, still await confirmation. This
+  session's disclosure used both: the matched lines' digest is taken over each line with its LF,
+  and their numbers did not change.
+- **Note for Al, no action asked:** ADR-0008's provisional-header form (the UTC date, marked
+  provisional) cannot be seen before the disclosure, and two sessions in a row missed it
+  harmlessly.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The pull request is open for Al's review, and NEXT waits on its
+merge. Repo green: the gate on the committed tree is recorded in the pull request and under the
+external root, not in the tree it certifies. **Memory writes:** none, deliberately. A write
+would change a memory digest and make the next disclosure owe verbatim reproduction.

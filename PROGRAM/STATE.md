@@ -44,7 +44,8 @@
       bytes an exact prefix (Q-H7);
     - the labels as recorded (Q-H1, Q-H2/Q-H3, Q-H5); the further unnamed results not items (Q-H4).
   - **Commit 2:** five frozen rows in the freeze register, one per new item directory, with commit
-    1's full id as their freeze point (Q-H7).
+    1's full id `d2569d61588368a60bbf7558fb9f0703f96e3a5b` as their freeze point (Q-H7). The register has 64 rows: 59 frozen, 5
+    append-only.
   - **The inventory event is not in this pull request — Al's ruling of 2026-10-28 (Session 38;
     *Standing rulings*):** it is the next pull request. The committed corpus is 40 manifests (37
     `s1_ingest`, one each of `s1_derive`, `s1_pair` and `s1_pair_archive`), the count Session 23
@@ -1101,7 +1102,9 @@ point, with no file added or removed under it (ruling 2). An **append-only** fil
 version at the freeze point and its version on the default branch (`refs/remotes/origin/HEAD` as
 last fetched; ADR-0008) as exact prefixes. A freeze point is a tag or a full commit id; every
 row's is the `gate-s1-registration` tag (`2018d5e79ea23fa200e560d628bec5e91edf0956`) — the S1
-packets' by Al's direction, the append-only rows' by ruling 2, the rest by ruling 3. Every row
+packets' by Al's direction, the append-only rows' by ruling 2, the rest by ruling 3 — except
+the five rows of the first later prefix (Session 38), whose freeze point is the commit that adds
+their directories, `d2569d61588368a60bbf7558fb9f0703f96e3a5b` (Al's ruling Q-H7 of 2026-10-28 on PR 23). Every row
 cites the record it derives from. A later prefix adds new item directories under `groundtruth/`
 and new stored copies under `sources/` beside the rows below, which name one item directory or
 one stored copy each, never the parent directory (ruling 3); a change to or removal of a frozen
@@ -1156,6 +1159,11 @@ run is the evidence. The table's rows must have exactly this column form, or the
 | `groundtruth/s1_ingest-v0.1.0-fd2bfef40d31/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
 | `groundtruth/s1_pair-v0.1.0-62fe0c816a6b/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
 | `groundtruth/s1_pair_archive-v0.1.0-094625fa10ff/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
+| `groundtruth/s1_ingest-v0.1.0-34988f7c8306/` | frozen | `d2569d61588368a60bbf7558fb9f0703f96e3a5b` | first later prefix, item 32 (candidate 28, arXiv 1403.6317 Theorem 1), integrated Session 38; the freeze point is the commit that adds the directory; Al's ruling Q-H7 of 2026-10-28 on PR 23 |
+| `groundtruth/s1_ingest-v0.1.0-915251f36fc5/` | frozen | `d2569d61588368a60bbf7558fb9f0703f96e3a5b` | first later prefix, item 33 (candidate 29, arXiv 1403.8075 Proposition 4.1), integrated Session 38; the freeze point is the commit that adds the directory; Al's ruling Q-H7 of 2026-10-28 on PR 23 |
+| `groundtruth/s1_ingest-v0.1.0-bca249b3fa72/` | frozen | `d2569d61588368a60bbf7558fb9f0703f96e3a5b` | first later prefix, item 34 (candidate 29, arXiv 1403.8075 Theorem 4.3), integrated Session 38; the freeze point is the commit that adds the directory; Al's ruling Q-H7 of 2026-10-28 on PR 23 |
+| `groundtruth/s1_ingest-v0.1.0-c6179869edf7/` | frozen | `d2569d61588368a60bbf7558fb9f0703f96e3a5b` | first later prefix, item 35 (candidate 29, arXiv 1403.8075 Theorem 4.4), integrated Session 38; the freeze point is the commit that adds the directory; Al's ruling Q-H7 of 2026-10-28 on PR 23 |
+| `groundtruth/s1_ingest-v0.1.0-11ffe4f87954/` | frozen | `d2569d61588368a60bbf7558fb9f0703f96e3a5b` | first later prefix, item 36 (candidate 30, arXiv 1404.4599 Proposition 2.22), integrated Session 38; the freeze point is the commit that adds the directory; Al's ruling Q-H7 of 2026-10-28 on PR 23 |
 | `groundtruth/derivations/` | frozen | `gate-s1-registration` | the reviewed TeX derivation recipe (ADR-0006; S1.3 bullet); Al's ruling 3 on PR 22 |
 | `groundtruth/HARVEST-LOG.md` | append-only | `gate-s1-registration` | the record of every candidate (ADR-0003 D7; Gate S1 table, S1.1 row); a later prefix appends rows (D8); Al's ruling 3 on PR 22 |
 | `groundtruth/README.md` | append-only | `gate-s1-registration` | the corpus README, append-only in the S1.3 tool until ADR-0012; Al's ruling 3 on PR 22 |
