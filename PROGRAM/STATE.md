@@ -1,6 +1,43 @@
 # STATE
 
-- **Updated:** 2026-10-27 UTC (Session 36 — an informed working session, not an examination,
+- **Updated:** 2026-10-28 UTC (2026-10-27 America/New_York). This was Session 37:
+  - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim, followed by an
+    owner note;
+  - SD15 disclosure first, **by digest**, under Al's ruling of 2026-10-27, which is recorded as
+    ADR-0005 *Amendments* 1 (HANDOFF Session 37, Entries 1–2);
+  - **not an examination**: the owner messages carry facts about this repository, and Gate S2 has
+    nothing to examine. The session certifies nothing.
+
+  **The held harvest's admission review is written** (S2 ordering step 3, STATE's NEXT as it
+  stood). Five items, five agree, no disagreement, seven questions for Al. Nothing was integrated
+  or approved.
+  - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main` at
+    `f8d71b8c…`, **behind** fetched `origin/main` `c48705c2d23183340eef5c01ff13059905513985` by
+    three commits, with the disclosure append as the only change.
+    - The fetched tip is **PR 22's merge**, by Al, 2026-10-27T23:06:37Z. Its tree
+      `a6b256840d764818c6d314259883967e0e10c7a4` is the tree Session 36 gated GREEN on PR 22's
+      head `fd8fa9e`.
+    - The fast-forward was refused, because the incoming commits touch HANDOFF. The preflight
+      therefore created the worktree `C:\Users\LEET\Syndeom-wt-2026-10-27` at the fetched tip, and
+      the disclosure was carried into it (ADR-0008 D3).
+    - Receipts `orient-1.json`, `orient-2-sync.json` and `orient-3-worktree.json` are under
+      `C:\Users\LEET\Codex\Temp\syndeom-held-harvest-review-20261028\`.
+    - The original checkout's append stands uncommitted (Standing escalations).
+  - **The review** is in `analysis/s1-held-harvest-review/` (`REVIEW.md`, `receipt.json`).
+    - Session 22's preserved evidence re-verified: 147 of 147 files, `ALL MATCH`.
+    - Every pinned original equals its preserved e-print.
+    - The stream is run 1's (`e164c0b1…2d48`): candidates 28–30 in order, nothing skipped.
+    - ADR-0003 D2 and D3 were re-applied per item, and items 32–36 all AGREE.
+    - Questions Q-H1..Q-H7 go to Al (Standing escalations).
+    - Two integration findings go beyond Session 22's conditions. The branch inserts its log rows
+      mid-table, which would fail the append-only freeze row. Its "Session 21" label is
+      Session 22 on `main`.
+  - **ADR-0005 *Amendments* 1** records Al's disclosure ruling verbatim. SD15's constitution text
+    is not edited; that question is escalated.
+  - **Unchanged:** registers' statuses, manifests, frozen packets, the retained report, the
+    accepted corpus (35 / 32), the constitution, the licence, the tag and the held branch.
+  - **NEXT** waits on Al's rulings on the review.
+- **Previous update (Session 36):** 2026-10-27 UTC (Session 36 — an informed working session, not an examination,
   continuing Session 35's conversation at Al's direction after PR 21's merge; not launched with
   the §6 prompt, so no SD15 disclosure): **ADR-0012 *Amendments* 1 — the narrowing's safety
   property tested, and the freeze register checked by the gate (Al's direction of 2026-10-27).**
@@ -630,7 +667,20 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 36):** no separate ORIENT gate on main `f8d71b8`. Its
+- **Current build verification (Session 37).** There was no separate ORIENT gate on `main`
+  `c48705c`.
+  - Its tree `a6b256840d764818c6d314259883967e0e10c7a4` is the tree Session 36 gated GREEN on PR
+    22's head `fd8fa9e`: run 2026-10-27T22:10:04Z–22:19:22Z, recorded in `gate-committed-2.json`
+    under `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-freeze-20261027\`.
+  - That run's raw log SHA-256 is `0ac3de25…739e`, re-hashed and equal this session.
+  - Before the gate, `lean/.lake` (144,221 files, 7.2 GB) and `engine/target` (2,886 files) were
+    copied from the original checkout into the worktree by robocopy, with no failures. These are
+    untracked build products; the copy log is under this session's external root.
+  - The worktree's Mathlib package `HEAD` is `d13f23b7…`, the `lake-manifest.json` pin.
+  - This pull request's commit is gated on its committed tree, with a clean working tree. The
+    result is recorded in the pull request and under the external root, not in the tree it
+    certifies.
+- **Previous build verification (Session 36):** no separate ORIENT gate on main `f8d71b8`. Its
   tree `35bb1439f4d7ac4ca54734ca61192ec4a68b3ff1` is the tree Session 35 gated GREEN on PR 21's
   head `9dc0d1e` (run 2026-10-27T21:17:49Z–21:21:08Z, `gate-committed.json`, raw log SHA-256
   `6cba5569…bc28`, under `C:\Users\LEET\Codex\Temp\syndeom-adr-0012-20261027\`). During the work,
@@ -1068,6 +1118,15 @@ SD17 removed; hazards kept); its digest is in HANDOFF Session 10 beside the Sess
 makes this disclosure first, whether or not it attempts a gate test, appended to HANDOFF without
 reading that file; a session that reads program state before disclosing cannot be an examination;
 such a session writes memory only once it has established that it is not an examination.
+**Disclosure by digest (ADR-0005 *Amendments* 1; Al's ruling of 2026-10-27, Session 37).** When
+every memory file's SHA-256 matches an earlier HANDOFF disclosure that reproduced the same bytes,
+the disclosure records instead:
+- the digests, line counts and byte facts;
+- the matched index line numbers and the withheld count;
+- a citation of that earlier entry.
+
+Verbatim reproduction is owed only for a new digest. If it cannot be completed, the session stops
+and escalates to Al.
 **Launch directory (Session 28, 2026-10-26; recorded at Al's direction):** whenever Claude Code
 is launched inside a git work tree, it attaches a Git status and history snapshot to the
 conversation before the first action: the current branch, `git status` and the last five commit
@@ -1122,7 +1181,9 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   reproduction's byte checks narrowed to its input set — written, implemented and measured
   Session 35 (2026-10-27), accepted at PR 21's merge (2026-10-27T21:36:26Z); **amended Session 36
   (*Amendments* 1: the invariance test and the freeze register; Al's rulings 1–4 of 2026-10-27 on
-  PR 22 recorded; PR 22 awaits merge); ADR-0013 is the next free number.**
+  PR 22 recorded; merged at PR 22, `c48705c`, 2026-10-27T23:06:37Z); ADR-0005 amended Session 37
+  (*Amendments* 1: disclosure by digest, Al's ruling of 2026-10-27); ADR-0013 is the next free
+  number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -1222,8 +1283,42 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
 
 ## Standing escalations and dispositions
 
+- **Held harvest admission review — FOR AL'S RULINGS (Session 37).** The record is
+  `analysis/s1-held-harvest-review/REVIEW.md` §2–§4, with its `receipt.json`.
+  - All five items on `claude/s1-harvest-candidates-28-30` at `c3a3d36` **agree** with the
+    preserved evidence under ADR-0003 D2 and D3. There is no disagreement, and nothing is
+    approved.
+  - **Q-H1:** item 32's truth reading, false or `undetermined`. Under `undetermined`, FLAW-0012
+    cannot apply.
+  - **Q-H2 / Q-H3:** items 34 and 35, severity `gap` by the entry's range or `fatal` by D3's
+    consequence clause.
+  - **Q-H4:** further unnamed results.
+  - **Q-H5:** item 36's "overcome in a later paper", `undetermined` or `true`.
+  - **Q-H6:** whether to integrate as the first later prefix under its own record. The executor
+    recommends option (a).
+  - **Q-H7:** the append-only continuation form of `groundtruth/HARVEST-LOG.md` (the branch's
+    mid-table rows would fail the freeze check), and freeze-register rows for the five new item
+    directories.
+  - The integration plan is REVIEW.md §4: the seven source numbers after S-0073 (0074–0080),
+    regenerated ids, a new inventory snapshot
+    under its own event, and the Session 22 label.
+- **SD15 disclosure by digest — RECORDED** (Al's ruling of 2026-10-27; ADR-0005 *Amendments* 1;
+  first used in HANDOFF Session 37). **One question is open for Al:** whether SD15's sentence in
+  the constitution, "is reproduced verbatim", is amended to cite the ruling (a constitution
+  amendment, §3.5), or ADR-0005's amendment governs as an addendum (the ADR-0008 form).
+  - Observation for Al: the memory index is machine-wide. When a session of any program edits it,
+    its digest changes. The next §6 session then finds the index digest new and owes the six
+    matched lines verbatim again. The by-digest path holds only while both files are unchanged.
+- **Session 37's uncommitted append and worktree — housekeeping for after this pull request
+  merges, on Al's approval** (the pattern of Session 34 and ruling 4 on PR 20).
+  - `C:\Users\LEET\Syndeom`, on `main` at `f8d71b8`, holds Session 37's disclosure append
+    uncommitted: 3,497 bytes, body `1047d059…d400`.
+  - The worktree `C:\Users\LEET\Syndeom-wt-2026-10-27` holds the copied build products.
+  - The housekeeping: verify that the committed body equals the append, discard the append,
+    fast-forward `main`, and remove the worktree.
 - **Freeze register — DECIDED by Al on 2026-10-27 (rulings 1–4 on PR 22, verbatim in ADR-0012
-  *Amendments* and HANDOFF Session 36; PR 22 awaits merge).** (1) The invariance test, the
+  *Amendments* and HANDOFF Session 36; PR 22 merged 2026-10-27T23:06:37Z, creating `main`
+  `c48705c2d23183340eef5c01ff13059905513985`).** (1) The invariance test, the
   checker and its tests, the CI changes and the nine enforced rows: accepted. (2) The two
   choices: accepted — a frozen scope refuses additions and removals, and the append-only rows'
   freeze point is the `gate-s1-registration` tag. (3) The awaiting scopes, all at that tag: one
@@ -1425,6 +1520,8 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\held-evidence\`, manifest
   copied to `analysis/s1-orientation-repair/evidence/held-evidence-manifest.json`; ten abstract
   pages exist only as hash-and-size receipts (listed there). Candidate 31 remains undecided.
+  **Reviewed in Session 37 (S2 ordering step 3):** `analysis/s1-held-harvest-review/REVIEW.md` —
+  five of five items agree; Q-H1..Q-H7 await Al (first bullet of this section).
   Do not request this decision again. The integration conditions recorded in Session 22 remain
   the description of the later review. — Session 22's original record of the hold: branch
   `claude/s1-harvest-candidates-28-30` (commit `c3a3d36` on base `8e222a4`, pushed) holds Route A
@@ -1449,7 +1546,8 @@ ADR-0010 registered S-0073**), so every config hash, artifact id, record, log ro
   (`analysis/s1-4/config/dispositions.json`, `analysis/s1-4/OBLIGATIONS.md`). The questions the
   held branch introduced (an eighth truth reading, two further severity readings, further unnamed
   results, its item 36's "overcome in a later paper" wording) remain pending that branch's later
-  admission review. Do not request this decision again.
+  admission review. Do not request this decision again. Session 37's review states them as
+  Q-H1..Q-H5 (`analysis/s1-held-harvest-review/REVIEW.md` §3).
 - **Conditional projections, not inventory (Session 23):** the accepted population remains 35
   archived representations and 32 effective logical items. If all five held items were admitted
   unchanged, the errata/retraction-only total would be 36 items; the whole-corpus projection
@@ -1547,47 +1645,35 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2 ordering step 3 — the held harvest's admission review (Al's order of 2026-10-26: after the
-narrowing, before ADR-0011's crate).** Review branch `claude/s1-harvest-candidates-28-30` at
-`c3a3d369689d56bab3678f519904087b313daf4e` (held by Al's decision 1 of 2026-10-21; Standing
-escalations, "Later harvest held off main") as the candidate first later prefix of the Route A
-stream (ADR-0003 D8, D9). The session reviews and records; it integrates nothing, approves
-nothing and writes no generator code.
+**Act on Al's rulings on the held harvest review.** Session 37 wrote the review
+(`analysis/s1-held-harvest-review/REVIEW.md`, Q-H1..Q-H7, in the pull request carrying this
+line; Al merges). S2 ordering step 3 is done. Step 4, ADR-0011's crate, comes only after Al rules
+on the review (Al's order of 2026-10-26).
 
 Executable cold:
-1. Open per ADR-0008 D1 (SD15 disclosure first if launched with the §6 prompt). Do not check the
-   held branch out over the examined checkout: read it with `git show c3a3d36:<path>` and
-   `git diff main...c3a3d36 --stat`, and read Session 22's preserved retrieval evidence under
-   `C:\Users\LEET\Codex\Temp\syndeom-orientation-repair-20261021\held-evidence\`, re-verifying
-   each file against `analysis/s1-orientation-repair/evidence/held-evidence-manifest.json`.
-2. For each of the branch's five items (candidates 28–30: arXiv `1403.6317` Theorem 1;
-   `1403.8075` Proposition 4.1, Theorems 4.3 and 4.4; `1404.4599` Proposition 2.22), re-apply
-   ADR-0003 D2's seven admission criteria and D3's class mapping to the branch's `RECORD.md`,
-   manifest and `HARVEST-LOG.md` row against the preserved originals and notices. Record
-   agree/disagree per item with the evidence line. Record the branch's open readings — an eighth
-   truth reading, two further severity readings, further unnamed results, its item 36's "overcome
-   in a later paper" wording (Standing escalations, "Older questions") — as questions for Al, not
-   as relabelings.
-3. Write the review as `analysis/s1-held-harvest-review/REVIEW.md` with a `receipt.json` (branch
-   tip, evidence digests re-verified, per-item verdicts, UTC times), and state the integration
-   plan the review implies: source entries renumbered after main's last entry, config hashes,
-   artifact ids, records and log rows regenerated at the integration commit, a new inventory
-   snapshot under its own event (the effective-inventory tool pins 35 archived representations /
-   32 logical items and refuses additions under `groundtruth/`; ADR-0012 D7), never a rewrite of
-   the Gate S1 table or the frozen S1.4 packet; candidate 31 stays undecided.
-4. Escalate to Al: the per-item verdicts, the questions, and whether to proceed to the
-   integration as the first later prefix under its own record (option (a), the executor's
-   recommendation of Session 22). Commit `[S1][ADR-0003] review the held harvest branch:
-   <n> items, <verdicts>` on a branch, gate the committed tree, open a pull request; Al merges.
-   Then step 4, ADR-0011's crate — only after Al rules on the review.
+1. Open per ADR-0008 D1. If the session was launched with the §6 prompt, the SD15 disclosure comes
+   first, by digest where ADR-0005 *Amendments* 1 allows it.
+2. Find Al's rulings on Q-H1..Q-H7 in the repository (HANDOFF, STATE) or in the launching
+   message. **If there are none, record that and stop. Do not choose an answer, and do not start
+   step 4.**
+3. **If Al orders the integration (Q-H6, option (a)),** do it per REVIEW.md §4, applying Al's
+   answers to Q-H1..Q-H5 and Q-H7, on a fresh branch from `main`:
+   - the seven source numbers after S-0073 (0074–0080);
+   - the five manifests regenerated by `s1_ingest` 0.1.0 at the integration commit, and the
+     records regenerated with them;
+   - the harvest-log rows appended after the file's end, the tag's bytes kept as a prefix;
+   - the label "Session 22";
+   - a new inventory snapshot under its own event, never a rewrite of the Gate S1 table or the
+     frozen S1.4 packet.
 
-ADR-0012 is on `main` (PR 21). If the pull request carrying its *Amendments* 1 (the freeze
-register, Session 36) is still unmerged when this action is picked up, the review may proceed;
-the integration waits for it.
+   Commit, gate the committed tree, and open a pull request. Al merges.
+4. **If Al rules that the integration waits,** take S2 ordering step 4: ADR-0011's crate
+   `engine/generate/` under PolyForm, per ADR-0011 D1–D12 and its *Amendments*. D6's S1-corpus
+   independence binds every seed.
 
 Bounds: the frozen packets, the registers, the constitution, the licence, the tag, the accepted
-corpus and the held branch's commits are untouched; nothing on the branch is approved by the
-review; no cherry-pick, no merge, no force-push. The harvest itself stays paused through
+corpus and the held branch's commits are untouched until a ruling says otherwise. Nothing on the
+held branch is approved by the review. No cherry-pick, no merge of the held branch, no force-push. The harvest itself stays paused through
 candidate 27 / `1403.4485`, with candidate 28 / `1403.6317` saved. The seven truth questions,
 the seven severity questions and the unnamed-result question keep their existing dispositions.
 Missing canonical lengths and external-byte verification remain prerequisites for scoring real

@@ -1,0 +1,18 @@
+{
+  "schema": "syndeom-held-evidence-reverify/1",
+  "started_utc": "2026-10-28T01:22:53.617070+00:00",
+  "finished_utc": "2026-10-28T01:22:55.339704+00:00",
+  "evidence_root": "C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/held-evidence",
+  "manifest_in_root_sha256": "d3ea78799dd3e4bbe660368660c17473065768e5ba0b27c7b8c34c89660b87ce",
+  "manifest_committed_sha256": "d3ea78799dd3e4bbe660368660c17473065768e5ba0b27c7b8c34c89660b87ce",
+  "manifest_copies_identical": true,
+  "manifest_file_count": 147,
+  "manifest_total_bytes": 17824213,
+  "checked": 147,
+  "ok": 147,
+  "total_bytes_on_disk": 17824213,
+  "mismatches_or_missing": [],
+  "files_on_disk_not_in_manifest": [],
+  "unavailable_bytes_entries": 10,
+  "result": "ALL MATCH"
+}
