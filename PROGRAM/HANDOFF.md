@@ -8105,3 +8105,97 @@ ESCALATIONS (superseding the block's):
 - Unchanged: human-referee participants (SD13).
 STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
 recorded in the pull request and under the external root, not in the tree it certifies.
+
+SESSION: 2026-10-28 UTC (2026-10-28 America/New_York) (Session 40 — a fresh conversation launched
+from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone; SD15 disclosure first,
+by digest (ADR-0005 *Amendments* 1–3); not an examination — Gate S2 has nothing to examine;
+examined fetched `origin/main` `f9f973012cbe1a7d7f1d8cd4520db998dca0e550`, tree
+`84a010018335bfdc94bcc2214babd593b5b734bb`, in the original checkout `C:\Users\LEET\Syndeom` on
+`main`, synchronized; branch `claude/s2-generate-crate`; header completed after ADR-0008 step 5 —
+it was written provisionally with the disclosure, which is unchanged; the session-end SHA is the
+commit carrying this block, recorded in its pull request)
+
+### Entry 1 — SD15 memory disclosure, by digest (ADR-0005 D1–D4, Amendments 1–3)
+
+This disclosure was made before any other action. The only steps before it were:
+- reading `PROGRAM/SYNDEOM-PROGRAM.md` and `PROGRAM/DECISIONS/ADR-0005.md` in full;
+- reading and hashing the memory below.
+
+No other repository file, directory listing, Git history or status, or build was read or run
+first. HANDOFF's existing contents were not read. This entry was appended by a Node script
+(`fs.appendFileSync`), not by a file-editing tool. The facts below were computed from the files on
+disk at 2026-10-28T17:05:04Z (UTC).
+
+- **Memory the harness loaded:** only the index
+  `C:\Users\LEET\.claude\projects\C--Users-LEET\memory\MEMORY.md`. The session was launched in
+  `C:\Users\LEET`, which is not a git work tree, so no gitStatus snapshot was attached. No other
+  memory file was loaded by the harness. This session read `project_syndeom.md` in full for this
+  disclosure.
+- **The whole index, as a fact:** 110 lines, 15,420 bytes, 0 CR, 334 non-ASCII bytes, ends with LF,
+  SHA-256 `cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69`. This is the same
+  digest as the whole-index fact in ADR-0005 Amendment 2's baseline.
+- **Name search (D3):** a case-insensitive search for `/syndeom|kober|friedman/i` over every index
+  line matched lines 85, 86, 88, 89, 106 and 107 (6 lines). It ran as a Node regex, not Git Bash
+  grep. An extra case-insensitive search for `fr13dman` matched lines 88, 89 and 107, all among
+  the six. The canary `/project memory/i` matched line 1, which shows the search runs.
+- **Matched index lines (D1 a):** lines 85, 86, 88, 89, 106 and 107, each with its LF terminator,
+  concatenated in index order. They total 1,198 bytes, with 0 CR and 30 non-ASCII bytes, SHA-256
+  `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`. The line numbers and the
+  digest are the same as in Amendment 2's baseline.
+- **Withheld by count (D2):** 104 lines, at line numbers 1–84, 87, 90–105 and 108–110. None of
+  them matched the name search.
+- **The SYNDEOM memory file (D1 b):** `project_syndeom.md`, 135 lines, 10,957 bytes, 0 CR,
+  71 non-ASCII bytes, ends with LF, SHA-256
+  `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`. This is the same digest as in
+  Amendment 2's baseline.
+- **Other recalled memory (D1 c):** none.
+- **The by-digest path (Amendment 1, refined by Amendment 2, readings confirmed by Amendment 3):**
+  both compared digests (the matched lines and the SYNDEOM file) equal the digests of bytes that
+  HANDOFF Session 35, Entry 1 reproduced, according to ADR-0005 Amendment 2:
+  - HANDOFF lines 6672–6677 hold the matched lines;
+  - HANDOFF lines 6683–6817 hold the file.
+
+  Their content is not reproduced again. At this point the citation comes from ADR-0005. Entry 2
+  verifies it after this append, by hashing those HANDOFF lines.
+- **D4, as read by this session:** the SYNDEOM file holds environment and tooling hazards and
+  locations only: the repo, the second checkout, and the external evidence roots. It holds no
+  phase, gate status, CLAIM or FLAW status, commit SHA used as a state marker, next action or
+  escalation. The six matched index lines name the three programs' repos and say that no state is
+  recorded there.
+- **Memory writes:** none in this session, and none will be made.
+- **Launch:** the launching message is the §6 Session-N prompt with no owner note appended. By
+  eye, it matches §6's text line for line.
+
+### Entry 2 — the disclosure's citation, verified after the append; the header completed
+
+- **Cited entry:** HANDOFF Session 35, Entry 1 (heading at line 6664, "Entry 1 — SD15 memory
+  disclosure (ADR-0005 D1–D4; ADR-0009)"). Extracted from HEAD's HANDOFF blob (`f9f9730`, blob
+  SHA-256 `76ace902…ccdd`):
+  - lines 6672–6677 hash to `0418e621…534c` and are byte-identical to index lines 85, 86, 88, 89,
+    106 and 107;
+  - lines 6683–6817 hash to `ce2ce6de…2cc0` and are byte-identical to `project_syndeom.md` on disk.
+
+  Neither digest is new, so nothing is owed verbatim. The matched lines kept their numbers.
+- **The append.** Entry 1 with its provisional header was 3,607 bytes, SHA-256 `e1ffe4e9…a52d`,
+  appended by `fs.appendFileSync` at 2026-10-28T17:05Z; HANDOFF's size grew by exactly that much.
+- **The header.** A script checked that HANDOFF's last 3,607 bytes were the appended entry, then
+  replaced the 80-byte provisional header line with the completed header (728 bytes). It asserted
+  that the disclosure body (3,526 bytes, `351c8267…2933`) was unchanged and that HEAD's HANDOFF
+  blob is an exact prefix of the working file.
+- **Constitution and ADR bytes (ADR-0008 step 5).** As read in step 0 and as in the snapshot: the
+  constitution `110f5360…479c` (38,958 B, ADR-0009's amended digest) and ADR-0005 `b08e543a…ce11`
+  (15,291 B, with *Amendments* 1–3).
+
+### Entry 3 — an interruption, and Al's direction
+
+A safety classifier stopped one of this session's responses during ORIENT step 6, after the
+ORIENT gate had ended GREEN, and that response wrote nothing to the repository, the external root
+or the memory store. The stopped response was carrying out the review of the ORIENT gate's log,
+the last check of ADR-0008 step 6, before ASSESS and PLAN.
+
+The executor then reported the session's position and asked whether to continue. Al's direction,
+transcribed verbatim from the message as rendered to the executor:
+
+~~~text
+Continue in this session. Your disclosure, orientation and gate stand; redo nothing. Record the interruption in this session's HANDOFF block in one sentence — the step it happened at, and that nothing was written — and say in one sentence which step the stopped response was carrying out, without reproducing it. Then proceed: PLAN the one thing STATE names, ADR-0011's crate, and EXECUTE it on a fresh branch from main. If a classifier stops you again at any point, do not reword or retry: stop at the nearest point where the committed tree passes the gate, complete the header, record both interruptions, push the branch, open the PR, and report. Otherwise run the loop to a clean stop per §4.6 and stop for my review.
+~~~

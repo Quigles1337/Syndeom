@@ -1,0 +1,66 @@
+{
+  "id": "n_sq_mod_four",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0014 example (the gap case): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "Squares of integers modulo four",
+  "statement": "For every integer $n$, $n^2 \\equiv 0$ or $n^2 \\equiv 1 \\pmod 4$.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/NSqModFour.lean:syndeom_seed_n_sq_mod_four"
+  },
+  "imports": ["Mathlib.Algebra.Ring.Int.Parity", "Mathlib.Tactic.Ring"],
+  "binders": "(n : ℤ)",
+  "claim": "n ^ 2 % 4 = 0 ∨ n ^ 2 % 4 = 1",
+  "styles": [
+    {
+      "id": "parity",
+      "steps": [
+        {
+          "text": "Every integer is even or odd: $n = 2k$ or $n = 2k + 1$ for some integer $k$.",
+          "fragment": ["obtain ⟨k, hk⟩ := Int.even_or_odd' n", "cases hk with"]
+        },
+        {
+          "text": "If $n = 2k$, then $n^2 = 4k^2 \\equiv 0 \\pmod 4$.",
+          "fragment": ["| inl h =>", "  have h2 : n ^ 2 = 4 * (k * k) := by subst h; ring", "  left", "  omega"]
+        },
+        {
+          "text": "If $n = 2k + 1$, then $n^2 = 4(k^2 + k) + 1 \\equiv 1 \\pmod 4$.",
+          "fragment": ["| inr h =>", "  have h2 : n ^ 2 = 4 * (k * k + k) + 1 := by subst h; ring", "  right", "  omega"]
+        },
+        {
+          "text": "In either case, $n^2 \\equiv 0$ or $n^2 \\equiv 1 \\pmod 4$.",
+          "fragment": []
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0014",
+          "sub_variant": null,
+          "severity": "gap",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"omitted_case": "odd", "holds": true},
+          "site": 1,
+          "anchor": null,
+          "steps": [
+            {
+              "from": 1,
+              "text": "If $n$ is even, then $n = 2k$ for some integer $k$.",
+              "fragment": ["obtain ⟨k, hk⟩ := Int.even_or_odd' n", "cases hk with"]
+            },
+            {
+              "from": 2,
+              "text": "If $n = 2k$, then $n^2 = 4k^2 \\equiv 0 \\pmod 4$.",
+              "fragment": ["| inl h =>", "  have h2 : n ^ 2 = 4 * (k * k) := by subst h; ring", "  left", "  omega"]
+            },
+            {
+              "from": 4,
+              "text": "Hence $n^2 \\equiv 0$ or $n^2 \\equiv 1 \\pmod 4$.",
+              "fragment": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

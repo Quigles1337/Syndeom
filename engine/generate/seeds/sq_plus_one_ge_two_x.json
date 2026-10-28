@@ -1,0 +1,88 @@
+{
+  "id": "sq_plus_one_ge_two_x",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0001 example: executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A square plus one is at least twice the number",
+  "statement": "For every real number $x$, $x^2 + 1 \\ge 2x$.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/SqPlusOneGeTwoX.lean:syndeom_seed_sq_plus_one_ge_two_x"
+  },
+  "imports": ["Mathlib.Basic.Real.Basic", "Mathlib.Tactic.Linarith", "Mathlib.Tactic.Ring"],
+  "binders": "(x : ℝ)",
+  "claim": "x ^ 2 + 1 ≥ 2 * x",
+  "styles": [
+    {
+      "id": "expand_square",
+      "steps": [
+        {
+          "text": "Expanding the square, $(x - 1)^2 = x^2 - 2x + 1$.",
+          "fragment": ["have h1 : (x - 1) ^ 2 = x ^ 2 - 2 * x + 1 := by ring"]
+        },
+        {
+          "text": "A square is non-negative, so $x^2 - 2x + 1 = (x - 1)^2 \\ge 0$.",
+          "fragment": ["have h2 : x ^ 2 - 2 * x + 1 ≥ 0 := by nlinarith [sq_nonneg (x - 1)]"]
+        },
+        {
+          "text": "Adding $2x$ to both sides gives $x^2 + 1 \\ge 2x$.",
+          "fragment": ["linarith"]
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0001",
+          "sub_variant": "propagated",
+          "severity": "fatal",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"perturbation": "sign"},
+          "site": 1,
+          "anchor": {"replaced": "x^2 - 2x + 1", "inserted": "x^2 - 2x - 1"},
+          "steps": [
+            {
+              "from": 1,
+              "text": "Expanding the square, $(x - 1)^2 = x^2 - 2x - 1$.",
+              "fragment": ["have h1 : (x - 1) ^ 2 = x ^ 2 - 2 * x - 1 := by ring"]
+            },
+            {
+              "from": 2,
+              "text": "A square is non-negative, so $x^2 - 2x - 1 = (x - 1)^2 \\ge 0$.",
+              "fragment": ["have h2 : x ^ 2 - 2 * x - 1 ≥ 0 := by nlinarith [sq_nonneg (x - 1)]"]
+            },
+            {
+              "from": 3,
+              "text": "Adding $2x$ to both sides gives $x^2 - 1 \\ge 2x$.",
+              "fragment": ["have h3 : x ^ 2 - 1 ≥ 2 * x := by linarith", "exact h3"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0001",
+          "sub_variant": "local",
+          "severity": "repairable",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"perturbation": "sign"},
+          "site": 1,
+          "anchor": {"replaced": "x^2 - 2x + 1", "inserted": "x^2 - 2x - 1"},
+          "steps": [
+            {
+              "from": 1,
+              "text": "Expanding the square, $(x - 1)^2 = x^2 - 2x - 1$.",
+              "fragment": ["have h1 : (x - 1) ^ 2 = x ^ 2 - 2 * x - 1 := by ring"]
+            },
+            {
+              "from": 2,
+              "text": "A square is non-negative, so $x^2 - 2x + 1 = (x - 1)^2 \\ge 0$.",
+              "fragment": ["have h2 : x ^ 2 - 2 * x + 1 ≥ 0 := by nlinarith [sq_nonneg (x - 1)]"]
+            },
+            {
+              "from": 3,
+              "text": "Adding $2x$ to both sides gives $x^2 + 1 \\ge 2x$.",
+              "fragment": ["linarith"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
