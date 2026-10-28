@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "97b28cf24aa4cc4bb6e810ceb12aebad481df0840cb5a3389b5eca1c2e599bce",
+        "file": "original-1403.6317v1.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 126877,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-34988f7c8306",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1403.6317v1.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 1 (TeX label thm:HD), statement: 'Let P be a closed symplectic manifold and L in P its closed Lagrangian submanifold such that omega|pi_2(P,L) = 0, mu|pi_2(P,L) = 0. Suppose that a Hamiltonian H is admissible, quasi-autonomous and homotopic to zero through admissible Hamiltonians. Then it holds: d(phi^1_H, Id) = Delta(L, phi^1_H(L))' - the hypotheses on H (Definitions 5 and 6 of v1), per the withdrawal comment 'an error in the assumptions of the Theorem 1'; the proof (v1 Section 3, the chain (i)-(vii) through Theorems 10 and 11, the inequality of [L] and Schwarz's Theorem 7) is removed with the theorem in v3; the failing step is not named by the notice",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1403.6317v1 (the original; withdrawn as v2 on 28 March 2014 'due to an error in the assumptions of the Theorem 1'; corrected by v3, 15 October 2024) - Theorem 1 (TeX label thm:HD; the first environment of the paper's single shared counter)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v1): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0074",
+      "S-0075"
+    ],
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0075: 'We removed the wrong theorem from the first version' (the v3 comment) and 'an error in the assumptions of the Theorem 1' (the v2 withdrawal comment); no counterexample is given and no corrected statement replaces it, so the undetermined reading (withdrawn rather than disproved) is named in RECORD.md as the alternative",
+      "value": false
+    },
+    "status": {
+      "kind": "erratum",
+      "reference": "S-0075"
+    }
+  },
+  "config_hash": "34988f7c830668135d1ae7b9bed449e4eb7bf9781920ca6ca83b021bbaaa0585",
+  "engine_commit": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 1 (TeX label thm:HD), statement: 'Let P be a closed symplectic manifold and L in P its closed Lagrangian submanifold such that omega|pi_2(P,L) = 0, mu|pi_2(P,L) = 0. Suppose that a Hamiltonian H is admissible, quasi-autonomous and homotopic to zero through admissible Hamiltonians. Then it holds: d(phi^1_H, Id) = Delta(L, phi^1_H(L))' - the hypotheses on H (Definitions 5 and 6 of v1), per the withdrawal comment 'an error in the assumptions of the Theorem 1'; the proof (v1 Section 3, the chain (i)-(vii) through Theorems 10 and 11, the inequality of [L] and Schwarz's Theorem 7) is removed with the theorem in v3; the failing step is not named by the notice"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "source-document",
+      "reference": "S-0075: 'We removed the wrong theorem from the first version' (the v3 comment) and 'an error in the assumptions of the Theorem 1' (the v2 withdrawal comment); no counterexample is given and no corrected statement replaces it, so the undetermined reading (withdrawn rather than disproved) is named in RECORD.md as the alternative",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 32 (candidate 28), Session 22 (2026-10-21). Ground truth as the authors' v3 comment and v2 withdrawal comment document it, confirmed against the v1->v3 TeX diff (the theorem, its proof section and the Hofer-distance subsection removed); the withdrawn-wording shape of items 8, 10, 11, 14, 15, 18 and 25 - RECORD.md names the undetermined reading as the alternative. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}

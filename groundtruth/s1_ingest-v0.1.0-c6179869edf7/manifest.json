@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "c171e3381684cb051dcf77333de7e51d75e08ca92580b9dc14d24d73e6999270",
+        "file": "original-1403.8075v9.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 136883,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-c6179869edf7",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1403.8075v9.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Theorem 4.4, proof: 'we can deduce that m(n) - Li(n) = o(M_0(m(n)) sqrt(m(n))) a.c. by applying Theorems 3.4 and 4.3' and 'Theorem 4.3 implies that pi(n) - Li(n) = o(M_0(m(n)) sqrt(m(n))) a.c.': a reduction to Theorem 4.3 (item 34) and a further application of Theorem 3.4 under the same unestablished independence hypothesis",
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1403.8075v9 (the original; withdrawn by v10, 27 December 2025, and again by v11, 9 January 2026) - Theorem 4.4 (Section 4, its fourth numbered environment: pi(n) - Li(n) = o(M(n) sqrt(Li(n))) almost certainly)",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v9): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0076",
+      "S-0077"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0077: 'These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4' (v10) and 'This invalidates the derivation of Theorems 4.3-4.4' (v11) - the derivation is withdrawn; the statement is neither re-proved nor disproved",
+      "value": null
+    },
+    "status": {
+      "kind": "retraction",
+      "reference": "S-0077"
+    }
+  },
+  "config_hash": "c6179869edf79e299472832aa46f049096b02aad2632f46c07ad088d25a45278",
+  "engine_commit": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Theorem 4.4, proof: 'we can deduce that m(n) - Li(n) = o(M_0(m(n)) sqrt(m(n))) a.c. by applying Theorems 3.4 and 4.3' and 'Theorem 4.3 implies that pi(n) - Li(n) = o(M_0(m(n)) sqrt(m(n))) a.c.': a reduction to Theorem 4.3 (item 34) and a further application of Theorem 3.4 under the same unestablished independence hypothesis"
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0077: 'These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4' (v10) and 'This invalidates the derivation of Theorems 4.3-4.4' (v11) - the derivation is withdrawn; the statement is neither re-proved nor disproved",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 35 (candidate 29), Session 22 (2026-10-21). The reduction shape of items 13, 24 and 29 (a result whose proof rests on a withdrawn one); ground truth as the withdrawal comments document it ('Theorems 4.3 -- 4.4'), confirmed against the v9 text. A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
