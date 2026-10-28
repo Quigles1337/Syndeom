@@ -1,0 +1,6 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-template-050-20261028T2330Z/lean-probe/s2i_hedged_p1.lean:7:21: error: unsolved goals
+p q : ℕ
+h : p.Coprime q
+hpq : p ^ 2 = 2 * q ^ 2
+hp2 : 2 ∣ p ^ 2
+⊢ 2 ∣ p
