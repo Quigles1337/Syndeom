@@ -1,0 +1,9 @@
+engine/generate/
+engine/manifest/
+lean/Syndeom/Seeds/
+engine/Cargo.toml
+engine/Cargo.lock
+rust-toolchain.toml
+lean/lean-toolchain
+lean/lakefile.toml
+lean/lake-manifest.json

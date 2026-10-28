@@ -1,0 +1,48 @@
+{
+  "id": "rolle_abs",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0005 example (the fatal case: Rolle's theorem applied to |x|): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A zero of the derivative of the absolute value",
+  "statement": "Let $f(x) = |x|$. There is $c \\in (-1, 1)$ with $f'(c) = 0$.",
+  "truth": {
+    "value": false,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/RolleAbs.lean:syndeom_seed_rolle_abs_false"
+  },
+  "counterexample": "$f(x) = |x|$ is not differentiable at $0$, and at every other point of $(-1, 1)$ its derivative is $1$ or $-1$; so no such $c$ exists.",
+  "imports": ["Mathlib.Analysis.Calculus.Deriv.Abs", "Mathlib.Analysis.Calculus.LocalExtr.Rolle"],
+  "binders": "",
+  "claim": "∃ c ∈ Set.Ioo (-1 : ℝ) 1, HasDerivAt (fun x : ℝ => |x|) 0 c",
+  "styles": [
+    {
+      "id": "rolle",
+      "steps": [
+        {
+          "text": "The function $f(x) = |x|$ is continuous on $[-1, 1]$.",
+          "fragment": ["have hcont : ContinuousOn (fun x : ℝ => |x|) (Set.Icc (-1) 1) := continuous_abs.continuousOn"]
+        },
+        {
+          "text": "Its values at the endpoints agree: $f(-1) = 1 = f(1)$.",
+          "fragment": ["have hend : |(-1 : ℝ)| = |(1 : ℝ)| := by norm_num"]
+        },
+        {
+          "text": "By Rolle's theorem applied to $f$ on $[-1, 1]$, since $f(-1) = f(1)$, there is $c \\in (-1, 1)$ with $f'(c) = 0$.",
+          "fragment": ["obtain ⟨c, hc, h0⟩ := exists_hasDerivAt_eq_zero (f' := fun x : ℝ => (SignType.sign x : ℝ)) (by norm_num) hcont hend (fun x _ => hasDerivAt_abs (by norm_num))", "exact ⟨c, hc, h0 ▸ hasDerivAt_abs (by norm_num)⟩"]
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0005",
+          "sub_variant": null,
+          "severity": "fatal",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"theorem": "Rolle's theorem", "hypothesis": "f is differentiable on (-1, 1)", "mode": "violated"},
+          "site": 3,
+          "anchor": null,
+          "intrinsic": true,
+          "steps": []
+        }
+      ]
+    }
+  ]
+}
