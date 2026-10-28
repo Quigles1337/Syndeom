@@ -7920,3 +7920,103 @@ below). STATE records the housekeeping as Session 38's, done outside Session 38'
 
 **Items 1–3** are recorded in STATE (*Standing rulings*, *Standing escalations*) and, for item 3,
 as ADR-0005 *Amendments* 3.
+
+### Entry 4 — the inventory event, built and measured (ADR-0013)
+
+- **Commit 1** `46cdcb8` (tree `d5a24f99…d276`): ADR-0013 (proposed); the tool, in new files
+  (`engine/ingest/examples/s1_later_prefix.rs`, `support/later_prefix.rs`); the packet's pins
+  (`analysis/s1-later-prefix-1/config/prefix-inputs.json`, `config/dispositions.json`) and
+  README; eight gate tests; and this block's Entries 1–3.
+- **The run**, on the clean checkout at `46cdcb8`, 2026-10-28T16:07:27Z–16:07:31Z: two runs
+  `PASS: 40 archived representations / 37 effective logical items; prefix through 1404.4599`,
+  byte-identical; an overwrite refused. The pinned `s1_effective_inventory` refuses at the same
+  tree on the first prefix addition, as ADR-0012 D7 says. The numbers are in ADR-0013
+  *Measurements* and STATE's Updated bullet.
+- **Commit 2:** the four outputs retained under `report/`, the ninth test (the working tree yields
+  `inventory.json`, `coverage.json` and `report.md` byte-identically), ADR-0013's measurements,
+  ADR-0005 *Amendments* 3, STATE, and this close. The retained-report test was held out of commit
+  1 because no report existed yet, and restored byte-identically from a saved copy.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (S2.1: ADR-0011 accepted; no code). Gate S1 CLOSED
+(Session 29). This session's work is S1 corpus maintenance (the first later prefix's inventory
+event, ADR-0003 D8), which Al ordered ahead of S2 ordering step 4.
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipt `orient-receipt.json`, SHA-256
+`1eb0dd09…5587`, under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\`):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-10-28T15:52:11Z–15:52:12Z, exit 0.
+- **Snapshot.** `main` at `ef567ec…`, tree `4bef2ccc…`, **synchronized**: ahead 0, behind 0. The
+  only change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree.
+- **Step 6.** Read in this order: STATE (the Updated bullet, the freeze register, memory policy,
+  standing rulings, the gate tables, blockers, standing escalations, NEXT); HANDOFF Session 38 in
+  full; CLAIMS (0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED existence only); FLAWS `0.1.0`
+  (14 entries); then ADR-0008, ADR-0003 D8–D9, ADR-0012 and REVIEW.md §4. They agree with one
+  another and with the tree.
+- **ORIENT gate GREEN**, 15:53:14Z–16:02:55Z (STATE, *Current build verification*).
+- **NEXT survived ORIENT.** Its condition held: PR 24 was merged with a merge commit on fetched
+  `origin/main`.
+ADVANCED:
+- **The first later prefix's inventory event** (Entry 4): ADR-0013 (proposed), the tool
+  `s1_later_prefix`, the packet `analysis/s1-later-prefix-1/` and nine gate tests. Session 23's
+  projection of 40 / 37 is measured: 40 archived representations, 37 effective logical items.
+- **Al's owner note recorded** (Entry 3): verbatim in STATE (*Standing rulings*); items 2 and 3 as
+  ADR-0005 *Amendments* 3; item 4 as Session 38's housekeeping in STATE.
+- **Escalations closed:** the `engine_commit` reading (accepted), the two digest readings
+  (confirmed), and the provisional-header note (now in ADR-0005).
+BELIEF DELTAS:
+- **The pinned modules' public surface was enough.** The new revision reuses `input_set`,
+  `validate_case`, `lineage`, `harvest`, `qualify` and `coverage()` without touching a pinned
+  byte. Only the private assembly steps are re-done.
+- **An append-only input can be pinned by its prefix.** Pinning the harvest log's first 56,562
+  bytes, and parsing only those, lets a later harvest append rows without changing or stopping
+  this event.
+- **The gate now enforces this event's population.** Session 38 found that the gate compiles the
+  pinned inventory without running it. The new tests run this event's inventory on a fixed list of
+  files, so a later prefix's directories cannot enter the fixture. The gate stays GREEN when the
+  next prefix lands, while the CLI refuses it.
+CONFUSIONS:
+- **Clippy's `duplicate_mod`** fired because `effective.rs` loads `coverage.rs` privately and the
+  new tool loads it again. The pinned file cannot change, so the second load carries
+  `#[allow(clippy::duplicate_mod)]` with a comment saying why. Cost: one lint round.
+- **The retained-report test was drafted before the report existed.** It was cut for commit 1 and
+  restored by script for commit 2. Cost: none.
+- **A §6 launch into a working conversation.** The prompt arrived in the conversation that had just
+  done the housekeeping. SD15's corollary already decides the case (not cold, cannot be an
+  examination); the disclosure states it. No doc fix is needed.
+HONESTY CHECK:
+- No register status changed, and nothing was upgraded or downgraded. The 40 / 37 is a
+  deterministic census of pinned metadata, as the S1.3 and S1.4 counts are. It enters no CLAIM.
+- Flags B and C change counts: the unflagged subset is 23 rather than 18 under B, and C fixes
+  whose labels are counted. They are stated as flags, not settled.
+- The launch-prompt and owner-note copies are transcriptions of the message as rendered.
+- The housekeeping is recorded from this conversation's own command output. No receipt file was
+  written at the time.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened. No detector, threshold or generator
+design was touched. The inputs were the committed corpus, the pinned modules, ADR-0003, ADR-0008,
+ADR-0012, REVIEW.md and Al's rulings. Verdict: no leakage.
+DETERMINISM CHECK:
+- The outputs regenerate from a clean checkout of `46cdcb8`, or of any tree with the same inputs,
+  with the one command in the packet's README. Two runs were byte-identical.
+- The gate test regenerates `inventory.json`, `coverage.json` and `report.md` from the working
+  tree. No seed is involved, since this is a census.
+- Nothing entered CLAIMS, so there is nothing to quarantine.
+MANIFEST CHECK:
+- No artifact or manifest was written or changed. Every manifest read passes `Manifest::check` and
+  the label validator.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing.
+DRIFT CHECK:
+- No verdict on any paper (SD3), and no understanding claims (SD17).
+- No detector was chosen or tuned, and there was no referee contact (SD13).
+- No S2 code, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, and with Al's rulings on ADR-0013's
+flags recorded first, S2 ordering step 4: ADR-0011's crate.
+ESCALATIONS:
+- **This pull request:** review and merge, with a merge commit.
+- **ADR-0013's flags A–D:** one tool and one packet; the five prefix roots unflagged; effective
+  labels; the freeze-register row for the packet, proposed and not added.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The pull request is open for Al's review, and NEXT waits on its
+merge. Repo green: the gate on the committed tree is recorded in the pull request and under the
+external root, not in the tree it certifies. **Memory writes:** none, deliberately. A write would
+change a memory digest and make the next disclosure owe verbatim reproduction.

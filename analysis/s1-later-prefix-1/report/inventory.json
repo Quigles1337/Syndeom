@@ -1,0 +1,1460 @@
+{
+  "accepted_inventory": "unchanged; the first-parent integration's report (35 / 32) describes the accepted corpus before this prefix",
+  "activation_scope": "this verified tree only; main changes only on review and merge",
+  "actual_byte_checks": [
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_derive-v0.1.0-c08f9e3ec092",
+      "file": "proof.md",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-003a35498654",
+      "file": "original-1304.5623v4.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-00f28e252823",
+      "file": "original-1209.2022v2.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-0833f61c748c",
+      "file": "original-1304.5623v4.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-11ffe4f87954",
+      "file": "original-1404.4599v4.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": true,
+      "artifact_id": "s1_ingest-v0.1.0-15ab865466d6",
+      "file": "original-0706.0357v70.tar.gz",
+      "scope": "Manifest::check against committed bytes"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-1c4c9a7747d0",
+      "file": "original-1107.0863v3.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-22ae000cb879",
+      "file": "original-1201.3327v2.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-2d93a266558a",
+      "file": "original-1107.0863v3.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-315546e87259",
+      "file": "original-1304.5623v4.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-34988f7c8306",
+      "file": "original-1403.6317v1.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-40e6c0da8821",
+      "file": "original-1303.3650v2.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-448d7aefa486",
+      "file": "original-1010.2391v9.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-45c3ee8319d5",
+      "file": "original-1210.6709v1.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-486ef22f632b",
+      "file": "original-1210.6709v1.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-5ba6c0f07557",
+      "file": "original-0902.0680v1.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": true,
+      "artifact_id": "s1_ingest-v0.1.0-63e23a952084",
+      "file": "original-0706.0357v70.tar.gz",
+      "scope": "Manifest::check against committed bytes"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-685b874cf579",
+      "file": "original-1206.5522v5.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-68ed1abfecb4",
+      "file": "original-1206.1893v6.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-6ae03b18a1bd",
+      "file": "original-1403.4485v3.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-72415457dce4",
+      "file": "original-1005.2398v2.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-744652f4b95f",
+      "file": "original-0707.3799v2.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-82b4e66d0016",
+      "file": "original-1304.5623v4.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-915251f36fc5",
+      "file": "original-1403.8075v9.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-a4822a4be06e",
+      "file": "original-1206.1893v6.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-a8ac73896464",
+      "file": "original-0908.3213v4.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-a93badadec27",
+      "file": "original-1209.2022v2.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-bca249b3fa72",
+      "file": "original-1403.8075v9.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-be3b17e73425",
+      "file": "original-1005.2398v2.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-c6179869edf7",
+      "file": "original-1403.8075v9.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-cafb56cb27fb",
+      "file": "original-1209.4040v3.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-da3a4784c2be",
+      "file": "original-1206.2228v1.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-dc0e0b0d5b87",
+      "file": "original-1210.6709v1.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-dc1e44f39bb9",
+      "file": "original-1202.5531v3.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-e0c199d3c60a",
+      "file": "original-1009.3998v4.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-e3cbdfa7ad1c",
+      "file": "original-1112.6107v2.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-f634c259799f",
+      "file": "original-1312.1045v1.tar.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_ingest-v0.1.0-fd2bfef40d31",
+      "file": "original-1201.3327v2.tex.gz",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_pair-v0.1.0-62fe0c816a6b",
+      "file": "proof.md",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": true,
+      "artifact_id": "s1_pair-v0.1.0-62fe0c816a6b",
+      "file": "Proof.lean",
+      "scope": "Manifest::check against committed bytes"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_pair_archive-v0.1.0-094625fa10ff",
+      "file": "aata-20250801.pdf",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    },
+    {
+      "actual_bytes_checked": false,
+      "artifact_id": "s1_pair_archive-v0.1.0-094625fa10ff",
+      "file": "PrimeFin.lean",
+      "scope": "external/regenerable bytes absent; retained historical evidence only"
+    }
+  ],
+  "counts": {
+    "archived_raw_representations": 38,
+    "archived_representations": 40,
+    "canonical_representations": 2,
+    "effective_logical_items": 37,
+    "flaw_instances": 51,
+    "logical_items_without_canonical": 35,
+    "observed_flaw_classes": 5,
+    "prefix_logical_items": 5,
+    "proof_status": {
+      "invalid": 36,
+      "valid": 1
+    },
+    "qualified_truth_dimension": {
+      "false": 11,
+      "true": 5
+    },
+    "statement_status": {
+      "false": 18,
+      "true": 5,
+      "undetermined": 14
+    },
+    "unflagged_documented_subset": 23,
+    "zero_coverage_classes": 9
+  },
+  "event_id": "first-later-prefix-inventory-2026-10-28",
+  "formalization_boundary": "owner accepts the attributed written witness; full analytic source-to-Lean bridge not formalized; no PROVEN claim",
+  "gate_s1": "CLOSED 2026-10-26 (Session 29) on the earlier prefix; its table is not rewritten (ADR-0003 D8); this is the later prefix's own record",
+  "historical_s1_4": "unchanged; its bins, counts and receipts describe its original frozen prefix",
+  "items": [
+    {
+      "admission": "historically admitted, Route A candidate 25 (1304.5623)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-003a35498654"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0061"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-003a35498654",
+      "effective_producing_revision": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-003a35498654/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ],
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-003a35498654",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0061, the erratum: 'the proof of Proposition 3.5 contains a mistake ... More precisely, the proof only shows the following: [a degree p multisection, finite and flat, arising from a family of A_xi[p]-torsors] ... contrary to what was claimed in Proposition 3.5, one may not be able to choose the degree p multisection D_xi to be radicial' - the statement is neither re-proved nor disproved",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 21 (1209.2022)",
+      "archived_representations": [
+        "s1_derive-v0.1.0-c08f9e3ec092",
+        "s1_ingest-v0.1.0-00f28e252823"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0053"
+      },
+      "canonical_representations": [
+        "s1_derive-v0.1.0-c08f9e3ec092"
+      ],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-00f28e252823",
+      "effective_producing_revision": "fd309a5fd06ac3d9ad1740084102aeee4a445ebe",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-00f28e252823",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "counterexample",
+        "reference": "S-0053: the v3 remark - Tian Lan's counterexample Hilb_G, the category of finite-dimensional Hilbert spaces graded over a finite group G, in whose center Rep(G) sits with URep(G) a proper, non-replete subcategory, while URep(G) lies in the unitary center: 'in general, Z*(C) != Z(C); in other words, Z*(C) is not a replete subcategory of Z(C)'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 25 (1304.5623)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-0833f61c748c"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0061"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-0833f61c748c",
+      "effective_producing_revision": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-0833f61c748c/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ],
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-0833f61c748c",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0061, the erratum: 'one needs Assertion (4) of Theorem 3.6, whose proof requires that one can find degree p multisections in Proposition 3.5 that are radicial over the base. Without this, one can only conclude that any two supersingular K3 surfaces in characteristic p >= 5 are connected by a sequence of very special degree p correspondences (as in Assertion (3) of Theorem 3.6)' - Assertion (4) is neither re-proved nor disproved",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "admitted in the first later prefix, Route A candidate 30 (1404.4599)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-11ffe4f87954"
+      ],
+      "author_status": {
+        "kind": "retraction",
+        "reference": "S-0079"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-11ffe4f87954",
+      "effective_producing_revision": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+      "event": "first-later-prefix-inventory-2026-10-28",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-11ffe4f87954",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0079: 'the induction towards Proposition 2.22 does not stabilise as claimed. This problem has been overcome in arXiv:1806.08664' - the proof is withdrawn ('I know of no direct repair'); the proposition as stated is neither re-proved nor disproved by the notice, and the later paper (S-0080) reworks the construction and its concepts; the true reading (the result stands by the later paper) is named in RECORD.md as the alternative",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 12 (1107.0863)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-1c4c9a7747d0"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0039"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-1c4c9a7747d0",
+      "effective_producing_revision": "335344f85d1000b1a65eb28216fa49f60c4296ac",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-1c4c9a7747d0",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "counterexample",
+        "reference": "S-0039: the appendix's Figure A - hyperplanes H_1, H_2, H_3, H_4, H_0 whose paths H_1 -> H_2 -> H_3 -> H_4 and H_1 -> H_0 -> H_4 form a 5-cycle in Upsilon_0(U) with no normal hyperplane; 'Lemma 12 ... is false as stated; Figure A shows a counterexample'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 15 (1201.3327)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-22ae000cb879"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0043"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-22ae000cb879",
+      "effective_producing_revision": "be22f7207b59cc741988e715cae43aa210cbe00c",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-22ae000cb879",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0043: 'the claimed Lemma 5.8 in the previous version of this article is not true - a counterexample was found by Francesco Amoroso and Lea Terracini' (the counterexample itself is not in the document)",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 12 (1107.0863)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-2d93a266558a"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0039"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-2d93a266558a",
+      "effective_producing_revision": "335344f85d1000b1a65eb28216fa49f60c4296ac",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-2d93a266558a/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ],
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-2d93a266558a",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0039: 'Theorem 1 of [CH] is incorrect in the stated generality due to an error in [Lem. 12]. We correct this under an extra hypothesis' (no 5-cycle in any vertex link)",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 25 (1304.5623)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-315546e87259"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0061"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-315546e87259",
+      "effective_producing_revision": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-315546e87259/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ],
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-315546e87259",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0061: 'due to a mistake in Proposition 3.5, the unirationality of supersingular K3 surfaces remains a conjecture' (the comment); 'the main result, the unirationality of supersingular K3 surfaces Theorem 5.3, remains a conjecture' (the erratum)",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "admitted in the first later prefix, Route A candidate 28 (1403.6317)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-34988f7c8306"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0075"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-34988f7c8306",
+      "effective_producing_revision": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+      "event": "first-later-prefix-inventory-2026-10-28",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-34988f7c8306",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0075: 'We removed the wrong theorem from the first version' (the v3 comment) and 'an error in the assumptions of the Theorem 1' (the v2 withdrawal comment); no counterexample is given and no corrected statement replaces it, so the undetermined reading (withdrawn rather than disproved) is named in RECORD.md as the alternative",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 24 (1303.3650)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-40e6c0da8821"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0059"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-40e6c0da8821",
+      "effective_producing_revision": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-40e6c0da8821/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ],
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-40e6c0da8821",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0059: 'an error in the old version of Theorem 4.6. The assumption that Tr(g) is not of the form r^q-r is corrected to that Tr(g) is not of the form r^p-r'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 10 (1010.2391)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-448d7aefa486"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0037"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-448d7aefa486",
+      "effective_producing_revision": "7c952e6896f40b2352d852cb33e131cb10e9c3ab",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-448d7aefa486/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ],
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-448d7aefa486",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0037: 'correcting mistakes in formulation of Lemma A.3 ...: center x of neighborhood must be in C^1'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 23 (1210.6709)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-45c3ee8319d5"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0057"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-45c3ee8319d5",
+      "effective_producing_revision": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-45c3ee8319d5",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0057: 'Statement of Theorem 1.7 is corrected' - v2 replaces 'Aut(P) has a comeager conjugacy class' by 'The action Aut(P) on I(P) has a comeager orbit' and its Remark 2.3 says 'We do not know if Aut(P) has a dense conjugacy class ... All existing \"proofs\" seem to have a flow [sic]'",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 23 (1210.6709)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-486ef22f632b"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0057"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-486ef22f632b",
+      "effective_producing_revision": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-486ef22f632b",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0057, Remark 2.3: 'We do not know if Aut(P) has a dense conjugacy class or if H(P) has a dense conjugacy class. All existing \"proofs\" seem to have a flow [sic]' - v2 replaces the theorem by 'The action Aut(P) on I(P) has a dense orbit'",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 4 (0902.0680)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-5ba6c0f07557"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0029"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-5ba6c0f07557",
+      "effective_producing_revision": "bb0fc32f172351aa47eb9f1e2576506ebbd51b71",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-5ba6c0f07557",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0029",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 1 (0706.0357)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-15ab865466d6",
+        "s1_ingest-v0.1.0-63e23a952084"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0025"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": true,
+      "effective_artifact_id": "s1_ingest-v0.1.0-15ab865466d6",
+      "effective_producing_revision": "1a76d9ac21cd5d2e4311f9164178327c0ca128bb",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-63e23a952084",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "counterexample",
+        "reference": "analysis/s1-first-parent-status/WITNESS.md; SHA-256 c88af9c0d8b1ac2a65e8bdb634d41fbf3a8bbc1f31c168f81e3caff9e8573917; sections 2-3; Codex GPT-6, 2026-10-20",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 19 (1206.5522)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-685b874cf579"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0051"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-685b874cf579",
+      "effective_producing_revision": "fd309a5fd06ac3d9ad1740084102aeee4a445ebe",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-685b874cf579/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ],
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-685b874cf579",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0051: 'Corrected Proposition 5.3'; the acknowledgement 'correcting the hypotheses in the statement of Proposition 5.3'; v6 restates the proposition under stronger hypotheses",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 17 (1206.1893)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-68ed1abfecb4"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0047"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-68ed1abfecb4",
+      "effective_producing_revision": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-68ed1abfecb4/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ],
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-68ed1abfecb4",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0047: 'Proposition 34 is incorrect; the random variable Y' constructed above does not, in fact, obey the hypotheses of Azuma's inequality. A version of the proposition can be salvaged by replacing C_i(xi_1,...,xi_i) with the larger quantity sup_eta C_i(xi_1,...,xi_{i-1})'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 27 (1403.4485)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-6ae03b18a1bd"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0065"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-6ae03b18a1bd",
+      "effective_producing_revision": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-6ae03b18a1bd",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0065: 'incorrect degree shift in Proposition 5.1 corrected'; the acknowledgement 'previously incorrect degrees shifts in Proposition 5.1'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 8 (1005.2398)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-72415457dce4"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0033"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-72415457dce4",
+      "effective_producing_revision": "7c952e6896f40b2352d852cb33e131cb10e9c3ab",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-72415457dce4",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0033: the lemma's v3 footnote - 'the published version did not assume that A -> B is finitely presented and was incorrect'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 2 (0707.3799)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-744652f4b95f"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0027"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-744652f4b95f",
+      "effective_producing_revision": "30e2a4aa06368b8a2ba1cc1a8164c4d22229a0cd",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-744652f4b95f",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0027",
+        "value": true
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 25 (1304.5623)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-82b4e66d0016"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0061"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-82b4e66d0016",
+      "effective_producing_revision": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-82b4e66d0016",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "counterexample",
+        "reference": "S-0061, the erratum's example: for sigma_0(N) = 3 the moduli space M_N consists geometrically of two copies of the Fermat hypersurface of degree p+1 in P^3 and varpi_N arises from a pencil of planes through a line of this surface, giving 'a fibration over P^1, whose geometric generic fibre is a singular rational curve that is not smooth. This gives an example, where the geometric generic fibre of varpi_N is not smooth, and in particular, not isomorphic to P^1' - so varpi_N is not a P^1-bundle there",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "admitted in the first later prefix, Route A candidate 29 (1403.8075)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-915251f36fc5"
+      ],
+      "author_status": {
+        "kind": "retraction",
+        "reference": "S-0077"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-915251f36fc5",
+      "effective_producing_revision": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+      "event": "first-later-prefix-inventory-2026-10-28",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-915251f36fc5",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0077: 'In Proposition 4.1 the argument incorrectly treats primality verification as equivalent to checking leading digits in multiple base representations' - the withdrawal faults the argument and does not pronounce on the statement; nothing re-proves or disproves it",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 17 (1206.1893)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-a4822a4be06e"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0047"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-a4822a4be06e",
+      "effective_producing_revision": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-a4822a4be06e/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ],
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-a4822a4be06e",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0047: 'for the purposes of establishing Proposition 35 (which is the only place in this paper where Proposition 34 is used), it is better to proceed as follows. Firstly, one should impose an additional mild moment hypothesis such as E xi_i^2 = O(n^{O(1)}), which is true in all applications of interest' - the statement as written is neither re-proved nor disproved",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 5 (0908.3213)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-a8ac73896464"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0031"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-a8ac73896464",
+      "effective_producing_revision": "bb0fc32f172351aa47eb9f1e2576506ebbd51b71",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-a8ac73896464",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0031",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 21 (1209.2022)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-a93badadec27"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0053"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-a93badadec27",
+      "effective_producing_revision": "fd309a5fd06ac3d9ad1740084102aeee4a445ebe",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-a93badadec27",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0053: the statement 'Every braiding of a unitary fusion category is unitary' is unchanged in v3, whose comment says 'The proof of Theorem 3.2 has been revised to avoid reliance on this proposition' and which proves it anew",
+        "value": true
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "admitted in the first later prefix, Route A candidate 29 (1403.8075)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-bca249b3fa72"
+      ],
+      "author_status": {
+        "kind": "retraction",
+        "reference": "S-0077"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-bca249b3fa72",
+      "effective_producing_revision": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+      "event": "first-later-prefix-inventory-2026-10-28",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-bca249b3fa72",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0077: 'These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4' (v10) and 'This invalidates the derivation of Theorems 4.3-4.4' (v11) - the derivation is withdrawn; the statement is neither re-proved nor disproved",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 8 (1005.2398)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-be3b17e73425"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0033"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-be3b17e73425",
+      "effective_producing_revision": "7c952e6896f40b2352d852cb33e131cb10e9c3ab",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-be3b17e73425",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "counterexample",
+        "reference": "S-0033: the author's footnote gives the counterexample Z -> Z[{x_p}_{p prime}]/(p x_p, x_p^p) to the statement without the finitely presented hypothesis",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "admitted in the first later prefix, Route A candidate 29 (1403.8075)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-c6179869edf7"
+      ],
+      "author_status": {
+        "kind": "retraction",
+        "reference": "S-0077"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-c6179869edf7",
+      "effective_producing_revision": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+      "event": "first-later-prefix-inventory-2026-10-28",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-c6179869edf7",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0077: 'These invalidate the probabilistic step leading to Theorems 4.3 -- 4.4' (v10) and 'This invalidates the derivation of Theorems 4.3-4.4' (v11) - the derivation is withdrawn; the statement is neither re-proved nor disproved",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 22 (1209.4040)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-cafb56cb27fb"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0055"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-cafb56cb27fb",
+      "effective_producing_revision": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-cafb56cb27fb/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ],
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-cafb56cb27fb",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0055: 'The notion of \"weakly regularizing\" (in Def.4.3) was strengthened to fix a gap in the proof of the main theorem (Thm.4.5)' - the theorem under v3's Definition 4.3 is neither re-proved nor disproved; v4 proves it under the strengthened definition",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 18 (1206.2228)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-da3a4784c2be"
+      ],
+      "author_status": {
+        "kind": "retraction",
+        "reference": "S-0049"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-da3a4784c2be",
+      "effective_producing_revision": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-da3a4784c2be",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0049: 'Theorem 1 is wrong; tilings described in later papers contradict it' (the contradicting tilings are not in the document)",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 23 (1210.6709)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-dc0e0b0d5b87"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0057"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-dc0e0b0d5b87",
+      "effective_producing_revision": "b05537f318a6ddf4de8fb307c9837a0363e98c9d",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-dc0e0b0d5b87/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ],
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-dc0e0b0d5b87",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0057, Remark 2.3: 'We do not know if Aut(P) has a dense conjugacy class or if H(P) has a dense conjugacy class. All existing \"proofs\" seem to have a flow [sic]' - v2 replaces the theorem by 'The action H(P) on I(P) has a dense orbit'",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 16 (1202.5531)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-dc1e44f39bb9"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0045"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-dc1e44f39bb9",
+      "effective_producing_revision": "bc12219edb5dd14c65d0f9b7904c6e4c3aa4c0b1",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-dc1e44f39bb9/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ],
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-dc1e44f39bb9",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0045: 'The main irreducibility theorem in the previous version is false in the stated generality'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 9 (1009.3998)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-e0c199d3c60a"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0035"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-e0c199d3c60a",
+      "effective_producing_revision": "7c952e6896f40b2352d852cb33e131cb10e9c3ab",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-e0c199d3c60a",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0035",
+        "value": true
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 14 (1112.6107)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-e3cbdfa7ad1c"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0041"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-e3cbdfa7ad1c",
+      "effective_producing_revision": "be22f7207b59cc741988e715cae43aa210cbe00c",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-e3cbdfa7ad1c/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2757"
+          ],
+          "kind": "truth-review",
+          "reason": "Historical false label retained; undetermined is a documented alternative pending the carried owner clarification. Excluded from qualified truth cells."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-e3cbdfa7ad1c",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0041: 'Correction of the last statement in Theorem 1, proofs are not affected'",
+        "value": false
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "historically admitted, Route A candidate 26 (1312.1045)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-f634c259799f"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0063"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-f634c259799f",
+      "effective_producing_revision": "1cfcc618c85287dda5d13ea65dd6554041776c42",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_ingest-v0.1.0-f634c259799f",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "source-document",
+        "reference": "S-0063: the statement of Theorem A.1 is unchanged word for word in v2, whose comment says the modified Proposition A.2 was needed 'to fill a gap in the proof of Theorem A.1' and whose proof establishes it",
+        "value": true
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    },
+    {
+      "admission": "historically admitted, Route A candidate 15 (1201.3327)",
+      "archived_representations": [
+        "s1_ingest-v0.1.0-fd2bfef40d31"
+      ],
+      "author_status": {
+        "kind": "erratum",
+        "reference": "S-0043"
+      },
+      "canonical_representations": [],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_ingest-v0.1.0-fd2bfef40d31",
+      "effective_producing_revision": "be22f7207b59cc741988e715cae43aa210cbe00c",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [
+        {
+          "evidence": [
+            "groundtruth/s1_ingest-v0.1.0-fd2bfef40d31/RECORD.md",
+            "PROGRAM/HANDOFF.md#L2762"
+          ],
+          "kind": "severity-review",
+          "reason": "Recorded gap retained; ADR-0003 D3 withdrawn/weakened consequence wording versus taxonomy range is an open owner clarification, historically nonblocking."
+        }
+      ],
+      "logical_item_key": "s1_ingest-v0.1.0-fd2bfef40d31",
+      "proof_status": "invalid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "undetermined",
+        "reference": "S-0043: the theorem is deleted and replaced by a weaker proposition; 'In contrast to the statement given in the published article, I am not able to classify all these field extensions' - neither re-proved nor disproved",
+        "value": null
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": false,
+      "unflagged_documented_subset": false
+    },
+    {
+      "admission": "owner merged PR 4 admission packet; documented checks retained; no separate GitHub reviewer approval and no PROVEN promotion",
+      "archived_representations": [
+        "s1_pair-v0.1.0-62fe0c816a6b",
+        "s1_pair_archive-v0.1.0-094625fa10ff"
+      ],
+      "author_status": {
+        "kind": "mathlib",
+        "reference": "S-0068: Nat.infinite_setOfPred_prime at mathlib d13f23b723b8a846827a245b89c10fc7d3f11612; S-0067 claim correspondence in analysis/s1-2/README.md"
+      },
+      "canonical_representations": [
+        "s1_pair-v0.1.0-62fe0c816a6b"
+      ],
+      "canonical_selection_context_locator_review_required": false,
+      "effective_artifact_id": "s1_pair_archive-v0.1.0-094625fa10ff",
+      "effective_producing_revision": "eb1b96d5b8084ceb1de734fffc90c9b480ec32bf",
+      "event": "first-parent-accepted-integration-2026-10-20",
+      "issues": [],
+      "logical_item_key": "s1_pair_archive-v0.1.0-094625fa10ff",
+      "proof_status": "valid",
+      "scoring_readiness": "not adjudicated by this metadata inventory; canonical artifacts and frozen battery still required",
+      "statement_status": {
+        "method": "mathlib",
+        "reference": "S-0068: Nat.infinite_setOfPred_prime at mathlib d13f23b723b8a846827a245b89c10fc7d3f11612; S-0067 claim correspondence in analysis/s1-2/README.md",
+        "value": true
+      },
+      "status_support_hold": false,
+      "truth_dimension_eligible": true,
+      "unflagged_documented_subset": true
+    }
+  ],
+  "mapping": {
+    "accepted_packet_revision": "37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f",
+    "activation": "effective in a tree only after successful Rust integration validation; main after reviewed merge",
+    "effective_artifact_id": "s1_ingest-v0.1.0-15ab865466d6",
+    "event_id": "first-parent-accepted-integration-2026-10-20",
+    "logical_item_key": "s1_ingest-v0.1.0-63e23a952084",
+    "owner_decision_date": "2026-10-20",
+    "owner_decision_path": "analysis/s1-first-parent-integration/OWNER-DECISION.md",
+    "owner_decision_sha256": "e9eae1ecbe0858df7edeeebec2f0f21019a0c174774ed02eba3d5cd748e0379b",
+    "owner_decision_timezone": "America/New_York",
+    "relation": "raw-metadata-amendment",
+    "superseded_artifact_id": "s1_ingest-v0.1.0-63e23a952084"
+  },
+  "preservation": {
+    "accepted_corpus_and_packets": "the first-parent integration's inputs byte-identical; its tool, packet and retained report unchanged and not run",
+    "baseline_files_checked": 80,
+    "baseline_revision": "37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f",
+    "baseline_tree": "aadce1d6332ad3a43f7f31b6779ee52083287215",
+    "harvest_log_prefix_bytes": 56562,
+    "input_set_rule": "ADR-0013 D3: ADR-0012's input set and the frozen S1.4 bins at the accepted baseline; the prefix's item files at the freeze point; the harvest log's prefix as it stood at the freeze point; additions under groundtruth/ refused besides the amendment map and the effective representation",
+    "prefix_files_checked": 10,
+    "prefix_freeze_point": "d2569d61588368a60bbf7558fb9f0703f96e3a5b",
+    "prefix_freeze_point_tree": "1e2fafad7e21fc69d0ebbc315a96b0e065dd9bd7",
+    "prefix_item_directories": [
+      "s1_ingest-v0.1.0-34988f7c8306",
+      "s1_ingest-v0.1.0-915251f36fc5",
+      "s1_ingest-v0.1.0-bca249b3fa72",
+      "s1_ingest-v0.1.0-c6179869edf7",
+      "s1_ingest-v0.1.0-11ffe4f87954"
+    ]
+  },
+  "scope_notes": [
+    "HANDOFF Session 20 also asks whether unnamed dependent results under candidate 25's erratum should become items. No new items are invented; the admitted named four remain the scope.",
+    "Source statuses and historical labels are unchanged. Owner merge is an admission action supported by the existing packet, not proof of an independent review, new Lean execution, or a PROVEN transition.",
+    "All observed canonical informal files define one octave grid, then split by statement-only/proof-bearing role. Formal files use their own grid; wrapper tokens are not transitive proof size.",
+    "Every real-item cell is expected underpowered until S3 computes N_min and freezes its protocol. S1 remains open and requires a later genuinely cold examination.",
+    "First later prefix (ADR-0013): candidates 28-30, items 32-36. Each item was reviewed in analysis/s1-held-harvest-review/REVIEW.md (five agree), and Al's rulings of 2026-10-28 on PR 23 settled every reading the review raised as recorded: Q-H1 (item 32 false by source document; its class stands), Q-H2 and Q-H3 (items 34 and 35 gap), Q-H5 (item 36 undetermined). No item issue remains open, so each prefix root is listed with none.",
+    "Q-H4: the further unnamed results in the prefix's notices stay out as items and join the existing unnamed-result question (the first scope note above); no item is invented."
+  ]
+}

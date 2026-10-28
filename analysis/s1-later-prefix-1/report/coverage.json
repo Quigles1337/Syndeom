@@ -1,0 +1,2958 @@
+{
+  "archive_coverage": [
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0001",
+      "correct_controls": 0,
+      "flaw_instances": 5,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 3,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 5,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 3,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 3,
+      "name": "Sign or constant error",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 3,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 3,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 0,
+        "repairable": 3
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 0,
+        "repairable": 3
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 3,
+        "n": 0
+      },
+      "truth": {
+        "false": 2,
+        "true": 1,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 2,
+        "true": 1
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0002",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Quantifier scope error",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0003",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Circularity",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0004",
+      "correct_controls": 0,
+      "flaw_instances": 4,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 3,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 4,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 3,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 3,
+      "name": "Unjustified step (\"clearly\")",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 3,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 3,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 2,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 2,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 3,
+        "n": 0
+      },
+      "truth": {
+        "false": 1,
+        "true": 0,
+        "undetermined": 2
+      },
+      "truth_eligible": {
+        "excluded": 2,
+        "false": 1,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0005",
+      "correct_controls": 0,
+      "flaw_instances": 22,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 22,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 22,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 22,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 22,
+      "name": "Theorem applied without its hypotheses",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 22,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 22,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 10,
+        "gap": 12,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 10,
+        "gap": 12,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 22,
+        "n": 0
+      },
+      "truth": {
+        "false": 7,
+        "true": 3,
+        "undetermined": 12
+      },
+      "truth_eligible": {
+        "excluded": 16,
+        "false": 3,
+        "true": 3
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0006",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Induction base or step error",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0007",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Vacuous or unused lemma",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0008",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Statement drift",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0009",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Smuggled axiom",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0010",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Fabricated or wrong citation",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0011",
+      "correct_controls": 0,
+      "flaw_instances": 4,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 4,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 4,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 4,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 4,
+      "name": "True theorem with invalid proof (composite)",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 4,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 4,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 3,
+        "repairable": 1
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 3,
+        "repairable": 1
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 4,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 4,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 4
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 1,
+      "class": "FLAW-0012",
+      "correct_controls": 0,
+      "flaw_instances": 16,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 16,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 16,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 16,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 15,
+      "name": "False theorem with convincing proof (composite)",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 16,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": 1,
+        "median": 1.0,
+        "min": 1,
+        "missing": 15,
+        "n": 1
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 16,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 16,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": 1,
+        "median": 1.0,
+        "min": 1,
+        "missing": 15,
+        "n": 1
+      },
+      "truth": {
+        "false": 16,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 7,
+        "false": 9,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0013",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Correct proof with uninformative padding",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0014",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Incomplete case analysis (non-inductive)",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 2,
+      "class": "TOTAL",
+      "correct_controls": 1,
+      "flaw_instances": 51,
+      "formal_bins": {
+        "[14, 28)": 1,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 1,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 1,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 37,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 51,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 36,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 35,
+      "name": "Unique logical items",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 36,
+        "valid": 1
+      },
+      "proof_steps": {
+        "excluded_statement_only": 1,
+        "max": 1,
+        "median": 1.0,
+        "min": 1,
+        "missing": 35,
+        "n": 1
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 30,
+        "gap": 17,
+        "repairable": 4
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 22,
+        "gap": 14,
+        "repairable": 3
+      },
+      "statement_only_controls": 1,
+      "steps": {
+        "max": 1,
+        "median": 0.5,
+        "min": 0,
+        "missing": 35,
+        "n": 2
+      },
+      "truth": {
+        "false": 18,
+        "true": 5,
+        "undetermined": 14
+      },
+      "truth_eligible": {
+        "excluded": 21,
+        "false": 11,
+        "true": 5
+      },
+      "unclassifiable_attributed": 0
+    }
+  ],
+  "battery_version": null,
+  "bins": {
+    "boundaries": {
+      "formal": [
+        14,
+        28
+      ],
+      "informal": [
+        7,
+        14,
+        28,
+        56,
+        112
+      ]
+    },
+    "edge_rule": "lower-inclusive upper-exclusive; retain empty bins; explicit underflow/overflow",
+    "population": "all canonical files at e6a7cae4392dd1565ee57f9fb727cc01e453687d, grouped by modality; includes statement-only positive control; one representation per root/modality",
+    "role_rule": "informal n_steps=0 is statement-only, >0 proof-bearing; formal reviewed-statement-mathlib-alias/1 is theorem-alias. Shared informal edges, separately counted roles; no pooling across modalities.",
+    "schema": "s1-4-coverage/1"
+  },
+  "candidate_counts": {
+    "admitted": 24,
+    "escalated": 0,
+    "found-but-unclassifiable": 2,
+    "pending": 0,
+    "pending-truth": 0,
+    "rejected": 4
+  },
+  "canonical_representations": 2,
+  "event_id": "first-later-prefix-inventory-2026-10-28",
+  "gate_s1_table": "not rewritten; the S1.4 frozen packet and the Gate S1 table describe the prefix through 1403.4485 (ADR-0003 D8)",
+  "harvest_candidates": 30,
+  "interim_power": "Every real-item cell is expected underpowered for the equivalence test until S3 derives N_min and freezes the protocol; S4 plans recall against documented errors and a false-positive upper bound on correct proofs, not a fooling length.",
+  "issues_by_kind": {
+    "pending-review": [],
+    "promotion-hold": [],
+    "severity-review": [
+      "s1_ingest-v0.1.0-003a35498654",
+      "s1_ingest-v0.1.0-0833f61c748c",
+      "s1_ingest-v0.1.0-315546e87259",
+      "s1_ingest-v0.1.0-a4822a4be06e",
+      "s1_ingest-v0.1.0-cafb56cb27fb",
+      "s1_ingest-v0.1.0-dc0e0b0d5b87",
+      "s1_ingest-v0.1.0-fd2bfef40d31"
+    ],
+    "truth-review": [
+      "s1_ingest-v0.1.0-2d93a266558a",
+      "s1_ingest-v0.1.0-40e6c0da8821",
+      "s1_ingest-v0.1.0-448d7aefa486",
+      "s1_ingest-v0.1.0-685b874cf579",
+      "s1_ingest-v0.1.0-68ed1abfecb4",
+      "s1_ingest-v0.1.0-dc1e44f39bb9",
+      "s1_ingest-v0.1.0-e3cbdfa7ad1c"
+    ]
+  },
+  "label_basis": "effective representations: the accepted first-parent amendment applied, so its logical item carries its effective status (ADR-0013 D5)",
+  "logical_items": 37,
+  "prefix_through_arxiv_id": "1404.4599",
+  "qualification_counts": {
+    "escalated_item_union": 14,
+    "pending_item_review_union": 14,
+    "promotion_holds": 0,
+    "unflagged_documented_subset": 23
+  },
+  "representations": 40,
+  "schema": "s1-later-prefix-coverage/1",
+  "scope_notes": [
+    "HANDOFF Session 20 also asks whether unnamed dependent results under candidate 25's erratum should become items. No new items are invented; the admitted named four remain the scope.",
+    "Source statuses and historical labels are unchanged. Owner merge is an admission action supported by the existing packet, not proof of an independent review, new Lean execution, or a PROVEN transition.",
+    "All observed canonical informal files define one octave grid, then split by statement-only/proof-bearing role. Formal files use their own grid; wrapper tokens are not transitive proof size.",
+    "Every real-item cell is expected underpowered until S3 computes N_min and freezes its protocol. S1 remains open and requires a later genuinely cold examination.",
+    "First later prefix (ADR-0013): candidates 28-30, items 32-36. Each item was reviewed in analysis/s1-held-harvest-review/REVIEW.md (five agree), and Al's rulings of 2026-10-28 on PR 23 settled every reading the review raised as recorded: Q-H1 (item 32 false by source document; its class stands), Q-H2 and Q-H3 (items 34 and 35 gap), Q-H5 (item 36 undetermined). No item issue remains open, so each prefix root is listed with none.",
+    "Q-H4: the further unnamed results in the prefix's notices stay out as items and join the existing unnamed-result question (the first scope note above); no item is invented."
+  ],
+  "seed": null,
+  "subset_rule": "exclude logical items with promotion-hold, truth-review, severity-review or pending-review issues; the accepted corpus's issues from the frozen S1.4 overlay with the first-parent hold discharged by the accepted amendment, the prefix's from its own overlay. Not scoring readiness or a new admission policy.",
+  "taxonomy_version": "0.1.0",
+  "uncertainty": "descriptive census of the pinned prefix; no sampling intervals or numeric power calculated",
+  "undetermined_truth_items": [
+    "s1_ingest-v0.1.0-003a35498654",
+    "s1_ingest-v0.1.0-0833f61c748c",
+    "s1_ingest-v0.1.0-11ffe4f87954",
+    "s1_ingest-v0.1.0-315546e87259",
+    "s1_ingest-v0.1.0-45c3ee8319d5",
+    "s1_ingest-v0.1.0-486ef22f632b",
+    "s1_ingest-v0.1.0-5ba6c0f07557",
+    "s1_ingest-v0.1.0-915251f36fc5",
+    "s1_ingest-v0.1.0-a4822a4be06e",
+    "s1_ingest-v0.1.0-bca249b3fa72",
+    "s1_ingest-v0.1.0-c6179869edf7",
+    "s1_ingest-v0.1.0-cafb56cb27fb",
+    "s1_ingest-v0.1.0-dc0e0b0d5b87",
+    "s1_ingest-v0.1.0-fd2bfef40d31"
+  ],
+  "unflagged_documented_subset_coverage": [
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0001",
+      "correct_controls": 0,
+      "flaw_instances": 5,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 3,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 5,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 3,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 3,
+      "name": "Sign or constant error",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 3,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 3,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 0,
+        "repairable": 3
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 0,
+        "repairable": 3
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 3,
+        "n": 0
+      },
+      "truth": {
+        "false": 2,
+        "true": 1,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 2,
+        "true": 1
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0002",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Quantifier scope error",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0003",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Circularity",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0004",
+      "correct_controls": 0,
+      "flaw_instances": 3,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 2,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 3,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 2,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 2,
+      "name": "Unjustified step (\"clearly\")",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 2,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 2,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 1,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 2,
+        "gap": 1,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 2,
+        "n": 0
+      },
+      "truth": {
+        "false": 1,
+        "true": 0,
+        "undetermined": 1
+      },
+      "truth_eligible": {
+        "excluded": 1,
+        "false": 1,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0005",
+      "correct_controls": 0,
+      "flaw_instances": 12,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 12,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 12,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 12,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 12,
+      "name": "Theorem applied without its hypotheses",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 12,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 12,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 6,
+        "gap": 6,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 6,
+        "gap": 6,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 12,
+        "n": 0
+      },
+      "truth": {
+        "false": 3,
+        "true": 3,
+        "undetermined": 6
+      },
+      "truth_eligible": {
+        "excluded": 6,
+        "false": 3,
+        "true": 3
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0006",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Induction base or step error",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0007",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Vacuous or unused lemma",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0008",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Statement drift",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0009",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Smuggled axiom",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0010",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Fabricated or wrong citation",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0011",
+      "correct_controls": 0,
+      "flaw_instances": 4,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 4,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 4,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 4,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 4,
+      "name": "True theorem with invalid proof (composite)",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 4,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 4,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 3,
+        "repairable": 1
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 3,
+        "repairable": 1
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 4,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 4,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 4
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 1,
+      "class": "FLAW-0012",
+      "correct_controls": 0,
+      "flaw_instances": 9,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 9,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 9,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 9,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 8,
+      "name": "False theorem with convincing proof (composite)",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 9,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": 1,
+        "median": 1.0,
+        "min": 1,
+        "missing": 8,
+        "n": 1
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 9,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 9,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": 1,
+        "median": 1.0,
+        "min": 1,
+        "missing": 8,
+        "n": 1
+      },
+      "truth": {
+        "false": 9,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 9,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0013",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Correct proof with uninformative padding",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 0,
+      "class": "FLAW-0014",
+      "correct_controls": 0,
+      "flaw_instances": 0,
+      "formal_bins": {
+        "[14, 28)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 0,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 0,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 0,
+      "name": "Incomplete case analysis (non-inductive)",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 0,
+        "valid": 0
+      },
+      "proof_steps": {
+        "excluded_statement_only": 0,
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 0,
+        "gap": 0,
+        "repairable": 0
+      },
+      "statement_only_controls": 0,
+      "steps": {
+        "max": null,
+        "median": null,
+        "min": null,
+        "missing": 0,
+        "n": 0
+      },
+      "truth": {
+        "false": 0,
+        "true": 0,
+        "undetermined": 0
+      },
+      "truth_eligible": {
+        "excluded": 0,
+        "false": 0,
+        "true": 0
+      },
+      "unclassifiable_attributed": 0
+    },
+    {
+      "canonical_roots": 2,
+      "class": "TOTAL",
+      "correct_controls": 1,
+      "flaw_instances": 33,
+      "formal_bins": {
+        "[14, 28)": 1,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 1,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_proof_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 1,
+        "[7, 14)": 0,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "informal_statement_bins": {
+        "[14, 28)": 0,
+        "[28, 56)": 0,
+        "[56, 112)": 0,
+        "[7, 14)": 1,
+        "overflow": 0,
+        "underflow": 0
+      },
+      "items": 23,
+      "lean_catchable_instances": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 33,
+        "YES-TOOLING": 0
+      },
+      "lean_catchable_items": {
+        "N/A": 0,
+        "NO": 0,
+        "YES-KERNEL": 22,
+        "YES-TOOLING": 0
+      },
+      "missing_canonical_length": 21,
+      "name": "Unique logical items",
+      "positive_length_informal_controls": 0,
+      "proof_status": {
+        "invalid": 22,
+        "valid": 1
+      },
+      "proof_steps": {
+        "excluded_statement_only": 1,
+        "max": 1,
+        "median": 1.0,
+        "min": 1,
+        "missing": 21,
+        "n": 1
+      },
+      "severity_instances": {
+        "cosmetic": 0,
+        "fatal": 19,
+        "gap": 10,
+        "repairable": 4
+      },
+      "severity_items": {
+        "cosmetic": 0,
+        "fatal": 15,
+        "gap": 7,
+        "repairable": 3
+      },
+      "statement_only_controls": 1,
+      "steps": {
+        "max": 1,
+        "median": 0.5,
+        "min": 0,
+        "missing": 21,
+        "n": 2
+      },
+      "truth": {
+        "false": 11,
+        "true": 5,
+        "undetermined": 7
+      },
+      "truth_eligible": {
+        "excluded": 7,
+        "false": 11,
+        "true": 5
+      },
+      "unclassifiable_attributed": 0
+    }
+  ],
+  "zero_coverage": [
+    {
+      "class": "FLAW-0002",
+      "name": "Quantifier scope error"
+    },
+    {
+      "class": "FLAW-0003",
+      "name": "Circularity"
+    },
+    {
+      "class": "FLAW-0006",
+      "name": "Induction base or step error"
+    },
+    {
+      "class": "FLAW-0007",
+      "name": "Vacuous or unused lemma"
+    },
+    {
+      "class": "FLAW-0008",
+      "name": "Statement drift"
+    },
+    {
+      "class": "FLAW-0009",
+      "name": "Smuggled axiom"
+    },
+    {
+      "class": "FLAW-0010",
+      "name": "Fabricated or wrong citation"
+    },
+    {
+      "class": "FLAW-0013",
+      "name": "Correct proof with uninformative padding"
+    },
+    {
+      "class": "FLAW-0014",
+      "name": "Incomplete case analysis (non-inductive)"
+    }
+  ]
+}

@@ -64,12 +64,33 @@ fn prefix_file(name: &str) -> String {
     )
 }
 
+fn retained(name: &str) -> Vec<u8> {
+    std::fs::read(repo().join(format!("{PACKET}/report/{name}"))).unwrap()
+}
+
 fn overlay_with(edit: impl FnOnce(&mut Value)) -> Blobs {
     let mut blobs = fixture();
     let mut o: Value = serde_json::from_slice(&blobs[OVERLAY]).unwrap();
     edit(&mut o);
     blobs.insert(OVERLAY.into(), serde_json::to_vec(&o).unwrap());
     blobs
+}
+
+#[test]
+fn working_tree_yields_the_retained_report() {
+    let event = inventory(&fixture()).unwrap();
+    assert_eq!(
+        json_bytes(&event.inventory).unwrap(),
+        retained("inventory.json")
+    );
+    assert_eq!(
+        json_bytes(&event.coverage).unwrap(),
+        retained("coverage.json")
+    );
+    assert_eq!(
+        render(&event.coverage).unwrap().into_bytes(),
+        retained("report.md")
+    );
 }
 
 #[test]
