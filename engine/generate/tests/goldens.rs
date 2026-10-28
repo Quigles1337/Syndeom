@@ -19,9 +19,10 @@ use syndeom_manifest::{Toolchain, content_hash, to_disk_json};
 
 /// The 0.1.0 goldens: each seed's control and FLAWS.md example, informal and formal (Session 40).
 const GOLDENS_0_1_0: u64 = 12;
-/// The 0.2.0 goldens: produced at the commit that holds the 0.2.0 producer, then added with
-/// their test; none exists before that commit.
-const GOLDENS_0_2_0: u64 = 0;
+/// The 0.2.0 goldens (Session 41): the true seed's control (informal, formal) and every new
+/// seed's FLAWS.md example (informal, formal, pair), produced at `af28cc96…` and added with their
+/// test.
+const GOLDENS_0_2_0: u64 = 14;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)

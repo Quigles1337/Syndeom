@@ -1,0 +1,126 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "value": true
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "pass"
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 92
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "a5091164d544a7bcfb843fcb84dfabda1c424a5b2b18c54b2399f43309120eae",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_continuity_is_not_uniform",
+        "n_bytes": 533,
+        "n_declarations": 1,
+        "n_lines": 9,
+        "n_tokens": 92,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_template-v0.2.0-b3c5dd026066-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "lean_axioms_standard": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": true
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "pass"
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [],
+    "padding_ratio": 0,
+    "style": "epsilon_delta",
+    "target": "formal",
+    "theorem": "continuity_is_not_uniform"
+  },
+  "config_hash": "b3c5dd026066b5f392f3a12af717794bd6ff1e08a20032fc94cdcc012b5c5c59",
+  "engine_commit": "af28cc96aa75cbabb0a6171d4c636a8cbc87f773",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_axioms_standard": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.2.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/ContinuityIsNotUniform.lean:syndeom_seed_continuity_is_not_uniform",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

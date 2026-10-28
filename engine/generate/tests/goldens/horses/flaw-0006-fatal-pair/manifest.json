@@ -1,0 +1,226 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0006": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 4
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 144
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "9e198c7cad78e0c9045378bebae6eaf019ba1a65b15de3f8a172d6cd5afc61f3",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_horses",
+        "n_bytes": 1493,
+        "n_declarations": 1,
+        "n_lines": 24,
+        "n_tokens": 244,
+        "storage": "regenerable"
+      },
+      "informal": {
+        "content_hash": "d516f093bed4bc031dc50397aa6caaaf171a32fa5f9053a79e28caf6d9d4c104",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 807,
+        "n_lemmas": 0,
+        "n_steps": 4,
+        "n_tokens": 144,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "pair"
+  },
+  "artifact_id": "s2_template-v0.2.0-8666b30995c2-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0006": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 4
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0006",
+        "dials": {
+          "failing_case": "n + 1 = 2",
+          "mode": "shift-index"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "induction",
+    "target": "pair",
+    "theorem": "horses"
+  },
+  "config_hash": "8666b30995c22ed707895078648233939a698803c4f6e1e2487d893406b9ebf9",
+  "engine_commit": "af28cc96aa75cbabb0a6171d4c636a8cbc87f773",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0006": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.2.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0006",
+        "dials": {
+          "counterexample": "Two horses of different colours: for $n = 2$ the set of both is not monochromatic.",
+          "failing_case": "n + 1 = 2",
+          "inserted": "These two sets of $n$ horses overlap: together they omit only $a$ and $b$, so their overlap has $n - 1 \\ge 1$ horses. Take a horse $z$ in both.",
+          "mode": "shift-index",
+          "replaced": null,
+          "site": 3
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            143
+          ],
+          "step": 3
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0006",
+        "dials": {
+          "counterexample": "Two horses of different colours: for $n = 2$ the set of both is not monochromatic.",
+          "failing_case": "n + 1 = 2",
+          "inserted": [
+            "      have hcard : (s.erase a ∩ s.erase b).card + 2 = s.card := by",
+            "        rw [Finset.erase_inter, Finset.inter_erase, Finset.inter_self, Finset.card_erase_of_mem (Finset.mem_erase.mpr ⟨hab, ha⟩), Finset.card_erase_of_mem hb]",
+            "        omega",
+            "      obtain ⟨z, hz⟩ : (s.erase a ∩ s.erase b).Nonempty := Finset.card_pos.mp (by omega)"
+          ],
+          "mode": "shift-index",
+          "replaced": null,
+          "site": 3
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_horses",
+          "line": 17
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/Horses.lean:syndeom_seed_horses_false",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

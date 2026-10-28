@@ -1,0 +1,24 @@
+{
+  "config": {
+    "theorem": "horses",
+    "style": "induction",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0006",
+        "sub_variant": null,
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "mode": "shift-index",
+          "failing_case": "n + 1 = 2"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "af28cc96aa75cbabb0a6171d4c636a8cbc87f773",
+  "toolchain": null,
+  "observation": null
+}

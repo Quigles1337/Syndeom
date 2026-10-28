@@ -1,0 +1,169 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0014": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 4
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 64
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "68386980c7db0fb68b33be30d39b7ae639ebda88bea099a8cbb6d72bb4539060",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 399,
+        "n_lemmas": 0,
+        "n_steps": 4,
+        "n_tokens": 64,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.2.0-06d157803870-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0014": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 4
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0014",
+        "dials": {
+          "holds": false,
+          "omitted_case": "x = 0"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "two_cases",
+    "target": "informal",
+    "theorem": "x_over_abs_x"
+  },
+  "config_hash": "06d157803870393367854170966da0dfad8c5e11c7f15e92b9af5a171e67efec",
+  "engine_commit": "af28cc96aa75cbabb0a6171d4c636a8cbc87f773",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0014": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.2.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0014",
+        "dials": {
+          "counterexample": "$x = 0$: the quotient $0/|0|$ is undefined, and in Lean $0 / |0| = 0$, which is neither $1$ nor $-1$.",
+          "holds": false,
+          "inserted": "Comparing $x$ with $0$, either $x > 0$ or $x < 0$.",
+          "omitted_case": "x = 0",
+          "replaced": null,
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            50
+          ],
+          "step": 1
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/XOverAbsX.lean:syndeom_seed_x_over_abs_x_false",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

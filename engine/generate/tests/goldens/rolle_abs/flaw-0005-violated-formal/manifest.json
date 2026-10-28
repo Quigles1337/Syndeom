@@ -1,0 +1,169 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0005": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 90
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "7d1b0342d4b223bf0b1eb4a7f685d3245bfb3971b87dc01d4bc09f25d6c6b4ca",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_rolle_abs",
+        "n_bytes": 585,
+        "n_declarations": 1,
+        "n_lines": 8,
+        "n_tokens": 90,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_template-v0.2.0-2aa8e0ec7f12-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0005": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {
+          "hypothesis": "f is differentiable on (-1, 1)",
+          "mode": "violated",
+          "theorem": "Rolle's theorem"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "rolle",
+    "target": "formal",
+    "theorem": "rolle_abs"
+  },
+  "config_hash": "2aa8e0ec7f127a13f4401c567e581a3a480d234853064fc8bd60710355b5ff9b",
+  "engine_commit": "af28cc96aa75cbabb0a6171d4c636a8cbc87f773",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0005": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.2.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {
+          "counterexample": "$f(x) = |x|$ is not differentiable at $0$, and at every other point of $(-1, 1)$ its derivative is $1$ or $-1$; so no such $c$ exists.",
+          "hypothesis": "f is differentiable on (-1, 1)",
+          "inserted": [
+            "obtain ⟨c, hc, h0⟩ := exists_hasDerivAt_eq_zero (f' := fun x : ℝ => (SignType.sign x : ℝ)) (by norm_num) hcont hend (fun x _ => hasDerivAt_abs (by norm_num))",
+            "exact ⟨c, hc, h0 ▸ hasDerivAt_abs (by norm_num)⟩"
+          ],
+          "mode": "violated",
+          "replaced": null,
+          "site": 3,
+          "theorem": "Rolle's theorem"
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_rolle_abs",
+          "line": 7
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/RolleAbs.lean:syndeom_seed_rolle_abs_false",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

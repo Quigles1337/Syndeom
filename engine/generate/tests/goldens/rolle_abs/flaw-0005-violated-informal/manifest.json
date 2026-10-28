@@ -1,0 +1,171 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0005": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 3
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 58
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "9fac220a0fa6a4d485d165779fdd912798395bede3c94f2bb61e0b827041733c",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 402,
+        "n_lemmas": 0,
+        "n_steps": 3,
+        "n_tokens": 58,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.2.0-6018ec4011e7-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0005": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 3
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {
+          "hypothesis": "f is differentiable on (-1, 1)",
+          "mode": "violated",
+          "theorem": "Rolle's theorem"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "rolle",
+    "target": "informal",
+    "theorem": "rolle_abs"
+  },
+  "config_hash": "6018ec4011e7508fd13504926e1b4a3c148961a57e443d11895e50ae2b2cbb82",
+  "engine_commit": "af28cc96aa75cbabb0a6171d4c636a8cbc87f773",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0005": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.2.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {
+          "counterexample": "$f(x) = |x|$ is not differentiable at $0$, and at every other point of $(-1, 1)$ its derivative is $1$ or $-1$; so no such $c$ exists.",
+          "hypothesis": "f is differentiable on (-1, 1)",
+          "inserted": "By Rolle's theorem applied to $f$ on $[-1, 1]$, since $f(-1) = f(1)$, there is $c \\in (-1, 1)$ with $f'(c) = 0$.",
+          "mode": "violated",
+          "replaced": null,
+          "site": 3,
+          "theorem": "Rolle's theorem"
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            112
+          ],
+          "step": 3
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/RolleAbs.lean:syndeom_seed_rolle_abs_false",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

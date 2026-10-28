@@ -1,0 +1,31 @@
+{
+  "config": {
+    "theorem": "x_over_abs_x",
+    "style": "two_cases",
+    "target": "pair",
+    "flaws": [
+      {
+        "class": "FLAW-0014",
+        "sub_variant": null,
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "omitted_case": "x = 0",
+          "holds": false
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "af28cc96aa75cbabb0a6171d4c636a8cbc87f773",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 4
+  }
+}
