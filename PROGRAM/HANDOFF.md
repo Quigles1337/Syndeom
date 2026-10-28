@@ -8408,3 +8408,137 @@ ESCALATIONS (superseding the block's):
 - Unchanged: human-referee participants (SD13).
 STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
 recorded in the pull request and under the external root, not in the tree it certifies.
+
+SESSION: 2026-10-28 UTC (2026-10-28 America/New_York) (Session 41 — a fresh conversation launched
+from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim followed by an owner note; SD15
+disclosure first, by digest (ADR-0005 *Amendments* 1–3); not an examination — the owner note
+carries program state, and Gate S2 has nothing to examine; examined fetched `origin/main`
+`de3e4a62fde75eea2c80c17ac6210955bb868a0f`, tree `4117ac9d979c9c837de533e14baa8a562f870c4d`, in
+the original checkout `C:\Users\LEET\Syndeom` on `main`, synchronized; branch
+`claude/s2-template-0.2.0`; header completed after ADR-0008 step 5 — it was written provisionally
+with the disclosure, which is unchanged; the session-end SHA is the commit carrying this block,
+recorded in its pull request)
+
+### Entry 1 — SD15 memory disclosure, by digest (ADR-0005 D1–D4 as amended by Amendments 1–3)
+
+Appended 2026-10-28 UTC by shell append (`cat >> PROGRAM/HANDOFF.md` of a scratchpad file, CRs
+stripped), before any other command or repository read except `PROGRAM/SYNDEOM-PROGRAM.md` and
+`PROGRAM/DECISIONS/ADR-0005.md`, both read in full, and the memory hashing below. HANDOFF's
+existing contents were not read before this append. No directory listing, Git command, or build
+preceded it. No memory was written. Executor model this session: Claude Fable 5.1. The launching
+prompt was the §6 Session-N resume prompt verbatim, followed by an owner note (two items on
+flaw-count units and pair-artifact confirmation), which is recorded verbatim later in this block.
+
+**Memory loaded by the harness this session.** The index `MEMORY.md` only, under
+`C:\Users\LEET\.claude\projects\C--Users-LEET\memory\` (the session was launched from
+`C:\Users\LEET`, which is not a git work tree). No other recalled memory file was loaded into
+context (ADR-0005 D1(c): none). The program's own memory file `project_syndeom.md` was read in
+full and hashed for this disclosure; it is not reproduced (Amendment 1), see its digest below.
+
+**Whole index, as a fact (Amendment 2).** SHA-256
+`cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69`, 15,420 bytes, 110 lines
+(LF-terminated, last byte 0x0a), 0 CR, 334 non-ASCII bytes. Equal to the digest ADR-0005
+Amendment 2 recorded as unchanged since Session 37's Entry 1.
+
+**The name check (D3).** Case-insensitive search of every index line (awk `tolower` with
+`index`/regex, not `grep -i`, per the Git Bash grep 3.0 hazard) for this program's name and its
+siblings' names:
+- `syndeom` → lines 106, 107
+- `kober` → lines 85, 86, 89, 106
+- `friedman` → lines 88, 89, 106
+- union → lines 85, 86, 88, 89, 106, 107 (6 lines)
+- extra check, the sibling's leetspeak repo name `fr13dman` → lines 88, 89, 107, all inside the
+  union.
+Every matched line is among the six whose digest is recorded under D1(a) below; no withheld line
+names the program or a sibling.
+
+**Matched index lines (D1(a)), by digest.** Lines 85, 86, 88, 89, 106 and 107, each with its LF
+terminator, concatenated in index order: 6 lines, 1,198 bytes, 0 CR, 30 non-ASCII bytes, SHA-256
+`0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`. This equals the baseline
+ADR-0005 Amendment 2 recorded, which that amendment states is the digest of HANDOFF lines
+6672–6677 as reproduced verbatim by Session 35's Entry 1. The line numbers are unchanged from
+that baseline (no renumbering).
+
+**Program memory file (D1(b)), by digest.** `project_syndeom.md`: SHA-256
+`ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`, 10,957 bytes, 135 lines
+(LF-terminated, last byte 0x0a), 0 CR, 71 non-ASCII bytes. Equal to the baseline ADR-0005
+Amendment 2 recorded as the digest of HANDOFF lines 6683–6817, from the same Session-35 entry.
+Read in full this session: it holds the repo location, the sibling pointers, the standing
+repo-is-the-only-memory rule, and machine/harness hazards; it names no phase, gate, CLAIM or FLAW
+status, commit SHA, toolchain version, escalation, or next action.
+
+**Withheld (D2).** 104 index lines, occupying lines 1–84, 87, 90–105 and 108–110. They concern
+unrelated programs on this machine and are withheld by count because this repository is public.
+
+**Citation (Amendment 1).** Session 35, Entry 1, the verbatim reproduction whose bytes these two
+digests equal, cited through ADR-0005 Amendment 2's *Baseline for the next disclosure*. Because
+this entry was appended without reading HANDOFF, the equality is asserted here against the
+digests recorded in ADR-0005; the check against HANDOFF's own bytes (hashing lines 6672–6677 and
+6683–6817) is made in an entry located after this one, so that the disclosure stays first
+(Session 37's precedent).
+
+**Pass criterion (D4).** The reproduced memory, taken by digest, is the same bytes Session 35
+reproduced; read this session, the SYNDEOM memory file holds no program state, and the six
+matched index lines are the index pointers to this program and its siblings. Withheld lines are
+outside the program by D3. Whether this session attempts a gate's cold-start test is decided
+after orientation; this disclosure was made either way, as SD15 (amended by ADR-0009) requires.
+
+**Method.** Scratchpad script `sd15_hash.sh` (GNU coreutils in Git Bash: `sha256sum`, `wc`, `tr`,
+`od`, `awk`), run at 2026-10-28T18:13:08Z against the files on disk. Digests only; nothing was
+reproduced.
+
+### Entry 2 — the disclosure's citation, verified after the append; the header completed
+
+- **Cited entry:** HANDOFF Session 35, Entry 1 (heading at line 6664, "Entry 1 — SD15 memory
+  disclosure (ADR-0005 D1–D4; ADR-0009)"). Checked in the working file, whose first 674,452 bytes
+  are HEAD's HANDOFF blob (`de3e4a6`, blob SHA-256 `3bcc5938…e6ba`):
+  - lines 6672–6677 (1,198 bytes) hash to `0418e621…534c` and are byte-identical to index lines
+    85, 86, 88, 89, 106 and 107;
+  - lines 6683–6817 (10,957 bytes) hash to `ce2ce6de…2cc0` and are byte-identical to
+    `project_syndeom.md` on disk.
+
+  Neither digest is new, so nothing is owed verbatim. The matched lines kept their numbers.
+- **The append.** Entry 1 with its provisional header was 4,684 bytes, SHA-256 `cb4653eb…2308`,
+  appended by `cat >>` at 2026-10-28T18:14:37Z. HANDOFF grew from 674,452 to 679,136 bytes,
+  exactly that much, and HEAD's blob is an exact prefix of the working file.
+- **The header.** A script checked that HANDOFF's last 4,684 bytes were the appended entry, then
+  replaced the one provisional header line (`## Session <N> — 2026-10-28 UTC (provisional header,
+  completed after orientation)`, 84 bytes) with the completed `SESSION:` header. It asserted that
+  the disclosure body, from `### Entry 1` to the end of the append, was unchanged, byte for byte.
+- **Constitution and ADR bytes (ADR-0008 step 5).** As read in step 0 and as in the snapshot at
+  `origin/main` `de3e4a6`: the constitution `110f5360…479c` (38,958 B, ADR-0009's amended digest),
+  ADR-0005 `b08e543a…ce11` (15,291 B, with *Amendments* 1–3) and ADR-0008 `ccdfa9d7…e9ff`
+  (18,589 B).
+
+### Entry 3 — the launch, and the owner note (a ruling, recorded before anything else)
+
+**The launch.** A fresh conversation from `C:\Users\LEET`, launched with the §6 Session-N resume
+prompt verbatim, followed by an owner note of two items. By eye the prompt matches §6's text line
+for line. The harness attached no Git snapshot (`C:\Users\LEET` is not a work tree) and loaded the
+`C--Users-LEET` index. Executor model: Claude Fable 5.1.
+
+**Not an examination.** The owner note carries program state (it names ADR-0001's registry,
+ADR-0011's amendments and the 0.2.0 revision), and Gate S2 has nothing to examine. The session
+certifies nothing.
+
+**The owner note, verbatim.** Transcribed from the message as rendered to the executor; the exact
+copy is `owner-note-as-received.txt` under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1815Z\`
+(504 bytes, SHA-256 `a80498bc38ee1e643a5cc0fa29e58c33ecb016dddb308fc8cda9b740db4ea4f1`).
+
+~~~text
+Owner note, to act on only after you have disclosed and oriented, and to record verbatim in this session's records:
+1. ADR-0001 stays unedited on flaw-count units: its registry names n_flaws_total and n_flaws_<NNNN> without a unit and already counts flaws_confirmed in instances, and the per-instance rule recorded in ADR-0011's amendments binds this producer.
+2. For a pair artifact, an injected instance is confirmed only when both of its records pass their checks. Record this with 0.2.0's amendment.
+~~~
+
+**Where it is recorded.** Here; STATE (*Standing rulings*); and ADR-0011 *Amendments*, with
+0.2.0's amendment, as item 2 directs. NEXT step 2 says a later ruling is recorded before anything
+else, so this record is the branch's first commit.
+
+**Effect.**
+- Item 1 closes the clause of ruling 3 on PR 26 that ADR-0001's wording "is clarified if it
+  needs it": ADR-0001 is not edited. The per-instance rule lives in ADR-0011's amendments and
+  binds `s2_template` from 0.2.0 on.
+- Item 2 decides the reading Session 40 flagged (Standing escalations): a pair's injected
+  instance is confirmed only when both of its records pass their checks, the informal structural
+  check and the formal check K. 0.2.0 implements it, and the open point is closed.

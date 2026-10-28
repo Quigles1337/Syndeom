@@ -1565,6 +1565,19 @@ Rulings on PR #26 (record them verbatim in ADR-0011 Amendments, STATE and this s
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review. I will merge with a merge commit: the goldens pin engine_commit 21f8359, which must stay a real commit on main.
 ~~~
 
+- **Al's owner note of 2026-10-28 (Session 41) — verbatim.** It followed the §6 prompt in
+  Session 41's launching message. The copy is `owner-note-as-received.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1815Z\` (504 bytes, SHA-256
+  `a80498bc38ee1e643a5cc0fa29e58c33ecb016dddb308fc8cda9b740db4ea4f1`), transcribed from the
+  message as rendered to the executor. It is also in HANDOFF Session 41, Entry 3, and in ADR-0011
+  *Amendments* with 0.2.0's amendment. Its effect is under *Standing escalations* and in NEXT.
+
+~~~text
+Owner note, to act on only after you have disclosed and oriented, and to record verbatim in this session's records:
+1. ADR-0001 stays unedited on flaw-count units: its registry names n_flaws_total and n_flaws_<NNNN> without a unit and already counts flaws_confirmed in instances, and the per-instance rule recorded in ADR-0011's amendments binds this producer.
+2. For a pair artifact, an injected instance is confirmed only when both of its records pass their checks. Record this with 0.2.0's amendment.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -1640,7 +1653,7 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 ## Standing escalations and dispositions
 
 - **ADR-0011's crate, the first implementation — RULED by Al on 2026-10-28 (rulings 1–6 on
-  PR 26, verbatim under *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge**
+  PR 26, verbatim under *Standing rulings* and in ADR-0011 *Amendments*); merged as PR 26**
   (Session 40; branch `claude/s2-generate-crate`; `analysis/s2-generate-1/README.md`).
   - The gate change `21f8359` is accepted.
   - Readings 1, 2, 3, 5–9, 11 and 12 are accepted. Reading 4 is replaced: flaw counts are per
@@ -1648,9 +1661,12 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
   - `s2_template` 0.2.0 embeds build-time input hashes, closing FINDING-005.
   - Al merges with a merge commit, so `21f8359` (the goldens' `engine_commit`) stays a real
     commit on `main`.
-  - Open for Al with the next revision: the executor's reading that a pair instance counts as
-    confirmed when each of its records passes its check (ADR-0011 *Amendments*, ruling 3's
-    effect).
+  - **Merged by Al as PR 26** (2026-10-28T18:10:24Z, merge commit `de3e4a6`; parents `f9f9730`
+    and `c4250d8`), so `21f8359` is a real commit on `main`.
+  - **The pair-confirmation reading — DECIDED** (Al's owner note of 2026-10-28, item 2;
+    *Standing rulings*): a pair's injected instance is confirmed only when both of its records
+    pass their checks. ADR-0001 stays unedited on flaw-count units (item 1). Recorded in
+    ADR-0011 *Amendments* with 0.2.0's amendment (Session 41). Nothing awaited.
 - **Held harvest admission review — RULED by Al on 2026-10-28** (rulings on PR 23, verbatim
   under *Standing rulings*; HANDOFF Session 37's addendum). The record is
   `analysis/s1-held-harvest-review/REVIEW.md` §2–§4, with its `receipt.json`. All five items on
