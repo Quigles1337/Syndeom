@@ -9241,3 +9241,50 @@ is open for Al's review. Repo green: the gate on the committed tree is recorded 
 request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 43 ADDENDUM — AL'S RULINGS ON PR 29 (2026-10-28 UTC, received in this session's
+conversation after PR #29 opened; recorded at Al's direction in a new commit on the same branch,
+no force-push; transcribed verbatim from Al's message as rendered to the executor; copy
+`owner-rulings-pr29.txt` under `C:\Users\LEET\Codex\Temp\syndeom-s2-template-040-20261028T2136Z\`,
+696 bytes, SHA-256 `b9e05c65bbcdb85d7ec9c0ef7ef139c05101bbf7e7a6ea97b6abd34562f8fec7`):
+
+~~~text
+Rulings on PR #29 / s2_template 0.4.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 29 through 38 are accepted as read.
+
+On reading 30, record also: the integer count is the generation decision because D4 forbids a floating-point value there; padding_ratio is a commanded statistic measured from the emitted file and checked at abs 0.05, and a ratio the count cannot reach is a FAIL verdict. A ratio-targeted mode, if a later version wants one, must choose its count by exact integer comparison of token quotients.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before applying the rulings, a fresh fetch at 2026-10-28T22:52:00Z (receipt `recheck-3.json`
+under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T2119Z\`) showed `origin/main` still at
+`4cd1f77` and the branch at `3aa87f7`, in sync with its remote; PR 29 had no review and no
+comment.
+
+How each ruling is applied:
+- **Readings 29–38 accepted** → recorded in ADR-0011 *Amendments*, STATE and the packet.
+- **Reading 30, recorded as ruled** → ADR-0011 *Amendments* (the D4/D8 reading: the integer
+  `count` is the generation decision because D4 forbids a floating-point value there;
+  `padding_ratio` is a commanded statistic measured from the emitted file and checked at
+  `abs 0.05`; a ratio the count cannot reach is a FAIL verdict; a ratio-targeted mode, if a later
+  version wants one, must choose its count by exact integer comparison of token quotients). 0.4.0
+  already does what the ruling records, so no byte changes, no seed or golden regenerates, and
+  the producer version stays 0.4.0.
+- **Commit 4** (this one): the records — ADR-0011 *Amendments*, STATE (*Standing rulings*,
+  *Standing escalations*, the Updated bullet), the packet README, and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No proof byte, label, register status or golden changed; FLAWS.md unchanged.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that `b54e2f16…`, the 0.4.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-014** (informational, backlog; in NEXT for 0.5.0).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

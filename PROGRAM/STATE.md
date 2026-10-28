@@ -10,7 +10,7 @@
   - **not an examination**: Gate S2 has nothing to examine. The session certifies nothing.
 
   **`s2_template` 0.4.0 is built** (STATE's NEXT as it stood: S2 ordering step 4, continued) on
-  branch `claude/s2-template-0.4.0`, in three commits, for Al's review. `main` is unchanged until
+  branch `claude/s2-template-0.4.0`, in four commits, for Al's review. `main` is unchanged until
   Al merges.
   - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main`
     **synchronized** with fetched `origin/main` `4cd1f7724f5d8ee1097f0afbc6d1ceafb0220f62`, tree
@@ -33,7 +33,10 @@
       formal), FLAW-0013 `drawn` with one re-derivation and FLAW-0013 `before` with all seven
       paragraphs (informal, formal, pair each) — produced at `b54e2f16…` by two byte-identical
       runs, and the goldens README;
-    - the record commit: `analysis/s2-generate-4/`, ADR-0011 *Amendments*, this file and HANDOFF.
+    - `3aa87f7b9b18e596b22f669d43646d19f9f71678` the record commit: `analysis/s2-generate-4/`,
+      ADR-0011 *Amendments*, this file and HANDOFF;
+    - the rulings commit: ADR-0011 *Amendments*, this file, the packet README and HANDOFF's
+      addendum (Al's rulings on PR 29, below).
   - **Measured at implementation** (`analysis/s2-generate-4/README.md`):
     - three Lean probes compiled one process at a time before the seed record was written: the
       faithful argument, the witness and the padded file build with `[propext, Quot.sound]`, and
@@ -53,6 +56,14 @@
     instance per paragraph; padding steps never lemmas; `padding_ratio` of a formal-only
     artifact; one spec per artifact; the record dials; the goldens' two-decimal ratios; check T
     for FLAW-0013.
+  - **Al's rulings of 2026-10-28 on PR 29** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 43's addendum), recorded on the same branch: readings 29–38
+    accepted as read; reading 30 recorded with Al's reading of D4/D8 (the integer `count` is the
+    generation decision because D4 forbids a floating-point value there; `padding_ratio` is a
+    commanded statistic measured from the emitted file and checked at `abs 0.05`; a ratio the
+    count cannot reach is a FAIL verdict; a ratio-targeted mode, if a later version wants one,
+    chooses its count by exact integer comparison of token quotients). No code, seed or golden
+    changed; the version stays 0.4.0.
   - **Not yet built:** `s2_grammar`, padding combined with an injected flaw, the kinds
     `unused-lemma` and `verbose-rewrite`, FLAW-0009 `native_decide`, FLAW-0007 `vacuous`, the
     seeds for the remaining FLAWS.md examples (FLAW-0003, 0004, 0008, 0010, 0011 and 0012), and
@@ -1610,8 +1621,7 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   and measured Session 39 (2026-10-28), accepted as amended by Al's rulings of 2026-10-28 on PR 25
   (*Amendments* 1), in effect at the merge; ADR-0011 amended Sessions 41–43 (*Amendments*: Al's
   owner note of 2026-10-28 and the `s2_template` 0.2.0, 0.3.0 and 0.4.0 revisions, with Al's
-  rulings on PRs 26, 27 and 28; 0.4.0's readings pending on its pull request); ADR-0014 is
-  the next free number.**
+  rulings on PRs 26, 27, 28 and 29); ADR-0014 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -1794,6 +1804,24 @@ On reading 24, record also: FLAWS.md's FLAW-0009 recipe ("an axiom of the same s
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
+- **Al's rulings of 2026-10-28 on PR 29 (`s2_template` 0.4.0) — verbatim.** Received in
+  Session 43's conversation after PR 29 opened. The copy is `owner-rulings-pr29.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-s2-template-040-20261028T2136Z\` (696 bytes, SHA-256
+  `b9e05c65bbcdb85d7ec9c0ef7ef139c05101bbf7e7a6ea97b6abd34562f8fec7`), transcribed from the
+  message as rendered to the executor. The rulings are also in ADR-0011 *Amendments* and in
+  HANDOFF Session 43's addendum. Their effect is under *Standing escalations* and in the Updated
+  bullet.
+
+~~~text
+Rulings on PR #29 / s2_template 0.4.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 29 through 38 are accepted as read.
+
+On reading 30, record also: the integer count is the generation decision because D4 forbids a floating-point value there; padding_ratio is a commanded statistic measured from the emitted file and checked at abs 0.05, and a ratio the count cannot reach is a FAIL verdict. A ratio-targeted mode, if a later version wants one, must choose its count by exact integer comparison of token quotients.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -1868,9 +1896,16 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
-- **`s2_template` 0.4.0 — awaiting Al's review and merge** (Session 43; branch
+- **`s2_template` 0.4.0 — RULED by Al on 2026-10-28 (rulings on PR 29, verbatim under
+  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 43; branch
   `claude/s2-template-0.4.0`; `analysis/s2-generate-4/README.md`).
-  - **Readings 29–38** (the packet; ADR-0011 *Amendments*): the seed's statement form (the
+  - Readings 29–38 are accepted as read. Reading 30 carries Al's recorded reading of D4 and D8:
+    the integer `count` is the generation decision because D4 forbids a floating-point value
+    there; `padding_ratio` is a commanded statistic measured from the emitted file and checked
+    at `abs 0.05`; a ratio the count cannot reach is a FAIL verdict; a ratio-targeted mode, if a
+    later version wants one, chooses its count by exact integer comparison of token quotients.
+    Nothing regenerated; the version stays 0.4.0. Nothing else is awaited on the readings.
+  - **The readings as flagged** (the packet; ADR-0011 *Amendments*): the seed's statement form (the
     number-theoretic core of "√2 is irrational"); how padding is commanded (a FLAW-0013 spec with
     `kinds`, `count` and `placement` plus a positive `padding_ratio`; `count` the generation
     decision, the ratio measured and checked at `abs 0.05`); `placement` (`before` | `drawn`);

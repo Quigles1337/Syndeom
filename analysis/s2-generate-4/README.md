@@ -210,7 +210,8 @@ FINDING-013 (accepted) stand as packets 1–3 record them.
 ## Implementation readings, flagged for Al
 
 None of these changes ADR-0011's text. Each is how this implementation reads it. They continue
-packet 3's numbering.
+packet 3's numbering. **All ten were accepted as read by Al's rulings of 2026-10-28 on PR 29**
+(below); reading 30 carries the reading Al recorded with it.
 
 29. **The seed's statement is the number-theoretic core.** FLAWS.md's example says "a proof that
     √2 is irrational"; the seed states, informally and formally, that no coprime natural numbers
@@ -226,6 +227,11 @@ packet 3's numbering.
     `ratio` is the config's value copied into the record's dials; the commanded ratio is a
     measured statistic checked at `abs 0.05` (D8), and a ratio the count cannot reach is a FAIL
     verdict. A config therefore commands what its count yields, as the goldens do.
+    **Accepted, with Al's reading recorded (rulings on PR 29):** the integer `count` is the
+    generation decision because D4 forbids a floating-point value there; `padding_ratio` is a
+    commanded statistic measured from the emitted file and checked at `abs 0.05`, and a ratio
+    the count cannot reach is a FAIL verdict. A ratio-targeted mode, if a later version wants
+    one, must choose its count by exact integer comparison of token quotients.
 31. **`placement`.** D5 says positions are drawn from the `padding` stream. `drawn` draws each
     paragraph's position before a step of the plan as it then stands, never after the last step,
     so the conclusion stays last; `before` puts every paragraph before the first step, in drawn
@@ -258,3 +264,17 @@ packet 3's numbering.
 38. **Check T for FLAW-0013** is the FLAW-0007 `unused` condition applied to each padding
     declaration: listed by the audit tail and outside the main declaration's transitive
     used-constants, closed over the file's own constants.
+
+## Al's rulings on PR 29, and their application
+
+Al ruled on 2026-10-28 (verbatim in ADR-0011 *Amendments*, STATE *Standing rulings* and HANDOFF
+Session 43's addendum; copy `owner-rulings-pr29.txt` under the external root, 696 bytes, SHA-256
+`b9e05c65bbcdb85d7ec9c0ef7ef139c05101bbf7e7a6ea97b6abd34562f8fec7`): readings 29 through 38 are
+accepted as read, and reading 30 is recorded with Al's reading of D4 and D8 — the integer `count`
+is the generation decision because D4 forbids a floating-point value there; `padding_ratio` is a
+commanded statistic measured from the emitted file and checked at `abs 0.05`; a ratio the count
+cannot reach is a FAIL verdict; a ratio-targeted mode, if a later version wants one, must choose
+its count by exact integer comparison of token quotients. 0.4.0 already does what the ruling
+records, so nothing was regenerated and the producer version stays 0.4.0. The records are commit
+4 of the branch; the gate on its committed tree, the step-7 recheck and the push are in the pull
+request and under the external root.
