@@ -8990,3 +8990,46 @@ is open for Al's review. Repo green: the gate on the committed tree is recorded 
 request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 42 ADDENDUM — AL'S RULINGS ON PR 28 (2026-10-28 UTC, received in this session's
+conversation after PR #28 opened; recorded at Al's direction in a new commit on the same branch,
+no force-push; transcribed verbatim from Al's message as rendered to the executor; copy
+`owner-rulings-pr28.txt` under `C:\Users\LEET\Codex\Temp\syndeom-s2-template-030-20261028T2005Z\`,
+764 bytes, SHA-256 `798ec70baacbd1d7716cadcbeac39213815878afc7c766123709e8194368e8ed`):
+
+~~~text
+Rulings on PR #28 / s2_template 0.3.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 21, 22, 23, 24, 25, 26, 27 and 28 are accepted as read.
+
+On reading 24, record also: FLAWS.md's FLAW-0009 recipe ("an axiom of the same statement; dial true | false") is read as same statement for truth: true, and for truth: false a false statement from which the main theorem still follows, with a witness module proving its negation; the record carries the replaced lemma and the inserted axiom so the modality mismatch in a pair is explicit in the ground truth. FLAWS.md's text is left as it is.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before applying the rulings, a fresh fetch at 2026-10-28T21:05:07Z showed `origin/main` still at
+`7a05e75` and the branch at `416fa8e`, in sync with its remote.
+
+How each ruling is applied:
+- **Readings 21–28 accepted** → recorded in ADR-0011 *Amendments*, STATE and the packet.
+- **Reading 24, recorded as ruled** → ADR-0011 *Amendments* (the D5 FLAW-0009 reading: the same
+  statement for `truth: true`; for `truth: false` a false statement from which the main theorem
+  still follows, its negation proved by the witness module; the record carrying the replaced
+  lemma and the inserted axiom). The 0.3.0 formal record already carries both — `replaced` holds
+  the faithful lemma's declaration lines and `inserted` the axiom line — so no byte changes, no
+  seed or golden regenerates, FLAWS.md is untouched, and the producer version stays 0.3.0.
+- **Commit 5** (this one): the records — ADR-0011 *Amendments*, STATE (*Standing rulings*,
+  *Standing escalations*, the Updated bullet, the Gate S2 row), the packet README, and this
+  addendum. The gate on the committed tree, the step-7 recheck and the push are recorded in the
+  pull request and under the external root.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No proof byte, label, register status or golden changed; FLAWS.md unchanged.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that `5a313ddf…`, the 0.3.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

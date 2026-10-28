@@ -199,7 +199,8 @@ FINDING-009 and FINDING-010 (accepted) stand as packets 1 and 2 record them.
 ## Implementation readings, flagged for Al
 
 None of these changes ADR-0011's text. Each is how this implementation reads it. They continue
-packet 2's numbering.
+packet 2's numbering. **All eight were accepted as read by Al's rulings of 2026-10-28 on PR 28**
+(below); reading 24 carries the reading Al recorded with it.
 
 21. **Lemma steps are steps.** D2's `lemmas : [Lemma]` is realized as a step carrying a lemma
     header, in document order, so the site index stays uniform and alignment is explicit; the
@@ -219,6 +220,11 @@ packet 2's numbering.
     and the informal file is unchanged — its Lemma 1 still states the true helper, because the
     class manifests in the formal file only. The witness module proves the negation of the false
     lemma, so the label is by construction. Severity `fatal` (FLAWS.md: "axiom false").
+    **Accepted, with Al's reading recorded (rulings on PR 28):** FLAWS.md's recipe is read as the
+    same statement for `truth: true` and, for `truth: false`, a false statement from which the
+    main theorem still follows, its negation proved by the witness module; the record carries the
+    replaced lemma and the inserted axiom (the formal `replaced` and `inserted` dials), so the
+    modality mismatch in a pair is explicit in the ground truth. FLAWS.md's text is left as it is.
 25. **Insertion material** (`inserts: true`; FLAW-0007 `unused`): the inserted step's `from` is
     null, `site` indexes the flawed argument, the informal record spans the whole step with
     `replaced: null` and no counterexample, and the originals are recorded. The material's
@@ -234,3 +240,17 @@ packet 2's numbering.
     goldens were re-produced at the commit holding the fix so that they name the complete
     producer. In the property tests the predicted control observation now lists
     `[propext, Quot.sound]` (what the harness observes) — tests only.
+
+## Al's rulings on PR 28, and their application
+
+Al ruled on 2026-10-28 (verbatim in ADR-0011 *Amendments*, STATE *Standing rulings* and HANDOFF
+Session 42's addendum; copy `owner-rulings-pr28.txt` under the external root, 764 bytes, SHA-256
+`798ec70baacbd1d7716cadcbeac39213815878afc7c766123709e8194368e8ed`): readings 21–28 are accepted
+as read, and reading 24 is recorded with Al's reading of FLAWS.md's FLAW-0009 recipe — the same
+statement for `truth: true`; for `truth: false` a false statement from which the main theorem
+still follows, with a witness module proving its negation; the record carrying the replaced lemma
+and the inserted axiom so the modality mismatch in a pair is explicit in the ground truth;
+FLAWS.md's text unchanged. The 0.3.0 formal record already carries both (`replaced`, the faithful
+lemma's declaration lines; `inserted`, the axiom line), so nothing was regenerated and the
+producer version stays 0.3.0. The records are commit 5 of the branch; the gate on its committed
+tree, the step-7 recheck and the push are in the pull request and under the external root.

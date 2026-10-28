@@ -48,6 +48,12 @@
     FLAW-0009 pair has one record); FLAW-0009 `truth: false` changes the formal lemma's
     statement with the informal file unchanged; insertion material; lemma-site formal records;
     one seed for two classes; FINDING-011's fix keeps the version at 0.3.0.
+  - **Al's rulings of 2026-10-28 on PR 28** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 42's addendum), recorded on the same branch: readings 21–28
+    accepted as read; reading 24 recorded with Al's reading of FLAWS.md's FLAW-0009 recipe (the
+    same statement for `truth: true`; for `truth: false` a false statement from which the main
+    theorem still follows, its negation proved by the witness module; the record carrying the
+    replaced lemma and the inserted axiom). No code, seed or golden changed; FLAWS.md unchanged.
   - **Not yet built:** `s2_grammar`, padding (FLAW-0013), FLAW-0009 `native_decide`, FLAW-0007
     `vacuous`, the seeds for the remaining FLAWS.md examples (FLAW-0003, 0004, 0008, 0010,
     0011, 0012 and 0013), and the sweep (ADR-0011 D11).
@@ -1709,6 +1715,24 @@ Reading 14 (FLAW-0006's mode for the horses) is not accepted as shift-index. D5'
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
+- **Al's rulings of 2026-10-28 on PR 28 (`s2_template` 0.3.0) — verbatim.** Received in
+  Session 42's conversation after PR 28 opened. The copy is `owner-rulings-pr28.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-s2-template-030-20261028T2005Z\` (764 bytes, SHA-256
+  `798ec70baacbd1d7716cadcbeac39213815878afc7c766123709e8194368e8ed`), transcribed from the
+  message as rendered to the executor. The rulings are also in ADR-0011 *Amendments* and in
+  HANDOFF Session 42's addendum. Their effect is under *Standing escalations* and in the Updated
+  bullet.
+
+~~~text
+Rulings on PR #28 / s2_template 0.3.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 21, 22, 23, 24, 25, 26, 27 and 28 are accepted as read.
+
+On reading 24, record also: FLAWS.md's FLAW-0009 recipe ("an axiom of the same statement; dial true | false") is read as same statement for truth: true, and for truth: false a false statement from which the main theorem still follows, with a witness module proving its negation; the record carries the replaced lemma and the inserted axiom so the modality mismatch in a pair is explicit in the ground truth. FLAWS.md's text is left as it is.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -1722,7 +1746,7 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 | Criterion | Status | Evidence |
 |---|---|---|
 | S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code. Session 40 (merged as PR 26): the crate `engine/generate/` — the plan, both renderers, the injector, `syndeom-rng/1`, the Lean harness and `s2_template` 0.1.0 with three seeds. Session 41 (merged as PR 27): `s2_template` 0.2.0 — four more seeds from the FLAWS.md examples (FLAW-0002 gap, FLAW-0005 violated, FLAW-0006 and FLAW-0014 fatal), three of them seeds whose statement is false (no control, intrinsic material, negation witnesses). Session 42 (PR pending): `s2_template` 0.3.0 — lemma steps in the plan and the seed `n_lt_two_pow` (FLAW-0009 `axiom` gap and fatal, FLAW-0007 `unused` cosmetic); `s2_grammar` and padding are not yet** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*); `engine/generate/`; `analysis/s2-generate-1/README.md`; `analysis/s2-generate-2/README.md`; `analysis/s2-generate-3/README.md` |
-| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress: implemented for `s2_template` 0.1.0 (Session 40, PR 26) 0.2.0 (Session 41, PR 27) and 0.3.0 (Session 42, PR pending) — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; from 0.2.0 the counts are per instance and a pair's instance is confirmed only when both of its records pass (ruling 3 on PR 26; Al's owner note of 2026-10-28); from 0.3.0 check T for formal `YES-TOOLING` records (FLAW-0007 `unused` by the used-constants closure over the file's own constants, FLAW-0009 by `#print axioms`) and records only in the files a class manifests in; no padding yet** | `engine/generate/src/template.rs`; `analysis/s2-generate-3/README.md` (readings 21–28 flagged for Al) |
+| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress: implemented for `s2_template` 0.1.0 (Session 40, PR 26) 0.2.0 (Session 41, PR 27) and 0.3.0 (Session 42, PR pending) — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; from 0.2.0 the counts are per instance and a pair's instance is confirmed only when both of its records pass (ruling 3 on PR 26; Al's owner note of 2026-10-28); from 0.3.0 check T for formal `YES-TOOLING` records (FLAW-0007 `unused` by the used-constants closure over the file's own constants, FLAW-0009 by `#print axioms`) and records only in the files a class manifests in; no padding yet** | `engine/generate/src/template.rs`; `analysis/s2-generate-3/README.md` (readings 21–28 accepted by Al's rulings on PR 28) |
 | S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **in progress: every manifest self-checked before writing; determinism and id tests; `regenerate` reproduces `content_hash`; from 0.2.0 the running binary's compiled input hashes, the engine commit's blobs and the checkout must agree on every input (FINDING-005 closed, Session 41); 35 goldens regenerate under the version their manifests name; `verify` refuses a manifest whose `main_declaration` is not the producer's (FINDING-011, Session 42)** | `engine/generate/tests/properties.rs`, `tests/goldens.rs`, `tests/provenance.rs`; `engine/generate/src/provenance.rs`, `build.rs`, `input-set.txt` |
 | S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **in progress: property and refusal tests; Golden A/B writer test; 35 goldens for eight seeds (12 of 0.1.0, 14 of 0.2.0, 9 of 0.3.0, each pair counted once); clippy clean; `cargo audit` clean (advisory-db `40f5be6f…`, Sessions 40, 41 and 42); security reviews recorded (packets 1–3); the RNG verified against published reference vectors (S-0081; ruling 4)** | `engine/generate/tests/`; `analysis/s2-generate-1/`; `analysis/s2-generate-2/`; `analysis/s2-generate-3/` |
 | Fidelity sweep report (commanded vs achieved flaw presence across the parameter grid, tolerances stated) | **open** | — |
@@ -1783,13 +1807,16 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
-- **`s2_template` 0.3.0 — awaiting Al's review and merge** (Session 42; branch
+- **`s2_template` 0.3.0 — RULED by Al on 2026-10-28 (rulings on PR 28, verbatim under
+  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 42; branch
   `claude/s2-template-0.3.0`; `analysis/s2-generate-3/README.md`).
-  - Readings 21–28: lemma steps as headed steps; the audit tail over every constant the file
-    defined; records only where a class manifests (a FLAW-0009 pair has one record); FLAW-0009
-    `truth: false` changes the formal lemma's statement with the informal file unchanged;
-    insertion material; lemma-site formal records; one seed for two classes; FINDING-011's fix
-    at version 0.3.0.
+  - Readings 21–28 are accepted as read. Reading 24 carries Al's recorded reading of FLAWS.md's
+    FLAW-0009 recipe: the same statement for `truth: true`; for `truth: false` a false statement
+    from which the main theorem still follows, its negation proved by the witness module; the
+    record carrying the replaced lemma and the inserted axiom (the 0.3.0 formal record's
+    `replaced` and `inserted`), so the modality mismatch in a pair is explicit in the ground
+    truth; FLAWS.md unchanged. Nothing regenerated; the version stays 0.3.0. Nothing else is
+    awaited on the readings.
   - **FINDING-011** (High): `verify` interpolated the manifest's `main_declaration` into the
     compiled audit file, present since 0.1.0; fixed in the same pull request (`5a313ddf…`).
   - Merge with a merge commit, so that `5a313ddf…`, the 0.3.0 goldens' `engine_commit`, stays a
