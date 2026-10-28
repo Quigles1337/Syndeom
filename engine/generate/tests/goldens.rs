@@ -27,6 +27,12 @@ const GOLDENS_0_2_0: u64 = 14;
 /// `axiom` with `truth` true and false (formal, pair each) and FLAW-0007 `unused` (informal,
 /// formal, pair), produced at the implementation commit `5a313ddf…` from two byte-identical runs.
 const GOLDENS_0_3_0: u64 = 9;
+/// The 0.4.0 goldens (Session 43): the `sqrt2_irrational` control (informal, formal), the
+/// lightly padded control (FLAW-0013, one re-derivation at a drawn position) and the FLAWS.md
+/// FLAW-0013 example (every paragraph of the seed's material before the argument), each as
+/// informal, formal and pair, produced at the implementation commit `b54e2f16…` from two
+/// byte-identical runs.
+const GOLDENS_0_4_0: u64 = 8;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -102,5 +108,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         by_version.get("0.3.0").copied().unwrap_or(0),
         GOLDENS_0_3_0,
         "the 0.3.0 goldens"
+    );
+    assert_eq!(
+        by_version.get("0.4.0").copied().unwrap_or(0),
+        GOLDENS_0_4_0,
+        "the 0.4.0 goldens"
     );
 }

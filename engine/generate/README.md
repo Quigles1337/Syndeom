@@ -5,11 +5,13 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
 - `src/plan.rs` — the plan, the one shared interface behind the four S2.1 modules, and its two
   pure renderers: `syndeom-informal-md/1` and `syndeom-lean/1` (D2); from 0.3.0 a step may be a
   lemma (`Lemma N.` in the informal file, its own declaration before the main one in the formal
-  file);
+  file); from 0.4.0 a step may be FLAW-0013 padding (a whole paragraph in the informal file, its
+  matching unused declaration before the main one in the formal file);
 - `src/rng.rs` — `syndeom-rng/1`, SplitMix64-seeded xoshiro256** streams per label (D4);
-- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0 and 0.3.0: seed
-  records, the config and its refusals (D3), the injector (D5), ground truth by construction
-  (D7), and the manifest with checks K and T (D8, D9);
+- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0, 0.3.0 and 0.4.0:
+  seed records, the config and its refusals (D3), the injector (D5), the padding module (D2
+  `pad`, D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks
+  K and T (D8, D9);
 - `src/harness.rs` — the Lean harness: `lake env lean` from `lean/`, one process at a time, and
   an audit tail printing `#print axioms` of the main declaration and the direct used-constants
   of every constant the file defined (D8; the T check's listing, from 0.3.0);
@@ -31,13 +33,19 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   `x_over_abs_x` (FLAW-0014, the fatal case), `rolle_abs` (FLAW-0005 `violated`, fatal) and
   `horses` (FLAW-0006 `step-above-base`, fatal; the mode Al's rulings on PR 27 added to D5); flaw
   counts per instance (Al's ruling 3 on PR 26); build-time input hashes.
-- **`s2_template` 0.3.0** (Session 42; the version `generate` emits): the 0.2.0 seeds and
-  `n_lt_two_pow` (FLAW-0009's helper `n < 2 ^ n`, a lemma step; FLAW-0007's unused lemma
-  `n² ≥ n`); lemma steps (D2); check T (D5, D8) for FLAW-0009 `axiom` (`truth` true, gap; false,
-  fatal) and FLAW-0007 `unused` (cosmetic); records only in the files a class manifests in
-  (FLAWS.md's *Manifests in*: FLAW-0009 is formal-only).
+- **`s2_template` 0.3.0** (Session 42): the 0.2.0 seeds and `n_lt_two_pow` (FLAW-0009's helper
+  `n < 2 ^ n`, a lemma step; FLAW-0007's unused lemma `n² ≥ n`); lemma steps (D2); check T (D5,
+  D8) for FLAW-0009 `axiom` (`truth` true, gap; false, fatal) and FLAW-0007 `unused` (cosmetic);
+  records only in the files a class manifests in (FLAWS.md's *Manifests in*: FLAW-0009 is
+  formal-only).
+- **`s2_template` 0.4.0** (Session 43; the version `generate` emits): the 0.3.0 seeds and
+  `sqrt2_irrational` (the FLAWS.md FLAW-0013 and FLAW-0011 example statement, as the
+  number-theoretic core `p ^ 2 ≠ 2 * q ^ 2` for coprime `p`, `q`, in five aligned steps), the
+  first seed with padding material (seven paragraphs: four restated definitions and three
+  re-derivations of `2 | p² ⇒ 2 | p`); the padding module (D2 `pad`, D5 FLAW-0013, Options 8);
+  check T for the padding declarations; `padding_ratio` measured.
 
-The crate regenerates all three versions: the goldens select the version their manifests name,
+The crate regenerates all four versions: the goldens select the version their manifests name,
 and `regenerate` and `verify` accept any of them. Every seed states its `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
@@ -64,6 +72,23 @@ is flagged for Al in ADR-0011 *Amendments*.
   span is the whole step, and `replaced` is null. At a lemma step the formal record's `inserted`
   and `replaced` are the declaration lines as the writer emits them, and `declaration` names the
   lemma; its location is that declaration at its first line.
+- **Padding** (0.4.0; FLAW-0013): commanded by one FLAW-0013 spec together with a positive
+  `padding_ratio`, and by nothing else (a ratio without the spec, or the spec with ratio 0, is
+  refused). The spec's dials are `kinds` (a non-empty subset of `restated-definition`,
+  `re-derivation`, `unused-lemma`, `verbose-rewrite` — the seed must carry material of the kinds
+  named), `count` (how many paragraphs, a positive integer: the generation decision is an
+  integer, and the ratio is compared only in `measure`, D4) and `placement` (`before`: every
+  paragraph before the first step, in drawn order, as the FLAWS.md example's "preceded by";
+  `drawn`: each paragraph at a position drawn from the `padding` stream, before a step of the
+  plan as it then stands). The paragraphs are drawn without replacement from the `padding`
+  stream. Each paragraph is its own instance with a record in each file the artifact has: the
+  informal record spans the whole step, `[0, len)`, `NO`; the formal record is the matching
+  declaration at its first line, `YES-TOOLING`. The records' dials carry the spec's dials, the
+  config's ratio (`ratio`), the paragraph drawn (`paragraph`, its index in the seed's material,
+  and `kind`), the resolved `site`, `inserted` (the text, or the declaration lines) and
+  `replaced: null`; the unpadded argument is recoverable by deleting the recorded steps. A seed
+  with padding material has it at the seed level, usable with every style; a seed whose
+  statement is false has none. Padding and an injected flaw in one artifact are a later version.
 - **Counts** (0.2.0): `n_flaws_total`, `n_flaws_<NNNN>` and `flaws_confirmed` count instances. A
   pair's two records of one instance share its `instance`; the instance is confirmed only when
   both records pass their checks (Al's owner note of 2026-10-28).
@@ -73,15 +98,22 @@ is flagged for Al in ADR-0011 *Amendments*.
   - formal `YES-KERNEL` records: check K, meaning the build fails and its first error lies in the
     site's fragment lines;
   - formal `YES-TOOLING` records (0.3.0): check T, meaning the build passes and the audit tail's
-    listing satisfies the class's condition — FLAW-0007 `unused`: the inserted lemma is among the
-    file's own constants and outside the transitive used-constants of the main declaration,
-    closed over the file's own constants (Lean's auxiliary `_proof_N` constants included);
-    FLAW-0009: `#print axioms` of the main declaration lists the axiom.
+    listing satisfies the class's condition — FLAW-0007 `unused` and, from 0.4.0, FLAW-0013: the
+    inserted declaration is among the file's own constants and outside the transitive
+    used-constants of the main declaration, closed over the file's own constants (Lean's
+    auxiliary `_proof_N` constants included); FLAW-0009: `#print axioms` of the main declaration
+    lists the axiom.
 
   No other check exists yet, so no other class is confirmed by this version.
-- **Not yet:** `s2_grammar`, padding (FLAW-0013; a non-zero `padding_ratio` is refused), the T
-  check for FLAW-0013's formal declarations, FLAW-0009 `native_decide`, FLAW-0012 as a commanded
-  class, and the fidelity sweep. They come in later sessions (D11).
+- **`padding_ratio`** (0.4.0; ADR-0001 D4, ADR-0011 D8): achieved as the tokens inside the
+  FLAW-0013 spans over `n_tokens` — the padded steps of the informal file when there is one,
+  else the padding declarations' lines of the formal file — in binary64; commanded as the
+  config's value with tolerance `abs 0.05` (`abs 0.0` at ratio 0). A commanded ratio the count
+  of paragraphs cannot reach is a FAIL verdict, not a refusal.
+- **Not yet:** `s2_grammar`, padding combined with an injected flaw, the kinds `unused-lemma` and
+  `verbose-rewrite` (no seed carries their material), FLAW-0009 `native_decide`, FLAW-0012 and
+  FLAW-0011 as commanded classes, the seeds for the remaining FLAWS.md examples, and the
+  fidelity sweep. They come in later sessions (D11).
 
 ## CLI
 

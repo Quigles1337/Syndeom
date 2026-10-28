@@ -1,0 +1,353 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 7
+    },
+    "n_flaws_0013": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 7
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 7
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 12
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 442
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.7126696832579186
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "cc7d3631dc05ead4ae38223c12e3e5fabcb39986320c7518c760f8b49797a436",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 2411,
+        "n_lemmas": 0,
+        "n_steps": 12,
+        "n_tokens": 442,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.4.0-27f7b0a8feb9-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 7
+    },
+    "n_flaws_0013": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 7
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 7
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 12
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.05
+      },
+      "value": 0.71
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "placement": "before"
+        },
+        "severity": "cosmetic",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0.71,
+    "style": "descent",
+    "target": "informal",
+    "theorem": "sqrt2_irrational"
+  },
+  "config_hash": "27f7b0a8feb9ae73b854fb37f9e89376d803615ea625faf0dcb65822c7c53411",
+  "engine_commit": "b54e2f16aa3c153258bf6ece67798bd270993cbb",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0013": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.4.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "inserted": "Recall that $p$ and $q$ are coprime when $\\gcd(p, q) = 1$, which is exactly the condition that the fraction $p/q$ is in lowest terms.",
+          "kind": "restated-definition",
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "paragraph": 3,
+          "placement": "before",
+          "ratio": 0.71,
+          "replaced": null,
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            133
+          ],
+          "step": 1
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "inserted": "Recall the definition of parity: a natural number $n$ is even when $2 \\mid n$, that is, when $n \\bmod 2 = 0$, and odd otherwise, that is, when $n \\bmod 2 = 1$; every natural number is one or the other.",
+          "kind": "restated-definition",
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "paragraph": 4,
+          "placement": "before",
+          "ratio": 0.71,
+          "replaced": null,
+          "site": 2
+        },
+        "instance": 2,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            201
+          ],
+          "step": 2
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "inserted": "Recall the definition of divisibility: for natural numbers $a$ and $b$, $a \\mid b$ means that $b = ac$ for some natural number $c$; in particular $2 \\mid b$ means $b = 2c$ for some $c$, and such a $b$ is called even.",
+          "kind": "restated-definition",
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "paragraph": 1,
+          "placement": "before",
+          "ratio": 0.71,
+          "replaced": null,
+          "site": 3
+        },
+        "instance": 3,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            216
+          ],
+          "step": 3
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "inserted": "Recall that a rational number is a quotient $p/q$ of integers with $q \\ne 0$, that every positive rational number has a representation in lowest terms with $p$ and $q$ natural numbers, and that $\\gcd(p, q)$, the greatest common divisor, is the largest natural number dividing both $p$ and $q$; in particular it divides both.",
+          "kind": "restated-definition",
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "paragraph": 2,
+          "placement": "before",
+          "ratio": 0.71,
+          "replaced": null,
+          "site": 4
+        },
+        "instance": 4,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            324
+          ],
+          "step": 4
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "inserted": "A third derivation: writing $p^2 = p \\cdot p$, the residue of a product modulo $2$ is the product of the residues, so if $p \\bmod 2 = 1$ then $p \\cdot p \\bmod 2 = 1 \\cdot 1 = 1$, which is impossible when $2 \\mid p^2$; hence $p$ is even.",
+          "kind": "re-derivation",
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "paragraph": 7,
+          "placement": "before",
+          "ratio": 0.71,
+          "replaced": null,
+          "site": 5
+        },
+        "instance": 5,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            236
+          ],
+          "step": 5
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "inserted": "We check once more that if $2 \\mid p^2$ then $2 \\mid p$: the residue of $p^2$ modulo $2$ is the residue of $(p \\bmod 2)^2$, so if $p \\bmod 2 = 1$ then $p^2 \\bmod 2 = 1$ and $2 \\nmid p^2$; hence $p \\bmod 2 = 0$.",
+          "kind": "re-derivation",
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "paragraph": 5,
+          "placement": "before",
+          "ratio": 0.71,
+          "replaced": null,
+          "site": 6
+        },
+        "instance": 6,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            210
+          ],
+          "step": 6
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 7,
+          "inserted": "Here is a second derivation of the same fact: if $p$ were odd, say $p = 2m + 1$, then $p^2 = 4m^2 + 4m + 1 = 2(2m^2 + 2m) + 1$ would be odd, so $2 \\nmid p^2$; therefore $2 \\mid p^2$ forces $p$ to be even.",
+          "kind": "re-derivation",
+          "kinds": [
+            "restated-definition",
+            "re-derivation"
+          ],
+          "paragraph": 6,
+          "placement": "before",
+          "ratio": 0.71,
+          "replaced": null,
+          "site": 7
+        },
+        "instance": 7,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            204
+          ],
+          "step": 7
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/Sqrt2Irrational.lean:syndeom_seed_sqrt2_irrational",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

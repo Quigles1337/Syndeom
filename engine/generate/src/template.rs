@@ -1,13 +1,15 @@
 //! `s2_template` (ADR-0011 D1, D6): hand-authored seed theorems with aligned informal and formal
-//! steps. `prepare` runs `plan` → `inject` → `render`; `assemble` runs `measure` → `manifest` once
-//! the Lean harness has observed the formal file (D2's pipeline; `pad` is the identity because no
-//! seed carries FLAW-0013 material, and a non-zero padding ratio is refused).
+//! steps. `prepare` runs `plan` → `inject` → `pad` → `render`; `assemble` runs `measure` →
+//! `manifest` once the Lean harness has observed the formal file (D2's pipeline). A config
+//! commands either one injected instance or padding, never both (D5: two whole-argument
+//! variants cannot be made disjoint, and a padded flawed argument is a later version).
 //!
-//! The crate carries three producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
+//! The crate carries four producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
 //! 26): `0.1.0`, whose three seeds and per-record counts stay regenerable as the goldens name them;
-//! `0.2.0`, with four more seeds and counts per instance; and `0.3.0`, the version `generate`
-//! emits, with lemma steps (D2), the T check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the
-//! `n_lt_two_pow` seed.
+//! `0.2.0`, with four more seeds and counts per instance; `0.3.0`, with lemma steps (D2), the T
+//! check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the `n_lt_two_pow` seed; and `0.4.0`,
+//! the version `generate` emits, with the padding module (D2 `pad`, D5 FLAW-0013, Options 8) and
+//! the `sqrt2_irrational` seed, which carries padding material.
 //!
 //! A seed's flaw material is a whole-argument variant of one style: the flawed step list, each
 //! step naming the faithful step it replaces (`from`), the flaw site, and the anchor text at the
@@ -16,6 +18,8 @@
 //! false has no faithful argument and no control; its material is *intrinsic*: the style's steps
 //! are the convincing argument as the FLAWS.md example writes it, nothing is replaced, and the
 //! record carries the seed's counterexample (0.2.0; a reading flagged for Al in the amendment).
+//! A seed's padding material (0.4.0) is a list of paragraphs, each true irrelevant material as a
+//! whole step with the unused declaration that matches it in the formal file.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -26,39 +30,42 @@ use syndeom_manifest::{
     FORMAT_LEAN, FileBytes, Files, Flaw, FormalFile, FormalLocation, FormalTag, Generator,
     GroundTruth, InformalFile, InformalLocation, InformalTag, Kind, LeanCatchable, Location,
     MANIFEST_SCHEMA, Manifest, Origin, ProofStatus, Severity, StatementStatus, Storage, Tolerance,
-    Toolchain, artifact_id, config_hash, content_hash, fidelity, is_lemma_step, parse_informal_md,
-    parse_lean, span_text,
+    Toolchain, artifact_id, config_hash, content_hash, count_tokens, fidelity, is_lemma_step,
+    parse_informal_md, parse_lean, span_text,
 };
 
 use crate::harness::{Observation, used_closure};
 use crate::plan::{
-    FormalRendering, LemmaHeader, Plan, Step, lemma_lines, render_formal, render_informal,
+    FormalRendering, LemmaHeader, PaddingHeader, PaddingKind, Plan, Step, lemma_lines,
+    padding_lines, render_formal, render_informal,
 };
 use crate::rng::{RNG_ID, Stream};
 
 pub const GENERATOR_ID: &str = "s2_template";
 /// The producer version `generate` emits (ADR-0011 D1; ruling 5 on PR 26).
-pub const GENERATOR_VERSION: &str = "0.3.0";
+pub const GENERATOR_VERSION: &str = "0.4.0";
 /// The FLAWS.md version every record is read against (ADR-0011 D7).
 pub const TAXONOMY_VERSION: &str = "0.1.0";
 
 /// A producer version this crate regenerates. `generate` emits [`Version::CURRENT`]; the goldens
-/// select the version their manifests name, and `regenerate`/`verify` accept both.
+/// select the version their manifests name, and `regenerate`/`verify` accept any of them.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum Version {
     V0_1_0,
     V0_2_0,
     V0_3_0,
+    V0_4_0,
 }
 
 impl Version {
-    pub const CURRENT: Version = Version::V0_3_0;
+    pub const CURRENT: Version = Version::V0_4_0;
 
     pub fn parse(s: &str) -> Option<Version> {
         match s {
             "0.1.0" => Some(Version::V0_1_0),
             "0.2.0" => Some(Version::V0_2_0),
             "0.3.0" => Some(Version::V0_3_0),
+            "0.4.0" => Some(Version::V0_4_0),
             _ => None,
         }
     }
@@ -68,22 +75,29 @@ impl Version {
             Version::V0_1_0 => "0.1.0",
             Version::V0_2_0 => "0.2.0",
             Version::V0_3_0 => "0.3.0",
+            Version::V0_4_0 => "0.4.0",
         }
     }
 
     /// How many of [`SEED_RECORDS`] the version compiles in: the v0.1 set, then the v0.2
-    /// additions, then the v0.3 addition.
+    /// additions, then the v0.3 addition, then the v0.4 addition.
     fn seed_count(self) -> usize {
         match self {
             Version::V0_1_0 => 3,
             Version::V0_2_0 => 7,
             Version::V0_3_0 => 8,
+            Version::V0_4_0 => 9,
         }
     }
 
     /// Ruling 3 on PR 26: from 0.2.0 the flaw counts are per instance; 0.1.0 counted records.
     fn counts_instances(self) -> bool {
         self != Version::V0_1_0
+    }
+
+    /// From 0.4.0 the padding module realizes FLAW-0013; earlier versions refuse it.
+    fn pads(self) -> bool {
+        self >= Version::V0_4_0
     }
 }
 
@@ -98,9 +112,10 @@ const SEED_RECORDS: &[&str] = &[
     include_str!("../seeds/rolle_abs.json"),
     include_str!("../seeds/horses.json"),
     include_str!("../seeds/n_lt_two_pow.json"),
+    include_str!("../seeds/sqrt2_irrational.json"),
 ];
 
-/// Dial keys the injector writes into a record; a spec may not use them.
+/// Dial keys the injector or the padding module writes into a record; a spec may not use them.
 const RESERVED_DIALS: &[&str] = &[
     "site",
     "inserted",
@@ -109,6 +124,9 @@ const RESERVED_DIALS: &[&str] = &[
     "original_fragments",
     "counterexample",
     "declaration",
+    "ratio",
+    "kind",
+    "paragraph",
 ];
 
 fn required_option<'de, D, T>(d: D) -> Result<Option<T>, D::Error>
@@ -138,6 +156,39 @@ pub struct Seed {
     pub binders: String,
     pub claim: String,
     pub styles: Vec<Style>,
+    /// FLAW-0013 padding material (0.4.0; ADR-0011 D5, D6), usable with every style of the
+    /// seed: true irrelevant paragraphs, each with its unused declaration. Empty for a seed
+    /// without padding material, on which a positive `padding_ratio` is refused.
+    #[serde(default)]
+    pub padding: Vec<Paragraph>,
+}
+
+/// One paragraph of FLAW-0013 padding material (0.4.0): its kind, its informal text (a whole
+/// step, never a `Lemma N.` step), and the matching unused declaration in the formal file — a
+/// `theorem` with this name and claim, proved by `fragment`, used by nothing.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Paragraph {
+    pub kind: PaddingKind,
+    pub text: String,
+    pub name: String,
+    pub claim: String,
+    pub fragment: Vec<String>,
+}
+
+impl Paragraph {
+    fn step(&self) -> Step {
+        Step {
+            text: self.text.clone(),
+            fragment: self.fragment.clone(),
+            lemma: None,
+            padding: Some(PaddingHeader {
+                kind: self.kind,
+                name: self.name.clone(),
+                claim: self.claim.clone(),
+            }),
+        }
+    }
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -279,6 +330,51 @@ pub fn check_seed(seed: &Seed) -> Result<(), String> {
                     seed.id
                 ));
             }
+        }
+    }
+    // Padding material (0.4.0): a faithful argument to pad, whole non-lemma steps, proved
+    // declarations whose names are distinct from one another, from every lemma the seed
+    // declares and from the main declaration.
+    if !seed.padding.is_empty() && false_statement {
+        return Err(format!(
+            "seed {}: padding material belongs to a true statement's faithful argument",
+            seed.id
+        ));
+    }
+    let mut taken: BTreeSet<String> = BTreeSet::new();
+    taken.insert(main_declaration(&seed.id));
+    for style in &seed.styles {
+        for s in &style.steps {
+            if let Some(l) = &s.lemma {
+                taken.insert(l.name.clone());
+            }
+        }
+        for m in &style.flaws {
+            for s in &m.steps {
+                if let Some(l) = &s.lemma {
+                    taken.insert(l.name.clone());
+                }
+            }
+        }
+    }
+    for para in &seed.padding {
+        if is_lemma_step(&para.text) {
+            return Err(format!(
+                "seed {}: a padding paragraph is not a lemma step",
+                seed.id
+            ));
+        }
+        if para.fragment.is_empty() {
+            return Err(format!(
+                "seed {}: a padding declaration has proof lines",
+                seed.id
+            ));
+        }
+        if !taken.insert(para.name.clone()) {
+            return Err(format!(
+                "seed {}: padding declaration {} collides with another declaration of the seed",
+                seed.id, para.name
+            ));
         }
     }
     Ok(())
@@ -489,8 +585,24 @@ pub struct Injection {
     pub formal_dials: Value,
 }
 
-/// Everything `prepare` produces: the config as given, the plan after injection, the rendered
-/// bytes, and the injected instance (none for a control).
+/// One inserted padding paragraph (0.4.0, FLAW-0013), before rendering fixes its locations.
+#[derive(Debug, Clone, PartialEq)]
+pub struct PaddingInsertion {
+    pub instance: u64,
+    pub kind: PaddingKind,
+    /// The paragraph's 1-based index in the seed's padding material.
+    pub paragraph: u64,
+    /// The inserted step's 1-based index in the padded plan.
+    pub site: usize,
+    pub text: String,
+    pub declaration: String,
+    pub informal_dials: Value,
+    pub formal_dials: Value,
+}
+
+/// Everything `prepare` produces: the config as given, the plan after injection and padding,
+/// the rendered bytes, the injected instance (none for a control or a padded control) and the
+/// padding insertions (none unless FLAW-0013 was commanded).
 #[derive(Debug, Clone, PartialEq)]
 pub struct Prepared {
     pub version: Version,
@@ -504,6 +616,7 @@ pub struct Prepared {
     pub informal: Option<Vec<u8>>,
     pub formal: Option<FormalRendering>,
     pub injection: Option<Injection>,
+    pub padding: Vec<PaddingInsertion>,
 }
 
 impl Prepared {
@@ -538,12 +651,13 @@ pub fn faithful_plan(seed: &Seed, style: &Style) -> Plan {
     }
 }
 
-/// `plan` → `inject` → `render` for one (config, seed) under the current producer version.
+/// `plan` → `inject` → `pad` → `render` for one (config, seed) under the current producer
+/// version.
 pub fn prepare(config: &Value, seed_value: u64) -> Result<Prepared, String> {
     prepare_with(Version::CURRENT, config, seed_value)
 }
 
-/// `plan` → `inject` → `render` for one (config, seed) under a named producer version.
+/// `plan` → `inject` → `pad` → `render` for one (config, seed) under a named producer version.
 pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result<Prepared, String> {
     let cfg = parse_config(config)?;
     let hash =
@@ -562,31 +676,61 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
         .iter()
         .find(|s| s.id == cfg.style)
         .ok_or(format!("seed {} has no style {:?}", seed.id, cfg.style))?;
-    if cfg.padding_ratio != 0.0 {
-        return Err(format!(
-            "seed {} carries no FLAW-0013 padding material in s2_template {}",
-            seed.id,
-            version.as_str()
-        ));
+    // Padding (0.4.0): commanded by a FLAW-0013 spec together with a positive `padding_ratio`,
+    // and by nothing else; earlier versions refuse both.
+    let pads = cfg.flaws.iter().any(|s| s.class == "FLAW-0013");
+    if !version.pads() {
+        if cfg.padding_ratio != 0.0 {
+            return Err(format!(
+                "seed {} carries no FLAW-0013 padding material in s2_template {}",
+                seed.id,
+                version.as_str()
+            ));
+        }
+        if pads {
+            return Err(format!(
+                "FLAW-0013 is not realized by s2_template {}",
+                version.as_str()
+            ));
+        }
+    } else if (cfg.padding_ratio > 0.0) != pads {
+        return Err(
+            "padding is commanded by a FLAW-0013 spec with a positive padding_ratio, and by nothing else"
+                .into(),
+        );
     }
     if cfg.flaws.len() > 1 {
         return Err(format!(
-            "s2_template {} materials are whole-argument variants, so two instances cannot be made disjoint (ADR-0011 D5)",
+            "s2_template {} materials are whole-argument variants, so two instances cannot be made disjoint (ADR-0011 D5); a padded flawed argument is a later version",
             version.as_str()
         ));
     }
-    if cfg.flaws.is_empty() && seed.truth.value == Some(false) {
+    if seed.truth.value == Some(false) && (cfg.flaws.is_empty() || pads) {
         return Err(format!(
-            "seed {} states a false theorem (its witness proves the negation), so it has no control: a flaw must be commanded",
+            "seed {} states a false theorem (its witness proves the negation), so it has no control and nothing to pad: a flaw must be commanded",
             seed.id
         ));
     }
     let mut plan = faithful_plan(&seed, style);
-    let injection = match cfg.flaws.first() {
-        None => None,
-        Some(spec) => Some(inject(
-            &mut plan, &seed, style, spec, cfg.target, seed_value,
-        )?),
+    let (injection, padding) = match cfg.flaws.first() {
+        None => (None, Vec::new()),
+        Some(spec) if spec.class == "FLAW-0013" => (
+            None,
+            pad(
+                &mut plan,
+                &seed,
+                spec,
+                cfg.padding_ratio,
+                cfg.target,
+                seed_value,
+            )?,
+        ),
+        Some(spec) => (
+            Some(inject(
+                &mut plan, &seed, style, spec, cfg.target, seed_value,
+            )?),
+            Vec::new(),
+        ),
     };
     let informal = cfg
         .target
@@ -608,7 +752,164 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
         informal,
         formal,
         injection,
+        padding,
     })
+}
+
+/// Where the padding module puts the paragraphs (the `placement` dial, 0.4.0).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum Placement {
+    /// Every paragraph before the first step of the argument, in drawn order: the FLAWS.md
+    /// example's "preceded by".
+    Before,
+    /// Each paragraph at a position drawn from the `padding` stream: before one step of the
+    /// plan as it then stands, so the padding interleaves the argument.
+    Drawn,
+}
+
+/// The padding module (ADR-0011 D2 `pad`, D5 FLAW-0013, Options 8; 0.4.0). Whole steps of true
+/// irrelevant material from the seed's padding material, each with its unused declaration, are
+/// inserted into the plan. The spec's dials are `kinds` (which kinds are eligible), `count`
+/// (how many paragraphs; an integer, as D4 requires of a generation decision) and `placement`
+/// (`before` or `drawn`). The paragraphs are drawn without replacement from the `padding`
+/// stream, then, under `drawn`, each position is drawn from the same stream. One record per
+/// paragraph, each its own instance; the config's `padding_ratio` is recorded as the `ratio`
+/// dial and compared only after rendering, in `measure` (D4, D8).
+fn pad(
+    plan: &mut Plan,
+    seed: &Seed,
+    spec: &FlawSpec,
+    ratio: f64,
+    target: Target,
+    seed_value: u64,
+) -> Result<Vec<PaddingInsertion>, String> {
+    check_spec(spec, target)?;
+    if spec.sub_variant.is_some() {
+        return Err("FLAW-0013 has no sub-variant".into());
+    }
+    if spec.site.is_some() {
+        return Err(
+            "FLAW-0013's positions are drawn from the padding stream, so its site is \"auto\""
+                .into(),
+        );
+    }
+    exact_keys(
+        &spec.dials,
+        &["kinds", "count", "placement"],
+        "FLAW-0013's dials",
+    )?;
+    let kinds: Vec<PaddingKind> = spec.dials["kinds"]
+        .as_array()
+        .ok_or("FLAW-0013's kinds is an array")?
+        .iter()
+        .map(|k| serde_json::from_value(k.clone()).map_err(|_| format!("unknown padding kind {k}")))
+        .collect::<Result<_, _>>()?;
+    if kinds.is_empty() {
+        return Err("FLAW-0013's kinds names at least one kind".into());
+    }
+    if kinds.iter().collect::<BTreeSet<_>>().len() != kinds.len() {
+        return Err("FLAW-0013's kinds names each kind once".into());
+    }
+    let count = spec.dials["count"]
+        .as_u64()
+        .filter(|c| *c >= 1)
+        .ok_or("FLAW-0013's count is a positive integer")?;
+    let placement = match spec.dials["placement"].as_str() {
+        Some("before") => Placement::Before,
+        Some("drawn") => Placement::Drawn,
+        _ => return Err("FLAW-0013's placement is \"before\" or \"drawn\"".into()),
+    };
+    if seed.padding.is_empty() {
+        return Err(format!(
+            "seed {} carries no FLAW-0013 padding material",
+            seed.id
+        ));
+    }
+    let mut remaining: Vec<(u64, &Paragraph)> = seed
+        .padding
+        .iter()
+        .enumerate()
+        .filter(|(_, p)| kinds.contains(&p.kind))
+        .map(|(i, p)| ((i + 1) as u64, p))
+        .collect();
+    if (remaining.len() as u64) < count {
+        return Err(format!(
+            "seed {} carries {} padding paragraph(s) of the kinds named, fewer than count {count}",
+            seed.id,
+            remaining.len()
+        ));
+    }
+    /// Which inserted paragraph a step of the padded plan is, if it is one.
+    struct Marker {
+        instance: u64,
+        paragraph: u64,
+        kind: PaddingKind,
+    }
+    let mut stream = Stream::new(seed_value, "padding");
+    let mut steps: Vec<(Step, Option<Marker>)> =
+        plan.steps.iter().cloned().map(|s| (s, None)).collect();
+    for instance in 1..=count {
+        let pick = stream.below(remaining.len() as u64) as usize;
+        let (paragraph, para) = remaining.remove(pick);
+        let position = match placement {
+            Placement::Before => (instance - 1) as usize,
+            Placement::Drawn => stream.below(steps.len() as u64) as usize,
+        };
+        let marker = Marker {
+            instance,
+            paragraph,
+            kind: para.kind,
+        };
+        steps.insert(position, (para.step(), Some(marker)));
+    }
+    plan.steps = steps.iter().map(|(s, _)| s.clone()).collect();
+    let mut out: Vec<PaddingInsertion> = Vec::new();
+    for (k, (step, marker)) in steps.iter().enumerate() {
+        let Some(Marker {
+            instance,
+            paragraph,
+            kind,
+        }) = marker
+        else {
+            continue;
+        };
+        let site = k + 1;
+        let declaration = step
+            .padding
+            .as_ref()
+            .map(|p| p.name.clone())
+            .ok_or("a padding step carries its header")?;
+        let with = |extra: Vec<(&str, Value)>| {
+            let mut m = spec.dials.clone();
+            m.insert("ratio".into(), json!(ratio));
+            m.insert("site".into(), json!(site));
+            m.insert("kind".into(), json!(kind.as_str()));
+            m.insert("paragraph".into(), json!(paragraph));
+            for (key, v) in extra {
+                m.insert(key.into(), v);
+            }
+            Value::Object(m)
+        };
+        out.push(PaddingInsertion {
+            instance: *instance,
+            kind: *kind,
+            paragraph: *paragraph,
+            site,
+            text: step.text.clone(),
+            declaration: declaration.clone(),
+            informal_dials: with(vec![
+                ("inserted", json!(step.text)),
+                ("replaced", Value::Null),
+            ]),
+            formal_dials: with(vec![
+                ("inserted", json!(padding_lines(step)?)),
+                ("replaced", Value::Null),
+                ("declaration", json!(declaration)),
+            ]),
+        });
+    }
+    out.sort_by_key(|i| i.instance);
+    Ok(out)
 }
 
 /// The injector (ADR-0011 D5): choose the material, rewrite the plan, write the dials.
@@ -723,6 +1024,7 @@ fn inject(
         text: flawed_site.text.clone(),
         fragment: flawed_site.fragment.clone(),
         lemma: flawed_site.lemma.clone(),
+        padding: None,
     };
     // Informal: the anchor's text, or the whole step; an inserted step replaces nothing.
     let faithful_site = (!material.inserts).then(|| &faithful[(material.site - 1) as usize]);
@@ -767,6 +1069,7 @@ fn inject(
             text: s.text.clone(),
             fragment: s.fragment.clone(),
             lemma: s.lemma.clone(),
+            padding: None,
         })
         .collect();
     Ok(Injection {
@@ -819,6 +1122,17 @@ fn measured(value: Value, estimator: &str) -> Achieved {
         ci95: None,
         reason: None,
     }
+}
+
+/// Check T for an unused declaration (ADR-0011 D5, D8; FLAW-0007 `unused` from 0.3.0, FLAW-0013
+/// from 0.4.0): the build passed, the audit tail's listing names the declaration, and it lies
+/// outside the transitive used-constants of the main declaration, closed over the file's own
+/// constants (Lean's auxiliary `_proof_N` constants included). No listing confirms nothing.
+fn unused_in_file(obs: &Observation, declaration: &str, main: &str) -> bool {
+    obs.exit_code == 0
+        && obs.used_constants.as_ref().is_some_and(|used| {
+            used.contains_key(declaration) && !used_closure(used, main).contains(declaration)
+        })
 }
 
 /// The flaw counts (ADR-0011 D8 as amended by ruling 3 on PR 26): per instance from 0.2.0, per
@@ -929,12 +1243,7 @@ pub fn assemble(
                 }
                 LeanCatchable::YesTooling if obs.exit_code == 0 => {
                     match (inj.class.as_str(), inj.sub_variant.as_deref()) {
-                        ("FLAW-0007", Some("unused")) => {
-                            obs.used_constants.as_ref().is_some_and(|used| {
-                                used.contains_key(&declaration)
-                                    && !used_closure(used, &main).contains(&declaration)
-                            })
-                        }
+                        ("FLAW-0007", Some("unused")) => unused_in_file(obs, &declaration, &main),
                         ("FLAW-0009", _) => obs
                             .axioms
                             .as_ref()
@@ -957,6 +1266,67 @@ pub fn assemble(
                     severity: inj.severity,
                     lean_catchable: inj.lean_catchable,
                     dials: inj.formal_dials.clone(),
+                },
+                confirmed,
+            ));
+        }
+    }
+    // Padding records (0.4.0, FLAW-0013): one instance per inserted paragraph, in both files
+    // (FLAWS.md: *Manifests in* both). The informal record spans the whole step, `[0, len)`,
+    // and is confirmed when the step holds exactly the paragraph's text; the formal record is
+    // the matching declaration at its first line, `YES-TOOLING`, confirmed by check T.
+    let mut padded_tokens: u64 = 0;
+    for ins in &p.padding {
+        if let Some(st) = &informal_stats {
+            let text = &st.steps[ins.site];
+            let span = [0, text.chars().count() as u64];
+            let confirmed = *text == ins.text;
+            padded_tokens += count_tokens(text);
+            records.push((
+                Flaw {
+                    instance: ins.instance,
+                    class: "FLAW-0013".into(),
+                    sub_variant: None,
+                    location: Location::Informal(InformalLocation {
+                        artifact: InformalTag::Informal,
+                        step: ins.site as u64,
+                        span,
+                    }),
+                    severity: Severity::Cosmetic,
+                    lean_catchable: LeanCatchable::No,
+                    dials: ins.informal_dials.clone(),
+                },
+                confirmed,
+            ));
+        }
+        if let (Some(f), Some(obs)) = (&p.formal, observation) {
+            let [lo, hi] = f.fragment_lines[ins.site - 1]
+                .ok_or("a padding step has its declaration lines in the formal file")?;
+            let declaration = f.declarations[ins.site - 1].clone();
+            if informal_stats.is_none() {
+                // a formal-only artifact: the padding's tokens are its declarations' lines
+                let text = std::str::from_utf8(&f.bytes).map_err(|e| e.to_string())?;
+                padded_tokens += text
+                    .lines()
+                    .skip(lo as usize - 1)
+                    .take((hi - lo + 1) as usize)
+                    .map(count_tokens)
+                    .sum::<u64>();
+            }
+            let confirmed = unused_in_file(obs, &declaration, &main);
+            records.push((
+                Flaw {
+                    instance: ins.instance,
+                    class: "FLAW-0013".into(),
+                    sub_variant: None,
+                    location: Location::Formal(FormalLocation {
+                        artifact: FormalTag::Formal,
+                        declaration,
+                        line: lo,
+                    }),
+                    severity: Severity::Cosmetic,
+                    lean_catchable: LeanCatchable::YesTooling,
+                    dials: ins.formal_dials.clone(),
                 },
                 confirmed,
             ));
@@ -1013,9 +1383,15 @@ pub fn assemble(
 
     // Achieved (ADR-0011 D8): parsers on the rendered bytes, the records, the harness.
     let mut achieved = BTreeMap::new();
-    let n_tokens = match (&informal_stats, &formal_stats) {
-        (Some(st), _) => measured(json!(st.n_tokens), "informal_md_1_token_count"),
-        (None, Some(st)) => measured(json!(st.n_tokens), "lean_1_token_count"),
+    let (n_tokens_value, n_tokens) = match (&informal_stats, &formal_stats) {
+        (Some(st), _) => (
+            st.n_tokens,
+            measured(json!(st.n_tokens), "informal_md_1_token_count"),
+        ),
+        (None, Some(st)) => (
+            st.n_tokens,
+            measured(json!(st.n_tokens), "lean_1_token_count"),
+        ),
         (None, None) => return Err("an artifact has at least one file".into()),
     };
     achieved.insert("n_tokens".to_string(), n_tokens);
@@ -1043,20 +1419,17 @@ pub fn assemble(
         "flaws_confirmed".to_string(),
         measured(json!(n_confirmed), "injected_instances_confirmed"),
     );
-    // No record is FLAW-0013, so no token lies inside a padding span.
-    let padded_tokens = records
-        .iter()
-        .filter(|(r, _)| r.class == "FLAW-0013")
-        .count();
-    if padded_tokens != 0 {
-        return Err(format!(
-            "FLAW-0013 spans are not measured by s2_template {}",
-            p.version.as_str()
-        ));
-    }
+    // `padding_ratio` (ADR-0001 D4): the tokens inside the FLAW-0013 spans — the padded steps of
+    // the informal file, or the padding declarations of a formal-only file — over `n_tokens`, in
+    // binary64 (D6); 0.0 when nothing was padded.
+    let padding_ratio = if padded_tokens == 0 {
+        0.0
+    } else {
+        padded_tokens as f64 / n_tokens_value as f64
+    };
     achieved.insert(
         "padding_ratio".to_string(),
-        measured(json!(0.0), "flaw_0013_span_tokens_over_n_tokens"),
+        measured(json!(padding_ratio), "flaw_0013_span_tokens_over_n_tokens"),
     );
     if let Some(obs) = observation {
         achieved.insert(

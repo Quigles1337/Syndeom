@@ -1,7 +1,7 @@
 # Goldens for `s2_template` (ADR-0011 D10)
 
-There are 35 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41) and 9 of
-0.3.0 (Session 42). All use seed 7. Each case directory holds:
+There are 43 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+0.3.0 (Session 42) and 8 of 0.4.0 (Session 43). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -107,8 +107,46 @@ listing (FLAW-0007) and `#print axioms` (FLAW-0009).
   of the FLAW-0007 cases names the file's four constants (the two lemmas, Lean's auxiliary
   `…lemma_1._proof_1_1`, and the main declaration), and the main declaration uses Lemma 1 only.
 
+## 0.4.0 (Session 43, 2026-10-28)
+
+The `sqrt2_irrational` seed's control (informal, formal); a lightly padded control — FLAW-0013
+with one re-derivation paragraph at a drawn position (`kinds: ["re-derivation"]`, `count: 1`,
+`placement: "drawn"`) — and the FLAWS.md FLAW-0013 example — every paragraph of the seed's
+material, four restated definitions and three re-derivations of `2 | p² ⇒ 2 | p`, before the
+five-step argument (`kinds: ["restated-definition", "re-derivation"]`, `count: 7`,
+`placement: "before"`) — each as an informal, a formal and a pair artifact. Padding is
+cosmetic, so every padded case is a correct proof (`proof_status: valid`, `correct: true`) with
+its paragraphs recorded, one instance each. The commanded `padding_ratio` of a padded case is
+the ratio its paragraphs achieve at seed 7, to two decimals (informal and pair: 0.28 and 0.71;
+formal-only: 0.31 and 0.61, measured over the declarations' tokens), because the ratio is a
+measured statistic (ADR-0011 D4) checked at tolerance `abs 0.05`.
+
+| Seed | Cases | Statement |
+|---|---|---|
+| `sqrt2_irrational` | control (informal, formal); FLAW-0013 `drawn`, 1 paragraph, cosmetic (informal, formal, pair); FLAW-0013 `before`, 7 paragraphs, cosmetic (informal, formal, pair) | true |
+
+**Provenance:**
+- The proof text is hand-authored seed material (`seeds/sqrt2_irrational.json`): five aligned
+  steps of the descent argument on `p ^ 2 ≠ 2 * q ^ 2` for coprime `p`, `q`, and seven padding
+  paragraphs, each with its matching unused declaration.
+- The formal files were first written by hand as Lean probes and compiled before the seed record
+  was written, one process at a time (`analysis/s2-generate-4/evidence/lean-probe/`): the
+  control golden is the faithful probe `s2i_faithful.lean` without its `#print axioms` tail, and
+  every padded formal and pair golden's declarations are blocks of the padded probe
+  `s2i_padded.lean`, in drawn order, followed by the probe's main declaration, as
+  `analysis/s2-generate-4/evidence/goldens-production-report.json` records.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `b54e2f16aa3c153258bf6ece67798bd270993cbb`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run.
+- Every case's fidelity verdict is PASS. Every formal and pair case builds (exit 0) and prints
+  `[propext, Quot.sound]`. The used-constants listing of a padded case names its padding
+  declarations, none of them reachable from the main declaration, which uses only its own
+  auxiliary `_proof_N` constants (check T).
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
-recorded in `analysis/s2-generate-2/README.md` and `analysis/s2-generate-3/README.md`.
+recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md` and
+`analysis/s2-generate-4/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

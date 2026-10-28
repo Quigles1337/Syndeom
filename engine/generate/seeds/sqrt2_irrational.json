@@ -1,0 +1,135 @@
+{
+  "id": "sqrt2_irrational",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0013 example (a correct five-step proof that √2 is irrational, preceded by restated definitions of rational number, gcd and parity and three separate derivations of 2 | p² ⇒ 2 | p) and FLAW-0011 example (the same statement): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "The square root of two is irrational",
+  "statement": "For all natural numbers $p$ and $q$ with $\\gcd(p, q) = 1$, $p^2 \\ne 2q^2$: the square root of two is irrational.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/Sqrt2Irrational.lean:syndeom_seed_sqrt2_irrational"
+  },
+  "imports": ["Mathlib.Data.Nat.Notation", "Mathlib.Tactic.Ring"],
+  "binders": "(p q : ℕ) (h : Nat.Coprime p q)",
+  "claim": "p ^ 2 ≠ 2 * q ^ 2",
+  "styles": [
+    {
+      "id": "descent",
+      "steps": [
+        {
+          "text": "Suppose, for contradiction, that $p^2 = 2q^2$ for natural numbers $p$ and $q$ with $\\gcd(p, q) = 1$.",
+          "fragment": ["intro hpq"]
+        },
+        {
+          "text": "Then $p^2 = 2q^2$ is even, being twice the natural number $q^2$.",
+          "fragment": ["have hp2 : 2 ∣ p ^ 2 := ⟨q ^ 2, hpq⟩"]
+        },
+        {
+          "text": "Hence $p$ is even: if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd. Write $p = 2k$.",
+          "fragment": [
+            "have hp : 2 ∣ p := by",
+            "  rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+            "  · exact Nat.dvd_of_mod_eq_zero hp",
+            "  · have h1 : p ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hp]",
+            "    omega",
+            "obtain ⟨k, hk⟩ := hp"
+          ]
+        },
+        {
+          "text": "Substituting, $4k^2 = 2q^2$, so $q^2 = 2k^2$ is even, and by the same argument $q$ is even. Write $q = 2m$.",
+          "fragment": [
+            "have h4 : 2 * q ^ 2 = 2 * (2 * k ^ 2) := by rw [← hpq, hk]; ring",
+            "have hq2 : 2 ∣ q ^ 2 := ⟨k ^ 2, by omega⟩",
+            "have hq : 2 ∣ q := by",
+            "  rcases Nat.mod_two_eq_zero_or_one q with hq | hq",
+            "  · exact Nat.dvd_of_mod_eq_zero hq",
+            "  · have h1 : q ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hq]",
+            "    omega",
+            "obtain ⟨m, hm⟩ := hq"
+          ]
+        },
+        {
+          "text": "Thus $2$ divides both $p$ and $q$, so $2$ divides $\\gcd(p, q) = 1$, which is absurd. Hence no such $p$ and $q$ exist, and $\\sqrt{2}$ is irrational.",
+          "fragment": [
+            "have h2 : 2 ∣ Nat.gcd p q := Nat.dvd_gcd ⟨k, hk⟩ ⟨m, hm⟩",
+            "rw [h.gcd_eq_one] at h2",
+            "omega"
+          ]
+        }
+      ],
+      "flaws": []
+    }
+  ],
+  "padding": [
+    {
+      "kind": "restated-definition",
+      "text": "Recall the definition of divisibility: for natural numbers $a$ and $b$, $a \\mid b$ means that $b = ac$ for some natural number $c$; in particular $2 \\mid b$ means $b = 2c$ for some $c$, and such a $b$ is called even.",
+      "name": "syndeom_s2_template_sqrt2_irrational_pad_dvd",
+      "claim": "∀ a b : ℕ, a ∣ b ↔ ∃ c, b = a * c",
+      "fragment": ["intro a b", "exact Iff.rfl"]
+    },
+    {
+      "kind": "restated-definition",
+      "text": "Recall that a rational number is a quotient $p/q$ of integers with $q \\ne 0$, that every positive rational number has a representation in lowest terms with $p$ and $q$ natural numbers, and that $\\gcd(p, q)$, the greatest common divisor, is the largest natural number dividing both $p$ and $q$; in particular it divides both.",
+      "name": "syndeom_s2_template_sqrt2_irrational_pad_gcd",
+      "claim": "∀ p q : ℕ, Nat.gcd p q ∣ p ∧ Nat.gcd p q ∣ q",
+      "fragment": ["intro p q", "exact ⟨Nat.gcd_dvd_left p q, Nat.gcd_dvd_right p q⟩"]
+    },
+    {
+      "kind": "restated-definition",
+      "text": "Recall that $p$ and $q$ are coprime when $\\gcd(p, q) = 1$, which is exactly the condition that the fraction $p/q$ is in lowest terms.",
+      "name": "syndeom_s2_template_sqrt2_irrational_pad_coprime",
+      "claim": "∀ p q : ℕ, Nat.Coprime p q ↔ Nat.gcd p q = 1",
+      "fragment": ["intro p q", "exact Iff.rfl"]
+    },
+    {
+      "kind": "restated-definition",
+      "text": "Recall the definition of parity: a natural number $n$ is even when $2 \\mid n$, that is, when $n \\bmod 2 = 0$, and odd otherwise, that is, when $n \\bmod 2 = 1$; every natural number is one or the other.",
+      "name": "syndeom_s2_template_sqrt2_irrational_pad_parity",
+      "claim": "∀ n : ℕ, 2 ∣ n ↔ n % 2 = 0",
+      "fragment": ["intro n", "exact Nat.dvd_iff_mod_eq_zero"]
+    },
+    {
+      "kind": "re-derivation",
+      "text": "We check once more that if $2 \\mid p^2$ then $2 \\mid p$: the residue of $p^2$ modulo $2$ is the residue of $(p \\bmod 2)^2$, so if $p \\bmod 2 = 1$ then $p^2 \\bmod 2 = 1$ and $2 \\nmid p^2$; hence $p \\bmod 2 = 0$.",
+      "name": "syndeom_s2_template_sqrt2_irrational_pad_two_dvd_sq_1",
+      "claim": "∀ p : ℕ, 2 ∣ p ^ 2 → 2 ∣ p",
+      "fragment": [
+        "intro p h",
+        "rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+        "· exact Nat.dvd_of_mod_eq_zero hp",
+        "· have h1 : p ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hp]",
+        "  omega"
+      ]
+    },
+    {
+      "kind": "re-derivation",
+      "text": "Here is a second derivation of the same fact: if $p$ were odd, say $p = 2m + 1$, then $p^2 = 4m^2 + 4m + 1 = 2(2m^2 + 2m) + 1$ would be odd, so $2 \\nmid p^2$; therefore $2 \\mid p^2$ forces $p$ to be even.",
+      "name": "syndeom_s2_template_sqrt2_irrational_pad_two_dvd_sq_2",
+      "claim": "∀ p : ℕ, 2 ∣ p ^ 2 → 2 ∣ p",
+      "fragment": [
+        "intro p h",
+        "rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+        "· exact Nat.dvd_of_mod_eq_zero hp",
+        "· obtain ⟨m, hm⟩ : ∃ m, p = 2 * m + 1 := ⟨p / 2, by omega⟩",
+        "  subst hm",
+        "  have h1 : (2 * m + 1) ^ 2 = 2 * (2 * m ^ 2 + 2 * m) + 1 := by ring",
+        "  omega"
+      ]
+    },
+    {
+      "kind": "re-derivation",
+      "text": "A third derivation: writing $p^2 = p \\cdot p$, the residue of a product modulo $2$ is the product of the residues, so if $p \\bmod 2 = 1$ then $p \\cdot p \\bmod 2 = 1 \\cdot 1 = 1$, which is impossible when $2 \\mid p^2$; hence $p$ is even.",
+      "name": "syndeom_s2_template_sqrt2_irrational_pad_two_dvd_sq_3",
+      "claim": "∀ p : ℕ, 2 ∣ p ^ 2 → 2 ∣ p",
+      "fragment": [
+        "intro p h",
+        "rw [Nat.pow_two] at h",
+        "rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+        "· exact Nat.dvd_of_mod_eq_zero hp",
+        "· have h1 : p * p % 2 = 1 := by rw [Nat.mul_mod, hp]",
+        "  omega"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "config": {
+    "theorem": "sqrt2_irrational",
+    "style": "descent",
+    "target": "informal",
+    "flaws": [],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "b54e2f16aa3c153258bf6ece67798bd270993cbb",
+  "toolchain": null,
+  "observation": null
+}

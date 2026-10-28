@@ -1,0 +1,122 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 5
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 127
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "5a1436bddef812c19b1a3b26ce32abed3936453c98245e6bae7255f225721610",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 786,
+        "n_lemmas": 0,
+        "n_steps": 5,
+        "n_tokens": 127,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.4.0-e8996ca4c91c-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 5
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [],
+    "padding_ratio": 0,
+    "style": "descent",
+    "target": "informal",
+    "theorem": "sqrt2_irrational"
+  },
+  "config_hash": "e8996ca4c91c6ced55b3afd3c60b082caa13247a553750da03f782fa3f4746e2",
+  "engine_commit": "b54e2f16aa3c153258bf6ece67798bd270993cbb",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.4.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/Sqrt2Irrational.lean:syndeom_seed_sqrt2_irrational",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}
