@@ -1,0 +1,65 @@
+{
+  "id": "continuity_is_not_uniform",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0002 example (the quantifier swap that asserts uniform continuity): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A continuous function equal to one at zero stays above one half nearby",
+  "statement": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be continuous with $f(0) = 1$. Then there is $\\delta > 0$ such that $f(x) > 1/2$ for every $x$ with $|x| < \\delta$.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/ContinuityIsNotUniform.lean:syndeom_seed_continuity_is_not_uniform"
+  },
+  "imports": ["Mathlib.Topology.MetricSpace.Pseudo.Defs", "Mathlib.Tactic.Linarith", "Mathlib.Tactic.NormNum"],
+  "binders": "(f : ℝ → ℝ) (hf : Continuous f) (h0 : f 0 = 1)",
+  "claim": "∃ δ > 0, ∀ x : ℝ, |x| < δ → f x > 1 / 2",
+  "styles": [
+    {
+      "id": "epsilon_delta",
+      "steps": [
+        {
+          "text": "Since $f$ is continuous at $0$, for $\\varepsilon = 1/2$ there is $\\delta > 0$ such that $|f(x) - f(0)| < 1/2$ for all $x$ with $|x - 0| < \\delta$.",
+          "fragment": ["obtain ⟨δ, hδ, h⟩ := Metric.continuous_iff.mp hf 0 (1 / 2) (by norm_num)"]
+        },
+        {
+          "text": "Take this $\\delta$, and let $|x| < \\delta$. Then $|f(x) - 1| < 1/2$, because $f(0) = 1$.",
+          "fragment": ["refine ⟨δ, hδ, fun x hx => ?_⟩", "have hx' : |f x - 1| < 1 / 2 := by simpa [Real.dist_eq, h0] using h x (by simpa [Real.dist_eq] using hx)"]
+        },
+        {
+          "text": "Hence $f(x) > 1 - 1/2 = 1/2$.",
+          "fragment": ["linarith [(abs_lt.mp hx').1]"]
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0002",
+          "sub_variant": null,
+          "severity": "gap",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"swap": "forall-exists"},
+          "site": 1,
+          "anchor": {
+            "replaced": "continuous at $0$, for $\\varepsilon = 1/2$ there is $\\delta > 0$ such that $|f(x) - f(0)| < 1/2$ for all $x$ with $|x - 0| < \\delta$",
+            "inserted": "continuous, for $\\varepsilon = 1/2$ there is $\\delta > 0$ such that $|f(x) - f(y)| < 1/2$ for all $x, y$ with $|x - y| < \\delta$"
+          },
+          "steps": [
+            {
+              "from": 1,
+              "text": "Since $f$ is continuous, for $\\varepsilon = 1/2$ there is $\\delta > 0$ such that $|f(x) - f(y)| < 1/2$ for all $x, y$ with $|x - y| < \\delta$.",
+              "fragment": ["obtain ⟨δ, hδ, h⟩ : ∃ δ > 0, ∀ x y : ℝ, dist x y < δ → dist (f x) (f y) < 1 / 2 := Metric.continuous_iff.mp hf 0 (1 / 2) (by norm_num)"]
+            },
+            {
+              "from": 2,
+              "text": "Take this $\\delta$, and let $|x| < \\delta$. Applying it with $y = 0$ gives $|f(x) - 1| < 1/2$, because $f(0) = 1$.",
+              "fragment": ["refine ⟨δ, hδ, fun x hx => ?_⟩", "have hx' : |f x - 1| < 1 / 2 := by simpa [Real.dist_eq, h0] using h x 0 (by simpa [Real.dist_eq] using hx)"]
+            },
+            {
+              "from": 3,
+              "text": "Hence $f(x) > 1 - 1/2 = 1/2$.",
+              "fragment": ["linarith [(abs_lt.mp hx').1]"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

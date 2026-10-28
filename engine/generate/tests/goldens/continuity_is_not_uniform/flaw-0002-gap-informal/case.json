@@ -1,0 +1,23 @@
+{
+  "config": {
+    "theorem": "continuity_is_not_uniform",
+    "style": "epsilon_delta",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0002",
+        "sub_variant": null,
+        "severity": "gap",
+        "site": "auto",
+        "dials": {
+          "swap": "forall-exists"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+  "toolchain": null,
+  "observation": null
+}

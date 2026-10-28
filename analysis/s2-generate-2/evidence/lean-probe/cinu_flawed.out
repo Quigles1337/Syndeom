@@ -1,0 +1,6 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-template-020-20261028T1830Z/lean-probe/cinu_flawed.lean:6:2: error: Type mismatch
+  Metric.continuous_iff.mp hf 0 (1 / 2) ?m.78
+has type
+  ∃ δ > 0, ∀ (a : ℝ), dist a 0 < δ → dist (f a) (f 0) < 1 / 2
+but is expected to have type
+  ∃ δ > 0, ∀ (x : ℝ) (y : ℝ), dist x y < δ → dist (f x) (f y) < 1 / 2

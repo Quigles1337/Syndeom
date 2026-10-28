@@ -1,0 +1,52 @@
+{
+  "id": "x_over_abs_x",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0014 example (the fatal case): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A real number divided by its absolute value",
+  "statement": "For every real number $x$, $x/|x| = 1$ or $x/|x| = -1$.",
+  "truth": {
+    "value": false,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/XOverAbsX.lean:syndeom_seed_x_over_abs_x_false"
+  },
+  "counterexample": "$x = 0$: the quotient $0/|0|$ is undefined, and in Lean $0 / |0| = 0$, which is neither $1$ nor $-1$.",
+  "imports": ["Mathlib.Basic.Real.Basic"],
+  "binders": "(x : ℝ)",
+  "claim": "x / |x| = 1 ∨ x / |x| = -1",
+  "styles": [
+    {
+      "id": "two_cases",
+      "steps": [
+        {
+          "text": "Comparing $x$ with $0$, either $x > 0$ or $x < 0$.",
+          "fragment": ["cases h : compare x 0 with"]
+        },
+        {
+          "text": "Case $x > 0$: then $|x| = x$, so $x/|x| = x/x = 1$.",
+          "fragment": ["| gt =>", "  have hpos : 0 < x := compare_gt_iff_gt.mp h", "  left", "  rw [abs_of_pos hpos, div_self hpos.ne']"]
+        },
+        {
+          "text": "Case $x < 0$: then $|x| = -x$, so $x/|x| = x/(-x) = -1$.",
+          "fragment": ["| lt =>", "  have hneg : x < 0 := compare_lt_iff_lt.mp h", "  right", "  rw [abs_of_neg hneg, div_neg, div_self hneg.ne]"]
+        },
+        {
+          "text": "Hence $x/|x| = 1$ or $x/|x| = -1$ for every real $x$.",
+          "fragment": []
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0014",
+          "sub_variant": null,
+          "severity": "fatal",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"omitted_case": "x = 0", "holds": false},
+          "site": 1,
+          "anchor": null,
+          "intrinsic": true,
+          "steps": []
+        }
+      ]
+    }
+  ]
+}

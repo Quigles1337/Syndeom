@@ -1,0 +1,12 @@
+=== LAKE start 18:54:59
+Build completed successfully (8933 jobs).
+=== LAKE end rc=0 18:55:41
+'syndeom_golden_nat_le_sq' depends on axioms: [propext]
+'syndeom_seed_nat_le_sq' depends on axioms: [propext]
+'syndeom_seed_n_sq_mod_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_sq_plus_one_ge_two_x' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_continuity_is_not_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_x_over_abs_x_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_rolle_abs_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_horses_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== AUDIT end rc=0

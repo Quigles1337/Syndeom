@@ -1,0 +1,24 @@
+{
+  "config": {
+    "theorem": "x_over_abs_x",
+    "style": "two_cases",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0014",
+        "sub_variant": null,
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "omitted_case": "x = 0",
+          "holds": false
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+  "toolchain": null,
+  "observation": null
+}

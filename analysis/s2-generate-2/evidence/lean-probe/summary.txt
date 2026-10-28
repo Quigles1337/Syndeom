@@ -1,0 +1,12 @@
+xoa_convincing exit=1 start=18:41:45 end=18:41:53
+xoa_false exit=0 start=18:41:53 end=18:42:00
+cinu_faithful exit=0 start=18:42:00 end=18:42:08
+cinu_flawed exit=1 start=18:42:08 end=18:42:17
+rolle_convincing exit=1 start=18:42:17 end=18:42:28
+rolle_false exit=0 start=18:42:28 end=18:42:40
+horses_convincing exit=1 start=18:42:40 end=18:42:47
+horses_false exit=1 start=18:42:47 end=18:42:53
+=== PROBE end
+horses_convincing exit=1 start=18:51:36 end=18:51:43
+horses_false exit=0 start=18:51:43 end=18:51:49
+=== PROBE end

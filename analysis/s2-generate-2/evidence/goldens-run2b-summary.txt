@@ -1,0 +1,71 @@
+continuity_is_not_uniform/control-informal exit=0 start=2026-10-28T19:30:19.772Z end=2026-10-28T19:30:22.097Z
+s2_template-v0.2.0-e12dbfbc34ae-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+continuity_is_not_uniform/control-formal exit=0 start=2026-10-28T19:30:22.099Z end=2026-10-28T19:30:42.301Z
+s2_template-v0.2.0-b3c5dd026066-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+continuity_is_not_uniform/flaw-0002-gap-informal exit=0 start=2026-10-28T19:30:42.302Z end=2026-10-28T19:30:44.364Z
+s2_template-v0.2.0-c6a316e15cbf-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+continuity_is_not_uniform/flaw-0002-gap-formal exit=0 start=2026-10-28T19:30:44.366Z end=2026-10-28T19:30:54.754Z
+s2_template-v0.2.0-5b355d64d88f-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+continuity_is_not_uniform/flaw-0002-gap-pair exit=0 start=2026-10-28T19:30:54.754Z end=2026-10-28T19:31:05.119Z
+s2_template-v0.2.0-b831cf02b9ea-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+x_over_abs_x/flaw-0014-fatal-informal exit=0 start=2026-10-28T19:31:05.121Z end=2026-10-28T19:31:07.279Z
+s2_template-v0.2.0-06d157803870-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+x_over_abs_x/flaw-0014-fatal-formal exit=0 start=2026-10-28T19:31:07.281Z end=2026-10-28T19:31:16.558Z
+s2_template-v0.2.0-a5c34a25cc46-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+x_over_abs_x/flaw-0014-fatal-pair exit=0 start=2026-10-28T19:31:16.560Z end=2026-10-28T19:31:25.633Z
+s2_template-v0.2.0-ec4a0514442b-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+rolle_abs/flaw-0005-violated-informal exit=0 start=2026-10-28T19:31:25.635Z end=2026-10-28T19:31:27.715Z
+s2_template-v0.2.0-6018ec4011e7-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+rolle_abs/flaw-0005-violated-formal exit=0 start=2026-10-28T19:31:27.717Z end=2026-10-28T19:31:41.053Z
+s2_template-v0.2.0-2aa8e0ec7f12-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+rolle_abs/flaw-0005-violated-pair exit=0 start=2026-10-28T19:31:41.054Z end=2026-10-28T19:31:54.633Z
+s2_template-v0.2.0-92ed2e47e131-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+horses/flaw-0006-fatal-informal exit=0 start=2026-10-28T19:31:54.635Z end=2026-10-28T19:31:56.757Z
+s2_template-v0.2.0-22c3147d9d48-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+horses/flaw-0006-fatal-formal exit=0 start=2026-10-28T19:31:56.759Z end=2026-10-28T19:32:05.983Z
+s2_template-v0.2.0-05964cd1eb74-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+horses/flaw-0006-fatal-pair exit=0 start=2026-10-28T19:32:05.985Z end=2026-10-28T19:32:14.621Z
+s2_template-v0.2.0-7b76255e38a5-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end

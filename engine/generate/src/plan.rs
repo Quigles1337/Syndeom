@@ -15,7 +15,8 @@ pub struct Step {
 }
 
 /// A whole artifact before rendering (ADR-0011 D2). Lemmas and padding steps arrive with the
-/// producer versions that realize FLAW-0007 and FLAW-0013; v0.1 seeds carry neither.
+/// producer versions that realize FLAW-0007 and FLAW-0013; no seed of 0.1.0 or 0.2.0 carries
+/// either.
 #[derive(Debug, Clone, PartialEq)]
 pub struct Plan {
     pub title: String,
@@ -24,6 +25,8 @@ pub struct Plan {
     /// An optional `/-- … -/` line above the main declaration (used by the D8 writer test).
     pub doc: Option<String>,
     pub main_declaration: String,
+    /// The binders between the declaration's name and its colon; empty for a closed statement
+    /// (an `s2_template` 0.2.0 seed may have none).
     pub binders: String,
     pub claim: String,
     pub truth: StatementStatus,
@@ -81,6 +84,8 @@ pub fn render_informal(plan: &Plan) -> Result<Vec<u8>, String> {
 
 /// The `syndeom-lean/1` writer (ADR-0011 D2): the imports, a blank line, the optional doc line,
 /// the main declaration, and its proof as the steps' fragments in step order, indented two spaces.
+/// A declaration without binders is written `theorem <name> : <claim> := by` (no double space);
+/// every 0.1.0 seed has binders, so no 0.1.0 byte depends on this case.
 pub fn render_formal(plan: &Plan) -> Result<FormalRendering, String> {
     if plan.imports.is_empty() {
         return Err("a formal file imports at least one Mathlib module".into());
@@ -104,13 +109,15 @@ pub fn render_formal(plan: &Plan) -> Result<FormalRendering, String> {
         check_text("doc", doc)?;
         push(&mut out, &format!("/-- {doc} -/"));
     }
-    push(
-        &mut out,
-        &format!(
+    let header = if plan.binders.is_empty() {
+        format!("theorem {} : {} := by", plan.main_declaration, plan.claim)
+    } else {
+        format!(
             "theorem {} {} : {} := by",
             plan.main_declaration, plan.binders, plan.claim
-        ),
-    );
+        )
+    };
+    push(&mut out, &header);
     let mut fragment_lines = Vec::with_capacity(plan.steps.len());
     let mut any = false;
     for (i, step) in plan.steps.iter().enumerate() {

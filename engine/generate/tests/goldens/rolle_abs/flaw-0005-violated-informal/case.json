@@ -1,0 +1,25 @@
+{
+  "config": {
+    "theorem": "rolle_abs",
+    "style": "rolle",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "sub_variant": null,
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "theorem": "Rolle's theorem",
+          "hypothesis": "f is differentiable on (-1, 1)",
+          "mode": "violated"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+  "toolchain": null,
+  "observation": null
+}

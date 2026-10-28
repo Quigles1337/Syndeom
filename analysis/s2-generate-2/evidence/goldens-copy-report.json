@@ -1,0 +1,222 @@
+[
+ {
+  "case": "continuity_is_not_uniform/control-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ],
+   "exit_code": 0,
+   "first_error_line": null
+  },
+  "artifact_id": "s2_template-v0.2.0-b3c5dd026066-s7",
+  "comparison": "probe minus its trailing #print axioms line",
+  "hand_authored_probe": "cinu_faithful",
+  "equals_probe": true,
+  "proof_sha256": "a5091164d544a7bcfb843fcb84dfabda1c424a5b2b18c54b2399f43309120eae"
+ },
+ {
+  "case": "continuity_is_not_uniform/control-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null,
+  "artifact_id": "s2_template-v0.2.0-e12dbfbc34ae-s7"
+ },
+ {
+  "case": "continuity_is_not_uniform/flaw-0002-gap-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 6
+  },
+  "artifact_id": "s2_template-v0.2.0-5b355d64d88f-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "cinu_flawed",
+  "equals_probe": true,
+  "proof_sha256": "772f25b4d000406cc76c607392d073e94e6a0a46149c6feb5641f5a8e7ba45ce"
+ },
+ {
+  "case": "continuity_is_not_uniform/flaw-0002-gap-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null,
+  "artifact_id": "s2_template-v0.2.0-c6a316e15cbf-s7"
+ },
+ {
+  "case": "continuity_is_not_uniform/flaw-0002-gap-pair",
+  "files": [
+   "Proof.lean",
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 6
+  },
+  "artifact_id": "s2_template-v0.2.0-b831cf02b9ea-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "cinu_flawed",
+  "equals_probe": true,
+  "proof_sha256": "772f25b4d000406cc76c607392d073e94e6a0a46149c6feb5641f5a8e7ba45ce"
+ },
+ {
+  "case": "horses/flaw-0006-fatal-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 20
+  },
+  "artifact_id": "s2_template-v0.2.0-4d89c8372b31-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "horses_convincing",
+  "equals_probe": true,
+  "proof_sha256": "9e198c7cad78e0c9045378bebae6eaf019ba1a65b15de3f8a172d6cd5afc61f3"
+ },
+ {
+  "case": "horses/flaw-0006-fatal-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null,
+  "artifact_id": "s2_template-v0.2.0-679bf6831274-s7"
+ },
+ {
+  "case": "horses/flaw-0006-fatal-pair",
+  "files": [
+   "Proof.lean",
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 20
+  },
+  "artifact_id": "s2_template-v0.2.0-8666b30995c2-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "horses_convincing",
+  "equals_probe": true,
+  "proof_sha256": "9e198c7cad78e0c9045378bebae6eaf019ba1a65b15de3f8a172d6cd5afc61f3"
+ },
+ {
+  "case": "rolle_abs/flaw-0005-violated-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 7
+  },
+  "artifact_id": "s2_template-v0.2.0-2aa8e0ec7f12-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "rolle_convincing",
+  "equals_probe": true,
+  "proof_sha256": "7d1b0342d4b223bf0b1eb4a7f685d3245bfb3971b87dc01d4bc09f25d6c6b4ca"
+ },
+ {
+  "case": "rolle_abs/flaw-0005-violated-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null,
+  "artifact_id": "s2_template-v0.2.0-6018ec4011e7-s7"
+ },
+ {
+  "case": "rolle_abs/flaw-0005-violated-pair",
+  "files": [
+   "Proof.lean",
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 7
+  },
+  "artifact_id": "s2_template-v0.2.0-92ed2e47e131-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "rolle_convincing",
+  "equals_probe": true,
+  "proof_sha256": "7d1b0342d4b223bf0b1eb4a7f685d3245bfb3971b87dc01d4bc09f25d6c6b4ca"
+ },
+ {
+  "case": "x_over_abs_x/flaw-0014-fatal-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 4
+  },
+  "artifact_id": "s2_template-v0.2.0-a5c34a25cc46-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "xoa_convincing",
+  "equals_probe": true,
+  "proof_sha256": "4a8b508fdec16de1d26a77f970d171d46107ddbb965eedec9cd21fd3b2e9469a"
+ },
+ {
+  "case": "x_over_abs_x/flaw-0014-fatal-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null,
+  "artifact_id": "s2_template-v0.2.0-06d157803870-s7"
+ },
+ {
+  "case": "x_over_abs_x/flaw-0014-fatal-pair",
+  "files": [
+   "Proof.lean",
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 4
+  },
+  "artifact_id": "s2_template-v0.2.0-ec4a0514442b-s7",
+  "comparison": "byte-exact",
+  "hand_authored_probe": "xoa_convincing",
+  "equals_probe": true,
+  "proof_sha256": "4a8b508fdec16de1d26a77f970d171d46107ddbb965eedec9cd21fd3b2e9469a"
+ }
+]

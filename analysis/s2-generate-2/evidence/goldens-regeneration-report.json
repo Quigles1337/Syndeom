@@ -1,0 +1,310 @@
+{
+ "run_a": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-020-20261028T1830Z/goldens-2a",
+ "run_b": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-020-20261028T1830Z/goldens-2b",
+ "cases": [
+  {
+   "case": "continuity_is_not_uniform/control-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "a5091164d544a7bcfb843fcb84dfabda1c424a5b2b18c54b2399f43309120eae",
+     "bytes": 533,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "676cc4076204f15f111a3116389a39d58260e9e9100d961ed30f4f32bdf57aac",
+     "bytes": 2961,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-b3c5dd026066-s7"
+  },
+  {
+   "case": "continuity_is_not_uniform/control-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "7ab2e504aa26f35ea7e3e0b6ab9070a6e960f5fa2bfd982267f5c7a5cfd2b95e",
+     "bytes": 2739,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "abd0002b349bd3b0a893f8deacf254c2430b55e92f672706d8be9901b9b5933a",
+     "bytes": 561,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-e12dbfbc34ae-s7"
+  },
+  {
+   "case": "continuity_is_not_uniform/flaw-0002-gap-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "772f25b4d000406cc76c607392d073e94e6a0a46149c6feb5641f5a8e7ba45ce",
+     "bytes": 607,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "0e50090eb5a0e565725e308805d27c5de3dd5c0d8cf4e10d583e78c39bb69860",
+     "bytes": 4462,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-5b355d64d88f-s7"
+  },
+  {
+   "case": "continuity_is_not_uniform/flaw-0002-gap-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "55d43e8b3b8d3154c503abe45dec6a905336772d4a3ad0c174e0d86966340850",
+     "bytes": 4228,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "25c01094ca38b7892bfb03eeb22e1cb4be369a713492f38c265618b59407b4fb",
+     "bytes": 583,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-c6a316e15cbf-s7"
+  },
+  {
+   "case": "continuity_is_not_uniform/flaw-0002-gap-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "772f25b4d000406cc76c607392d073e94e6a0a46149c6feb5641f5a8e7ba45ce",
+     "bytes": 607,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "7b1b47b053f3b95ea38fb3f0aa495496e08bd1e3f9a156e22d269e8ecc299cf3",
+     "bytes": 6281,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "25c01094ca38b7892bfb03eeb22e1cb4be369a713492f38c265618b59407b4fb",
+     "bytes": 583,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-b831cf02b9ea-s7"
+  },
+  {
+   "case": "horses/flaw-0006-fatal-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "9e198c7cad78e0c9045378bebae6eaf019ba1a65b15de3f8a172d6cd5afc61f3",
+     "bytes": 1493,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "e5641e7d7885909bd1cd8fc4c32f6cb86be3ae75a7641eedd43af7a9db694178",
+     "bytes": 4325,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-05964cd1eb74-s7"
+  },
+  {
+   "case": "horses/flaw-0006-fatal-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "15f4ec35a1d71f3a488899e9418490d20e609021fe3e2c5269b7513550a76ae4",
+     "bytes": 3935,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "d516f093bed4bc031dc50397aa6caaaf171a32fa5f9053a79e28caf6d9d4c104",
+     "bytes": 807,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-22c3147d9d48-s7"
+  },
+  {
+   "case": "horses/flaw-0006-fatal-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "9e198c7cad78e0c9045378bebae6eaf019ba1a65b15de3f8a172d6cd5afc61f3",
+     "bytes": 1493,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "c05ef520a90417fe645049b1544af2c97aaa59e43de9ae3abb91bc8d3eb2fa54",
+     "bytes": 5859,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "d516f093bed4bc031dc50397aa6caaaf171a32fa5f9053a79e28caf6d9d4c104",
+     "bytes": 807,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-7b76255e38a5-s7"
+  },
+  {
+   "case": "rolle_abs/flaw-0005-violated-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "7d1b0342d4b223bf0b1eb4a7f685d3245bfb3971b87dc01d4bc09f25d6c6b4ca",
+     "bytes": 585,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "428d470c0f17ecdde678f91546a372e321d98cbe32451263166ec574ad243873",
+     "bytes": 4336,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-2aa8e0ec7f12-s7"
+  },
+  {
+   "case": "rolle_abs/flaw-0005-violated-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "0c3da743adc9c113fae0e4ef09f4e14f6be3f475df868a9cf9b60755da2246da",
+     "bytes": 4062,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "9fac220a0fa6a4d485d165779fdd912798395bede3c94f2bb61e0b827041733c",
+     "bytes": 402,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-6018ec4011e7-s7"
+  },
+  {
+   "case": "rolle_abs/flaw-0005-violated-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "7d1b0342d4b223bf0b1eb4a7f685d3245bfb3971b87dc01d4bc09f25d6c6b4ca",
+     "bytes": 585,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "397ff68287e143b4939a20e014f4c79f42dbdb5d3617a31c947c61235e23f9a0",
+     "bytes": 5942,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "9fac220a0fa6a4d485d165779fdd912798395bede3c94f2bb61e0b827041733c",
+     "bytes": 402,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-92ed2e47e131-s7"
+  },
+  {
+   "case": "x_over_abs_x/flaw-0014-fatal-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "4a8b508fdec16de1d26a77f970d171d46107ddbb965eedec9cd21fd3b2e9469a",
+     "bytes": 381,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "73b69cd60c738ab68c6841b1918a0a1e7d7660364ca1ab96712fe09972441fa9",
+     "bytes": 3978,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-a5c34a25cc46-s7"
+  },
+  {
+   "case": "x_over_abs_x/flaw-0014-fatal-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "937c4a7da12d237032cc836ffee0beabd568ecb12544864d01a9520dfae0eab9",
+     "bytes": 3842,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "68386980c7db0fb68b33be30d39b7ae639ebda88bea099a8cbb6d72bb4539060",
+     "bytes": 399,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-06d157803870-s7"
+  },
+  {
+   "case": "x_over_abs_x/flaw-0014-fatal-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "4a8b508fdec16de1d26a77f970d171d46107ddbb965eedec9cd21fd3b2e9469a",
+     "bytes": 381,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "49f71f5d56afc2c09a8d9626265e267d18e509d55d28037bd933949ea6eff682",
+     "bytes": 5420,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "68386980c7db0fb68b33be30d39b7ae639ebda88bea099a8cbb6d72bb4539060",
+     "bytes": 399,
+     "identical": true
+    }
+   },
+   "engine_commit": "c899b0732db8b7a1a104822772a428f534a651cd",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.2.0-ec4a0514442b-s7"
+  }
+ ],
+ "all_byte_identical": true,
+ "engine_commits": [
+  "c899b0732db8b7a1a104822772a428f534a651cd"
+ ]
+}

@@ -2,16 +2,19 @@
 //! `syndeom-generate` (ADR-0011 D9): `generate`, `regenerate` and `verify`. Exit codes: 0 written
 //! or identical; 1 usage or I/O; 2 refused; 3 a different artifact under the same id. A failed
 //! confirmation is not a refusal: the artifact is written with its FAIL verdict.
+//!
+//! `generate` emits the current producer version; `regenerate` and `verify` accept every version
+//! the crate carries, selected by the manifest's `generator.version` (ADR-0011 *Amendments*).
 
 use std::collections::BTreeMap;
 use std::fs;
 use std::io::Write;
 use std::path::{Path, PathBuf};
-use std::process::Command;
 
 use serde_json::{Value, json};
 use syndeom_generate::harness::{self, LeanRun, Observation};
-use syndeom_generate::template::{self, GENERATOR_ID, GENERATOR_VERSION, Prepared};
+use syndeom_generate::provenance::{self, ProvenanceError};
+use syndeom_generate::template::{self, GENERATOR_ID, GENERATOR_VERSION, Prepared, Version};
 use syndeom_manifest::{
     Manifest, Toolchain, content_hash, from_json_str, sha256_hex, to_disk_json,
 };
@@ -20,17 +23,6 @@ const USAGE: &str = "usage:
   syndeom-generate generate --config <config.json> --seed <u64> --root <repo> --engine-commit <40-hex> --receipt-dir <new directory outside the repo> [--dry-run]
   syndeom-generate regenerate --manifest <manifest.json> --root <repo>
   syndeom-generate verify --artifact <corpora/<id>> --root <repo> --receipt-dir <new directory outside the repo>";
-
-/// The producer's tracked input set (ADR-0011 D9): directories and single files.
-const INPUT_DIRS: &[&str] = &["engine/generate", "engine/manifest", "lean/Syndeom/Seeds"];
-const INPUT_FILES: &[&str] = &[
-    "engine/Cargo.toml",
-    "engine/Cargo.lock",
-    "rust-toolchain.toml",
-    "lean/lean-toolchain",
-    "lean/lakefile.toml",
-    "lean/lake-manifest.json",
-];
 
 enum Fail {
     Usage(String),
@@ -41,6 +33,15 @@ enum Fail {
 impl From<std::io::Error> for Fail {
     fn from(e: std::io::Error) -> Self {
         Fail::Usage(e.to_string())
+    }
+}
+
+impl From<ProvenanceError> for Fail {
+    fn from(e: ProvenanceError) -> Self {
+        match e {
+            ProvenanceError::Io(m) => Fail::Usage(m),
+            ProvenanceError::Refused(m) => Fail::Refused(m),
+        }
     }
 }
 
@@ -74,84 +75,6 @@ fn parse_args(
         }
     }
     Ok((values, set))
-}
-
-fn git(root: &Path, args: &[&str]) -> Result<std::process::Output, Fail> {
-    Command::new("git")
-        .arg("-C")
-        .arg(root)
-        .args(args)
-        .output()
-        .map_err(io)
-}
-
-fn walk(dir: &Path, out: &mut Vec<PathBuf>) -> Result<(), Fail> {
-    if !dir.exists() {
-        return Ok(());
-    }
-    for entry in fs::read_dir(dir)? {
-        let path = entry?.path();
-        if path.is_dir() {
-            walk(&path, out)?;
-        } else {
-            out.push(path);
-        }
-    }
-    Ok(())
-}
-
-/// ADR-0011 D9: the named commit is an ancestor of `HEAD` and its blobs for the tracked input
-/// set equal the working tree's bytes, with no input file the commit lacks.
-fn verify_engine_commit(root: &Path, commit: &str) -> Result<(), Fail> {
-    if commit.len() != 40 || !commit.chars().all(|c| matches!(c, '0'..='9' | 'a'..='f')) {
-        return Err(Fail::Refused(
-            "--engine-commit is a 40-character lowercase hex commit id".into(),
-        ));
-    }
-    if !git(root, &["merge-base", "--is-ancestor", commit, "HEAD"])?
-        .status
-        .success()
-    {
-        return Err(Fail::Refused(format!(
-            "engine_commit {commit} is not an ancestor of HEAD"
-        )));
-    }
-    let mut args = vec!["ls-tree", "-r", "--name-only", commit, "--"];
-    args.extend(INPUT_DIRS);
-    let listed = git(root, &args)?;
-    if !listed.status.success() {
-        return Err(Fail::Refused(format!("git ls-tree failed for {commit}")));
-    }
-    let mut names: Vec<String> = String::from_utf8_lossy(&listed.stdout)
-        .lines()
-        .map(str::to_string)
-        .collect();
-    names.extend(INPUT_FILES.iter().map(|s| s.to_string()));
-    for name in &names {
-        let blob = git(root, &["show", &format!("{commit}:{name}")])?;
-        if !blob.status.success() || blob.stdout != fs::read(root.join(name)).unwrap_or_default() {
-            return Err(Fail::Refused(format!(
-                "engine_commit does not identify the checked-out producer input {name}"
-            )));
-        }
-    }
-    let mut present = Vec::new();
-    for dir in INPUT_DIRS {
-        walk(&root.join(dir), &mut present)?;
-    }
-    for path in present {
-        let rel = path
-            .strip_prefix(root)
-            .map_err(io)?
-            .to_string_lossy()
-            .replace('\\', "/");
-        if !names.contains(&rel) {
-            return Err(Fail::Refused(format!(
-                "producer input {rel} is not in engine_commit {commit}"
-            )));
-        }
-    }
-    Ok(())
 }
 
 /// `toolchain`, read from `lean/lean-toolchain` and `lean/lake-manifest.json` (ADR-0001 D4).
@@ -268,6 +191,18 @@ fn files_of(p: &Prepared) -> Vec<(&'static str, Vec<u8>)> {
     v
 }
 
+/// The producer version a manifest names, if this crate carries it.
+fn version_of(manifest: &Manifest) -> Result<Version, Fail> {
+    let version = Version::parse(&manifest.generator.version);
+    match version {
+        Some(v) if manifest.generator.id == GENERATOR_ID => Ok(v),
+        _ => Err(Fail::Refused(format!(
+            "{} {} is not a version of this producer",
+            manifest.generator.id, manifest.generator.version
+        ))),
+    }
+}
+
 fn generate(args: &[String]) -> Result<(), Fail> {
     let (a, flags) = parse_args(
         args,
@@ -287,7 +222,7 @@ fn generate(args: &[String]) -> Result<(), Fail> {
         .parse()
         .map_err(|_| Fail::Usage("--seed is an unsigned 64-bit integer".into()))?;
     let config: Value = serde_json::from_str(&fs::read_to_string(&a["--config"])?).map_err(io)?;
-    verify_engine_commit(&root, commit)?;
+    let provenance = provenance::verify_engine_commit(&root, commit)?;
     let prepared = template::prepare(&config, seed).map_err(Fail::Refused)?;
     let id = prepared.artifact_id();
     let dir = new_receipt_dir(&root, &a["--receipt-dir"])?;
@@ -342,6 +277,7 @@ fn generate(args: &[String]) -> Result<(), Fail> {
             "command": std::iter::once("generate".to_string()).chain(args.iter().cloned()).collect::<Vec<_>>(),
             "producer": {"id": GENERATOR_ID, "version": GENERATOR_VERSION},
             "engine_commit": commit,
+            "provenance": provenance,
             "toolchain": toolchain.map(|t| json!({"lean": t.lean, "mathlib": t.mathlib})),
             "lean_commands": runs,
             "observation": observation,
@@ -363,18 +299,10 @@ fn regenerate(args: &[String]) -> Result<(), Fail> {
     let (a, _) = parse_args(args, &["--manifest", "--root"], &[])?;
     let path = PathBuf::from(&a["--manifest"]);
     let manifest = load_manifest(&path)?;
-    if (
-        manifest.generator.id.as_str(),
-        manifest.generator.version.as_str(),
-    ) != (GENERATOR_ID, GENERATOR_VERSION)
-    {
-        return Err(Fail::Refused(format!(
-            "{} {} is not this producer",
-            manifest.generator.id, manifest.generator.version
-        )));
-    }
+    let version = version_of(&manifest)?;
     let seed = manifest.seed.ok_or(Fail::Refused("no seed".into()))?;
-    let prepared = template::prepare(&manifest.config, seed).map_err(Fail::Refused)?;
+    let prepared =
+        template::prepare_with(version, &manifest.config, seed).map_err(Fail::Refused)?;
     if prepared.artifact_id() != manifest.artifact_id {
         return Err(Fail::Refused("the manifest's id does not derive".into()));
     }
@@ -444,18 +372,10 @@ fn verify(args: &[String]) -> Result<(), Fail> {
     }
     // Lean elaboration can run code, so only bytes this producer itself emits for the manifest's
     // (config, seed) are ever compiled.
-    if (
-        manifest.generator.id.as_str(),
-        manifest.generator.version.as_str(),
-    ) != (GENERATOR_ID, GENERATOR_VERSION)
-    {
-        return Err(Fail::Refused(format!(
-            "{} {} is not this producer",
-            manifest.generator.id, manifest.generator.version
-        )));
-    }
+    let version = version_of(&manifest)?;
     let seed = manifest.seed.ok_or(Fail::Refused("no seed".into()))?;
-    let prepared = template::prepare(&manifest.config, seed).map_err(Fail::Refused)?;
+    let prepared =
+        template::prepare_with(version, &manifest.config, seed).map_err(Fail::Refused)?;
     if prepared.artifact_id() != manifest.artifact_id
         || prepared.formal.as_ref().map(|f| f.bytes.as_slice()) != Some(bytes.as_slice())
     {
@@ -480,7 +400,7 @@ fn verify(args: &[String]) -> Result<(), Fail> {
         json!({
             "schema": "syndeom-generate-receipt/1",
             "command": std::iter::once("verify".to_string()).chain(args.iter().cloned()).collect::<Vec<_>>(),
-            "producer": {"id": GENERATOR_ID, "version": GENERATOR_VERSION},
+            "producer": {"id": GENERATOR_ID, "version": version.as_str()},
             "artifact_ids": [manifest.artifact_id],
             "content_hash": formal.content_hash,
             "lean_commands": runs,
