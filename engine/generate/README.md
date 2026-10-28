@@ -26,7 +26,8 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
 - **`s2_template` 0.2.0** (Session 41; the version `generate` emits): the 0.1.0 seeds and four
   more, each from its FLAWS.md 0.1.0 example — `continuity_is_not_uniform` (FLAW-0002, the
   quantifier swap, gap), `x_over_abs_x` (FLAW-0014, the fatal case), `rolle_abs` (FLAW-0005
-  `violated`, fatal) and `horses` (FLAW-0006, fatal); flaw counts per instance (Al's ruling 3 on
+  `violated`, fatal) and `horses` (FLAW-0006 `step-above-base`, fatal; the mode Al's rulings on
+  PR 27 added to D5); flaw counts per instance (Al's ruling 3 on
   PR 26); build-time input hashes.
 
 The crate regenerates both versions: the goldens select the version their manifests name, and

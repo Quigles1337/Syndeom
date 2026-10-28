@@ -40,7 +40,7 @@
           "sub_variant": null,
           "severity": "fatal",
           "lean_catchable": "YES-KERNEL",
-          "dials": {"mode": "shift-index", "failing_case": "n + 1 = 2"},
+          "dials": {"mode": "step-above-base", "failing_case": "n + 1 = 2"},
           "site": 3,
           "anchor": null,
           "intrinsic": true,

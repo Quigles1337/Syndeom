@@ -44,7 +44,7 @@ Branch `claude/s2-template-0.2.0`, from `main` `de3e4a62fde75eea2c80c17ac6210955
   | `continuity_is_not_uniform` | FLAW-0002, `swap: forall-exists` | gap | true | `syndeom_seed_continuity_is_not_uniform` (the statement) |
   | `x_over_abs_x` | FLAW-0014, `omitted_case: "x = 0"`, `holds: false` | fatal | false | `syndeom_seed_x_over_abs_x_false` (the negation) |
   | `rolle_abs` | FLAW-0005, Rolle's theorem, differentiability, `mode: violated` | fatal | false | `syndeom_seed_rolle_abs_false` (the negation) |
-  | `horses` | FLAW-0006, `mode: shift-index`, `failing_case: "n + 1 = 2"` | fatal | false | `syndeom_seed_horses_false` (the negation) |
+  | `horses` | FLAW-0006, `mode: step-above-base` (relabeled from `shift-index` by Al's rulings on PR 27), `failing_case: "n + 1 = 2"` | fatal | false | `syndeom_seed_horses_false` (the negation) |
 
 - **Seeds whose statement is false.** They carry `truth.value: false` with the negation witness
   and a `counterexample` in words; they have no control (a flawless config is refused, exit 2);
@@ -174,7 +174,10 @@ reads it. They continue packet 1's numbering.
     FLAWS.md files its example under; a FLAW-0012 record is written only when FLAW-0012 is
     commanded, in a later version.
 14. **FLAW-0006's mode for the horses** (also in the amendment): `shift-index`, with
-    `failing_case: "n + 1 = 2"`.
+    `failing_case: "n + 1 = 2"`. **Not accepted (Al's rulings on PR 27):** D5's mode enum gains
+    `step-above-base` (the inductive step's argument is valid only for n above the base, so the
+    base → base+1 step is unjustified; `failing_case` names that first unjustified step), and the
+    horses record is relabeled to it, with `failing_case` kept; see *Al's rulings on PR 27* below.
 15. **The no-binders header.** `theorem <name> : <claim> := by` for a closed statement; a D2
     rendering detail with no 0.1.0 byte affected.
 16. **Both versions in one crate.** `generate` emits 0.2.0 only; `regenerate` and `verify`
@@ -193,3 +196,22 @@ reads it. They continue packet 1's numbering.
 20. **`omega`'s message.** "No usable constraints found" at the horses' overlap line is the
     message for a satisfiable system (`m = 1`), as `omega_test.lean` shows; the probe records
     the message as Lean printed it.
+
+## Al's rulings on PR 27, and their application
+
+Al ruled on 2026-10-28 (verbatim in ADR-0011 *Amendments*, STATE *Standing rulings* and HANDOFF
+Session 41's addendum; copy `owner-rulings-pr27.txt` under the external root, 1,443 bytes,
+SHA-256 `c465f9e5cecb42677e958cb950f3249492c6d75251901ffa6fd343d7aceb6b8a`): readings 13, 15,
+16, 17, 18, 19 and 20 are accepted as read; reading 14 is not accepted as `shift-index`.
+
+- **D5 amended.** FLAW-0006's `mode` gains a fourth value, `step-above-base`: the inductive
+  step's argument is valid only for n above the base, so the base → base+1 step is unjustified;
+  `failing_case` names that first unjustified step. The mode is descriptive for intrinsic
+  material and changes no proof byte.
+- **The horses record relabeled.** `seeds/horses.json` carries `mode: "step-above-base"`,
+  `failing_case: "n + 1 = 2"`; the refusal case in `tests/properties.rs` and the crate README
+  follow. The seed's steps, fragments and witness are untouched.
+- **The 0.2.0 goldens regenerated** at the commit that holds the relabeled seed, by two
+  separate runs compared byte for byte (`evidence/goldens-run2.py`, `evidence/goldens-copy2.py`,
+  `evidence/goldens-regeneration-report.json`); the runs, the engine commit they name and the
+  horses artifact ids are recorded below once made.

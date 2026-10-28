@@ -520,7 +520,7 @@ fn d3_unsupported_specs_are_refused() {
                 "FLAW-0006",
                 None,
                 "gap",
-                json!({"mode": "shift-index"})
+                json!({"mode": "step-above-base", "failing_case": "n + 1 = 2"})
             )]),
         ),
     ];

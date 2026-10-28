@@ -8673,3 +8673,35 @@ is open for Al's review. Repo green: the gate on the committed tree is recorded 
 request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 41 ADDENDUM — AL'S RULINGS ON PR 27 (2026-10-28 UTC, received in this session's
+conversation after PR #27 opened; recorded at Al's direction in new commits on the same branch,
+no force-push; transcribed verbatim from Al's message as rendered to the executor; copy
+`owner-rulings-pr27.txt` under `C:\Users\LEET\Codex\Temp\syndeom-s2-template-020-20261028T1830Z\`,
+1,443 bytes, SHA-256 `c465f9e5cecb42677e958cb950f3249492c6d75251901ffa6fd343d7aceb6b8a`):
+
+~~~text
+Rulings on PR #27 / s2_template 0.2.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 13, 15, 16, 17, 18, 19 and 20 are accepted as read.
+
+Reading 14 (FLAW-0006's mode for the horses) is not accepted as shift-index. D5's modes {drop-base, shift-index, strong-weak} name no case that fits, as the amendment says, and shift-index asserts an index shift the horses argument does not contain: its induction is set up correctly, and the defect is that the overlap step is valid only for n+1 >= 3, leaving the first step (1 -> 2) unjustified -- the kind FLAWS.md's own prose names ("proves the step only for n above the base"). Extend D5's FLAW-0006 mode enum with a fourth value, step-above-base, defined as "the inductive step's argument is valid only for n above the base, so the base -> base+1 step is unjustified; failing_case names that first unjustified step." Relabel the horses record's dials.mode (in the seed and in all three horses goldens) to step-above-base, keep failing_case "n + 1 = 2", and regenerate so the 0.2.0 goldens share one engine_commit. The horses proof bytes do not change (the mode is descriptive for intrinsic material); only the manifests do. Confirm two runs are byte-identical and report the engine_commit the regenerated goldens name.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before applying the rulings, a fresh fetch at 2026-10-28T19:27:00Z showed `origin/main` still at `de3e4a6`
+and the branch at `20f8033`, in sync with its remote.
+
+How each ruling is applied:
+- **Readings 13, 15–20 accepted** → recorded in ADR-0011 *Amendments*, STATE and the packet.
+- **Reading 14 replaced** → D5's FLAW-0006 mode enum gains `step-above-base`, with its
+  definition, in ADR-0011 *Amendments* (the D5 row's mode set is superseded on that point); the
+  horses seed record's `dials.mode` is relabeled with `failing_case` kept; the refusal case in
+  `tests/properties.rs` and the crate README follow. The horses proof bytes do not change: the
+  seed's steps, fragments and witness are untouched, and only the material's dials differ.
+- **Regeneration** → the 14 goldens of 0.2.0 are regenerated at the commit that holds the
+  relabeled seed (the first of these commits), by two separate runs of `generate --dry-run`
+  whose outputs are compared byte for byte before run A's are placed under
+  `engine/generate/tests/goldens/`. The second part of this addendum records the engine commit
+  they name, the two runs, the gate on the committed tree, the recheck and the push.

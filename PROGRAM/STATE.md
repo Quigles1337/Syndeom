@@ -48,6 +48,11 @@
     statement is false have no control and intrinsic material; FLAW-0006's mode for the horses;
     the no-binders header; both versions in one crate; the FLAW-0002 theorem and its gap
     severity; `rolle_abs` in `HasDerivAt` form; the horses formalization; `omega`'s message.
+  - **Al's rulings of 2026-10-28 on PR 27** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 41's addendum), applied on the same branch: readings 13 and
+    15–20 accepted; reading 14 replaced by the new D5 mode `step-above-base`; the horses record
+    relabeled (proof bytes unchanged); the 14 goldens of 0.2.0 regenerated at one engine commit
+    from two byte-identical runs (the addendum names it).
   - **Not yet built:** `s2_grammar`, padding (FLAW-0013), lemma steps, the T check, the seeds
     for the remaining FLAWS.md examples (FLAW-0003, 0004, 0007, 0008, 0009, 0010, 0011, 0012 and
     0013), and the sweep (ADR-0011 D11).
@@ -1634,6 +1639,24 @@ Owner note, to act on only after you have disclosed and oriented, and to record 
 2. For a pair artifact, an injected instance is confirmed only when both of its records pass their checks. Record this with 0.2.0's amendment.
 ~~~
 
+- **Al's rulings of 2026-10-28 on PR 27 (`s2_template` 0.2.0) — verbatim.** Received in
+  Session 41's conversation after PR 27 opened. The copy is `owner-rulings-pr27.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-s2-template-020-20261028T1830Z\` (1,443 bytes, SHA-256
+  `c465f9e5cecb42677e958cb950f3249492c6d75251901ffa6fd343d7aceb6b8a`), transcribed from the
+  message as rendered to the executor. The rulings are also in ADR-0011 *Amendments* and in
+  HANDOFF Session 41's addendum. Their effect is under *Standing escalations* and in the Updated
+  bullet.
+
+~~~text
+Rulings on PR #27 / s2_template 0.2.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 13, 15, 16, 17, 18, 19 and 20 are accepted as read.
+
+Reading 14 (FLAW-0006's mode for the horses) is not accepted as shift-index. D5's modes {drop-base, shift-index, strong-weak} name no case that fits, as the amendment says, and shift-index asserts an index shift the horses argument does not contain: its induction is set up correctly, and the defect is that the overlap step is valid only for n+1 >= 3, leaving the first step (1 -> 2) unjustified -- the kind FLAWS.md's own prose names ("proves the step only for n above the base"). Extend D5's FLAW-0006 mode enum with a fourth value, step-above-base, defined as "the inductive step's argument is valid only for n above the base, so the base -> base+1 step is unjustified; failing_case names that first unjustified step." Relabel the horses record's dials.mode (in the seed and in all three horses goldens) to step-above-base, keep failing_case "n + 1 = 2", and regenerate so the 0.2.0 goldens share one engine_commit. The horses proof bytes do not change (the mode is descriptive for intrinsic material); only the manifests do. Confirm two runs are byte-identical and report the engine_commit the regenerated goldens name.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -1708,14 +1731,19 @@ Owner note, to act on only after you have disclosed and oriented, and to record 
 
 ## Standing escalations and dispositions
 
-- **`s2_template` 0.2.0 — awaiting Al's review and merge** (Session 41; branch
+- **`s2_template` 0.2.0 — RULED by Al on 2026-10-28 (rulings on PR 27, verbatim under
+  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 41; branch
   `claude/s2-template-0.2.0`; `analysis/s2-generate-2/README.md`).
-  - Merge with a merge commit, so that `af28cc9` (the 0.2.0 goldens' `engine_commit`) stays a
-    real commit on `main`.
-  - Readings 13–20 in the packet, and the two readings in ADR-0011 *Amendments* (seeds whose
-    statement is false have no control and intrinsic material; FLAW-0006's mode for the horses),
-    await rulings. A ruling that changes a seed or a check bumps the producer again; no golden is
-    rewritten.
+  - Readings 13, 15, 16, 17, 18, 19 and 20 are accepted as read.
+  - Reading 14 is replaced: D5's FLAW-0006 mode enum gains `step-above-base` (the inductive
+    step's argument is valid only for n above the base, so the base → base+1 step is
+    unjustified; `failing_case` names that first unjustified step). The horses record is
+    relabeled in the seed and, by regeneration, in its three goldens; the proof bytes are
+    unchanged. All 14 goldens of 0.2.0 are regenerated at one engine commit — the commit holding
+    the relabeled seed — from two runs confirmed byte-identical (HANDOFF Session 41's addendum
+    reports the engine commit they name).
+  - Merge with a merge commit, so that the 0.2.0 goldens' `engine_commit` stays a real commit on
+    `main`.
   - The owner note of 2026-10-28 is recorded (`da2bd83`); nothing else is awaited on it.
 - **ADR-0011's crate, the first implementation — RULED by Al on 2026-10-28 (rulings 1–6 on
   PR 26, verbatim under *Standing rulings* and in ADR-0011 *Amendments*); merged as PR 26**
