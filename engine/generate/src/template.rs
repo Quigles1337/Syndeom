@@ -3,9 +3,11 @@
 //! the Lean harness has observed the formal file (D2's pipeline; `pad` is the identity because no
 //! seed carries FLAW-0013 material, and a non-zero padding ratio is refused).
 //!
-//! The crate carries two producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR 26):
-//! `0.1.0`, whose three seeds and per-record counts stay regenerable as the goldens name them, and
-//! `0.2.0`, the version `generate` emits, with four more seeds and counts per instance.
+//! The crate carries three producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
+//! 26): `0.1.0`, whose three seeds and per-record counts stay regenerable as the goldens name them;
+//! `0.2.0`, with four more seeds and counts per instance; and `0.3.0`, the version `generate`
+//! emits, with lemma steps (D2), the T check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the
+//! `n_lt_two_pow` seed.
 //!
 //! A seed's flaw material is a whole-argument variant of one style: the flawed step list, each
 //! step naming the faithful step it replaces (`from`), the flaw site, and the anchor text at the
@@ -28,13 +30,15 @@ use syndeom_manifest::{
     parse_lean, span_text,
 };
 
-use crate::harness::Observation;
-use crate::plan::{FormalRendering, Plan, Step, render_formal, render_informal};
+use crate::harness::{Observation, used_closure};
+use crate::plan::{
+    FormalRendering, LemmaHeader, Plan, Step, lemma_lines, render_formal, render_informal,
+};
 use crate::rng::{RNG_ID, Stream};
 
 pub const GENERATOR_ID: &str = "s2_template";
 /// The producer version `generate` emits (ADR-0011 D1; ruling 5 on PR 26).
-pub const GENERATOR_VERSION: &str = "0.2.0";
+pub const GENERATOR_VERSION: &str = "0.3.0";
 /// The FLAWS.md version every record is read against (ADR-0011 D7).
 pub const TAXONOMY_VERSION: &str = "0.1.0";
 
@@ -44,15 +48,17 @@ pub const TAXONOMY_VERSION: &str = "0.1.0";
 pub enum Version {
     V0_1_0,
     V0_2_0,
+    V0_3_0,
 }
 
 impl Version {
-    pub const CURRENT: Version = Version::V0_2_0;
+    pub const CURRENT: Version = Version::V0_3_0;
 
     pub fn parse(s: &str) -> Option<Version> {
         match s {
             "0.1.0" => Some(Version::V0_1_0),
             "0.2.0" => Some(Version::V0_2_0),
+            "0.3.0" => Some(Version::V0_3_0),
             _ => None,
         }
     }
@@ -61,14 +67,17 @@ impl Version {
         match self {
             Version::V0_1_0 => "0.1.0",
             Version::V0_2_0 => "0.2.0",
+            Version::V0_3_0 => "0.3.0",
         }
     }
 
-    /// How many of [`SEED_RECORDS`] the version compiles in: the v0.1 set, then the v0.2 additions.
+    /// How many of [`SEED_RECORDS`] the version compiles in: the v0.1 set, then the v0.2
+    /// additions, then the v0.3 addition.
     fn seed_count(self) -> usize {
         match self {
             Version::V0_1_0 => 3,
             Version::V0_2_0 => 7,
+            Version::V0_3_0 => 8,
         }
     }
 
@@ -88,6 +97,7 @@ const SEED_RECORDS: &[&str] = &[
     include_str!("../seeds/x_over_abs_x.json"),
     include_str!("../seeds/rolle_abs.json"),
     include_str!("../seeds/horses.json"),
+    include_str!("../seeds/n_lt_two_pow.json"),
 ];
 
 /// Dial keys the injector writes into a record; a spec may not use them.
@@ -98,6 +108,7 @@ const RESERVED_DIALS: &[&str] = &[
     "original_steps",
     "original_fragments",
     "counterexample",
+    "declaration",
 ];
 
 fn required_option<'de, D, T>(d: D) -> Result<Option<T>, D::Error>
@@ -156,6 +167,11 @@ pub struct Material {
     /// itself, `steps` is empty, and the record replaces nothing.
     #[serde(default)]
     pub intrinsic: bool,
+    /// `true` for material that inserts a step (0.3.0; FLAW-0007 `unused`): `site` is then the
+    /// 1-based index of the inserted step in `steps`, the one step that stands in for no
+    /// faithful step (`from: null`).
+    #[serde(default)]
+    pub inserts: bool,
     pub steps: Vec<FlawedStep>,
 }
 
@@ -171,10 +187,14 @@ pub struct Anchor {
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct FlawedStep {
-    /// The faithful step this one stands in for, 1-based.
-    pub from: u64,
+    /// The faithful step this one stands in for, 1-based; `null` for an inserted step.
+    #[serde(deserialize_with = "required_option")]
+    pub from: Option<u64>,
     pub text: String,
     pub fragment: Vec<String>,
+    /// The lemma header of a lemma step (0.3.0).
+    #[serde(default)]
+    pub lemma: Option<LemmaHeader>,
 }
 
 /// Every seed record a producer version compiles in.
@@ -219,8 +239,37 @@ pub fn check_seed(seed: &Seed) -> Result<(), String> {
                     seed.id
                 ));
             }
-            if m.site < 1 || m.site as usize > style.steps.len() {
-                return Err(format!("seed {}: a material's site is a step", seed.id));
+            if m.inserts {
+                if m.intrinsic || m.anchor.is_some() {
+                    return Err(format!(
+                        "seed {}: insertion material is neither intrinsic nor anchored",
+                        seed.id
+                    ));
+                }
+                if m.site < 1 || m.site as usize > m.steps.len() {
+                    return Err(format!(
+                        "seed {}: an insertion's site is one of its own steps",
+                        seed.id
+                    ));
+                }
+                for (i, s) in m.steps.iter().enumerate() {
+                    if s.from.is_none() != (i + 1 == m.site as usize) {
+                        return Err(format!(
+                            "seed {}: exactly the inserted step stands in for no faithful step",
+                            seed.id
+                        ));
+                    }
+                }
+            } else {
+                if m.site < 1 || m.site as usize > style.steps.len() {
+                    return Err(format!("seed {}: a material's site is a step", seed.id));
+                }
+                if m.steps.iter().any(|s| s.from.is_none()) {
+                    return Err(format!(
+                        "seed {}: replacement material names the faithful step each step stands in for",
+                        seed.id
+                    ));
+                }
             }
             if let Some(a) = &m.anchor
                 && a.replaced.is_some() == m.intrinsic
@@ -637,17 +686,24 @@ fn inject(
     }
 
     let faithful = &style.steps;
-    let site = material
-        .steps
-        .iter()
-        .position(|s| s.from == material.site)
-        .ok_or("the material's site is not among its steps")?
-        + 1;
+    // The flaw site in the flawed argument: for replacement material, the step standing in for
+    // the faithful site; for insertion material (0.3.0, FLAW-0007 `unused`), the inserted step
+    // itself, which stands in for nothing.
+    let site = if material.inserts {
+        material.site as usize
+    } else {
+        material
+            .steps
+            .iter()
+            .position(|s| s.from == Some(material.site))
+            .ok_or("the material's site is not among its steps")?
+            + 1
+    };
     let mut original_steps = Map::new();
     let mut original_fragments = Map::new();
     for (j, f) in faithful.iter().enumerate() {
         let k = (j + 1) as u64;
-        match material.steps.iter().find(|s| s.from == k) {
+        match material.steps.iter().find(|s| s.from == Some(k)) {
             None => {
                 original_steps.insert(k.to_string(), json!(f.text));
                 original_fragments.insert(k.to_string(), json!(f.fragment));
@@ -656,39 +712,61 @@ fn inject(
                 if s.text != f.text {
                     original_steps.insert(k.to_string(), json!(f.text));
                 }
-                if s.fragment != f.fragment {
+                if s.fragment != f.fragment || s.lemma != f.lemma {
                     original_fragments.insert(k.to_string(), json!(f.fragment));
                 }
             }
         }
     }
-    let faithful_site = &faithful[(material.site - 1) as usize];
     let flawed_site = &material.steps[site - 1];
-    let (inserted, replaced) = match &material.anchor {
-        Some(a) => (
+    let flawed_step = Step {
+        text: flawed_site.text.clone(),
+        fragment: flawed_site.fragment.clone(),
+        lemma: flawed_site.lemma.clone(),
+    };
+    // Informal: the anchor's text, or the whole step; an inserted step replaces nothing.
+    let faithful_site = (!material.inserts).then(|| &faithful[(material.site - 1) as usize]);
+    let (inserted, replaced) = match (&material.anchor, faithful_site) {
+        (Some(a), _) => (
             a.inserted.clone(),
-            a.replaced
-                .clone()
-                .ok_or("material that is not intrinsic replaces text at its anchor")?,
+            Some(
+                a.replaced
+                    .clone()
+                    .ok_or("material that is not intrinsic replaces text at its anchor")?,
+            ),
         ),
-        None => (flawed_site.text.clone(), faithful_site.text.clone()),
+        (None, Some(f)) => (flawed_site.text.clone(), Some(f.text.clone())),
+        (None, None) => (flawed_site.text.clone(), None),
     };
     let informal_dials = with(vec![
         ("inserted", json!(inserted)),
         ("replaced", json!(replaced)),
         ("original_steps", Value::Object(original_steps)),
     ]);
-    let formal_dials = with(vec![
-        ("inserted", json!(flawed_site.fragment)),
-        ("replaced", json!(faithful_site.fragment)),
+    // Formal: a main-proof step's fragment, or a lemma step's declaration lines as the writer
+    // emits them (0.3.0), with the declaration's name recorded.
+    let (formal_inserted, formal_replaced) = match (&flawed_step.lemma, faithful_site) {
+        (Some(_), Some(f)) => (lemma_lines(&flawed_step)?, Some(lemma_lines(f)?)),
+        (Some(_), None) => (lemma_lines(&flawed_step)?, None),
+        (None, Some(f)) => (flawed_step.fragment.clone(), Some(f.fragment.clone())),
+        (None, None) => (flawed_step.fragment.clone(), None),
+    };
+    let mut formal_extra = vec![
+        ("inserted", json!(formal_inserted)),
+        ("replaced", json!(formal_replaced)),
         ("original_fragments", Value::Object(original_fragments)),
-    ]);
+    ];
+    if let Some(l) = &flawed_step.lemma {
+        formal_extra.push(("declaration", json!(l.name)));
+    }
+    let formal_dials = with(formal_extra);
     plan.steps = material
         .steps
         .iter()
         .map(|s| Step {
             text: s.text.clone(),
             fragment: s.fragment.clone(),
+            lemma: s.lemma.clone(),
         })
         .collect();
     Ok(Injection {
@@ -700,9 +778,20 @@ fn inject(
         site,
         informal_inserted: inserted,
         informal_dials,
-        formal_inserted: flawed_site.fragment.clone(),
+        formal_inserted,
         formal_dials,
     })
+}
+
+/// FLAWS.md 0.1.0's *Manifests in* column, as ADR-0011 D5 realizes it: whether a class's record
+/// appears in the informal file and in the formal file. FLAW-0009 and FLAW-0008 leave the
+/// informal file unchanged; FLAW-0010 and FLAW-0003 `cycle` leave the formal file unchanged.
+pub fn manifests_in(class: &str, sub_variant: Option<&str>) -> (bool, bool) {
+    match (class, sub_variant) {
+        ("FLAW-0003", Some("cycle")) | ("FLAW-0010", _) => (true, false),
+        ("FLAW-0008", _) | ("FLAW-0009", _) => (false, true),
+        _ => (true, true),
+    }
 }
 
 /// The unique code-point span of `needle` in `hay`, or `None` unless it occurs exactly once.
@@ -796,7 +885,8 @@ pub fn assemble(
     // Records, each with its confirmation check (S2.2).
     let mut records: Vec<(Flaw, bool)> = Vec::new();
     if let Some(inj) = &p.injection {
-        if let Some(st) = &informal_stats {
+        let (in_informal, in_formal) = manifests_in(&inj.class, inj.sub_variant.as_deref());
+        if let (Some(st), true) = (&informal_stats, in_informal) {
             let text = &st.steps[inj.site];
             let span = unique_span(text, &inj.informal_inserted).ok_or(
                 "the inserted text does not occur exactly once at the informal site".to_string(),
@@ -823,14 +913,37 @@ pub fn assemble(
                 confirmed,
             ));
         }
-        if let (Some(f), Some(obs)) = (&p.formal, observation) {
+        if let (Some(f), Some(obs), true) = (&p.formal, observation, in_formal) {
             let [lo, hi] =
                 f.fragment_lines[inj.site - 1].ok_or("the flaw site has no formal fragment")?;
-            // K: the build fails and the first error lies within the site's fragment. No other
-            // check is implemented, so any other class is never confirmed here.
-            let confirmed = inj.lean_catchable == LeanCatchable::YesKernel
-                && obs.exit_code != 0
-                && obs.first_error_line.is_some_and(|l| lo <= l && l <= hi);
+            let declaration = f.declarations[inj.site - 1].clone();
+            // K: the build fails and the first error lies within the site's fragment (D5).
+            // T (0.3.0): the build passes and the audit tail's listing satisfies the class's
+            // condition — FLAW-0007 `unused`: the lemma's name is listed and lies outside the
+            // transitive used-constants of the main declaration, closed over the file's own
+            // constants; FLAW-0009: `#print axioms` lists the axiom's name. No other check is
+            // implemented, so any other class is never confirmed here.
+            let confirmed = match inj.lean_catchable {
+                LeanCatchable::YesKernel => {
+                    obs.exit_code != 0 && obs.first_error_line.is_some_and(|l| lo <= l && l <= hi)
+                }
+                LeanCatchable::YesTooling if obs.exit_code == 0 => {
+                    match (inj.class.as_str(), inj.sub_variant.as_deref()) {
+                        ("FLAW-0007", Some("unused")) => {
+                            obs.used_constants.as_ref().is_some_and(|used| {
+                                used.contains_key(&declaration)
+                                    && !used_closure(used, &main).contains(&declaration)
+                            })
+                        }
+                        ("FLAW-0009", _) => obs
+                            .axioms
+                            .as_ref()
+                            .is_some_and(|a| a.contains(&declaration)),
+                        _ => false,
+                    }
+                }
+                _ => false,
+            };
             records.push((
                 Flaw {
                     instance: inj.instance,
@@ -838,7 +951,7 @@ pub fn assemble(
                     sub_variant: inj.sub_variant.clone(),
                     location: Location::Formal(FormalLocation {
                         artifact: FormalTag::Formal,
-                        declaration: main.clone(),
+                        declaration,
                         line: lo,
                     }),
                     severity: inj.severity,

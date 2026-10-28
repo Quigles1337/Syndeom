@@ -3,13 +3,16 @@
 Deterministic seeded templates and grammars (the standing ruling of Session 2). This crate holds:
 
 - `src/plan.rs` — the plan, the one shared interface behind the four S2.1 modules, and its two
-  pure renderers: `syndeom-informal-md/1` and `syndeom-lean/1` (D2);
+  pure renderers: `syndeom-informal-md/1` and `syndeom-lean/1` (D2); from 0.3.0 a step may be a
+  lemma (`Lemma N.` in the informal file, its own declaration before the main one in the formal
+  file);
 - `src/rng.rs` — `syndeom-rng/1`, SplitMix64-seeded xoshiro256** streams per label (D4);
-- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0 and 0.2.0: seed records,
-  the config and its refusals (D3), the injector (D5), ground truth by construction (D7), and the
-  manifest (D8, D9);
+- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0 and 0.3.0: seed
+  records, the config and its refusals (D3), the injector (D5), ground truth by construction
+  (D7), and the manifest with checks K and T (D8, D9);
 - `src/harness.rs` — the Lean harness: `lake env lean` from `lean/`, one process at a time, and
-  an audit tail printing `#print axioms` (D8);
+  an audit tail printing `#print axioms` of the main declaration and the direct used-constants
+  of every constant the file defined (D8; the T check's listing, from 0.3.0);
 - `src/provenance.rs`, `build.rs` and `input-set.txt` — the running binary's provenance: the
   hashes of every file of the producer's input set, compiled in at build time (D9 as amended by
   Al's ruling 5 on PR 26; FINDING-005 closed);
@@ -23,15 +26,19 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
 - **`s2_template` 0.1.0** (Session 40): seeds `nat_le_sq` (ADR-0001 D8's theorem),
   `sq_plus_one_ge_two_x` (FLAWS.md FLAW-0001's example: `propagated` and `local`) and
   `n_sq_mod_four` (FLAW-0014's gap example); flaw counts per record.
-- **`s2_template` 0.2.0** (Session 41; the version `generate` emits): the 0.1.0 seeds and four
-  more, each from its FLAWS.md 0.1.0 example — `continuity_is_not_uniform` (FLAW-0002, the
-  quantifier swap, gap), `x_over_abs_x` (FLAW-0014, the fatal case), `rolle_abs` (FLAW-0005
-  `violated`, fatal) and `horses` (FLAW-0006 `step-above-base`, fatal; the mode Al's rulings on
-  PR 27 added to D5); flaw counts per instance (Al's ruling 3 on
-  PR 26); build-time input hashes.
+- **`s2_template` 0.2.0** (Session 41): the 0.1.0 seeds and four more, each from its FLAWS.md
+  0.1.0 example — `continuity_is_not_uniform` (FLAW-0002, the quantifier swap, gap),
+  `x_over_abs_x` (FLAW-0014, the fatal case), `rolle_abs` (FLAW-0005 `violated`, fatal) and
+  `horses` (FLAW-0006 `step-above-base`, fatal; the mode Al's rulings on PR 27 added to D5); flaw
+  counts per instance (Al's ruling 3 on PR 26); build-time input hashes.
+- **`s2_template` 0.3.0** (Session 42; the version `generate` emits): the 0.2.0 seeds and
+  `n_lt_two_pow` (FLAW-0009's helper `n < 2 ^ n`, a lemma step; FLAW-0007's unused lemma
+  `n² ≥ n`); lemma steps (D2); check T (D5, D8) for FLAW-0009 `axiom` (`truth` true, gap; false,
+  fatal) and FLAW-0007 `unused` (cosmetic); records only in the files a class manifests in
+  (FLAWS.md's *Manifests in*: FLAW-0009 is formal-only).
 
-The crate regenerates both versions: the goldens select the version their manifests name, and
-`regenerate` and `verify` accept either. Every seed states its `source`, never under
+The crate regenerates all three versions: the goldens select the version their manifests name,
+and `regenerate` and `verify` accept any of them. Every seed states its `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
 ## Seeds whose statement is false (0.2.0)
@@ -52,6 +59,11 @@ is flagged for Al in ADR-0011 *Amendments*.
   selects the material the spec names, drawing from the stream `injector/<class>/1`, and writes
   every replaced or removed original into the record's `dials`. One instance per artifact: two
   whole-argument variants cannot be made disjoint, so a second spec is refused (D5).
+- Insertion material (0.3.0; FLAW-0007 `unused`) inserts one step that stands in for no
+  faithful step (`from: null`); `site` is that step's index in the flawed argument, the record's
+  span is the whole step, and `replaced` is null. At a lemma step the formal record's `inserted`
+  and `replaced` are the declaration lines as the writer emits them, and `declaration` names the
+  lemma; its location is that declaration at its first line.
 - **Counts** (0.2.0): `n_flaws_total`, `n_flaws_<NNNN>` and `flaws_confirmed` count instances. A
   pair's two records of one instance share its `instance`; the instance is confirmed only when
   both records pass their checks (Al's owner note of 2026-10-28).
@@ -59,12 +71,17 @@ is flagged for Al in ADR-0011 *Amendments*.
   - informal records: the recorded span holds exactly the recorded text and, where something was
     replaced, differs from it;
   - formal `YES-KERNEL` records: check K, meaning the build fails and its first error lies in the
-    site's fragment lines.
+    site's fragment lines;
+  - formal `YES-TOOLING` records (0.3.0): check T, meaning the build passes and the audit tail's
+    listing satisfies the class's condition — FLAW-0007 `unused`: the inserted lemma is among the
+    file's own constants and outside the transitive used-constants of the main declaration,
+    closed over the file's own constants (Lean's auxiliary `_proof_N` constants included);
+    FLAW-0009: `#print axioms` of the main declaration lists the axiom.
 
   No other check exists yet, so no other class is confirmed by this version.
-- **Not yet:** `s2_grammar`, padding (FLAW-0013; a non-zero `padding_ratio` is refused), lemma
-  steps, the T check and the used-constants audit (FLAW-0007, FLAW-0009, FLAW-0013), FLAW-0012
-  as a commanded class, and the fidelity sweep. They come in later sessions (D11).
+- **Not yet:** `s2_grammar`, padding (FLAW-0013; a non-zero `padding_ratio` is refused), the T
+  check for FLAW-0013's formal declarations, FLAW-0009 `native_decide`, FLAW-0012 as a commanded
+  class, and the fidelity sweep. They come in later sessions (D11).
 
 ## CLI
 

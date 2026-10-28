@@ -2,14 +2,20 @@
 //! assembled, the harness observation is the one the D5 prediction implies, and the goldens test
 //! pins the observations measured at implementation.
 
+use std::collections::BTreeMap;
+
 use serde_json::{Value, json};
-use syndeom_generate::harness::{Observation, first_error_line, parse_axioms};
-use syndeom_generate::plan::{render_formal, render_informal};
+use syndeom_generate::harness::{
+    Observation, audit_bytes, first_error_line, parse_axioms, parse_used_constants, used_closure,
+};
+use syndeom_generate::plan::{own_declarations, render_formal, render_informal};
 use syndeom_generate::template::{
-    Prepared, Version, assemble, check_seed, faithful_plan, prepare, prepare_with, seeds,
+    Prepared, Version, assemble, check_seed, faithful_plan, manifests_in, prepare, prepare_with,
+    seeds,
 };
 use syndeom_manifest::{
-    Location, ProofStatus, Toolchain, Verdict, parse_informal_md, parse_lean, span_text,
+    LeanCatchable, Location, ProofStatus, Toolchain, Verdict, parse_informal_md, parse_lean,
+    span_text,
 };
 
 const COMMIT: &str = "0123456789abcdef0123456789abcdef01234567";
@@ -29,21 +35,72 @@ fn spec(class: &str, sub: Option<&str>, severity: &str, dials: Value) -> Value {
     json!({"class": class, "sub_variant": sub, "severity": severity, "site": "auto", "dials": dials})
 }
 
-/// The observation D5 predicts: K-class instances fail at the site's first fragment line.
+/// The observation D5 predicts: a K-class instance fails at the site's first fragment line; a
+/// T-class instance builds, and the audit lists the smuggled axiom (FLAW-0009) or shows the
+/// inserted lemma used by nothing (FLAW-0007 `unused`); a control builds with standard axioms.
 fn predicted(p: &Prepared) -> Option<Observation> {
     let f = p.formal.as_ref()?;
+    let standard = || vec!["propext".to_string(), "Quot.sound".to_string()];
+    // every own declaration uses nothing of the file's own, except the main declaration, which
+    // uses every lemma but an inserted one
+    let used = |except: Option<&str>| {
+        let own = own_declarations(f);
+        let mut map: BTreeMap<String, Vec<String>> = BTreeMap::new();
+        for d in &own {
+            map.insert(d.clone(), Vec::new());
+        }
+        let mut uses: Vec<String> = own
+            .iter()
+            .filter(|d| **d != p.plan.main_declaration && Some(d.as_str()) != except)
+            .cloned()
+            .collect();
+        uses.sort();
+        map.insert(p.plan.main_declaration.clone(), uses);
+        Some(map)
+    };
     Some(match &p.injection {
-        Some(inj) => Observation {
+        Some(inj) if inj.lean_catchable == LeanCatchable::YesKernel => Observation {
             exit_code: 1,
             first_error_line: f.fragment_lines[inj.site - 1].map(|r| r[0]),
             axioms: None,
+            used_constants: None,
         },
+        Some(inj) => {
+            let declaration = inj.formal_dials["declaration"].as_str().map(str::to_string);
+            let mut axioms = standard();
+            if inj.class == "FLAW-0009" {
+                axioms.push(
+                    declaration
+                        .clone()
+                        .expect("a FLAW-0009 record names its axiom"),
+                );
+            }
+            Observation {
+                exit_code: 0,
+                first_error_line: None,
+                axioms: Some(axioms),
+                used_constants: used(if inj.class == "FLAW-0007" {
+                    declaration.as_deref()
+                } else {
+                    None
+                }),
+            }
+        }
         None => Observation {
             exit_code: 0,
             first_error_line: None,
-            axioms: Some(vec!["propext".into()]),
+            axioms: Some(standard()),
+            used_constants: used(None),
         },
     })
+}
+
+fn faithful_plan_of(id: &str) -> syndeom_generate::plan::Plan {
+    let seed = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == id)
+        .unwrap();
+    faithful_plan(&seed, &seed.styles[0])
 }
 
 fn build_with(version: Version, c: &Value, seed: u64) -> (Prepared, syndeom_manifest::Manifest) {
@@ -77,7 +134,17 @@ fn every_case() -> Vec<Value> {
             }
             for flaws in specs {
                 for target in ["informal", "formal", "pair"] {
-                    out.push(config(&seed.id, &style.id, target, flaws.clone()));
+                    // D3: a class the target cannot realize is refused, not a case
+                    let class = flaws[0]["class"].as_str().unwrap_or("");
+                    let refused = matches!(
+                        (class, target),
+                        ("FLAW-0009", "informal")
+                            | ("FLAW-0008", "informal" | "formal")
+                            | ("FLAW-0004" | "FLAW-0010", "formal")
+                    );
+                    if !refused {
+                        out.push(config(&seed.id, &style.id, target, flaws.clone()));
+                    }
                 }
             }
         }
@@ -97,7 +164,7 @@ fn d9_determinism_and_idempotence() {
                 syndeom_manifest::to_disk_json(&m2).unwrap()
             );
             assert_eq!(m1.artifact_id, p1.artifact_id());
-            assert!(m1.artifact_id.starts_with("s2_template-v0.2.0-"));
+            assert!(m1.artifact_id.starts_with("s2_template-v0.3.0-"));
         }
     }
 }
@@ -139,25 +206,44 @@ fn d10_locations_resolve_to_the_dials_text() {
                     }
                 }
                 Location::Formal(loc) => {
-                    let bytes = &p.formal.as_ref().unwrap().bytes;
-                    let line = std::str::from_utf8(bytes)
-                        .unwrap()
-                        .lines()
-                        .nth(loc.line as usize - 1)
-                        .unwrap()
-                        .to_string();
-                    assert_eq!(
-                        format!("  {}", r.dials["inserted"][0].as_str().unwrap()),
-                        line
-                    );
+                    let f = p.formal.as_ref().unwrap();
+                    let text = std::str::from_utf8(&f.bytes).unwrap();
+                    let lines: Vec<&str> = text.lines().collect();
+                    let inserted = r.dials["inserted"].as_array().unwrap();
+                    if loc.declaration == p.plan.main_declaration {
+                        // a main-proof step: its fragment lines, indented by the writer
+                        assert_eq!(
+                            format!("  {}", inserted[0].as_str().unwrap()),
+                            lines[loc.line as usize - 1]
+                        );
+                        assert!(r.dials.get("declaration").is_none(), "{c}");
+                    } else {
+                        // a lemma step (0.3.0): its declaration lines as the writer emits them
+                        assert_eq!(r.dials["declaration"], json!(loc.declaration), "{c}");
+                        for (j, l) in inserted.iter().enumerate() {
+                            assert_eq!(
+                                l.as_str().unwrap(),
+                                lines[loc.line as usize - 1 + j],
+                                "{c}"
+                            );
+                        }
+                        assert!(lines[loc.line as usize - 1].contains(&loc.declaration));
+                    }
                 }
                 Location::Raw(_) => panic!("synthetic records are canonical"),
             }
-            if r.dials["replaced"].is_null() {
+            if r.dials["replaced"].is_null() && r.dials.get("counterexample").is_some() {
                 // intrinsic: a false statement's argument replaces nothing and names its
                 // counterexample
                 assert!(r.dials["counterexample"].is_string(), "{c}");
                 assert!(r.dials.get("original_steps").is_none(), "{c}");
+            } else if r.dials["replaced"].is_null() {
+                // an inserted step (0.3.0): nothing replaced, the originals recorded
+                assert_eq!(r.class, "FLAW-0007", "{c}");
+                assert!(
+                    r.dials["original_steps"].is_object()
+                        || r.dials["original_fragments"].is_object()
+                );
             } else {
                 assert!(
                     r.dials["original_steps"].is_object()
@@ -184,14 +270,20 @@ fn d8_counts_are_per_instance_and_predictions_pass() {
             Some(json!(n)),
             "{c}: every predicted check passes"
         );
-        if c["target"] == "pair" {
+        // a record per file the class manifests in (FLAWS.md's column: FLAW-0009 is formal-only)
+        let files_with_records = flaws.first().map_or(0, |f| {
+            let (informal, formal) = manifests_in(&f.class, f.sub_variant.as_deref());
+            let target = c["target"].as_str().unwrap();
+            usize::from(informal && target != "formal")
+                + usize::from(formal && target != "informal")
+        });
+        assert_eq!(flaws.len(), n * files_with_records, "{c}");
+        if c["target"] == "pair" && files_with_records == 2 {
             assert_eq!(
                 flaws.len(),
                 2 * n,
                 "{c}: a pair records each instance twice"
             );
-        } else {
-            assert_eq!(flaws.len(), n, "{c}");
         }
         assert_eq!(m.fidelity.verdict, Verdict::Pass, "{c}");
     }
@@ -228,6 +320,7 @@ fn d8_a_pair_instance_is_confirmed_only_when_both_records_pass() {
         exit_code: 0,
         first_error_line: None,
         axioms: Some(vec![]),
+        used_constants: None,
     };
     let m = assemble(&p, COMMIT, Some(toolchain()), Some(&built)).unwrap();
     assert_eq!(m.achieved["n_flaws_total"].value, Some(json!(0)));
@@ -264,6 +357,7 @@ fn d8_a_failed_confirmation_is_a_fail_verdict_not_a_refusal() {
         exit_code: 0,
         first_error_line: None,
         axioms: Some(vec![]),
+        used_constants: None,
     };
     let m = assemble(&p, COMMIT, Some(toolchain()), Some(&built)).unwrap();
     assert_eq!(m.fidelity.verdict, Verdict::Fail);
@@ -274,6 +368,7 @@ fn d8_a_failed_confirmation_is_a_fail_verdict_not_a_refusal() {
         exit_code: 1,
         first_error_line: Some(8),
         axioms: None,
+        used_constants: None,
     };
     let m = assemble(&p, COMMIT, Some(toolchain()), Some(&elsewhere)).unwrap();
     assert_eq!(m.fidelity.per_statistic["flaws_confirmed"], Verdict::Fail);
@@ -339,8 +434,9 @@ fn d7_a_false_statement_seed_yields_an_invalid_incorrect_artifact_with_its_count
 #[test]
 fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
     assert_eq!(seeds(Version::V0_1_0).len(), 3);
-    let all = seeds(Version::V0_2_0);
-    assert_eq!(all.len(), 7);
+    assert_eq!(seeds(Version::V0_2_0).len(), 7);
+    let all = seeds(Version::V0_3_0);
+    assert_eq!(all.len(), 8);
     let ids: Vec<&str> = all.iter().map(|s| s.id.as_str()).collect();
     assert_eq!(
         ids,
@@ -352,6 +448,7 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
             "x_over_abs_x",
             "rolle_abs",
             "horses",
+            "n_lt_two_pow",
         ]
     );
     for seed in &all {
@@ -368,9 +465,10 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
             assert!(!style.flaws.is_empty() || seed.id == "nat_le_sq");
             for m in &style.flaws {
                 assert_eq!(m.intrinsic, false_statement, "{}", seed.id);
-                let site_text = &style.steps[m.site as usize - 1];
+                let site_text = style.steps.get(m.site as usize - 1);
                 if m.intrinsic {
                     assert!(m.steps.is_empty());
+                    let site_text = site_text.expect("the site is a step");
                     assert!(
                         !site_text.fragment.is_empty(),
                         "the site carries a formal fragment"
@@ -381,7 +479,7 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
                     }
                     continue;
                 }
-                let froms: Vec<u64> = m.steps.iter().map(|s| s.from).collect();
+                let froms: Vec<u64> = m.steps.iter().filter_map(|s| s.from).collect();
                 assert!(
                     froms.windows(2).all(|w| w[0] < w[1]),
                     "from indices increase"
@@ -391,18 +489,25 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
                         .iter()
                         .all(|k| *k >= 1 && *k as usize <= style.steps.len())
                 );
-                let site = m
-                    .steps
-                    .iter()
-                    .find(|s| s.from == m.site)
-                    .expect("site kept");
+                let site = if m.inserts {
+                    // an inserted step (0.3.0) stands in for nothing and is a proved lemma
+                    let s = &m.steps[m.site as usize - 1];
+                    assert!(s.from.is_none() && s.lemma.is_some(), "{}", seed.id);
+                    s
+                } else {
+                    m.steps
+                        .iter()
+                        .find(|s| s.from == Some(m.site))
+                        .expect("site kept")
+                };
                 assert!(
-                    !site.fragment.is_empty(),
-                    "the site carries a formal fragment"
+                    !site.fragment.is_empty() || site.lemma.is_some(),
+                    "the site carries a formal fragment or is a lemma declaration"
                 );
                 if let Some(a) = &m.anchor {
                     assert_eq!(site.text.matches(&a.inserted).count(), 1);
                     let replaced = a.replaced.as_ref().expect("material replaces text");
+                    let site_text = site_text.expect("the site is a step");
                     assert_eq!(site_text.text.matches(replaced).count(), 1);
                 }
             }
@@ -411,21 +516,26 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
 }
 
 #[test]
-fn d1_the_0_1_0_seed_set_is_closed() {
-    // A 0.2.0 seed is not a seed of 0.1.0: the earlier version refused it, and still does.
-    for id in [
-        "continuity_is_not_uniform",
-        "x_over_abs_x",
-        "rolle_abs",
-        "horses",
-    ] {
-        let style = seeds(Version::V0_2_0)
+fn d1_the_earlier_seed_sets_are_closed() {
+    // A 0.2.0 seed is not a seed of 0.1.0, and the 0.3.0 seed is a seed of neither: the earlier
+    // versions refused them, and still do.
+    let style_of = |id: &str| {
+        seeds(Version::CURRENT)
             .into_iter()
             .find(|s| s.id == id)
             .unwrap()
             .styles[0]
             .id
-            .clone();
+            .clone()
+    };
+    for id in [
+        "continuity_is_not_uniform",
+        "x_over_abs_x",
+        "rolle_abs",
+        "horses",
+        "n_lt_two_pow",
+    ] {
+        let style = style_of(id);
         assert!(
             prepare_with(
                 Version::V0_1_0,
@@ -435,8 +545,17 @@ fn d1_the_0_1_0_seed_set_is_closed() {
             .is_err()
         );
     }
-    assert!(Version::parse("0.3.0").is_none());
-    assert_eq!(Version::CURRENT.as_str(), "0.2.0");
+    let style = style_of("n_lt_two_pow");
+    assert!(
+        prepare_with(
+            Version::V0_2_0,
+            &config("n_lt_two_pow", &style, "informal", json!([])),
+            7
+        )
+        .is_err()
+    );
+    assert!(Version::parse("0.4.0").is_none());
+    assert_eq!(Version::CURRENT.as_str(), "0.3.0");
 }
 
 #[test]
@@ -510,6 +629,40 @@ fn d3_unsupported_specs_are_refused() {
             "repairable",
             json!({"perturbation": "sign", "counterexample": "none"})
         )])),
+        // FLAW-0009 is formal-only, and the n_lt_two_pow materials are what the seed names
+        config(
+            "n_lt_two_pow",
+            "helper_lemma",
+            "informal",
+            json!([spec(
+                "FLAW-0009",
+                None,
+                "gap",
+                json!({"mode": "axiom", "truth": true})
+            )]),
+        ),
+        config(
+            "n_lt_two_pow",
+            "helper_lemma",
+            "formal",
+            json!([spec(
+                "FLAW-0009",
+                None,
+                "gap",
+                json!({"mode": "native_decide", "truth": true})
+            )]),
+        ),
+        config(
+            "n_lt_two_pow",
+            "helper_lemma",
+            "pair",
+            json!([spec(
+                "FLAW-0007",
+                Some("unused"),
+                "cosmetic",
+                json!({"count": 2, "length_steps": 1})
+            )]),
+        ),
         // a false statement has no control, and its material is what the seed names
         config("horses", "induction", "pair", json!([])),
         config(
@@ -554,6 +707,183 @@ fn d8_harness_parsers() {
         Some(vec![])
     );
     assert_eq!(parse_axioms(ax, "g"), None);
+    // the used-constants listing (0.3.0), sorted and deduplicated per constant
+    let listing = "used-constants b._proof_1: [Nat, a, Nat]\nused-constants main: [b, Nat, a]\nused-constants a: [Nat]\nused-constants b: [b._proof_1, Nat]\nnoise\n";
+    let used = parse_used_constants(listing).unwrap();
+    assert_eq!(used["main"], vec!["Nat", "a", "b"]);
+    assert_eq!(used["b._proof_1"], vec!["Nat", "a"]);
+    assert_eq!(parse_used_constants("nothing\n"), None);
+    // the closure over the file's own constants: main → b → b._proof_1 → a, never into Mathlib
+    let closure = used_closure(&used, "main");
+    assert!(
+        ["main", "a", "b", "b._proof_1"]
+            .iter()
+            .all(|d| closure.contains(*d))
+    );
+    assert!(!closure.contains("Nat"));
+    let mut without_b = used.clone();
+    without_b.insert("main".into(), vec!["Nat".into(), "a".into()]);
+    let closure = used_closure(&without_b, "main");
+    assert!(closure.contains("a") && !closure.contains("b"));
+    // the audit tail prints the main declaration's axioms and every own constant's uses
+    let tail = String::from_utf8(audit_bytes(b"import Mathlib\n", "main")).unwrap();
+    assert!(tail.starts_with("import Mathlib\n\n#print axioms main\n"));
+    assert!(tail.contains("env.constants.map₂.toList") && tail.contains("getUsedConstantsAsSet"));
+}
+
+#[test]
+fn d2_lemma_steps_render_as_declarations_before_the_main_declaration() {
+    let plan = faithful_plan_of("n_lt_two_pow");
+    let r = render_formal(&plan).unwrap();
+    let text = String::from_utf8(r.bytes.clone()).unwrap();
+    let lines: Vec<&str> = text.lines().collect();
+    assert_eq!(lines[0], "import Mathlib.Data.Nat.Notation");
+    assert_eq!(lines[1], "");
+    assert_eq!(
+        lines[2],
+        "theorem syndeom_s2_template_n_lt_two_pow_lemma_1 : ∀ n : ℕ, n < 2 ^ n := by"
+    );
+    assert_eq!(lines[3], "  intro n");
+    assert_eq!(lines[7], "");
+    assert_eq!(
+        lines[8],
+        "theorem syndeom_s2_template_n_lt_two_pow (n : ℕ) : n + 1 ≤ 2 ^ n := by"
+    );
+    assert_eq!(
+        lines[9],
+        "  exact syndeom_s2_template_n_lt_two_pow_lemma_1 n"
+    );
+    assert_eq!(lines.len(), 10);
+    assert_eq!(r.fragment_lines, vec![Some([3, 7]), Some([10, 10])]);
+    assert_eq!(
+        r.declarations,
+        vec![
+            "syndeom_s2_template_n_lt_two_pow_lemma_1".to_string(),
+            "syndeom_s2_template_n_lt_two_pow".to_string()
+        ]
+    );
+    assert_eq!(own_declarations(&r), r.declarations);
+    let st = parse_lean(&r.bytes).unwrap();
+    assert_eq!(st.n_declarations, 2);
+    let informal = parse_informal_md(&render_informal(&plan).unwrap()).unwrap();
+    assert_eq!((informal.n_steps, informal.n_lemmas), (2, 1));
+    // the shape rules: numbering, headers, proof lines
+    let mut bad = plan.clone();
+    bad.steps[0].text = bad.steps[0].text.replacen("Lemma 1.", "Lemma 2.", 1);
+    assert!(render_formal(&bad).is_err());
+    let mut bad = plan.clone();
+    bad.steps[1].text = format!("Lemma 2. {}", bad.steps[1].text);
+    assert!(render_informal(&bad).is_err());
+    let mut bad = plan.clone();
+    bad.steps[0].fragment.clear();
+    assert!(render_formal(&bad).is_err());
+}
+
+#[test]
+fn d5_check_t_confirms_the_tooling_caught_classes_only_as_predicted() {
+    // FLAW-0007 `unused`: confirmed iff the inserted lemma is listed and outside the main
+    // declaration's closure; FLAW-0009: confirmed iff `#print axioms` lists the axiom.
+    let unused = config(
+        "n_lt_two_pow",
+        "helper_lemma",
+        "pair",
+        json!([spec(
+            "FLAW-0007",
+            Some("unused"),
+            "cosmetic",
+            json!({"count": 1, "length_steps": 1})
+        )]),
+    );
+    let (p, m) = build(&unused, 7);
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(gt.flaws.len(), 2);
+    assert_eq!(gt.proof_status, ProofStatus::Valid);
+    assert!(gt.correct);
+    assert_eq!(m.commanded["n_lemmas"].value, json!(2));
+    assert_eq!(m.commanded["n_steps"].value, json!(3));
+    assert_eq!(m.commanded["lean_build"].value, json!("pass"));
+    assert_eq!(m.commanded["lean_axioms_standard"].value, json!(true));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    let lemma_2 = "syndeom_s2_template_n_lt_two_pow_lemma_2";
+    let formal = gt
+        .flaws
+        .iter()
+        .find(|f| matches!(f.location, Location::Formal(_)))
+        .unwrap();
+    assert_eq!(formal.dials["declaration"], json!(lemma_2));
+    match &formal.location {
+        Location::Formal(loc) => assert_eq!(loc.declaration, lemma_2),
+        _ => unreachable!(),
+    }
+    // the main declaration uses the lemma after all: not confirmed
+    let mut obs = predicted(&p).unwrap();
+    let used = obs.used_constants.as_mut().unwrap();
+    used.get_mut(&p.plan.main_declaration)
+        .unwrap()
+        .push(lemma_2.into());
+    let m = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(0)));
+    assert_eq!(m.fidelity.verdict, Verdict::Fail);
+    // used through an auxiliary constant of the file: not confirmed either
+    let mut obs = predicted(&p).unwrap();
+    let used = obs.used_constants.as_mut().unwrap();
+    used.insert("aux._proof_1".into(), vec![lemma_2.into()]);
+    used.get_mut(&p.plan.main_declaration)
+        .unwrap()
+        .push("aux._proof_1".into());
+    let m = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(0)));
+    // no listing at all: not confirmed
+    let mut obs = predicted(&p).unwrap();
+    obs.used_constants = None;
+    let m = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(0)));
+
+    for (severity, truth) in [("gap", true), ("fatal", false)] {
+        let smuggled = config(
+            "n_lt_two_pow",
+            "helper_lemma",
+            "pair",
+            json!([spec(
+                "FLAW-0009",
+                None,
+                severity,
+                json!({"mode": "axiom", "truth": truth})
+            )]),
+        );
+        let (p, m) = build(&smuggled, 7);
+        let gt = m.ground_truth.as_ref().unwrap();
+        // formal-only: one record, one instance, the informal file unchanged
+        assert_eq!(gt.flaws.len(), 1);
+        assert!(matches!(gt.flaws[0].location, Location::Formal(_)));
+        assert_eq!(gt.proof_status, ProofStatus::Invalid);
+        assert_eq!(m.commanded["n_flaws_total"].value, json!(1));
+        assert_eq!(m.commanded["lean_build"].value, json!("pass"));
+        assert_eq!(m.commanded["lean_axioms_standard"].value, json!(false));
+        assert_eq!(m.achieved["lean_axioms_standard"].value, Some(json!(false)));
+        assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(1)));
+        assert_eq!(m.fidelity.verdict, Verdict::Pass);
+        let lemma_1 = "syndeom_s2_template_n_lt_two_pow_lemma_1";
+        assert_eq!(gt.flaws[0].dials["declaration"], json!(lemma_1));
+        assert_eq!(gt.flaws[0].dials["truth"], json!(truth));
+        let text = std::str::from_utf8(&p.formal.as_ref().unwrap().bytes).unwrap();
+        assert!(text.contains(&format!("\naxiom {lemma_1} : ")));
+        assert_eq!(
+            p.informal.as_ref().unwrap(),
+            &render_informal(&faithful_plan_of("n_lt_two_pow")).unwrap()
+        );
+        // the axiom print without the axiom: not confirmed, and the axioms statistic fails too
+        let mut obs = predicted(&p).unwrap();
+        obs.axioms = Some(vec!["propext".into()]);
+        let m = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(
+            m.fidelity.per_statistic["lean_axioms_standard"],
+            Verdict::Fail
+        );
+        assert_eq!(m.fidelity.verdict, Verdict::Fail);
+    }
 }
 
 #[test]

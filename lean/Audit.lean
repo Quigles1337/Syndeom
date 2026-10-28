@@ -12,3 +12,5 @@ import Syndeom
 #print axioms syndeom_seed_x_over_abs_x_false
 #print axioms syndeom_seed_rolle_abs_false
 #print axioms syndeom_seed_horses_false
+#print axioms syndeom_seed_n_lt_two_pow
+#print axioms syndeom_seed_n_lt_two_pow_lemma_false

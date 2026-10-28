@@ -1,0 +1,106 @@
+{
+  "id": "n_lt_two_pow",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0009 example (the helper `n < 2 ^ n` stated as an axiom) and FLAW-0007 example (the unused lemma `n² ≥ n`): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A natural number plus one is at most two to that power",
+  "statement": "For every natural number $n$, $n + 1 \\le 2^n$.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/NLtTwoPow.lean:syndeom_seed_n_lt_two_pow"
+  },
+  "imports": ["Mathlib.Data.Nat.Notation"],
+  "binders": "(n : ℕ)",
+  "claim": "n + 1 ≤ 2 ^ n",
+  "styles": [
+    {
+      "id": "helper_lemma",
+      "steps": [
+        {
+          "text": "Lemma 1. For every natural number $n$, $n < 2^n$. Proof of the lemma: by induction on $n$. For $n = 0$ we have $0 < 1 = 2^0$. If $k < 2^k$, then $k + 1 \\le 2^k < 2 \\cdot 2^k = 2^{k+1}$.",
+          "fragment": ["intro n", "induction n with", "| zero => decide", "| succ k ih => rw [Nat.pow_succ]; omega"],
+          "lemma": {"kind": "theorem", "name": "syndeom_s2_template_n_lt_two_pow_lemma_1", "claim": "∀ n : ℕ, n < 2 ^ n"}
+        },
+        {
+          "text": "By Lemma 1, $n < 2^n$; since both sides are natural numbers, $n + 1 \\le 2^n$.",
+          "fragment": ["exact syndeom_s2_template_n_lt_two_pow_lemma_1 n"]
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0009",
+          "sub_variant": null,
+          "severity": "gap",
+          "lean_catchable": "YES-TOOLING",
+          "dials": {"mode": "axiom", "truth": true},
+          "site": 1,
+          "anchor": null,
+          "steps": [
+            {
+              "from": 1,
+              "text": "Lemma 1. For every natural number $n$, $n < 2^n$. Proof of the lemma: by induction on $n$. For $n = 0$ we have $0 < 1 = 2^0$. If $k < 2^k$, then $k + 1 \\le 2^k < 2 \\cdot 2^k = 2^{k+1}$.",
+              "fragment": [],
+              "lemma": {"kind": "axiom", "name": "syndeom_s2_template_n_lt_two_pow_lemma_1", "claim": "∀ n : ℕ, n < 2 ^ n"}
+            },
+            {
+              "from": 2,
+              "text": "By Lemma 1, $n < 2^n$; since both sides are natural numbers, $n + 1 \\le 2^n$.",
+              "fragment": ["exact syndeom_s2_template_n_lt_two_pow_lemma_1 n"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0009",
+          "sub_variant": null,
+          "severity": "fatal",
+          "lean_catchable": "YES-TOOLING",
+          "dials": {"mode": "axiom", "truth": false},
+          "site": 1,
+          "anchor": null,
+          "steps": [
+            {
+              "from": 1,
+              "text": "Lemma 1. For every natural number $n$, $n < 2^n$. Proof of the lemma: by induction on $n$. For $n = 0$ we have $0 < 1 = 2^0$. If $k < 2^k$, then $k + 1 \\le 2^k < 2 \\cdot 2^k = 2^{k+1}$.",
+              "fragment": [],
+              "lemma": {"kind": "axiom", "name": "syndeom_s2_template_n_lt_two_pow_lemma_1", "claim": "∀ n : ℕ, n + 1 < 2 ^ n"}
+            },
+            {
+              "from": 2,
+              "text": "By Lemma 1, $n < 2^n$; since both sides are natural numbers, $n + 1 \\le 2^n$.",
+              "fragment": ["exact Nat.le_of_lt (syndeom_s2_template_n_lt_two_pow_lemma_1 n)"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0007",
+          "sub_variant": "unused",
+          "severity": "cosmetic",
+          "lean_catchable": "YES-TOOLING",
+          "dials": {"count": 1, "length_steps": 1},
+          "site": 2,
+          "anchor": null,
+          "inserts": true,
+          "steps": [
+            {
+              "from": 1,
+              "text": "Lemma 1. For every natural number $n$, $n < 2^n$. Proof of the lemma: by induction on $n$. For $n = 0$ we have $0 < 1 = 2^0$. If $k < 2^k$, then $k + 1 \\le 2^k < 2 \\cdot 2^k = 2^{k+1}$.",
+              "fragment": ["intro n", "induction n with", "| zero => decide", "| succ k ih => rw [Nat.pow_succ]; omega"],
+              "lemma": {"kind": "theorem", "name": "syndeom_s2_template_n_lt_two_pow_lemma_1", "claim": "∀ n : ℕ, n < 2 ^ n"}
+            },
+            {
+              "from": null,
+              "text": "Lemma 2. For all $n \\in \\mathbb{N}$, $n^2 \\ge n$. Proof of the lemma: $n^2 = n \\cdot n$, and $n \\cdot n \\ge n \\cdot 1 = n$ when $n \\ge 1$, while $0^2 = 0$.",
+              "fragment": ["intro n", "rw [Nat.pow_two]", "exact Nat.le_mul_self n"],
+              "lemma": {"kind": "theorem", "name": "syndeom_s2_template_n_lt_two_pow_lemma_2", "claim": "∀ n : ℕ, n ≤ n ^ 2"}
+            },
+            {
+              "from": 2,
+              "text": "By Lemma 1, $n < 2^n$; since both sides are natural numbers, $n + 1 \\le 2^n$.",
+              "fragment": ["exact syndeom_s2_template_n_lt_two_pow_lemma_1 n"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
