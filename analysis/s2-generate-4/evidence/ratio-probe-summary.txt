@@ -1,0 +1,25 @@
+sqrt2_irrational/flaw-0013-drawn-1-informal exit=0 start=2026-10-28T21:49:58.187Z end=2026-10-28T21:50:01.301Z
+s2_template-v0.4.0-e9d8dcbdbb3f-s7
+fidelity: Fail
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0013-drawn-1-informal achieved padding_ratio = 0.2784090909090909 n_tokens = 176
+sqrt2_irrational/flaw-0013-drawn-1-formal exit=0 start=2026-10-28T21:50:01.307Z end=2026-10-28T21:50:19.190Z
+s2_template-v0.4.0-755fa86da13f-s7
+fidelity: Fail
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0013-drawn-1-formal achieved padding_ratio = 0.31297709923664124 n_tokens = 262
+sqrt2_irrational/flaw-0013-before-7-informal exit=0 start=2026-10-28T21:50:19.196Z end=2026-10-28T21:50:22.092Z
+s2_template-v0.4.0-8859431ae389-s7
+fidelity: Fail
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0013-before-7-informal achieved padding_ratio = 0.7126696832579186 n_tokens = 442
+sqrt2_irrational/flaw-0013-before-7-formal exit=0 start=2026-10-28T21:50:22.098Z end=2026-10-28T21:50:39.750Z
+s2_template-v0.4.0-015fafa36170-s7
+fidelity: Fail
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0013-before-7-formal achieved padding_ratio = 0.6145610278372591 n_tokens = 467
+=== GOLDENS end

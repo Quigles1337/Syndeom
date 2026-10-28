@@ -1,0 +1,1 @@
+'syndeom_seed_sqrt2_irrational' depends on axioms: [propext, Quot.sound]
