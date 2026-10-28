@@ -41,6 +41,13 @@ impl Stream {
         Self { s }
     }
 
+    /// A stream from an explicit xoshiro256** state, for checking the generator against published
+    /// reference vectors (ADR-0011 *Amendments*, Al's ruling 4 on PR 26). Producers start every
+    /// stream with [`Stream::new`]; this constructor changes no output of it.
+    pub fn from_state(s: [u64; 4]) -> Self {
+        Self { s }
+    }
+
     /// The next xoshiro256** output.
     pub fn next_u64(&mut self) -> u64 {
         let [s0, s1, s2, s3] = &mut self.s;

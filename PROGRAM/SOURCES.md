@@ -2654,3 +2654,46 @@ the exact case-specific ruling and validated replacement metadata are proposed.
   dates, access times and digests are Session 22's, and nothing was re-fetched.
 - **Bears on:** S1.1 item 36 (the record's truth discussion and the finder of the error); no
   CLAIM.
+
+## S-0081 — `rand_xoshiro` 0.3.0 (crates.io): the SplitMix64 and xoshiro256** reference test vectors
+
+- **State:** VERIFIED. Retrieved and read in Session 40 (2026-10-28), digest-only, with no copy
+  committed. The two test vectors are reproduced as data in `engine/generate/tests/rng.rs`, with
+  attribution (below).
+- **Citation (from the archive's `Cargo.toml`):**
+  - crate `rand_xoshiro` version 0.3.0, "Xoshiro, xoroshiro and splitmix64 random number
+    generators";
+  - authors "The Rand Project Developers";
+  - repository `https://github.com/rust-random/rand`;
+  - licence `MIT/Apache-2.0`.
+- **Primary:**
+  - the crates.io sparse index entry <https://index.crates.io/ra/nd/rand_xoshiro>, accessed
+    2026-10-28T17:59:51Z (HTTP 200), 7,033 bytes, SHA-256
+    `6c7f3b350aa1cb14da8650da0c871654b02f6b2d6ef3eddf77c710f1cbecf838`. Version 0.3.0 is not
+    yanked, and its `cksum` is `0be70256657904bb6ee9b4bca1776ade789a05710eeff2a9292323a6f2c3831f`;
+  - the archive <https://static.crates.io/crates/rand_xoshiro/rand_xoshiro-0.3.0.crate>, accessed
+    2026-10-28T17:59:52Z (HTTP 200), 15,597 bytes, SHA-256 `0be70256…831f`, **equal to the
+    index's `cksum`**. It was extracted as data only.
+- **Content used:**
+  - **`src/splitmix64.rs`** (SHA-256
+    `07ff47002d834e4f44df1fb8db5d9341ff8c0b0b7c7e8f8d688fce8d2044a146`): test `reference`,
+    `SplitMix64::seed_from_u64(1477776061723855037)` followed by 50 `next_u64` outputs. The
+    comment reads "These values were produced with the reference implementation:
+    http://xoshiro.di.unimi.it/splitmix64.c". `seed_from_u64` writes the seed little-endian and
+    `from_seed` reads it back, so the state is the seed itself.
+  - **`src/xoshiro256starstar.rs`** (SHA-256
+    `c25daa8b65b34d69b3eb30d5e205db73f9e45b41507ea4c47acea95e733ad0f8`): test `reference`,
+    `from_seed` with the little-endian bytes of the state 1, 2, 3, 4, followed by 10 `next_u64`
+    outputs. Its comment reads "These values were produced with the reference implementation:
+    http://xoshiro.di.unimi.it/xoshiro128starstar.c". That names the 128-bit generator's file,
+    not `xoshiro256starstar.c`; it is recorded here as written.
+  - Both vectors were extracted by script, never transcribed by hand. Two independent
+    implementations reproduce them:
+    - `syndeom-rng/1` (ADR-0011 D4);
+    - a Python implementation written from D4's text.
+
+    The script and its output are in `analysis/s2-generate-1/evidence/`.
+- **Licence:** MIT or Apache-2.0 (`Cargo.toml`; `LICENSE-MIT` and `LICENSE-APACHE` are in the
+  archive). No code is copied: the 60 numbers are outputs of the published algorithms, kept as
+  test data with this attribution. The archive is not committed.
+- **Bears on:** ADR-0011 D4's conformance record (Al's ruling 4 on PR 26). No CLAIM.
