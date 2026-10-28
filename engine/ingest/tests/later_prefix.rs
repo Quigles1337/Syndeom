@@ -64,10 +64,6 @@ fn prefix_file(name: &str) -> String {
     )
 }
 
-fn retained(name: &str) -> Vec<u8> {
-    std::fs::read(repo().join(format!("{PACKET}/report/{name}"))).unwrap()
-}
-
 fn overlay_with(edit: impl FnOnce(&mut Value)) -> Blobs {
     let mut blobs = fixture();
     let mut o: Value = serde_json::from_slice(&blobs[OVERLAY]).unwrap();
@@ -76,38 +72,61 @@ fn overlay_with(edit: impl FnOnce(&mut Value)) -> Blobs {
     blobs
 }
 
+/// ADR-0013 D7 as amended: every count and the scope follow from the recorded inputs. Nothing
+/// here is a literal count; the retained report freezes the measured values.
 #[test]
-fn working_tree_yields_the_retained_report() {
-    let event = inventory(&fixture()).unwrap();
-    assert_eq!(
-        json_bytes(&event.inventory).unwrap(),
-        retained("inventory.json")
-    );
-    assert_eq!(
-        json_bytes(&event.coverage).unwrap(),
-        retained("coverage.json")
-    );
-    assert_eq!(
-        render(&event.coverage).unwrap().into_bytes(),
-        retained("report.md")
-    );
-}
-
-#[test]
-fn population_is_forty_representations_and_thirty_seven_logical_items() {
-    let event = inventory(&fixture()).unwrap();
+fn population_follows_the_recorded_inputs() {
+    let blobs = fixture();
+    let p = prefix().unwrap();
+    let event = inventory(&blobs).unwrap();
     let counts = &event.inventory["counts"];
-    assert_eq!(counts["archived_representations"], 40);
-    assert_eq!(counts["archived_raw_representations"], 38);
-    assert_eq!(counts["canonical_representations"], 2);
-    assert_eq!(counts["effective_logical_items"], 37);
-    assert_eq!(counts["prefix_logical_items"], 5);
-    assert_eq!(event.coverage["harvest_candidates"], 30);
-    assert_eq!(event.coverage["prefix_through_arxiv_id"], "1404.4599");
-    let rows = event.coverage["archive_coverage"].as_array().unwrap();
-    assert_eq!(rows.len(), 15);
-    assert_eq!(rows[14]["class"], "TOTAL");
-    assert_eq!(rows[14]["items"], 37);
+    let manifests = blobs
+        .keys()
+        .filter(|k| k.starts_with("groundtruth/") && k.ends_with("/manifest.json"))
+        .count();
+    assert_eq!(counts["archived_representations"], manifests);
+    assert_eq!(
+        counts["archived_raw_representations"].as_u64().unwrap()
+            + counts["canonical_representations"].as_u64().unwrap(),
+        manifests as u64
+    );
+    assert_eq!(counts["prefix_logical_items"], p.item_directories.len());
+    let items = event.inventory["items"].as_array().unwrap();
+    assert_eq!(counts["effective_logical_items"], items.len());
+    for dir in &p.item_directories {
+        assert!(
+            items
+                .iter()
+                .any(|i| i["logical_item_key"] == dir.as_str() && i["event"] == EVENT)
+        );
+    }
+    // The scope is the last row of the harvest log's pinned prefix.
+    let log = std::str::from_utf8(&blobs[HARVEST_LOG][..p.harvest_log.n_bytes]).unwrap();
+    let rows: Vec<Vec<&str>> = log
+        .lines()
+        .map(|l| l.split('|').map(str::trim).collect::<Vec<_>>())
+        .filter(|f| f.len() > 2 && f[1].parse::<usize>().is_ok())
+        .collect();
+    let last = rows.last().unwrap();
+    assert_eq!(event.coverage["harvest_candidates"], rows.len());
+    assert_eq!(
+        event.coverage["prefix_through_candidate"],
+        last[1].parse::<usize>().unwrap()
+    );
+    assert_eq!(
+        event.coverage["prefix_through_arxiv_id"],
+        last[2].trim_matches('`')
+    );
+    let classes = std::str::from_utf8(&blobs["PROGRAM/FLAWS.md"])
+        .unwrap()
+        .lines()
+        .filter(|l| l.starts_with("## FLAW-"))
+        .count();
+    let table = event.coverage["archive_coverage"].as_array().unwrap();
+    assert_eq!(table.len(), classes + 1);
+    assert_eq!(table[classes]["class"], "TOTAL");
+    assert_eq!(table[classes]["items"], counts["effective_logical_items"]);
+    assert_eq!(event.coverage["amendment_map"]["path"], MAP);
 }
 
 #[test]
@@ -145,7 +164,9 @@ fn the_harvest_log_is_read_to_its_pinned_prefix() {
         .unwrap()
         .extend_from_slice(b"\n| 31 | `1406.7174` | v2 | **admitted** | a later harvest's row |\n");
     let event = inventory(&blobs).unwrap();
-    assert_eq!(event.coverage["harvest_candidates"], 30);
+    let base = inventory(&fixture()).unwrap();
+    assert_eq!(event.coverage, base.coverage);
+    assert_eq!(event.inventory, base.inventory);
     let mut blobs = fixture();
     blobs.get_mut(HARVEST_LOG).unwrap()[100] ^= 1;
     assert_eq!(
@@ -180,7 +201,9 @@ fn changes_outside_the_inputs_pass() {
     blobs.insert("engine/generate/Cargo.toml".into(), b"[package]".to_vec());
     blobs.insert(format!("{PACKET}/report/receipt.json"), b"{}".to_vec());
     let event = inventory(&blobs).unwrap();
-    assert_eq!(event.inventory["counts"]["effective_logical_items"], 37);
+    let base = inventory(&fixture()).unwrap();
+    assert_eq!(event.inventory, base.inventory);
+    assert_eq!(event.coverage, base.coverage);
 }
 
 #[test]

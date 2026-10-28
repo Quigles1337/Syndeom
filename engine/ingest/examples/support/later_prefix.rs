@@ -38,7 +38,6 @@ pub const HARVEST_LOG: &str = "groundtruth/HARVEST-LOG.md";
 pub const DECISION: &str = "analysis/s1-first-parent-integration/OWNER-DECISION.md";
 const BASELINE: &str = "analysis/s1-first-parent-integration/preservation-inputs.json";
 const PAIR_VERIFICATION: &str = "analysis/s1-2/implementation/VERIFICATION.md";
-const LAST_CANDIDATE: (usize, &str) = (30, "1404.4599");
 const PREFIX: &str =
     include_str!("../../../../analysis/s1-later-prefix-1/config/prefix-inputs.json");
 const EXPECTED_OVERLAY: &str =
@@ -115,7 +114,7 @@ pub fn prefix() -> Result<Prefix> {
     if p.event_id != EVENT
         || p.freeze_point != FREEZE_POINT
         || p.freeze_point_tree != "1e2fafad7e21fc69d0ebbc315a96b0e065dd9bd7"
-        || p.item_directories.len() != 5
+        || p.item_directories.is_empty()
         || dirs
             != p.item_directories
                 .iter()
@@ -518,18 +517,16 @@ pub fn inventory(blobs: &Blobs) -> Result<Event> {
         .filter(|m| m.config.get("derived_from").is_none())
         .count();
     let last = candidates.last().ok_or("empty harvest")?;
+    // ADR-0013 D7 as amended: the recorded inputs pin the population, so these are identity
+    // checks only. The counts are measured outputs, recorded in the packet, never conditions.
     if !reviews.is_empty()
-        || manifests.len() != 40
-        || groups.len() != 37
-        || effective_ids.len() != 37
-        || raw != 38
         || groups[OLD] != vec![NEW.to_string(), OLD.to_string()]
         || admitted_seen != admitted
         || !prefix_roots.iter().all(|r| admitted_seen.contains(*r))
-        || (last.index, last.arxiv_id.as_str()) != LAST_CANDIDATE
     {
-        return Err("unexpected inventory/disposition population; the first later prefix must yield 40 representations and 37 logical items through candidate 30".into());
+        return Err("unexpected inventory/disposition population: every review must name a logical item, the amended item must alias exactly its two representations, and the harvest admissions must equal the corpus roots".into());
     }
+    let map_sha256 = content_hash(bytes(blobs, MAP)?);
     let mut candidate_counts: BTreeMap<String, usize> = [
         "admitted",
         "rejected",
@@ -596,21 +593,23 @@ pub fn inventory(blobs: &Blobs) -> Result<Event> {
         "flaw_instances":flaw_instances,"observed_flaw_classes":observed_classes.len(),"zero_coverage_classes":classes.len()-observed_classes.len()},
         "items":items,"actual_byte_checks":byte_checks,"preservation":preservation,
         "historical_s1_4":"unchanged; its bins, counts and receipts describe its original frozen prefix",
-        "accepted_inventory":"unchanged; the first-parent integration's report (35 / 32) describes the accepted corpus before this prefix",
+        "accepted_inventory":"unchanged; the first-parent integration's retained report describes the accepted corpus before this prefix",
         "scope_notes":scope_notes,
         "formalization_boundary":"owner accepts the attributed written witness; full analytic source-to-Lean bridge not formalized; no PROVEN claim",
         "gate_s1":"CLOSED 2026-10-26 (Session 29) on the earlier prefix; its table is not rewritten (ADR-0003 D8); this is the later prefix's own record"});
     let coverage = json!({"schema":"s1-later-prefix-coverage/1","event_id":EVENT,"taxonomy_version":"0.1.0","battery_version":null,"seed":null,
         "uncertainty":"descriptive census of the pinned prefix; no sampling intervals or numeric power calculated",
-        "label_basis":"effective representations: the accepted first-parent amendment applied, so its logical item carries its effective status (ADR-0013 D5)",
+        "label_basis":"effective representations: the accepted first-parent amendment applied, so its logical item carries its effective representation's labels (ADR-0013 D5); the frozen S1.4 table counted the historical roots",
+        "amendment_map":{"path":MAP,"sha256":map_sha256,"logical_item_key":OLD,"effective_artifact_id":NEW},
         "representations":manifests.len(),"logical_items":groups.len(),"canonical_representations":manifests.len()-raw,
         "archive_coverage":rows,"unflagged_documented_subset_coverage":qualified,
         "subset_rule":"exclude logical items with promotion-hold, truth-review, severity-review or pending-review issues; the accepted corpus's issues from the frozen S1.4 overlay with the first-parent hold discharged by the accepted amendment, the prefix's from its own overlay. Not scoring readiness or a new admission policy.",
-        "bins":bins,"zero_coverage":zero,"candidate_counts":candidate_counts,"harvest_candidates":candidates.len(),"prefix_through_arxiv_id":last.arxiv_id,
+        "bins":bins,"zero_coverage":zero,"candidate_counts":candidate_counts,"harvest_candidates":candidates.len(),"prefix_through_candidate":last.index,"prefix_through_arxiv_id":last.arxiv_id,
+        "scope_source":"the harvest log read to its pinned prefix (config/prefix-inputs.json); the scope is measured, not a constant",
         "undetermined_truth_items":undetermined,"issues_by_kind":issues_by_kind,"scope_notes":scope_notes,
         "qualification_counts":{"pending_item_review_union":covered.iter().filter(|i|!i.issues.is_empty()).count(),"escalated_item_union":covered.iter().filter(|i|i.issues.iter().any(|e|e.kind=="truth-review"||e.kind=="severity-review")).count(),"promotion_holds":covered.iter().filter(|i|i.issues.iter().any(|e|e.kind=="promotion-hold")).count(),"unflagged_documented_subset":subset.len()},
         "interim_power":"Every real-item cell is expected underpowered for the equivalence test until S3 derives N_min and freezes the protocol; S4 plans recall against documented errors and a false-positive upper bound on correct proofs, not a fooling length.",
-        "gate_s1_table":"not rewritten; the S1.4 frozen packet and the Gate S1 table describe the prefix through 1403.4485 (ADR-0003 D8)"});
+        "gate_s1_table":"not rewritten; the S1.4 frozen packet and the Gate S1 table describe the earlier prefix (ADR-0003 D8)"});
     Ok(Event {
         inventory,
         coverage,
@@ -628,12 +627,21 @@ fn counts(value: &Value, keys: &[&str]) -> String {
 pub fn render(coverage: &Value) -> Result<String> {
     let mut out = String::new();
     out.push_str(&format!(
-        "# First later prefix — coverage (ADR-0003 D9; ADR-0013)\n\nEvent `{}`. Prefix through arXiv id {}: {} harvest candidates, {} archived representations, {} effective logical items. Taxonomy `0.1.0`; no battery; no seed. Labels are the effective representations' (the accepted first-parent amendment applied). Generated from `coverage.json` by the tool; the Gate S1 table and the frozen S1.4 packet are not rewritten.\n\n",
+        "# First later prefix — coverage (ADR-0003 D9; ADR-0013)\n\nEvent `{}`. Prefix through harvest candidate {} (arXiv id {}), read from the harvest log's pinned prefix: {} harvest candidates, {} archived representations, {} effective logical items, all measured. Taxonomy `0.1.0`; no battery; no seed. Labels are the effective representations': the accepted first-parent amendment in `{}` (SHA-256 `{}`) is applied, so `{}` carries the labels of `{}`. The frozen S1.4 table counted the historical roots and is not rewritten, nor is the Gate S1 table. Generated from `coverage.json` by the tool.\n\n",
         coverage["event_id"].as_str().ok_or("event id")?,
+        coverage["prefix_through_candidate"],
         coverage["prefix_through_arxiv_id"].as_str().ok_or("prefix id")?,
         coverage["harvest_candidates"],
         coverage["representations"],
-        coverage["logical_items"]
+        coverage["logical_items"],
+        coverage["amendment_map"]["path"].as_str().ok_or("amendment map")?,
+        coverage["amendment_map"]["sha256"].as_str().ok_or("amendment map")?,
+        coverage["amendment_map"]["logical_item_key"]
+            .as_str()
+            .ok_or("amendment map")?,
+        coverage["amendment_map"]["effective_artifact_id"]
+            .as_str()
+            .ok_or("amendment map")?
     ));
     for (title, key) in [
         ("Archive coverage", "archive_coverage"),
@@ -870,8 +878,12 @@ pub fn cli() -> Result<()> {
         ]),
     )?;
     println!(
-        "PASS: 40 archived representations / 37 effective logical items; prefix through {} ({EVENT})",
-        LAST_CANDIDATE.1
+        "PASS: {} archived representations / {} effective logical items, measured; prefix through {} ({EVENT})",
+        event.coverage["representations"],
+        event.coverage["logical_items"],
+        event.coverage["prefix_through_arxiv_id"]
+            .as_str()
+            .ok_or("prefix id")?
     );
     Ok(())
 }

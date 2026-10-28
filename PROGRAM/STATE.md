@@ -45,6 +45,16 @@
     *Amendments* 3 (Al's owner note, items 2 and 3), STATE and this block's close.
   - **Flags for Al (ADR-0013):** A, one tool and one packet; B, the five prefix roots unflagged;
     C, effective labels; D, the freeze-register row for the packet, proposed and not added.
+  - **Al's rulings of 2026-10-28 on PR 25** (verbatim under *Standing rulings*; ADR-0013
+    *Amendments* 1). A, B and C were accepted. D7 was amended: the recorded inputs pin the
+    population, and counts are measured outputs, not conditions in the code. D was ruled: a final
+    commit on the branch adds the packet's frozen row. They were applied on the same branch in
+    three further commits:
+    - commit 3 removes the literal counts from the tool and the tests, takes the scope from the
+      harvest log's pinned prefix, names the amendment map in `coverage.json`, rewrites D7 and D8,
+      and records the rulings;
+    - commit 4 holds the regenerated packet;
+    - commit 5 adds the frozen row, with commit 4 as its freeze point.
   - **Unchanged:** registers' statuses, manifests, labels, frozen packets, the retained reports,
     the Gate S1 table, the freeze register, the constitution, the licence and the tag. **NEXT** is
     S2 ordering step 4, ADR-0011's crate, after this pull request merges.
@@ -1343,8 +1353,8 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   and the comparison refined, Al's rulings of 2026-10-28 on PR 23); ADR-0005 amended Session 39
   (*Amendments* 3: the two readings confirmed and the provisional header's UTC date, Al's owner
   note of 2026-10-28); ADR-0013 the first later prefix's inventory event — written, implemented
-  and measured Session 39 (2026-10-28), proposed, flags A–D for Al; ADR-0014 is the next free
-  number.**
+  and measured Session 39 (2026-10-28), accepted as amended by Al's rulings of 2026-10-28 on PR 25
+  (*Amendments* 1), in effect at the merge; ADR-0014 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -1417,6 +1427,30 @@ Owner note, to act on only after you have disclosed and oriented, and to record 
 2. Both readings of the digest rule recorded in ADR-0005 are confirmed: the matched lines' digest is taken over the byte form Session 37 verified against Session 35's reproduction, and a renumbering of matched lines without a change to their bytes is no change, with the new numbers and the withheld count recorded.
 3. ADR-0005 also states the provisional header's UTC date requirement, so a session meets it before it can read ADR-0008. Record this as an ADR-0005 amendment.
 4. Session 38's conversation was closed by a forced Windows restart overnight on 2026-10-27/28, before its post-merge housekeeping could be done there. At the owner's direction on 2026-10-28, a fresh Claude Code conversation, not launched with the §6 prompt and not a numbered session, did the housekeeping: it found the checkout C:\Users\LEET\Syndeom clean on claude/s1-held-harvest-integration at c43f9f9 with one worktree and no restart damage, fetched, read the default branch name from git, switched to it, and fast-forwarded main from a793954 to ef567ec. It made no disclosure, changed no repository file, committed, pushed and deleted nothing, and opened no PR. Record this in STATE as Session 38's housekeeping, noting that it was not done in Session 38's conversation.
+~~~
+
+- **Al's rulings of 2026-10-28 on PR 25 (ADR-0013) — verbatim.** Received in Session 39's
+  conversation after PR 25 opened. The copy is `owner-rulings-adr-0013.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\` (2,072 bytes, SHA-256
+  `e8fbcac1155cab68240e69c86d0a65139a3e3c70a0ce9c362a577404861c3b1a`), transcribed from the
+  message as rendered to the executor. The rulings are also in ADR-0013 *Amendments* 1 and in
+  HANDOFF Session 39's addendum. Their effect is under *Standing escalations* and in the Updated
+  bullet.
+
+~~~text
+Rulings on ADR-0013 (record them verbatim in ADR-0013, STATE and this session's HANDOFF block, as new commits on PR #25's branch; no force-push):
+
+Flag A: accepted. One tool and one packet.
+
+Flag B: accepted. The five prefix roots count as unflagged. An item is flagged by a recorded open issue; the admission review and my rulings Q-H1–Q-H5 closed every reading raised on items 32–36, and dispositions.json records that basis per item. A later issue enters through the overlay.
+
+Flag C: accepted. The coverage table uses the effective labels with the first-parent amendment applied. The S1.4 table stays frozen history, and the packet names which labels it used and the amendment map.
+
+D7, the population pin: amended. The population is pinned by D2's recorded inputs — the accepted integration's input set and the five prefix item directories, by name and byte hash, with the harvest log read to its pinned prefix — and by nothing else. Counts are measured outputs, recorded in the packet and frozen there; they are not conditions in the code. Remove the literal 40/37/38 comparisons from the tool's guard and from its messages, and the literal-count assertions from the tests, keeping the identity checks, the byte-identity test against the retained report, and any assertion derived from the recorded inputs. Take the "through candidate 30 / 1404.4599" scope from prefix-inputs.json or from the pinned harvest-log prefix, not from a constant. Rewrite D7 and D8 to match. The pinned ADR-0012 tool keeps its literals: it is frozen, and this ruling applies from this event on. Regenerate the packet, since provenance records the tool's sources, and confirm two runs are still byte-identical.
+
+Flag D: on the branch, after the regeneration and before the merge, as PR #24 did: a final commit adds one frozen row for analysis/s1-later-prefix-1/ whose freeze point is the commit that holds the regenerated packet. I will merge with a merge commit so that commit's id survives.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
 ## Carried from S0 (notes, not actions)
@@ -1551,13 +1585,18 @@ Owner note, to act on only after you have disclosed and oriented, and to record 
   is changed or re-run by the integration. **Built in Session 39** on branch
   `claude/s1-later-prefix-inventory` (Updated bullet): ADR-0013 (proposed), the tool
   `s1_later_prefix`, and the packet `analysis/s1-later-prefix-1/`, which measures **40 / 37**. It
-  awaits Al's review and merge, with a merge commit, and Al's decisions on ADR-0013's flags:
-  - **A:** one tool and one packet for the inventory and the coverage run;
-  - **B:** the five prefix roots count as unflagged, since Al's rulings settled every reading the
-    admission review raised;
+  awaits Al's review and merge, with a merge commit. **ADR-0013's flags — RULED by Al on
+  2026-10-28 on PR 25** (verbatim under *Standing rulings*):
+  - **A:** one tool and one packet for the inventory and the coverage run. Accepted.
+  - **B:** the five prefix roots count as unflagged. Accepted. An item is flagged by a recorded
+    open issue, and a later issue enters through the overlay.
   - **C:** the coverage counts effective labels, with the accepted first-parent amendment
-    applied, not the historical roots' labels;
-  - **D:** a freeze-register row for `analysis/s1-later-prefix-1/`, proposed and not added.
+    applied. Accepted. The S1.4 table stays frozen history, and the packet names its labels and
+    the amendment map.
+  - **D7:** amended. The recorded inputs pin the population, and the counts are measured outputs,
+    frozen in the packet. Applied in commit 3, with the packet regenerated in commit 4.
+  - **D:** one frozen row for `analysis/s1-later-prefix-1/`, whose freeze point is the commit
+    holding the regenerated packet, added by the branch's final commit.
 - **Session 38's post-merge housekeeping — DONE on 2026-10-28, outside Session 38's
   conversation** (Al's owner note of 2026-10-28, item 4, verbatim under *Standing rulings*;
   Updated bullet). Nothing awaited.
@@ -1905,16 +1944,15 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 ## NEXT-SINGLE-ACTION
 
 **S2 ordering step 4: ADR-0011's crate `engine/generate/`, after the inventory-event pull request
-(branch `claude/s1-later-prefix-inventory`) merges.** Al's rulings on ADR-0013's flags A–D come
-first if they change the event.
+(branch `claude/s1-later-prefix-inventory`) merges.** Al's rulings on ADR-0013 (2026-10-28 on PR
+25) are applied on that branch.
 
 Executable cold:
 1. Open per ADR-0008 D1. If the session was launched with the §6 prompt, the SD15 disclosure comes
    first, by digest where ADR-0005 *Amendments* 1–3 allow it.
 2. Confirm that the inventory-event pull request is merged, with a merge commit on fetched
-   `origin/main`. **If it is not, record that and stop.** If Al has ruled on ADR-0013's flags,
-   record the rulings verbatim (ADR-0013 *Amendments*, STATE, HANDOFF) before anything else. Flag
-   D, if accepted, is a freeze-register row in its own commit.
+   `origin/main`. **If it is not, record that and stop.** Any later ruling on the pull request
+   is recorded verbatim (ADR-0013 *Amendments*, STATE, HANDOFF) before anything else.
 3. On a fresh branch from `main`, build the crate `engine/generate/` under PolyForm, per ADR-0011
    D1–D12 and its *Amendments*. D6's S1-corpus independence binds every seed: no seed, grammar or
    template derives from any item under `groundtruth/`, and the five prefix items are S1 corpus.

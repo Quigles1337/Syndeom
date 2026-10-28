@@ -8020,3 +8020,53 @@ STOP-REASON: natural boundary. The pull request is open for Al's review, and NEX
 merge. Repo green: the gate on the committed tree is recorded in the pull request and under the
 external root, not in the tree it certifies. **Memory writes:** none, deliberately. A write would
 change a memory digest and make the next disclosure owe verbatim reproduction.
+AL'S RULINGS ON PR 25 (2026-10-28 UTC, received in this session's conversation after PR #25
+opened; recorded at Al's direction in new commits on the same branch, no force-push; transcribed
+verbatim from Al's message; copy `owner-rulings-adr-0013.txt` under the external root, 2,072
+bytes, SHA-256 `e8fbcac1155cab68240e69c86d0a65139a3e3c70a0ce9c362a577404861c3b1a`):
+
+~~~text
+Rulings on ADR-0013 (record them verbatim in ADR-0013, STATE and this session's HANDOFF block, as new commits on PR #25's branch; no force-push):
+
+Flag A: accepted. One tool and one packet.
+
+Flag B: accepted. The five prefix roots count as unflagged. An item is flagged by a recorded open issue; the admission review and my rulings Q-H1–Q-H5 closed every reading raised on items 32–36, and dispositions.json records that basis per item. A later issue enters through the overlay.
+
+Flag C: accepted. The coverage table uses the effective labels with the first-parent amendment applied. The S1.4 table stays frozen history, and the packet names which labels it used and the amendment map.
+
+D7, the population pin: amended. The population is pinned by D2's recorded inputs — the accepted integration's input set and the five prefix item directories, by name and byte hash, with the harvest log read to its pinned prefix — and by nothing else. Counts are measured outputs, recorded in the packet and frozen there; they are not conditions in the code. Remove the literal 40/37/38 comparisons from the tool's guard and from its messages, and the literal-count assertions from the tests, keeping the identity checks, the byte-identity test against the retained report, and any assertion derived from the recorded inputs. Take the "through candidate 30 / 1404.4599" scope from prefix-inputs.json or from the pinned harvest-log prefix, not from a constant. Rewrite D7 and D8 to match. The pinned ADR-0012 tool keeps its literals: it is frozen, and this ruling applies from this event on. Regenerate the packet, since provenance records the tool's sources, and confirm two runs are still byte-identical.
+
+Flag D: on the branch, after the regeneration and before the merge, as PR #24 did: a final commit adds one frozen row for analysis/s1-later-prefix-1/ whose freeze point is the commit that holds the regenerated packet. I will merge with a merge commit so that commit's id survives.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+How each ruling is applied (commit 3 unless stated):
+- **A, B and C** → recorded as accepted in ADR-0013 (*Status*, D1, D4, D5, *Flags*). For C, the
+  packet names its labels and the amendment map: `coverage.json` gains `amendment_map` (path,
+  SHA-256, logical item key, effective artifact id), and `label_basis` and `report.md` say which
+  labels were used.
+- **D7** → the tool's guard compares no count with a literal. The 40, 37 and 38 comparisons and
+  the `LAST_CANDIDATE` constant are gone, and so is the prefix pins' comparison with 5. The guard
+  keeps the identity checks:
+  - every review names a logical item;
+  - the amended item aliases exactly its two representations;
+  - the harvest admissions equal the corpus roots.
+
+  The refusal message names those identities, and the PASS line prints the measured values. The
+  scope is measured from the harvest log's pinned prefix: `prefix_through_candidate` and
+  `prefix_through_arxiv_id`, with `scope_source`. Tests:
+  - the literal-count test is replaced by `population_follows_the_recorded_inputs`, whose every
+    assertion is derived from the fixture's recorded inputs;
+  - the two tests that asserted a literal count now assert outputs equal to the unchanged
+    fixture's;
+  - the byte-identity test is kept.
+
+  A grep of the tool and the tests for the whole words 40, 37, 38, 30, `1404.4599` and
+  `LAST_CANDIDATE` finds nothing (exit 1). A canary with the same grep form finds the freeze-point
+  tree id, so the absence is real. D7 and D8 are rewritten. The pinned ADR-0012 tool is
+  untouched.
+- **Regeneration** → commit 4. The byte-identity test is held out of commit 3, because the
+  retained report is stale until then, and restored in commit 4 from a saved copy, as in
+  commits 1–2.
+- **D** → commit 5, the freeze-register row with commit 4's full id as its freeze point.

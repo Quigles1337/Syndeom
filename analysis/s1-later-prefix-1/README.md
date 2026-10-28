@@ -30,7 +30,21 @@ byte-identical to `report/`. `provenance.json` names the checkout revision, so i
 retained copy whenever the checkout does. The gate checks the first three from the working tree
 (`engine/ingest/tests/later_prefix.rs`).
 
+## Labels
+
+The coverage counts the effective logical items with the effective representations' labels: the
+accepted first-parent amendment in `groundtruth/amendment-map.json` is applied. `coverage.json`
+records this as `label_basis` and `amendment_map`. The frozen S1.4 table, which counted the
+historical roots, stays as it is (ADR-0013 D5; Al's ruling C).
+
 ## Bounds
 
-The tool refuses any population other than 40 archived representations and 37 effective logical
-items. A later prefix is its own event, with its own tool revision and packet.
+The population is pinned by the recorded inputs and by nothing else (ADR-0013 D7 as amended; Al's
+ruling of 2026-10-28 on PR 25):
+- the accepted integration's input set;
+- the five prefix item directories, by name and byte hash;
+- the harvest log, read to its pinned prefix.
+
+The counts and the scope are measured outputs, recorded and frozen in `report/`. They are not
+conditions in the code. A later prefix is its own event, with its own recorded inputs, tool
+revision and packet. The packet is a frozen scope in STATE's freeze register.
