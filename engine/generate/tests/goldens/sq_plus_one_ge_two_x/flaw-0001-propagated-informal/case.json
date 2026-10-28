@@ -1,0 +1,23 @@
+{
+  "config": {
+    "theorem": "sq_plus_one_ge_two_x",
+    "style": "expand_square",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "sub_variant": "propagated",
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "perturbation": "sign"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "21f83594a22d514bb9cdb1ec0261f659e7d1f4b9",
+  "toolchain": null,
+  "observation": null
+}

@@ -1,0 +1,11 @@
+✔ [8925/8929] Built Syndeom.Seeds.NSqModFour (8.7s)
+✔ [8926/8929] Built Syndeom.Seeds.SqPlusOneGeTwoX (8.8s)
+✔ [8927/8929] Built Syndeom.Seeds.NatLeSq (30s)
+✔ [8928/8929] Built Syndeom (17s)
+Build completed successfully (8929 jobs).
+lake-build exit 0
+'syndeom_golden_nat_le_sq' depends on axioms: [propext]
+'syndeom_seed_nat_le_sq' depends on axioms: [propext]
+'syndeom_seed_n_sq_mod_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_sq_plus_one_ge_two_x' depends on axioms: [propext, Classical.choice, Quot.sound]
+audit exit 0

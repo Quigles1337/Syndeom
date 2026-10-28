@@ -1,0 +1,12 @@
+[package]
+name = "syndeom-generate"
+version = "0.1.0"
+edition = "2024"
+license = "PolyForm-Noncommercial-1.0.0"
+description = "S2 first generator family: deterministic seeded templates and grammars (ADR-0011)"
+publish = false
+
+[dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = { version = "1.0.154", features = ["float_roundtrip"] }
+syndeom-manifest = { path = "../manifest" }

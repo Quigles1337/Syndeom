@@ -1,0 +1,6 @@
+sq_faithful exit=0 start=17:25:21 end=17:25:39
+sq_propagated exit=1 start=17:25:39 end=17:25:47
+sq_local exit=1 start=17:25:47 end=17:25:55
+nsq_faithful exit=0 start=17:25:55 end=17:26:02
+nsq_gap exit=1 start=17:26:02 end=17:26:09
+=== PROBE end

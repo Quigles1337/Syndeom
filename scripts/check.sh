@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # SYNDEOM gate (SD9; ADR-0002 D6). The default branch always passes this script.
 #   lake build (lean/)  +  cargo fmt --check  +  cargo clippy -D warnings  +  cargo test (engine/)
-#   + axiom audit of the golden fixture  +  LF/BOM check  +  register cross-reference check
+#   + axiom audit of the golden fixture and the seed witnesses  +  LF/BOM check
+#   + register cross-reference check  +  freeze register
 # Run from anywhere: paths are resolved from this file's location.
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -10,17 +11,32 @@ cd "$ROOT"
 echo "== lean: lake build (toolchain $(cat lean/lean-toolchain)) =="
 ( cd lean && lake build )
 
-echo "== lean: axiom audit of the golden fixture =="
+echo "== lean: axiom audit of the golden fixture and the seed witnesses =="
 AUDIT="$(cd lean && lake env lean Audit.lean 2>&1)"
 echo "$AUDIT"
-# SD2(ii): at most the standard three axioms; the audit line must be exactly one of these forms
-case "$AUDIT" in
-  *"'syndeom_golden_nat_le_sq' depends on axioms: [propext, Classical.choice, Quot.sound]"*|\
-  *"'syndeom_golden_nat_le_sq' depends on axioms: [propext, Quot.sound]"*|\
-  *"'syndeom_golden_nat_le_sq' depends on axioms: [propext]"*|\
-  *"'syndeom_golden_nat_le_sq' does not depend on any axioms"*) ;;
-  *) echo "FAIL: golden fixture axioms are not within the standard three"; exit 1 ;;
-esac
+# SD2(ii): every audited declaration depends on at most the standard three axioms (ADR-0011 D10).
+# Audit.lean prints one line per `#print axioms`; each must name only propext, Classical.choice
+# and Quot.sound, and the number of axiom lines must equal the number of audited declarations.
+EXPECTED="$(grep -c '^#print axioms ' lean/Audit.lean)"
+SEEN=0
+while IFS= read -r line; do
+  case "$line" in
+    "'"*"' does not depend on any axioms") SEEN=$((SEEN + 1)) ;;
+    "'"*"' depends on axioms: ["*"]")
+      list="${line#*depends on axioms: [}"
+      IFS=',' read -ra axioms <<< "${list%]}"
+      for ax in "${axioms[@]}"; do
+        case "${ax# }" in
+          propext|Classical.choice|Quot.sound) ;;
+          *) echo "FAIL: non-standard axiom '${ax# }' in: $line"; exit 1 ;;
+        esac
+      done
+      SEEN=$((SEEN + 1)) ;;
+  esac
+done <<< "$AUDIT"
+if [ "$EXPECTED" -lt 1 ] || [ "$SEEN" -ne "$EXPECTED" ]; then
+  echo "FAIL: $SEEN axiom lines for $EXPECTED audited declarations"; exit 1
+fi
 
 echo "== engine: cargo fmt --check =="
 ( cd engine && cargo fmt --all --check )

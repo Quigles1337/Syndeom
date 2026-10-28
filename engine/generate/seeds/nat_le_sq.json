@@ -1,0 +1,31 @@
+{
+  "id": "nat_le_sq",
+  "source": "PROGRAM/DECISIONS/ADR-0001.md D8, the theorem of Golden A and Golden B: executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A natural number is at most its square",
+  "statement": "For every natural number $n$, $n \\le n^2$.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/NatLeSq.lean:syndeom_seed_nat_le_sq"
+  },
+  "imports": ["Mathlib"],
+  "binders": "(n : ℕ)",
+  "claim": "n ≤ n ^ 2",
+  "styles": [
+    {
+      "id": "two_cases",
+      "steps": [
+        {
+          "text": "If $n = 0$, both sides equal $0$ — there is nothing to prove.",
+          "fragment": []
+        },
+        {
+          "text": "Otherwise $n \\ge 1$; multiplying both sides by $n \\ge 0$ gives $n \\cdot n \\ge n$,\nthat is, $n^2 \\ge n$.",
+          "fragment": ["simpa [sq] using Nat.le_mul_self n"]
+        }
+      ],
+      "flaws": []
+    }
+  ]
+}

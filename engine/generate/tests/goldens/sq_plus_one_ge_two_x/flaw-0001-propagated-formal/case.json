@@ -1,0 +1,30 @@
+{
+  "config": {
+    "theorem": "sq_plus_one_ge_two_x",
+    "style": "expand_square",
+    "target": "formal",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "sub_variant": "propagated",
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "perturbation": "sign"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "21f83594a22d514bb9cdb1ec0261f659e7d1f4b9",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 6
+  }
+}

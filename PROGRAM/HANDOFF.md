@@ -8105,3 +8105,306 @@ ESCALATIONS (superseding the block's):
 - Unchanged: human-referee participants (SD13).
 STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
 recorded in the pull request and under the external root, not in the tree it certifies.
+
+SESSION: 2026-10-28 UTC (2026-10-28 America/New_York) (Session 40 — a fresh conversation launched
+from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone; SD15 disclosure first,
+by digest (ADR-0005 *Amendments* 1–3); not an examination — Gate S2 has nothing to examine;
+examined fetched `origin/main` `f9f973012cbe1a7d7f1d8cd4520db998dca0e550`, tree
+`84a010018335bfdc94bcc2214babd593b5b734bb`, in the original checkout `C:\Users\LEET\Syndeom` on
+`main`, synchronized; branch `claude/s2-generate-crate`; header completed after ADR-0008 step 5 —
+it was written provisionally with the disclosure, which is unchanged; the session-end SHA is the
+commit carrying this block, recorded in its pull request)
+
+### Entry 1 — SD15 memory disclosure, by digest (ADR-0005 D1–D4, Amendments 1–3)
+
+This disclosure was made before any other action. The only steps before it were:
+- reading `PROGRAM/SYNDEOM-PROGRAM.md` and `PROGRAM/DECISIONS/ADR-0005.md` in full;
+- reading and hashing the memory below.
+
+No other repository file, directory listing, Git history or status, or build was read or run
+first. HANDOFF's existing contents were not read. This entry was appended by a Node script
+(`fs.appendFileSync`), not by a file-editing tool. The facts below were computed from the files on
+disk at 2026-10-28T17:05:04Z (UTC).
+
+- **Memory the harness loaded:** only the index
+  `C:\Users\LEET\.claude\projects\C--Users-LEET\memory\MEMORY.md`. The session was launched in
+  `C:\Users\LEET`, which is not a git work tree, so no gitStatus snapshot was attached. No other
+  memory file was loaded by the harness. This session read `project_syndeom.md` in full for this
+  disclosure.
+- **The whole index, as a fact:** 110 lines, 15,420 bytes, 0 CR, 334 non-ASCII bytes, ends with LF,
+  SHA-256 `cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69`. This is the same
+  digest as the whole-index fact in ADR-0005 Amendment 2's baseline.
+- **Name search (D3):** a case-insensitive search for `/syndeom|kober|friedman/i` over every index
+  line matched lines 85, 86, 88, 89, 106 and 107 (6 lines). It ran as a Node regex, not Git Bash
+  grep. An extra case-insensitive search for `fr13dman` matched lines 88, 89 and 107, all among
+  the six. The canary `/project memory/i` matched line 1, which shows the search runs.
+- **Matched index lines (D1 a):** lines 85, 86, 88, 89, 106 and 107, each with its LF terminator,
+  concatenated in index order. They total 1,198 bytes, with 0 CR and 30 non-ASCII bytes, SHA-256
+  `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`. The line numbers and the
+  digest are the same as in Amendment 2's baseline.
+- **Withheld by count (D2):** 104 lines, at line numbers 1–84, 87, 90–105 and 108–110. None of
+  them matched the name search.
+- **The SYNDEOM memory file (D1 b):** `project_syndeom.md`, 135 lines, 10,957 bytes, 0 CR,
+  71 non-ASCII bytes, ends with LF, SHA-256
+  `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`. This is the same digest as in
+  Amendment 2's baseline.
+- **Other recalled memory (D1 c):** none.
+- **The by-digest path (Amendment 1, refined by Amendment 2, readings confirmed by Amendment 3):**
+  both compared digests (the matched lines and the SYNDEOM file) equal the digests of bytes that
+  HANDOFF Session 35, Entry 1 reproduced, according to ADR-0005 Amendment 2:
+  - HANDOFF lines 6672–6677 hold the matched lines;
+  - HANDOFF lines 6683–6817 hold the file.
+
+  Their content is not reproduced again. At this point the citation comes from ADR-0005. Entry 2
+  verifies it after this append, by hashing those HANDOFF lines.
+- **D4, as read by this session:** the SYNDEOM file holds environment and tooling hazards and
+  locations only: the repo, the second checkout, and the external evidence roots. It holds no
+  phase, gate status, CLAIM or FLAW status, commit SHA used as a state marker, next action or
+  escalation. The six matched index lines name the three programs' repos and say that no state is
+  recorded there.
+- **Memory writes:** none in this session, and none will be made.
+- **Launch:** the launching message is the §6 Session-N prompt with no owner note appended. By
+  eye, it matches §6's text line for line.
+
+### Entry 2 — the disclosure's citation, verified after the append; the header completed
+
+- **Cited entry:** HANDOFF Session 35, Entry 1 (heading at line 6664, "Entry 1 — SD15 memory
+  disclosure (ADR-0005 D1–D4; ADR-0009)"). Extracted from HEAD's HANDOFF blob (`f9f9730`, blob
+  SHA-256 `76ace902…ccdd`):
+  - lines 6672–6677 hash to `0418e621…534c` and are byte-identical to index lines 85, 86, 88, 89,
+    106 and 107;
+  - lines 6683–6817 hash to `ce2ce6de…2cc0` and are byte-identical to `project_syndeom.md` on disk.
+
+  Neither digest is new, so nothing is owed verbatim. The matched lines kept their numbers.
+- **The append.** Entry 1 with its provisional header was 3,607 bytes, SHA-256 `e1ffe4e9…a52d`,
+  appended by `fs.appendFileSync` at 2026-10-28T17:05Z; HANDOFF's size grew by exactly that much.
+- **The header.** A script checked that HANDOFF's last 3,607 bytes were the appended entry, then
+  replaced the 80-byte provisional header line with the completed header (728 bytes). It asserted
+  that the disclosure body (3,526 bytes, `351c8267…2933`) was unchanged and that HEAD's HANDOFF
+  blob is an exact prefix of the working file.
+- **Constitution and ADR bytes (ADR-0008 step 5).** As read in step 0 and as in the snapshot: the
+  constitution `110f5360…479c` (38,958 B, ADR-0009's amended digest) and ADR-0005 `b08e543a…ce11`
+  (15,291 B, with *Amendments* 1–3).
+
+### Entry 3 — an interruption, and Al's direction
+
+A safety classifier stopped one of this session's responses during ORIENT step 6, after the
+ORIENT gate had ended GREEN, and that response wrote nothing to the repository, the external root
+or the memory store. The stopped response was carrying out the review of the ORIENT gate's log,
+the last check of ADR-0008 step 6, before ASSESS and PLAN.
+
+The executor then reported the session's position and asked whether to continue. Al's direction,
+transcribed verbatim from the message as rendered to the executor:
+
+~~~text
+Continue in this session. Your disclosure, orientation and gate stand; redo nothing. Record the interruption in this session's HANDOFF block in one sentence — the step it happened at, and that nothing was written — and say in one sentence which step the stopped response was carrying out, without reproducing it. Then proceed: PLAN the one thing STATE names, ADR-0011's crate, and EXECUTE it on a fresh branch from main. If a classifier stops you again at any point, do not reword or retry: stop at the nearest point where the committed tree passes the gate, complete the header, record both interruptions, push the branch, open the PR, and report. Otherwise run the loop to a clean stop per §4.6 and stop for my review.
+~~~
+
+### Entry 4 — ADR-0011's crate, built (S2 ordering step 4)
+
+All on branch `claude/s2-generate-crate`, from `main` `f9f9730`:
+- **Commit 1** `9b4b16f688bfc280a0e7ce0cda2da80558435f5b`: the crate `engine/generate/`, with
+  Cargo.toml and Cargo.lock gaining the workspace member only, and this block's Entries 1–3.
+- **Commit 2** `21f83594a22d514bb9cdb1ec0261f659e7d1f4b9`: the seed witnesses, `Audit.lean`, and
+  the gate's axiom loop. This is the D10 gate change that ruling 3 gives its own review.
+- **Commit 3** `f8cc5df249c3026d2685c17483ccba6301c5cf3a`: the 12 goldens, produced by
+  `generate --dry-run` at commit 2, with the Lean harness run one process at a time
+  (2026-10-28T17:37:02Z–17:38:56Z).
+- **Commit 4** `cd5633b3f1a7388565526e5d93f0afffabcc17c4`: the security review's four fixes; no
+  emitted byte changed.
+- **Commit 5** (this one): the packet `analysis/s2-generate-1/`, STATE, and this close.
+
+The evidence, the security review and readings 1–12 are in the packet's README. Every receipt is
+under `C:\Users\LEET\Codex\Temp\syndeom-generate-20261028T1706Z\`.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN. S2.1–S2.4 are in progress: this is the first
+implementation session (ADR-0011 D11). Gate S1 is CLOSED (Session 29).
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipt `orient-receipt-1.json`, SHA-256
+`6dd8577d…0f37`, under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1706Z\`):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-10-28T17:06:23Z–17:06:24Z, exit 0.
+- **Snapshot.** `main` at `f9f97301…`, tree `84a01001…`, **synchronized**: ahead 0, behind 0. The
+  only change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree.
+- **Step 5.** The constitution (`110f5360…`) and ADR-0005 (`b08e543a…`), as read in step 0, equal
+  the snapshot's blobs.
+- **Step 6.** Read in this order:
+  - STATE (the Updated bullet, the freeze register, memory policy, standing rulings, the gate
+    tables, blockers, standing escalations, NEXT);
+  - HANDOFF Session 39 in full;
+  - CLAIMS: 0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED (existence only);
+  - FLAWS `0.1.0` (14 entries);
+  - ADR-0008, ADR-0011, ADR-0001's D4 registry and example, and `syndeom-manifest`'s API.
+
+  They agree with one another and with the tree.
+- **ORIENT gate GREEN**, 17:07:43Z–17:08:31Z (STATE, *Current build verification*).
+- **NEXT survived ORIENT.** PR 25 was merged by Al with the merge commit `f9f9730`. Its only
+  comment is the executor's own, so there was no later ruling to record.
+ADVANCED:
+- **ADR-0011's crate** (S2.1–S2.4 in progress): the plan and both renderers (Golden A and Golden B
+  reproduced), `syndeom-rng/1`, `s2_template` 0.1.0 with three seeds, the injector, ground truth,
+  commanded, achieved and fidelity, the Lean harness, and the CLI.
+- **12 goldens**, each fidelity PASS, with check K confirmed by Lean for the three flawed formal
+  cases.
+- **The gate's axiom audit** now covers the seed witnesses.
+- **`cargo audit`** is clean, and the security review is recorded with four findings fixed.
+BELIEF DELTAS:
+- **Lean prints the compiled file's path exactly as it was passed:** the Windows verbatim form
+  `//?/C:/…`, because the CLI canonicalizes paths. Check K can therefore match the file exactly,
+  and FINDING-004 relies on that.
+- **`Mathlib.Data.Real.Basic` is deprecated at the pinned Mathlib** (since 2026-08-27; replace with
+  `Mathlib.Basic.Real.Basic`). It warns rather than fails. A seed that used it would carry the
+  warning into every build output.
+- **Compile cost is the import set's.** A seed with narrow imports compiles in about 8–17 s.
+  `import Mathlib` (the `nat_le_sq` bytes that Golden B fixes) takes about 50 s. Full-Mathlib
+  seeds will dominate the sweep's cost.
+- **ADR-0012's narrowing did its job.** Editing `engine/Cargo.toml`, `engine/Cargo.lock`,
+  `lean/Audit.lean` and `scripts/check.sh` left every existing test green, because those files
+  are outside the S1.3 reproduction's input set.
+CONFUSIONS:
+- **The goldens could not be produced while their own files sat in the working tree.**
+  Engine-commit verification walks `engine/generate/` and refuses any file the commit lacks. The
+  order is therefore: commit the producer, generate into external receipt directories, then add
+  the goldens. Cost: none, because the order was planned. The goldens README records it.
+- **`--dry-run` first wrote its outputs nowhere.** It now writes them into the receipt
+  directory, so the goldens needed no `corpora/` artifact before the sweep. Cost: one edit.
+- **The classifier interruption** (Entry 3). Cost: one round trip, and nothing was written.
+HONESTY CHECK:
+- No register status changed. The packet's measurements are implementation evidence, not CLAIMS.
+- The RNG vectors are checked against D4's text, not against the published reference code. The
+  attribution is unverified, and the test and the packet say so.
+- The engine produced the golden manifests; they were not written by hand.
+  - The formal proof bytes were written by hand first and matched exactly.
+  - The informal bytes are seed material, rendered. They were checked by reading. Only
+    `nat_le_sq` has an independent byte check, against Golden A.
+- FINDING-005 stays open: `engine_commit` identifies the checked-out sources, not the running
+  binary.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened. The seeds come from FLAWS.md 0.1.0
+and ADR-0001 D8 only, and no `groundtruth/` item was read for design (D6, ruling 1). No real
+AI-generated proof was used. Verdict: no leakage.
+DETERMINISM CHECK:
+- Every golden regenerates byte for byte from its config, seed and recorded observation.
+- Two calls with the same input are identical.
+- The RNG vectors are pinned.
+- No wall-clock value enters an artifact; receipts carry durations only.
+- Nothing entered CLAIMS, so there is nothing to quarantine.
+MANIFEST CHECK:
+- Every golden manifest passed `Manifest::check` with its bytes before it was written: `origin`
+  synthetic, `derivation` by-construction.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing. The witnesses are `lean-kernel` references audited by the
+  gate, not CLAIMS.
+DRIFT CHECK:
+- No verdict on any paper (SD3), and no understanding claims (SD17).
+- No detector was chosen or tuned, and there was no referee contact (SD13).
+- No S3 work, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, with Al's rulings recorded first,
+add the next `s2_template` seeds: the FLAWS.md examples that check K confirms.
+ESCALATIONS:
+- **This pull request:** review and merge, with a merge commit.
+- **Commit `21f8359`:** the D10 gate change, under its own review (ruling 3 of 2026-10-27).
+- **Readings 1–12** in `analysis/s2-generate-1/README.md`, FINDING-005 among them.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The first implementation session's scope (ADR-0011 D11) is built,
+and the pull request is open for Al's review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
+**Memory writes:** none. A write would change a memory digest and make the next disclosure owe
+verbatim reproduction.
+
+SESSION 40 ADDENDUM — AL'S RULINGS ON PR 26 (2026-10-28 UTC, received in this session's
+conversation after PR #26 opened; recorded at Al's direction in new commits on the same branch,
+no force-push; transcribed verbatim from Al's message as rendered to the executor; copy
+`owner-rulings-pr26.txt` under `C:\Users\LEET\Codex\Temp\syndeom-pr26-rulings-20261028\`, 2,281
+bytes, SHA-256 `f4f6e2b05f0bf39045079a621cadcd567eed3b007109cc858ee4020b4ccac267`):
+
+~~~text
+Rulings on PR #26 (record them verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+1. The gate change in 21f8359 is accepted: the seed witnesses are library modules, and the audit parses every #print axioms line against the standard three axioms with a count check.
+
+2. Readings 1, 2, 3, 5, 6, 7, 8 and 9 are accepted as read.
+
+3. Reading 4 is not accepted as read. Flaw counts are per instance, not per record: one injected flaw rendered in both files of a pair is one instance with two locations, and n_flaws_total and n_flaws_<NNNN> count instances. No current golden is a pair, so nothing regenerates now; the rule binds the next producer revision before the first pair golden, and ADR-0001's wording is clarified if it needs it.
+
+4. Reading 10: the attribution is to be verified against retrieved vectors, not left unverified. An independent implementation from the published algorithms reproduces this crate's D4 vectors and matches the reference vectors in rand_xoshiro 0.3.0's tests (src/splitmix64.rs: seed 1477776061723855037, 50 outputs; src/xoshiro256starstar.rs: state 1, 2, 3, 4, 10 outputs; both recorded there as produced with Vigna's reference C at xoshiro.di.unimi.it). Retrieve those two vectors, register the source under SD11, add them as tests in engine/generate/tests/rng.rs (a state constructor for the stream may be needed for the xoshiro vector; it must change no output), and lift the "unverified" note in the tests header, the packet README and D4's conformance record.
+
+5. Readings 11 and 12: accepted. A new seed bumps s2_template to 0.2.0 with the 0.1.0 goldens kept regenerable under the version they name, and 0.2.0 embeds its input hashes at build time as syndeom-pair does, closing FINDING-005.
+
+6. Record correction: the packet README and HANDOFF say each formal golden is byte-identical to its hand-written probe. That holds for three of five; the two faithful probes carry a trailing #print axioms line the goldens do not. Correct the wording; the probes stay as they are.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review. I will merge with a merge commit: the goldens pin engine_commit 21f8359, which must stay a real commit on main.
+~~~
+
+Before applying the rulings, a fresh fetch at 2026-10-28T17:59Z showed `origin/main` still at
+`f9f9730` and the branch at `8697ab3`, in sync with its remote.
+
+**The gate on PR 26's head, before the rulings:** `8697ab3` (tree `a2345dd4…`) was GREEN,
+2026-10-28T17:48:05Z–17:48:47Z, exit 0, with the tree clean before and after.
+- Lean: 8,929 jobs; four axiom lines within the standard three.
+- Rust: fmt and clippy pass, and 114 tests pass.
+- Records: 570 tracked files are LF; the registers and the freeze register (65 rows) ALL PASS.
+- Raw log SHA-256 `2214f509…473a`, under `C:\Users\LEET\Codex\Temp\syndeom-generate-20261028T1706Z\`.
+
+The preflight's `recheck` exited 0, and the push created the branch.
+
+How each ruling is applied:
+- **Ruling 1 (the gate change accepted)** → recorded in ADR-0011 *Amendments* and STATE.
+- **Ruling 2 (readings 1, 2, 3, 5–9 accepted)** → recorded, and the packet README marks them.
+- **Ruling 3 (counts per instance)** → recorded as an amendment of D8.
+  - `s2_template` 0.1.0 counts records, and no 0.1.0 golden is a pair, so no code or byte
+    changed now.
+  - STATE's NEXT makes per-instance counting part of 0.2.0, with the property test that equates
+    the counts with records changed then.
+  - ADR-0001 is left unedited: it names `n_flaws_total` and `n_flaws_<NNNN>` without a unit and
+    already defines `flaws_confirmed` as a count of instances.
+  - One reading is the executor's, open for Al: a pair instance counts as confirmed when each of
+    its records passes its check.
+- **Ruling 4 (the RNG attribution)** → commit `91dde9a6763526e6d9f2131ce196f6d6a54b2bd3`.
+  - **Retrieval** at 2026-10-28T17:59:51Z–17:59:52Z: the crates.io index entry for
+    `rand_xoshiro` (SHA-256 `6c7f3b35…f838`) and the 0.3.0 archive (15,597 bytes, SHA-256
+    `0be70256…831f`, equal to the index's `cksum`, not yanked). The archive was extracted as data
+    into a new directory.
+  - **The vectors**, extracted by script:
+    - `src/splitmix64.rs` test `reference`: seed 1477776061723855037, 50 outputs, comment naming
+      `splitmix64.c`;
+    - `src/xoshiro256starstar.rs` test `reference`: state 1, 2, 3, 4, 10 outputs. Its comment
+      names `xoshiro128starstar.c`, which is recorded as written.
+  - **Agreement:** both the crate and the independent Python implementation of D4 reproduce them.
+  - **Registered** as S-0081, digest-only.
+  - **Tests** in `engine/generate/tests/rng.rs`, through the new `Stream::from_state`. The 12
+    goldens still regenerate, so no output changed.
+  - **Notes lifted:** the "unverified" note in the tests header, the packet README and, by the
+    amendment, D4's conformance record.
+- **Ruling 5 (0.2.0)** → recorded. NEXT step 3 makes 0.2.0 the first move: the version bump,
+  build-time input hashes closing FINDING-005, per-instance counts, and the 0.1.0 goldens kept
+  regenerable. The packet marks FINDING-005 as scheduled.
+- **Ruling 6 (the record correction)** → the packet README, the goldens README and STATE now say
+  that the three flawed formal goldens are byte-identical to their probes. The two faithful probes
+  are their goldens followed by the probe's own `\n#print axioms <main>\n` tail, which the copy
+  script removed before comparing. The probes are unchanged.
+
+  **This block's Entry 4 is corrected here, because HANDOFF is append-only.** Its HONESTY CHECK
+  bullet "The formal proof bytes were written by hand first and matched exactly" holds for the
+  three flawed cases only; for the two faithful cases it holds after removing the probe's axiom
+  print. The same overstatement is in commit `f8cc5df`'s message and in PR 26's description. The
+  commit message stands as history; the PR comment for this addendum corrects it.
+
+BELIEF DELTA: a test vector's provenance can be checked one link further than its file. The
+crates.io index publishes the archive's SHA-256, so the vectors used here are pinned to bytes the
+registry vouches for. They do not rest only on a repository copy.
+CONFUSION: the copy report's `equals_probe: true` came from a comparison that first stripped the
+probes' axiom-print tail. The session then summarized it as "byte-identical", and the report's
+field name hid the normalization. Cost: a record correction. Fix: state the normalization
+whenever a comparison is not byte-exact.
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and the only source added is an RNG crate's tests.
+- No manifest, golden byte, label or register status changed. SOURCES gained S-0081,
+  append-only.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that `21f8359`, the goldens'
+  `engine_commit`, stays a real commit on `main`.
+- **For the next revision:** the pair-confirmation reading under ruling 3.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

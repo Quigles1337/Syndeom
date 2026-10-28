@@ -1,0 +1,173 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0014": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 3
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 47
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "5f587ca3fe43856da82834fd72dc386bd5ee9cd0bd690eff295520b68ebb4cb6",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 318,
+        "n_lemmas": 0,
+        "n_steps": 3,
+        "n_tokens": 47,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.1.0-01d2a3dd8a98-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0014": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 3
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0014",
+        "dials": {
+          "holds": true,
+          "omitted_case": "odd"
+        },
+        "severity": "gap",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "parity",
+    "target": "informal",
+    "theorem": "n_sq_mod_four"
+  },
+  "config_hash": "01d2a3dd8a9813fcbd7a2f0b6d3d7dd5d235cac23f6064cbf63a7d87ff5d62a9",
+  "engine_commit": "21f83594a22d514bb9cdb1ec0261f659e7d1f4b9",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0014": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0014",
+        "dials": {
+          "holds": true,
+          "inserted": "If $n$ is even, then $n = 2k$ for some integer $k$.",
+          "omitted_case": "odd",
+          "original_steps": {
+            "1": "Every integer is even or odd: $n = 2k$ or $n = 2k + 1$ for some integer $k$.",
+            "3": "If $n = 2k + 1$, then $n^2 = 4(k^2 + k) + 1 \\equiv 1 \\pmod 4$.",
+            "4": "In either case, $n^2 \\equiv 0$ or $n^2 \\equiv 1 \\pmod 4$."
+          },
+          "replaced": "Every integer is even or odd: $n = 2k$ or $n = 2k + 1$ for some integer $k$.",
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            51
+          ],
+          "step": 1
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/NSqModFour.lean:syndeom_seed_n_sq_mod_four",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

@@ -1,0 +1,171 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0001": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 3
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 49
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "5c12a5ffb66388619155f21140dfb28634e700038c16a04ee8a4cc32ad8849c7",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 327,
+        "n_lemmas": 0,
+        "n_steps": 3,
+        "n_tokens": 49,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.1.0-3894bab87ffd-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0001": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 3
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "perturbation": "sign"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": "propagated"
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "expand_square",
+    "target": "informal",
+    "theorem": "sq_plus_one_ge_two_x"
+  },
+  "config_hash": "3894bab87ffdad0213ff07ae91c658c4d772cd8baf8e80432e4e7a4d600f6fbb",
+  "engine_commit": "21f83594a22d514bb9cdb1ec0261f659e7d1f4b9",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0001": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "inserted": "x^2 - 2x - 1",
+          "original_steps": {
+            "1": "Expanding the square, $(x - 1)^2 = x^2 - 2x + 1$.",
+            "2": "A square is non-negative, so $x^2 - 2x + 1 = (x - 1)^2 \\ge 0$.",
+            "3": "Adding $2x$ to both sides gives $x^2 + 1 \\ge 2x$."
+          },
+          "perturbation": "sign",
+          "replaced": "x^2 - 2x + 1",
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            35,
+            47
+          ],
+          "step": 1
+        },
+        "severity": "fatal",
+        "sub_variant": "propagated"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/SqPlusOneGeTwoX.lean:syndeom_seed_sq_plus_one_ge_two_x",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

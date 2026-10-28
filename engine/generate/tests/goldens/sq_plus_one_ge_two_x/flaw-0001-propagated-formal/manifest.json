@@ -1,0 +1,176 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0001": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 82
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "1bd275203ca1f220f3eeacdf42d9a582058bd966251bf85bec6a909bb03f0f4e",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_sq_plus_one_ge_two_x",
+        "n_bytes": 363,
+        "n_declarations": 1,
+        "n_lines": 9,
+        "n_tokens": 82,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_template-v0.1.0-3086f607c410-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0001": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "perturbation": "sign"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": "propagated"
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "expand_square",
+    "target": "formal",
+    "theorem": "sq_plus_one_ge_two_x"
+  },
+  "config_hash": "3086f607c410e5f8bbf0bb9f259cd6bd1f2588270b1328d49d038de9c7d58e41",
+  "engine_commit": "21f83594a22d514bb9cdb1ec0261f659e7d1f4b9",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0001": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "inserted": [
+            "have h1 : (x - 1) ^ 2 = x ^ 2 - 2 * x - 1 := by ring"
+          ],
+          "original_fragments": {
+            "1": [
+              "have h1 : (x - 1) ^ 2 = x ^ 2 - 2 * x + 1 := by ring"
+            ],
+            "2": [
+              "have h2 : x ^ 2 - 2 * x + 1 ≥ 0 := by nlinarith [sq_nonneg (x - 1)]"
+            ],
+            "3": [
+              "linarith"
+            ]
+          },
+          "perturbation": "sign",
+          "replaced": [
+            "have h1 : (x - 1) ^ 2 = x ^ 2 - 2 * x + 1 := by ring"
+          ],
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_sq_plus_one_ge_two_x",
+          "line": 6
+        },
+        "severity": "fatal",
+        "sub_variant": "propagated"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/SqPlusOneGeTwoX.lean:syndeom_seed_sq_plus_one_ge_two_x",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

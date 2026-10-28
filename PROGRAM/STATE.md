@@ -1,6 +1,62 @@
 # STATE
 
-- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 39:
+- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 40:
+  - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
+    fresh conversation;
+  - SD15 disclosure first, **by digest** (ADR-0005 *Amendments* 1–3). The matched index lines
+    (85, 86, 88, 89, 106, 107; `0418e621…534c`; 104 withheld) and the SYNDEOM memory file
+    (`ce2ce6de…2cc0`) are the bytes Session 35's Entry 1 reproduced, verified by hashing
+    HANDOFF's lines in HANDOFF Session 40, Entry 2;
+  - **not an examination**: Gate S2 has nothing to examine. The session certifies nothing;
+  - **one interruption**: a safety classifier stopped one response during ORIENT step 6, after
+    the ORIENT gate had ended GREEN. Nothing was written by it. Al then directed the session to
+    continue (verbatim under *Standing rulings*; HANDOFF Session 40, Entry 3).
+
+  **ADR-0011's crate is built** (STATE's NEXT as it stood: S2 ordering step 4). It is on branch
+  `claude/s2-generate-crate` (PR 26), in seven commits: five before Al's rulings on PR 26, and
+  two applying them. `main` is unchanged until Al merges.
+  - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main`
+    **synchronized** with fetched `origin/main` `f9f973012cbe1a7d7f1d8cd4520db998dca0e550`, tree
+    `84a010018335bfdc94bcc2214babd593b5b734bb`, with the disclosure append the only change.
+    - That is **PR 25's merge** (by Al, 2026-10-28T17:02:54Z; parents `ef567ec` and `41008ed`).
+      No later ruling on PR 25 exists.
+    - The receipt is `orient-receipt-1.json` under
+      `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1706Z\`.
+    - The ORIENT gate was GREEN (*Current build verification*).
+  - **Commits:**
+    - `9b4b16f` the crate: plan, renderers, `syndeom-rng/1`, harness, `s2_template` 0.1.0, the
+      CLI, three seeds, and tests;
+    - `21f8359` the seed witnesses in the Lean library, with `Audit.lean` and the gate's axiom
+      loop. This is the D10 gate change that ruling 3 gives its own review;
+    - `f8cc5df` the 12 goldens;
+    - `cd5633b` the security review's four fixes;
+    - `8697ab3` the packet `analysis/s2-generate-1/`, this file and HANDOFF;
+    - `91dde9a` and the record commit, both after Al's rulings on PR 26 (below).
+  - **Measured at implementation** (`analysis/s2-generate-1/README.md`):
+    - Golden A and Golden B are reproduced byte for byte by the writers;
+    - the RNG vectors agree with an independent Python implementation of D4;
+    - 12 goldens (each seed's control and FLAWS.md example, informal and formal) have fidelity
+      PASS. The flawed formal cases fail at the site's fragment (check K). The three flawed formal
+      goldens are byte-identical to their hand-written probes, and the two faithful probes are
+      their goldens plus a trailing `#print axioms` line. This was corrected by Al's ruling 6 on
+      PR 26: it first read "every formal golden equals its probe";
+    - `cargo audit` is clean (advisory-db `40f5be6f…`);
+    - the security review found five issues. FINDING-001..004 are resolved. FINDING-005, the
+      binary-provenance gap, is to be closed by `s2_template` 0.2.0 (ruling 5).
+  - **Al's rulings of 2026-10-28 on PR 26** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 40's addendum), applied on the same branch in two more commits:
+    - `91dde9a` (ruling 4) verifies `syndeom-rng/1` against `rand_xoshiro` 0.3.0's reference
+      vectors (S-0081): SplitMix64 50 outputs, xoshiro256** 10 outputs, through
+      `Stream::from_state`. No output changed;
+    - the record commit holds rulings 1–6: the gate change accepted; readings 1, 2, 3, 5–9, 11
+      and 12 accepted; reading 4 replaced (flaw counts are per instance, binding the next
+      revision); 0.2.0's version and build-time input hashes; the probe wording corrected.
+  - **Not yet built:** `s2_grammar`, padding (FLAW-0013), lemma steps, the T check, the seeds for
+    the other FLAWS.md examples, and the sweep. They are later sessions (ADR-0011 D11).
+  - **Unchanged:** registers' statuses, the manifests under `groundtruth/`, frozen packets, the
+    Gate S1 table, the constitution, the licence, the tag and `corpora/` (no artifact written).
+    **NEXT** waits on this pull request's merge.
+- **Previous update (Session 39):** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 39:
   - launched with the §6 Session-N resume prompt verbatim, followed by an owner note, pasted into
     an existing Claude Code conversation: the one that had just done Session 38's post-merge
     housekeeping at Al's direction (below);
@@ -795,7 +851,20 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 39).** ORIENT gate on `main` `ef567ec` (tree
+- **Current build verification (Session 40).** The ORIENT gate ran on `main` `f9f9730` (tree
+  `84a01001…`, PR 25's merge) in the original checkout, with the disclosure append the only
+  change. **GATE: GREEN**, 2026-10-28T17:07:43Z–17:08:31Z, exit 0.
+  - Lean: the build and the axiom audit, `[propext]`.
+  - Rust: fmt, clippy and the tests pass.
+  - 496 tracked files are LF. The registers and the freeze register (65 rows: 60 frozen,
+    5 append-only) ALL PASS.
+  - Stderr carried only cargo's progress lines and the freeze test's unittest summary.
+  - The raw log is `gate-orient.raw.log` (SHA-256 `d62ffaa6…1496`) under
+    `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1706Z\`.
+
+  The pull request's head is gated on its committed tree. That result is recorded in the pull
+  request and under the external root, not in the tree it certifies.
+- **Previous build verification (Session 39).** ORIENT gate on `main` `ef567ec` (tree
   `4bef2ccc…`, PR 24's merge) in the original checkout, with the disclosure append the only
   change: **GATE: GREEN**, 2026-10-28T15:53:14Z–16:02:55Z, exit 0, stderr empty. Lean 8,926 jobs,
   axioms `[propext]`; fmt, clippy and 89 Rust tests pass; 485 tracked files LF; registers and the
@@ -1461,6 +1530,41 @@ Flag D: on the branch, after the regeneration and before the merge, as PR #24 di
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
+- **Al's direction of 2026-10-28 (Session 40) — verbatim.** It was received in Session 40's
+  conversation after a safety classifier stopped one of the session's responses. It is also in
+  HANDOFF Session 40, Entry 3, transcribed from the message as rendered to the executor.
+
+~~~text
+Continue in this session. Your disclosure, orientation and gate stand; redo nothing. Record the interruption in this session's HANDOFF block in one sentence — the step it happened at, and that nothing was written — and say in one sentence which step the stopped response was carrying out, without reproducing it. Then proceed: PLAN the one thing STATE names, ADR-0011's crate, and EXECUTE it on a fresh branch from main. If a classifier stops you again at any point, do not reword or retry: stop at the nearest point where the committed tree passes the gate, complete the header, record both interruptions, push the branch, open the PR, and report. Otherwise run the loop to a clean stop per §4.6 and stop for my review.
+~~~
+
+- **Al's rulings of 2026-10-28 on PR 26 (ADR-0011's crate) — verbatim.** They were received in
+  Session 40's conversation after PR 26 opened.
+  - The copy is `owner-rulings-pr26.txt` under
+    `C:\Users\LEET\Codex\Temp\syndeom-pr26-rulings-20261028\` (2,281 bytes, SHA-256
+    `f4f6e2b05f0bf39045079a621cadcd567eed3b007109cc858ee4020b4ccac267`), transcribed from the
+    message as rendered to the executor.
+  - The rulings are also in ADR-0011 *Amendments* and in HANDOFF Session 40's addendum. Their
+    effect is under *Standing escalations*, in the Updated bullet and in NEXT.
+
+~~~text
+Rulings on PR #26 (record them verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+1. The gate change in 21f8359 is accepted: the seed witnesses are library modules, and the audit parses every #print axioms line against the standard three axioms with a count check.
+
+2. Readings 1, 2, 3, 5, 6, 7, 8 and 9 are accepted as read.
+
+3. Reading 4 is not accepted as read. Flaw counts are per instance, not per record: one injected flaw rendered in both files of a pair is one instance with two locations, and n_flaws_total and n_flaws_<NNNN> count instances. No current golden is a pair, so nothing regenerates now; the rule binds the next producer revision before the first pair golden, and ADR-0001's wording is clarified if it needs it.
+
+4. Reading 10: the attribution is to be verified against retrieved vectors, not left unverified. An independent implementation from the published algorithms reproduces this crate's D4 vectors and matches the reference vectors in rand_xoshiro 0.3.0's tests (src/splitmix64.rs: seed 1477776061723855037, 50 outputs; src/xoshiro256starstar.rs: state 1, 2, 3, 4, 10 outputs; both recorded there as produced with Vigna's reference C at xoshiro.di.unimi.it). Retrieve those two vectors, register the source under SD11, add them as tests in engine/generate/tests/rng.rs (a state constructor for the stream may be needed for the xoshiro vector; it must change no output), and lift the "unverified" note in the tests header, the packet README and D4's conformance record.
+
+5. Readings 11 and 12: accepted. A new seed bumps s2_template to 0.2.0 with the 0.1.0 goldens kept regenerable under the version they name, and 0.2.0 embeds its input hashes at build time as syndeom-pair does, closing FINDING-005.
+
+6. Record correction: the packet README and HANDOFF say each formal golden is byte-identical to its hand-written probe. That holds for three of five; the two faithful probes carry a trailing #print axioms line the goldens do not. Correct the wording; the probes stay as they are.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review. I will merge with a merge commit: the goldens pin engine_commit 21f8359, which must stay a real commit on main.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -1473,10 +1577,10 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*) |
-| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **open** | — |
-| S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **open** | — |
-| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **open** | — |
+| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code. Session 40 (PR pending): the crate `engine/generate/` is built — the plan, both renderers, the injector, `syndeom-rng/1`, the Lean harness and `s2_template` 0.1.0 with three seeds; `s2_grammar`, padding and lemma steps are not yet** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*); `engine/generate/`; `analysis/s2-generate-1/README.md` |
+| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress (Session 40, PR pending): implemented for `s2_template` 0.1.0 — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; no T check, no padding yet** | `engine/generate/src/template.rs`; `analysis/s2-generate-1/README.md` (readings 2–5 flagged for Al) |
+| S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **in progress (Session 40, PR pending): every manifest self-checked before writing; determinism and id tests; engine-commit verification; `regenerate` reproduces `content_hash`** | `engine/generate/tests/properties.rs`, `tests/goldens.rs`; FINDING-005 (binary provenance) is to be closed by 0.2.0's build-time input hashes (Al's ruling 5 on PR 26) |
+| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **in progress (Session 40, PR pending): property and refusal tests; Golden A/B writer test; 12 goldens for three seeds (FLAW-0001, FLAW-0014 and the controls); clippy clean; `cargo audit` clean; security review recorded; the RNG verified against published reference vectors (S-0081; ruling 4)** | `engine/generate/tests/`; `analysis/s2-generate-1/` |
 | Fidelity sweep report (commanded vs achieved flaw presence across the parameter grid, tolerances stated) | **open** | — |
 | Goldens green; lint and audit clean | **open** | — |
 | Cold-start test (§2, SD15) | **open** | — |
@@ -1535,6 +1639,18 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
+- **ADR-0011's crate, the first implementation — RULED by Al on 2026-10-28 (rulings 1–6 on
+  PR 26, verbatim under *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge**
+  (Session 40; branch `claude/s2-generate-crate`; `analysis/s2-generate-1/README.md`).
+  - The gate change `21f8359` is accepted.
+  - Readings 1, 2, 3, 5–9, 11 and 12 are accepted. Reading 4 is replaced: flaw counts are per
+    instance. Reading 10 is superseded: the RNG attribution is verified (S-0081).
+  - `s2_template` 0.2.0 embeds build-time input hashes, closing FINDING-005.
+  - Al merges with a merge commit, so `21f8359` (the goldens' `engine_commit`) stays a real
+    commit on `main`.
+  - Open for Al with the next revision: the executor's reading that a pair instance counts as
+    confirmed when each of its records passes its check (ADR-0011 *Amendments*, ruling 3's
+    effect).
 - **Held harvest admission review — RULED by Al on 2026-10-28** (rulings on PR 23, verbatim
   under *Standing rulings*; HANDOFF Session 37's addendum). The record is
   `analysis/s1-held-harvest-review/REVIEW.md` §2–§4, with its `receipt.json`. All five items on
@@ -1951,22 +2067,39 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2 ordering step 4: ADR-0011's crate `engine/generate/`, after the inventory-event pull request
-(branch `claude/s1-later-prefix-inventory`) merges.** Al's rulings on ADR-0013 (2026-10-28 on PR
-25) are applied on that branch.
+**S2 ordering step 4, continued: `s2_template` 0.2.0 with the next seeds — after the crate's pull
+request (branch `claude/s2-generate-crate`, PR 26) merges.** Al's rulings 1–6 on it are recorded
+(ADR-0011 *Amendments*).
 
 Executable cold:
 1. Open per ADR-0008 D1. If the session was launched with the §6 prompt, the SD15 disclosure comes
    first, by digest where ADR-0005 *Amendments* 1–3 allow it.
-2. Confirm that the inventory-event pull request is merged, with a merge commit on fetched
-   `origin/main`. **If it is not, record that and stop.** Any later ruling on the pull request
-   is recorded verbatim (ADR-0013 *Amendments*, STATE, HANDOFF) before anything else.
-3. On a fresh branch from `main`, build the crate `engine/generate/` under PolyForm, per ADR-0011
-   D1–D12 and its *Amendments*. D6's S1-corpus independence binds every seed: no seed, grammar or
-   template derives from any item under `groundtruth/`, and the five prefix items are S1 corpus.
-4. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`, `s1_later_prefix`),
+2. Confirm that PR 26 is merged, with a merge commit on fetched `origin/main`, and that
+   `21f8359` (the 0.1.0 goldens' `engine_commit`) is an ancestor of `main`. **If either fails,
+   record that and stop.** Any later ruling is recorded verbatim, in STATE, HANDOFF and, where it
+   amends the design, ADR-0011 *Amendments*, before anything else.
+3. **`s2_template` 0.2.0 first** (Al's rulings 3 and 5 on PR 26):
+   - bump the version (ADR-0011 D1);
+   - embed the input set's hashes at build time, as `syndeom-pair`'s `build.rs` does, and have
+     `engine_commit` verification compare the running binary's inputs with the commit. This
+     closes FINDING-005;
+   - count `n_flaws_total` and `n_flaws_<NNNN>` per instance, not per record. Change the
+     property test that equates them with the record count;
+   - keep the 0.1.0 goldens regenerable under the version they name. The golden test selects
+     the producer version a case was made with, or the 0.1.0 cases stay pinned some other way.
+     Never rewrite a golden.
+4. On the same branch, add the next seeds:
+   - seed records, with their FLAW material, for FLAWS.md 0.1.0 examples that check K already
+     confirms: `x_over_abs_x` (FLAW-0014 fatal), `rolle_abs` (FLAW-0005), `horses` (FLAW-0006,
+     a false statement with its counterexample) and `continuity_is_not_uniform` (FLAW-0002);
+   - for each seed, its Lean witness module, its controls and examples as 0.2.0 goldens, and Lean
+     probes compiled before the record is written, one Lean process at a time;
+   - D6's S1-corpus independence binds every seed;
+   - if a pair golden is added, it counts per instance (ruling 3). Confirm with Al the reading
+     that a pair instance counts as confirmed when each of its records passes its check.
+5. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`, `s1_later_prefix`),
    their packets, the Gate S1 table or the frozen S1.4 packet.
-5. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,
+6. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,
    with a merge commit, never squash.
 
 Bounds: the frozen packets, the registers, the constitution, the licence, the tag, the accepted
