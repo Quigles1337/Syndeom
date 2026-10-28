@@ -1,5 +1,5 @@
 //! The goldens (ADR-0011 D10): for every seed, the control (where the statement is true) and the
-//! FLAWS.md example's flawed artifact, informal and formal, and for the 0.2.0 seeds the pair too.
+//! FLAWS.md example's flawed artifact, informal and formal, and from the 0.2.0 seeds the pair too.
 //! Each case directory holds `case.json` (the config, the seed, the engine commit, the toolchain
 //! and the harness observation measured at implementation) and the exact bytes: `proof.md` or
 //! `Proof.lean`, and `manifest.json`. The test regenerates every case without Lean, from the
@@ -33,6 +33,11 @@ const GOLDENS_0_3_0: u64 = 9;
 /// informal, formal and pair, produced at the implementation commit `b54e2f16…` from two
 /// byte-identical runs.
 const GOLDENS_0_4_0: u64 = 8;
+/// The 0.5.0 goldens (Session 44): FLAW-0004 `routine-true` on `sqrt2_irrational` (the hedge
+/// drawn, the justification deleted, the proof of `hp` omitted) and FLAW-0011 as a commanded
+/// composite of that instance, each as informal and pair (the formal target is refused for
+/// FLAW-0004), produced at the implementation commit `7be41123…` from two byte-identical runs.
+const GOLDENS_0_5_0: u64 = 4;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -113,5 +118,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         by_version.get("0.4.0").copied().unwrap_or(0),
         GOLDENS_0_4_0,
         "the 0.4.0 goldens"
+    );
+    assert_eq!(
+        by_version.get("0.5.0").copied().unwrap_or(0),
+        GOLDENS_0_5_0,
+        "the 0.5.0 goldens"
     );
 }

@@ -1,7 +1,7 @@
 # Goldens for `s2_template` (ADR-0011 D10)
 
-There are 43 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
-0.3.0 (Session 42) and 8 of 0.4.0 (Session 43). All use seed 7. Each case directory holds:
+There are 47 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+0.3.0 (Session 42), 8 of 0.4.0 (Session 43) and 4 of 0.5.0 (Session 44). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -144,9 +144,48 @@ measured statistic (ADR-0011 D4) checked at tolerance `abs 0.05`.
   declarations, none of them reachable from the main declaration, which uses only its own
   auxiliary `_proof_N` constants (check T).
 
+## 0.5.0 (Session 44, 2026-10-28)
+
+FLAW-0004 `routine-true` on the `sqrt2_irrational` seed's step 3 — the FLAWS.md FLAW-0011
+example's hedge: `2 | p² ⇒ 2 | p` asserted with a hedge and the parity argument dropped — and
+FLAW-0011 as a commanded composite of that one instance (`embedded`), each as an informal and a
+pair artifact. The formal target is refused for FLAW-0004 (FLAWS.md: it manifests in informal)
+and so for the composite that embeds it. At seed 7 the injector draws hedge 1 of the fixed
+lexicon, `It is easy to see that`, so step 3 reads `It is easy to see that $p$ is even. Write
+$p = 2k$.`; in the formal file the proof of `have hp : 2 ∣ p := by` is omitted (the `have`
+header and the `obtain` stay; no `sorry`), and the kernel reports `unsolved goals` at line 7,
+the site's first fragment line (check K). The hidden step is routine and true, so the instance
+is cosmetic and the artifact is a valid proof of a true statement under ADR-0011 D7
+(`proof_status: valid`, `correct: true`), with `lean_build` commanded `fail`; the composite
+inherits the severity and `YES-KERNEL`, and its own records sit at step 0 (the statement) and
+at the main declaration's header line (line 4). The informal-only artifacts carry `N/A`.
+
+| Seed | Cases | Statement |
+|---|---|---|
+| `sqrt2_irrational` | FLAW-0004 `routine-true` cosmetic (informal, pair); FLAW-0011 embedding it, cosmetic (informal, pair) | true |
+
+**Provenance:**
+- The proof text is hand-authored seed material (`seeds/sqrt2_irrational.json`): the five
+  faithful steps, and the FLAW-0004 material's bare claim at step 3 with the justification and
+  the four omitted tactic lines recorded.
+- The formal file was first written by hand as a Lean probe and compiled before the seed
+  material was written, one process at a time (`analysis/s2-generate-5/evidence/lean-probe/`):
+  both pair goldens' `Proof.lean` are byte-identical to the probe `s2i_hedged_p1.lean`, which
+  has no tail, as `analysis/s2-generate-5/evidence/goldens-production-report.json` records.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine
+  commit `7be41123c698a07b9e56cab2aa2a1e9d257944b8`, by two separate runs compared byte for
+  byte (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal),
+  with the running binary's compiled input hashes verified against the commit before each run.
+- Every case's fidelity verdict is PASS. Both pair cases fail to build (exit 1) with the first
+  error at line 7; `lean_axioms_standard` is therefore unmeasured (`null`, with its reason).
+  Each instance is confirmed: the informal record by the D5 check (the hedge entry, a space and
+  the bare claim; the faithful text held the justification exactly once), the formal record by
+  check K, and the composite by the seed's kernel-checked witness together with its embedded
+  instance's records.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
-recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md` and
-`analysis/s2-generate-4/README.md`.
+recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
+`analysis/s2-generate-4/README.md` and `analysis/s2-generate-5/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

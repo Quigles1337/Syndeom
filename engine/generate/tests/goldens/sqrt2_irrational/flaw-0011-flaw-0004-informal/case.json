@@ -1,0 +1,33 @@
+{
+  "config": {
+    "theorem": "sqrt2_irrational",
+    "style": "descent",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "sub_variant": null,
+        "severity": "cosmetic",
+        "site": "auto",
+        "dials": {
+          "embedded": [
+            {
+              "class": "FLAW-0004",
+              "sub_variant": null,
+              "severity": "cosmetic",
+              "site": "auto",
+              "dials": {
+                "hidden_step": "routine-true"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "7be41123c698a07b9e56cab2aa2a1e9d257944b8",
+  "toolchain": null,
+  "observation": null
+}
