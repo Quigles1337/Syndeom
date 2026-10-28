@@ -1,0 +1,94 @@
+{
+  "achieved": {},
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "c171e3381684cb051dcf77333de7e51d75e08ca92580b9dc14d24d73e6999270",
+        "file": "original-1403.8075v9.tar.gz",
+        "format": "raw/1",
+        "n_bytes": 136883,
+        "n_lemmas": null,
+        "n_steps": null,
+        "n_tokens": null,
+        "storage": "external"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s1_ingest-v0.1.0-915251f36fc5",
+  "commanded": {},
+  "config": {
+    "file": {
+      "name": "original-1403.8075v9.tar.gz",
+      "storage": "external"
+    },
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "locator": "Proposition 4.1, proof, the sentence 'The above reasoning is valid for any algorithm since verifying any number to be prime is equivalent to verifying the first digit of the p_j-ary number is not 0 for certain p_j s' (resting on 'if we cannot verify that the first digit of the p_j-ary representation of p_i is not 0 for a sufficient number of j < i, we cannot verify whether p_i is prime'): an equivalence asserted without justification, which the notice calls incorrect - the entry's dial 'false'",
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "item": "arXiv:1403.8075v9 (the original; withdrawn by v10, 27 December 2025, and again by v11, 9 January 2026) - Proposition 4.1 (Section 4, its first numbered environment: 'The function f_p has the property of an infinite number of steps')",
+    "licence": "arXiv non-exclusive licence to distribute (http://arxiv.org/licenses/nonexclusive-distrib/1.0/, stated on the arXiv abstract page of v9): not redistributable by this repository",
+    "proof_status": "invalid",
+    "sources": [
+      "S-0076",
+      "S-0077"
+    ],
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0077: 'In Proposition 4.1 the argument incorrectly treats primality verification as equivalent to checking leading digits in multiple base representations' - the withdrawal faults the argument and does not pronounce on the statement; nothing re-proves or disproves it",
+      "value": null
+    },
+    "status": {
+      "kind": "retraction",
+      "reference": "S-0077"
+    }
+  },
+  "config_hash": "915251f36fc5a7975e1370891a5f91158a3509bb5bf54bf158fddeb19773bd47",
+  "engine_commit": "a7939547b9d103baa3fd0474149e476e3e0b0dcb",
+  "fidelity": {
+    "per_statistic": {},
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s1_ingest",
+    "rng": "none",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "documented-by-source",
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {},
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "locator": "Proposition 4.1, proof, the sentence 'The above reasoning is valid for any algorithm since verifying any number to be prime is equivalent to verifying the first digit of the p_j-ary number is not 0 for certain p_j s' (resting on 'if we cannot verify that the first digit of the p_j-ary representation of p_i is not 0 for a sufficient number of j < i, we cannot verify whether p_i is prime'): an equivalence asserted without justification, which the notice calls incorrect - the entry's dial 'false'"
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "undetermined",
+      "reference": "S-0077: 'In Proposition 4.1 the argument incorrectly treats primality verification as equivalent to checking leading digits in multiple base representations' - the withdrawal faults the argument and does not pronounce on the statement; nothing re-proves or disproves it",
+      "value": null
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "notes": "Route A item 33 (candidate 29), Session 22 (2026-10-21). Ground truth as the author's v10 and v11 withdrawal comments document it, confirmed against the v9 text (no corrected version exists; the withdrawn versions have no e-print, as for candidate 18); RECORD.md names FLAW-0012 as not applicable (the notice faults the argument, not the statement). A reading of documents, not a verdict on the paper (SD3).",
+  "origin": "ground-truth",
+  "seed": null,
+  "toolchain": null
+}
