@@ -20,10 +20,9 @@ use syndeom_manifest::{Toolchain, content_hash, to_disk_json};
 /// The 0.1.0 goldens: each seed's control and FLAWS.md example, informal and formal (Session 40).
 const GOLDENS_0_1_0: u64 = 12;
 /// The 0.2.0 goldens (Session 41): the true seed's control (informal, formal) and every new
-/// seed's FLAWS.md example (informal, formal, pair). The three horses cases are absent at this
-/// commit (their mode is relabeled by Al's rulings on PR 27); the next commit adds all 14,
-/// regenerated at this commit so that they share one engine commit.
-const GOLDENS_0_2_0: u64 = 11;
+/// seed's FLAWS.md example (informal, formal, pair), regenerated at `c899b073…` after Al's
+/// rulings on PR 27 so that they share one engine commit.
+const GOLDENS_0_2_0: u64 = 14;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)

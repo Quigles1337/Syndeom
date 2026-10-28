@@ -8705,3 +8705,42 @@ How each ruling is applied:
   whose outputs are compared byte for byte before run A's are placed under
   `engine/generate/tests/goldens/`. The second part of this addendum records the engine commit
   they name, the two runs, the gate on the committed tree, the recheck and the push.
+
+**The rulings applied (second part of the addendum).**
+- **Commit 5** `c899b0732db8b7a1a104822772a428f534a651cd`: the rulings recorded verbatim (ADR-0011
+  *Amendments*, STATE, this addendum's first part); D5's FLAW-0006 mode enum extended with
+  `step-above-base` in ADR-0011 *Amendments*; `seeds/horses.json` relabeled
+  (`mode: "step-above-base"`, `failing_case: "n + 1 = 2"` kept; steps, fragments and witness
+  untouched); the refusal case in `tests/properties.rs` and the crate README following; the three
+  horses goldens, whose configs named the old mode, removed and the goldens test's 0.2.0 count
+  pinned at 11 so that the commit's tree stays green.
+- **Regeneration at commit 5**, with the binary rebuilt from its tree: two separate runs of
+  `generate --dry-run` for all 14 cases of 0.2.0 (`evidence/goldens-run2.py`; run A
+  2026-10-28T19:28:06Z–19:30:19Z, run B 19:30:19Z–19:32:14Z; every case exit 0, fidelity PASS;
+  the provenance check passed against commit 5 before each run). `evidence/goldens-copy2.py`
+  compared the runs file by file — every `proof.md`, `Proof.lean` and `manifest.json`
+  byte-identical, every observation equal, one engine commit — and replaced the 0.2.0 cases
+  under `engine/generate/tests/goldens/` with run A's outputs
+  (`evidence/goldens-regeneration-report.json`, SHA-256 `cb8aba70…d2ad`, 9,130 bytes).
+  - **The engine commit the regenerated goldens name: `c899b0732db8b7a1a104822772a428f534a651cd`.**
+  - The horses proof bytes are unchanged from the first production (`Proof.lean` `9e198c7c…`,
+    `proof.md` `d516f093…`); its manifests, config hashes and artifact ids changed
+    (`22c3147d9d48` informal, `05964cd1eb74` formal, `7b76255e38a5` pair).
+  - The other eleven cases differ from the first production only in the engine commit they
+    name (22 files, one line each).
+  - The receipts are under the external root's `goldens-2a\` and `goldens-2b\`; their sorted
+    `receipt.json` SHA-256 lists hash to `a79a05b9…f0ee` and `872b85fe…0e92`.
+- **Commit 6** (this one): the regenerated goldens, the goldens test expecting 14 again, the
+  goldens README, the packet's regeneration record and evidence, STATE, and this part.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No proof byte, label, register status or 0.1.0 golden changed; the 0.2.0 manifests changed
+  under Al's ruling, which authorizes the regeneration.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that `c899b07`, the 0.2.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

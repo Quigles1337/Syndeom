@@ -51,8 +51,8 @@
   - **Al's rulings of 2026-10-28 on PR 27** (verbatim under *Standing rulings*; ADR-0011
     *Amendments*; HANDOFF Session 41's addendum), applied on the same branch: readings 13 and
     15–20 accepted; reading 14 replaced by the new D5 mode `step-above-base`; the horses record
-    relabeled (proof bytes unchanged); the 14 goldens of 0.2.0 regenerated at one engine commit
-    from two byte-identical runs (the addendum names it).
+    relabeled (proof bytes unchanged); the 14 goldens of 0.2.0 regenerated at one engine commit,
+    `c899b073…`, from two byte-identical runs.
   - **Not yet built:** `s2_grammar`, padding (FLAW-0013), lemma steps, the T check, the seeds
     for the remaining FLAWS.md examples (FLAW-0003, 0004, 0007, 0008, 0009, 0010, 0011, 0012 and
     0013), and the sweep (ADR-0011 D11).
@@ -1740,8 +1740,8 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
     unjustified; `failing_case` names that first unjustified step). The horses record is
     relabeled in the seed and, by regeneration, in its three goldens; the proof bytes are
     unchanged. All 14 goldens of 0.2.0 are regenerated at one engine commit — the commit holding
-    the relabeled seed — from two runs confirmed byte-identical (HANDOFF Session 41's addendum
-    reports the engine commit they name).
+    the relabeled seed, `c899b0732db8b7a1a104822772a428f534a651cd` — from two runs confirmed
+    byte-identical; the horses proof bytes are unchanged.
   - Merge with a merge commit, so that the 0.2.0 goldens' `engine_commit` stays a real commit on
     `main`.
   - The owner note of 2026-10-28 is recorded (`da2bd83`); nothing else is awaited on it.

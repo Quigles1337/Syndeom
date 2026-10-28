@@ -8,7 +8,8 @@ seed 7. Each case directory holds:
 
 `tests/goldens.rs` regenerates each case without Lean, from the recorded observation, under the
 producer version its `manifest.json` names (Al's ruling 5 on PR 26: the 0.1.0 goldens stay
-regenerable under the version they name), and compares the bytes. No golden is ever rewritten.
+regenerable under the version they name), and compares the bytes. No golden is rewritten except
+under a ruling that says so.
 
 ## 0.1.0 (Session 40, 2026-10-28)
 
@@ -46,7 +47,7 @@ a formal and a pair artifact. The counts are per instance: a pair's two records 
 | `continuity_is_not_uniform` | control (informal, formal); FLAW-0002 `forall-exists` gap (informal, formal, pair) | true |
 | `x_over_abs_x` | FLAW-0014 `holds: false` fatal (informal, formal, pair) | false: no control |
 | `rolle_abs` | FLAW-0005 `violated` fatal (informal, formal, pair) | false: no control |
-| `horses` | FLAW-0006 `shift-index` fatal (informal, formal, pair) | false: no control |
+| `horses` | FLAW-0006 `step-above-base` fatal (informal, formal, pair) | false: no control |
 
 **Provenance:**
 - The proof text is hand-authored seed material (`seeds/*.json`). A seed whose statement is false
@@ -57,11 +58,15 @@ a formal and a pair artifact. The counts are per instance: a pair's two records 
   - the eight flawed formal and pair goldens are byte-identical to their probes;
   - the faithful probe of `continuity_is_not_uniform` is its control golden followed by the
     probe's own `\n#print axioms <main>\n` tail.
-- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine
-  commit `af28cc96aa75cbabb0a6171d4c636a8cbc87f773`, the commit that holds the 0.2.0 producer,
-  its seeds and their witness modules; the running binary's compiled input hashes were verified
-  against that commit (ADR-0011 D9 as amended). The Lean harness ran then, one process at a time,
-  and each `observation` is what it measured.
+- The files and manifests were first produced at engine commit `af28cc96…` and then, by Al's
+  rulings of 2026-10-28 on PR 27, **regenerated at engine commit
+  `c899b0732db8b7a1a104822772a428f534a651cd`**, the commit that relabels the horses record's
+  `mode` from `shift-index` to the new D5 value `step-above-base` (`failing_case: "n + 1 = 2"`
+  kept). Two separate runs of `syndeom-generate generate --dry-run` at that commit produced
+  byte-identical outputs for all 14 cases (`analysis/s2-generate-2/evidence/goldens-regeneration-report.json`),
+  with the running binary's compiled input hashes verified against the commit before each run.
+  The horses proof bytes did not change; its manifests, config hashes and artifact ids did. The
+  other eleven cases differ from the first production only in the engine commit they name.
 - Every case's fidelity verdict is PASS. The flawed formal and pair cases fail at the site's
   fragment (check K): line 6 (`continuity_is_not_uniform`, the swapped `obtain`), line 4
   (`x_over_abs_x`, the `cases` with the `eq` alternative missing), line 7 (`rolle_abs`, the Rolle

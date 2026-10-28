@@ -104,7 +104,7 @@ Branch `claude/s2-template-0.2.0`, from `main` `de3e4a62fde75eea2c80c17ac6210955
    `b831cf02b9ea`; `x_over_abs_x` `06d157803870` / `a5c34a25cc46` / `ec4a0514442b`; `rolle_abs`
    `6018ec4011e7` / `2aa8e0ec7f12` / `92ed2e47e131`; `horses` `679bf6831274` / `4d89c8372b31` /
    `8666b30995c2` (informal / formal / pair).
-5. **Tests and lint.** The crate's 24 tests pass (goldens 1, properties 13, provenance 2, rng 5,
+5. **Tests and lint.** The crate's 24 tests pass (and still pass after the regeneration) (goldens 1, properties 13, provenance 2, rng 5,
    writers 3); `cargo clippy --all-targets --all-features -- -D warnings` and `cargo fmt --check`
    are clean. The gate on the committed tree is recorded in the pull request and under the
    external root.
@@ -213,5 +213,19 @@ SHA-256 `c465f9e5cecb42677e958cb950f3249492c6d75251901ffa6fd343d7aceb6b8a`): rea
   follow. The seed's steps, fragments and witness are untouched.
 - **The 0.2.0 goldens regenerated** at the commit that holds the relabeled seed, by two
   separate runs compared byte for byte (`evidence/goldens-run2.py`, `evidence/goldens-copy2.py`,
-  `evidence/goldens-regeneration-report.json`); the runs, the engine commit they name and the
-  horses artifact ids are recorded below once made.
+  `evidence/goldens-regeneration-report.json`):
+  - the commit is `c899b0732db8b7a1a104822772a428f534a651cd` (the records of the rulings, the
+    relabeled seed, the refusal test and the READMEs);
+  - run A 2026-10-28T19:28:06Z–19:30:19Z and run B 19:30:19Z–19:32:14Z, each 14 cases, each case
+    exit 0 with fidelity PASS, the provenance check passed against the commit before each run
+    (`evidence/goldens-run2a-summary.txt`, `evidence/goldens-run2b-summary.txt`);
+  - every output file (`proof.md`, `Proof.lean`, `manifest.json`) byte-identical between the
+    runs, every observation equal, one engine commit; the report's SHA-256 is `cb8aba701e26466461d8e05b3c3a05ad99b59f78b30eaecbae65a0c99b1ad2ad`
+    (9,130 bytes); the receipts are under the external root's `goldens-2a\` and
+    `goldens-2b\`, whose sorted `receipt.json` SHA-256 lists hash to `a79a05b9…f0ee` and
+    `872b85fe…0e92`;
+  - the horses proof bytes are unchanged from the first production (`Proof.lean`
+    `9e198c7c…`, `proof.md` `d516f093…`); its artifact ids are now `22c3147d9d48` (informal),
+    `05964cd1eb74` (formal) and `7b76255e38a5` (pair); the other eleven cases differ from the
+    first production only in the engine commit they name.
+- **The goldens test** expects 14 cases of 0.2.0 again, each regenerated under 0.2.0, and passes.
