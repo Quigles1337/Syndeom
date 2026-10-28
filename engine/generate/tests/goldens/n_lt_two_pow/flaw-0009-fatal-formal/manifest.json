@@ -1,0 +1,189 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "value": false
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "pass"
+    },
+    "n_flaws_0009": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 35
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "dc5bdafd8aabbac8fb7ba2eff863e283409f3ff120737bdec9aa0f5517a92269",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_n_lt_two_pow",
+        "n_bytes": 252,
+        "n_declarations": 2,
+        "n_lines": 6,
+        "n_tokens": 35,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_template-v0.3.0-0e14a45c6007-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": false
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "pass"
+    },
+    "n_flaws_0009": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0009",
+        "dials": {
+          "mode": "axiom",
+          "truth": false
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "helper_lemma",
+    "target": "formal",
+    "theorem": "n_lt_two_pow"
+  },
+  "config_hash": "0e14a45c600744def250a441716d957a9f359816e28e60918fa619e89a9a4e95",
+  "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_axioms_standard": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0009": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.3.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0009",
+        "dials": {
+          "declaration": "syndeom_s2_template_n_lt_two_pow_lemma_1",
+          "inserted": [
+            "axiom syndeom_s2_template_n_lt_two_pow_lemma_1 : ∀ n : ℕ, n + 1 < 2 ^ n"
+          ],
+          "mode": "axiom",
+          "original_fragments": {
+            "1": [
+              "intro n",
+              "induction n with",
+              "| zero => decide",
+              "| succ k ih => rw [Nat.pow_succ]; omega"
+            ],
+            "2": [
+              "exact syndeom_s2_template_n_lt_two_pow_lemma_1 n"
+            ]
+          },
+          "replaced": [
+            "theorem syndeom_s2_template_n_lt_two_pow_lemma_1 : ∀ n : ℕ, n < 2 ^ n := by",
+            "  intro n",
+            "  induction n with",
+            "  | zero => decide",
+            "  | succ k ih => rw [Nat.pow_succ]; omega"
+          ],
+          "site": 1,
+          "truth": false
+        },
+        "instance": 1,
+        "lean_catchable": "YES-TOOLING",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_n_lt_two_pow_lemma_1",
+          "line": 3
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/NLtTwoPow.lean:syndeom_seed_n_lt_two_pow",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

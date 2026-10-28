@@ -1,7 +1,7 @@
 # Goldens for `s2_template` (ADR-0011 D10)
 
-There are 26 cases: 12 of `s2_template` 0.1.0 (Session 40) and 14 of 0.2.0 (Session 41). All use
-seed 7. Each case directory holds:
+There are 35 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41) and 9 of
+0.3.0 (Session 42). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -74,8 +74,41 @@ a formal and a pair artifact. The counts are per instance: a pair's two records 
   non-empty, which `omega` refuses without `2 ≤ m`). The control's audit prints
   `[propext, Classical.choice, Quot.sound]`.
 
-The receipts are under the session's external evidence root. Their digests and the runs are
-recorded in `analysis/s2-generate-2/README.md`.
+## 0.3.0 (Session 42, 2026-10-28)
+
+The seed's control (informal, formal), FLAW-0009 `axiom` with `truth` true and false (formal and
+pair each: FLAW-0009 is formal-only, so a pair carries one record and the informal file is the
+faithful one), and FLAW-0007 `unused` (informal, formal, pair). The flawed formal files build:
+these are the tooling-caught classes, confirmed by check T from the audit tail's used-constants
+listing (FLAW-0007) and `#print axioms` (FLAW-0009).
+
+| Seed | Cases | Statement |
+|---|---|---|
+| `n_lt_two_pow` | control (informal, formal); FLAW-0009 `axiom` `truth: true` gap (formal, pair); FLAW-0009 `axiom` `truth: false` fatal (formal, pair); FLAW-0007 `unused` cosmetic (informal, formal, pair) | true |
+
+**Provenance:**
+- The proof text is hand-authored seed material (`seeds/n_lt_two_pow.json`): Lemma 1 (`n < 2 ^ n`,
+  by induction) and the conclusion; the FLAW-0009 materials replace Lemma 1's declaration by an
+  `axiom` — of the same statement (`truth: true`), or of the false lemma `n + 1 < 2 ^ n` with the
+  conclusion adapted (`truth: false`; the witness module proves the negation); the FLAW-0007
+  material inserts Lemma 2 (`n ≤ n ^ 2`, proved, cited nowhere).
+- The formal files were first written by hand as Lean probes and compiled before the seed record
+  was written, one process at a time (`analysis/s2-generate-3/evidence/lean-probe/`): every one
+  of the seven formal and pair goldens is byte-identical to its probe without the probe's own
+  tail (`\n#print axioms …` and, for two probes, a used-constants `#eval`), as
+  `analysis/s2-generate-3/evidence/goldens-production-report.json` records.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run.
+- Every case's fidelity verdict is PASS. Every formal and pair case builds (exit 0). The control
+  and the FLAW-0007 cases print `[propext, Quot.sound]`; the FLAW-0009 cases print
+  `[syndeom_s2_template_n_lt_two_pow_lemma_1]`, the smuggled axiom. The used-constants listing
+  of the FLAW-0007 cases names the file's four constants (the two lemmas, Lean's auxiliary
+  `…lemma_1._proof_1_1`, and the main declaration), and the main declaration uses Lemma 1 only.
+
+The receipts are under the sessions' external evidence roots. Their digests and the runs are
+recorded in `analysis/s2-generate-2/README.md` and `analysis/s2-generate-3/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

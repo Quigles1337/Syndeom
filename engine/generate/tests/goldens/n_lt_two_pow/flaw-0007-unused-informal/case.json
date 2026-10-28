@@ -1,0 +1,24 @@
+{
+  "config": {
+    "theorem": "n_lt_two_pow",
+    "style": "helper_lemma",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0007",
+        "sub_variant": "unused",
+        "severity": "cosmetic",
+        "site": "auto",
+        "dials": {
+          "count": 1,
+          "length_steps": 1
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+  "toolchain": null,
+  "observation": null
+}
