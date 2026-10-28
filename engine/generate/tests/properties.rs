@@ -921,3 +921,51 @@ fn d9_the_cli_refuses_an_engine_commit_that_does_not_identify_this_binary() {
         assert!(!receipt.exists(), "a refusal writes nothing");
     }
 }
+
+#[test]
+fn d9_verify_refuses_a_manifest_whose_main_declaration_is_not_the_producers() {
+    // FINDING-011 (analysis/s2-generate-3): the audit tail interpolates the main declaration
+    // into Lean source that `verify` then compiles, so nothing is compiled unless the manifest
+    // names the producer's own declaration.
+    let golden = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("tests/goldens/continuity_is_not_uniform/control-formal");
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
+    for (tag, name) in [
+        ("other", "syndeom_s2_template_other"),
+        ("injected", "x\n#eval (1 : Nat)"),
+    ] {
+        let dir = std::path::Path::new(env!("CARGO_TARGET_TMPDIR"))
+            .join(format!("verify-main-declaration-{tag}"));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        std::fs::copy(golden.join("Proof.lean"), dir.join("Proof.lean")).unwrap();
+        let mut manifest: Value =
+            serde_json::from_slice(&std::fs::read(golden.join("manifest.json")).unwrap()).unwrap();
+        manifest["artifact"]["files"]["formal"]["main_declaration"] = json!(name);
+        std::fs::write(
+            dir.join("manifest.json"),
+            serde_json::to_vec(&manifest).unwrap(),
+        )
+        .unwrap();
+        let receipt = dir.join("receipt");
+        let out = std::process::Command::new(env!("CARGO_BIN_EXE_syndeom-generate"))
+            .args(["verify", "--artifact"])
+            .arg(&dir)
+            .arg("--root")
+            .arg(&root)
+            .arg("--receipt-dir")
+            .arg(&receipt)
+            .output()
+            .unwrap();
+        assert_eq!(
+            out.status.code(),
+            Some(2),
+            "{tag}: {}",
+            String::from_utf8_lossy(&out.stderr)
+        );
+        assert!(
+            !receipt.exists(),
+            "{tag}: a refusal compiles nothing and writes no receipt"
+        );
+    }
+}
