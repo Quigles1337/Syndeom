@@ -1,0 +1,69 @@
+{
+  "schema": "syndeom-held-harvest-review-receipt/1",
+  "action": "S2 ordering step 3 — admission review of the held harvest branch (STATE NEXT-SINGLE-ACTION at c48705c)",
+  "session": 37,
+  "executor": "Claude Opus 5.5 (claude-opus-5-5)",
+  "started_utc": "2026-10-28T01:22:53Z",
+  "finished_utc": "2026-10-28T01:31:19Z",
+  "examined_snapshot": {
+    "fetched_ref": "refs/remotes/origin/main",
+    "sha": "c48705c2d23183340eef5c01ff13059905513985",
+    "tree": "a6b256840d764818c6d314259883967e0e10c7a4",
+    "checkout": "C:/Users/LEET/Syndeom-wt-2026-10-27 (ADR-0008 preflight worktree)"
+  },
+  "held_branch": {
+    "name": "claude/s1-harvest-candidates-28-30",
+    "tip": "c3a3d369689d56bab3678f519904087b313daf4e",
+    "tree": "7bb6600d151d91270f7265b16868424682bd02dd",
+    "parent": "8e222a49a64273c9cefc35bca5ae15a0a05fb9ee",
+    "authored_utc": "2026-10-21T22:26:57Z",
+    "live_remote_tip": "c3a3d369689d56bab3678f519904087b313daf4e",
+    "read_by": "git show / git diff origin/main...c3a3d36 only; never checked out",
+    "files_changed": 13
+  },
+  "evidence_reverification": {
+    "root": "C:/Users/LEET/Codex/Temp/syndeom-orientation-repair-20261021/held-evidence",
+    "committed_manifest": "analysis/s1-orientation-repair/evidence/held-evidence-manifest.json",
+    "manifest_sha256": "d3ea78799dd3e4bbe660368660c17473065768e5ba0b27c7b8c34c89660b87ce",
+    "root_manifest_identical": true,
+    "files_checked": 147,
+    "files_ok": 147,
+    "bytes": 17824213,
+    "unlisted_files_on_disk": 0,
+    "result": "ALL MATCH",
+    "abstract_pages_receipt_only": 10,
+    "output": "evidence-reverify.json (committed LF copy, sha256 7c71cfac6fa954d370492b3fe91678e8f3913346e8a15d047fb5659f2d5bb8e3; the CRLF original under the session's external root, sha256 cdd96618553df6e41f11e185e43aa642288822212f9c7bca2e7505675825324d)",
+    "tool": "verify_held_evidence.py (python -I -X utf8)"
+  },
+  "originals_pinned": [
+    {"items": [32], "arxiv": "1403.6317v1", "bytes": 126877, "sha256": "97b28cf24aa4cc4bb6e810ceb12aebad481df0840cb5a3389b5eca1c2e599bce", "manifest_pin": "MATCH"},
+    {"items": [33, 34, 35], "arxiv": "1403.8075v9", "bytes": 136883, "sha256": "c171e3381684cb051dcf77333de7e51d75e08ca92580b9dc14d24d73e6999270", "manifest_pin": "MATCH"},
+    {"items": [36], "arxiv": "1404.4599v4", "bytes": 48382, "sha256": "2e326a3380ac4068d70de4685e3b306eb693677716fa6c920d8deb747f923cd2", "manifest_pin": "MATCH"}
+  ],
+  "stream": {
+    "candidate_list": "route-a/candidates.tsv",
+    "rows": 2472,
+    "sha256": "e164c0b1693c7a6cdf242dcca853db28517f8c210d17af7ba82d2446dd752d48",
+    "equals_run1_digest_recorded_at": "PROGRAM/HANDOFF.md line 1464 at c48705c (Session 11)",
+    "rows_27_to_31": ["1403.4485", "1403.6317", "1403.8075", "1404.4599", "1406.7174"],
+    "no_skipping": true,
+    "correcting_versions_in_window": {"1403.6317v3": "2024-10-15", "1403.8075v10": "2025-12-27", "1403.8075v11": "2026-01-09", "1404.4599v5": "2024-01-12"}
+  },
+  "items": [
+    {"branch_item": 32, "candidate": 28, "artifact_id_on_branch": "s1_ingest-v0.1.0-eeea00c52724", "result": "arXiv 1403.6317v1 Theorem 1 (thm:HD)", "labels": "FLAW-0012 fatal YES-KERNEL; statement false (source-document); undetermined named", "d2": "agree", "d3": "agree", "verdict": "AGREE", "questions": ["Q-H1"], "evidence": "abs-v2.html (bytes); abs-only.txt (v3 comment receipt); v1 tex lines 168, 643-650; v3 tex acknowledgement"},
+    {"branch_item": 33, "candidate": 29, "artifact_id_on_branch": "s1_ingest-v0.1.0-b77cf8e312d0", "result": "arXiv 1403.8075v9 Proposition 4.1", "labels": "FLAW-0004 dial false, fatal, YES-KERNEL; undetermined", "d2": "agree", "d3": "agree", "verdict": "AGREE", "questions": [], "evidence": "abs-v10.html (bytes); abs-only.txt (v11 receipt); v9 tex lines 409, 414-415, 425, 432"},
+    {"branch_item": 34, "candidate": 29, "artifact_id_on_branch": "s1_ingest-v0.1.0-c38c8c65dd2c", "result": "arXiv 1403.8075v9 Theorem 4.3", "labels": "FLAW-0005 gap YES-KERNEL; undetermined", "d2": "agree", "d3": "agree (entry-range severity practice)", "verdict": "AGREE", "questions": ["Q-H2"], "evidence": "v9 tex lines 460-466"},
+    {"branch_item": 35, "candidate": 29, "artifact_id_on_branch": "s1_ingest-v0.1.0-e8075d1f1a0d", "result": "arXiv 1403.8075v9 Theorem 4.4", "labels": "FLAW-0005 gap YES-KERNEL; undetermined", "d2": "agree", "d3": "agree (entry-range severity practice)", "verdict": "AGREE", "questions": ["Q-H3"], "evidence": "v9 tex lines 513, 524, 533"},
+    {"branch_item": 36, "candidate": 30, "artifact_id_on_branch": "s1_ingest-v0.1.0-22b1b48f3565", "result": "arXiv 1404.4599v4 Proposition 2.22 (Nacycgroupoidprop)", "labels": "FLAW-0005 fatal YES-KERNEL (FLAW-0004 named); undetermined (true named)", "d2": "agree", "d3": "agree (class-fit note recorded)", "verdict": "AGREE", "questions": ["Q-H5"], "evidence": "examine.txt (v5 receipt); v4 tex lines 2217, 2239, 2294, 2304-2310, 2316; 1806.08664v6 tex lines 4043, 4993-4996"}
+  ],
+  "counts": {"items_reviewed": 5, "agree": 5, "disagree": 0},
+  "questions_for_al": ["Q-H1 eighth truth reading (item 32) and its class coupling", "Q-H2 severity (item 34)", "Q-H3 severity (item 35)", "Q-H4 further unnamed results", "Q-H5 item 36 'overcome in a later paper' wording", "Q-H6 proceed to integration as the first later prefix (option (a))", "Q-H7 harvest-log continuation form and freeze-register rows for new item directories"],
+  "integration_findings": [
+    "S-0066..S-0072 collide with main's S-0066..S-0073; renumber to the seven numbers after S-0073 (0074-0080); every config hash and artifact id changes",
+    "groundtruth/HARVEST-LOG.md on the branch diverges from the gate-s1-registration bytes at offset 41721 (line 87): rows inserted mid-table would fail the append-only freeze row; append instead",
+    "the branch labels its harvest 'Session 21'; on main the harvest is HANDOFF Session 22",
+    "the branch's STATE diff is not applied; the effective-inventory tool refuses additions (ADR-0012 D7): a new snapshot under its own event"
+  ],
+  "integrated": false,
+  "approved": false
+}

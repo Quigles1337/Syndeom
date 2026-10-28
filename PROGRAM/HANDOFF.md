@@ -7181,3 +7181,334 @@ Nothing else changed: no register status, manifest, frozen packet, retained repo
 constitution byte, licence, tag, corpus file or S2 code. The commit carrying this addendum is
 gated on its committed tree; the result is recorded in the pull request and under the external
 root (`gate-committed-2.json`), not in the tree it certifies. **Memory writes:** none.
+
+---
+
+SESSION: 2026-10-28 UTC (2026-10-27 America/New_York) (Session 37 — a session launched from
+`C:\Users\LEET`, outside the checkout, with the §6 Session-N resume prompt verbatim followed by
+an owner note; SD15 disclosure first, by digest (Al's ruling, ADR-0005 *Amendments* 1); not an
+examination — the owner messages carry facts about this repository, and Gate S2 has nothing to
+examine; examined fetched `origin/main` `c48705c2d23183340eef5c01ff13059905513985`, tree
+`a6b256840d764818c6d314259883967e0e10c7a4`, in the worktree `C:\Users\LEET\Syndeom-wt-2026-10-27`
+(the original checkout `C:\Users\LEET\Syndeom` was behind and its fast-forward was refused; the
+disclosure was carried here per ADR-0008 D3); branch `claude/s2-held-harvest-review`; header
+completed after ADR-0008 step 5 — it was written provisionally with the disclosure, which is
+unchanged; the session-end SHA is the commit carrying this block, recorded in its pull request)
+
+### Entry 1 — SD15 memory disclosure, by digest (Al's ruling of 2026-10-27, amending ADR-0005's procedure)
+
+Made before any other repository read except `PROGRAM/SYNDEOM-PROGRAM.md` and
+`PROGRAM/DECISIONS/ADR-0005.md`, both read in full. No git command, no build, no listing of the
+checkout's directories, and no read of this file preceded it. Appended by shell
+(`tr -d '\r' … >>`), not by a file-editing tool.
+
+**Memory in context.** The harness loaded one memory: the index
+`C:\Users\LEET\.claude\projects\C--Users-LEET\memory\MEMORY.md`. The working directory was
+`C:\Users\LEET`, which is not a git work tree, so no gitStatus snapshot was attached. This session
+read two memory files from disk: the index and this program's own memory file
+`project_syndeom.md`. It read no other memory file. The harness-loaded copy of the index was
+compared with the file on disk by inspection only; it cannot be hashed.
+
+| File | SHA-256 | Bytes | Lines | CR bytes | BOM | Final byte | Non-ASCII bytes |
+|---|---|---|---|---|---|---|---|
+| `MEMORY.md` | `cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69` | 15420 | 110 | 0 | none (`23 20 50`) | `0a` | 334 |
+| `project_syndeom.md` | `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0` | 10957 | 135 | 0 | none (`2d 2d 2d`) | `0a` | 71 |
+
+Lines = `wc -l` = awk `NR`. Both digests were computed twice this session, at the interrupted
+first attempt and again immediately before this append, and the two results were identical.
+
+**Check (ADR-0005 D3).** The whole index was searched case-insensitively with awk over
+`tolower($0)` for `syndeom|kober|friedman|fr13dman`. A control search for `project memory`
+matched line 1, which shows the search runs. Matched lines: **85, 86, 88, 89, 106, 107** (6).
+**Withheld by count: 104 lines**, namely 1–84, 87, 90–105 and 108–110; none of them names this
+program or a sibling.
+
+**Content not reproduced again.** Under Al's ruling, both digests match a disclosure already
+recorded in this file that reproduced the same bytes. So that this disclosure comes before any read
+of this file, the earlier entry is located and cited in Entry 2 of this block by a digest search
+made after this append. If either digest is not found there, verbatim reproduction is owed, and the
+session stops and escalates to Al under the ruling.
+
+**Program-state check (SD15, D4).** Both files were read in full this session. Every entry in
+`project_syndeom.md` is an environment or tooling hazard or the repo location. None records phase,
+gate status, CLAIM or FLAW status, file contents, commit SHAs as state markers, next actions or
+escalations. The six matched index lines point to the repo and to the siblings' repos, and state
+that no program state is kept in memory.
+
+**Launch context.** The launching prompt was the §6 Session-N resume prompt, followed by an owner
+note about an earlier aborted launch. The first attempt at this disclosure was stopped by a safety
+classifier partway through a response, before anything was appended. A second owner message then
+gave the by-digest ruling. Both owner messages are recorded verbatim later in this block. Because
+the launching context went beyond the §6 prompt verbatim, and the ruling states a fact about this
+file's contents, **this session claims no cold-start exam status** unless Al rules otherwise. No
+memory is written this session.
+
+### Entry 2 — the disclosure's citation, verified after the append (Al's ruling; ADR-0005 *Amendments* 1)
+
+- **Cited entry:** **HANDOFF Session 35, Entry 1** (lines 6664–6818 of this file at `c48705c`).
+  It reproduced D1(a), the six index lines, at lines 6672–6677, and D1(b), `project_syndeom.md`
+  in full, at lines 6683–6817. It records the index digest `cd943842…fc69` at line 6668 and the
+  memory file's digest `ce2ce6de…2cc0` at line 6680.
+- **Verified by bytes, not only by stated digests.** The fenced copy at lines 6683–6817 hashes to
+  `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`, the file's digest today.
+  Lines 6672–6677 are byte-identical to index lines 85, 86, 88, 89, 106 and 107 as extracted
+  today; both hash to `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`.
+  Sessions 29 (lines 5134, 5157) and 34 (lines 6288, 6300) record the same two digests.
+  **The ruling's premise holds for both files; no digest is new; nothing is owed verbatim.**
+- **Where the disclosure was made.** It was first appended in `C:\Users\LEET\Syndeom` (on `main`
+  at `f8d71b8`, behind fetched `origin/main` by 3) at 2026-10-28T01:17:35Z, from the file's
+  mtime. That is the disclosure time. A fast-forward was refused because the incoming commits
+  touch this file, so the preflight created the worktree `C:\Users\LEET\Syndeom-wt-2026-10-27` at
+  the fetched tip. The disclosure was carried into it as the first action there (ADR-0008 D3), at
+  about 01:18:49Z, under a header marked as carried. The original append stands uncommitted in
+  the original checkout and is left as it stands (Escalations).
+- **Byte identity of the two copies.** The disclosure body, from Entry 1's heading to its end,
+  is 3,387 bytes with SHA-256 `1047d0598b90f9ab32e156b8cff11f338a4d634e1b2f3a01c30a31af6f56d400`,
+  identical in both checkouts. The original append was 3,497 bytes (`42206164…4c11`, provisional
+  header included); the carried append was 3,565 bytes. Copies are kept under
+  `C:\Users\LEET\Codex\Temp\syndeom-held-harvest-review-20261028\`.
+- **Dating.** Entry 1 calls the ruling "of 2026-10-27", its America/New_York date. Al's message
+  arrived at about 2026-10-28T01:1xZ UTC.
+
+### Entry 3 — the launches of 2026-10-27, recorded at Al's direction
+
+**The aborted launch.** It is recorded as Al's note reports it; this session has no other record
+of it. An earlier launch on 2026-10-27 stopped before making its disclosure, after a safety
+classifier cut off its response. It wrote nothing to the repository. It began on Claude Fable 5.1
+and ended on Claude Opus 5.5. It is not a session of this log and holds no number.
+
+**This session's interrupted first attempt.** Session 37's first response did the following:
+1. It read `PROGRAM/SYNDEOM-PROGRAM.md` and `PROGRAM/DECISIONS/ADR-0005.md` in full.
+2. It read both memory files in full: `MEMORY.md` and `project_syndeom.md`.
+3. It wrote `memcheck.sh` in the session scratchpad and ran it. The script computed the two
+   digests, line counts, CR and BOM bytes and the D3 name search, and listed the memory
+   directory's file names. It read no other memory file.
+4. A safety classifier stopped the response before anything was appended. Nothing was written to
+   the repository, and nothing of the checkout was read.
+
+The executor reported this and stopped. The withheld content was not regenerated in any form. Al
+then gave the ruling below. The disclosure in Entry 1 was made after it, by digest. The digests
+were computed again immediately before the append and were identical to the first attempt's.
+
+**Launching prompt.** Its first 13 lines are byte-identical to the constitution's §6 Session-N
+block. That was checked by `cmp` after the disclosure, against the lines extracted from the
+snapshot's `PROGRAM/SYNDEOM-PROGRAM.md`. An owner note followed them. The exact copy of the whole
+prompt is `launch-prompt-as-received.txt` under the external root (1,463 bytes, SHA-256
+`c6977e523cd6de36634e95bc2b3e4bf039948036d601de5f1be2028f7b3a5d1b`). The note, verbatim:
+
+~~~text
+Owner note, to act on only after you have disclosed and oriented: an earlier launch today stopped before making its disclosure, after a safety classifier cut off its response. It wrote nothing to the repository; it began on Fable 5.1 and ended on Opus 5.5. Record it in this session's HANDOFF block as an aborted launch.
+~~~
+
+### Entry 4 — Al's ruling on the disclosure, verbatim (also ADR-0005 *Amendments* 1)
+
+The ruling was received after the interrupted first attempt and transcribed verbatim from Al's
+message. The exact copy is `owner-ruling-disclosure-by-digest.txt` under the external root
+`C:\Users\LEET\Codex\Temp\syndeom-held-harvest-review-20261028\` (1,064 bytes, SHA-256
+`cf5c416d161ce431968f58233b0bbfca5e766361dfa756de606e92f0e69b2c81`).
+
+~~~text
+Ruling on the disclosure (amends ADR-0005's procedure; record it there and in this session's HANDOFF block):
+
+Both memory digests you computed already appear in HANDOFF, in disclosures that reproduced these exact bytes. When every memory file's SHA-256 matches a disclosure already recorded in HANDOFF, the disclosure is by digest: record each file's SHA-256, line count and byte facts, the matched index line numbers and the withheld count, and cite the earlier HANDOFF entry that reproduced the same bytes. Do not reproduce the content again. Verbatim reproduction is required only when a digest is new; if that reproduction cannot be completed, stop and escalate to me rather than working around it.
+
+Proceed in this session: make the disclosure by digest as the first entry of a new HANDOFF block, by shell append as before, then orient and continue to STATE's NEXT. Record this ruling verbatim in ADR-0005's Amendments and in your HANDOFF block, together with the earlier aborted launch from my previous note and this session's own interrupted first attempt.
+~~~
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (S2.1: ADR-0011 accepted; no code). Gate S1 CLOSED
+(Session 29).
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipts under the external root):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-10-28T01:17:49Z, exit 0: `f8d71b8..c48705c main -> origin/main`.
+- **Snapshot.**
+  - The checkout was on `main` at `f8d71b8c…`, **behind by 3**: `73a16eb`, `fd8fa9e`, and PR 22's
+    merge `c48705c`, made by Al at 2026-10-27T23:06:37Z.
+  - The working-tree change was the disclosure append only (`allowed_present`;
+    `unrelated: []`).
+  - `--sync` exited 3 and changed nothing. The incoming commits touch `PROGRAM/HANDOFF.md`.
+  - `--worktree C:/Users/LEET/Syndeom-wt-2026-10-27` exited 0 (`SNAPSHOT-ESTABLISHED-IN-WORKTREE`).
+    The worktree's HEAD is `c48705c…`, its tree `a6b2568…`, and it was clean.
+  - Receipts: `orient-1.json`, `orient-2-sync.json`, `orient-3-worktree.json`.
+- **Step-0 bytes.** The constitution, ADR-0005 and ADR-0008, as read before and just after the
+  disclosure, are byte-identical to the snapshot's copies:
+  - constitution `110f5360…479c`, 38,958 B, ADR-0009's amended digest;
+  - ADR-0005 `873f0751…7595`;
+  - ADR-0008 `ccdfa9d7…e9ff`.
+- **Step 6, reconstruction.** STATE (Updated bullet, gate tables, Standing escalations, NEXT),
+  then HANDOFF Session 36, then CLAIMS (0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED
+  existence only), then FLAWS `0.1.0`, then ADR-0003 D1–D9 and ADR-0008. They agree with one
+  another and with the gate receipt's register counts.
+  - No separate ORIENT gate was run. The fetched tree is PR 22's head tree, which Session 36 gated
+    GREEN (`gate-committed-2.json`, 22:10:04Z–22:19:22Z). Its raw log was re-hashed and equals
+    `0ac3de25…739e`.
+- **NEXT survived ORIENT.** It was S2 ordering step 3, and its condition (PR 22 merged) now holds.
+ADVANCED:
+- **A. The held harvest review.** It is `analysis/s1-held-harvest-review/`, holding `REVIEW.md`,
+  `receipt.json`, `evidence-reverify.json` and `verify_held_evidence.py`.
+  - Session 22's preserved evidence: 147 of 147 files re-hash to the committed manifest
+    (`ALL MATCH`).
+  - The five manifests' pins equal the preserved originals' full digests.
+  - The candidate list is run 1's (`e164c0b1…2d48`, HANDOFF line 1464): rows 28–30 in order,
+    nothing skipped, every correcting version in the window.
+  - Every record's claim of record was located in the preserved TeX by label and by counting the
+    numbered environments on the paper's own counter.
+  - Every notice sentence was found, five of them against page or TeX bytes and the rest against
+    the receipts' transcriptions.
+  - **Five items, five agree, no disagreement.**
+  - **Questions Q-H1..Q-H7 for Al.** Q-H1 couples item 32's truth reading to its class.
+  - **The integration plan** is REVIEW.md §4. It adds two findings to Session 22's conditions:
+    the log's append-only conflict and the Session 22 label.
+- **B. ADR-0005 *Amendments* 1.** Al's disclosure ruling, verbatim, with its effect on D1–D4 and
+  what it does not touch.
+- **C. STATE.** Changed: the Updated bullet, Current build verification, the Memory policy
+  paragraph, the ADR-numbers line, the freeze-register escalation (PR 22 merged), three new
+  standing escalations, the held-harvest and older-questions bullets, and NEXT.
+- **D. HANDOFF.** This block. Entries 1 and 2 were appended by shell, and the header was completed
+  after step 5.
+- **E. Build products.** Copied into the worktree for the gate, untracked: `lean/.lake` (144,221
+  files, 7.2 GB) and `engine/target` (2,886 files), both by robocopy with 0 failed. Mathlib's
+  `HEAD` is `d13f23b7…`, at the pin.
+- Nothing changed in any register status, manifest, frozen packet, retained report, constitution
+  byte, licence, tag, corpus file or the held branch. No S2 code was written.
+BELIEF DELTAS:
+- **The held branch's content stands up; its obstacles are mechanical.** All five readings agree
+  with the bytes. What blocks a merge is numbering, regeneration and the append-only log. The
+  last of these is new since Session 22: the freeze register (PR 22) makes the branch's mid-table
+  log rows a gate failure (they diverge from the tag at offset 41,721).
+- **One label depends on another.** FLAW-0012 requires a false statement, so item 32's class
+  stands or falls with its truth reading. Q-H1 is therefore a class question as well.
+- **Disclosure by digest fits a stable memory, not a moving one.** The index is machine-wide, and
+  any other program's session can change its digest. Recorded for Al, not acted on.
+CONFUSIONS:
+- **The provisional header's date.** It carried the America/New_York date (2026-10-27).
+  ADR-0008 D1 asks for the UTC date, marked provisional. The completed header gives both dates.
+  Cost: none, since the header is not part of the disclosure.
+- **My manifest summary read the wrong key.** It used a top-level `files` where the pin is
+  `artifact.files.informal`, and printed "CHECK" for all five. It was rerun with the right key
+  over the full digests: five MATCH. Cost: one rerun.
+- **The awk backslash hazard struck twice.** Patterns written as `\\section` matched nothing, and
+  environment macros (`\bP`, `\bL`) hid the counter. Both counts were redone, the first with
+  bracket expressions and the second in Python using `chr(92)`. Cost: three reruns. Doc fix: none
+  needed; the hazard is already in the executor's memory file.
+- **robocopy exit 1 means "files copied"**, so the background task reported it as a failure. The
+  log shows 0 failed. Cost: one read.
+- **The later paper's quote.** "absence of a simple completion" did not match the TeX until the
+  `\emph{}` markup was allowed for. The quote stands.
+HONESTY CHECK:
+- Register entries re-examined: none changed, and nothing was downgraded. The review approves
+  nothing, and the branch's labels stay unapproved.
+- **Limits, stated in REVIEW.md:**
+  - six notice comments were checked against receipt transcriptions, not page bytes;
+  - the records' precedent lists (main's items 13, 16, 21, 24, 26, 27, 29) were not re-checked;
+  - the class-fit note on item 36 is a reading, not a relabeling;
+  - the arXiv pages were not re-fetched, so the review is a statement about the preserved bytes,
+    not about the live pages.
+- Entry 2's citation was verified by hashing Session 35's reproduced bytes, not only by matching
+  its stated digests.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened. No detector, threshold or
+generator design was touched. The inputs were the held branch, Session 22's preserved evidence,
+ADR-0003, FLAWS.md `0.1.0` and Al's messages. Verdict: no leakage.
+DETERMINISM CHECK:
+- The re-verification is regenerable on this machine from `verify_held_evidence.py`, the committed
+  manifest and the external evidence root. That root is outside the repository, as the held
+  evidence always was.
+- The review's line numbers are regenerable from the preserved TeX.
+- No MEASURED result was produced, and nothing entered CLAIMS. Nothing to quarantine.
+MANIFEST CHECK: no artifact was created or changed and no manifest was written. "Proven" was
+applied to nothing, and nothing synthetic was labeled real.
+DRIFT CHECK:
+- The review reads notices and texts and states agreement with the branch's records. It makes no
+  verdict on any paper (SD3), and REVIEW.md says so.
+- No understanding claims (SD17).
+- No detector chosen or tuned, and no referee contact (SD13).
+- No S2 code, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. Act on Al's rulings on the held harvest review (Q-H1..Q-H7):
+- the integration per REVIEW.md §4 if Al orders it;
+- otherwise S2 ordering step 4, ADR-0011's crate;
+- with no ruling, record that and stop.
+ESCALATIONS:
+- **Held harvest review**, Q-H1..Q-H7 (STATE, Standing escalations, first bullet;
+  REVIEW.md §3–§4).
+- **SD15's constitution sentence** against the by-digest ruling: a constitution amendment, or
+  ADR-0005 *Amendments* 1 as an addendum? Also the index-digest observation.
+- **Housekeeping** after this pull request merges, on approval: the original checkout's
+  uncommitted append and the worktree `C:\Users\LEET\Syndeom-wt-2026-10-27`.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. NEXT's step 4 is an escalation to Al, and the next action needs
+Al's rulings. Repo green: the gate on the committed tree is recorded in the pull request.
+**Memory writes:** none, deliberately. Any write would change a memory file's digest and make the
+next disclosure owe verbatim reproduction.
+AL'S RULINGS ON PR 23 (2026-10-28 UTC, received in this session's conversation after PR #23
+opened; recorded at Al's direction in a third commit on the same branch, no force-push;
+transcribed verbatim from Al's message; exact copy `owner-rulings-pr23.txt` under the external
+root, 1,854 bytes, SHA-256 `0047396b604535ab17a4a2b0ddaa7dfa74b027d63c8ca2d69f03463aded8449b`):
+
+~~~text
+Rulings on PR #23 (held harvest review):
+
+Q-H1, item 32: false by source document, as recorded, so its recorded class stands. "The wrong theorem" belongs to the wording group main's items were read under; changing that standard would be a corpus-wide decision, not a one-item exception.
+Q-H2 and Q-H3, items 34 and 35: gap, as recorded, by the entry-range practice main's items follow.
+Q-H4: the unnamed results stay out as items and join the existing unnamed-result question.
+Q-H5, item 36: undetermined, as recorded. "Overcome" speaks to the later paper's reworked concepts, not to Proposition 2.22 as stated.
+Q-H6: integrate now, as the first later prefix, following section 4's plan.
+Q-H7: the harvest log continues as a new dated section after the file's current end, with its own table header, rows and counts, keeping the tag's bytes as an exact prefix. The five new item directories get frozen rows, added in a second commit on the integration branch with the commit that adds the directories as their freeze point. Pull requests keep merging with merge commits, never squash, so that freeze point stays in main's history.
+SD15 wording: ADR-0005's amendment stands as an addendum; the constitution is not edited, since every session reads ADR-0005 in full before disclosing.
+Disclosure by digest, refined: compare the digest of the matched index lines and of the SYNDEOM memory file, not of the whole index. Record the whole index's digest as a fact; verbatim reproduction is owed only when the matched lines or the SYNDEOM file change.
+
+Record these rulings verbatim where the program records rulings (STATE, HANDOFF, and ADR-0005 for the digest refinement), as a new commit on PR #23's branch (no force-push). Run the gate on the committed tree, fetch fresh before pushing, and stop for my review. The housekeeping waits until after the merge.
+~~~
+
+Before writing: `recheck --baseline c48705c2…` re-fetched at 2026-10-28T04:13:50Z (exit 0,
+`TARGET-UNCHANGED`; receipt `recheck-3-rulings-start.json`). `main` was still `c48705c2…`. The
+branch was at `a5144ce` locally and on the remote, and the worktree was clean. PR 23 was open
+and mergeable, with no reviews or comments. The held branch is still at `c3a3d36` on the remote.
+
+Effect:
+- **Q-H1, Q-H2/Q-H3, Q-H5** → the five items' labels stand as recorded: item 32 false by source
+  document (FLAW-0012), items 34 and 35 `gap`, item 36 `undetermined`. Nothing was relabeled.
+- **Q-H4** → the further unnamed results stay out as items: Corollary 12 and the demoted
+  Theorem 3 of 1403.6317, Lemma 4.2 of 1403.8075, and Lemmas 2.9 and 2.21 of 1404.4599. STATE's
+  *Carried questions* and *Older questions* bullets now list them under the unnamed-result
+  question. The frozen S1.4 packet, which records that question's disposition, is not touched.
+- **Q-H6, Q-H7** → STATE's NEXT is the integration, after this pull request merges. It follows
+  REVIEW.md §4 on a fresh branch from `main`, continues the harvest log as a new dated section,
+  and then adds five frozen rows in a second commit, with the first commit as their freeze point.
+  The merge-commit rule joins the *Freeze register* preamble. Nothing was integrated, and no row
+  was added.
+- **SD15 wording, the refinement** → ADR-0005 *Amendments* 2: the two paragraphs verbatim, their
+  effect, and the baseline below. STATE's *Memory policy* paragraph and the SD15 escalation are
+  updated, and that escalation is closed.
+- **The instruction paragraph** → recorded in this addendum, in STATE and in ADR-0005.
+  - STATE: *Standing rulings* (the message verbatim), the Updated bullet, Current build
+    verification, the ADR-numbers line, *Standing escalations*, the held-harvest,
+    carried-questions and older-questions bullets, the *Freeze register* preamble, and NEXT.
+  - The housekeeping is not done.
+
+Baseline under the refined rule (ADR-0005 *Amendments* 2). Computed from the files on disk after
+the rulings; hashes and counts only, nothing reproduced.
+- Matched index lines 85, 86, 88, 89, 106 and 107: 6 lines, 1,198 bytes, SHA-256
+  `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`, equal to HANDOFF lines
+  6672–6677 (Session 35, Entry 1).
+- `project_syndeom.md`: `ce2ce6de…2cc0`, equal to HANDOFF lines 6683–6817 (the same entry).
+- The whole index, a fact: `cd943842…fc69`, 15,420 bytes, 110 lines, unchanged since Entry 1. The
+  name search matched the same six lines, and the canary matched line 1.
+
+Flagged for Al: two readings of the refinement are the executor's, recorded in ADR-0005
+*Amendments* 2.
+- The matched lines' digest is taken over each matched line with its LF, in index order. That is
+  the form Entry 2 verified against Session 35's reproduction.
+- A renumbering of the matched lines alone, with their bytes unchanged, is not a change.
+
+NEXT-SINGLE-ACTION (superseding the block's): STATE's NEXT. After PR 23 merges, integrate the
+held harvest per REVIEW.md §4 and Al's rulings, in two commits; then S2 ordering step 4.
+ESCALATIONS (superseding the block's):
+- **Housekeeping** after this pull request merges: the original checkout's uncommitted append and
+  the worktree (Al: "The housekeeping waits until after the merge.").
+- The two readings of the refinement above, for Al's confirmation.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction — stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root (`gate-committed-2.json`), not in the
+tree it certifies. Checks for this addendum: no leakage (`contact/` not opened; no detector,
+threshold or generator touched); nothing measured; no artifact or manifest written; no verdict on
+any paper (SD3). **Memory writes:** none.
