@@ -20,8 +20,11 @@ compares the bytes.
 **Provenance (Session 40, 2026-10-28):**
 - The proof text is hand-authored seed material (`seeds/*.json`).
 - The formal files were first written by hand as Lean probes and compiled before the crate
-  existed. Each formal golden is byte-identical to its probe; the `nat_le_sq` control is
-  checked instead by the D8 writer test against Golden B.
+  existed (`analysis/s2-generate-1/evidence/lean-probe/`).
+  - The three flawed formal goldens are byte-identical to their probes.
+  - The two faithful probes are their goldens followed by the probe's own
+    `\n#print axioms <main>\n` tail (Al's ruling 6 on PR 26 corrected this record).
+  - The `nat_le_sq` control is checked instead by the D8 writer test against Golden B.
 - The files and manifests were produced by `syndeom-generate generate --dry-run` at engine
   commit `21f83594a22d514bb9cdb1ec0261f659e7d1f4b9`. The Lean harness ran then, one process at a
   time, and each `observation` is what it measured: exit code, first error line, and axioms.

@@ -8310,3 +8310,101 @@ and the pull request is open for Al's review. Repo green: the gate on the commit
 recorded in the pull request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 40 ADDENDUM — AL'S RULINGS ON PR 26 (2026-10-28 UTC, received in this session's
+conversation after PR #26 opened; recorded at Al's direction in new commits on the same branch,
+no force-push; transcribed verbatim from Al's message as rendered to the executor; copy
+`owner-rulings-pr26.txt` under `C:\Users\LEET\Codex\Temp\syndeom-pr26-rulings-20261028\`, 2,281
+bytes, SHA-256 `f4f6e2b05f0bf39045079a621cadcd567eed3b007109cc858ee4020b4ccac267`):
+
+~~~text
+Rulings on PR #26 (record them verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+1. The gate change in 21f8359 is accepted: the seed witnesses are library modules, and the audit parses every #print axioms line against the standard three axioms with a count check.
+
+2. Readings 1, 2, 3, 5, 6, 7, 8 and 9 are accepted as read.
+
+3. Reading 4 is not accepted as read. Flaw counts are per instance, not per record: one injected flaw rendered in both files of a pair is one instance with two locations, and n_flaws_total and n_flaws_<NNNN> count instances. No current golden is a pair, so nothing regenerates now; the rule binds the next producer revision before the first pair golden, and ADR-0001's wording is clarified if it needs it.
+
+4. Reading 10: the attribution is to be verified against retrieved vectors, not left unverified. An independent implementation from the published algorithms reproduces this crate's D4 vectors and matches the reference vectors in rand_xoshiro 0.3.0's tests (src/splitmix64.rs: seed 1477776061723855037, 50 outputs; src/xoshiro256starstar.rs: state 1, 2, 3, 4, 10 outputs; both recorded there as produced with Vigna's reference C at xoshiro.di.unimi.it). Retrieve those two vectors, register the source under SD11, add them as tests in engine/generate/tests/rng.rs (a state constructor for the stream may be needed for the xoshiro vector; it must change no output), and lift the "unverified" note in the tests header, the packet README and D4's conformance record.
+
+5. Readings 11 and 12: accepted. A new seed bumps s2_template to 0.2.0 with the 0.1.0 goldens kept regenerable under the version they name, and 0.2.0 embeds its input hashes at build time as syndeom-pair does, closing FINDING-005.
+
+6. Record correction: the packet README and HANDOFF say each formal golden is byte-identical to its hand-written probe. That holds for three of five; the two faithful probes carry a trailing #print axioms line the goldens do not. Correct the wording; the probes stay as they are.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review. I will merge with a merge commit: the goldens pin engine_commit 21f8359, which must stay a real commit on main.
+~~~
+
+Before applying the rulings, a fresh fetch at 2026-10-28T17:59Z showed `origin/main` still at
+`f9f9730` and the branch at `8697ab3`, in sync with its remote.
+
+**The gate on PR 26's head, before the rulings:** `8697ab3` (tree `a2345dd4…`) was GREEN,
+2026-10-28T17:48:05Z–17:48:47Z, exit 0, with the tree clean before and after.
+- Lean: 8,929 jobs; four axiom lines within the standard three.
+- Rust: fmt and clippy pass, and 114 tests pass.
+- Records: 570 tracked files are LF; the registers and the freeze register (65 rows) ALL PASS.
+- Raw log SHA-256 `2214f509…473a`, under `C:\Users\LEET\Codex\Temp\syndeom-generate-20261028T1706Z\`.
+
+The preflight's `recheck` exited 0, and the push created the branch.
+
+How each ruling is applied:
+- **Ruling 1 (the gate change accepted)** → recorded in ADR-0011 *Amendments* and STATE.
+- **Ruling 2 (readings 1, 2, 3, 5–9 accepted)** → recorded, and the packet README marks them.
+- **Ruling 3 (counts per instance)** → recorded as an amendment of D8.
+  - `s2_template` 0.1.0 counts records, and no 0.1.0 golden is a pair, so no code or byte
+    changed now.
+  - STATE's NEXT makes per-instance counting part of 0.2.0, with the property test that equates
+    the counts with records changed then.
+  - ADR-0001 is left unedited: it names `n_flaws_total` and `n_flaws_<NNNN>` without a unit and
+    already defines `flaws_confirmed` as a count of instances.
+  - One reading is the executor's, open for Al: a pair instance counts as confirmed when each of
+    its records passes its check.
+- **Ruling 4 (the RNG attribution)** → commit `91dde9a6763526e6d9f2131ce196f6d6a54b2bd3`.
+  - **Retrieval** at 2026-10-28T17:59:51Z–17:59:52Z: the crates.io index entry for
+    `rand_xoshiro` (SHA-256 `6c7f3b35…f838`) and the 0.3.0 archive (15,597 bytes, SHA-256
+    `0be70256…831f`, equal to the index's `cksum`, not yanked). The archive was extracted as data
+    into a new directory.
+  - **The vectors**, extracted by script:
+    - `src/splitmix64.rs` test `reference`: seed 1477776061723855037, 50 outputs, comment naming
+      `splitmix64.c`;
+    - `src/xoshiro256starstar.rs` test `reference`: state 1, 2, 3, 4, 10 outputs. Its comment
+      names `xoshiro128starstar.c`, which is recorded as written.
+  - **Agreement:** both the crate and the independent Python implementation of D4 reproduce them.
+  - **Registered** as S-0081, digest-only.
+  - **Tests** in `engine/generate/tests/rng.rs`, through the new `Stream::from_state`. The 12
+    goldens still regenerate, so no output changed.
+  - **Notes lifted:** the "unverified" note in the tests header, the packet README and, by the
+    amendment, D4's conformance record.
+- **Ruling 5 (0.2.0)** → recorded. NEXT step 3 makes 0.2.0 the first move: the version bump,
+  build-time input hashes closing FINDING-005, per-instance counts, and the 0.1.0 goldens kept
+  regenerable. The packet marks FINDING-005 as scheduled.
+- **Ruling 6 (the record correction)** → the packet README, the goldens README and STATE now say
+  that the three flawed formal goldens are byte-identical to their probes. The two faithful probes
+  are their goldens followed by the probe's own `\n#print axioms <main>\n` tail, which the copy
+  script removed before comparing. The probes are unchanged.
+
+  **This block's Entry 4 is corrected here, because HANDOFF is append-only.** Its HONESTY CHECK
+  bullet "The formal proof bytes were written by hand first and matched exactly" holds for the
+  three flawed cases only; for the two faithful cases it holds after removing the probe's axiom
+  print. The same overstatement is in commit `f8cc5df`'s message and in PR 26's description. The
+  commit message stands as history; the PR comment for this addendum corrects it.
+
+BELIEF DELTA: a test vector's provenance can be checked one link further than its file. The
+crates.io index publishes the archive's SHA-256, so the vectors used here are pinned to bytes the
+registry vouches for. They do not rest only on a repository copy.
+CONFUSION: the copy report's `equals_probe: true` came from a comparison that first stripped the
+probes' axiom-print tail. The session then summarized it as "byte-identical", and the report's
+field name hid the normalization. Cost: a record correction. Fix: state the normalization
+whenever a comparison is not byte-exact.
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and the only source added is an RNG crate's tests.
+- No manifest, golden byte, label or register status changed. SOURCES gained S-0081,
+  append-only.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that `21f8359`, the goldens'
+  `engine_commit`, stays a real commit on `main`.
+- **For the next revision:** the pair-confirmation reading under ruling 3.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

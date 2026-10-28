@@ -14,7 +14,9 @@ Branch `claude/s2-generate-crate`, from `main` `f9f973012cbe1a7d7f1d8cd4520db998
 | `21f83594a22d514bb9cdb1ec0261f659e7d1f4b9` | seed witnesses in the Lean library; `Audit.lean` and the gate's axiom loop (the D10 gate change, for Al's own review under ruling 3) |
 | `f8cc5df249c3026d2685c17483ccba6301c5cf3a` | the 12 goldens and their test |
 | `cd5633b3f1a7388565526e5d93f0afffabcc17c4` | the security review's four fixes; no emitted byte changed |
-| the commit carrying this packet | this packet, STATE and HANDOFF |
+| `8697ab39379a0d78a513c7447fba230488af7932` | this packet, STATE and HANDOFF |
+| `91dde9a6763526e6d9f2131ce196f6d6a54b2bd3` | ruling 4: S-0081 registered, the published reference vectors as tests, `Stream::from_state` |
+| the record commit after it | rulings 1–6 recorded (ADR-0011 *Amendments*, STATE, HANDOFF), and the corrections of ruling 6 |
 
 ## What was built
 
@@ -27,9 +29,17 @@ Branch `claude/s2-generate-crate`, from `main` `f9f973012cbe1a7d7f1d8cd4520db998
   seeds 0, 1 and 7 under the label `test`, plus one bounded draw, are pinned in `tests/rng.rs`.
   - The pinned values equal an independent Python implementation written from D4's text
     (`evidence/rng_d4.py`, `evidence/rng_d4.out.json`).
-  - **Agreement with the published SplitMix64 and xoshiro256** reference code was not
-    attempted** this session, so the attribution is unverified. D4 lets the definition stand on
-    its own.
+  - **The attribution is verified** (Al's ruling 4 on PR 26). `syndeom-rng/1` reproduces the
+    published reference vectors in `rand_xoshiro` 0.3.0's tests (S-0081), which record them as
+    produced with Vigna's reference C:
+    - SplitMix64 from seed 1477776061723855037, 50 outputs;
+    - xoshiro256** from the state 1, 2, 3, 4, 10 outputs, through `Stream::from_state`, which
+      changes no output of `Stream::new`.
+
+    The archive was checked against the crates.io index checksum. The vectors were extracted by
+    script, and the independent Python implementation reproduces them too
+    (`evidence/rng-reference/`). This replaces the session's first statement that the
+    attribution was unverified.
 - **`s2_template` 0.1.0 (D3, D5–D9):**
   - Seeds `nat_le_sq`, `sq_plus_one_ge_two_x` and `n_sq_mod_four`. Each states its `source`:
     FLAWS.md 0.1.0's examples and ADR-0001 D8, never `groundtruth/` (ruling 1).
@@ -69,8 +79,13 @@ Branch `claude/s2-generate-crate`, from `main` `f9f973012cbe1a7d7f1d8cd4520db998
    (`evidence/goldens-run.mjs`, `evidence/goldens-run-summary.txt`):
    - 12 cases, each exit 0 with fidelity PASS;
    - the flawed formal cases have first error line 6, inside the site's fragment (check K);
-   - each formal golden is byte-identical to its hand-written probe
-     (`evidence/goldens-copy-report.json`).
+   - the three flawed formal goldens are byte-identical to their hand-written probes;
+   - the two faithful probes are their goldens followed by the probe's own
+     `\n#print axioms <main>\n` tail, which the copy script removed before comparing
+     (`evidence/goldens-copy.mjs`, `evidence/goldens-copy-report.json`).
+
+     This sentence first said that every formal golden was byte-identical to its probe. Al's
+     ruling 6 on PR 26 corrected it, and the probes are unchanged.
 
    The receipts, with build and audit stdout and stderr, are under the external root
    `C:\Users\LEET\Codex\Temp\syndeom-generate-20261028T1706Z\goldens\`.
@@ -162,7 +177,7 @@ FINDING-005: engine_commit is verified against the working tree, not the running
 Severity:    Medium
 Category:    Logic (provenance, SD6)
 Location:    engine/generate/src/main.rs (verify_engine_commit)
-Status:      Open — for Al
+Status:      Scheduled — closed by s2_template 0.2.0 (Al's ruling 5 on PR 26)
 Description: as in syndeom-derive (D9: "verified as syndeom-derive does"), the check compares the
              commit's blobs with the checkout. A binary built from older sources and run directly would
              pass and stamp an engine_commit whose bytes it did not use. `cargo run` and `cargo test`
@@ -196,9 +211,13 @@ Description: v0.1 only refuses a non-zero ratio. When padding is realized, the d
              rational and the ratio compared only after rendering, as D4 requires.
 ```
 
-## Implementation readings, flagged for Al
+## Implementation readings, and Al's rulings on them
 
-None of these changes ADR-0011's text. Each is how this implementation reads it:
+None of these changes ADR-0011's text. Each is how this implementation reads it. **Al ruled on
+them on 2026-10-28 (PR 26; verbatim in ADR-0011 *Amendments*):**
+- readings 1, 2, 3, 5, 6, 7, 8, 9, 11 and 12 are accepted as read;
+- reading 4 is not accepted: flaw counts are per instance;
+- reading 10 is superseded: the attribution is now verified.
 
 1. **Lean-free goldens.** Golden manifests carry `engine_commit` `21f83594…`, the commit the
    producer ran from. `case.json` records the harness observation, so the golden test needs no
@@ -209,7 +228,11 @@ None of these changes ADR-0011's text. Each is how this implementation reads it:
 3. **`n_tokens`** is measured on the informal file when there is one, else on the formal file.
 4. **Flaw counts.** Achieved `n_flaws_total` and `n_flaws_<NNNN>` use the estimator
    `injected_instances_confirmed`, as ADR-0001's example manifest does. The commanded counts are
-   records, so a pair counts each instance twice.
+   records, so a pair counts each instance twice. **Not accepted (ruling 3):**
+   - `n_flaws_total` and `n_flaws_<NNNN>` count instances; one flaw rendered in both files of a
+     pair is one instance with two locations;
+   - 0.1.0 has no pair golden, so nothing regenerates;
+   - the next producer revision counts instances before its first pair golden.
 5. **Informal confirmation.** An informal record is confirmed structurally: the span holds exactly
    the inserted text, which differs from what it replaced. Check K needs a formal file.
 6. **Flaw material.** Template material is a whole-argument variant, one instance per artifact
@@ -221,7 +244,8 @@ None of these changes ADR-0011's text. Each is how this implementation reads it:
    declaration.
 9. **Deferred.** The used-constants part of the audit tail (the T check) waits for the first
    FLAW-0007, FLAW-0009 or FLAW-0013 producer.
-10. **Reference vectors.** The RNG attribution is unverified (above).
+10. **Reference vectors.** This reading left the RNG attribution unverified. **Superseded
+    (ruling 4):** it is verified against S-0081's vectors (above).
 11. **FINDING-005.** Whether to embed build-time input hashes in the next producer revision.
 12. **Versioning a new seed.** A new seed makes `s2_template` emit bytes for a config that 0.1.0
     refused. STATE's NEXT reads ADR-0011 D1 as requiring a version bump (0.2.0), with the 0.1.0
