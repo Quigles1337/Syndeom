@@ -1,0 +1,61 @@
+nat_le_sq/control-informal exit=0 start=2026-10-28T17:37:02.299Z end=2026-10-28T17:37:02.943Z
+s2_template-v0.1.0-e938458d924b-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+nat_le_sq/control-formal exit=0 start=2026-10-28T17:37:02.944Z end=2026-10-28T17:37:54.748Z
+s2_template-v0.1.0-e90f981d8806-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sq_plus_one_ge_two_x/control-informal exit=0 start=2026-10-28T17:37:54.750Z end=2026-10-28T17:37:55.398Z
+s2_template-v0.1.0-38836407734b-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sq_plus_one_ge_two_x/control-formal exit=0 start=2026-10-28T17:37:55.400Z end=2026-10-28T17:38:12.829Z
+s2_template-v0.1.0-443f21583615-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sq_plus_one_ge_two_x/flaw-0001-propagated-informal exit=0 start=2026-10-28T17:38:12.831Z end=2026-10-28T17:38:13.493Z
+s2_template-v0.1.0-3894bab87ffd-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sq_plus_one_ge_two_x/flaw-0001-propagated-formal exit=0 start=2026-10-28T17:38:13.495Z end=2026-10-28T17:38:22.354Z
+s2_template-v0.1.0-3086f607c410-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sq_plus_one_ge_two_x/flaw-0001-local-informal exit=0 start=2026-10-28T17:38:22.356Z end=2026-10-28T17:38:23.078Z
+s2_template-v0.1.0-8c642418f60e-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sq_plus_one_ge_two_x/flaw-0001-local-formal exit=0 start=2026-10-28T17:38:23.079Z end=2026-10-28T17:38:32.072Z
+s2_template-v0.1.0-f625e5382605-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_sq_mod_four/control-informal exit=0 start=2026-10-28T17:38:32.075Z end=2026-10-28T17:38:32.685Z
+s2_template-v0.1.0-c9eb0243192f-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_sq_mod_four/control-formal exit=0 start=2026-10-28T17:38:32.687Z end=2026-10-28T17:38:48.418Z
+s2_template-v0.1.0-3e564800cd4f-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_sq_mod_four/flaw-0014-gap-informal exit=0 start=2026-10-28T17:38:48.420Z end=2026-10-28T17:38:49.040Z
+s2_template-v0.1.0-01d2a3dd8a98-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_sq_mod_four/flaw-0014-gap-formal exit=0 start=2026-10-28T17:38:49.042Z end=2026-10-28T17:38:56.189Z
+s2_template-v0.1.0-992662e641c8-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end

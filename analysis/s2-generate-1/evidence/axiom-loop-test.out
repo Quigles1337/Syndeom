@@ -1,0 +1,6 @@
+standard (expect 0) -> exit 0 : 
+reordered subsets (expect 0) -> exit 0 : 
+sorryAx (expect 1) -> exit 1 : FAIL: non-standard axiom 'sorryAx' in: 'a' depends on axioms: [propext, sorryAx]
+ofReduceBool (expect 1) -> exit 1 : FAIL: non-standard axiom 'Lean.ofReduceBool' in: 'a' depends on axioms: [propext, Lean.ofReduceBool]
+one line missing (expect 1) -> exit 1 : FAIL: 1 axiom lines for 2 audited declarations
+empty output (expect 1) -> exit 1 : FAIL: 0 axiom lines for 2 audited declarations

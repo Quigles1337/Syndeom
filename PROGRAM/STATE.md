@@ -1,6 +1,51 @@
 # STATE
 
-- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 39:
+- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 40:
+  - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
+    fresh conversation;
+  - SD15 disclosure first, **by digest** (ADR-0005 *Amendments* 1–3). The matched index lines
+    (85, 86, 88, 89, 106, 107; `0418e621…534c`; 104 withheld) and the SYNDEOM memory file
+    (`ce2ce6de…2cc0`) are the bytes Session 35's Entry 1 reproduced, verified by hashing
+    HANDOFF's lines in HANDOFF Session 40, Entry 2;
+  - **not an examination**: Gate S2 has nothing to examine. The session certifies nothing;
+  - **one interruption**: a safety classifier stopped one response during ORIENT step 6, after
+    the ORIENT gate had ended GREEN. Nothing was written by it. Al then directed the session to
+    continue (verbatim under *Standing rulings*; HANDOFF Session 40, Entry 3).
+
+  **ADR-0011's crate is built** (STATE's NEXT as it stood: S2 ordering step 4). It is on branch
+  `claude/s2-generate-crate`, in five commits, for Al's review. `main` is unchanged until Al
+  merges.
+  - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main`
+    **synchronized** with fetched `origin/main` `f9f973012cbe1a7d7f1d8cd4520db998dca0e550`, tree
+    `84a010018335bfdc94bcc2214babd593b5b734bb`, with the disclosure append the only change.
+    - That is **PR 25's merge** (by Al, 2026-10-28T17:02:54Z; parents `ef567ec` and `41008ed`).
+      No later ruling on PR 25 exists.
+    - The receipt is `orient-receipt-1.json` under
+      `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1706Z\`.
+    - The ORIENT gate was GREEN (*Current build verification*).
+  - **Commits:**
+    - `9b4b16f` the crate: plan, renderers, `syndeom-rng/1`, harness, `s2_template` 0.1.0, the
+      CLI, three seeds, and tests;
+    - `21f8359` the seed witnesses in the Lean library, with `Audit.lean` and the gate's axiom
+      loop. This is the D10 gate change that ruling 3 gives its own review;
+    - `f8cc5df` the 12 goldens;
+    - `cd5633b` the security review's four fixes;
+    - the fifth commit: the packet `analysis/s2-generate-1/`, this file and HANDOFF.
+  - **Measured at implementation** (`analysis/s2-generate-1/README.md`):
+    - Golden A and Golden B are reproduced byte for byte by the writers;
+    - the RNG vectors agree with an independent Python implementation of D4;
+    - 12 goldens (each seed's control and FLAWS.md example, informal and formal) have fidelity
+      PASS. The flawed formal cases fail at the site's fragment (check K), and every formal
+      golden equals its hand-written probe;
+    - `cargo audit` is clean (advisory-db `40f5be6f…`);
+    - the security review found five issues. FINDING-001..004 are resolved; FINDING-005, the
+      binary-provenance gap, is open for Al.
+  - **Not yet built:** `s2_grammar`, padding (FLAW-0013), lemma steps, the T check, the seeds for
+    the other FLAWS.md examples, and the sweep. They are later sessions (ADR-0011 D11).
+  - **Unchanged:** registers' statuses, the manifests under `groundtruth/`, frozen packets, the
+    Gate S1 table, the constitution, the licence, the tag and `corpora/` (no artifact written).
+    **NEXT** waits on this pull request's merge.
+- **Previous update (Session 39):** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 39:
   - launched with the §6 Session-N resume prompt verbatim, followed by an owner note, pasted into
     an existing Claude Code conversation: the one that had just done Session 38's post-merge
     housekeeping at Al's direction (below);
@@ -795,7 +840,20 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 39).** ORIENT gate on `main` `ef567ec` (tree
+- **Current build verification (Session 40).** The ORIENT gate ran on `main` `f9f9730` (tree
+  `84a01001…`, PR 25's merge) in the original checkout, with the disclosure append the only
+  change. **GATE: GREEN**, 2026-10-28T17:07:43Z–17:08:31Z, exit 0.
+  - Lean: the build and the axiom audit, `[propext]`.
+  - Rust: fmt, clippy and the tests pass.
+  - 496 tracked files are LF. The registers and the freeze register (65 rows: 60 frozen,
+    5 append-only) ALL PASS.
+  - Stderr carried only cargo's progress lines and the freeze test's unittest summary.
+  - The raw log is `gate-orient.raw.log` (SHA-256 `d62ffaa6…1496`) under
+    `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1706Z\`.
+
+  The pull request's head is gated on its committed tree. That result is recorded in the pull
+  request and under the external root, not in the tree it certifies.
+- **Previous build verification (Session 39).** ORIENT gate on `main` `ef567ec` (tree
   `4bef2ccc…`, PR 24's merge) in the original checkout, with the disclosure append the only
   change: **GATE: GREEN**, 2026-10-28T15:53:14Z–16:02:55Z, exit 0, stderr empty. Lean 8,926 jobs,
   axioms `[propext]`; fmt, clippy and 89 Rust tests pass; 485 tracked files LF; registers and the
@@ -1461,6 +1519,14 @@ Flag D: on the branch, after the regeneration and before the merge, as PR #24 di
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
+- **Al's direction of 2026-10-28 (Session 40) — verbatim.** It was received in Session 40's
+  conversation after a safety classifier stopped one of the session's responses. It is also in
+  HANDOFF Session 40, Entry 3, transcribed from the message as rendered to the executor.
+
+~~~text
+Continue in this session. Your disclosure, orientation and gate stand; redo nothing. Record the interruption in this session's HANDOFF block in one sentence — the step it happened at, and that nothing was written — and say in one sentence which step the stopped response was carrying out, without reproducing it. Then proceed: PLAN the one thing STATE names, ADR-0011's crate, and EXECUTE it on a fresh branch from main. If a classifier stops you again at any point, do not reword or retry: stop at the nearest point where the committed tree passes the gate, complete the header, record both interruptions, push the branch, open the PR, and report. Otherwise run the loop to a clean stop per §4.6 and stop for my review.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -1473,10 +1539,10 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*) |
-| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **open** | — |
-| S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **open** | — |
-| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **open** | — |
+| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code. Session 40 (PR pending): the crate `engine/generate/` is built — the plan, both renderers, the injector, `syndeom-rng/1`, the Lean harness and `s2_template` 0.1.0 with three seeds; `s2_grammar`, padding and lemma steps are not yet** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*); `engine/generate/`; `analysis/s2-generate-1/README.md` |
+| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress (Session 40, PR pending): implemented for `s2_template` 0.1.0 — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; no T check, no padding yet** | `engine/generate/src/template.rs`; `analysis/s2-generate-1/README.md` (readings 2–5 flagged for Al) |
+| S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **in progress (Session 40, PR pending): every manifest self-checked before writing; determinism and id tests; engine-commit verification; `regenerate` reproduces `content_hash`** | `engine/generate/tests/properties.rs`, `tests/goldens.rs`; FINDING-005 (binary provenance) open for Al |
+| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **in progress (Session 40, PR pending): property and refusal tests; Golden A/B writer test; 12 goldens for three seeds (FLAW-0001, FLAW-0014 and the controls); clippy clean; `cargo audit` clean; security review recorded** | `engine/generate/tests/`; `analysis/s2-generate-1/` |
 | Fidelity sweep report (commanded vs achieved flaw presence across the parameter grid, tolerances stated) | **open** | — |
 | Goldens green; lint and audit clean | **open** | — |
 | Cold-start test (§2, SD15) | **open** | — |
@@ -1535,6 +1601,13 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
+- **ADR-0011's crate, the first implementation — AWAITING Al's review** (Session 40; branch
+  `claude/s2-generate-crate`; `analysis/s2-generate-1/README.md`). For Al:
+  - the pull request itself;
+  - commit `21f8359`, the D10 gate change (seed witnesses, `Audit.lean`, the `check.sh` axiom
+    loop). Ruling 3 of 2026-10-27 gives it its own review;
+  - the packet's implementation readings 1–12, FINDING-005 among them: whether the next producer
+    revision embeds build-time input hashes, as `syndeom-pair` does.
 - **Held harvest admission review — RULED by Al on 2026-10-28** (rulings on PR 23, verbatim
   under *Standing rulings*; HANDOFF Session 37's addendum). The record is
   `analysis/s1-held-harvest-review/REVIEW.md` §2–§4, with its `receipt.json`. All five items on
@@ -1951,22 +2024,34 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2 ordering step 4: ADR-0011's crate `engine/generate/`, after the inventory-event pull request
-(branch `claude/s1-later-prefix-inventory`) merges.** Al's rulings on ADR-0013 (2026-10-28 on PR
-25) are applied on that branch.
+**S2 ordering step 4, continued: the next `s2_template` seeds — after the crate's pull request
+(branch `claude/s2-generate-crate`, Session 40) merges.** Al's rulings on that pull request are
+recorded first.
 
 Executable cold:
 1. Open per ADR-0008 D1. If the session was launched with the §6 prompt, the SD15 disclosure comes
    first, by digest where ADR-0005 *Amendments* 1–3 allow it.
-2. Confirm that the inventory-event pull request is merged, with a merge commit on fetched
-   `origin/main`. **If it is not, record that and stop.** Any later ruling on the pull request
-   is recorded verbatim (ADR-0013 *Amendments*, STATE, HANDOFF) before anything else.
-3. On a fresh branch from `main`, build the crate `engine/generate/` under PolyForm, per ADR-0011
-   D1–D12 and its *Amendments*. D6's S1-corpus independence binds every seed: no seed, grammar or
-   template derives from any item under `groundtruth/`, and the five prefix items are S1 corpus.
-4. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`, `s1_later_prefix`),
+2. Confirm that the crate's pull request is merged, with a merge commit on fetched `origin/main`.
+   **If it is not, record that and stop.** Any ruling on the pull request, on the gate change
+   `21f8359`, on readings 1–12 or on FINDING-005 (`analysis/s2-generate-1/README.md`) is recorded
+   verbatim, in STATE, HANDOFF and, where it amends the design, ADR-0011 *Amendments*, before
+   anything else.
+3. On a fresh branch from `main`:
+   - add seed records, with their FLAW material, for FLAWS.md 0.1.0 examples that check K
+     already confirms: `x_over_abs_x` (FLAW-0014 fatal), `rolle_abs` (FLAW-0005), `horses`
+     (FLAW-0006, a false statement with its counterexample) and `continuity_is_not_uniform`
+     (FLAW-0002);
+   - for each seed, add its Lean witness module, its controls and examples as goldens, and Lean
+     probes compiled before the record is written, one Lean process at a time;
+   - D6's S1-corpus independence binds every seed.
+4. A new seed changes what `s2_template` emits for a config that 0.1.0 refused, so decide the
+   version first, by ADR-0011 D1: bump `s2_template` to 0.2.0. Keep the 0.1.0 goldens
+   regenerable: their manifests name version 0.1.0, so the golden test must select the producer
+   version a case was made with, or the 0.1.0 cases stay pinned some other way. Never rewrite a
+   golden.
+5. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`, `s1_later_prefix`),
    their packets, the Gate S1 table or the frozen S1.4 packet.
-5. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,
+6. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,
    with a merge commit, never squash.
 
 Bounds: the frozen packets, the registers, the constitution, the licence, the tag, the accepted

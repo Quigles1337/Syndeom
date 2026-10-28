@@ -8199,3 +8199,114 @@ transcribed verbatim from the message as rendered to the executor:
 ~~~text
 Continue in this session. Your disclosure, orientation and gate stand; redo nothing. Record the interruption in this session's HANDOFF block in one sentence — the step it happened at, and that nothing was written — and say in one sentence which step the stopped response was carrying out, without reproducing it. Then proceed: PLAN the one thing STATE names, ADR-0011's crate, and EXECUTE it on a fresh branch from main. If a classifier stops you again at any point, do not reword or retry: stop at the nearest point where the committed tree passes the gate, complete the header, record both interruptions, push the branch, open the PR, and report. Otherwise run the loop to a clean stop per §4.6 and stop for my review.
 ~~~
+
+### Entry 4 — ADR-0011's crate, built (S2 ordering step 4)
+
+All on branch `claude/s2-generate-crate`, from `main` `f9f9730`:
+- **Commit 1** `9b4b16f688bfc280a0e7ce0cda2da80558435f5b`: the crate `engine/generate/`, with
+  Cargo.toml and Cargo.lock gaining the workspace member only, and this block's Entries 1–3.
+- **Commit 2** `21f83594a22d514bb9cdb1ec0261f659e7d1f4b9`: the seed witnesses, `Audit.lean`, and
+  the gate's axiom loop. This is the D10 gate change that ruling 3 gives its own review.
+- **Commit 3** `f8cc5df249c3026d2685c17483ccba6301c5cf3a`: the 12 goldens, produced by
+  `generate --dry-run` at commit 2, with the Lean harness run one process at a time
+  (2026-10-28T17:37:02Z–17:38:56Z).
+- **Commit 4** `cd5633b3f1a7388565526e5d93f0afffabcc17c4`: the security review's four fixes; no
+  emitted byte changed.
+- **Commit 5** (this one): the packet `analysis/s2-generate-1/`, STATE, and this close.
+
+The evidence, the security review and readings 1–12 are in the packet's README. Every receipt is
+under `C:\Users\LEET\Codex\Temp\syndeom-generate-20261028T1706Z\`.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN. S2.1–S2.4 are in progress: this is the first
+implementation session (ADR-0011 D11). Gate S1 is CLOSED (Session 29).
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipt `orient-receipt-1.json`, SHA-256
+`6dd8577d…0f37`, under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1706Z\`):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-10-28T17:06:23Z–17:06:24Z, exit 0.
+- **Snapshot.** `main` at `f9f97301…`, tree `84a01001…`, **synchronized**: ahead 0, behind 0. The
+  only change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree.
+- **Step 5.** The constitution (`110f5360…`) and ADR-0005 (`b08e543a…`), as read in step 0, equal
+  the snapshot's blobs.
+- **Step 6.** Read in this order:
+  - STATE (the Updated bullet, the freeze register, memory policy, standing rulings, the gate
+    tables, blockers, standing escalations, NEXT);
+  - HANDOFF Session 39 in full;
+  - CLAIMS: 0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED (existence only);
+  - FLAWS `0.1.0` (14 entries);
+  - ADR-0008, ADR-0011, ADR-0001's D4 registry and example, and `syndeom-manifest`'s API.
+
+  They agree with one another and with the tree.
+- **ORIENT gate GREEN**, 17:07:43Z–17:08:31Z (STATE, *Current build verification*).
+- **NEXT survived ORIENT.** PR 25 was merged by Al with the merge commit `f9f9730`. Its only
+  comment is the executor's own, so there was no later ruling to record.
+ADVANCED:
+- **ADR-0011's crate** (S2.1–S2.4 in progress): the plan and both renderers (Golden A and Golden B
+  reproduced), `syndeom-rng/1`, `s2_template` 0.1.0 with three seeds, the injector, ground truth,
+  commanded, achieved and fidelity, the Lean harness, and the CLI.
+- **12 goldens**, each fidelity PASS, with check K confirmed by Lean for the three flawed formal
+  cases.
+- **The gate's axiom audit** now covers the seed witnesses.
+- **`cargo audit`** is clean, and the security review is recorded with four findings fixed.
+BELIEF DELTAS:
+- **Lean prints the compiled file's path exactly as it was passed:** the Windows verbatim form
+  `//?/C:/…`, because the CLI canonicalizes paths. Check K can therefore match the file exactly,
+  and FINDING-004 relies on that.
+- **`Mathlib.Data.Real.Basic` is deprecated at the pinned Mathlib** (since 2026-08-27; replace with
+  `Mathlib.Basic.Real.Basic`). It warns rather than fails. A seed that used it would carry the
+  warning into every build output.
+- **Compile cost is the import set's.** A seed with narrow imports compiles in about 8–17 s.
+  `import Mathlib` (the `nat_le_sq` bytes that Golden B fixes) takes about 50 s. Full-Mathlib
+  seeds will dominate the sweep's cost.
+- **ADR-0012's narrowing did its job.** Editing `engine/Cargo.toml`, `engine/Cargo.lock`,
+  `lean/Audit.lean` and `scripts/check.sh` left every existing test green, because those files
+  are outside the S1.3 reproduction's input set.
+CONFUSIONS:
+- **The goldens could not be produced while their own files sat in the working tree.**
+  Engine-commit verification walks `engine/generate/` and refuses any file the commit lacks. The
+  order is therefore: commit the producer, generate into external receipt directories, then add
+  the goldens. Cost: none, because the order was planned. The goldens README records it.
+- **`--dry-run` first wrote its outputs nowhere.** It now writes them into the receipt
+  directory, so the goldens needed no `corpora/` artifact before the sweep. Cost: one edit.
+- **The classifier interruption** (Entry 3). Cost: one round trip, and nothing was written.
+HONESTY CHECK:
+- No register status changed. The packet's measurements are implementation evidence, not CLAIMS.
+- The RNG vectors are checked against D4's text, not against the published reference code. The
+  attribution is unverified, and the test and the packet say so.
+- The engine produced the golden manifests; they were not written by hand.
+  - The formal proof bytes were written by hand first and matched exactly.
+  - The informal bytes are seed material, rendered. They were checked by reading. Only
+    `nat_le_sq` has an independent byte check, against Golden A.
+- FINDING-005 stays open: `engine_commit` identifies the checked-out sources, not the running
+  binary.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened. The seeds come from FLAWS.md 0.1.0
+and ADR-0001 D8 only, and no `groundtruth/` item was read for design (D6, ruling 1). No real
+AI-generated proof was used. Verdict: no leakage.
+DETERMINISM CHECK:
+- Every golden regenerates byte for byte from its config, seed and recorded observation.
+- Two calls with the same input are identical.
+- The RNG vectors are pinned.
+- No wall-clock value enters an artifact; receipts carry durations only.
+- Nothing entered CLAIMS, so there is nothing to quarantine.
+MANIFEST CHECK:
+- Every golden manifest passed `Manifest::check` with its bytes before it was written: `origin`
+  synthetic, `derivation` by-construction.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing. The witnesses are `lean-kernel` references audited by the
+  gate, not CLAIMS.
+DRIFT CHECK:
+- No verdict on any paper (SD3), and no understanding claims (SD17).
+- No detector was chosen or tuned, and there was no referee contact (SD13).
+- No S3 work, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, with Al's rulings recorded first,
+add the next `s2_template` seeds: the FLAWS.md examples that check K confirms.
+ESCALATIONS:
+- **This pull request:** review and merge, with a merge commit.
+- **Commit `21f8359`:** the D10 gate change, under its own review (ruling 3 of 2026-10-27).
+- **Readings 1–12** in `analysis/s2-generate-1/README.md`, FINDING-005 among them.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The first implementation session's scope (ADR-0011 D11) is built,
+and the pull request is open for Al's review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
+**Memory writes:** none. A write would change a memory digest and make the next disclosure owe
+verbatim reproduction.

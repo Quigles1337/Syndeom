@@ -1,0 +1,159 @@
+[
+ {
+  "case": "n_sq_mod_four/control-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ],
+   "exit_code": 0,
+   "first_error_line": null
+  },
+  "hand_authored_probe": "nsq_faithful",
+  "equals_probe": true,
+  "proof_sha256": "0a487d605940ade8db9a6a589be23d9e86f45419a75e60f04f443c2b6f89b705"
+ },
+ {
+  "case": "n_sq_mod_four/control-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null
+ },
+ {
+  "case": "n_sq_mod_four/flaw-0014-gap-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 6
+  },
+  "hand_authored_probe": "nsq_gap",
+  "equals_probe": true,
+  "proof_sha256": "c5837f4032da4b82b6d95de42dcd0d184409172db6aa59fe40880229046fb7d9"
+ },
+ {
+  "case": "n_sq_mod_four/flaw-0014-gap-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null
+ },
+ {
+  "case": "nat_le_sq/control-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": [
+    "propext"
+   ],
+   "exit_code": 0,
+   "first_error_line": null
+  }
+ },
+ {
+  "case": "nat_le_sq/control-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null
+ },
+ {
+  "case": "sq_plus_one_ge_two_x/control-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ],
+   "exit_code": 0,
+   "first_error_line": null
+  },
+  "hand_authored_probe": "sq_faithful",
+  "equals_probe": true,
+  "proof_sha256": "ed3d96cdb477c62db35c30b7232c06c57fe07eb46c8e3049972af73260c9c661"
+ },
+ {
+  "case": "sq_plus_one_ge_two_x/control-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null
+ },
+ {
+  "case": "sq_plus_one_ge_two_x/flaw-0001-local-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 6
+  },
+  "hand_authored_probe": "sq_local",
+  "equals_probe": true,
+  "proof_sha256": "486de63c006c8016f9f28c1f4ef0376ff828cbd9f291a8a382c722d7837704cf"
+ },
+ {
+  "case": "sq_plus_one_ge_two_x/flaw-0001-local-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null
+ },
+ {
+  "case": "sq_plus_one_ge_two_x/flaw-0001-propagated-formal",
+  "files": [
+   "Proof.lean",
+   "manifest.json"
+  ],
+  "verdict": "PASS",
+  "observation": {
+   "axioms": null,
+   "exit_code": 1,
+   "first_error_line": 6
+  },
+  "hand_authored_probe": "sq_propagated",
+  "equals_probe": true,
+  "proof_sha256": "1bd275203ca1f220f3eeacdf42d9a582058bd966251bf85bec6a909bb03f0f4e"
+ },
+ {
+  "case": "sq_plus_one_ge_two_x/flaw-0001-propagated-informal",
+  "files": [
+   "manifest.json",
+   "proof.md"
+  ],
+  "verdict": "PASS",
+  "observation": null
+ }
+]
