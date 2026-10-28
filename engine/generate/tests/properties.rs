@@ -322,9 +322,15 @@ fn d3_unsupported_specs_are_refused() {
 
 #[test]
 fn d8_harness_parsers() {
-    let out = "C:/x/Proof.lean:1:0: warning: deprecated\nTry this: ring_nf\nC:/x/Proof.lean:6:47: error: unsolved goals\nC:/x/Proof.lean:9:2: error: Type mismatch\n";
-    assert_eq!(first_error_line(out), Some(6));
-    assert_eq!(first_error_line("no errors here\n"), None);
+    let file = "//?/C:/x/Proof.lean";
+    let out = "//?/C:/x/Proof.lean:1:0: warning: deprecated\nTry this: ring_nf\n//?/C:/x/Proof.lean:6:47: error: unsolved goals\n//?/C:/x/Proof.lean:9:2: error: Type mismatch\n";
+    assert_eq!(first_error_line(out, file), Some(6));
+    assert_eq!(first_error_line("no errors here\n", file), None);
+    // an error reported against another file is not this file's first error
+    let other =
+        "//?/C:/y/Other.lean:2:0: error: unknown\n//?/C:/x/Proof.lean:9:2: error: Type mismatch\n";
+    assert_eq!(first_error_line(other, file), Some(9));
+    assert_eq!(first_error_line(other, "/tmp/Proof.lean"), None);
     let ax = "'f' depends on axioms: [propext, Classical.choice, Quot.sound]\n";
     assert_eq!(
         parse_axioms(ax, "f"),

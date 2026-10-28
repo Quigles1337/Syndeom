@@ -173,22 +173,30 @@ fn read_toolchain(root: &Path) -> Result<Toolchain, Fail> {
     Ok(Toolchain { lean, mathlib })
 }
 
-/// A new receipt directory outside the repository; never reused (ADR-0011 D9).
+/// A new receipt directory outside the repository; never reused (ADR-0011 D9). Its parent must
+/// exist; the location is checked before anything is created.
 fn new_receipt_dir(root: &Path, dir: &str) -> Result<PathBuf, Fail> {
     let path = PathBuf::from(dir);
-    if path.exists() {
-        return Err(Fail::Usage(format!(
-            "receipt directory {dir} exists; receipts are never overwritten"
-        )));
-    }
-    fs::create_dir_all(&path)?;
-    let path = fs::canonicalize(&path)?;
-    if path.starts_with(root) {
+    let name = path
+        .file_name()
+        .ok_or(Fail::Usage("the receipt directory needs a name".into()))?;
+    let parent = match path.parent() {
+        Some(p) if !p.as_os_str().is_empty() => p.to_path_buf(),
+        _ => PathBuf::from("."),
+    };
+    let target = fs::canonicalize(&parent)?.join(name);
+    if target.starts_with(root) {
         return Err(Fail::Usage(
             "the receipt directory must lie outside the repository".into(),
         ));
     }
-    Ok(path)
+    match fs::create_dir(&target) {
+        Ok(()) => Ok(target),
+        Err(e) if e.kind() == std::io::ErrorKind::AlreadyExists => Err(Fail::Usage(format!(
+            "receipt directory {dir} exists; receipts are never overwritten"
+        ))),
+        Err(e) => Err(e.into()),
+    }
 }
 
 fn write_new(path: &Path, bytes: &[u8]) -> Result<(), Fail> {
@@ -432,6 +440,27 @@ fn verify(args: &[String]) -> Result<(), Fail> {
     if content_hash(&bytes) != formal.content_hash {
         return Err(Fail::Refused(
             "Proof.lean does not match the manifest's content_hash".into(),
+        ));
+    }
+    // Lean elaboration can run code, so only bytes this producer itself emits for the manifest's
+    // (config, seed) are ever compiled.
+    if (
+        manifest.generator.id.as_str(),
+        manifest.generator.version.as_str(),
+    ) != (GENERATOR_ID, GENERATOR_VERSION)
+    {
+        return Err(Fail::Refused(format!(
+            "{} {} is not this producer",
+            manifest.generator.id, manifest.generator.version
+        )));
+    }
+    let seed = manifest.seed.ok_or(Fail::Refused("no seed".into()))?;
+    let prepared = template::prepare(&manifest.config, seed).map_err(Fail::Refused)?;
+    if prepared.artifact_id() != manifest.artifact_id
+        || prepared.formal.as_ref().map(|f| f.bytes.as_slice()) != Some(bytes.as_slice())
+    {
+        return Err(Fail::Refused(
+            "Proof.lean is not what this producer emits for the manifest's config and seed".into(),
         ));
     }
     let main = formal

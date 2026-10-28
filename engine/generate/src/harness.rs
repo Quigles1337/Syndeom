@@ -42,14 +42,16 @@ pub fn audit_bytes(artifact: &[u8], main_declaration: &str) -> Vec<u8> {
     out
 }
 
-/// The line of the first `<file>.lean:<line>:<col>: error` message, in output order.
-pub fn first_error_line(output: &str) -> Option<u64> {
+/// The line of the first `<file>:<line>:<col>: error` message about `file` itself (the path
+/// exactly as it was passed to Lean, which prints it back unchanged), in output order. An error
+/// reported against any other file is not this file's first error.
+pub fn first_error_line(output: &str, file: &str) -> Option<u64> {
     output.lines().find_map(|l| {
         let at = l.find(": error")?;
         let mut parts = l[..at].rsplitn(3, ':');
         let _col: u64 = parts.next()?.parse().ok()?;
         let line: u64 = parts.next()?.parse().ok()?;
-        parts.next()?.ends_with(".lean").then_some(line)
+        (parts.next()? == file).then_some(line)
     })
 }
 
@@ -107,7 +109,10 @@ pub fn observe(build: &LeanRun, audit: Option<&LeanRun>, main_declaration: &str)
     });
     Observation {
         exit_code: build.exit_code,
-        first_error_line: first_error_line(&build_out),
+        first_error_line: build
+            .argv
+            .last()
+            .and_then(|file| first_error_line(&build_out, file)),
         axioms,
     }
 }

@@ -333,6 +333,9 @@ pub struct Injection {
 #[derive(Debug, Clone, PartialEq)]
 pub struct Prepared {
     pub config: Value,
+    /// `config_hash` (ADR-0001 D5), computed once; a config that cannot be canonicalized is
+    /// refused by `prepare`.
+    pub config_hash: String,
     pub seed: u64,
     pub target: Target,
     pub plan: Plan,
@@ -343,8 +346,12 @@ pub struct Prepared {
 
 impl Prepared {
     pub fn artifact_id(&self) -> String {
-        let h = config_hash(&self.config).expect("a parsed config canonicalizes");
-        artifact_id(GENERATOR_ID, GENERATOR_VERSION, &h, Some(self.seed))
+        artifact_id(
+            GENERATOR_ID,
+            GENERATOR_VERSION,
+            &self.config_hash,
+            Some(self.seed),
+        )
     }
 }
 
@@ -371,6 +378,8 @@ pub fn faithful_plan(seed: &Seed, style: &Style) -> Plan {
 /// `plan` → `inject` → `render` for one (config, seed).
 pub fn prepare(config: &Value, seed_value: u64) -> Result<Prepared, String> {
     let cfg = parse_config(config)?;
+    let hash =
+        config_hash(config).map_err(|e| format!("the config cannot be canonicalized: {e}"))?;
     let seed = seeds()
         .into_iter()
         .find(|s| s.id == cfg.theorem)
@@ -411,6 +420,7 @@ pub fn prepare(config: &Value, seed_value: u64) -> Result<Prepared, String> {
         .transpose()?;
     Ok(Prepared {
         config: config.clone(),
+        config_hash: hash,
         seed: seed_value,
         target: cfg.target,
         plan,
@@ -797,10 +807,10 @@ pub fn assemble(
             }),
     };
     let fid = fidelity(&commanded, &achieved);
-    let hash = config_hash(&p.config).map_err(|e| e.to_string())?;
+    let hash = p.config_hash.clone();
     let manifest = Manifest {
         manifest_schema: MANIFEST_SCHEMA.into(),
-        artifact_id: artifact_id(GENERATOR_ID, GENERATOR_VERSION, &hash, Some(p.seed)),
+        artifact_id: p.artifact_id(),
         origin: Origin::Synthetic,
         generator: Generator {
             id: GENERATOR_ID.into(),
