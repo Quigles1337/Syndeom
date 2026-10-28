@@ -1,0 +1,61 @@
+{
+  "config": {
+    "theorem": "n_lt_two_pow",
+    "style": "helper_lemma",
+    "target": "pair",
+    "flaws": [
+      {
+        "class": "FLAW-0009",
+        "sub_variant": null,
+        "severity": "gap",
+        "site": "auto",
+        "dials": {
+          "mode": "axiom",
+          "truth": true
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "observation": {
+    "axioms": [
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+      "syndeom_s2_template_n_lt_two_pow": [
+        "HAdd.hAdd",
+        "HPow.hPow",
+        "LE.le",
+        "Nat",
+        "OfNat.ofNat",
+        "instAddNat",
+        "instHAdd",
+        "instHPow",
+        "instLENat",
+        "instNatPowNat",
+        "instOfNatNat",
+        "instPowNat",
+        "syndeom_s2_template_n_lt_two_pow_lemma_1"
+      ],
+      "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+        "HPow.hPow",
+        "LT.lt",
+        "Nat",
+        "OfNat.ofNat",
+        "instHPow",
+        "instLTNat",
+        "instNatPowNat",
+        "instOfNatNat",
+        "instPowNat"
+      ]
+    }
+  }
+}

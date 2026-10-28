@@ -1,0 +1,17 @@
+=== LAKE start 2026-10-28T20:22:45Z
+✔ [8932/8934] Built Syndeom.Seeds.NLtTwoPow (2.0s)
+✔ [8933/8934] Built Syndeom (14s)
+Build completed successfully (8934 jobs).
+=== lake build rc=0
+=== AUDIT start 2026-10-28T20:23:09Z
+'syndeom_golden_nat_le_sq' depends on axioms: [propext]
+'syndeom_seed_nat_le_sq' depends on axioms: [propext]
+'syndeom_seed_n_sq_mod_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_sq_plus_one_ge_two_x' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_continuity_is_not_uniform' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_x_over_abs_x_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_rolle_abs_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_horses_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+'syndeom_seed_n_lt_two_pow' depends on axioms: [propext, Quot.sound]
+'syndeom_seed_n_lt_two_pow_lemma_false' does not depend on any axioms
+=== audit rc=0 end 2026-10-28T20:23:27Z

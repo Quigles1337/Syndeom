@@ -1,0 +1,28 @@
+n_lt_two_pow/control-informal exit=2 start=2026-10-28T20:31:46.630Z end=2026-10-28T20:31:47.089Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/control-formal exit=2 start=2026-10-28T20:31:47.090Z end=2026-10-28T20:31:47.541Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/flaw-0009-gap-formal exit=2 start=2026-10-28T20:31:47.541Z end=2026-10-28T20:31:47.997Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/flaw-0009-gap-pair exit=2 start=2026-10-28T20:31:47.998Z end=2026-10-28T20:31:48.443Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/flaw-0009-fatal-formal exit=2 start=2026-10-28T20:31:48.444Z end=2026-10-28T20:31:48.883Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/flaw-0009-fatal-pair exit=2 start=2026-10-28T20:31:48.884Z end=2026-10-28T20:31:49.322Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/flaw-0007-unused-informal exit=2 start=2026-10-28T20:31:49.323Z end=2026-10-28T20:31:49.772Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/flaw-0007-unused-formal exit=2 start=2026-10-28T20:31:49.773Z end=2026-10-28T20:31:50.219Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+n_lt_two_pow/flaw-0007-unused-pair exit=2 start=2026-10-28T20:31:50.219Z end=2026-10-28T20:31:50.660Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+=== GOLDENS end

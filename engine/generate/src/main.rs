@@ -387,6 +387,13 @@ fn verify(args: &[String]) -> Result<(), Fail> {
         .main_declaration
         .clone()
         .ok_or(Fail::Refused("no main declaration".into()))?;
+    // The audit tail interpolates this name into Lean source that is then compiled, so only the
+    // producer's own declaration is ever named (FINDING-011, analysis/s2-generate-3).
+    if main != prepared.plan.main_declaration {
+        return Err(Fail::Refused(
+            "the manifest's main_declaration is not the declaration this producer emits".into(),
+        ));
+    }
     let dir = new_receipt_dir(&root, &a["--receipt-dir"])?;
     let (obs, runs) = harness_on(&root, &dir, &bytes, &main)?;
     let recorded_build = manifest

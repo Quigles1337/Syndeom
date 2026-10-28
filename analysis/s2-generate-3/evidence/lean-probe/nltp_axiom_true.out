@@ -1,0 +1,3 @@
+'syndeom_s2_template_n_lt_two_pow' depends on axioms: [syndeom_s2_template_n_lt_two_pow_lemma_1]
+used-constants syndeom_s2_template_n_lt_two_pow_lemma_1: [instPowNat, instOfNatNat, instNatPowNat, HPow.hPow, Nat, LT.lt, instHPow, instLTNat, OfNat.ofNat]
+used-constants syndeom_s2_template_n_lt_two_pow: [instPowNat, instOfNatNat, LE.le, instLENat, syndeom_s2_template_n_lt_two_pow_lemma_1, instNatPowNat, instHAdd, HPow.hPow, HAdd.hAdd, Nat, instAddNat, instHPow, OfNat.ofNat]

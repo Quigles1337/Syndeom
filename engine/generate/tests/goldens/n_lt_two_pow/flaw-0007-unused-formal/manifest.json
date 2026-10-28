@@ -1,0 +1,176 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "value": true
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "pass"
+    },
+    "n_flaws_0007": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 72
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "5d4dcfb25ca34f300fe59e21ca6c6c25532e60bdd1cb2281bde45f25b9ec7453",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_n_lt_two_pow",
+        "n_bytes": 469,
+        "n_declarations": 3,
+        "n_lines": 15,
+        "n_tokens": 72,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_template-v0.3.0-a8e03589f863-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": true
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "pass"
+    },
+    "n_flaws_0007": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0007",
+        "dials": {
+          "count": 1,
+          "length_steps": 1
+        },
+        "severity": "cosmetic",
+        "site": "auto",
+        "sub_variant": "unused"
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "helper_lemma",
+    "target": "formal",
+    "theorem": "n_lt_two_pow"
+  },
+  "config_hash": "a8e03589f86327bc6fbbb95d05dbd44cc7f5fa65b46d044a88c2892c9351d60e",
+  "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_axioms_standard": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0007": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.3.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0007",
+        "dials": {
+          "count": 1,
+          "declaration": "syndeom_s2_template_n_lt_two_pow_lemma_2",
+          "inserted": [
+            "theorem syndeom_s2_template_n_lt_two_pow_lemma_2 : ∀ n : ℕ, n ≤ n ^ 2 := by",
+            "  intro n",
+            "  rw [Nat.pow_two]",
+            "  exact Nat.le_mul_self n"
+          ],
+          "length_steps": 1,
+          "original_fragments": {},
+          "replaced": null,
+          "site": 2
+        },
+        "instance": 1,
+        "lean_catchable": "YES-TOOLING",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_n_lt_two_pow_lemma_2",
+          "line": 9
+        },
+        "severity": "cosmetic",
+        "sub_variant": "unused"
+      }
+    ],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/NLtTwoPow.lean:syndeom_seed_n_lt_two_pow",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

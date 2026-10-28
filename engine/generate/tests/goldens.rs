@@ -23,6 +23,10 @@ const GOLDENS_0_1_0: u64 = 12;
 /// seed's FLAWS.md example (informal, formal, pair), regenerated at `c899b073…` after Al's
 /// rulings on PR 27 so that they share one engine commit.
 const GOLDENS_0_2_0: u64 = 14;
+/// The 0.3.0 goldens (Session 42): the `n_lt_two_pow` control (informal, formal), FLAW-0009
+/// `axiom` with `truth` true and false (formal, pair each) and FLAW-0007 `unused` (informal,
+/// formal, pair), produced at the implementation commit `5a313ddf…` from two byte-identical runs.
+const GOLDENS_0_3_0: u64 = 9;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -93,5 +97,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         by_version.get("0.2.0").copied().unwrap_or(0),
         GOLDENS_0_2_0,
         "the 0.2.0 goldens"
+    );
+    assert_eq!(
+        by_version.get("0.3.0").copied().unwrap_or(0),
+        GOLDENS_0_3_0,
+        "the 0.3.0 goldens"
     );
 }

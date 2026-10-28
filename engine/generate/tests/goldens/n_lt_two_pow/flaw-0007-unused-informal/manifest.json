@@ -1,0 +1,169 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0007": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 2
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 3
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 109
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "d721f2b8fecad1873ea1b3eda66390ab133194bd6ec006b61db41e507c52f0a6",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 594,
+        "n_lemmas": 2,
+        "n_steps": 3,
+        "n_tokens": 109,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.3.0-057c6b09e6ee-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0007": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 3
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0007",
+        "dials": {
+          "count": 1,
+          "length_steps": 1
+        },
+        "severity": "cosmetic",
+        "site": "auto",
+        "sub_variant": "unused"
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "helper_lemma",
+    "target": "informal",
+    "theorem": "n_lt_two_pow"
+  },
+  "config_hash": "057c6b09e6ee93b21d831939886da0224b0ac84793c103471120959fa98fdee3",
+  "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0007": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.3.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0007",
+        "dials": {
+          "count": 1,
+          "inserted": "Lemma 2. For all $n \\in \\mathbb{N}$, $n^2 \\ge n$. Proof of the lemma: $n^2 = n \\cdot n$, and $n \\cdot n \\ge n \\cdot 1 = n$ when $n \\ge 1$, while $0^2 = 0$.",
+          "length_steps": 1,
+          "original_steps": {},
+          "replaced": null,
+          "site": 2
+        },
+        "instance": 1,
+        "lean_catchable": "YES-TOOLING",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            155
+          ],
+          "step": 2
+        },
+        "severity": "cosmetic",
+        "sub_variant": "unused"
+      }
+    ],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/NLtTwoPow.lean:syndeom_seed_n_lt_two_pow",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}
