@@ -8070,3 +8070,38 @@ How each ruling is applied (commit 3 unless stated):
   retained report is stale until then, and restored in commit 4 from a saved copy, as in
   commits 1–2.
 - **D** → commit 5, the freeze-register row with commit 4's full id as its freeze point.
+
+The rulings, applied:
+- **Commit 3** `97e0d54d1a68d66861b26f6e02af29d346e417ab` (tree `3f05bbc0…466f`): the tool, the
+  tests, ADR-0013, the packet README, STATE, and the part of this addendum above. Eight tests
+  passed with the byte-identity test held out.
+- **Regeneration**, on the clean checkout at `97e0d54`, 2026-10-28T16:48:47Z–16:48:50Z, two runs:
+  `PASS: 40 archived representations / 37 effective logical items, measured; prefix through
+  1404.4599`. The four outputs are byte-identical across the runs (`inventory.json`
+  `fa407409…f66c`, `coverage.json` `a0c4d864…17f5`, `report.md` `129b0fdc…d35c`,
+  `provenance.json` `df83d3e2…0a9c`). Against the first run, every count is equal. Only the
+  intended fields differ: `accepted_inventory`'s wording, and `amendment_map`,
+  `prefix_through_candidate`, `scope_source`, `label_basis` and `gate_s1_table` in coverage, with
+  the report header and provenance following. The run directories are `regen-1/` and `regen-2/`
+  under the external root.
+- **Commit 4** `bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d` (tree `18368337…9150`): the regenerated
+  packet, the byte-identity test restored from its saved copy (9 of 9 pass), and ADR-0013's
+  measurements.
+- **Commit 5** (this one): the frozen row `analysis/s1-later-prefix-1/` at `bcdcdfa…` (Al's ruling
+  D), the register preamble naming that exception, STATE, and this close. `check_freeze.py`: 65
+  rows (60 frozen, 5 append-only), ALL PASS; the new row has 7 files, 7 byte-identical and 0
+  added. The packet is not touched after commit 4.
+BELIEF DELTA: once the inputs are pinned by name and hash, the counts are redundant as conditions.
+The literal guard could only disagree with the pinned inputs, so it was a second source of truth.
+The amended tool has none, and the gate test derives every expectation from the same inputs.
+CONFUSION: none new. The held-out-test step was needed again, because the outputs changed and
+the retained report could only be regenerated from a committed tree.
+CHECKS for this addendum: no leakage (`contact/` not opened; no detector, threshold or generator
+touched); no manifest, label or register status changed; every count is unchanged from the first
+run; no verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that the freeze point
+  `bcdcdfa` survives in `main`'s history (Al's ruling D).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

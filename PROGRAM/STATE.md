@@ -50,14 +50,18 @@
     population, and counts are measured outputs, not conditions in the code. D was ruled: a final
     commit on the branch adds the packet's frozen row. They were applied on the same branch in
     three further commits:
-    - commit 3 removes the literal counts from the tool and the tests, takes the scope from the
-      harvest log's pinned prefix, names the amendment map in `coverage.json`, rewrites D7 and D8,
-      and records the rulings;
-    - commit 4 holds the regenerated packet;
-    - commit 5 adds the frozen row, with commit 4 as its freeze point.
+    - commit 3 (`97e0d54`) removes the literal counts from the tool and the tests, takes the scope
+      from the harvest log's pinned prefix, names the amendment map in `coverage.json`, rewrites D7
+      and D8, and records the rulings;
+    - commit 4 (`bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d`) holds the packet regenerated at
+      `97e0d54`. Two runs were byte-identical, and every count is unchanged;
+    - commit 5 adds the frozen row `analysis/s1-later-prefix-1/` with commit 4 as its freeze point.
+      The register then holds 65 rows (60 frozen, 5 append-only), ALL PASS, with the new row at
+      7 files, 7 byte-identical and 0 added.
   - **Unchanged:** registers' statuses, manifests, labels, frozen packets, the retained reports,
-    the Gate S1 table, the freeze register, the constitution, the licence and the tag. **NEXT** is
-    S2 ordering step 4, ADR-0011's crate, after this pull request merges.
+    the Gate S1 table, the constitution, the licence and the tag. The freeze register changes only
+    by the one row of Al's ruling D. **NEXT** is S2 ordering step 4, ADR-0011's crate, after this
+    pull request merges.
 - **Previous update (Session 38):** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 38:
   - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim, followed by an
     owner note;
@@ -1170,7 +1174,10 @@ last fetched; ADR-0008) as exact prefixes. A freeze point is a tag or a full com
 row's is the `gate-s1-registration` tag (`2018d5e79ea23fa200e560d628bec5e91edf0956`) — the S1
 packets' by Al's direction, the append-only rows' by ruling 2, the rest by ruling 3 — except
 the five rows of the first later prefix (Session 38), whose freeze point is the commit that adds
-their directories, `d2569d61588368a60bbf7558fb9f0703f96e3a5b` (Al's ruling Q-H7 of 2026-10-28 on PR 23). Every row
+their directories, `d2569d61588368a60bbf7558fb9f0703f96e3a5b` (Al's ruling Q-H7 of 2026-10-28 on PR 23), and the
+row of that prefix's inventory packet (Session 39), whose freeze point is the commit that holds the
+regenerated packet, `bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d` (Al's ruling D of 2026-10-28 on PR
+25). Every row
 cites the record it derives from. A later prefix adds new item directories under `groundtruth/`
 and new stored copies under `sources/` beside the rows below, which name one item directory or
 one stored copy each, never the parent directory (ruling 3); a change to or removal of a frozen
@@ -1188,6 +1195,7 @@ run is the evidence. The table's rows must have exactly this column form, or the
 | `analysis/s1-first-parent-integration/` | frozen | `gate-s1-registration` | the integration packet and "the retained report" (Updated bullet, Session 35; `preservation-inputs.json` among the records left byte-identical, ADR-0009 D4) |
 | `analysis/s1-post-merge-readiness/` | frozen | `gate-s1-registration` | "readiness packet … unchanged" (Previous update, Session 22); Historical build verification (PR 8 readiness) |
 | `analysis/s1-orientation-repair/` | frozen | `gate-s1-registration` | the orientation-repair event packet: its README among the records left byte-identical (ADR-0009 D4); Previous update (Session 23) |
+| `analysis/s1-later-prefix-1/` | frozen | `bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d` | the first later prefix's inventory packet (ADR-0013; 7 files: README, the pins, the overlay and the four outputs regenerated after Al's rulings); the freeze point is the commit that holds the regenerated packet; Al's ruling D of 2026-10-28 on PR 25 |
 | `PROGRAM/HANDOFF.md` | append-only | `gate-s1-registration` | §3.6 append-only session log; "its HANDOFF append … is never erased or rewritten" (ADR-0008 bullet); "HANDOFF entries (append-only)" (examination step 0 bullet); freeze point by ruling 2 |
 | `PROGRAM/SOURCES.md` | append-only | `gate-s1-registration` | "`PROGRAM/SOURCES.md` append-only (ADR-0010)" (S1.3 reproduction tool bullet); "SOURCES historical prefix unchanged" (Gate S1 table, licences row); freeze point by ruling 2 |
 | `groundtruth/s1_derive-v0.1.0-c08f9e3ec092/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
