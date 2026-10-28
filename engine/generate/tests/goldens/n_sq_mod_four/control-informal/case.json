@@ -1,0 +1,13 @@
+{
+  "config": {
+    "theorem": "n_sq_mod_four",
+    "style": "parity",
+    "target": "informal",
+    "flaws": [],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "21f83594a22d514bb9cdb1ec0261f659e7d1f4b9",
+  "toolchain": null,
+  "observation": null
+}

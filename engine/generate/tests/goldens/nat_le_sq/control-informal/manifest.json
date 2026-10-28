@@ -1,0 +1,122 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 2
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 44
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "9cecc09f48a5a90a4fa2305135555151d8eecb21c7946e991ce602febad02ac0",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 309,
+        "n_lemmas": 0,
+        "n_steps": 2,
+        "n_tokens": 44,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.1.0-e938458d924b-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [],
+    "padding_ratio": 0,
+    "style": "two_cases",
+    "target": "informal",
+    "theorem": "nat_le_sq"
+  },
+  "config_hash": "e938458d924bdd4e917b9939acf8de226895129a703e30e8dca8eb82fc714e5f",
+  "engine_commit": "21f83594a22d514bb9cdb1ec0261f659e7d1f4b9",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/NatLeSq.lean:syndeom_seed_nat_le_sq",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}
