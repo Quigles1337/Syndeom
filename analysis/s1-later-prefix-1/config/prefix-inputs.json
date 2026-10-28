@@ -1,0 +1,58 @@
+{
+  "event_id": "first-later-prefix-inventory-2026-10-28",
+  "freeze_point": "d2569d61588368a60bbf7558fb9f0703f96e3a5b",
+  "freeze_point_tree": "1e2fafad7e21fc69d0ebbc315a96b0e065dd9bd7",
+  "item_directories": [
+    "s1_ingest-v0.1.0-34988f7c8306",
+    "s1_ingest-v0.1.0-915251f36fc5",
+    "s1_ingest-v0.1.0-bca249b3fa72",
+    "s1_ingest-v0.1.0-c6179869edf7",
+    "s1_ingest-v0.1.0-11ffe4f87954"
+  ],
+  "files": {
+    "groundtruth/s1_ingest-v0.1.0-11ffe4f87954/RECORD.md": {
+      "sha256": "df8f8c489ffda4f7e15e49dbfb0b27606af698bdbd441370b29b9b340336cac1",
+      "n_bytes": 10188
+    },
+    "groundtruth/s1_ingest-v0.1.0-11ffe4f87954/manifest.json": {
+      "sha256": "fb270361eff12c5c87ea68650f4cb2ad571daab901b96e4c5478bc750bb2335c",
+      "n_bytes": 6276
+    },
+    "groundtruth/s1_ingest-v0.1.0-34988f7c8306/RECORD.md": {
+      "sha256": "8bb2833f61af7282676324ff440a63c3987d77411b832c6e320800907100f61a",
+      "n_bytes": 8594
+    },
+    "groundtruth/s1_ingest-v0.1.0-34988f7c8306/manifest.json": {
+      "sha256": "01913586f0a836009f9347a6dad33225c1b6caf3d8eb68121da68177d616870b",
+      "n_bytes": 4976
+    },
+    "groundtruth/s1_ingest-v0.1.0-915251f36fc5/RECORD.md": {
+      "sha256": "dcb156e29a5193acad77f1e74a763b4c59a93973f171408c2179df77d55023f2",
+      "n_bytes": 8474
+    },
+    "groundtruth/s1_ingest-v0.1.0-915251f36fc5/manifest.json": {
+      "sha256": "9584cacdd9652275bc617e7b468cabd0ad203aac94868839926339703d22bb1d",
+      "n_bytes": 4471
+    },
+    "groundtruth/s1_ingest-v0.1.0-bca249b3fa72/RECORD.md": {
+      "sha256": "c2d1e031f4048ae9af11e506b29a399892a4f98a150282f6442f11ea1d6cf787",
+      "n_bytes": 6862
+    },
+    "groundtruth/s1_ingest-v0.1.0-bca249b3fa72/manifest.json": {
+      "sha256": "f7470f85ca95a6841426cc275a1059f7a3868a5ac05e0a92b4580431a32cebd4",
+      "n_bytes": 4895
+    },
+    "groundtruth/s1_ingest-v0.1.0-c6179869edf7/RECORD.md": {
+      "sha256": "4994a4fd7476322136df9cff4142d5edf6b2d2c8902f7aec382be09a895c245c",
+      "n_bytes": 4874
+    },
+    "groundtruth/s1_ingest-v0.1.0-c6179869edf7/manifest.json": {
+      "sha256": "23d202e54d6fce84bf96e6650c8c0ccfb72d23e86e62c2e214c34cb7334eeade",
+      "n_bytes": 3933
+    }
+  },
+  "harvest_log": {
+    "sha256": "58af93f118175c406ea960534010b4d0aa5b25b3e1f172c763ba452d26715c8c",
+    "n_bytes": 56562
+  }
+}
