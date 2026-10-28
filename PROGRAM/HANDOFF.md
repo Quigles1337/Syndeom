@@ -7439,3 +7439,76 @@ STOP-REASON: natural boundary. NEXT's step 4 is an escalation to Al, and the nex
 Al's rulings. Repo green: the gate on the committed tree is recorded in the pull request.
 **Memory writes:** none, deliberately. Any write would change a memory file's digest and make the
 next disclosure owe verbatim reproduction.
+AL'S RULINGS ON PR 23 (2026-10-28 UTC, received in this session's conversation after PR #23
+opened; recorded at Al's direction in a third commit on the same branch, no force-push;
+transcribed verbatim from Al's message; exact copy `owner-rulings-pr23.txt` under the external
+root, 1,854 bytes, SHA-256 `0047396b604535ab17a4a2b0ddaa7dfa74b027d63c8ca2d69f03463aded8449b`):
+
+~~~text
+Rulings on PR #23 (held harvest review):
+
+Q-H1, item 32: false by source document, as recorded, so its recorded class stands. "The wrong theorem" belongs to the wording group main's items were read under; changing that standard would be a corpus-wide decision, not a one-item exception.
+Q-H2 and Q-H3, items 34 and 35: gap, as recorded, by the entry-range practice main's items follow.
+Q-H4: the unnamed results stay out as items and join the existing unnamed-result question.
+Q-H5, item 36: undetermined, as recorded. "Overcome" speaks to the later paper's reworked concepts, not to Proposition 2.22 as stated.
+Q-H6: integrate now, as the first later prefix, following section 4's plan.
+Q-H7: the harvest log continues as a new dated section after the file's current end, with its own table header, rows and counts, keeping the tag's bytes as an exact prefix. The five new item directories get frozen rows, added in a second commit on the integration branch with the commit that adds the directories as their freeze point. Pull requests keep merging with merge commits, never squash, so that freeze point stays in main's history.
+SD15 wording: ADR-0005's amendment stands as an addendum; the constitution is not edited, since every session reads ADR-0005 in full before disclosing.
+Disclosure by digest, refined: compare the digest of the matched index lines and of the SYNDEOM memory file, not of the whole index. Record the whole index's digest as a fact; verbatim reproduction is owed only when the matched lines or the SYNDEOM file change.
+
+Record these rulings verbatim where the program records rulings (STATE, HANDOFF, and ADR-0005 for the digest refinement), as a new commit on PR #23's branch (no force-push). Run the gate on the committed tree, fetch fresh before pushing, and stop for my review. The housekeeping waits until after the merge.
+~~~
+
+Before writing: `recheck --baseline c48705c2…` re-fetched at 2026-10-28T04:13:50Z (exit 0,
+`TARGET-UNCHANGED`; receipt `recheck-3-rulings-start.json`). `main` was still `c48705c2…`. The
+branch was at `a5144ce` locally and on the remote, and the worktree was clean. PR 23 was open
+and mergeable, with no reviews or comments. The held branch is still at `c3a3d36` on the remote.
+
+Effect:
+- **Q-H1, Q-H2/Q-H3, Q-H5** → the five items' labels stand as recorded: item 32 false by source
+  document (FLAW-0012), items 34 and 35 `gap`, item 36 `undetermined`. Nothing was relabeled.
+- **Q-H4** → the further unnamed results stay out as items: Corollary 12 and the demoted
+  Theorem 3 of 1403.6317, Lemma 4.2 of 1403.8075, and Lemmas 2.9 and 2.21 of 1404.4599. STATE's
+  *Carried questions* and *Older questions* bullets now list them under the unnamed-result
+  question. The frozen S1.4 packet, which records that question's disposition, is not touched.
+- **Q-H6, Q-H7** → STATE's NEXT is the integration, after this pull request merges. It follows
+  REVIEW.md §4 on a fresh branch from `main`, continues the harvest log as a new dated section,
+  and then adds five frozen rows in a second commit, with the first commit as their freeze point.
+  The merge-commit rule joins the *Freeze register* preamble. Nothing was integrated, and no row
+  was added.
+- **SD15 wording, the refinement** → ADR-0005 *Amendments* 2: the two paragraphs verbatim, their
+  effect, and the baseline below. STATE's *Memory policy* paragraph and the SD15 escalation are
+  updated, and that escalation is closed.
+- **The instruction paragraph** → recorded in this addendum, in STATE and in ADR-0005.
+  - STATE: *Standing rulings* (the message verbatim), the Updated bullet, Current build
+    verification, the ADR-numbers line, *Standing escalations*, the held-harvest,
+    carried-questions and older-questions bullets, the *Freeze register* preamble, and NEXT.
+  - The housekeeping is not done.
+
+Baseline under the refined rule (ADR-0005 *Amendments* 2). Computed from the files on disk after
+the rulings; hashes and counts only, nothing reproduced.
+- Matched index lines 85, 86, 88, 89, 106 and 107: 6 lines, 1,198 bytes, SHA-256
+  `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`, equal to HANDOFF lines
+  6672–6677 (Session 35, Entry 1).
+- `project_syndeom.md`: `ce2ce6de…2cc0`, equal to HANDOFF lines 6683–6817 (the same entry).
+- The whole index, a fact: `cd943842…fc69`, 15,420 bytes, 110 lines, unchanged since Entry 1. The
+  name search matched the same six lines, and the canary matched line 1.
+
+Flagged for Al: two readings of the refinement are the executor's, recorded in ADR-0005
+*Amendments* 2.
+- The matched lines' digest is taken over each matched line with its LF, in index order. That is
+  the form Entry 2 verified against Session 35's reproduction.
+- A renumbering of the matched lines alone, with their bytes unchanged, is not a change.
+
+NEXT-SINGLE-ACTION (superseding the block's): STATE's NEXT. After PR 23 merges, integrate the
+held harvest per REVIEW.md §4 and Al's rulings, in two commits; then S2 ordering step 4.
+ESCALATIONS (superseding the block's):
+- **Housekeeping** after this pull request merges: the original checkout's uncommitted append and
+  the worktree (Al: "The housekeeping waits until after the merge.").
+- The two readings of the refinement above, for Al's confirmation.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction — stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root (`gate-committed-2.json`), not in the
+tree it certifies. Checks for this addendum: no leakage (`contact/` not opened; no detector,
+threshold or generator touched); nothing measured; no artifact or manifest written; no verdict on
+any paper (SD3). **Memory writes:** none.
