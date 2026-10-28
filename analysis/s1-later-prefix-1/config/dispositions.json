@@ -1,0 +1,52 @@
+{
+  "schema": "s1-later-prefix-overlay/1",
+  "event_id": "first-later-prefix-inventory-2026-10-28",
+  "base_overlay": "analysis/s1-4/config/dispositions.json",
+  "base_overlay_sha256": "16c7c65f903560a9375302db5bed3be11f38262d58d9848d2ce5067b0b9b96ca",
+  "reviews": [
+    {
+      "root_id": "s1_ingest-v0.1.0-34988f7c8306",
+      "issues": [],
+      "basis": [
+        "analysis/s1-held-harvest-review/REVIEW.md#item-32-candidate-28-arxiv-14036317-theorem-1",
+        "PROGRAM/STATE.md#standing-rulings-recorded-their-adrs-come-later"
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-915251f36fc5",
+      "issues": [],
+      "basis": [
+        "analysis/s1-held-harvest-review/REVIEW.md#items-3335-candidate-29-arxiv-14038075-proposition-41-and-theorems-43-and-44",
+        "PROGRAM/STATE.md#standing-rulings-recorded-their-adrs-come-later"
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-bca249b3fa72",
+      "issues": [],
+      "basis": [
+        "analysis/s1-held-harvest-review/REVIEW.md#items-3335-candidate-29-arxiv-14038075-proposition-41-and-theorems-43-and-44",
+        "PROGRAM/STATE.md#standing-rulings-recorded-their-adrs-come-later"
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-c6179869edf7",
+      "issues": [],
+      "basis": [
+        "analysis/s1-held-harvest-review/REVIEW.md#items-3335-candidate-29-arxiv-14038075-proposition-41-and-theorems-43-and-44",
+        "PROGRAM/STATE.md#standing-rulings-recorded-their-adrs-come-later"
+      ]
+    },
+    {
+      "root_id": "s1_ingest-v0.1.0-11ffe4f87954",
+      "issues": [],
+      "basis": [
+        "analysis/s1-held-harvest-review/REVIEW.md#item-36-candidate-30-arxiv-14044599-proposition-222",
+        "PROGRAM/STATE.md#standing-rulings-recorded-their-adrs-come-later"
+      ]
+    }
+  ],
+  "scope_notes": [
+    "First later prefix (ADR-0013): candidates 28-30, items 32-36. Each item was reviewed in analysis/s1-held-harvest-review/REVIEW.md (five agree), and Al's rulings of 2026-10-28 on PR 23 settled every reading the review raised as recorded: Q-H1 (item 32 false by source document; its class stands), Q-H2 and Q-H3 (items 34 and 35 gap), Q-H5 (item 36 undetermined). No item issue remains open, so each prefix root is listed with none.",
+    "Q-H4: the further unnamed results in the prefix's notices stay out as items and join the existing unnamed-result question (the first scope note above); no item is invented."
+  ]
+}

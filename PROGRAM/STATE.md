@@ -1,6 +1,68 @@
 # STATE
 
-- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 38:
+- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 39:
+  - launched with the §6 Session-N resume prompt verbatim, followed by an owner note, pasted into
+    an existing Claude Code conversation: the one that had just done Session 38's post-merge
+    housekeeping at Al's direction (below);
+  - SD15 disclosure first, **by digest** (ADR-0005 *Amendments* 1 and 2): the matched index lines
+    (85, 86, 88, 89, 106, 107; `0418e621…534c`; 104 withheld) and the SYNDEOM memory file
+    (`ce2ce6de…2cc0`) are the bytes Session 35's Entry 1 reproduced, verified by hashing HANDOFF's
+    lines in HANDOFF Session 39, Entry 2;
+  - **not cold and not an examination**: the conversation read program state before the prompt,
+    and the owner note carries program state. The session certifies nothing.
+
+  **The first later prefix's inventory event is built** (STATE's NEXT as it stood; Al's ruling of
+  2026-10-28 on its scope), on branch `claude/s1-later-prefix-inventory`, in two commits, for Al's
+  review. `main` is unchanged until Al merges.
+  - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main`
+    **synchronized** with fetched `origin/main` `ef567ec9824319924300a3f2d620e8121a16af18`, tree
+    `4bef2ccc6b24a0ed9c60294608c7dae839e28f88`, with the disclosure append the only change. That
+    is **PR 24's merge** (by Al, 2026-10-28T05:27:56Z; parents `a793954` and `c43f9f9`). Receipt
+    `orient-receipt.json` under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\`. ORIENT
+    gate GREEN (*Current build verification*).
+  - **Session 38's post-merge housekeeping — DONE on 2026-10-28, not in Session 38's
+    conversation** (Al's owner note, item 4; *Standing rulings*). A forced Windows restart closed
+    that conversation overnight. At Al's direction a fresh conversation, not launched with the §6
+    prompt and not a numbered session, found the checkout clean on
+    `claude/s1-held-harvest-integration` at `c43f9f9`, with one worktree and no restart damage. It
+    fetched, read the default branch name from git, switched to `main` and fast-forwarded it from
+    `a793954` to `ef567ec`. It changed no repository file and wrote no memory. That conversation
+    then received this session's launch (HANDOFF Session 39, Entries 1 and 3).
+  - **Commit 1** (`46cdcb8`): ADR-0013 (proposed) and a new tool revision in new files,
+    `engine/ingest/examples/s1_later_prefix.rs` with `support/later_prefix.rs`, plus the packet's
+    pins (`analysis/s1-later-prefix-1/config/`) and eight gate tests. The pinned
+    `s1_effective_inventory` and `s1_4_coverage`, their packets and retained reports, and every
+    manifest are unchanged.
+  - **Measured** from commit 1's clean committed tree, two runs byte-identical: **PASS, 40
+    archived representations (38 raw, 2 canonical) / 37 effective logical items**, 5 of them in
+    the prefix. 30 harvest candidates (24 admitted, 4 rejected, 2 found-but-unclassifiable), prefix
+    through `1404.4599`. Statement status 5 true / 18 false / 14 undetermined; unflagged documented
+    subset 23; the same nine zero-coverage classes. Session 23's projection of 40 / 37 is now
+    measured. The pinned tool refuses at that tree on the first prefix addition, as ADR-0012 D7
+    says it must.
+  - **Commit 2:** the retained outputs (`analysis/s1-later-prefix-1/report/`), the ninth gate test
+    (the working tree yields them byte-identically), ADR-0013's measurements, ADR-0005
+    *Amendments* 3 (Al's owner note, items 2 and 3), STATE and this block's close.
+  - **Flags for Al (ADR-0013):** A, one tool and one packet; B, the five prefix roots unflagged;
+    C, effective labels; D, the freeze-register row for the packet, proposed and not added.
+  - **Al's rulings of 2026-10-28 on PR 25** (verbatim under *Standing rulings*; ADR-0013
+    *Amendments* 1). A, B and C were accepted. D7 was amended: the recorded inputs pin the
+    population, and counts are measured outputs, not conditions in the code. D was ruled: a final
+    commit on the branch adds the packet's frozen row. They were applied on the same branch in
+    three further commits:
+    - commit 3 (`97e0d54`) removes the literal counts from the tool and the tests, takes the scope
+      from the harvest log's pinned prefix, names the amendment map in `coverage.json`, rewrites D7
+      and D8, and records the rulings;
+    - commit 4 (`bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d`) holds the packet regenerated at
+      `97e0d54`. Two runs were byte-identical, and every count is unchanged;
+    - commit 5 adds the frozen row `analysis/s1-later-prefix-1/` with commit 4 as its freeze point.
+      The register then holds 65 rows (60 frozen, 5 append-only), ALL PASS, with the new row at
+      7 files, 7 byte-identical and 0 added.
+  - **Unchanged:** registers' statuses, manifests, labels, frozen packets, the retained reports,
+    the Gate S1 table, the constitution, the licence and the tag. The freeze register changes only
+    by the one row of Al's ruling D. **NEXT** is S2 ordering step 4, ADR-0011's crate, after this
+    pull request merges.
+- **Previous update (Session 38):** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 38:
   - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim, followed by an
     owner note;
   - SD15 disclosure first, **by digest** (ADR-0005 *Amendments* 1 and 2): the matched index lines
@@ -733,7 +795,15 @@
   37 tests (24 manifest + 5 ingest + 8 derivation), fmt and clippy. Logs: `analysis/s1-3/`.
   Real generation/reproduction passed from the producer commit. The final staged artifact/evidence
   tree passed the full gate; `analysis/s1-3/gate-final.txt` records exit 0 and GATE: GREEN.
-- **Current build verification (Session 38).** ORIENT gate on `main` `a793954` (tree
+- **Current build verification (Session 39).** ORIENT gate on `main` `ef567ec` (tree
+  `4bef2ccc…`, PR 24's merge) in the original checkout, with the disclosure append the only
+  change: **GATE: GREEN**, 2026-10-28T15:53:14Z–16:02:55Z, exit 0, stderr empty. Lean 8,926 jobs,
+  axioms `[propext]`; fmt, clippy and 89 Rust tests pass; 485 tracked files LF; registers and the
+  freeze register (64 rows: 59 frozen, 5 append-only) ALL PASS. Raw log `gate-orient.raw.log`
+  (SHA-256 `428ae8dd…18b7`) under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\`. The
+  pull request's head is gated on its committed tree; that result is recorded in the pull request
+  and under the external root, not in the tree it certifies.
+- **Previous build verification (Session 38).** ORIENT gate on `main` `a793954` (tree
   `bfa2ce23…`, PR 23's head tree) in the original checkout, with the disclosure append the only
   change: **GATE: GREEN**, 2026-10-28T04:58:53Z–05:07:50Z, exit 0, stderr empty. Lean 8,926 jobs,
   axioms `[propext]`; fmt, clippy and the Rust tests pass; registers and freeze register (59 rows)
@@ -1104,7 +1174,10 @@ last fetched; ADR-0008) as exact prefixes. A freeze point is a tag or a full com
 row's is the `gate-s1-registration` tag (`2018d5e79ea23fa200e560d628bec5e91edf0956`) — the S1
 packets' by Al's direction, the append-only rows' by ruling 2, the rest by ruling 3 — except
 the five rows of the first later prefix (Session 38), whose freeze point is the commit that adds
-their directories, `d2569d61588368a60bbf7558fb9f0703f96e3a5b` (Al's ruling Q-H7 of 2026-10-28 on PR 23). Every row
+their directories, `d2569d61588368a60bbf7558fb9f0703f96e3a5b` (Al's ruling Q-H7 of 2026-10-28 on PR 23), and the
+row of that prefix's inventory packet (Session 39), whose freeze point is the commit that holds the
+regenerated packet, `bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d` (Al's ruling D of 2026-10-28 on PR
+25). Every row
 cites the record it derives from. A later prefix adds new item directories under `groundtruth/`
 and new stored copies under `sources/` beside the rows below, which name one item directory or
 one stored copy each, never the parent directory (ruling 3); a change to or removal of a frozen
@@ -1122,6 +1195,7 @@ run is the evidence. The table's rows must have exactly this column form, or the
 | `analysis/s1-first-parent-integration/` | frozen | `gate-s1-registration` | the integration packet and "the retained report" (Updated bullet, Session 35; `preservation-inputs.json` among the records left byte-identical, ADR-0009 D4) |
 | `analysis/s1-post-merge-readiness/` | frozen | `gate-s1-registration` | "readiness packet … unchanged" (Previous update, Session 22); Historical build verification (PR 8 readiness) |
 | `analysis/s1-orientation-repair/` | frozen | `gate-s1-registration` | the orientation-repair event packet: its README among the records left byte-identical (ADR-0009 D4); Previous update (Session 23) |
+| `analysis/s1-later-prefix-1/` | frozen | `bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d` | the first later prefix's inventory packet (ADR-0013; 7 files: README, the pins, the overlay and the four outputs regenerated after Al's rulings); the freeze point is the commit that holds the regenerated packet; Al's ruling D of 2026-10-28 on PR 25 |
 | `PROGRAM/HANDOFF.md` | append-only | `gate-s1-registration` | §3.6 append-only session log; "its HANDOFF append … is never erased or rewritten" (ADR-0008 bullet); "HANDOFF entries (append-only)" (examination step 0 bullet); freeze point by ruling 2 |
 | `PROGRAM/SOURCES.md` | append-only | `gate-s1-registration` | "`PROGRAM/SOURCES.md` append-only (ADR-0010)" (S1.3 reproduction tool bullet); "SOURCES historical prefix unchanged" (Gate S1 table, licences row); freeze point by ruling 2 |
 | `groundtruth/s1_derive-v0.1.0-c08f9e3ec092/` | frozen | `gate-s1-registration` | accepted corpus item (35 archived representations / 32 effective logical items, unchanged since Session 23); Al's ruling 3 on PR 22 |
@@ -1222,6 +1296,12 @@ as a fact. Verbatim reproduction is owed only when the matched lines or the SYND
 Baseline: the matched lines (85, 86, 88, 89, 106, 107; 1,198 bytes) `0418e621…534c` and the
 memory file `ce2ce6de…2cc0`, both reproduced in HANDOFF Session 35's Entry 1. ADR-0005's
 amendments stand as an addendum; the constitution is not edited.
+**Readings confirmed, and the header's date stated (ADR-0005 *Amendments* 3; Al's owner note of
+2026-10-28).** Both readings of the comparison are Al's now: the matched lines' digest is over
+each line with its LF, in index order, and a renumbering without a byte change is no change, with
+the new numbers and the withheld count recorded. The provisional block header carries the UTC
+date and is marked provisional; ADR-0005 now says so, because a session reads it before
+disclosing and reads ADR-0008 only after.
 **Launch directory (Session 28, 2026-10-26; recorded at Al's direction):** whenever Claude Code
 is launched inside a git work tree, it attaches a Git status and history snapshot to the
 conversation before the first action: the current branch, `git status` and the last five commit
@@ -1278,8 +1358,11 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   (*Amendments* 1: the invariance test and the freeze register; Al's rulings 1–4 of 2026-10-27 on
   PR 22 recorded; merged at PR 22, `c48705c`, 2026-10-27T23:06:37Z); ADR-0005 amended Session 37
   (*Amendments* 1: disclosure by digest, Al's ruling of 2026-10-27; *Amendments* 2: SD15's wording
-  and the comparison refined, Al's rulings of 2026-10-28 on PR 23); ADR-0013 is the next free
-  number.**
+  and the comparison refined, Al's rulings of 2026-10-28 on PR 23); ADR-0005 amended Session 39
+  (*Amendments* 3: the two readings confirmed and the provisional header's UTC date, Al's owner
+  note of 2026-10-28); ADR-0013 the first later prefix's inventory event — written, implemented
+  and measured Session 39 (2026-10-28), accepted as amended by Al's rulings of 2026-10-28 on PR 25
+  (*Amendments* 1), in effect at the merge; ADR-0014 is the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -1336,6 +1419,46 @@ Record these rulings verbatim where the program records rulings (STATE, HANDOFF,
 
 ~~~text
 Separate PR next (Recommended) — This PR is the integration as ruled: commit 1 holds items, SOURCES 0074–0080, records, the log section and STATE; commit 2 adds the five freeze rows. STATE records 40/37 as committed but not yet measured, and notes the pinned tool refuses at HEAD as D7 predicts. The inventory event (new tool revision + coverage run) becomes NEXT, in its own PR, before S2 step 4.
+~~~
+
+- **Al's owner note of 2026-10-28 (Session 39) — verbatim.** It followed the §6 prompt in
+  Session 39's launching message. The copy is `owner-note-as-received.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\` (1,570 bytes, SHA-256
+  `435a26e3d83837e03bf96576373fcee25edc470146eda09c6bd18e1e76d265a9`), transcribed from the
+  message as rendered to the executor. It is also in HANDOFF Session 39, Entry 3. Items 2 and 3
+  are recorded as ADR-0005 *Amendments* 3. Their effect is under *Standing escalations* and in
+  the Updated bullet.
+
+~~~text
+Owner note, to act on only after you have disclosed and oriented, and to record verbatim in this session's records:
+1. The new manifests' engine_commit is the commit the producer ran from, as main's existing items record it. REVIEW.md's "at the integration commit" could not be met literally, and this is accepted.
+2. Both readings of the digest rule recorded in ADR-0005 are confirmed: the matched lines' digest is taken over the byte form Session 37 verified against Session 35's reproduction, and a renumbering of matched lines without a change to their bytes is no change, with the new numbers and the withheld count recorded.
+3. ADR-0005 also states the provisional header's UTC date requirement, so a session meets it before it can read ADR-0008. Record this as an ADR-0005 amendment.
+4. Session 38's conversation was closed by a forced Windows restart overnight on 2026-10-27/28, before its post-merge housekeeping could be done there. At the owner's direction on 2026-10-28, a fresh Claude Code conversation, not launched with the §6 prompt and not a numbered session, did the housekeeping: it found the checkout C:\Users\LEET\Syndeom clean on claude/s1-held-harvest-integration at c43f9f9 with one worktree and no restart damage, fetched, read the default branch name from git, switched to it, and fast-forwarded main from a793954 to ef567ec. It made no disclosure, changed no repository file, committed, pushed and deleted nothing, and opened no PR. Record this in STATE as Session 38's housekeeping, noting that it was not done in Session 38's conversation.
+~~~
+
+- **Al's rulings of 2026-10-28 on PR 25 (ADR-0013) — verbatim.** Received in Session 39's
+  conversation after PR 25 opened. The copy is `owner-rulings-adr-0013.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\` (2,072 bytes, SHA-256
+  `e8fbcac1155cab68240e69c86d0a65139a3e3c70a0ce9c362a577404861c3b1a`), transcribed from the
+  message as rendered to the executor. The rulings are also in ADR-0013 *Amendments* 1 and in
+  HANDOFF Session 39's addendum. Their effect is under *Standing escalations* and in the Updated
+  bullet.
+
+~~~text
+Rulings on ADR-0013 (record them verbatim in ADR-0013, STATE and this session's HANDOFF block, as new commits on PR #25's branch; no force-push):
+
+Flag A: accepted. One tool and one packet.
+
+Flag B: accepted. The five prefix roots count as unflagged. An item is flagged by a recorded open issue; the admission review and my rulings Q-H1–Q-H5 closed every reading raised on items 32–36, and dispositions.json records that basis per item. A later issue enters through the overlay.
+
+Flag C: accepted. The coverage table uses the effective labels with the first-parent amendment applied. The S1.4 table stays frozen history, and the packet names which labels it used and the amendment map.
+
+D7, the population pin: amended. The population is pinned by D2's recorded inputs — the accepted integration's input set and the five prefix item directories, by name and byte hash, with the harvest log read to its pinned prefix — and by nothing else. Counts are measured outputs, recorded in the packet and frozen there; they are not conditions in the code. Remove the literal 40/37/38 comparisons from the tool's guard and from its messages, and the literal-count assertions from the tests, keeping the identity checks, the byte-identity test against the retained report, and any assertion derived from the recorded inputs. Take the "through candidate 30 / 1404.4599" scope from prefix-inputs.json or from the pinned harvest-log prefix, not from a constant. Rewrite D7 and D8 to match. The pinned ADR-0012 tool keeps its literals: it is frozen, and this ruling applies from this event on. Regenerate the packet, since provenance records the tool's sources, and confirm two runs are still byte-identical.
+
+Flag D: on the branch, after the regeneration and before the merge, as PR #24 did: a final commit adds one frozen row for analysis/s1-later-prefix-1/ whose freeze point is the commit that holds the regenerated packet. I will merge with a merge commit so that commit's id survives.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
 ## Carried from S0 (notes, not actions)
@@ -1433,7 +1556,10 @@ Separate PR next (Recommended) — This PR is the integration as ruled: commit 1
     never squash, so that freeze point stays in `main`'s history (*Freeze register*).
   - **Integrated in Session 38** on branch `claude/s1-held-harvest-integration` (Updated
     bullet): commit 1 adds the five items, S-0074..S-0080 and the log section; commit 2 adds their
-    frozen rows. It awaits Al's review and merge, with a merge commit.
+    frozen rows. **Merged by Al as PR 24** (2026-10-28T05:27:56Z, merge commit `ef567ec`).
+  - **`engine_commit` — ACCEPTED** (Al's owner note of 2026-10-28, item 1; *Standing rulings*):
+    the five manifests record `a793954`, the commit the producer ran from, as main's existing items
+    do. REVIEW.md §4 step 3's "at the integration commit" could not be met literally.
 - **SD15 disclosure by digest — RULED** (Al's ruling of 2026-10-27, ADR-0005 *Amendments* 1; Al's
   rulings of 2026-10-28 on PR 23, *Amendments* 2).
   - ADR-0005's amendments stand as an addendum, and the constitution is not edited.
@@ -1443,7 +1569,10 @@ Separate PR next (Recommended) — This PR is the integration as ruled: commit 1
     index's digest is recorded as a fact.
   - **Two readings are the executor's, flagged for Al:** the matched lines' digest is taken over
     each matched line with its LF, in index order; and a renumbering alone, with the lines' bytes
-    unchanged, is not a change.
+    unchanged, is not a change. **Both CONFIRMED** by Al's owner note of 2026-10-28, item 2, and
+    recorded as ADR-0005 *Amendments* 3.
+  - **The provisional header's UTC date** (Session 38's note) is now stated in ADR-0005 too, which
+    a session reads before it discloses (Al's owner note, item 3; ADR-0005 *Amendments* 3).
 - **Session 37's uncommitted append and worktree — housekeeping for after this pull request
   merges, on Al's approval** (the pattern of Session 34 and ruling 4 on PR 20; Al, 2026-10-28:
   "The housekeeping waits until after the merge.").
@@ -1461,7 +1590,24 @@ Separate PR next (Recommended) — This PR is the integration as ruled: commit 1
   effective logical items by the projection) and does not measure them. The pinned
   effective-inventory tool (`engine/ingest/examples/s1_effective_inventory.rs`, 35 / 32) refuses
   the additions, and the S1.4 coverage tool pins its own corpus revision (ADR-0012 D7). Neither
-  is changed or re-run by the integration. The event is NEXT.
+  is changed or re-run by the integration. **Built in Session 39** on branch
+  `claude/s1-later-prefix-inventory` (Updated bullet): ADR-0013 (proposed), the tool
+  `s1_later_prefix`, and the packet `analysis/s1-later-prefix-1/`, which measures **40 / 37**. It
+  awaits Al's review and merge, with a merge commit. **ADR-0013's flags — RULED by Al on
+  2026-10-28 on PR 25** (verbatim under *Standing rulings*):
+  - **A:** one tool and one packet for the inventory and the coverage run. Accepted.
+  - **B:** the five prefix roots count as unflagged. Accepted. An item is flagged by a recorded
+    open issue, and a later issue enters through the overlay.
+  - **C:** the coverage counts effective labels, with the accepted first-parent amendment
+    applied. Accepted. The S1.4 table stays frozen history, and the packet names its labels and
+    the amendment map.
+  - **D7:** amended. The recorded inputs pin the population, and the counts are measured outputs,
+    frozen in the packet. Applied in commit 3, with the packet regenerated in commit 4.
+  - **D:** one frozen row for `analysis/s1-later-prefix-1/`, whose freeze point is the commit
+    holding the regenerated packet, added by the branch's final commit.
+- **Session 38's post-merge housekeeping — DONE on 2026-10-28, outside Session 38's
+  conversation** (Al's owner note of 2026-10-28, item 4, verbatim under *Standing rulings*;
+  Updated bullet). Nothing awaited.
 - **Freeze register — DECIDED by Al on 2026-10-27 (rulings 1–4 on PR 22, verbatim in ADR-0012
   *Amendments* and HANDOFF Session 36; PR 22 merged 2026-10-27T23:06:37Z, creating `main`
   `c48705c2d23183340eef5c01ff13059905513985`).** (1) The invariance test, the
@@ -1805,34 +1951,27 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**The inventory event for the first later prefix, in its own pull request, after the integration
-pull request merges** (Al's ruling of 2026-10-28, Session 38; *Standing rulings*). S2 ordering step
-4, ADR-0011's crate, follows it.
+**S2 ordering step 4: ADR-0011's crate `engine/generate/`, after the inventory-event pull request
+(branch `claude/s1-later-prefix-inventory`) merges.** Al's rulings on ADR-0013 (2026-10-28 on PR
+25) are applied on that branch.
 
 Executable cold:
 1. Open per ADR-0008 D1. If the session was launched with the §6 prompt, the SD15 disclosure comes
-   first, by digest where ADR-0005 *Amendments* 1 and 2 allow it.
-2. Confirm that the integration pull request (branch `claude/s1-held-harvest-integration`) is
-   merged, with a merge commit on fetched `origin/main`. **If it is not, record that and stop.**
-3. On a fresh branch from `main`, decide and build the event:
-   - a new engine tool revision that takes the inventory of the committed corpus under its own
-     event id. The projection to test is 40 archived representations and 37 effective logical
-     items; the run measures it and does not assume it;
-   - the coverage run for the prefix (ADR-0003 D8, D9) as its own packet;
-   - tests for both, under the gate.
-   The design is the session's to propose, with its choices flagged for Al. An ADR (ADR-0013 is the
-   next free number) is the place for them, and Al decides whether it is accepted.
-4. Never change the pinned first-parent tool, its packet, the Gate S1 table or the frozen S1.4
-   packet (ADR-0012 D7; the freeze register).
+   first, by digest where ADR-0005 *Amendments* 1–3 allow it.
+2. Confirm that the inventory-event pull request is merged, with a merge commit on fetched
+   `origin/main`. **If it is not, record that and stop.** Any later ruling on the pull request
+   is recorded verbatim (ADR-0013 *Amendments*, STATE, HANDOFF) before anything else.
+3. On a fresh branch from `main`, build the crate `engine/generate/` under PolyForm, per ADR-0011
+   D1–D12 and its *Amendments*. D6's S1-corpus independence binds every seed: no seed, grammar or
+   template derives from any item under `groundtruth/`, and the five prefix items are S1 corpus.
+4. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`, `s1_later_prefix`),
+   their packets, the Gate S1 table or the frozen S1.4 packet.
 5. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,
    with a merge commit, never squash.
 
-Then S2 ordering step 4: ADR-0011's crate `engine/generate/` under PolyForm, per ADR-0011 D1–D12
-and its *Amendments*. D6's S1-corpus independence binds every seed, and the five integrated items
-are S1 corpus.
-
 Bounds: the frozen packets, the registers, the constitution, the licence, the tag, the accepted
-corpus and the held branch's commits are untouched until a ruling says otherwise. No cherry-pick,
+corpus, the first later prefix and the held branch's commits are untouched until a ruling says
+otherwise. No cherry-pick,
 no merge of the held branch, no force-push. The harvest stays paused after candidate 30;
 candidate 31 (`1406.7174`) stays undecided. The seven truth questions, the seven severity questions
 and the unnamed-result question keep their existing dispositions; the last also covers the held

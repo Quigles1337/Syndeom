@@ -7779,3 +7779,329 @@ STOP-REASON: natural boundary. The pull request is open for Al's review, and NEX
 merge. Repo green: the gate on the committed tree is recorded in the pull request and under the
 external root, not in the tree it certifies. **Memory writes:** none, deliberately. A write
 would change a memory digest and make the next disclosure owe verbatim reproduction.
+
+---
+
+SESSION: 2026-10-28 UTC (2026-10-28 America/New_York) (Session 39 — launched with the §6
+Session-N resume prompt verbatim followed by an owner note, pasted into an existing Claude Code
+conversation that had first done Session 38's post-merge housekeeping at Al's direction; SD15
+disclosure first, by digest (ADR-0005 *Amendments* 1 and 2); not cold and not an examination —
+the conversation read program state before the prompt, and the owner note carries program state;
+examined fetched `origin/main` `ef567ec9824319924300a3f2d620e8121a16af18`, tree
+`4bef2ccc6b24a0ed9c60294608c7dae839e28f88`, in the original checkout `C:\Users\LEET\Syndeom` on
+`main`, synchronized; branch `claude/s1-later-prefix-inventory`; header completed after ADR-0008
+step 5 — it was written provisionally with the disclosure, which is unchanged; the session-end SHA
+is the commit carrying this block, recorded in its pull request)
+
+### Entry 1 — SD15 memory disclosure (by digest, ADR-0005 Amendments 1–2)
+
+Appended by shell (`cat >>`) without reading HANDOFF. The memory was read and hashed at
+2026-10-28T15:50:31Z (11:50:31 America/New_York).
+
+**How this session was launched: not cold, and not an examination.**
+- The §6 Session-N prompt, verbatim, followed by a four-item owner note, was pasted into an
+  existing Claude Code conversation (model Claude Opus 5.5, `claude-opus-5-5`). The launch carries
+  program state (the owner note) and the conversation is not fresh, so under SD15 this session is
+  not cold. It attempts no gate's cold-start test.
+- The conversation is the one the owner note's item 4 describes. It was opened on 2026-10-28 at
+  the owner's direction for post-merge housekeeping, without the §6 prompt. Before the §6 prompt
+  arrived it read program state (Git status and history, and PR titles), so under SD15 it cannot
+  be an examination on that ground as well.
+
+**What the conversation did before the §6 prompt.**
+- The harness loaded the memory index (`C--Users-LEET`) at conversation start.
+- It searched every git checkout directly under the home directory, this one included, for commit
+  `ef567ec`. None held it before the fetch.
+- `gh search prs` over the owner's merged PRs. The results included the titles and merge times of
+  this repository's PRs #1–#24, and PRs of other repositories, which are not named here.
+- `gh pr view 24`, and `gh api` for the repository's default branch and for `main`'s head commit
+  and its parents.
+- It read `project_syndeom.md` in full.
+- In `C:\Users\LEET\Syndeom`: `git status`; `git worktree list --porcelain`; `git branch -vv`
+  (every local branch's name, tip and subject); `git log -1`; checks for lock files and for an
+  unfinished merge, rebase, cherry-pick or revert; `git stash list`; `git remote -v`;
+  `git fetch origin`; `git symbolic-ref refs/remotes/origin/HEAD`; `git remote show origin`;
+  `git merge-base --is-ancestor main origin/main`; `git fsck`; `git switch main`;
+  `git merge --ff-only origin/main` (its output listed created paths under `groundtruth/`);
+  `git status`; `git worktree list`.
+- It read no repository file, wrote no memory, and committed, pushed and deleted nothing.
+
+**What this session did before this entry.** It read `PROGRAM/SYNDEOM-PROGRAM.md` and
+`PROGRAM/DECISIONS/ADR-0005.md` in full. In one shell command it read and hashed the memory below
+and took the time. Nothing else.
+
+**The memory, by digest.** The matched lines and `project_syndeom.md` both have the digests of
+ADR-0005 Amendment 2's baseline, so under Amendments 1–2 their content is not reproduced again.
+- Memory index `MEMORY.md`, as a fact: SHA-256
+  `cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69`, 15,420 bytes, 110 lines,
+  0 CR, 334 non-ASCII bytes, no BOM (first bytes `23 20 50`), ends with LF. Last modified
+  2026-10-26 15:30 America/New_York. This equals the whole-index fact in the baseline.
+- Name search (D3): a case-insensitive search for `syndeom|kober|friedman` over all 110 lines
+  (`awk` under `LC_ALL=C`, on `tolower` of each line) matched lines 85, 86, 88, 89, 106 and 107.
+  A second search for `fr13dman|syndeo` matched 88, 89, 106 and 107, a subset. A search for
+  `συνδ` matched nothing.
+- Matched lines, each with its LF, concatenated in index order: 6 lines, 1,198 bytes, 0 CR,
+  30 non-ASCII bytes, SHA-256 `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`.
+  The baseline records this as the digest of HANDOFF lines 6672–6677, reproduced by Session 35's
+  Entry 1.
+- `project_syndeom.md`: SHA-256
+  `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`, 10,957 bytes, 135 lines,
+  0 CR, 71 non-ASCII bytes, no BOM (first bytes `2d 2d 2d`), ends with LF. Last modified
+  2026-10-26 18:45 America/New_York. The baseline records this as the digest of HANDOFF lines
+  6683–6817, from the same entry.
+- Withheld by count (D2): 104 lines, numbers 1–84, 87, 90–105 and 108–110. By the search above,
+  none of them names this program or a sibling.
+- D1 (c): the harness loaded no other memory that names this program.
+- Citation: Session 35's Entry 1. A later entry verifies it by hashing those HANDOFF lines, so
+  that this entry stays first.
+- No memory was written in this conversation, before or after the §6 prompt.
+
+### Entry 2 — the disclosure's citation, verified after the append (ADR-0005 *Amendments* 1 and 2)
+
+- **Cited entry:** **HANDOFF Session 35, Entry 1** (its heading at line 6664 of this file at
+  `ef567ec`). It reproduced D1 (a), the six matched index lines, at lines 6672–6677, and D1 (b),
+  `project_syndeom.md` in full, at lines 6683–6817.
+- **Verified by bytes, not only by stated digests.** Extracted from `ef567ec`'s HANDOFF blob:
+  - lines 6672–6677 hash to `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`
+    and are byte-identical (`cmp`) to index lines 85, 86, 88, 89, 106 and 107 as extracted for
+    Entry 1;
+  - lines 6683–6817 hash to `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`
+    and are byte-identical (`cmp`) to `project_syndeom.md` on disk.
+
+  Neither digest is new, so nothing is owed verbatim. The matched lines kept their numbers, so
+  the renumbering reading did not arise.
+- **The append.** The scratch file holding Entry 1 and its provisional header was 4,478 bytes,
+  0 CR, no BOM, SHA-256 `a6b2705e…353f`, appended by `cat … >>` at 2026-10-28T15:51:55Z (the clock
+  read by the same command). HANDOFF's last 4,478 bytes then hashed to the same digest, and HEAD's
+  HANDOFF blob followed by the scratch file hashes to the working file's digest (`67e6ffda…2d69`):
+  a pure append. The provisional header line (109 bytes) was then replaced by the completed header
+  above, by a script that asserted the disclosure body (4,368 bytes, `6c163587…fe6e`) unchanged.
+- **The provisional header carried the UTC date** and the word "provisional", as ADR-0008 D1 step
+  0 asks. This session knew the requirement from the owner note's item 3 before it read ADR-0008.
+- **Constitution and ADR bytes (ADR-0008 step 5).** As read in step 0 and as in the snapshot: the
+  constitution `110f5360…479c` (38,958 B, ADR-0009's amended digest), ADR-0005 `b3da80df…f8cb`
+  (12,382 B) and ADR-0008 `ccdfa9d7…e9ff`. Their working-tree blobs equal HEAD's.
+
+### Entry 3 — the launch, the owner note, and Session 38's housekeeping
+
+**Launching prompt.** Its first 13 lines are byte-identical (`cmp`) to the constitution's §6
+Session-N block, lines 481–493 of the snapshot's `PROGRAM/SYNDEOM-PROGRAM.md` (1,141 bytes,
+`00151726…3dd3`). An owner note followed them. Both copies are under the external root
+`C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\`: `launch-prompt-first-13-lines.txt` and
+`owner-note-as-received.txt` (1,570 bytes, SHA-256 `435a26e3…65a9`). They were written from the
+message as rendered to the executor, so they are transcriptions. The note, verbatim:
+
+~~~text
+Owner note, to act on only after you have disclosed and oriented, and to record verbatim in this session's records:
+1. The new manifests' engine_commit is the commit the producer ran from, as main's existing items record it. REVIEW.md's "at the integration commit" could not be met literally, and this is accepted.
+2. Both readings of the digest rule recorded in ADR-0005 are confirmed: the matched lines' digest is taken over the byte form Session 37 verified against Session 35's reproduction, and a renumbering of matched lines without a change to their bytes is no change, with the new numbers and the withheld count recorded.
+3. ADR-0005 also states the provisional header's UTC date requirement, so a session meets it before it can read ADR-0008. Record this as an ADR-0005 amendment.
+4. Session 38's conversation was closed by a forced Windows restart overnight on 2026-10-27/28, before its post-merge housekeeping could be done there. At the owner's direction on 2026-10-28, a fresh Claude Code conversation, not launched with the §6 prompt and not a numbered session, did the housekeeping: it found the checkout C:\Users\LEET\Syndeom clean on claude/s1-held-harvest-integration at c43f9f9 with one worktree and no restart damage, fetched, read the default branch name from git, switched to it, and fast-forwarded main from a793954 to ef567ec. It made no disclosure, changed no repository file, committed, pushed and deleted nothing, and opened no PR. Record this in STATE as Session 38's housekeeping, noting that it was not done in Session 38's conversation.
+~~~
+
+**The housekeeping (item 4), from this conversation's own record.** The conversation that did it is
+the one this session then ran in (Entry 1). Before the §6 prompt it observed and did the following:
+- the checkout on `claude/s1-held-harvest-integration` at `c43f9f9` (PR 24's head), with a clean
+  working tree;
+- `git worktree list` showing one worktree;
+- no lock file, no unfinished merge, rebase, cherry-pick or revert, no stash, and `git fsck`
+  reporting nothing;
+- five local branches whose upstreams were gone, from earlier merges, left alone;
+- `git fetch origin` moved `origin/main` from `a793954` to `ef567ec`, PR 24's merge, with parents
+  `a793954` and `c43f9f9`;
+- the default branch, `main`, read from `git symbolic-ref refs/remotes/origin/HEAD` and
+  confirmed by `git remote show origin`;
+- `git switch main`, then `git merge --ff-only origin/main`, a fast-forward of three commits;
+- the result was `main` at `ef567ec`, equal to `origin/main`, with a clean working tree.
+
+It wrote no file and no memory, and committed, pushed and deleted nothing. Its commands are listed
+in Entry 1. This session's preflight then found the checkout synchronized at `ef567ec` (ORIENT,
+below). STATE records the housekeeping as Session 38's, done outside Session 38's conversation.
+
+**Items 1–3** are recorded in STATE (*Standing rulings*, *Standing escalations*) and, for item 3,
+as ADR-0005 *Amendments* 3.
+
+### Entry 4 — the inventory event, built and measured (ADR-0013)
+
+- **Commit 1** `46cdcb8` (tree `d5a24f99…d276`): ADR-0013 (proposed); the tool, in new files
+  (`engine/ingest/examples/s1_later_prefix.rs`, `support/later_prefix.rs`); the packet's pins
+  (`analysis/s1-later-prefix-1/config/prefix-inputs.json`, `config/dispositions.json`) and
+  README; eight gate tests; and this block's Entries 1–3.
+- **The run**, on the clean checkout at `46cdcb8`, 2026-10-28T16:07:27Z–16:07:31Z: two runs
+  `PASS: 40 archived representations / 37 effective logical items; prefix through 1404.4599`,
+  byte-identical; an overwrite refused. The pinned `s1_effective_inventory` refuses at the same
+  tree on the first prefix addition, as ADR-0012 D7 says. The numbers are in ADR-0013
+  *Measurements* and STATE's Updated bullet.
+- **Commit 2:** the four outputs retained under `report/`, the ninth test (the working tree yields
+  `inventory.json`, `coverage.json` and `report.md` byte-identically), ADR-0013's measurements,
+  ADR-0005 *Amendments* 3, STATE, and this close. The retained-report test was held out of commit
+  1 because no report existed yet, and restored byte-identically from a saved copy.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN (S2.1: ADR-0011 accepted; no code). Gate S1 CLOSED
+(Session 29). This session's work is S1 corpus maintenance (the first later prefix's inventory
+event, ADR-0003 D8), which Al ordered ahead of S2 ordering step 4.
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipt `orient-receipt.json`, SHA-256
+`1eb0dd09…5587`, under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1553Z\`):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-10-28T15:52:11Z–15:52:12Z, exit 0.
+- **Snapshot.** `main` at `ef567ec…`, tree `4bef2ccc…`, **synchronized**: ahead 0, behind 0. The
+  only change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree.
+- **Step 6.** Read in this order: STATE (the Updated bullet, the freeze register, memory policy,
+  standing rulings, the gate tables, blockers, standing escalations, NEXT); HANDOFF Session 38 in
+  full; CLAIMS (0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED existence only); FLAWS `0.1.0`
+  (14 entries); then ADR-0008, ADR-0003 D8–D9, ADR-0012 and REVIEW.md §4. They agree with one
+  another and with the tree.
+- **ORIENT gate GREEN**, 15:53:14Z–16:02:55Z (STATE, *Current build verification*).
+- **NEXT survived ORIENT.** Its condition held: PR 24 was merged with a merge commit on fetched
+  `origin/main`.
+ADVANCED:
+- **The first later prefix's inventory event** (Entry 4): ADR-0013 (proposed), the tool
+  `s1_later_prefix`, the packet `analysis/s1-later-prefix-1/` and nine gate tests. Session 23's
+  projection of 40 / 37 is measured: 40 archived representations, 37 effective logical items.
+- **Al's owner note recorded** (Entry 3): verbatim in STATE (*Standing rulings*); items 2 and 3 as
+  ADR-0005 *Amendments* 3; item 4 as Session 38's housekeeping in STATE.
+- **Escalations closed:** the `engine_commit` reading (accepted), the two digest readings
+  (confirmed), and the provisional-header note (now in ADR-0005).
+BELIEF DELTAS:
+- **The pinned modules' public surface was enough.** The new revision reuses `input_set`,
+  `validate_case`, `lineage`, `harvest`, `qualify` and `coverage()` without touching a pinned
+  byte. Only the private assembly steps are re-done.
+- **An append-only input can be pinned by its prefix.** Pinning the harvest log's first 56,562
+  bytes, and parsing only those, lets a later harvest append rows without changing or stopping
+  this event.
+- **The gate now enforces this event's population.** Session 38 found that the gate compiles the
+  pinned inventory without running it. The new tests run this event's inventory on a fixed list of
+  files, so a later prefix's directories cannot enter the fixture. The gate stays GREEN when the
+  next prefix lands, while the CLI refuses it.
+CONFUSIONS:
+- **Clippy's `duplicate_mod`** fired because `effective.rs` loads `coverage.rs` privately and the
+  new tool loads it again. The pinned file cannot change, so the second load carries
+  `#[allow(clippy::duplicate_mod)]` with a comment saying why. Cost: one lint round.
+- **The retained-report test was drafted before the report existed.** It was cut for commit 1 and
+  restored by script for commit 2. Cost: none.
+- **A §6 launch into a working conversation.** The prompt arrived in the conversation that had just
+  done the housekeeping. SD15's corollary already decides the case (not cold, cannot be an
+  examination); the disclosure states it. No doc fix is needed.
+HONESTY CHECK:
+- No register status changed, and nothing was upgraded or downgraded. The 40 / 37 is a
+  deterministic census of pinned metadata, as the S1.3 and S1.4 counts are. It enters no CLAIM.
+- Flags B and C change counts: the unflagged subset is 23 rather than 18 under B, and C fixes
+  whose labels are counted. They are stated as flags, not settled.
+- The launch-prompt and owner-note copies are transcriptions of the message as rendered.
+- The housekeeping is recorded from this conversation's own command output. No receipt file was
+  written at the time.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened. No detector, threshold or generator
+design was touched. The inputs were the committed corpus, the pinned modules, ADR-0003, ADR-0008,
+ADR-0012, REVIEW.md and Al's rulings. Verdict: no leakage.
+DETERMINISM CHECK:
+- The outputs regenerate from a clean checkout of `46cdcb8`, or of any tree with the same inputs,
+  with the one command in the packet's README. Two runs were byte-identical.
+- The gate test regenerates `inventory.json`, `coverage.json` and `report.md` from the working
+  tree. No seed is involved, since this is a census.
+- Nothing entered CLAIMS, so there is nothing to quarantine.
+MANIFEST CHECK:
+- No artifact or manifest was written or changed. Every manifest read passes `Manifest::check` and
+  the label validator.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing.
+DRIFT CHECK:
+- No verdict on any paper (SD3), and no understanding claims (SD17).
+- No detector was chosen or tuned, and there was no referee contact (SD13).
+- No S2 code, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, and with Al's rulings on ADR-0013's
+flags recorded first, S2 ordering step 4: ADR-0011's crate.
+ESCALATIONS:
+- **This pull request:** review and merge, with a merge commit.
+- **ADR-0013's flags A–D:** one tool and one packet; the five prefix roots unflagged; effective
+  labels; the freeze-register row for the packet, proposed and not added.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The pull request is open for Al's review, and NEXT waits on its
+merge. Repo green: the gate on the committed tree is recorded in the pull request and under the
+external root, not in the tree it certifies. **Memory writes:** none, deliberately. A write would
+change a memory digest and make the next disclosure owe verbatim reproduction.
+AL'S RULINGS ON PR 25 (2026-10-28 UTC, received in this session's conversation after PR #25
+opened; recorded at Al's direction in new commits on the same branch, no force-push; transcribed
+verbatim from Al's message; copy `owner-rulings-adr-0013.txt` under the external root, 2,072
+bytes, SHA-256 `e8fbcac1155cab68240e69c86d0a65139a3e3c70a0ce9c362a577404861c3b1a`):
+
+~~~text
+Rulings on ADR-0013 (record them verbatim in ADR-0013, STATE and this session's HANDOFF block, as new commits on PR #25's branch; no force-push):
+
+Flag A: accepted. One tool and one packet.
+
+Flag B: accepted. The five prefix roots count as unflagged. An item is flagged by a recorded open issue; the admission review and my rulings Q-H1–Q-H5 closed every reading raised on items 32–36, and dispositions.json records that basis per item. A later issue enters through the overlay.
+
+Flag C: accepted. The coverage table uses the effective labels with the first-parent amendment applied. The S1.4 table stays frozen history, and the packet names which labels it used and the amendment map.
+
+D7, the population pin: amended. The population is pinned by D2's recorded inputs — the accepted integration's input set and the five prefix item directories, by name and byte hash, with the harvest log read to its pinned prefix — and by nothing else. Counts are measured outputs, recorded in the packet and frozen there; they are not conditions in the code. Remove the literal 40/37/38 comparisons from the tool's guard and from its messages, and the literal-count assertions from the tests, keeping the identity checks, the byte-identity test against the retained report, and any assertion derived from the recorded inputs. Take the "through candidate 30 / 1404.4599" scope from prefix-inputs.json or from the pinned harvest-log prefix, not from a constant. Rewrite D7 and D8 to match. The pinned ADR-0012 tool keeps its literals: it is frozen, and this ruling applies from this event on. Regenerate the packet, since provenance records the tool's sources, and confirm two runs are still byte-identical.
+
+Flag D: on the branch, after the regeneration and before the merge, as PR #24 did: a final commit adds one frozen row for analysis/s1-later-prefix-1/ whose freeze point is the commit that holds the regenerated packet. I will merge with a merge commit so that commit's id survives.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+How each ruling is applied (commit 3 unless stated):
+- **A, B and C** → recorded as accepted in ADR-0013 (*Status*, D1, D4, D5, *Flags*). For C, the
+  packet names its labels and the amendment map: `coverage.json` gains `amendment_map` (path,
+  SHA-256, logical item key, effective artifact id), and `label_basis` and `report.md` say which
+  labels were used.
+- **D7** → the tool's guard compares no count with a literal. The 40, 37 and 38 comparisons and
+  the `LAST_CANDIDATE` constant are gone, and so is the prefix pins' comparison with 5. The guard
+  keeps the identity checks:
+  - every review names a logical item;
+  - the amended item aliases exactly its two representations;
+  - the harvest admissions equal the corpus roots.
+
+  The refusal message names those identities, and the PASS line prints the measured values. The
+  scope is measured from the harvest log's pinned prefix: `prefix_through_candidate` and
+  `prefix_through_arxiv_id`, with `scope_source`. Tests:
+  - the literal-count test is replaced by `population_follows_the_recorded_inputs`, whose every
+    assertion is derived from the fixture's recorded inputs;
+  - the two tests that asserted a literal count now assert outputs equal to the unchanged
+    fixture's;
+  - the byte-identity test is kept.
+
+  A grep of the tool and the tests for the whole words 40, 37, 38, 30, `1404.4599` and
+  `LAST_CANDIDATE` finds nothing (exit 1). A canary with the same grep form finds the freeze-point
+  tree id, so the absence is real. D7 and D8 are rewritten. The pinned ADR-0012 tool is
+  untouched.
+- **Regeneration** → commit 4. The byte-identity test is held out of commit 3, because the
+  retained report is stale until then, and restored in commit 4 from a saved copy, as in
+  commits 1–2.
+- **D** → commit 5, the freeze-register row with commit 4's full id as its freeze point.
+
+The rulings, applied:
+- **Commit 3** `97e0d54d1a68d66861b26f6e02af29d346e417ab` (tree `3f05bbc0…466f`): the tool, the
+  tests, ADR-0013, the packet README, STATE, and the part of this addendum above. Eight tests
+  passed with the byte-identity test held out.
+- **Regeneration**, on the clean checkout at `97e0d54`, 2026-10-28T16:48:47Z–16:48:50Z, two runs:
+  `PASS: 40 archived representations / 37 effective logical items, measured; prefix through
+  1404.4599`. The four outputs are byte-identical across the runs (`inventory.json`
+  `fa407409…f66c`, `coverage.json` `a0c4d864…17f5`, `report.md` `129b0fdc…d35c`,
+  `provenance.json` `df83d3e2…0a9c`). Against the first run, every count is equal. Only the
+  intended fields differ: `accepted_inventory`'s wording, and `amendment_map`,
+  `prefix_through_candidate`, `scope_source`, `label_basis` and `gate_s1_table` in coverage, with
+  the report header and provenance following. The run directories are `regen-1/` and `regen-2/`
+  under the external root.
+- **Commit 4** `bcdcdfa36cc6be8a74409d34d08ea6edabd3ac3d` (tree `18368337…9150`): the regenerated
+  packet, the byte-identity test restored from its saved copy (9 of 9 pass), and ADR-0013's
+  measurements.
+- **Commit 5** (this one): the frozen row `analysis/s1-later-prefix-1/` at `bcdcdfa…` (Al's ruling
+  D), the register preamble naming that exception, STATE, and this close. `check_freeze.py`: 65
+  rows (60 frozen, 5 append-only), ALL PASS; the new row has 7 files, 7 byte-identical and 0
+  added. The packet is not touched after commit 4.
+BELIEF DELTA: once the inputs are pinned by name and hash, the counts are redundant as conditions.
+The literal guard could only disagree with the pinned inputs, so it was a second source of truth.
+The amended tool has none, and the gate test derives every expectation from the same inputs.
+CONFUSION: none new. The held-out-test step was needed again, because the outputs changed and
+the retained report could only be regenerated from a committed tree.
+CHECKS for this addendum: no leakage (`contact/` not opened; no detector, threshold or generator
+touched); no manifest, label or register status changed; every count is unchanged from the first
+run; no verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that the freeze point
+  `bcdcdfa` survives in `main`'s history (Al's ruling D).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

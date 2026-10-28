@@ -1,0 +1,30 @@
+{
+  "accepted_packet_revision": "37f1d598bb79a42eea6c5203d8a48d5d7b6ab29f",
+  "battery_version": null,
+  "checkout_revision": "97e0d54d1a68d66861b26f6e02af29d346e417ab",
+  "checkout_tree": "3f05bbc0a9f23cd0424b6272626f9f4b174e466f",
+  "command_from_engine": "cargo run --locked -p syndeom-ingest --example s1_later_prefix -- <repo> <new-output-directory-outside-repo>",
+  "event_id": "first-later-prefix-inventory-2026-10-28",
+  "no_network_or_witness_reinvestigation": true,
+  "overlay_sha256": "80f1adf23e80769b4ed170a79aecfb6953d32256dc157e4446b34fccf0f51657",
+  "pinned_tools": "s1_effective_inventory and s1_4_coverage are unchanged and not run; their modules are compiled into this tool as they stand",
+  "prefix_freeze_point": "d2569d61588368a60bbf7558fb9f0703f96e3a5b",
+  "prefix_freeze_point_tree": "1e2fafad7e21fc69d0ebbc315a96b0e065dd9bd7",
+  "prefix_inputs_sha256": "1994648633572f11efbc634853e238a04e5b3b0228777a674a4332f24120ef62",
+  "preservation_inputs_sha256": "37de4cf4d592857699e4b10387a388aee6a4de94b8af42fa28eb7626af3f5bdb",
+  "seed": null,
+  "taxonomy_version": "0.1.0",
+  "tool_source_sha256": {
+    "engine/Cargo.lock": "47fea4b3a80b0465afa11c19945d7044b7010e392ef68e4efb64318123149826",
+    "engine/Cargo.toml": "b062063aa2056ee6fe5d7b175502b413163190b220088a97275fd61d4f96e4f1",
+    "engine/ingest/Cargo.toml": "ddfb56cde02d4a6ee8b4b656205ea62487c1e877025b19b75c630bf5dbf66aec",
+    "engine/ingest/examples/s1_later_prefix.rs": "544c9d37a5957e6b67b90a2a620524f32206578e3c70b57c67d7ce3643a451be",
+    "engine/ingest/examples/support/effective.rs": "2f5056332568658c65c83ecace1746c96f0c7292f71c0b9ed547da01a22585f9",
+    "engine/ingest/examples/support/later_prefix.rs": "e3c5aef7b74404356e09f1beab84c9f4fbf1a8946b9336ec879d539b812fcf3d",
+    "engine/manifest/Cargo.toml": "e18c25f1a4efa1f5b17ba4cc04d73b3499a34b99f3287abfae8736d6d4d8a23e",
+    "engine/manifest/examples/support/coverage.rs": "8c3642a532e6de0dc06bd1a27a454d682f6a1e11c3fe9f7f0b6715b59a944376",
+    "engine/manifest/src/lib.rs": "549223c7b84fbf639c9e37fb3757b1484ad22879a82702f125c8cd52f7cdb01d",
+    "rust-toolchain.toml": "7157527d1a56f14e9c980b3d18e7332f16efdd2fb16c5b7974ca2aa86586129c"
+  },
+  "uncertainty": "deterministic census of pinned metadata; not a statistical estimate"
+}
