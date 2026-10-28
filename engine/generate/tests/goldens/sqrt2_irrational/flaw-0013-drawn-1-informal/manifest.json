@@ -1,0 +1,177 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0013": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 6
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 176
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.2784090909090909
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "82653e53d8a15ddd2011115af062af34cf7082c73dbefd7f4ff1cc8ac1bc5d29",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 1004,
+        "n_lemmas": 0,
+        "n_steps": 6,
+        "n_tokens": 176,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.4.0-a507dd6b84e2-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0013": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 6
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.05
+      },
+      "value": 0.28
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 1,
+          "kinds": [
+            "re-derivation"
+          ],
+          "placement": "drawn"
+        },
+        "severity": "cosmetic",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0.28,
+    "style": "descent",
+    "target": "informal",
+    "theorem": "sqrt2_irrational"
+  },
+  "config_hash": "a507dd6b84e2dd01326425c4b7211b5ba15d79857d4d4d41776eea8fa81421d0",
+  "engine_commit": "b54e2f16aa3c153258bf6ece67798bd270993cbb",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0013": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.4.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 1,
+          "inserted": "Here is a second derivation of the same fact: if $p$ were odd, say $p = 2m + 1$, then $p^2 = 4m^2 + 4m + 1 = 2(2m^2 + 2m) + 1$ would be odd, so $2 \\nmid p^2$; therefore $2 \\mid p^2$ forces $p$ to be even.",
+          "kind": "re-derivation",
+          "kinds": [
+            "re-derivation"
+          ],
+          "paragraph": 6,
+          "placement": "drawn",
+          "ratio": 0.28,
+          "replaced": null,
+          "site": 2
+        },
+        "instance": 1,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            204
+          ],
+          "step": 2
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/Sqrt2Irrational.lean:syndeom_seed_sqrt2_irrational",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}
