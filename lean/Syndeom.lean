@@ -11,3 +11,4 @@ import Syndeom.Seeds.XOverAbsX
 import Syndeom.Seeds.RolleAbs
 import Syndeom.Seeds.Horses
 import Syndeom.Seeds.NLtTwoPow
+import Syndeom.Seeds.Sqrt2Irrational

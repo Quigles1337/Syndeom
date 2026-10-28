@@ -8,7 +8,7 @@ use serde_json::{Value, json};
 use syndeom_generate::harness::{
     Observation, audit_bytes, first_error_line, parse_axioms, parse_used_constants, used_closure,
 };
-use syndeom_generate::plan::{own_declarations, render_formal, render_informal};
+use syndeom_generate::plan::{PaddingKind, own_declarations, render_formal, render_informal};
 use syndeom_generate::template::{
     Prepared, Version, assemble, check_seed, faithful_plan, manifests_in, prepare, prepare_with,
     seeds,
@@ -37,21 +37,27 @@ fn spec(class: &str, sub: Option<&str>, severity: &str, dials: Value) -> Value {
 
 /// The observation D5 predicts: a K-class instance fails at the site's first fragment line; a
 /// T-class instance builds, and the audit lists the smuggled axiom (FLAW-0009) or shows the
-/// inserted lemma used by nothing (FLAW-0007 `unused`); a control builds with standard axioms.
+/// inserted lemma used by nothing (FLAW-0007 `unused`); a control builds with standard axioms;
+/// a padded artifact (0.4.0) builds and its padding declarations are used by nothing.
 fn predicted(p: &Prepared) -> Option<Observation> {
     let f = p.formal.as_ref()?;
     let standard = || vec!["propext".to_string(), "Quot.sound".to_string()];
     // every own declaration uses nothing of the file's own, except the main declaration, which
-    // uses every lemma but an inserted one
+    // uses every lemma but an inserted one, and never a padding declaration
     let used = |except: Option<&str>| {
         let own = own_declarations(f);
+        let pads: Vec<&str> = p.padding.iter().map(|i| i.declaration.as_str()).collect();
         let mut map: BTreeMap<String, Vec<String>> = BTreeMap::new();
         for d in &own {
             map.insert(d.clone(), Vec::new());
         }
         let mut uses: Vec<String> = own
             .iter()
-            .filter(|d| **d != p.plan.main_declaration && Some(d.as_str()) != except)
+            .filter(|d| {
+                **d != p.plan.main_declaration
+                    && Some(d.as_str()) != except
+                    && !pads.contains(&d.as_str())
+            })
             .cloned()
             .collect();
         uses.sort();
@@ -115,8 +121,42 @@ fn build(c: &Value, seed: u64) -> (Prepared, syndeom_manifest::Manifest) {
     build_with(Version::CURRENT, c, seed)
 }
 
+/// A FLAW-0013 spec (0.4.0): the eligible kinds, how many paragraphs, and where they go.
+fn padding_spec(kinds: Value, count: u64, placement: &str) -> Value {
+    spec(
+        "FLAW-0013",
+        None,
+        "cosmetic",
+        json!({"kinds": kinds, "count": count, "placement": placement}),
+    )
+}
+
+/// A padded config whose commanded `padding_ratio` is the ratio the artifact achieves at seed 7:
+/// the ratio is compared only in `measure` (ADR-0011 D4), so a config commands what the count of
+/// paragraphs yields, as the goldens do.
+fn padded(
+    theorem: &str,
+    style: &str,
+    target: &str,
+    kinds: Value,
+    count: u64,
+    placement: &str,
+) -> Value {
+    let flaws = json!([padding_spec(kinds, count, placement)]);
+    let probe = json!({"theorem": theorem, "style": style, "target": target, "flaws": flaws, "padding_ratio": 1});
+    let (_, m) = build(&probe, 7);
+    let ratio = m.achieved["padding_ratio"]
+        .value
+        .as_ref()
+        .and_then(Value::as_f64)
+        .unwrap();
+    json!({"theorem": theorem, "style": style, "target": target, "flaws": flaws, "padding_ratio": ratio})
+}
+
 /// Every (seed, style, material-or-control, target) the current seed set supports; a seed whose
-/// statement is false has no control.
+/// statement is false has no control; a seed with padding material (0.4.0) adds the FLAWS.md
+/// example's padding (every paragraph, before the argument) and a lightly padded control (one
+/// re-derivation at a drawn position).
 fn every_case() -> Vec<Value> {
     let mut out = Vec::new();
     for seed in seeds(Version::CURRENT) {
@@ -147,6 +187,27 @@ fn every_case() -> Vec<Value> {
                     }
                 }
             }
+            if !seed.padding.is_empty() {
+                let n = seed.padding.len() as u64;
+                for target in ["informal", "formal", "pair"] {
+                    out.push(padded(
+                        &seed.id,
+                        &style.id,
+                        target,
+                        json!(["restated-definition", "re-derivation"]),
+                        n,
+                        "before",
+                    ));
+                    out.push(padded(
+                        &seed.id,
+                        &style.id,
+                        target,
+                        json!(["re-derivation"]),
+                        1,
+                        "drawn",
+                    ));
+                }
+            }
         }
     }
     out
@@ -164,7 +225,7 @@ fn d9_determinism_and_idempotence() {
                 syndeom_manifest::to_disk_json(&m2).unwrap()
             );
             assert_eq!(m1.artifact_id, p1.artifact_id());
-            assert!(m1.artifact_id.starts_with("s2_template-v0.3.0-"));
+            assert!(m1.artifact_id.starts_with("s2_template-v0.4.0-"));
         }
     }
 }
@@ -237,6 +298,24 @@ fn d10_locations_resolve_to_the_dials_text() {
                 // counterexample
                 assert!(r.dials["counterexample"].is_string(), "{c}");
                 assert!(r.dials.get("original_steps").is_none(), "{c}");
+            } else if r.class == "FLAW-0013" {
+                // a padding paragraph (0.4.0): nothing replaced, no originals (the argument is
+                // recoverable by deleting the recorded steps), the draw and the ratio recorded
+                assert!(r.dials["replaced"].is_null(), "{c}");
+                assert!(r.dials.get("original_steps").is_none(), "{c}");
+                assert!(r.dials.get("original_fragments").is_none(), "{c}");
+                assert_eq!(r.dials["ratio"], c["padding_ratio"], "{c}");
+                assert!(
+                    r.dials["kind"].is_string() && r.dials["paragraph"].is_u64(),
+                    "{c}"
+                );
+                assert!(
+                    r.dials["kinds"].is_array()
+                        && r.dials["count"].is_u64()
+                        && r.dials["placement"].is_string(),
+                    "{c}"
+                );
+                assert!(r.sub_variant.is_none(), "{c}");
             } else if r.dials["replaced"].is_null() {
                 // an inserted step (0.3.0): nothing replaced, the originals recorded
                 assert_eq!(r.class, "FLAW-0007", "{c}");
@@ -435,8 +514,9 @@ fn d7_a_false_statement_seed_yields_an_invalid_incorrect_artifact_with_its_count
 fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
     assert_eq!(seeds(Version::V0_1_0).len(), 3);
     assert_eq!(seeds(Version::V0_2_0).len(), 7);
-    let all = seeds(Version::V0_3_0);
-    assert_eq!(all.len(), 8);
+    assert_eq!(seeds(Version::V0_3_0).len(), 8);
+    let all = seeds(Version::V0_4_0);
+    assert_eq!(all.len(), 9);
     let ids: Vec<&str> = all.iter().map(|s| s.id.as_str()).collect();
     assert_eq!(
         ids,
@@ -449,6 +529,7 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
             "rolle_abs",
             "horses",
             "n_lt_two_pow",
+            "sqrt2_irrational",
         ]
     );
     for seed in &all {
@@ -458,11 +539,25 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
         assert_eq!(seed.licence, "PolyForm-Noncommercial-1.0.0");
         let false_statement = seed.truth.value == Some(false);
         assert_eq!(seed.counterexample.is_some(), false_statement);
+        // padding material (0.4.0): only the sqrt2_irrational seed carries it, seven paragraphs
+        // of the two kinds the FLAWS.md example names, each a proved declaration of the seed
+        assert_eq!(!seed.padding.is_empty(), seed.id == "sqrt2_irrational");
+        for para in &seed.padding {
+            assert!(matches!(
+                para.kind,
+                PaddingKind::RestatedDefinition | PaddingKind::ReDerivation
+            ));
+            assert!(
+                para.name
+                    .starts_with("syndeom_s2_template_sqrt2_irrational_pad_")
+            );
+            assert!(!para.fragment.is_empty() && !para.text.starts_with("Lemma "));
+        }
         for style in &seed.styles {
             let plan = faithful_plan(seed, style);
             parse_informal_md(&render_informal(&plan).unwrap()).unwrap();
             parse_lean(&render_formal(&plan).unwrap().bytes).unwrap();
-            assert!(!style.flaws.is_empty() || seed.id == "nat_le_sq");
+            assert!(!style.flaws.is_empty() || seed.id == "nat_le_sq" || !seed.padding.is_empty());
             for m in &style.flaws {
                 assert_eq!(m.intrinsic, false_statement, "{}", seed.id);
                 let site_text = style.steps.get(m.site as usize - 1);
@@ -517,8 +612,9 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
 
 #[test]
 fn d1_the_earlier_seed_sets_are_closed() {
-    // A 0.2.0 seed is not a seed of 0.1.0, and the 0.3.0 seed is a seed of neither: the earlier
-    // versions refused them, and still do.
+    // A 0.2.0 seed is not a seed of 0.1.0, the 0.3.0 seed is a seed of neither, and the 0.4.0
+    // seed is a seed of none of them: the earlier versions refused them, and still do. Padding
+    // (0.4.0) is refused by every earlier version, whether commanded by the ratio or the spec.
     let style_of = |id: &str| {
         seeds(Version::CURRENT)
             .into_iter()
@@ -534,6 +630,7 @@ fn d1_the_earlier_seed_sets_are_closed() {
         "rolle_abs",
         "horses",
         "n_lt_two_pow",
+        "sqrt2_irrational",
     ] {
         let style = style_of(id);
         assert!(
@@ -545,17 +642,33 @@ fn d1_the_earlier_seed_sets_are_closed() {
             .is_err()
         );
     }
-    let style = style_of("n_lt_two_pow");
+    for id in ["n_lt_two_pow", "sqrt2_irrational"] {
+        let style = style_of(id);
+        assert!(
+            prepare_with(
+                Version::V0_2_0,
+                &config(id, &style, "informal", json!([])),
+                7
+            )
+            .is_err()
+        );
+    }
+    let style = style_of("sqrt2_irrational");
     assert!(
         prepare_with(
-            Version::V0_2_0,
-            &config("n_lt_two_pow", &style, "informal", json!([])),
+            Version::V0_3_0,
+            &config("sqrt2_irrational", &style, "informal", json!([])),
             7
         )
         .is_err()
     );
-    assert!(Version::parse("0.4.0").is_none());
-    assert_eq!(Version::CURRENT.as_str(), "0.3.0");
+    let padded_old = json!({
+        "theorem": "n_lt_two_pow", "style": "helper_lemma", "target": "informal",
+        "flaws": [padding_spec(json!(["re-derivation"]), 1, "drawn")], "padding_ratio": 0.1
+    });
+    assert!(prepare_with(Version::V0_3_0, &padded_old, 7).is_err());
+    assert!(Version::parse("0.5.0").is_none());
+    assert_eq!(Version::CURRENT.as_str(), "0.4.0");
 }
 
 #[test]
@@ -883,6 +996,306 @@ fn d5_check_t_confirms_the_tooling_caught_classes_only_as_predicted() {
             Verdict::Fail
         );
         assert_eq!(m.fidelity.verdict, Verdict::Fail);
+    }
+}
+
+#[test]
+fn d5_padding_inserts_true_irrelevant_paragraphs_with_their_unused_declarations() {
+    // ADR-0011 D2 `pad`, D5 FLAW-0013, Options 8 (0.4.0). The FLAWS.md example: every paragraph
+    // of the sqrt2_irrational seed's material, placed before the five-step argument.
+    let seed = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "sqrt2_irrational")
+        .unwrap();
+    let n = seed.padding.len() as u64;
+    assert_eq!(n, 7);
+    let example = padded(
+        "sqrt2_irrational",
+        "descent",
+        "pair",
+        json!(["restated-definition", "re-derivation"]),
+        n,
+        "before",
+    );
+    let (p, m) = build(&example, 7);
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(p.padding.len(), 7);
+    assert!(p.injection.is_none());
+    assert_eq!(gt.flaws.len(), 14, "seven instances, two records each");
+    assert_eq!(gt.proof_status, ProofStatus::Valid);
+    assert!(gt.correct);
+    assert_eq!(m.commanded["n_steps"].value, json!(12));
+    assert_eq!(m.commanded["n_lemmas"].value, json!(0));
+    assert_eq!(m.commanded["n_flaws_total"].value, json!(7));
+    assert_eq!(m.commanded["n_flaws_0013"].value, json!(7));
+    assert_eq!(m.commanded["flaws_confirmed"].value, json!(7));
+    assert_eq!(m.commanded["lean_build"].value, json!("pass"));
+    assert_eq!(m.commanded["lean_axioms_standard"].value, json!(true));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(7)));
+    assert_eq!(m.achieved["n_flaws_0013"].value, Some(json!(7)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    let ratio = m.achieved["padding_ratio"]
+        .value
+        .as_ref()
+        .and_then(Value::as_f64)
+        .unwrap();
+    assert!(ratio > 0.0 && ratio < 1.0, "{ratio}");
+    assert_eq!(m.commanded["padding_ratio"].value, json!(ratio));
+    // placement `before`: steps 1–7 are the paragraphs in drawn order, 8–12 the argument
+    let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+    assert_eq!(st.n_steps, 12);
+    let faithful: Vec<String> = seed.styles[0]
+        .steps
+        .iter()
+        .map(|s| s.text.clone())
+        .collect();
+    assert_eq!(st.steps[8..13].to_vec(), faithful);
+    let mut drawn: Vec<u64> = p.padding.iter().map(|i| i.paragraph).collect();
+    drawn.sort();
+    assert_eq!(drawn, (1..=7).collect::<Vec<u64>>(), "every paragraph once");
+    for (j, ins) in p.padding.iter().enumerate() {
+        assert_eq!(ins.instance as usize, j + 1);
+        assert_eq!(ins.site, j + 1);
+        assert_eq!(st.steps[ins.site], ins.text);
+        assert_eq!(seed.padding[ins.paragraph as usize - 1].text, ins.text);
+        assert_eq!(seed.padding[ins.paragraph as usize - 1].kind, ins.kind);
+    }
+    // the informal records span whole steps; the formal records are the declarations before
+    // the main declaration, YES-TOOLING, each confirmed by check T
+    let f = p.formal.as_ref().unwrap();
+    assert_eq!(&own_declarations(f)[7], &p.plan.main_declaration);
+    for r in &gt.flaws {
+        assert_eq!(r.class, "FLAW-0013");
+        assert_eq!(r.severity, syndeom_manifest::Severity::Cosmetic);
+        match &r.location {
+            Location::Informal(loc) => {
+                assert_eq!(r.lean_catchable, LeanCatchable::No);
+                assert_eq!(loc.span[0], 0);
+                assert_eq!(
+                    loc.span[1],
+                    st.steps[loc.step as usize].chars().count() as u64
+                );
+            }
+            Location::Formal(loc) => {
+                assert_eq!(r.lean_catchable, LeanCatchable::YesTooling);
+                assert!(loc.declaration.contains("_pad_"));
+                assert_eq!(r.dials["declaration"], json!(loc.declaration));
+                let ins = &p.padding[r.instance as usize - 1];
+                assert_eq!(ins.declaration, loc.declaration);
+                assert_eq!(f.fragment_lines[ins.site - 1].unwrap()[0], loc.line);
+            }
+            Location::Raw(_) => unreachable!(),
+        }
+    }
+    let text = String::from_utf8(f.bytes.clone()).unwrap();
+    assert!(text.starts_with("import Mathlib.Data.Nat.Notation\nimport Mathlib.Tactic.Ring\n\n"));
+    assert_eq!(
+        text.matches("\ntheorem syndeom_s2_template_sqrt2_irrational_pad_")
+            .count(),
+        7
+    );
+    assert_eq!(parse_lean(&f.bytes).unwrap().n_declarations, 8);
+    // the main declaration uses a padding declaration after all: that instance is not confirmed
+    let mut obs = predicted(&p).unwrap();
+    let pad_1 = p.padding[0].declaration.clone();
+    obs.used_constants
+        .as_mut()
+        .unwrap()
+        .get_mut(&p.plan.main_declaration)
+        .unwrap()
+        .push(pad_1);
+    let m2 = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+    assert_eq!(m2.achieved["flaws_confirmed"].value, Some(json!(6)));
+    assert_eq!(m2.fidelity.verdict, Verdict::Fail);
+    // a commanded ratio the count cannot reach is a FAIL verdict, not a refusal (D4, D8)
+    let mut off = example.clone();
+    off["padding_ratio"] = json!(ratio + 0.2);
+    let (_, m3) = build(&off, 7);
+    assert_eq!(m3.fidelity.per_statistic["padding_ratio"], Verdict::Fail);
+    assert_eq!(m3.fidelity.verdict, Verdict::Fail);
+    assert_eq!(m3.achieved["flaws_confirmed"].value, Some(json!(7)));
+    let mut close = example.clone();
+    close["padding_ratio"] = json!(ratio - 0.04);
+    let (_, m4) = build(&close, 7);
+    assert_eq!(m4.fidelity.verdict, Verdict::Pass, "within abs 0.05");
+
+    // the padded control: one re-derivation at a drawn position, the argument's order kept
+    let light = padded(
+        "sqrt2_irrational",
+        "descent",
+        "pair",
+        json!(["re-derivation"]),
+        1,
+        "drawn",
+    );
+    let (p, m) = build(&light, 7);
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(p.padding.len(), 1);
+    assert_eq!(gt.flaws.len(), 2);
+    assert_eq!(p.padding[0].kind, PaddingKind::ReDerivation);
+    assert!(p.padding[0].paragraph >= 5, "a re-derivation paragraph");
+    assert_eq!(m.commanded["n_steps"].value, json!(6));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+    let site = p.padding[0].site;
+    assert!((1..=5).contains(&site), "before an existing step: {site}");
+    let mut rest: Vec<String> = st.steps[1..].to_vec();
+    rest.remove(site - 1);
+    assert_eq!(rest, faithful);
+    // the same (config, seed) draws the same paragraph and position; the stream is `padding`
+    let (p2, _) = build(&light, 7);
+    assert_eq!(p2.padding, p.padding);
+    // informal-only and formal-only: records in that file alone; the formal-only ratio is over
+    // the declarations' tokens
+    for target in ["informal", "formal"] {
+        let c = padded(
+            "sqrt2_irrational",
+            "descent",
+            target,
+            json!(["restated-definition", "re-derivation"]),
+            n,
+            "before",
+        );
+        let (_, m) = build(&c, 7);
+        let flaws = &m.ground_truth.as_ref().unwrap().flaws;
+        assert_eq!(flaws.len(), 7, "{target}");
+        assert!(flaws.iter().all(|r| match &r.location {
+            Location::Informal(_) => target == "informal",
+            Location::Formal(_) => target == "formal",
+            Location::Raw(_) => false,
+        }));
+        let ratio = m.achieved["padding_ratio"]
+            .value
+            .as_ref()
+            .and_then(Value::as_f64)
+            .unwrap();
+        assert!(ratio > 0.0 && ratio < 1.0, "{target}: {ratio}");
+        assert_eq!(m.fidelity.verdict, Verdict::Pass, "{target}");
+    }
+    // a control of the seed is unpadded and unflawed
+    let (_, m) = build(&config("sqrt2_irrational", "descent", "pair", json!([])), 7);
+    assert!(m.ground_truth.as_ref().unwrap().flaws.is_empty());
+    assert_eq!(m.achieved["padding_ratio"].value, Some(json!(0.0)));
+    assert_eq!(m.commanded["n_steps"].value, json!(5));
+}
+
+#[test]
+fn d3_padding_is_commanded_by_a_flaw_0013_spec_with_a_positive_ratio_and_refused_otherwise() {
+    let s2 = |flaws: Value, ratio: Value| json!({"theorem": "sqrt2_irrational", "style": "descent", "target": "pair", "flaws": flaws, "padding_ratio": ratio});
+    let kinds = json!(["restated-definition", "re-derivation"]);
+    let ok = s2(json!([padding_spec(kinds.clone(), 2, "drawn")]), json!(0.2));
+    assert!(prepare(&ok, 7).is_ok());
+    let refusals = [
+        // the ratio and the spec go together
+        s2(json!([]), json!(0.2)),
+        s2(json!([padding_spec(kinds.clone(), 2, "drawn")]), json!(0)),
+        // the spec's shape: no sub-variant, no explicit site, cosmetic only, exactly three dials
+        s2(
+            json!([spec(
+                "FLAW-0013",
+                Some("unused-lemma"),
+                "cosmetic",
+                json!({"kinds": kinds, "count": 1, "placement": "drawn"})
+            )]),
+            json!(0.2),
+        ),
+        s2(
+            json!([{"class": "FLAW-0013", "sub_variant": null, "severity": "cosmetic", "site": 1, "dials": {"kinds": kinds, "count": 1, "placement": "drawn"}}]),
+            json!(0.2),
+        ),
+        s2(
+            json!([spec(
+                "FLAW-0013",
+                None,
+                "gap",
+                json!({"kinds": kinds, "count": 1, "placement": "drawn"})
+            )]),
+            json!(0.2),
+        ),
+        s2(
+            json!([spec(
+                "FLAW-0013",
+                None,
+                "cosmetic",
+                json!({"kinds": kinds, "count": 1})
+            )]),
+            json!(0.2),
+        ),
+        s2(
+            json!([spec(
+                "FLAW-0013",
+                None,
+                "cosmetic",
+                json!({"kinds": kinds, "count": 1, "placement": "drawn", "ratio": 0.2})
+            )]),
+            json!(0.2),
+        ),
+        s2(
+            json!([spec(
+                "FLAW-0013",
+                None,
+                "cosmetic",
+                json!({"kinds": kinds, "count": 1, "placement": "drawn", "kind": "re-derivation"})
+            )]),
+            json!(0.2),
+        ),
+        s2(
+            json!([spec(
+                "FLAW-0013",
+                None,
+                "cosmetic",
+                json!({"kinds": kinds, "count": 1, "placement": "drawn", "paragraph": 1})
+            )]),
+            json!(0.2),
+        ),
+        // the dials' values
+        s2(json!([padding_spec(json!([]), 1, "drawn")]), json!(0.2)),
+        s2(
+            json!([padding_spec(
+                json!(["re-derivation", "re-derivation"]),
+                1,
+                "drawn"
+            )]),
+            json!(0.2),
+        ),
+        s2(
+            json!([padding_spec(json!(["restated-lemma"]), 1, "drawn")]),
+            json!(0.2),
+        ),
+        s2(json!([padding_spec(kinds.clone(), 0, "drawn")]), json!(0.2)),
+        s2(json!([padding_spec(kinds.clone(), 8, "drawn")]), json!(0.2)),
+        s2(
+            json!([padding_spec(json!(["re-derivation"]), 4, "drawn")]),
+            json!(0.2),
+        ),
+        s2(
+            json!([padding_spec(json!(["unused-lemma"]), 1, "drawn")]),
+            json!(0.2),
+        ),
+        s2(
+            json!([padding_spec(json!(["verbose-rewrite"]), 1, "drawn")]),
+            json!(0.2),
+        ),
+        s2(json!([padding_spec(kinds.clone(), 1, "after")]), json!(0.2)),
+        // one spec per artifact: padding and an injected flaw together are a later version
+        s2(
+            json!([
+                padding_spec(kinds.clone(), 1, "drawn"),
+                spec(
+                    "FLAW-0007",
+                    Some("unused"),
+                    "cosmetic",
+                    json!({"count": 1, "length_steps": 1})
+                )
+            ]),
+            json!(0.2),
+        ),
+        // a seed without padding material, and a false statement
+        json!({"theorem": "nat_le_sq", "style": "two_cases", "target": "pair", "flaws": [padding_spec(kinds.clone(), 1, "drawn")], "padding_ratio": 0.2}),
+        json!({"theorem": "horses", "style": "induction", "target": "pair", "flaws": [padding_spec(kinds, 1, "drawn")], "padding_ratio": 0.2}),
+    ];
+    for c in refusals {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
     }
 }
 
