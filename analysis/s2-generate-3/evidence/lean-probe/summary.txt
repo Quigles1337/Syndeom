@@ -1,0 +1,9 @@
+nltp_faithful exit=0 start=20:08:06 end=20:08:10
+nltp_axiom_true exit=0 start=20:08:10 end=20:08:13
+nltp_axiom_false exit=0 start=20:08:13 end=20:08:16
+nltp_unused exit=0 start=20:08:16 end=20:08:20
+nltp_witness exit=0 start=20:08:20 end=20:08:23
+=== PROBE end
+nltp_tail_map2 exit=0 start=20:17:02 end=20:17:06
+nltp_tail_fold exit=0 start=20:17:06 end=20:17:09
+=== PROBE end

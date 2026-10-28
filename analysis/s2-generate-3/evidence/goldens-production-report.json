@@ -1,0 +1,865 @@
+{
+ "run_a": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-030-20261028T2005Z/goldens-3a",
+ "run_b": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-030-20261028T2005Z/goldens-3b",
+ "cases": [
+  {
+   "case": "n_lt_two_pow/control-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "837a269b5bfacb56e119df2fb12e60be3c19b05ff225a44c3715193c2c45f1f9",
+     "bytes": 331,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "179a3ea5b52fbdab77b8355e901a94c208ba98016cffb9e77479214418199878",
+     "bytes": 2909,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_template_n_lt_two_pow": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLENat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+      "Bool",
+      "Bool.true",
+      "Decidable.byContradiction",
+      "Decidable.decide",
+      "Eq",
+      "Eq.mpr",
+      "Eq.refl",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "LT.lt",
+      "Nat",
+      "Nat.decLt",
+      "Nat.pow_succ",
+      "Nat.recAux",
+      "Nat.succ",
+      "Not",
+      "OfNat.ofNat",
+      "congrArg",
+      "id",
+      "instAddNat",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instLTNat",
+      "instMulNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "of_decide_eq_true",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1._proof_1_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1._proof_1_1": [
+      "Bool",
+      "Bool.true",
+      "Decidable.decide",
+      "Eq",
+      "Eq.refl",
+      "Eq.symm",
+      "Eq.trans",
+      "False",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "HSub.hSub",
+      "Int",
+      "Int.add_one_le_of_lt",
+      "Int.instAdd",
+      "Int.instDecidableEq",
+      "Int.instLEInt",
+      "Int.instMul",
+      "Int.instNatPow",
+      "Int.instNegInt",
+      "Int.instSub",
+      "Int.natCast_add",
+      "Int.natCast_mul",
+      "Int.natCast_nonneg",
+      "Int.sub_nonneg_of_le",
+      "LT.lt",
+      "Lean.Omega.Coeffs.isZero",
+      "Lean.Omega.Coeffs.ofList",
+      "Lean.Omega.Constraint.addInequality_sat",
+      "Lean.Omega.Constraint.combine_sat'",
+      "Lean.Omega.Constraint.isImpossible",
+      "Lean.Omega.Constraint.mk",
+      "Lean.Omega.Constraint.not_sat'_of_isImpossible",
+      "Lean.Omega.Int.add_congr",
+      "Lean.Omega.Int.mul_congr",
+      "Lean.Omega.Int.ofNat_le_of_le",
+      "Lean.Omega.Int.ofNat_lt_of_lt",
+      "Lean.Omega.Int.ofNat_pow",
+      "Lean.Omega.Int.sub_congr",
+      "Lean.Omega.LinearCombo",
+      "Lean.Omega.LinearCombo.add_eval",
+      "Lean.Omega.LinearCombo.coordinate",
+      "Lean.Omega.LinearCombo.coordinate_eval_0",
+      "Lean.Omega.LinearCombo.coordinate_eval_1",
+      "Lean.Omega.LinearCombo.eval",
+      "Lean.Omega.LinearCombo.instAdd",
+      "Lean.Omega.LinearCombo.instSub",
+      "Lean.Omega.LinearCombo.mk",
+      "Lean.Omega.LinearCombo.mul",
+      "Lean.Omega.LinearCombo.mul_eval",
+      "Lean.Omega.LinearCombo.sub_eval",
+      "Lean.Omega.combo_sat'",
+      "Lean.Omega.tidy_sat",
+      "List.cons",
+      "List.decidableBAll",
+      "List.nil",
+      "Nat",
+      "Nat.cast",
+      "Nat.le_of_not_lt",
+      "Neg.neg",
+      "Not",
+      "OfNat.ofNat",
+      "Option.none",
+      "Option.some",
+      "Or",
+      "id",
+      "instAddNat",
+      "instDecidableEqBool",
+      "instDecidableOr",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instHSub",
+      "instLTNat",
+      "instMulNat",
+      "instNatCastInt",
+      "instNatPowNat",
+      "instOfNat",
+      "instOfNatNat",
+      "instPowNat",
+      "le_of_le_of_eq",
+      "of_decide_eq_true"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-a66bf629fb89-s7",
+   "probe": {
+    "file": "nltp_faithful.lean",
+    "golden_is_probe_without_its_tail": true,
+    "probe_sha256": "5459af3a6e4749ee2d06f70ca64d9edf4b5f6c7fd0e3177b8f7b88b7fce5feb4"
+   }
+  },
+  {
+   "case": "n_lt_two_pow/control-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "1302b189a7b2b031a821a2e7c07640caa6bcf757052e9095700f70670d381038",
+     "bytes": 2699,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "ab1a285e491df249157d3c983864b764465946f6efce2993025f0ea06973f1b2",
+     "bytes": 425,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-301add18edb4-s7"
+  },
+  {
+   "case": "n_lt_two_pow/flaw-0007-unused-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "5d4dcfb25ca34f300fe59e21ca6c6c25532e60bdd1cb2281bde45f25b9ec7453",
+     "bytes": 469,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "19408fbd223b96fd2a3deca2fe2799fcb2c0ccb33544f2d42b311e16d254c861",
+     "bytes": 4173,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_template_n_lt_two_pow": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLENat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+      "Bool",
+      "Bool.true",
+      "Decidable.byContradiction",
+      "Decidable.decide",
+      "Eq",
+      "Eq.mpr",
+      "Eq.refl",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "LT.lt",
+      "Nat",
+      "Nat.decLt",
+      "Nat.pow_succ",
+      "Nat.recAux",
+      "Nat.succ",
+      "Not",
+      "OfNat.ofNat",
+      "congrArg",
+      "id",
+      "instAddNat",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instLTNat",
+      "instMulNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "of_decide_eq_true",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1._proof_1_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1._proof_1_1": [
+      "Bool",
+      "Bool.true",
+      "Decidable.decide",
+      "Eq",
+      "Eq.refl",
+      "Eq.symm",
+      "Eq.trans",
+      "False",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "HSub.hSub",
+      "Int",
+      "Int.add_one_le_of_lt",
+      "Int.instAdd",
+      "Int.instDecidableEq",
+      "Int.instLEInt",
+      "Int.instMul",
+      "Int.instNatPow",
+      "Int.instNegInt",
+      "Int.instSub",
+      "Int.natCast_add",
+      "Int.natCast_mul",
+      "Int.natCast_nonneg",
+      "Int.sub_nonneg_of_le",
+      "LT.lt",
+      "Lean.Omega.Coeffs.isZero",
+      "Lean.Omega.Coeffs.ofList",
+      "Lean.Omega.Constraint.addInequality_sat",
+      "Lean.Omega.Constraint.combine_sat'",
+      "Lean.Omega.Constraint.isImpossible",
+      "Lean.Omega.Constraint.mk",
+      "Lean.Omega.Constraint.not_sat'_of_isImpossible",
+      "Lean.Omega.Int.add_congr",
+      "Lean.Omega.Int.mul_congr",
+      "Lean.Omega.Int.ofNat_le_of_le",
+      "Lean.Omega.Int.ofNat_lt_of_lt",
+      "Lean.Omega.Int.ofNat_pow",
+      "Lean.Omega.Int.sub_congr",
+      "Lean.Omega.LinearCombo",
+      "Lean.Omega.LinearCombo.add_eval",
+      "Lean.Omega.LinearCombo.coordinate",
+      "Lean.Omega.LinearCombo.coordinate_eval_0",
+      "Lean.Omega.LinearCombo.coordinate_eval_1",
+      "Lean.Omega.LinearCombo.eval",
+      "Lean.Omega.LinearCombo.instAdd",
+      "Lean.Omega.LinearCombo.instSub",
+      "Lean.Omega.LinearCombo.mk",
+      "Lean.Omega.LinearCombo.mul",
+      "Lean.Omega.LinearCombo.mul_eval",
+      "Lean.Omega.LinearCombo.sub_eval",
+      "Lean.Omega.combo_sat'",
+      "Lean.Omega.tidy_sat",
+      "List.cons",
+      "List.decidableBAll",
+      "List.nil",
+      "Nat",
+      "Nat.cast",
+      "Nat.le_of_not_lt",
+      "Neg.neg",
+      "Not",
+      "OfNat.ofNat",
+      "Option.none",
+      "Option.some",
+      "Or",
+      "id",
+      "instAddNat",
+      "instDecidableEqBool",
+      "instDecidableOr",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instHSub",
+      "instLTNat",
+      "instMulNat",
+      "instNatCastInt",
+      "instNatPowNat",
+      "instOfNat",
+      "instOfNatNat",
+      "instPowNat",
+      "le_of_le_of_eq",
+      "of_decide_eq_true"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_2": [
+      "Eq",
+      "Eq.mpr",
+      "HMul.hMul",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "Nat.le_mul_self",
+      "Nat.pow_two",
+      "OfNat.ofNat",
+      "congrArg",
+      "id",
+      "instHMul",
+      "instHPow",
+      "instLENat",
+      "instMulNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-a8e03589f863-s7",
+   "probe": {
+    "file": "nltp_unused.lean",
+    "golden_is_probe_without_its_tail": true,
+    "probe_sha256": "ab5cb6c2372ad6da49a3669e27d6de67b3fe2f400d128a26b3e45d946048aa01"
+   }
+  },
+  {
+   "case": "n_lt_two_pow/flaw-0007-unused-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "91ba696147b3e9e0fb3e284b94567728cb7aa7124a35f6e6840a2fe924d96c6c",
+     "bytes": 3845,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "d721f2b8fecad1873ea1b3eda66390ab133194bd6ec006b61db41e507c52f0a6",
+     "bytes": 594,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-057c6b09e6ee-s7"
+  },
+  {
+   "case": "n_lt_two_pow/flaw-0007-unused-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "5d4dcfb25ca34f300fe59e21ca6c6c25532e60bdd1cb2281bde45f25b9ec7453",
+     "bytes": 469,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "213a9b8abd08d75ef644475209cfead202ec5743a23ac00fd8db5ddc32dd4def",
+     "bytes": 5628,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "d721f2b8fecad1873ea1b3eda66390ab133194bd6ec006b61db41e507c52f0a6",
+     "bytes": 594,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_template_n_lt_two_pow": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLENat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+      "Bool",
+      "Bool.true",
+      "Decidable.byContradiction",
+      "Decidable.decide",
+      "Eq",
+      "Eq.mpr",
+      "Eq.refl",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "LT.lt",
+      "Nat",
+      "Nat.decLt",
+      "Nat.pow_succ",
+      "Nat.recAux",
+      "Nat.succ",
+      "Not",
+      "OfNat.ofNat",
+      "congrArg",
+      "id",
+      "instAddNat",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instLTNat",
+      "instMulNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "of_decide_eq_true",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1._proof_1_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1._proof_1_1": [
+      "Bool",
+      "Bool.true",
+      "Decidable.decide",
+      "Eq",
+      "Eq.refl",
+      "Eq.symm",
+      "Eq.trans",
+      "False",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "HSub.hSub",
+      "Int",
+      "Int.add_one_le_of_lt",
+      "Int.instAdd",
+      "Int.instDecidableEq",
+      "Int.instLEInt",
+      "Int.instMul",
+      "Int.instNatPow",
+      "Int.instNegInt",
+      "Int.instSub",
+      "Int.natCast_add",
+      "Int.natCast_mul",
+      "Int.natCast_nonneg",
+      "Int.sub_nonneg_of_le",
+      "LT.lt",
+      "Lean.Omega.Coeffs.isZero",
+      "Lean.Omega.Coeffs.ofList",
+      "Lean.Omega.Constraint.addInequality_sat",
+      "Lean.Omega.Constraint.combine_sat'",
+      "Lean.Omega.Constraint.isImpossible",
+      "Lean.Omega.Constraint.mk",
+      "Lean.Omega.Constraint.not_sat'_of_isImpossible",
+      "Lean.Omega.Int.add_congr",
+      "Lean.Omega.Int.mul_congr",
+      "Lean.Omega.Int.ofNat_le_of_le",
+      "Lean.Omega.Int.ofNat_lt_of_lt",
+      "Lean.Omega.Int.ofNat_pow",
+      "Lean.Omega.Int.sub_congr",
+      "Lean.Omega.LinearCombo",
+      "Lean.Omega.LinearCombo.add_eval",
+      "Lean.Omega.LinearCombo.coordinate",
+      "Lean.Omega.LinearCombo.coordinate_eval_0",
+      "Lean.Omega.LinearCombo.coordinate_eval_1",
+      "Lean.Omega.LinearCombo.eval",
+      "Lean.Omega.LinearCombo.instAdd",
+      "Lean.Omega.LinearCombo.instSub",
+      "Lean.Omega.LinearCombo.mk",
+      "Lean.Omega.LinearCombo.mul",
+      "Lean.Omega.LinearCombo.mul_eval",
+      "Lean.Omega.LinearCombo.sub_eval",
+      "Lean.Omega.combo_sat'",
+      "Lean.Omega.tidy_sat",
+      "List.cons",
+      "List.decidableBAll",
+      "List.nil",
+      "Nat",
+      "Nat.cast",
+      "Nat.le_of_not_lt",
+      "Neg.neg",
+      "Not",
+      "OfNat.ofNat",
+      "Option.none",
+      "Option.some",
+      "Or",
+      "id",
+      "instAddNat",
+      "instDecidableEqBool",
+      "instDecidableOr",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instHSub",
+      "instLTNat",
+      "instMulNat",
+      "instNatCastInt",
+      "instNatPowNat",
+      "instOfNat",
+      "instOfNatNat",
+      "instPowNat",
+      "le_of_le_of_eq",
+      "of_decide_eq_true"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_2": [
+      "Eq",
+      "Eq.mpr",
+      "HMul.hMul",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "Nat.le_mul_self",
+      "Nat.pow_two",
+      "OfNat.ofNat",
+      "congrArg",
+      "id",
+      "instHMul",
+      "instHPow",
+      "instLENat",
+      "instMulNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-e3cf5c1a91ae-s7",
+   "probe": {
+    "file": "nltp_unused.lean",
+    "golden_is_probe_without_its_tail": true,
+    "probe_sha256": "ab5cb6c2372ad6da49a3669e27d6de67b3fe2f400d128a26b3e45d946048aa01"
+   }
+  },
+  {
+   "case": "n_lt_two_pow/flaw-0009-fatal-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "dc5bdafd8aabbac8fb7ba2eff863e283409f3ff120737bdec9aa0f5517a92269",
+     "bytes": 252,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "2c7468c6bcdd588e3f4289ccc62e73ebe46bedacb534d477f2364721f5c58b23",
+     "bytes": 4606,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "syndeom_s2_template_n_lt_two_pow_lemma_1"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_template_n_lt_two_pow": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "Nat.le_of_lt",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLENat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LT.lt",
+      "Nat",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLTNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-0e14a45c6007-s7",
+   "probe": {
+    "file": "nltp_axiom_false.lean",
+    "golden_is_probe_without_its_tail": true,
+    "probe_sha256": "69ac30876d4bdf71a8df2d795774be3e02b611d44e97eb55cc22938ed559645d"
+   }
+  },
+  {
+   "case": "n_lt_two_pow/flaw-0009-fatal-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "dc5bdafd8aabbac8fb7ba2eff863e283409f3ff120737bdec9aa0f5517a92269",
+     "bytes": 252,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "31ff3da0be3d0af43ce70fa0c04a7058cae5ba6b0c708897e97f6203c354d4f2",
+     "bytes": 5383,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "ab1a285e491df249157d3c983864b764465946f6efce2993025f0ea06973f1b2",
+     "bytes": 425,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "syndeom_s2_template_n_lt_two_pow_lemma_1"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_template_n_lt_two_pow": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "Nat.le_of_lt",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLENat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LT.lt",
+      "Nat",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLTNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-20216e43f213-s7",
+   "probe": {
+    "file": "nltp_axiom_false.lean",
+    "golden_is_probe_without_its_tail": true,
+    "probe_sha256": "69ac30876d4bdf71a8df2d795774be3e02b611d44e97eb55cc22938ed559645d"
+   }
+  },
+  {
+   "case": "n_lt_two_pow/flaw-0009-gap-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "ca13ba96bac80db6c3e223b815a2440a5c3c5524d2a777514fa4b3954ac76161",
+     "bytes": 233,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "8aa8d7e5241dabf53b037f9049336f42e0fac2d0309bfa0e0747be1dc681acbb",
+     "bytes": 4497,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "syndeom_s2_template_n_lt_two_pow_lemma_1"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_template_n_lt_two_pow": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLENat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+      "HPow.hPow",
+      "LT.lt",
+      "Nat",
+      "OfNat.ofNat",
+      "instHPow",
+      "instLTNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-38df27ba3c69-s7",
+   "probe": {
+    "file": "nltp_axiom_true.lean",
+    "golden_is_probe_without_its_tail": true,
+    "probe_sha256": "f8723c5960b8bf1fc9d05d38e56225ad08f86dd41ddcb6dbab5b81a85ff92900"
+   }
+  },
+  {
+   "case": "n_lt_two_pow/flaw-0009-gap-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "ca13ba96bac80db6c3e223b815a2440a5c3c5524d2a777514fa4b3954ac76161",
+     "bytes": 233,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "bf8d34b1550c87fab3c2fbb51eb91cbe3bf00de84eea4cfb082852b3fec04105",
+     "bytes": 5274,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "ab1a285e491df249157d3c983864b764465946f6efce2993025f0ea06973f1b2",
+     "bytes": 425,
+     "identical": true
+    }
+   },
+   "engine_commit": "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "syndeom_s2_template_n_lt_two_pow_lemma_1"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_template_n_lt_two_pow": [
+      "HAdd.hAdd",
+      "HPow.hPow",
+      "LE.le",
+      "Nat",
+      "OfNat.ofNat",
+      "instAddNat",
+      "instHAdd",
+      "instHPow",
+      "instLENat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat",
+      "syndeom_s2_template_n_lt_two_pow_lemma_1"
+     ],
+     "syndeom_s2_template_n_lt_two_pow_lemma_1": [
+      "HPow.hPow",
+      "LT.lt",
+      "Nat",
+      "OfNat.ofNat",
+      "instHPow",
+      "instLTNat",
+      "instNatPowNat",
+      "instOfNatNat",
+      "instPowNat"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.3.0-51f145606f69-s7",
+   "probe": {
+    "file": "nltp_axiom_true.lean",
+    "golden_is_probe_without_its_tail": true,
+    "probe_sha256": "f8723c5960b8bf1fc9d05d38e56225ad08f86dd41ddcb6dbab5b81a85ff92900"
+   }
+  }
+ ],
+ "all_byte_identical": true,
+ "probes": {
+  "n_lt_two_pow/control-formal": true,
+  "n_lt_two_pow/flaw-0007-unused-formal": true,
+  "n_lt_two_pow/flaw-0007-unused-pair": true,
+  "n_lt_two_pow/flaw-0009-fatal-formal": true,
+  "n_lt_two_pow/flaw-0009-fatal-pair": true,
+  "n_lt_two_pow/flaw-0009-gap-formal": true,
+  "n_lt_two_pow/flaw-0009-gap-pair": true
+ },
+ "engine_commits": [
+  "5a313ddf8de6a870c2f41c9d65d8cb87a1595b2e"
+ ]
+}

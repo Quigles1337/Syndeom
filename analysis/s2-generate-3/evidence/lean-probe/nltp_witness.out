@@ -1,0 +1,2 @@
+'syndeom_seed_n_lt_two_pow' depends on axioms: [propext, Quot.sound]
+'syndeom_seed_n_lt_two_pow_lemma_false' does not depend on any axioms

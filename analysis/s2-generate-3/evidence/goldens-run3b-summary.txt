@@ -1,0 +1,46 @@
+n_lt_two_pow/control-informal exit=0 start=2026-10-28T20:33:31.733Z end=2026-10-28T20:33:34.111Z
+s2_template-v0.3.0-301add18edb4-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/control-formal exit=0 start=2026-10-28T20:33:34.112Z end=2026-10-28T20:33:43.185Z
+s2_template-v0.3.0-a66bf629fb89-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/flaw-0009-gap-formal exit=0 start=2026-10-28T20:33:43.187Z end=2026-10-28T20:33:52.934Z
+s2_template-v0.3.0-38df27ba3c69-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/flaw-0009-gap-pair exit=0 start=2026-10-28T20:33:52.935Z end=2026-10-28T20:34:02.324Z
+s2_template-v0.3.0-51f145606f69-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/flaw-0009-fatal-formal exit=0 start=2026-10-28T20:34:02.326Z end=2026-10-28T20:34:11.191Z
+s2_template-v0.3.0-0e14a45c6007-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/flaw-0009-fatal-pair exit=0 start=2026-10-28T20:34:11.192Z end=2026-10-28T20:34:20.064Z
+s2_template-v0.3.0-20216e43f213-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/flaw-0007-unused-informal exit=0 start=2026-10-28T20:34:20.065Z end=2026-10-28T20:34:22.376Z
+s2_template-v0.3.0-057c6b09e6ee-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/flaw-0007-unused-formal exit=0 start=2026-10-28T20:34:22.378Z end=2026-10-28T20:34:31.327Z
+s2_template-v0.3.0-a8e03589f863-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+n_lt_two_pow/flaw-0007-unused-pair exit=0 start=2026-10-28T20:34:31.328Z end=2026-10-28T20:34:40.730Z
+s2_template-v0.3.0-e3cf5c1a91ae-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end
