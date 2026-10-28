@@ -1,6 +1,60 @@
 # STATE
 
-- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 40:
+- **Updated:** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 41:
+  - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim followed by an
+    owner note, in a fresh conversation;
+  - SD15 disclosure first, **by digest** (ADR-0005 *Amendments* 1–3). The matched index lines
+    (85, 86, 88, 89, 106, 107; `0418e621…534c`; 104 withheld) and the SYNDEOM memory file
+    (`ce2ce6de…2cc0`) are the bytes Session 35's Entry 1 reproduced, verified by hashing
+    HANDOFF's lines in HANDOFF Session 41, Entry 2;
+  - **not an examination**: the owner note carries program state, and Gate S2 has nothing to
+    examine. The session certifies nothing.
+
+  **`s2_template` 0.2.0 is built** (STATE's NEXT as it stood: S2 ordering step 4, continued) on
+  branch `claude/s2-template-0.2.0`, in four commits, for Al's review. `main` is unchanged until
+  Al merges.
+  - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main`
+    **synchronized** with fetched `origin/main` `de3e4a62fde75eea2c80c17ac6210955bb868a0f`, tree
+    `4117ac9d979c9c837de533e14baa8a562f870c4d`, with the disclosure append the only change.
+    - That is **PR 26's merge** (by Al, 2026-10-28T18:10:24Z; parents `f9f9730` and `c4250d8`),
+      so `21f8359` is a real commit on `main`.
+    - The receipt is `orient-1.json` under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1815Z\`.
+    - The ORIENT gate was GREEN (*Current build verification*).
+  - **Al's owner note of 2026-10-28** (verbatim under *Standing rulings*; ADR-0011 *Amendments*;
+    HANDOFF Session 41, Entry 3) was recorded first (`da2bd83`): ADR-0001 stays unedited on
+    flaw-count units, and a pair's injected instance is confirmed only when both of its records
+    pass their checks.
+  - **Commits:**
+    - `da2bd83` the records;
+    - `af28cc96aa75cbabb0a6171d4c636a8cbc87f773` the 0.2.0 producer: build-time input hashes
+      (`input-set.txt`, `build.rs`, `src/provenance.rs`; FINDING-005 closed), the version
+      selection (0.1.0 and 0.2.0 in one crate; `generate` emits 0.2.0), counts per instance, the
+      seeds `continuity_is_not_uniform`, `x_over_abs_x`, `rolle_abs` and `horses`, their witness
+      modules, `Audit.lean` (eight lines) and the tests;
+    - `d7b5d81` the 14 goldens of 0.2.0;
+    - the record commit: `analysis/s2-generate-2/`, this file and HANDOFF.
+  - **Measured at implementation** (`analysis/s2-generate-2/README.md`):
+    - eight Lean probes compiled one process at a time before any seed record was written: the
+      three convincing arguments fail exactly at their flaw sites, and the faithful argument and
+      the three negation witnesses build with the standard three axioms;
+    - the 12 goldens of 0.1.0 regenerate byte for byte under 0.1.0, and the 14 of 0.2.0 under
+      0.2.0 (fidelity PASS; check K at lines 6, 4, 7 and 20; every flawed formal and pair golden
+      byte-identical to its probe; every pair one instance with two records);
+    - the provenance test: the compiled hashes cover exactly the input set on disk, and the CLI
+      refuses an ancestor commit that lacks the crate (exit 2);
+    - `cargo audit` clean (advisory-db `40f5be6f…`; `Cargo.lock` unchanged); the security review
+      of the new code found nothing above informational.
+  - **Readings flagged for Al** (ADR-0011 *Amendments*; packet readings 13–20): seeds whose
+    statement is false have no control and intrinsic material; FLAW-0006's mode for the horses;
+    the no-binders header; both versions in one crate; the FLAW-0002 theorem and its gap
+    severity; `rolle_abs` in `HasDerivAt` form; the horses formalization; `omega`'s message.
+  - **Not yet built:** `s2_grammar`, padding (FLAW-0013), lemma steps, the T check, the seeds
+    for the remaining FLAWS.md examples (FLAW-0003, 0004, 0007, 0008, 0009, 0010, 0011, 0012 and
+    0013), and the sweep (ADR-0011 D11).
+  - **Unchanged:** registers' statuses, the manifests under `groundtruth/`, frozen packets, the
+    Gate S1 table, the constitution, the licence, the tag, `corpora/` (no artifact written) and
+    every 0.1.0 golden. **NEXT** waits on this pull request's merge.
+- **Previous update (Session 40):** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 40:
   - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
     fresh conversation;
   - SD15 disclosure first, **by digest** (ADR-0005 *Amendments* 1–3). The matched index lines
@@ -1431,7 +1485,9 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   (*Amendments* 3: the two readings confirmed and the provisional header's UTC date, Al's owner
   note of 2026-10-28); ADR-0013 the first later prefix's inventory event — written, implemented
   and measured Session 39 (2026-10-28), accepted as amended by Al's rulings of 2026-10-28 on PR 25
-  (*Amendments* 1), in effect at the merge; ADR-0014 is the next free number.**
+  (*Amendments* 1), in effect at the merge; ADR-0011 amended Session 41 (*Amendments*: Al's
+  owner note of 2026-10-28, with `s2_template` 0.2.0's amendment; PR pending); ADR-0014 is
+  the next free number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
   **count in proof-flaw cells and are excluded from every cell that uses the truth dimension,
@@ -1590,10 +1646,10 @@ Owner note, to act on only after you have disclosed and oriented, and to record 
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code. Session 40 (PR pending): the crate `engine/generate/` is built — the plan, both renderers, the injector, `syndeom-rng/1`, the Lean harness and `s2_template` 0.1.0 with three seeds; `s2_grammar`, padding and lemma steps are not yet** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*); `engine/generate/`; `analysis/s2-generate-1/README.md` |
-| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress (Session 40, PR pending): implemented for `s2_template` 0.1.0 — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; no T check, no padding yet** | `engine/generate/src/template.rs`; `analysis/s2-generate-1/README.md` (readings 2–5 flagged for Al) |
-| S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **in progress (Session 40, PR pending): every manifest self-checked before writing; determinism and id tests; engine-commit verification; `regenerate` reproduces `content_hash`** | `engine/generate/tests/properties.rs`, `tests/goldens.rs`; FINDING-005 (binary provenance) is to be closed by 0.2.0's build-time input hashes (Al's ruling 5 on PR 26) |
-| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **in progress (Session 40, PR pending): property and refusal tests; Golden A/B writer test; 12 goldens for three seeds (FLAW-0001, FLAW-0014 and the controls); clippy clean; `cargo audit` clean; security review recorded; the RNG verified against published reference vectors (S-0081; ruling 4)** | `engine/generate/tests/`; `analysis/s2-generate-1/` |
+| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code. Session 40 (merged as PR 26): the crate `engine/generate/` — the plan, both renderers, the injector, `syndeom-rng/1`, the Lean harness and `s2_template` 0.1.0 with three seeds. Session 41 (PR pending): `s2_template` 0.2.0 — four more seeds from the FLAWS.md examples (FLAW-0002 gap, FLAW-0005 violated, FLAW-0006 and FLAW-0014 fatal), three of them seeds whose statement is false (no control, intrinsic material, negation witnesses); `s2_grammar`, padding and lemma steps are not yet** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*); `engine/generate/`; `analysis/s2-generate-1/README.md`; `analysis/s2-generate-2/README.md` |
+| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress: implemented for `s2_template` 0.1.0 (Session 40, PR 26) and 0.2.0 (Session 41, PR pending) — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; from 0.2.0 the counts are per instance and a pair's instance is confirmed only when both of its records pass (ruling 3 on PR 26; Al's owner note of 2026-10-28); no T check, no padding yet** | `engine/generate/src/template.rs`; `analysis/s2-generate-2/README.md` (readings 13–20 flagged for Al) |
+| S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **in progress: every manifest self-checked before writing; determinism and id tests; `regenerate` reproduces `content_hash`; from 0.2.0 the running binary's compiled input hashes, the engine commit's blobs and the checkout must agree on every input (FINDING-005 closed, Session 41); 26 goldens regenerate under the version their manifests name** | `engine/generate/tests/properties.rs`, `tests/goldens.rs`, `tests/provenance.rs`; `engine/generate/src/provenance.rs`, `build.rs`, `input-set.txt` |
+| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **in progress: property and refusal tests; Golden A/B writer test; 26 goldens for seven seeds (12 of 0.1.0, 14 of 0.2.0, each pair counted once); clippy clean; `cargo audit` clean (advisory-db `40f5be6f…`, Sessions 40 and 41); security reviews recorded (packets 1 and 2); the RNG verified against published reference vectors (S-0081; ruling 4)** | `engine/generate/tests/`; `analysis/s2-generate-1/`; `analysis/s2-generate-2/` |
 | Fidelity sweep report (commanded vs achieved flaw presence across the parameter grid, tolerances stated) | **open** | — |
 | Goldens green; lint and audit clean | **open** | — |
 | Cold-start test (§2, SD15) | **open** | — |
@@ -1652,6 +1708,15 @@ Owner note, to act on only after you have disclosed and oriented, and to record 
 
 ## Standing escalations and dispositions
 
+- **`s2_template` 0.2.0 — awaiting Al's review and merge** (Session 41; branch
+  `claude/s2-template-0.2.0`; `analysis/s2-generate-2/README.md`).
+  - Merge with a merge commit, so that `af28cc9` (the 0.2.0 goldens' `engine_commit`) stays a
+    real commit on `main`.
+  - Readings 13–20 in the packet, and the two readings in ADR-0011 *Amendments* (seeds whose
+    statement is false have no control and intrinsic material; FLAW-0006's mode for the horses),
+    await rulings. A ruling that changes a seed or a check bumps the producer again; no golden is
+    rewritten.
+  - The owner note of 2026-10-28 is recorded (`da2bd83`); nothing else is awaited on it.
 - **ADR-0011's crate, the first implementation — RULED by Al on 2026-10-28 (rulings 1–6 on
   PR 26, verbatim under *Standing rulings* and in ADR-0011 *Amendments*); merged as PR 26**
   (Session 40; branch `claude/s2-generate-crate`; `analysis/s2-generate-1/README.md`).
@@ -2083,36 +2148,33 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2 ordering step 4, continued: `s2_template` 0.2.0 with the next seeds — after the crate's pull
-request (branch `claude/s2-generate-crate`, PR 26) merges.** Al's rulings 1–6 on it are recorded
-(ADR-0011 *Amendments*).
+**S2 ordering step 4, continued: `s2_template` 0.3.0, the T check and the tooling-caught classes
+— after the 0.2.0 pull request (branch `claude/s2-template-0.2.0`) merges.** Any ruling on its
+readings is recorded first.
 
 Executable cold:
 1. Open per ADR-0008 D1. If the session was launched with the §6 prompt, the SD15 disclosure comes
    first, by digest where ADR-0005 *Amendments* 1–3 allow it.
-2. Confirm that PR 26 is merged, with a merge commit on fetched `origin/main`, and that
-   `21f8359` (the 0.1.0 goldens' `engine_commit`) is an ancestor of `main`. **If either fails,
-   record that and stop.** Any later ruling is recorded verbatim, in STATE, HANDOFF and, where it
-   amends the design, ADR-0011 *Amendments*, before anything else.
-3. **`s2_template` 0.2.0 first** (Al's rulings 3 and 5 on PR 26):
-   - bump the version (ADR-0011 D1);
-   - embed the input set's hashes at build time, as `syndeom-pair`'s `build.rs` does, and have
-     `engine_commit` verification compare the running binary's inputs with the commit. This
-     closes FINDING-005;
-   - count `n_flaws_total` and `n_flaws_<NNNN>` per instance, not per record. Change the
-     property test that equates them with the record count;
-   - keep the 0.1.0 goldens regenerable under the version they name. The golden test selects
-     the producer version a case was made with, or the 0.1.0 cases stay pinned some other way.
-     Never rewrite a golden.
-4. On the same branch, add the next seeds:
-   - seed records, with their FLAW material, for FLAWS.md 0.1.0 examples that check K already
-     confirms: `x_over_abs_x` (FLAW-0014 fatal), `rolle_abs` (FLAW-0005), `horses` (FLAW-0006,
-     a false statement with its counterexample) and `continuity_is_not_uniform` (FLAW-0002);
-   - for each seed, its Lean witness module, its controls and examples as 0.2.0 goldens, and Lean
-     probes compiled before the record is written, one Lean process at a time;
-   - D6's S1-corpus independence binds every seed;
-   - if a pair golden is added, it counts per instance (ruling 3). Confirm with Al the reading
-     that a pair instance counts as confirmed when each of its records passes its check.
+2. Confirm that the 0.2.0 pull request is merged, with a merge commit on fetched `origin/main`,
+   and that `af28cc96` (the 0.2.0 goldens' `engine_commit`) is an ancestor of `main`. **If either
+   fails, record that and stop.** Any later ruling — on readings 13–20 of
+   `analysis/s2-generate-2/README.md` or on the two readings in ADR-0011 *Amendments* — is
+   recorded verbatim, in STATE, HANDOFF and, where it amends the design, ADR-0011 *Amendments*,
+   before anything else; a ruling that changes a seed or a check bumps the producer again, and
+   no golden is rewritten.
+3. **`s2_template` 0.3.0, the T check first** (ADR-0011 D5, D8): the audit tail prints
+   `#print axioms <main>` and the direct used-constants of every declaration in the file
+   (`Lean.ConstantInfo.getUsedConstantsAsSet` in a `#eval` over `MetaM`); the Rust side parses
+   it, closes the relation over the file's own declarations and evaluates the class's condition;
+   lemma steps enter the plan (D2: a step whose text begins `Lemma N.`, rendered as a declaration
+   before the main declaration). The 0.1.0 and 0.2.0 goldens stay regenerable under the versions
+   they name.
+4. On the same branch, the seeds whose FLAWS.md examples the T check confirms: `n_lt_two_pow`
+   (FLAW-0009 `axiom`, `truth` true and false; `lean_axioms_standard` predicted false) and
+   FLAW-0007 `unused` on a seed that carries an irrelevant proved lemma; Lean probes compiled
+   first, one process at a time; each seed's Lean witness module; controls and examples as 0.3.0
+   goldens (informal, formal, pair); D6's S1-corpus independence binds every seed; counts per
+   instance.
 5. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`, `s1_later_prefix`),
    their packets, the Gate S1 table or the frozen S1.4 packet.
 6. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,

@@ -1,0 +1,13 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-template-020-20261028T1830Z/lean-probe/rolle_convincing.lean:7:146: error: unsolved goals
+hcont : ContinuousOn (fun x => |x|) (Set.Icc (-1) 1)
+hend : |(-1)| = |1|
+x : ℝ
+x✝ : x ∈ Set.Ioo (-1) 1
+⊢ ¬x = 0
+C:/Users/LEET/Codex/Temp/syndeom-s2-template-020-20261028T1830Z/lean-probe/rolle_convincing.lean:8:37: error: unsolved goals
+hcont : ContinuousOn (fun x => |x|) (Set.Icc (-1) 1)
+hend : |(-1)| = |1|
+c : ℝ
+hc : c ∈ Set.Ioo (-1) 1
+h0 : ↑(SignType.sign c) = 0
+⊢ ¬c = 0

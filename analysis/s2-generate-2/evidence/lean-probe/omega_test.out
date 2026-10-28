@@ -1,0 +1,2 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-template-020-20261028T1830Z/lean-probe/omega_test.lean:3:117: error: omega could not prove the goal:
+No usable constraints found. You may need to unfold definitions so `omega` can see linear arithmetic facts about `Nat` and `Int`, which may also involve multiplication, division, and modular remainder by constants.

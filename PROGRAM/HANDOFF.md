@@ -8542,3 +8542,134 @@ else, so this record is the branch's first commit.
 - Item 2 decides the reading Session 40 flagged (Standing escalations): a pair's injected
   instance is confirmed only when both of its records pass their checks, the informal structural
   check and the formal check K. 0.2.0 implements it, and the open point is closed.
+
+### Entry 4 — `s2_template` 0.2.0, built (S2 ordering step 4, continued)
+
+All on branch `claude/s2-template-0.2.0`, from `main` `de3e4a6`:
+- **Commit 1** `da2bd83b84b3ff5202ca900c9bcff9bf6f9eddb8`: the owner note recorded before
+  anything else — ADR-0011 *Amendments* (with 0.2.0's amendment as decided), STATE (*Standing
+  rulings*, *Standing escalations*) and this block's Entries 1–3.
+- **Commit 2** `af28cc96aa75cbabb0a6171d4c636a8cbc87f773`: the 0.2.0 producer — build-time input
+  hashes (`input-set.txt`, `build.rs`, `src/provenance.rs`; FINDING-005 closed), the version
+  selection (0.1.0 and 0.2.0 in one crate; `generate` emits 0.2.0; `regenerate` and `verify`
+  accept the version a manifest names), counts per instance, the seeds
+  `continuity_is_not_uniform`, `x_over_abs_x`, `rolle_abs` and `horses` with their witness
+  modules, `Syndeom.lean`, `Audit.lean` (eight lines) and the tests. `Cargo.lock` unchanged.
+- **Commit 3** `d7b5d8185ef683ef3618f01a2d9cc6ba7983cee4`: the 14 goldens of 0.2.0, produced by
+  `generate --dry-run` at commit 2 with the Lean harness run one process at a time
+  (2026-10-28T18:58:21Z–19:00:08Z), and the goldens README.
+- **Commit 4** (this one): the packet `analysis/s2-generate-2/`, STATE, and this close.
+
+The evidence, the security review and readings 13–20 are in the packet's README. Every receipt is
+under `C:\Users\LEET\Codex\Temp\syndeom-s2-template-020-20261028T1830Z\` (the probes, the 14
+golden receipts whose sorted SHA-256 list hashes to `184058ad…3919`, the lake build log and
+`cargo audit`), and the orientation receipts under
+`C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1815Z\`.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN. S2.1–S2.4 are in progress: this is the second
+implementation session (ADR-0011 D11). Gate S1 is CLOSED (Session 29).
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipt `orient-1.json`, SHA-256
+`88b6727c…d782`, under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T1815Z\`):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-10-28T18:15:15Z–18:15:16Z, exit 0.
+- **Snapshot.** `main` at `de3e4a62…`, tree `4117ac9d…`, **synchronized**: ahead 0, behind 0. The
+  only change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree.
+- **Step 5.** The constitution (`110f5360…`), ADR-0005 (`b08e543a…`) and ADR-0008 (`ccdfa9d7…`),
+  as read in step 0, equal the snapshot's blobs.
+- **Step 6.** Read in this order:
+  - STATE (the Updated bullets of Sessions 37–40, the freeze register, memory policy, standing
+    rulings, the gate tables, blockers, standing escalations, NEXT);
+  - HANDOFF Session 40 in full (Entries 1–4, the close and the addendum);
+  - CLAIMS: 0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED (existence only);
+  - FLAWS `0.1.0` (14 entries); SOURCES through S-0081;
+  - ADR-0008, ADR-0011 with its amendments, ADR-0001 in full; the crate's sources, tests, seeds
+    and goldens, the witness modules, the gate script, `syndeom-pair`'s `build.rs` and
+    provenance module, and implementation packet 1.
+
+  They agree with one another and with the tree.
+- **ORIENT gate GREEN**, 18:18:36Z–18:19:30Z (log SHA-256 `24eb6474…b735`, 16,438 bytes): 8,929
+  Lean jobs; four axiom lines within the standard three; fmt, clippy and 116 tests pass; every
+  tracked text file LF; the registers and the 65-row freeze register ALL PASS.
+- **NEXT survived ORIENT.** PR 26 was merged by Al with the merge commit `de3e4a6` at
+  2026-10-28T18:10:24Z, and `21f8359` is an ancestor of `main`. The owner note was the only later
+  ruling; it was recorded before anything else (Entry 3; commit 1).
+ADVANCED:
+- **`s2_template` 0.2.0** (S2.1–S2.4 in progress): the running binary's provenance (ruling 5;
+  FINDING-005 closed), counts per instance with the pair rule (ruling 3; the owner note), four
+  seeds from the FLAWS.md examples with their Lean witnesses, 14 goldens, and the 0.1.0 goldens
+  regenerable under 0.1.0.
+- **The gate's axiom audit** now covers eight declarations, four of them negations of false
+  statements.
+- **`cargo audit`** is clean, and the security review of the new code is recorded.
+BELIEF DELTAS:
+- **Three of the four examples named for 0.2.0 are false theorems**, in Lean's reading and in
+  FLAWS.md's own words: Rolle on `|x|` ("no such c exists"), the horses, and `x/|x| = ±1` at
+  `x = 0`. ADR-0001's consistency rule (`value == false ⇒ proof_status == "invalid"`) therefore
+  forbids a control for them; D3's "every seed theorem has its control" cannot hold for a false
+  seed. Evidence: the negation witnesses build; the self-check.
+- **Mathlib's Rolle needs no differentiability** (`exists_deriv_eq_zero`), because `deriv` is `0`
+  where a function is not differentiable; the `deriv`-form claim about `|x|` would be true. The
+  seed is in `HasDerivAt` form, which is false. Evidence: `Rolle.lean` 54–64, `Deriv/Abs.lean`
+  184, the witness.
+- **A structured `cases … with` reports a missing alternative at the `cases` line**, so the
+  omitted-case shape of FLAW-0014 has a formal site; `rcases` with too few patterns would rename
+  instead. Evidence: `xoa_convincing` at `4:2`.
+- **`omega`'s "No usable constraints found" is its message for a satisfiable system** here, not
+  for an empty hypothesis set. Evidence: `omega_test.lean` (`0 < m` fails, `1 < m` closes).
+- **Build-time input hashing is cheap**: a rebuild on any input change, and a 4.6 s test build.
+CONFUSIONS:
+- **The horses membership proof**: `a ∈ s.erase b` needs `⟨hab, ha⟩`, not `hb`. Cost: one probe
+  rerun (8 s). The record keeps the first run's exit codes in the probe summary.
+- **`norm_num` is not available from `Mathlib.Data.Finset.Card` alone**; the horses witness uses
+  `decide`. Cost: the same rerun.
+- **The block header's form**: the existing blocks begin with a `SESSION:` line, not a Markdown
+  heading; the provisional header was a `## ` line. Cost: none (the header is replaceable by
+  design), and the completed header follows the `SESSION:` form. ADR-0008 step 0 and ADR-0005
+  *Amendments* 3 could name the form; noted, not changed.
+HONESTY CHECK:
+- No register status changed. The packet's measurements are implementation evidence, not CLAIMS.
+- The goldens' observations are what the harness measured at `af28cc9`; nothing was hand-edited.
+- The horses golden's first error is at line 20 while its formal record's location is line 17,
+  the fragment's first line (ADR-0011 D5); K holds because 20 lies within the fragment's lines
+  17–20. The other three first errors are at their fragments' first lines.
+- For an intrinsic record the informal check confirms only that the recorded text is present at
+  the recorded span; the substantive confirmation is K on the formal file. The informal-only
+  artifacts of the three false seeds are confirmed by that structural check alone, as 0.1.0's
+  informal artifacts were.
+- The first probe run's two slips are recorded in the packet; the corrected probes, not the
+  first ones, are the evidence.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened; no `groundtruth/` item was read for
+design; the seeds come from FLAWS.md 0.1.0 only (D6, ruling 1); the Mathlib files read are library
+code at the pinned commit; no real AI-generated proof was used. Verdict: no leakage.
+DETERMINISM CHECK:
+- Every golden regenerates byte for byte from its config, seed and recorded observation, under
+  the version its manifest names; two `prepare` calls agree; the RNG vectors are pinned.
+- No wall-clock value enters an artifact; receipts carry durations only.
+- Nothing entered CLAIMS, so there is nothing to quarantine.
+MANIFEST CHECK:
+- Every golden manifest passed `Manifest::check` with its bytes before it was written: `origin`
+  synthetic, `derivation` by-construction; the three false statements carry `value: false` with
+  the declaration that proves the negation, `proof_status: "invalid"`, `correct: false`.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing. The witnesses are `lean-kernel` references audited by the
+  gate, not CLAIMS.
+DRIFT CHECK:
+- No verdict on any paper (SD3), and no understanding claims (SD17).
+- No detector was chosen or tuned, and there was no referee contact (SD13).
+- No S3 work, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, with any ruling recorded first,
+`s2_template` 0.3.0: the T check (the audit tail's used-constants listing and its Rust closure,
+lemma steps in the plan) with the tooling-caught classes, `n_lt_two_pow` (FLAW-0009) and
+FLAW-0007 `unused`.
+ESCALATIONS:
+- **This pull request:** review and merge with a merge commit, so that `af28cc9`, the 0.2.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **Readings 13–20** in `analysis/s2-generate-2/README.md`, and the two readings in ADR-0011
+  *Amendments* (seeds whose statement is false; FLAW-0006's mode for the horses).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The 0.2.0 scope STATE's NEXT named is built, and the pull request
+is open for Al's review. Repo green: the gate on the committed tree is recorded in the pull
+request and under the external root, not in the tree it certifies.
+**Memory writes:** none. A write would change a memory digest and make the next disclosure owe
+verbatim reproduction.
