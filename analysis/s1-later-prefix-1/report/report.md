@@ -1,6 +1,6 @@
 # First later prefix — coverage (ADR-0003 D9; ADR-0013)
 
-Event `first-later-prefix-inventory-2026-10-28`. Prefix through arXiv id 1404.4599: 30 harvest candidates, 40 archived representations, 37 effective logical items. Taxonomy `0.1.0`; no battery; no seed. Labels are the effective representations' (the accepted first-parent amendment applied). Generated from `coverage.json` by the tool; the Gate S1 table and the frozen S1.4 packet are not rewritten.
+Event `first-later-prefix-inventory-2026-10-28`. Prefix through harvest candidate 30 (arXiv id 1404.4599), read from the harvest log's pinned prefix: 30 harvest candidates, 40 archived representations, 37 effective logical items, all measured. Taxonomy `0.1.0`; no battery; no seed. Labels are the effective representations': the accepted first-parent amendment in `groundtruth/amendment-map.json` (SHA-256 `cf9039d90070379dfc8977dca828c3509e0056b576e13faa1f9962d0228fb6dd`) is applied, so `s1_ingest-v0.1.0-63e23a952084` carries the labels of `s1_ingest-v0.1.0-15ab865466d6`. The frozen S1.4 table counted the historical roots and is not rewritten, nor is the Gate S1 table. Generated from `coverage.json` by the tool.
 
 ## Archive coverage
 

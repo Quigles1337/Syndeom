@@ -1,4 +1,10 @@
 {
+  "amendment_map": {
+    "effective_artifact_id": "s1_ingest-v0.1.0-15ab865466d6",
+    "logical_item_key": "s1_ingest-v0.1.0-63e23a952084",
+    "path": "groundtruth/amendment-map.json",
+    "sha256": "cf9039d90070379dfc8977dca828c3509e0056b576e13faa1f9962d0228fb6dd"
+  },
   "archive_coverage": [
     {
       "canonical_roots": 0,
@@ -1441,7 +1447,7 @@
   },
   "canonical_representations": 2,
   "event_id": "first-later-prefix-inventory-2026-10-28",
-  "gate_s1_table": "not rewritten; the S1.4 frozen packet and the Gate S1 table describe the prefix through 1403.4485 (ADR-0003 D8)",
+  "gate_s1_table": "not rewritten; the S1.4 frozen packet and the Gate S1 table describe the earlier prefix (ADR-0003 D8)",
   "harvest_candidates": 30,
   "interim_power": "Every real-item cell is expected underpowered for the equivalence test until S3 derives N_min and freezes the protocol; S4 plans recall against documented errors and a false-positive upper bound on correct proofs, not a fooling length.",
   "issues_by_kind": {
@@ -1466,9 +1472,10 @@
       "s1_ingest-v0.1.0-e3cbdfa7ad1c"
     ]
   },
-  "label_basis": "effective representations: the accepted first-parent amendment applied, so its logical item carries its effective status (ADR-0013 D5)",
+  "label_basis": "effective representations: the accepted first-parent amendment applied, so its logical item carries its effective representation's labels (ADR-0013 D5); the frozen S1.4 table counted the historical roots",
   "logical_items": 37,
   "prefix_through_arxiv_id": "1404.4599",
+  "prefix_through_candidate": 30,
   "qualification_counts": {
     "escalated_item_union": 14,
     "pending_item_review_union": 14,
@@ -1485,6 +1492,7 @@
     "First later prefix (ADR-0013): candidates 28-30, items 32-36. Each item was reviewed in analysis/s1-held-harvest-review/REVIEW.md (five agree), and Al's rulings of 2026-10-28 on PR 23 settled every reading the review raised as recorded: Q-H1 (item 32 false by source document; its class stands), Q-H2 and Q-H3 (items 34 and 35 gap), Q-H5 (item 36 undetermined). No item issue remains open, so each prefix root is listed with none.",
     "Q-H4: the further unnamed results in the prefix's notices stay out as items and join the existing unnamed-result question (the first scope note above); no item is invented."
   ],
+  "scope_source": "the harvest log read to its pinned prefix (config/prefix-inputs.json); the scope is measured, not a constant",
   "seed": null,
   "subset_rule": "exclude logical items with promotion-hold, truth-review, severity-review or pending-review issues; the accepted corpus's issues from the frozen S1.4 overlay with the first-parent hold discharged by the accepted amendment, the prefix's from its own overlay. Not scoring readiness or a new admission policy.",
   "taxonomy_version": "0.1.0",
