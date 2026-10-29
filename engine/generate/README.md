@@ -8,8 +8,9 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   file); from 0.4.0 a step may be FLAW-0013 padding (a whole paragraph in the informal file, its
   matching unused declaration before the main one in the formal file);
 - `src/rng.rs` — `syndeom-rng/1`, SplitMix64-seeded xoshiro256** streams per label (D4);
-- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0, 0.3.0 and 0.4.0:
-  seed records, the config and its refusals (D3), the injector (D5), the padding module (D2
+- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0
+  and 0.5.0: seed records, the config and its refusals (D3), the injector (D5; from 0.5.0 with
+  FLAW-0004's hedge lexicon and FLAW-0011 as a commanded composite), the padding module (D2
   `pad`, D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks
   K and T (D8, D9);
 - `src/harness.rs` — the Lean harness: `lake env lean` from `lean/`, one process at a time, and
@@ -38,14 +39,24 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   D8) for FLAW-0009 `axiom` (`truth` true, gap; false, fatal) and FLAW-0007 `unused` (cosmetic);
   records only in the files a class manifests in (FLAWS.md's *Manifests in*: FLAW-0009 is
   formal-only).
-- **`s2_template` 0.4.0** (Session 43; the version `generate` emits): the 0.3.0 seeds and
+- **`s2_template` 0.4.0** (Session 43): the 0.3.0 seeds and
   `sqrt2_irrational` (the FLAWS.md FLAW-0013 and FLAW-0011 example statement, as the
   number-theoretic core `p ^ 2 ≠ 2 * q ^ 2` for coprime `p`, `q`, in five aligned steps), the
   first seed with padding material (seven paragraphs: four restated definitions and three
   re-derivations of `2 | p² ⇒ 2 | p`); the padding module (D2 `pad`, D5 FLAW-0013, Options 8);
   check T for the padding declarations; `padding_ratio` measured.
+- **`s2_template` 0.5.0** (Session 44; the version `generate` emits): the 0.4.0 seeds, with
+  FLAW-0004 material on `sqrt2_irrational` (`hidden_step: routine-true` at step 3: the FLAWS.md
+  FLAW-0011 example's `2 | p² ⇒ 2 | p` hedged, the parity argument dropped); FLAW-0004 (D5: the
+  hedge drawn from the fixed lexicon and prefixed to the bare claim, the justification deleted,
+  the aligned tactic lines omitted so the kernel reports an unsolved goal at the site, never
+  `sorry`; `N/A` for an informal-only target); FLAW-0011 as a commanded composite (D5:
+  `embedded`, one instance in this version — of FLAW-0001 through FLAW-0010 and of severity gap
+  or fatal, Al's rulings 2 and 3 on PR 30 — on a true statement; the composite's own record at
+  the statement, its severity and `lean_catchable` inherited); and the seed rule that no style
+  step carries a padding header (FINDING-014).
 
-The crate regenerates all four versions: the goldens select the version their manifests name,
+The crate regenerates all five versions: the goldens select the version their manifests name,
 and `regenerate` and `verify` accept any of them. Every seed states its `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
@@ -89,12 +100,38 @@ is flagged for Al in ADR-0011 *Amendments*.
   `replaced: null`; the unpadded argument is recoverable by deleting the recorded steps. A seed
   with padding material has it at the seed level, usable with every style; a seed whose
   statement is false has none. Padding and an injected flaw in one artifact are a later version.
+- **FLAW-0004** (0.5.0): replacement material whose `hidden` names the bare claim, the
+  justification and the omitted tactic lines, with the one dial `hidden_step` (`routine-true`
+  cosmetic, `nontrivial-true` gap, `false` fatal; only `routine-true` has material in 0.5.0).
+  The injector draws the hedge from the fixed lexicon (`Clearly`, `It is easy to see that`,
+  `Obviously`, `By a standard argument`, `One checks that`) from the stream
+  `injector/FLAW-0004/1` after the material, and the site step becomes the hedge, a space and
+  the claim; the formal fragment is the faithful one without the omitted block (the `have`
+  header and the `obtain` stay). The records carry `hedge` (the index), `hedge_text`, the
+  `justification` and `claim` (informal) or the `omitted` lines (formal), `inserted`,
+  `replaced` and the originals. The target `formal` is refused (FLAWS.md: manifests in
+  informal); for a pair the instance is `YES-KERNEL`, for an informal-only artifact `N/A`.
+- **FLAW-0011** (0.5.0): commanded with the one dial `embedded`, a list of FlawSpecs — exactly
+  one in this version, since the materials are whole-argument variants — of FLAW-0001 through
+  FLAW-0010 only (FLAW-0011's definition; Al's ruling 3 on PR 30) and of severity gap or fatal
+  (Al's ruling 2 on PR 30: a composite of cosmetic or repairable instances is not an invalid
+  proof and is refused), on a seed whose statement is true; the spec's severity must be the
+  embedded instance's (it inherits). The embedded instance is injected as instance 1 and the
+  composite is instance 2, with a record in each file the artifact has: step 0 with span
+  `[0, len)` in the informal file, the main declaration at its header line in the formal file,
+  `lean_catchable` inherited, dials `embedded`, `embedded_instances`, `site: 0`, `inserted` and
+  `replaced: null`. Every composite is therefore an invalid proof of a true statement under D7.
+  FLAWS.md's FLAW-0011 example embeds a cosmetic instance (the routine-true hedge) and so
+  realizes FLAW-0004 `routine-true`, not a composite — an erratum note against FLAWS.md 0.1.0,
+  recorded in ADR-0011 *Amendments* by Al's ruling 2 on PR 30; FLAWS.md's text is unchanged.
 - **Counts** (0.2.0): `n_flaws_total`, `n_flaws_<NNNN>` and `flaws_confirmed` count instances. A
   pair's two records of one instance share its `instance`; the instance is confirmed only when
   both records pass their checks (Al's owner note of 2026-10-28).
 - **Checks:**
   - informal records: the recorded span holds exactly the recorded text and, where something was
-    replaced, differs from it;
+    replaced, differs from it; a FLAW-0004 record (0.5.0) also requires the step to be the hedge
+    entry, a space and the bare claim, the faithful text to have held the justification exactly
+    once, and the step not to hold it;
   - formal `YES-KERNEL` records: check K, meaning the build fails and its first error lies in the
     site's fragment lines;
   - formal `YES-TOOLING` records (0.3.0): check T, meaning the build passes and the audit tail's
@@ -104,16 +141,21 @@ is flagged for Al in ADR-0011 *Amendments*.
     auxiliary `_proof_N` constants included); FLAW-0009: `#print axioms` of the main declaration
     lists the axiom.
 
+  - a FLAW-0011 record (0.5.0): the statement's truth is by a kernel-checked witness or Mathlib
+    (D7; the witness is a library module the gate builds) and every record of every embedded
+    instance passes its check.
+
   No other check exists yet, so no other class is confirmed by this version.
 - **`padding_ratio`** (0.4.0; ADR-0001 D4, ADR-0011 D8): achieved as the tokens inside the
   FLAW-0013 spans over `n_tokens` — the padded steps of the informal file when there is one,
   else the padding declarations' lines of the formal file — in binary64; commanded as the
   config's value with tolerance `abs 0.05` (`abs 0.0` at ratio 0). A commanded ratio the count
   of paragraphs cannot reach is a FAIL verdict, not a refusal.
-- **Not yet:** `s2_grammar`, padding combined with an injected flaw, the kinds `unused-lemma` and
-  `verbose-rewrite` (no seed carries their material), FLAW-0009 `native_decide`, FLAW-0012 and
-  FLAW-0011 as commanded classes, the seeds for the remaining FLAWS.md examples, and the
-  fidelity sweep. They come in later sessions (D11).
+- **Not yet:** `s2_grammar`, padding combined with an injected flaw (also inside a composite),
+  composites of more than one instance, the kinds `unused-lemma` and `verbose-rewrite` (no seed
+  carries their material), FLAW-0004 `nontrivial-true` and `false` (no seed carries the
+  material), FLAW-0009 `native_decide`, FLAW-0012 as a commanded class, the seeds for the
+  remaining FLAWS.md examples, and the fidelity sweep. They come in later sessions (D11).
 
 ## CLI
 

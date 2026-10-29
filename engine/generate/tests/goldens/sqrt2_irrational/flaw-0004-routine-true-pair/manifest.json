@@ -1,0 +1,251 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0004": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 5
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 115
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "603c0f1b55fa2ff600f82729e666014ea1b9135beb6cb940cbafc5804bc427f2",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_sqrt2_irrational",
+        "n_bytes": 715,
+        "n_declarations": 1,
+        "n_lines": 19,
+        "n_tokens": 152,
+        "storage": "regenerable"
+      },
+      "informal": {
+        "content_hash": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 722,
+        "n_lemmas": 0,
+        "n_steps": 5,
+        "n_tokens": 115,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "pair"
+  },
+  "artifact_id": "s2_template-v0.5.0-a389934b677e-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0004": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 5
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {
+          "hidden_step": "routine-true"
+        },
+        "severity": "cosmetic",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "descent",
+    "target": "pair",
+    "theorem": "sqrt2_irrational"
+  },
+  "config_hash": "a389934b677ed0535e24a8f7217d7113e951db2a798c620cb42165382a2ab910",
+  "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0004": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.5.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {
+          "claim": "$p$ is even. Write $p = 2k$.",
+          "hedge": 1,
+          "hedge_text": "It is easy to see that",
+          "hidden_step": "routine-true",
+          "inserted": "It is easy to see that $p$ is even. Write $p = 2k$.",
+          "justification": "if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd",
+          "original_steps": {
+            "3": "Hence $p$ is even: if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd. Write $p = 2k$."
+          },
+          "replaced": "Hence $p$ is even: if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd. Write $p = 2k$.",
+          "site": 3
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            51
+          ],
+          "step": 3
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0004",
+        "dials": {
+          "hedge": 1,
+          "hedge_text": "It is easy to see that",
+          "hidden_step": "routine-true",
+          "inserted": [
+            "have hp : 2 ∣ p := by",
+            "obtain ⟨k, hk⟩ := hp"
+          ],
+          "omitted": [
+            "  rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+            "  · exact Nat.dvd_of_mod_eq_zero hp",
+            "  · have h1 : p ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hp]",
+            "    omega"
+          ],
+          "original_fragments": {
+            "3": [
+              "have hp : 2 ∣ p := by",
+              "  rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+              "  · exact Nat.dvd_of_mod_eq_zero hp",
+              "  · have h1 : p ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hp]",
+              "    omega",
+              "obtain ⟨k, hk⟩ := hp"
+            ]
+          },
+          "replaced": [
+            "have hp : 2 ∣ p := by",
+            "  rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+            "  · exact Nat.dvd_of_mod_eq_zero hp",
+            "  · have h1 : p ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hp]",
+            "    omega",
+            "obtain ⟨k, hk⟩ := hp"
+          ],
+          "site": 3
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_sqrt2_irrational",
+          "line": 7
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/Sqrt2Irrational.lean:syndeom_seed_sqrt2_irrational",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

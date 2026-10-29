@@ -1,0 +1,296 @@
+{
+ "run_a": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-050-20261028T2330Z/goldens-5a",
+ "run_b": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-050-20261028T2330Z/goldens-5b",
+ "cases": [
+  {
+   "case": "sqrt2_irrational/flaw-0004-routine-true-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "a47bda4c060c246ecb21953c0892dd3e76fc2c378a29a951215799169c3c9fb1",
+     "bytes": 4197,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+     "bytes": 722,
+     "identical": true
+    }
+   },
+   "engine_commit": "7be41123c698a07b9e56cab2aa2a1e9d257944b8",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-0abb0ceac4c5-s7",
+   "proof_status": "valid",
+   "correct": true,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "N/A",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       51
+      ],
+      "step": 3
+     }
+    }
+   ],
+   "hedge": {
+    "index": 1,
+    "text": "It is easy to see that"
+   },
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1
+  },
+  {
+   "case": "sqrt2_irrational/flaw-0004-routine-true-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "603c0f1b55fa2ff600f82729e666014ea1b9135beb6cb940cbafc5804bc427f2",
+     "bytes": 715,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "0c1ec865683296d2f816e5a7e568b420586421ec5b7b41cf6e02aa60851c70e0",
+     "bytes": 6684,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+     "bytes": 722,
+     "identical": true
+    }
+   },
+   "engine_commit": "7be41123c698a07b9e56cab2aa2a1e9d257944b8",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 7
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-a389934b677e-s7",
+   "proof_status": "valid",
+   "correct": true,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       51
+      ],
+      "step": 3
+     }
+    },
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "formal",
+      "declaration": "syndeom_s2_template_sqrt2_irrational",
+      "line": 7
+     }
+    }
+   ],
+   "hedge": {
+    "index": 1,
+    "text": "It is easy to see that"
+   },
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1,
+   "probe": {
+    "file": "s2i_hedged_p1.lean",
+    "golden_is_probe": true
+   }
+  },
+  {
+   "case": "sqrt2_irrational/flaw-0011-flaw-0004-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "8fd5ce6d556b848423569fc2caec7a569134cea66e9269b8236507367d9333e9",
+     "bytes": 5576,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+     "bytes": 722,
+     "identical": true
+    }
+   },
+   "engine_commit": "7be41123c698a07b9e56cab2aa2a1e9d257944b8",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-f0ead84420be-s7",
+   "proof_status": "valid",
+   "correct": true,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "N/A",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       51
+      ],
+      "step": 3
+     }
+    },
+    {
+     "instance": 2,
+     "class": "FLAW-0011",
+     "severity": "cosmetic",
+     "lean_catchable": "N/A",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       112
+      ],
+      "step": 0
+     }
+    }
+   ],
+   "hedge": {
+    "index": 1,
+    "text": "It is easy to see that"
+   },
+   "n_flaws_total": {
+    "commanded": 2,
+    "achieved": 2
+   },
+   "flaws_confirmed": 2
+  },
+  {
+   "case": "sqrt2_irrational/flaw-0011-flaw-0004-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "603c0f1b55fa2ff600f82729e666014ea1b9135beb6cb940cbafc5804bc427f2",
+     "bytes": 715,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "0695d0128951e6c68e63b0f4c19b1c8ec318a8fa8149856905ba1019d4b45734",
+     "bytes": 8978,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+     "bytes": 722,
+     "identical": true
+    }
+   },
+   "engine_commit": "7be41123c698a07b9e56cab2aa2a1e9d257944b8",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 7
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-a77967460c1f-s7",
+   "proof_status": "valid",
+   "correct": true,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       51
+      ],
+      "step": 3
+     }
+    },
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "formal",
+      "declaration": "syndeom_s2_template_sqrt2_irrational",
+      "line": 7
+     }
+    },
+    {
+     "instance": 2,
+     "class": "FLAW-0011",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       112
+      ],
+      "step": 0
+     }
+    },
+    {
+     "instance": 2,
+     "class": "FLAW-0011",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "formal",
+      "declaration": "syndeom_s2_template_sqrt2_irrational",
+      "line": 4
+     }
+    }
+   ],
+   "hedge": {
+    "index": 1,
+    "text": "It is easy to see that"
+   },
+   "n_flaws_total": {
+    "commanded": 2,
+    "achieved": 2
+   },
+   "flaws_confirmed": 2,
+   "probe": {
+    "file": "s2i_hedged_p1.lean",
+    "golden_is_probe": true
+   }
+  }
+ ],
+ "all_byte_identical": true,
+ "probes": {
+  "sqrt2_irrational/flaw-0004-routine-true-pair": true,
+  "sqrt2_irrational/flaw-0011-flaw-0004-pair": true
+ },
+ "probe_files": {
+  "s2i_hedged_p1.lean": "603c0f1b55fa2ff600f82729e666014ea1b9135beb6cb940cbafc5804bc427f2"
+ },
+ "engine_commits": [
+  "7be41123c698a07b9e56cab2aa2a1e9d257944b8"
+ ]
+}

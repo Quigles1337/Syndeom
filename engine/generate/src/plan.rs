@@ -111,6 +111,9 @@ pub struct FormalRendering {
     pub bytes: Vec<u8>,
     pub fragment_lines: Vec<Option<[u64; 2]>>,
     pub declarations: Vec<String>,
+    /// The 1-based line of the main declaration's header (0.5.0): where a FLAW-0011 composite
+    /// record addresses the statement (ADR-0011 D5, notes to the table).
+    pub main_line: u64,
 }
 
 /// The file's own declarations in order of first appearance: every lemma, then the main
@@ -326,7 +329,7 @@ pub fn render_formal(plan: &Plan) -> Result<FormalRendering, String> {
             plan.main_declaration, plan.binders, plan.claim
         )
     };
-    push(&mut out, &header);
+    let main_line = push(&mut out, &header);
     let mut any = false;
     for (i, step) in plan.steps.iter().enumerate() {
         if step.lemma.is_some() || step.padding.is_some() {
@@ -348,5 +351,6 @@ pub fn render_formal(plan: &Plan) -> Result<FormalRendering, String> {
         bytes: out.into_bytes(),
         fragment_lines,
         declarations,
+        main_line,
     })
 }

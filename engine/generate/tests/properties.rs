@@ -8,14 +8,17 @@ use serde_json::{Value, json};
 use syndeom_generate::harness::{
     Observation, audit_bytes, first_error_line, parse_axioms, parse_used_constants, used_closure,
 };
-use syndeom_generate::plan::{PaddingKind, own_declarations, render_formal, render_informal};
+use syndeom_generate::plan::{
+    PaddingHeader, PaddingKind, own_declarations, render_formal, render_informal,
+};
+use syndeom_generate::rng::Stream;
 use syndeom_generate::template::{
-    Prepared, Version, assemble, check_seed, faithful_plan, manifests_in, prepare, prepare_with,
-    seeds,
+    HEDGES, Prepared, Version, assemble, check_seed, faithful_plan, manifests_in, prepare,
+    prepare_with, seeds,
 };
 use syndeom_manifest::{
-    LeanCatchable, Location, ProofStatus, Toolchain, Verdict, parse_informal_md, parse_lean,
-    span_text,
+    LeanCatchable, Location, ProofStatus, Severity, Toolchain, Verdict, parse_informal_md,
+    parse_lean, span_text,
 };
 
 const COMMIT: &str = "0123456789abcdef0123456789abcdef01234567";
@@ -167,15 +170,35 @@ fn every_case() -> Vec<Value> {
             }
             for m in &style.flaws {
                 let sev = serde_json::to_value(m.severity).unwrap();
-                specs.push(json!([{
+                let inner = json!({
                     "class": m.class, "sub_variant": m.sub_variant, "severity": sev,
                     "site": m.site, "dials": m.dials
-                }]));
+                });
+                specs.push(json!([inner]));
+                // FLAW-0011 as a commanded composite (0.5.0): the same material embedded, on a
+                // seed whose statement is true, with the inherited severity — an instance of
+                // FLAW-0001 through FLAW-0010 of severity gap or fatal (Al's rulings 2 and 3 on
+                // PR 30)
+                let number: u32 = m.class[5..].parse().unwrap();
+                let invalidating = matches!(
+                    m.severity,
+                    syndeom_manifest::Severity::Gap | syndeom_manifest::Severity::Fatal
+                );
+                if seed.truth.value == Some(true) && (1..=10).contains(&number) && invalidating {
+                    specs.push(json!([{
+                        "class": "FLAW-0011", "sub_variant": null, "severity": sev,
+                        "site": "auto", "dials": {"embedded": [inner]}
+                    }]));
+                }
             }
             for flaws in specs {
                 for target in ["informal", "formal", "pair"] {
-                    // D3: a class the target cannot realize is refused, not a case
+                    // D3: a class the target cannot realize is refused, not a case; a composite
+                    // is refused where its embedded class is
                     let class = flaws[0]["class"].as_str().unwrap_or("");
+                    let class = flaws[0]["dials"]["embedded"][0]["class"]
+                        .as_str()
+                        .unwrap_or(class);
                     let refused = matches!(
                         (class, target),
                         ("FLAW-0009", "informal")
@@ -225,7 +248,7 @@ fn d9_determinism_and_idempotence() {
                 syndeom_manifest::to_disk_json(&m2).unwrap()
             );
             assert_eq!(m1.artifact_id, p1.artifact_id());
-            assert!(m1.artifact_id.starts_with("s2_template-v0.4.0-"));
+            assert!(m1.artifact_id.starts_with("s2_template-v0.5.0-"));
         }
     }
 }
@@ -271,7 +294,21 @@ fn d10_locations_resolve_to_the_dials_text() {
                     let text = std::str::from_utf8(&f.bytes).unwrap();
                     let lines: Vec<&str> = text.lines().collect();
                     let inserted = r.dials["inserted"].as_array().unwrap();
-                    if loc.declaration == p.plan.main_declaration {
+                    if r.class == "FLAW-0011" {
+                        // the composite (0.5.0): the main declaration at its header line
+                        assert_eq!(loc.declaration, p.plan.main_declaration, "{c}");
+                        assert_eq!(loc.line, f.main_line, "{c}");
+                        assert_eq!(
+                            inserted[0].as_str().unwrap(),
+                            lines[loc.line as usize - 1],
+                            "{c}"
+                        );
+                        assert!(
+                            lines[loc.line as usize - 1]
+                                .starts_with(&format!("theorem {} ", loc.declaration)),
+                            "{c}"
+                        );
+                    } else if loc.declaration == p.plan.main_declaration {
                         // a main-proof step: its fragment lines, indented by the writer
                         assert_eq!(
                             format!("  {}", inserted[0].as_str().unwrap()),
@@ -316,6 +353,21 @@ fn d10_locations_resolve_to_the_dials_text() {
                     "{c}"
                 );
                 assert!(r.sub_variant.is_none(), "{c}");
+            } else if r.class == "FLAW-0011" {
+                // the composite (0.5.0): nothing replaced; the embedded specs and instances
+                // recorded; site 0, the statement
+                assert!(r.dials["replaced"].is_null(), "{c}");
+                assert!(
+                    r.dials["embedded"].is_array() && r.dials["embedded_instances"].is_array(),
+                    "{c}"
+                );
+                assert_eq!(r.dials["site"], json!(0), "{c}");
+                assert!(
+                    r.dials.get("original_steps").is_none()
+                        && r.dials.get("original_fragments").is_none(),
+                    "{c}"
+                );
+                assert!(r.sub_variant.is_none(), "{c}");
             } else if r.dials["replaced"].is_null() {
                 // an inserted step (0.3.0): nothing replaced, the originals recorded
                 assert_eq!(r.class, "FLAW-0007", "{c}");
@@ -349,15 +401,30 @@ fn d8_counts_are_per_instance_and_predictions_pass() {
             Some(json!(n)),
             "{c}: every predicted check passes"
         );
-        // a record per file the class manifests in (FLAWS.md's column: FLAW-0009 is formal-only)
-        let files_with_records = flaws.first().map_or(0, |f| {
-            let (informal, formal) = manifests_in(&f.class, f.sub_variant.as_deref());
-            let target = c["target"].as_str().unwrap();
+        // a record per file each instance's class manifests in (FLAWS.md's column: FLAW-0009 is
+        // formal-only; a composite's own records (0.5.0) are in both files)
+        let target = c["target"].as_str().unwrap();
+        let mut classes: BTreeMap<u64, (String, Option<String>)> = BTreeMap::new();
+        for f in flaws {
+            classes
+                .entry(f.instance)
+                .or_insert((f.class.clone(), f.sub_variant.clone()));
+        }
+        let files_of = |class: &str, sub: Option<&str>| {
+            let (informal, formal) = manifests_in(class, sub);
             usize::from(informal && target != "formal")
                 + usize::from(formal && target != "informal")
-        });
-        assert_eq!(flaws.len(), n * files_with_records, "{c}");
-        if c["target"] == "pair" && files_with_records == 2 {
+        };
+        let expected: usize = classes
+            .values()
+            .map(|(class, sub)| files_of(class, sub.as_deref()))
+            .sum();
+        assert_eq!(flaws.len(), expected, "{c}");
+        if target == "pair"
+            && classes
+                .values()
+                .all(|(class, sub)| files_of(class, sub.as_deref()) == 2)
+        {
             assert_eq!(
                 flaws.len(),
                 2 * n,
@@ -558,8 +625,21 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
             parse_informal_md(&render_informal(&plan).unwrap()).unwrap();
             parse_lean(&render_formal(&plan).unwrap().bytes).unwrap();
             assert!(!style.flaws.is_empty() || seed.id == "nat_le_sq" || !seed.padding.is_empty());
+            // no style step carries a padding header (FINDING-014, packet 4)
+            assert!(
+                style.steps.iter().all(|s| s.padding.is_none()),
+                "{}",
+                seed.id
+            );
             for m in &style.flaws {
                 assert_eq!(m.intrinsic, false_statement, "{}", seed.id);
+                // FLAW-0004 material (0.5.0): `hidden` iff the class, on sqrt2_irrational only
+                assert_eq!(m.hidden.is_some(), m.class == "FLAW-0004", "{}", seed.id);
+                if m.class == "FLAW-0004" {
+                    assert_eq!(seed.id, "sqrt2_irrational");
+                    assert_eq!(m.dials, json!({"hidden_step": "routine-true"}));
+                    assert_eq!(m.severity, Severity::Cosmetic);
+                }
                 let site_text = style.steps.get(m.site as usize - 1);
                 if m.intrinsic {
                     assert!(m.steps.is_empty());
@@ -608,6 +688,49 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
             }
         }
     }
+    // FINDING-014 (packet 4): a seed whose own step carries a padding header is refused
+    let sqrt2 = all.iter().find(|s| s.id == "sqrt2_irrational").unwrap();
+    let mut bad = sqrt2.clone();
+    bad.styles[0].steps[0].padding = Some(PaddingHeader {
+        kind: PaddingKind::ReDerivation,
+        name: "syndeom_s2_template_sqrt2_irrational_x".into(),
+        claim: "True".into(),
+    });
+    assert!(check_seed(&bad).is_err());
+    // the FLAW-0004 material's shape rules (0.5.0): the bare claim at the site, the justification
+    // held exactly once by the faithful step, the omitted block contiguous and exactly once,
+    // the severity its hidden_step fixes, `hidden` on FLAW-0004 only
+    let hedge_at = |seed: &syndeom_generate::template::Seed| {
+        seed.styles[0]
+            .flaws
+            .iter()
+            .position(|m| m.class == "FLAW-0004")
+            .unwrap()
+    };
+    let i = hedge_at(sqrt2);
+    let mutate = |f: &dyn Fn(&mut syndeom_generate::template::Material)| {
+        let mut s = sqrt2.clone();
+        f(&mut s.styles[0].flaws[i]);
+        check_seed(&s)
+    };
+    assert!(mutate(&|_| {}).is_ok());
+    assert!(mutate(&|m| m.steps[2].text = "Clearly $p$ is even.".into()).is_err());
+    assert!(mutate(&|m| m.hidden.as_mut().unwrap().justification = "no such text".into()).is_err());
+    assert!(mutate(&|m| m.hidden.as_mut().unwrap().justification = "$p$".into()).is_err());
+    assert!(
+        mutate(&|m| {
+            m.hidden.as_mut().unwrap().omitted.remove(0);
+        })
+        .is_err()
+    );
+    assert!(mutate(&|m| m.hidden.as_mut().unwrap().omitted.clear()).is_err());
+    assert!(mutate(&|m| m.steps[2].fragment.clear()).is_err());
+    assert!(mutate(&|m| m.severity = Severity::Gap).is_err());
+    assert!(mutate(&|m| m.dials = json!({"hidden_step": "nontrivial-true"})).is_err());
+    assert!(mutate(&|m| m.dials = json!({"hidden_step": "routine-true", "hedge": 0})).is_err());
+    assert!(mutate(&|m| m.lean_catchable = LeanCatchable::NotApplicable).is_err());
+    assert!(mutate(&|m| m.class = "FLAW-0010".into()).is_err());
+    assert!(mutate(&|m| m.hidden = None).is_err());
 }
 
 #[test]
@@ -667,8 +790,38 @@ fn d1_the_earlier_seed_sets_are_closed() {
         "flaws": [padding_spec(json!(["re-derivation"]), 1, "drawn")], "padding_ratio": 0.1
     });
     assert!(prepare_with(Version::V0_3_0, &padded_old, 7).is_err());
-    assert!(Version::parse("0.5.0").is_none());
-    assert_eq!(Version::CURRENT.as_str(), "0.4.0");
+    // FLAW-0004 and FLAW-0011 (0.5.0) are refused by 0.4.0 and every earlier version
+    let hedge = spec(
+        "FLAW-0004",
+        None,
+        "cosmetic",
+        json!({"hidden_step": "routine-true"}),
+    );
+    let hedged = config("sqrt2_irrational", &style, "pair", json!([hedge]));
+    let composite = config(
+        "continuity_is_not_uniform",
+        &style_of("continuity_is_not_uniform"),
+        "pair",
+        json!([spec(
+            "FLAW-0011",
+            None,
+            "gap",
+            json!({"embedded": [spec("FLAW-0002", None, "gap", json!({"swap": "forall-exists"}))]})
+        )]),
+    );
+    for v in [
+        Version::V0_1_0,
+        Version::V0_2_0,
+        Version::V0_3_0,
+        Version::V0_4_0,
+    ] {
+        assert!(prepare_with(v, &hedged, 7).is_err());
+        assert!(prepare_with(v, &composite, 7).is_err());
+    }
+    assert!(prepare_with(Version::V0_5_0, &hedged, 7).is_ok());
+    assert!(prepare_with(Version::V0_5_0, &composite, 7).is_ok());
+    assert!(Version::parse("0.6.0").is_none());
+    assert_eq!(Version::CURRENT.as_str(), "0.5.0");
 }
 
 #[test]
@@ -1381,4 +1534,535 @@ fn d9_verify_refuses_a_manifest_whose_main_declaration_is_not_the_producers() {
             "{tag}: a refusal compiles nothing and writes no receipt"
         );
     }
+}
+
+#[test]
+fn d5_flaw_0004_deletes_the_justification_and_prefixes_a_drawn_hedge() {
+    // ADR-0011 D5 (0.5.0), the FLAWS.md FLAW-0011 example's hedge: `2 | p² ⇒ 2 | p` replaced by
+    // a hedge on sqrt2_irrational's step 3, the aligned tactic lines omitted, never `sorry`.
+    let seed = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "sqrt2_irrational")
+        .unwrap();
+    let faithful = &seed.styles[0].steps;
+    let hedge_spec = spec(
+        "FLAW-0004",
+        None,
+        "cosmetic",
+        json!({"hidden_step": "routine-true"}),
+    );
+    let pair = config(
+        "sqrt2_irrational",
+        "descent",
+        "pair",
+        json!([hedge_spec.clone()]),
+    );
+    let (p, m) = build(&pair, 7);
+    let inj = p.injection.as_ref().unwrap();
+    assert!(p.composite.is_none() && p.padding.is_empty());
+    assert_eq!(
+        (inj.class.as_str(), inj.site, inj.lean_catchable),
+        ("FLAW-0004", 3, LeanCatchable::YesKernel)
+    );
+    // the hedge is drawn from the instance's stream after the material: below(1), then below(5)
+    let mut stream = Stream::new(7, "injector/FLAW-0004/1");
+    assert_eq!(stream.below(1), 0);
+    let hedge = stream.below(HEDGES.len() as u64) as usize;
+    assert_eq!(HEDGES.len(), 5);
+    assert_eq!(inj.informal_dials["hedge"], json!(hedge));
+    assert_eq!(inj.informal_dials["hedge_text"], json!(HEDGES[hedge]));
+    let claim = "$p$ is even. Write $p = 2k$.";
+    let justification =
+        "if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd";
+    let hedged = format!("{} {claim}", HEDGES[hedge]);
+    assert_eq!(inj.informal_inserted, hedged);
+    assert_eq!(inj.informal_dials["claim"], json!(claim));
+    assert_eq!(inj.informal_dials["justification"], json!(justification));
+    assert_eq!(inj.informal_dials["replaced"], json!(faithful[2].text));
+    assert!(faithful[2].text.contains(justification) && !hedged.contains(justification));
+    assert_eq!(
+        inj.informal_dials["original_steps"],
+        json!({"3": faithful[2].text})
+    );
+    // the informal file: step 3 is the hedge and the bare claim; the other steps are faithful
+    let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+    assert_eq!(st.n_steps, 5);
+    assert_eq!(st.steps[3], hedged);
+    for k in [1, 2, 4, 5] {
+        assert_eq!(st.steps[k], faithful[k - 1].text);
+    }
+    // the formal file: the `have` header and the `obtain` stay; the four tactic lines are gone
+    let f = p.formal.as_ref().unwrap();
+    let text = String::from_utf8(f.bytes.clone()).unwrap();
+    let lines: Vec<&str> = text.lines().collect();
+    assert_eq!(f.fragment_lines[2], Some([7, 8]));
+    assert_eq!(lines[6], "  have hp : 2 ∣ p := by");
+    assert_eq!(lines[7], "  obtain ⟨k, hk⟩ := hp");
+    assert!(!text.contains("sorry") && !text.contains("rcases Nat.mod_two_eq_zero_or_one p"));
+    assert_eq!(
+        inj.formal_dials["omitted"],
+        json!([
+            "  rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+            "  · exact Nat.dvd_of_mod_eq_zero hp",
+            "  · have h1 : p ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hp]",
+            "    omega"
+        ])
+    );
+    assert_eq!(
+        inj.formal_dials["inserted"],
+        json!(["have hp : 2 ∣ p := by", "obtain ⟨k, hk⟩ := hp"])
+    );
+    assert_eq!(inj.formal_dials["replaced"], json!(faithful[2].fragment));
+    assert_eq!(inj.formal_dials["hedge"], json!(hedge));
+    assert!(
+        inj.formal_dials.get("claim").is_none() && inj.formal_dials.get("justification").is_none()
+    );
+    // the records: two, one instance, YES-KERNEL, cosmetic; the proof stays valid (D7) while
+    // the formal file is predicted to fail at the site (check K)
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(gt.flaws.len(), 2);
+    assert!(gt.flaws.iter().all(|r| r.instance == 1
+        && r.class == "FLAW-0004"
+        && r.severity == Severity::Cosmetic
+        && r.lean_catchable == LeanCatchable::YesKernel));
+    assert_eq!(gt.proof_status, ProofStatus::Valid);
+    assert!(gt.correct);
+    match &gt.flaws[0].location {
+        Location::Informal(loc) => {
+            assert_eq!(loc.step, 3);
+            assert_eq!(loc.span, [0, hedged.chars().count() as u64]);
+        }
+        _ => unreachable!(),
+    }
+    match &gt.flaws[1].location {
+        Location::Formal(loc) => {
+            assert_eq!(
+                (loc.declaration.as_str(), loc.line),
+                (p.plan.main_declaration.as_str(), 7)
+            );
+        }
+        _ => unreachable!(),
+    }
+    assert_eq!(m.commanded["lean_build"].value, json!("fail"));
+    assert!(!m.commanded.contains_key("lean_axioms_standard"));
+    assert_eq!(m.commanded["n_flaws_0004"].value, json!(1));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    // a build that passes, or fails elsewhere, does not confirm the formal record, nor the
+    // instance with it
+    for obs in [
+        Observation {
+            exit_code: 0,
+            first_error_line: None,
+            axioms: Some(vec![]),
+            used_constants: None,
+        },
+        Observation {
+            exit_code: 1,
+            first_error_line: Some(9),
+            axioms: None,
+            used_constants: None,
+        },
+    ] {
+        let m2 = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(m2.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(m2.fidelity.verdict, Verdict::Fail);
+    }
+    // informal-only: one record, N/A (no formal manifestation), the same hedge drawn
+    let informal = config(
+        "sqrt2_irrational",
+        "descent",
+        "informal",
+        json!([hedge_spec.clone()]),
+    );
+    let (pi, mi) = build(&informal, 7);
+    let gti = mi.ground_truth.as_ref().unwrap();
+    assert_eq!(gti.flaws.len(), 1);
+    assert_eq!(gti.flaws[0].lean_catchable, LeanCatchable::NotApplicable);
+    assert_eq!(pi.informal, p.informal);
+    assert_eq!(mi.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert!(!mi.commanded.contains_key("lean_build"));
+    assert_eq!(mi.fidelity.verdict, Verdict::Pass);
+    // the same (config, seed) draws the same hedge; other seeds draw others, all in the lexicon
+    let (p2, _) = build(&pair, 7);
+    assert_eq!(p2.injection, p.injection);
+    let drawn: std::collections::BTreeSet<u64> = (0..40u64)
+        .map(|s| {
+            build(&pair, s).0.injection.unwrap().informal_dials["hedge"]
+                .as_u64()
+                .unwrap()
+        })
+        .collect();
+    assert!(drawn.len() > 1 && drawn.iter().all(|h| *h < HEDGES.len() as u64));
+    // refusals: the formal target; hidden steps the seed has no material for; a severity the
+    // dial does not fix; the injector's own dial names; a sub-variant; an ineligible site; and
+    // the version before 0.5.0
+    let s2 = |target: &str, flaws: Value| config("sqrt2_irrational", "descent", target, flaws);
+    let hedge_with = |severity: &str, dials: Value| spec("FLAW-0004", None, severity, dials);
+    for c in [
+        s2("formal", json!([hedge_spec.clone()])),
+        s2(
+            "pair",
+            json!([hedge_with("gap", json!({"hidden_step": "nontrivial-true"}))]),
+        ),
+        s2(
+            "pair",
+            json!([hedge_with("fatal", json!({"hidden_step": "false"}))]),
+        ),
+        s2(
+            "pair",
+            json!([hedge_with("gap", json!({"hidden_step": "routine-true"}))]),
+        ),
+        s2(
+            "pair",
+            json!([hedge_with(
+                "cosmetic",
+                json!({"hidden_step": "routine-true", "hedge": 0})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([hedge_with(
+                "cosmetic",
+                json!({"hidden_step": "routine-true", "hedge_text": "Clearly"})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([hedge_with(
+                "cosmetic",
+                json!({"hidden_step": "routine-true", "justification": "x"})
+            )]),
+        ),
+        s2("pair", json!([hedge_with("cosmetic", json!({}))])),
+        s2(
+            "pair",
+            json!([spec(
+                "FLAW-0004",
+                Some("hedge"),
+                "cosmetic",
+                json!({"hidden_step": "routine-true"})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([{"class": "FLAW-0004", "sub_variant": null, "severity": "cosmetic", "site": 2, "dials": {"hidden_step": "routine-true"}}]),
+        ),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
+    assert!(prepare_with(Version::V0_4_0, &pair, 7).is_err());
+}
+
+#[test]
+fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
+    // ADR-0011 D5 (0.5.0) as ruled on PR 30: a true statement whose argument carries one
+    // embedded instance of FLAW-0001 through FLAW-0010 of severity gap or fatal; the composite's
+    // own record addresses the statement. The subject is continuity_is_not_uniform's FLAW-0002
+    // forall-exists gap.
+    let inner = spec("FLAW-0002", None, "gap", json!({"swap": "forall-exists"}));
+    let composite = |severity: &str, embedded: Value| {
+        spec("FLAW-0011", None, severity, json!({"embedded": embedded}))
+    };
+    let cont = |target: &str, flaws: Value| {
+        config("continuity_is_not_uniform", "epsilon_delta", target, flaws)
+    };
+    let pair = cont("pair", json!([composite("gap", json!([inner.clone()]))]));
+    let (p, m) = build(&pair, 7);
+    let comp = p.composite.as_ref().unwrap();
+    let inj = p.injection.as_ref().unwrap();
+    assert_eq!(
+        (comp.instance, comp.severity, comp.lean_catchable),
+        (2, Severity::Gap, LeanCatchable::YesKernel)
+    );
+    assert_eq!(comp.embedded_instances, vec![1]);
+    assert_eq!(comp.embedded, json!([inner.clone()]));
+    assert_eq!(inj.instance, 1);
+    // the embedded instance is the standalone FLAW-0002 instance: the same draw, the same bytes
+    let (ps, _) = build(&cont("pair", json!([inner.clone()])), 7);
+    assert_eq!(p.injection, ps.injection);
+    assert_eq!(p.informal, ps.informal);
+    assert_eq!(p.formal, ps.formal);
+    // four records: the embedded instance in both files, then the composite at the statement
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(gt.flaws.len(), 4);
+    assert_eq!(
+        gt.flaws
+            .iter()
+            .map(|r| (r.instance, r.class.as_str()))
+            .collect::<Vec<_>>(),
+        vec![
+            (1, "FLAW-0002"),
+            (1, "FLAW-0002"),
+            (2, "FLAW-0011"),
+            (2, "FLAW-0011")
+        ]
+    );
+    let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+    match &gt.flaws[2].location {
+        Location::Informal(loc) => {
+            assert_eq!(loc.step, 0);
+            assert_eq!(loc.span, [0, st.steps[0].chars().count() as u64]);
+        }
+        _ => unreachable!(),
+    }
+    assert_eq!(gt.flaws[2].dials["inserted"], json!(st.steps[0]));
+    let f = p.formal.as_ref().unwrap();
+    let text = String::from_utf8(f.bytes.clone()).unwrap();
+    let lines: Vec<&str> = text.lines().collect();
+    match &gt.flaws[3].location {
+        Location::Formal(loc) => {
+            assert_eq!(loc.declaration, p.plan.main_declaration);
+            assert_eq!(loc.line, f.main_line);
+            assert!(
+                lines[loc.line as usize - 1]
+                    .starts_with("theorem syndeom_s2_template_continuity_is_not_uniform ")
+            );
+            assert_eq!(
+                gt.flaws[3].dials["inserted"],
+                json!([lines[loc.line as usize - 1]])
+            );
+        }
+        _ => unreachable!(),
+    }
+    for r in &gt.flaws[2..] {
+        assert_eq!(r.severity, Severity::Gap);
+        assert_eq!(r.lean_catchable, LeanCatchable::YesKernel);
+        assert!(r.sub_variant.is_none());
+        assert_eq!(r.dials["embedded"], json!([inner.clone()]));
+        assert_eq!(r.dials["embedded_instances"], json!([1]));
+        assert_eq!(r.dials["site"], json!(0));
+        assert!(r.dials["replaced"].is_null());
+    }
+    // the statement is true by the seed's witness and the argument invalid (the gap): a true
+    // theorem with an invalid proof, as FLAWS.md's recipe says
+    assert_eq!(gt.statement_status.value, Some(true));
+    assert_eq!(gt.proof_status, ProofStatus::Invalid);
+    assert!(!gt.correct);
+    // counts per instance: two instances, one per class; the formal file fails at the site
+    assert_eq!(m.commanded["n_flaws_total"].value, json!(2));
+    assert_eq!(m.commanded["n_flaws_0002"].value, json!(1));
+    assert_eq!(m.commanded["n_flaws_0011"].value, json!(1));
+    assert_eq!(m.commanded["flaws_confirmed"].value, json!(2));
+    assert_eq!(m.commanded["lean_build"].value, json!("fail"));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(2)));
+    assert_eq!(m.achieved["n_flaws_0011"].value, Some(json!(1)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    assert_eq!(f.fragment_lines[inj.site - 1].map(|r| r[0]), Some(6));
+    // the composite is confirmed only when every embedded record is: a build that passes fails
+    // the embedded formal record, and the composite with it
+    let built = Observation {
+        exit_code: 0,
+        first_error_line: None,
+        axioms: Some(vec![]),
+        used_constants: None,
+    };
+    let m2 = assemble(&p, COMMIT, Some(toolchain()), Some(&built)).unwrap();
+    assert_eq!(m2.achieved["flaws_confirmed"].value, Some(json!(0)));
+    assert_eq!(m2.achieved["n_flaws_0011"].value, Some(json!(0)));
+    assert_eq!(m2.achieved["n_flaws_0002"].value, Some(json!(0)));
+    assert_eq!(m2.fidelity.verdict, Verdict::Fail);
+    // informal-only: two records, the instance's lean_catchable kept (FLAW-0002 has no
+    // informal-only exception), no lean_build commanded
+    let (pi, mi) = build(
+        &cont(
+            "informal",
+            json!([composite("gap", json!([inner.clone()]))]),
+        ),
+        7,
+    );
+    let gti = mi.ground_truth.as_ref().unwrap();
+    assert_eq!(gti.flaws.len(), 2);
+    assert!(
+        gti.flaws
+            .iter()
+            .all(|r| r.lean_catchable == LeanCatchable::YesKernel)
+    );
+    assert_eq!(gti.proof_status, ProofStatus::Invalid);
+    assert_eq!(
+        pi.composite.as_ref().unwrap().lean_catchable,
+        LeanCatchable::YesKernel
+    );
+    assert!(!mi.commanded.contains_key("lean_build"));
+    assert_eq!(mi.fidelity.verdict, Verdict::Pass);
+    // a fatal instance composes too, and the composite inherits fatal
+    let fatal = spec(
+        "FLAW-0001",
+        Some("propagated"),
+        "fatal",
+        json!({"perturbation": "sign"}),
+    );
+    let (pf, mf) = build(
+        &config(
+            "sq_plus_one_ge_two_x",
+            "expand_square",
+            "pair",
+            json!([composite("fatal", json!([fatal.clone()]))]),
+        ),
+        7,
+    );
+    assert_eq!(pf.composite.as_ref().unwrap().severity, Severity::Fatal);
+    let gtf = mf.ground_truth.as_ref().unwrap();
+    assert_eq!(gtf.proof_status, ProofStatus::Invalid);
+    assert!(gtf.flaws[2..].iter().all(|r| r.severity == Severity::Fatal));
+    assert_eq!(mf.fidelity.verdict, Verdict::Pass);
+    // Al's ruling 2 on PR 30: a composite whose embedded instances are all cosmetic is not an
+    // invalid proof and is refused — FLAWS.md's FLAW-0011 example (the routine-true hedge)
+    // therefore realizes FLAW-0004 routine-true, which stands alone; a repairable instance is
+    // refused likewise. Al's ruling 3: FLAW-0011 through FLAW-0014 are never embedded.
+    let hedge = spec(
+        "FLAW-0004",
+        None,
+        "cosmetic",
+        json!({"hidden_step": "routine-true"}),
+    );
+    let s2 = |flaws: Value| config("sqrt2_irrational", "descent", "pair", flaws);
+    assert!(prepare(&s2(json!([hedge.clone()])), 7).is_ok());
+    for c in [
+        s2(json!([composite("cosmetic", json!([hedge.clone()]))])),
+        s2(json!([composite("gap", json!([hedge.clone()]))])),
+        config(
+            "n_lt_two_pow",
+            "helper_lemma",
+            "pair",
+            json!([composite(
+                "cosmetic",
+                json!([spec(
+                    "FLAW-0007",
+                    Some("unused"),
+                    "cosmetic",
+                    json!({"count": 1, "length_steps": 1})
+                )])
+            )]),
+        ),
+        config(
+            "sq_plus_one_ge_two_x",
+            "expand_square",
+            "pair",
+            json!([composite(
+                "repairable",
+                json!([spec(
+                    "FLAW-0001",
+                    Some("local"),
+                    "repairable",
+                    json!({"perturbation": "sign"})
+                )])
+            )]),
+        ),
+        config(
+            "n_sq_mod_four",
+            "parity",
+            "pair",
+            json!([composite(
+                "gap",
+                json!([spec(
+                    "FLAW-0014",
+                    None,
+                    "gap",
+                    json!({"omitted_case": "odd", "holds": true})
+                )])
+            )]),
+        ),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
+    // refusals: nothing embedded; two instances; a severity not inherited; a sub-variant; an
+    // explicit site; other dials; nesting; padding or a false-statement class embedded; a
+    // malformed embedded spec; the embedded class's target refusal; a false statement; padding
+    // with a composite; a second top-level spec; the version before 0.5.0
+    for c in [
+        cont("pair", json!([composite("gap", json!([]))])),
+        cont(
+            "pair",
+            json!([composite("gap", json!([inner.clone(), inner.clone()]))]),
+        ),
+        cont("pair", json!([composite("fatal", json!([inner.clone()]))])),
+        cont(
+            "pair",
+            json!([spec(
+                "FLAW-0011",
+                Some("x"),
+                "gap",
+                json!({"embedded": [inner.clone()]})
+            )]),
+        ),
+        cont(
+            "pair",
+            json!([{"class": "FLAW-0011", "sub_variant": null, "severity": "gap", "site": 1, "dials": {"embedded": [inner.clone()]}}]),
+        ),
+        cont("pair", json!([spec("FLAW-0011", None, "gap", json!({}))])),
+        cont(
+            "pair",
+            json!([spec(
+                "FLAW-0011",
+                None,
+                "gap",
+                json!({"embedded": [inner.clone()], "x": 1})
+            )]),
+        ),
+        cont(
+            "pair",
+            json!([composite(
+                "gap",
+                json!([composite("gap", json!([inner.clone()]))])
+            )]),
+        ),
+        s2(json!([composite(
+            "cosmetic",
+            json!([padding_spec(json!(["re-derivation"]), 1, "drawn")])
+        )])),
+        cont(
+            "pair",
+            json!([composite(
+                "fatal",
+                json!([spec(
+                    "FLAW-0012",
+                    None,
+                    "fatal",
+                    json!({"dropped_hypothesis": "x"})
+                )])
+            )]),
+        ),
+        cont(
+            "pair",
+            json!([composite("gap", json!([{"class": "FLAW-0002"}]))]),
+        ),
+        config(
+            "n_lt_two_pow",
+            "helper_lemma",
+            "informal",
+            json!([composite(
+                "gap",
+                json!([spec(
+                    "FLAW-0009",
+                    None,
+                    "gap",
+                    json!({"mode": "axiom", "truth": true})
+                )])
+            )]),
+        ),
+        config(
+            "horses",
+            "induction",
+            "pair",
+            json!([composite(
+                "fatal",
+                json!([spec(
+                    "FLAW-0006",
+                    None,
+                    "fatal",
+                    json!({"mode": "step-above-base", "failing_case": "n + 1 = 2"})
+                )])
+            )]),
+        ),
+        json!({"theorem": "continuity_is_not_uniform", "style": "epsilon_delta", "target": "pair",
+               "flaws": [composite("gap", json!([inner.clone()]))], "padding_ratio": 0.2}),
+        cont(
+            "pair",
+            json!([composite("gap", json!([inner.clone()])), inner.clone()]),
+        ),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
+    assert!(prepare_with(Version::V0_4_0, &pair, 7).is_err());
 }

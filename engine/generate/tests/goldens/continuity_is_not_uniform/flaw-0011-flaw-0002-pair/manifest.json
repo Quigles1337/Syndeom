@@ -1,0 +1,322 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0002": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0011": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 3
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 92
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "772f25b4d000406cc76c607392d073e94e6a0a46149c6feb5641f5a8e7ba45ce",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_continuity_is_not_uniform",
+        "n_bytes": 607,
+        "n_declarations": 1,
+        "n_lines": 9,
+        "n_tokens": 118,
+        "storage": "regenerable"
+      },
+      "informal": {
+        "content_hash": "25c01094ca38b7892bfb03eeb22e1cb4be369a713492f38c265618b59407b4fb",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 583,
+        "n_lemmas": 0,
+        "n_steps": 3,
+        "n_tokens": 92,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "pair"
+  },
+  "artifact_id": "s2_template-v0.5.0-dac9acd07051-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0002": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0011": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 3
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "dials": {
+          "embedded": [
+            {
+              "class": "FLAW-0002",
+              "dials": {
+                "swap": "forall-exists"
+              },
+              "severity": "gap",
+              "site": "auto",
+              "sub_variant": null
+            }
+          ]
+        },
+        "severity": "gap",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "epsilon_delta",
+    "target": "pair",
+    "theorem": "continuity_is_not_uniform"
+  },
+  "config_hash": "dac9acd0705191ad4f368c01b6e4d3e82c31a0e60d4ddd9bc94830ef23782242",
+  "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0002": "PASS",
+      "n_flaws_0011": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.5.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0002",
+        "dials": {
+          "inserted": "continuous, for $\\varepsilon = 1/2$ there is $\\delta > 0$ such that $|f(x) - f(y)| < 1/2$ for all $x, y$ with $|x - y| < \\delta$",
+          "original_steps": {
+            "1": "Since $f$ is continuous at $0$, for $\\varepsilon = 1/2$ there is $\\delta > 0$ such that $|f(x) - f(0)| < 1/2$ for all $x$ with $|x - 0| < \\delta$.",
+            "2": "Take this $\\delta$, and let $|x| < \\delta$. Then $|f(x) - 1| < 1/2$, because $f(0) = 1$."
+          },
+          "replaced": "continuous at $0$, for $\\varepsilon = 1/2$ there is $\\delta > 0$ such that $|f(x) - f(0)| < 1/2$ for all $x$ with $|x - 0| < \\delta$",
+          "site": 1,
+          "swap": "forall-exists"
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            13,
+            141
+          ],
+          "step": 1
+        },
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0002",
+        "dials": {
+          "inserted": [
+            "obtain ⟨δ, hδ, h⟩ : ∃ δ > 0, ∀ x y : ℝ, dist x y < δ → dist (f x) (f y) < 1 / 2 := Metric.continuous_iff.mp hf 0 (1 / 2) (by norm_num)"
+          ],
+          "original_fragments": {
+            "1": [
+              "obtain ⟨δ, hδ, h⟩ := Metric.continuous_iff.mp hf 0 (1 / 2) (by norm_num)"
+            ],
+            "2": [
+              "refine ⟨δ, hδ, fun x hx => ?_⟩",
+              "have hx' : |f x - 1| < 1 / 2 := by simpa [Real.dist_eq, h0] using h x (by simpa [Real.dist_eq] using hx)"
+            ]
+          },
+          "replaced": [
+            "obtain ⟨δ, hδ, h⟩ := Metric.continuous_iff.mp hf 0 (1 / 2) (by norm_num)"
+          ],
+          "site": 1,
+          "swap": "forall-exists"
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_continuity_is_not_uniform",
+          "line": 6
+        },
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0011",
+        "dials": {
+          "embedded": [
+            {
+              "class": "FLAW-0002",
+              "dials": {
+                "swap": "forall-exists"
+              },
+              "severity": "gap",
+              "site": "auto",
+              "sub_variant": null
+            }
+          ],
+          "embedded_instances": [
+            1
+          ],
+          "inserted": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be continuous with $f(0) = 1$. Then there is $\\delta > 0$ such that $f(x) > 1/2$ for every $x$ with $|x| < \\delta$.",
+          "replaced": null,
+          "site": 0
+        },
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            151
+          ],
+          "step": 0
+        },
+        "severity": "gap",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0011",
+        "dials": {
+          "embedded": [
+            {
+              "class": "FLAW-0002",
+              "dials": {
+                "swap": "forall-exists"
+              },
+              "severity": "gap",
+              "site": "auto",
+              "sub_variant": null
+            }
+          ],
+          "embedded_instances": [
+            1
+          ],
+          "inserted": [
+            "theorem syndeom_s2_template_continuity_is_not_uniform (f : ℝ → ℝ) (hf : Continuous f) (h0 : f 0 = 1) : ∃ δ > 0, ∀ x : ℝ, |x| < δ → f x > 1 / 2 := by"
+          ],
+          "replaced": null,
+          "site": 0
+        },
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_continuity_is_not_uniform",
+          "line": 5
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/ContinuityIsNotUniform.lean:syndeom_seed_continuity_is_not_uniform",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

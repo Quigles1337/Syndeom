@@ -4,12 +4,15 @@
 //! commands either one injected instance or padding, never both (D5: two whole-argument
 //! variants cannot be made disjoint, and a padded flawed argument is a later version).
 //!
-//! The crate carries four producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
+//! The crate carries five producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
 //! 26): `0.1.0`, whose three seeds and per-record counts stay regenerable as the goldens name them;
 //! `0.2.0`, with four more seeds and counts per instance; `0.3.0`, with lemma steps (D2), the T
-//! check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the `n_lt_two_pow` seed; and `0.4.0`,
-//! the version `generate` emits, with the padding module (D2 `pad`, D5 FLAW-0013, Options 8) and
-//! the `sqrt2_irrational` seed, which carries padding material.
+//! check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the `n_lt_two_pow` seed; `0.4.0`, with
+//! the padding module (D2 `pad`, D5 FLAW-0013, Options 8) and the `sqrt2_irrational` seed, which
+//! carries padding material; and `0.5.0`, the version `generate` emits, with FLAW-0004 (the
+//! hedge lexicon, `hidden_step`; the aligned tactic step omitted), realized on `sqrt2_irrational`
+//! as FLAWS.md's FLAW-0011 example, and FLAW-0011 as a commanded composite (`embedded`) of one
+//! gap-or-fatal instance of FLAW-0001 through FLAW-0010 (Al's rulings 2 and 3 on PR 30).
 //!
 //! A seed's flaw material is a whole-argument variant of one style: the flawed step list, each
 //! step naming the faithful step it replaces (`from`), the flaw site, and the anchor text at the
@@ -19,7 +22,12 @@
 //! are the convincing argument as the FLAWS.md example writes it, nothing is replaced, and the
 //! record carries the seed's counterexample (0.2.0; a reading flagged for Al in the amendment).
 //! A seed's padding material (0.4.0) is a list of paragraphs, each true irrelevant material as a
-//! whole step with the unused declaration that matches it in the formal file.
+//! whole step with the unused declaration that matches it in the formal file. FLAW-0004 material
+//! (0.5.0) is replacement material whose site step is the bare claim: the injector draws a hedge
+//! from the fixed lexicon and prefixes it, records the justification the faithful step held and
+//! the tactic lines omitted from the aligned fragment, and the kernel reports the unsolved goal at
+//! the site. A FLAW-0011 composite (0.5.0) applies one embedded spec of severity gap or fatal to
+//! a true statement, so that the argument is invalid, and adds its own record at the statement.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -29,9 +37,9 @@ use syndeom_manifest::{
     Achieved, Artifact, Commanded, Derivation, FILE_FORMAL, FILE_INFORMAL, FORMAT_INFORMAL_MD,
     FORMAT_LEAN, FileBytes, Files, Flaw, FormalFile, FormalLocation, FormalTag, Generator,
     GroundTruth, InformalFile, InformalLocation, InformalTag, Kind, LeanCatchable, Location,
-    MANIFEST_SCHEMA, Manifest, Origin, ProofStatus, Severity, StatementStatus, Storage, Tolerance,
-    Toolchain, artifact_id, config_hash, content_hash, count_tokens, fidelity, is_lemma_step,
-    parse_informal_md, parse_lean, span_text,
+    MANIFEST_SCHEMA, Manifest, Origin, ProofStatus, Severity, StatementMethod, StatementStatus,
+    Storage, Tolerance, Toolchain, artifact_id, config_hash, content_hash, count_tokens, fidelity,
+    is_lemma_step, parse_informal_md, parse_lean, span_text,
 };
 
 use crate::harness::{Observation, used_closure};
@@ -43,7 +51,7 @@ use crate::rng::{RNG_ID, Stream};
 
 pub const GENERATOR_ID: &str = "s2_template";
 /// The producer version `generate` emits (ADR-0011 D1; ruling 5 on PR 26).
-pub const GENERATOR_VERSION: &str = "0.4.0";
+pub const GENERATOR_VERSION: &str = "0.5.0";
 /// The FLAWS.md version every record is read against (ADR-0011 D7).
 pub const TAXONOMY_VERSION: &str = "0.1.0";
 
@@ -55,10 +63,11 @@ pub enum Version {
     V0_2_0,
     V0_3_0,
     V0_4_0,
+    V0_5_0,
 }
 
 impl Version {
-    pub const CURRENT: Version = Version::V0_4_0;
+    pub const CURRENT: Version = Version::V0_5_0;
 
     pub fn parse(s: &str) -> Option<Version> {
         match s {
@@ -66,6 +75,7 @@ impl Version {
             "0.2.0" => Some(Version::V0_2_0),
             "0.3.0" => Some(Version::V0_3_0),
             "0.4.0" => Some(Version::V0_4_0),
+            "0.5.0" => Some(Version::V0_5_0),
             _ => None,
         }
     }
@@ -76,17 +86,27 @@ impl Version {
             Version::V0_2_0 => "0.2.0",
             Version::V0_3_0 => "0.3.0",
             Version::V0_4_0 => "0.4.0",
+            Version::V0_5_0 => "0.5.0",
         }
     }
 
     /// How many of [`SEED_RECORDS`] the version compiles in: the v0.1 set, then the v0.2
-    /// additions, then the v0.3 addition, then the v0.4 addition.
+    /// additions, then the v0.3 addition, then the v0.4 addition; 0.5.0 adds no seed.
     fn seed_count(self) -> usize {
         match self {
             Version::V0_1_0 => 3,
             Version::V0_2_0 => 7,
             Version::V0_3_0 => 8,
-            Version::V0_4_0 => 9,
+            Version::V0_4_0 | Version::V0_5_0 => 9,
+        }
+    }
+
+    /// From 0.5.0 the injector realizes FLAW-0004 (the hedge lexicon and `hidden_step`) and
+    /// FLAW-0011 as a commanded composite; earlier versions refuse both specs.
+    fn realizes(self, class: &str) -> bool {
+        match class {
+            "FLAW-0004" | "FLAW-0011" => self >= Version::V0_5_0,
+            _ => true,
         }
     }
 
@@ -127,6 +147,12 @@ const RESERVED_DIALS: &[&str] = &[
     "ratio",
     "kind",
     "paragraph",
+    "hedge",
+    "hedge_text",
+    "justification",
+    "claim",
+    "omitted",
+    "embedded_instances",
 ];
 
 fn required_option<'de, D, T>(d: D) -> Result<Option<T>, D::Error>
@@ -223,6 +249,10 @@ pub struct Material {
     /// faithful step (`from: null`).
     #[serde(default)]
     pub inserts: bool,
+    /// FLAW-0004 material (0.5.0): the hidden step's claim, justification and omitted tactic
+    /// lines; present iff the class is FLAW-0004.
+    #[serde(default)]
+    pub hidden: Option<HiddenStep>,
     pub steps: Vec<FlawedStep>,
 }
 
@@ -233,6 +263,39 @@ pub struct Anchor {
     #[serde(deserialize_with = "required_option")]
     pub replaced: Option<String>,
     pub inserted: String,
+}
+
+/// FLAW-0004's fixed hedge lexicon (ADR-0011 D5; 0.5.0). The record's `hedge` dial is an index
+/// into it, drawn from the instance's stream after the material; `hedge_text` is the entry.
+pub const HEDGES: &[&str] = &[
+    "Clearly",
+    "It is easy to see that",
+    "Obviously",
+    "By a standard argument",
+    "One checks that",
+];
+
+/// FLAW-0004's `hidden_step` dial and the severity it fixes (ADR-0011 D5).
+fn hidden_step_severity(hidden_step: &str) -> Option<Severity> {
+    match hidden_step {
+        "routine-true" => Some(Severity::Cosmetic),
+        "nontrivial-true" => Some(Severity::Gap),
+        "false" => Some(Severity::Fatal),
+        _ => None,
+    }
+}
+
+/// FLAW-0004 material at a site (0.5.0; ADR-0011 D5): the step's bare claim, to which the
+/// injector prefixes the drawn hedge; the justification the recipe deletes from the faithful
+/// step, which holds it exactly once; and the aligned tactic lines it omits from the faithful
+/// fragment — a contiguous block, never replaced by `sorry`, so the kernel reports an unsolved
+/// goal at the site.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct HiddenStep {
+    pub claim: String,
+    pub justification: String,
+    pub omitted: Vec<String>,
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -330,6 +393,15 @@ pub fn check_seed(seed: &Seed) -> Result<(), String> {
                     seed.id
                 ));
             }
+            check_hidden_material(seed, style, m)?;
+        }
+        // FINDING-014 (packet 4): a seed's own steps never carry a padding header; only the
+        // padding module sets one (a flawed step cannot carry one, by its shape).
+        if style.steps.iter().any(|s| s.padding.is_some()) {
+            return Err(format!(
+                "seed {}: a style step never carries a padding header",
+                seed.id
+            ));
         }
     }
     // Padding material (0.4.0): a faithful argument to pad, whole non-lemma steps, proved
@@ -376,6 +448,91 @@ pub fn check_seed(seed: &Seed) -> Result<(), String> {
                 seed.id, para.name
             ));
         }
+    }
+    Ok(())
+}
+
+/// FLAW-0004 material (0.5.0): `hidden` is present iff the class is FLAW-0004; the material is
+/// replacement material at a main-proof step without an anchor, `YES-KERNEL`; its one dial
+/// `hidden_step` fixes the severity; the material's site step is the bare claim; the faithful
+/// site step holds the justification exactly once and the claim does not; the omitted block
+/// occurs exactly once in the faithful fragment, and removing it yields the material's fragment.
+fn check_hidden_material(seed: &Seed, style: &Style, m: &Material) -> Result<(), String> {
+    let err =
+        |what: &str| Err::<(), String>(format!("seed {}: FLAW-0004 material {what}", seed.id));
+    let Some(hs) = &m.hidden else {
+        if m.class == "FLAW-0004" {
+            return err("carries `hidden`");
+        }
+        return Ok(());
+    };
+    if m.class != "FLAW-0004" {
+        return err("is the only material that carries `hidden`");
+    }
+    if m.intrinsic || m.inserts || m.anchor.is_some() {
+        return err("is replacement material without an anchor");
+    }
+    if m.lean_catchable != LeanCatchable::YesKernel {
+        return err(
+            "is YES-KERNEL in a formal file (N/A is the injector's, for an informal-only target)",
+        );
+    }
+    let hidden_step = m
+        .dials
+        .as_object()
+        .filter(|d| d.len() == 1)
+        .and_then(|d| d.get("hidden_step"))
+        .and_then(Value::as_str);
+    let Some(hidden_step) = hidden_step else {
+        return err("has exactly the dial hidden_step");
+    };
+    if hidden_step_severity(hidden_step) != Some(m.severity) {
+        return err("has the severity its hidden_step fixes");
+    }
+    let Some(faithful) = (m.site >= 1)
+        .then(|| style.steps.get(m.site as usize - 1))
+        .flatten()
+    else {
+        return err("sits at a step of the style");
+    };
+    let Some(flawed) = m.steps.iter().find(|s| s.from == Some(m.site)) else {
+        return err("keeps its site step");
+    };
+    if faithful.lemma.is_some() || flawed.lemma.is_some() {
+        return err("sits at a main-proof step in 0.5.0");
+    }
+    if flawed.text != hs.claim {
+        return err(
+            "has its site step's text equal to the bare claim (the injector prefixes the hedge)",
+        );
+    }
+    if hs.justification.is_empty() || faithful.text.matches(hs.justification.as_str()).count() != 1
+    {
+        return err("names a justification the faithful step holds exactly once");
+    }
+    if hs.claim.contains(hs.justification.as_str()) {
+        return err("deletes the justification from the claim");
+    }
+    if hs.omitted.is_empty() {
+        return err("omits at least one tactic line");
+    }
+    let n = hs.omitted.len();
+    let positions: Vec<usize> = faithful
+        .fragment
+        .windows(n)
+        .enumerate()
+        .filter(|(_, w)| *w == hs.omitted.as_slice())
+        .map(|(i, _)| i)
+        .collect();
+    if positions.len() != 1 {
+        return err("omits a block that occurs exactly once in the faithful fragment");
+    }
+    let mut without = faithful.fragment.clone();
+    without.drain(positions[0]..positions[0] + n);
+    if without != flawed.fragment {
+        return err(
+            "has its site fragment equal to the faithful fragment without the omitted block",
+        );
     }
     Ok(())
 }
@@ -439,6 +596,48 @@ fn parse_severity(v: &Value) -> Result<Severity, String> {
     serde_json::from_value(v.clone()).map_err(|_| format!("unknown severity {v}"))
 }
 
+/// One `FlawSpec` (ADR-0011 D3) as a config gives it or, from 0.5.0, as FLAW-0011's `embedded`
+/// list gives it; `what` names it in a refusal.
+fn parse_spec(f: &Value, what: &str) -> Result<FlawSpec, String> {
+    let f = f.as_object().ok_or(format!("{what} is an object"))?;
+    exact_keys(
+        f,
+        &["class", "sub_variant", "severity", "site", "dials"],
+        what,
+    )?;
+    let site = match &f["site"] {
+        Value::String(s) if s == "auto" => None,
+        v => Some(
+            v.as_u64()
+                .filter(|k| *k >= 1)
+                .ok_or(format!("{what}.site is \"auto\" or a step index"))?,
+        ),
+    };
+    let dials = f["dials"]
+        .as_object()
+        .ok_or(format!("{what}.dials is an object"))?
+        .clone();
+    if let Some(k) = RESERVED_DIALS.iter().find(|k| dials.contains_key(**k)) {
+        return Err(format!(
+            "{what}.dials may not set {k:?}: the injector records it"
+        ));
+    }
+    Ok(FlawSpec {
+        class: f["class"]
+            .as_str()
+            .ok_or(format!("{what}.class is a string"))?
+            .to_string(),
+        sub_variant: match &f["sub_variant"] {
+            Value::Null => None,
+            Value::String(s) => Some(s.clone()),
+            _ => return Err(format!("{what}.sub_variant is a string or null")),
+        },
+        severity: parse_severity(&f["severity"])?,
+        site,
+        dials,
+    })
+}
+
 /// Parse and shape-check a config; every refusal is an exit-2 refusal.
 pub fn parse_config(config: &Value) -> Result<Config, String> {
     let obj = config.as_object().ok_or("the config is a JSON object")?;
@@ -470,43 +669,7 @@ pub fn parse_config(config: &Value) -> Result<Config, String> {
         .iter()
         .enumerate()
     {
-        let f = f
-            .as_object()
-            .ok_or(format!("config.flaws[{i}] is an object"))?;
-        exact_keys(
-            f,
-            &["class", "sub_variant", "severity", "site", "dials"],
-            &format!("config.flaws[{i}]"),
-        )?;
-        let site = match &f["site"] {
-            Value::String(s) if s == "auto" => None,
-            v => Some(v.as_u64().filter(|k| *k >= 1).ok_or(format!(
-                "config.flaws[{i}].site is \"auto\" or a step index"
-            ))?),
-        };
-        let dials = f["dials"]
-            .as_object()
-            .ok_or(format!("config.flaws[{i}].dials is an object"))?
-            .clone();
-        if let Some(k) = RESERVED_DIALS.iter().find(|k| dials.contains_key(**k)) {
-            return Err(format!(
-                "config.flaws[{i}].dials may not set {k:?}: the injector records it"
-            ));
-        }
-        flaws.push(FlawSpec {
-            class: f["class"]
-                .as_str()
-                .ok_or(format!("config.flaws[{i}].class is a string"))?
-                .to_string(),
-            sub_variant: match &f["sub_variant"] {
-                Value::Null => None,
-                Value::String(s) => Some(s.clone()),
-                _ => return Err(format!("config.flaws[{i}].sub_variant is a string or null")),
-            },
-            severity: parse_severity(&f["severity"])?,
-            site,
-            dials,
-        });
+        flaws.push(parse_spec(f, &format!("config.flaws[{i}]"))?);
     }
     Ok(Config {
         theorem: string("theorem")?,
@@ -600,9 +763,24 @@ pub struct PaddingInsertion {
     pub formal_dials: Value,
 }
 
+/// FLAW-0011 as a commanded composite (0.5.0; ADR-0011 D5): the record that names its embedded
+/// instance(s), inherits the most severe one's severity and `lean_catchable`, and addresses the
+/// statement — step 0 with span `[0, len)` in the informal file, the main declaration at its
+/// header line in the formal file (D5, notes to the table).
+#[derive(Debug, Clone, PartialEq)]
+pub struct Composite {
+    pub instance: u64,
+    pub severity: Severity,
+    pub lean_catchable: LeanCatchable,
+    /// The embedded specs exactly as the config gave them.
+    pub embedded: Value,
+    pub embedded_instances: Vec<u64>,
+}
+
 /// Everything `prepare` produces: the config as given, the plan after injection and padding,
-/// the rendered bytes, the injected instance (none for a control or a padded control) and the
-/// padding insertions (none unless FLAW-0013 was commanded).
+/// the rendered bytes, the injected instance (none for a control or a padded control; the
+/// embedded instance of a composite), the padding insertions (none unless FLAW-0013 was
+/// commanded) and the composite (none unless FLAW-0011 was commanded).
 #[derive(Debug, Clone, PartialEq)]
 pub struct Prepared {
     pub version: Version,
@@ -617,6 +795,7 @@ pub struct Prepared {
     pub formal: Option<FormalRendering>,
     pub injection: Option<Injection>,
     pub padding: Vec<PaddingInsertion>,
+    pub composite: Option<Composite>,
 }
 
 impl Prepared {
@@ -711,9 +890,18 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
             seed.id
         ));
     }
+    if let Some(spec) = cfg.flaws.first()
+        && !version.realizes(&spec.class)
+    {
+        return Err(format!(
+            "{} is not realized by s2_template {}",
+            spec.class,
+            version.as_str()
+        ));
+    }
     let mut plan = faithful_plan(&seed, style);
-    let (injection, padding) = match cfg.flaws.first() {
-        None => (None, Vec::new()),
+    let (injection, padding, composite) = match cfg.flaws.first() {
+        None => (None, Vec::new(), None),
         Some(spec) if spec.class == "FLAW-0013" => (
             None,
             pad(
@@ -724,12 +912,20 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
                 cfg.target,
                 seed_value,
             )?,
+            None,
         ),
+        Some(spec) if spec.class == "FLAW-0011" => {
+            let (inj, comp) = compose(
+                &mut plan, &seed, style, spec, cfg.target, seed_value, version,
+            )?;
+            (Some(inj), Vec::new(), Some(comp))
+        }
         Some(spec) => (
             Some(inject(
                 &mut plan, &seed, style, spec, cfg.target, seed_value,
             )?),
             Vec::new(),
+            None,
         ),
     };
     let informal = cfg
@@ -753,6 +949,7 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
         formal,
         injection,
         padding,
+        composite,
     })
 }
 
@@ -1019,12 +1216,37 @@ fn inject(
             }
         }
     }
+    // FLAW-0004 (0.5.0): the hedge is drawn from the instance's stream after the material and
+    // prefixed to the material's bare claim; the deleted justification, the claim and the
+    // omitted tactic lines are recorded. An informal-only target has no formal manifestation,
+    // so the instance is `N/A` there (D5).
+    let hidden = material.hidden.as_ref();
+    let hedge = hidden.map(|_| stream.below(HEDGES.len() as u64) as usize);
     let flawed_site = &material.steps[site - 1];
+    let site_text = match (hidden, hedge) {
+        (Some(hs), Some(i)) => format!("{} {}", HEDGES[i], hs.claim),
+        _ => flawed_site.text.clone(),
+    };
     let flawed_step = Step {
-        text: flawed_site.text.clone(),
+        text: site_text.clone(),
         fragment: flawed_site.fragment.clone(),
         lemma: flawed_site.lemma.clone(),
         padding: None,
+    };
+    let hedged = |formal: bool| -> Vec<(&str, Value)> {
+        match (hidden, hedge) {
+            (Some(hs), Some(i)) => {
+                let mut v = vec![("hedge", json!(i)), ("hedge_text", json!(HEDGES[i]))];
+                if formal {
+                    v.push(("omitted", json!(hs.omitted)));
+                } else {
+                    v.push(("justification", json!(hs.justification)));
+                    v.push(("claim", json!(hs.claim)));
+                }
+                v
+            }
+            _ => Vec::new(),
+        }
     };
     // Informal: the anchor's text, or the whole step; an inserted step replaces nothing.
     let faithful_site = (!material.inserts).then(|| &faithful[(material.site - 1) as usize]);
@@ -1037,14 +1259,16 @@ fn inject(
                     .ok_or("material that is not intrinsic replaces text at its anchor")?,
             ),
         ),
-        (None, Some(f)) => (flawed_site.text.clone(), Some(f.text.clone())),
-        (None, None) => (flawed_site.text.clone(), None),
+        (None, Some(f)) => (site_text.clone(), Some(f.text.clone())),
+        (None, None) => (site_text.clone(), None),
     };
-    let informal_dials = with(vec![
+    let mut informal_extra = hedged(false);
+    informal_extra.extend([
         ("inserted", json!(inserted)),
         ("replaced", json!(replaced)),
         ("original_steps", Value::Object(original_steps)),
     ]);
+    let informal_dials = with(informal_extra);
     // Formal: a main-proof step's fragment, or a lemma step's declaration lines as the writer
     // emits them (0.3.0), with the declaration's name recorded.
     let (formal_inserted, formal_replaced) = match (&flawed_step.lemma, faithful_site) {
@@ -1053,11 +1277,12 @@ fn inject(
         (None, Some(f)) => (flawed_step.fragment.clone(), Some(f.fragment.clone())),
         (None, None) => (flawed_step.fragment.clone(), None),
     };
-    let mut formal_extra = vec![
+    let mut formal_extra = hedged(true);
+    formal_extra.extend([
         ("inserted", json!(formal_inserted)),
         ("replaced", json!(formal_replaced)),
         ("original_fragments", Value::Object(original_fragments)),
-    ];
+    ]);
     if let Some(l) = &flawed_step.lemma {
         formal_extra.push(("declaration", json!(l.name)));
     }
@@ -1065,25 +1290,119 @@ fn inject(
     plan.steps = material
         .steps
         .iter()
-        .map(|s| Step {
-            text: s.text.clone(),
+        .enumerate()
+        .map(|(j, s)| Step {
+            text: if j + 1 == site {
+                site_text.clone()
+            } else {
+                s.text.clone()
+            },
             fragment: s.fragment.clone(),
             lemma: s.lemma.clone(),
             padding: None,
         })
         .collect();
+    let lean_catchable = if hidden.is_some() && target == Target::Informal {
+        LeanCatchable::NotApplicable
+    } else {
+        material.lean_catchable
+    };
     Ok(Injection {
         instance: 1,
         class: material.class.clone(),
         sub_variant: material.sub_variant.clone(),
         severity: material.severity,
-        lean_catchable: material.lean_catchable,
+        lean_catchable,
         site,
         informal_inserted: inserted,
         informal_dials,
         formal_inserted,
         formal_dials,
     })
+}
+
+/// FLAW-0011 as a commanded composite (ADR-0011 D5; 0.5.0): `embedded` lists the FlawSpecs to
+/// apply to a seed whose statement is true — one in 0.5.0, since the materials are
+/// whole-argument variants (D5's disjointness rule) — of FLAW-0001 through FLAW-0010 only
+/// (FLAW-0011's definition; Al's ruling 3 on PR 30) and of severity gap or fatal, so that the
+/// composite is an invalid proof under D7 (Al's ruling 2 on PR 30: a composite whose embedded
+/// instances are all cosmetic is refused). The composite's severity and `lean_catchable` are
+/// its most severe embedded instance's; its own record addresses the statement and is numbered
+/// after the embedded instance.
+fn compose(
+    plan: &mut Plan,
+    seed: &Seed,
+    style: &Style,
+    spec: &FlawSpec,
+    target: Target,
+    seed_value: u64,
+    version: Version,
+) -> Result<(Injection, Composite), String> {
+    check_spec(spec, target)?;
+    if spec.sub_variant.is_some() {
+        return Err("FLAW-0011 has no sub-variant".into());
+    }
+    if spec.site.is_some() {
+        return Err("FLAW-0011 addresses the statement (step 0), so its site is \"auto\"".into());
+    }
+    exact_keys(&spec.dials, &["embedded"], "FLAW-0011's dials")?;
+    let embedded = spec.dials["embedded"]
+        .as_array()
+        .ok_or("FLAW-0011's embedded is an array of FlawSpecs")?;
+    if embedded.is_empty() {
+        return Err("FLAW-0011 embeds at least one instance".into());
+    }
+    if embedded.len() > 1 {
+        return Err(format!(
+            "s2_template {} materials are whole-argument variants, so a composite embeds one instance (ADR-0011 D5)",
+            version.as_str()
+        ));
+    }
+    let inner = parse_spec(&embedded[0], "FLAW-0011's embedded[0]")?;
+    let number = inner
+        .class
+        .strip_prefix("FLAW-")
+        .and_then(|n| n.parse::<u32>().ok());
+    if !matches!(number, Some(1..=10)) {
+        return Err(format!(
+            "FLAW-0011 embeds an instance of FLAW-0001 through FLAW-0010 (FLAWS.md's definition; Al's ruling 3 on PR 30), not {}",
+            inner.class
+        ));
+    }
+    if !matches!(inner.severity, Severity::Gap | Severity::Fatal) {
+        return Err(format!(
+            "FLAW-0011 requires an embedded instance of severity gap or fatal; a composite of {:?} instances is not an invalid proof (D7; Al's ruling 2 on PR 30)",
+            inner.severity
+        ));
+    }
+    if !version.realizes(&inner.class) {
+        return Err(format!(
+            "{} is not realized by s2_template {}",
+            inner.class,
+            version.as_str()
+        ));
+    }
+    if seed.truth.value != Some(true) {
+        return Err(format!(
+            "seed {} states a false theorem; FLAW-0011 is a true theorem with an invalid proof (a false one is FLAW-0012)",
+            seed.id
+        ));
+    }
+    if inner.severity != spec.severity {
+        return Err(format!(
+            "FLAW-0011's severity inherits its most severe embedded instance: {:?}, not {:?}",
+            inner.severity, spec.severity
+        ));
+    }
+    let inj = inject(plan, seed, style, &inner, target, seed_value)?;
+    let composite = Composite {
+        instance: inj.instance + 1,
+        severity: spec.severity,
+        lean_catchable: inj.lean_catchable,
+        embedded: spec.dials["embedded"].clone(),
+        embedded_instances: vec![inj.instance],
+    };
+    Ok((inj, composite))
 }
 
 /// FLAWS.md 0.1.0's *Manifests in* column, as ADR-0011 D5 realizes it: whether a class's record
@@ -1207,9 +1526,25 @@ pub fn assemble(
             )?;
             // The span holds exactly the recorded text; where something was replaced, the text
             // differs from it (an intrinsic record replaces nothing).
-            let confirmed = span_text(text, span).as_deref() == Some(&inj.informal_inserted)
+            let mut confirmed = span_text(text, span).as_deref() == Some(&inj.informal_inserted)
                 && (inj.informal_dials["replaced"].is_null()
                     || inj.informal_dials["replaced"] != json!(inj.informal_inserted));
+            // FLAW-0004 (0.5.0, D5): the span equals the hedge entry plus the step text minus
+            // its recorded justification — the step is the drawn hedge, a space and the bare
+            // claim; the faithful text held the justification exactly once; the step does not.
+            if inj.class == "FLAW-0004" {
+                let d = &inj.informal_dials;
+                let hedge = d["hedge_text"].as_str().unwrap_or_default();
+                let claim = d["claim"].as_str().unwrap_or_default();
+                let justification = d["justification"].as_str().unwrap_or_default();
+                confirmed = confirmed
+                    && !justification.is_empty()
+                    && *text == format!("{hedge} {claim}")
+                    && d["replaced"]
+                        .as_str()
+                        .is_some_and(|r| r.matches(justification).count() == 1)
+                    && !text.contains(justification);
+            }
             records.push((
                 Flaw {
                     instance: inj.instance,
@@ -1327,6 +1662,81 @@ pub fn assemble(
                     severity: Severity::Cosmetic,
                     lean_catchable: LeanCatchable::YesTooling,
                     dials: ins.formal_dials.clone(),
+                },
+                confirmed,
+            ));
+        }
+    }
+    // FLAW-0011 as a commanded composite (0.5.0, D5): one record per file the artifact has, at
+    // the statement — step 0 with span `[0, len)`, the main declaration at its header line —
+    // confirmed when the statement's truth is by a kernel-checked witness or Mathlib (D7; the
+    // witness is a library module the gate builds) and every embedded instance's records pass.
+    if let Some(comp) = &p.composite {
+        let embedded_records: Vec<&(Flaw, bool)> = records
+            .iter()
+            .filter(|(r, _)| comp.embedded_instances.contains(&r.instance))
+            .collect();
+        let embedded_ok =
+            !embedded_records.is_empty() && embedded_records.iter().all(|(_, ok)| *ok);
+        let truth = &p.plan.truth;
+        let truth_ok = truth.value == Some(true)
+            && matches!(
+                truth.method,
+                StatementMethod::LeanKernel | StatementMethod::Mathlib
+            )
+            && !truth.reference.is_empty();
+        let confirmed = embedded_ok && truth_ok;
+        let with = |extra: Vec<(&str, Value)>| {
+            let mut m = Map::new();
+            m.insert("embedded".into(), comp.embedded.clone());
+            m.insert("site".into(), json!(0));
+            m.insert("embedded_instances".into(), json!(comp.embedded_instances));
+            for (key, v) in extra {
+                m.insert(key.into(), v);
+            }
+            Value::Object(m)
+        };
+        if let Some(st) = &informal_stats {
+            let text = &st.steps[0];
+            records.push((
+                Flaw {
+                    instance: comp.instance,
+                    class: "FLAW-0011".into(),
+                    sub_variant: None,
+                    location: Location::Informal(InformalLocation {
+                        artifact: InformalTag::Informal,
+                        step: 0,
+                        span: [0, text.chars().count() as u64],
+                    }),
+                    severity: comp.severity,
+                    lean_catchable: comp.lean_catchable,
+                    dials: with(vec![("inserted", json!(text)), ("replaced", Value::Null)]),
+                },
+                confirmed,
+            ));
+        }
+        if let (Some(f), Some(_)) = (&p.formal, observation) {
+            let text = std::str::from_utf8(&f.bytes).map_err(|e| e.to_string())?;
+            let header = text
+                .lines()
+                .nth(f.main_line as usize - 1)
+                .ok_or("the main declaration's header line is in the formal file")?;
+            records.push((
+                Flaw {
+                    instance: comp.instance,
+                    class: "FLAW-0011".into(),
+                    sub_variant: None,
+                    location: Location::Formal(FormalLocation {
+                        artifact: FormalTag::Formal,
+                        declaration: main.clone(),
+                        line: f.main_line,
+                    }),
+                    severity: comp.severity,
+                    lean_catchable: comp.lean_catchable,
+                    dials: with(vec![
+                        ("inserted", json!([header])),
+                        ("replaced", Value::Null),
+                    ]),
                 },
                 confirmed,
             ));

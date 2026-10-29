@@ -1,0 +1,173 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0004": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 5
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 115
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 722,
+        "n_lemmas": 0,
+        "n_steps": 5,
+        "n_tokens": 115,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.5.0-0abb0ceac4c5-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0004": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 5
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {
+          "hidden_step": "routine-true"
+        },
+        "severity": "cosmetic",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "descent",
+    "target": "informal",
+    "theorem": "sqrt2_irrational"
+  },
+  "config_hash": "0abb0ceac4c5fff1c378c42147ce00692cb6e6b43cf8dab31343b9602f31b152",
+  "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0004": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.5.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0004",
+        "dials": {
+          "claim": "$p$ is even. Write $p = 2k$.",
+          "hedge": 1,
+          "hedge_text": "It is easy to see that",
+          "hidden_step": "routine-true",
+          "inserted": "It is easy to see that $p$ is even. Write $p = 2k$.",
+          "justification": "if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd",
+          "original_steps": {
+            "3": "Hence $p$ is even: if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd. Write $p = 2k$."
+          },
+          "replaced": "Hence $p$ is even: if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd. Write $p = 2k$.",
+          "site": 3
+        },
+        "instance": 1,
+        "lean_catchable": "N/A",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            51
+          ],
+          "step": 3
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/Sqrt2Irrational.lean:syndeom_seed_sqrt2_irrational",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

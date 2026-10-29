@@ -1,0 +1,21 @@
+sqrt2_irrational/flaw-0004-routine-true-informal exit=0 start=2026-10-28T23:41:58.227Z end=2026-10-28T23:42:01.778Z
+s2_template-v0.5.0-0abb0ceac4c5-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0004-routine-true-pair exit=0 start=2026-10-28T23:42:01.780Z end=2026-10-28T23:42:12.639Z
+s2_template-v0.5.0-a389934b677e-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0011-flaw-0004-informal exit=0 start=2026-10-28T23:42:12.641Z end=2026-10-28T23:42:16.428Z
+s2_template-v0.5.0-f0ead84420be-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0011-flaw-0004-pair exit=0 start=2026-10-28T23:42:16.430Z end=2026-10-28T23:42:26.172Z
+s2_template-v0.5.0-a77967460c1f-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end

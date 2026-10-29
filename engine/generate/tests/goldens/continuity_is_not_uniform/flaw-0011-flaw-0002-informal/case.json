@@ -1,0 +1,33 @@
+{
+  "config": {
+    "theorem": "continuity_is_not_uniform",
+    "style": "epsilon_delta",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0011",
+        "sub_variant": null,
+        "severity": "gap",
+        "site": "auto",
+        "dials": {
+          "embedded": [
+            {
+              "class": "FLAW-0002",
+              "sub_variant": null,
+              "severity": "gap",
+              "site": "auto",
+              "dials": {
+                "swap": "forall-exists"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+  "toolchain": null,
+  "observation": null
+}
