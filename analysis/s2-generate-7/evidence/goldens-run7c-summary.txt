@@ -1,0 +1,51 @@
+bolzano_weierstrass/control-informal exit=0 start=2026-10-29T02:32:45.406Z end=2026-10-29T02:32:50.514Z
+s2_template-v0.7.0-a67602abb5dd-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/control-formal exit=0 start=2026-10-29T02:32:50.514Z end=2026-10-29T02:33:13.274Z
+s2_template-v0.7.0-161fc51ffb45-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/flaw-0008-add-hypothesis-pair exit=0 start=2026-10-29T02:33:13.276Z end=2026-10-29T02:33:35.350Z
+s2_template-v0.7.0-c607b52c1eac-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/flaw-0008-restrict-type-pair exit=0 start=2026-10-29T02:33:35.351Z end=2026-10-29T02:33:55.663Z
+s2_template-v0.7.0-9dedc138a9e0-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/flaw-0008-flip-strictness-pair exit=0 start=2026-10-29T02:33:55.664Z end=2026-10-29T02:34:18.684Z
+s2_template-v0.7.0-4be2b87571b6-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/flaw-0008-weaken-conclusion-pair exit=0 start=2026-10-29T02:34:18.686Z end=2026-10-29T02:34:41.432Z
+s2_template-v0.7.0-e4c274e9a544-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/flaw-0008-shadow-definition-pair exit=0 start=2026-10-29T02:34:41.435Z end=2026-10-29T02:35:02.405Z
+s2_template-v0.7.0-1f0d447ea8bb-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_continuous_sup/flaw-0012-fatal-informal exit=0 start=2026-10-29T02:35:02.407Z end=2026-10-29T02:35:07.426Z
+s2_template-v0.7.0-35b526a2cabe-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_continuous_sup/flaw-0012-fatal-formal exit=0 start=2026-10-29T02:35:07.428Z end=2026-10-29T02:35:21.523Z
+s2_template-v0.7.0-6f6417a96546-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_continuous_sup/flaw-0012-fatal-pair exit=0 start=2026-10-29T02:35:21.524Z end=2026-10-29T02:35:35.593Z
+s2_template-v0.7.0-4a45be1bb211-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end

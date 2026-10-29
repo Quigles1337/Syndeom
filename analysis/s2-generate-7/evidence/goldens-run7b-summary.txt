@@ -1,0 +1,35 @@
+bolzano_weierstrass/control-informal exit=0 start=2026-10-29T02:29:25.565Z end=2026-10-29T02:29:30.315Z
+s2_template-v0.7.0-a67602abb5dd-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/control-formal exit=0 start=2026-10-29T02:29:30.317Z end=2026-10-29T02:29:52.461Z
+s2_template-v0.7.0-161fc51ffb45-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bolzano_weierstrass/flaw-0008-add-hypothesis-pair exit=2 start=2026-10-29T02:29:52.463Z end=2026-10-29T02:29:52.977Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+bolzano_weierstrass/flaw-0008-restrict-type-pair exit=2 start=2026-10-29T02:29:52.980Z end=2026-10-29T02:29:53.486Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+bolzano_weierstrass/flaw-0008-flip-strictness-pair exit=2 start=2026-10-29T02:29:53.489Z end=2026-10-29T02:29:54.005Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+bolzano_weierstrass/flaw-0008-weaken-conclusion-pair exit=2 start=2026-10-29T02:29:54.007Z end=2026-10-29T02:29:54.520Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+bolzano_weierstrass/flaw-0008-shadow-definition-pair exit=2 start=2026-10-29T02:29:54.522Z end=2026-10-29T02:29:55.035Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+bounded_continuous_sup/flaw-0012-fatal-informal exit=2 start=2026-10-29T02:29:55.038Z end=2026-10-29T02:29:55.549Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+bounded_continuous_sup/flaw-0012-fatal-formal exit=2 start=2026-10-29T02:29:55.550Z end=2026-10-29T02:29:56.065Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+bounded_continuous_sup/flaw-0012-fatal-pair exit=2 start=2026-10-29T02:29:56.067Z end=2026-10-29T02:29:56.583Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+=== GOLDENS end

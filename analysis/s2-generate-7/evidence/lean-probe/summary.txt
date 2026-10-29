@@ -1,0 +1,13 @@
+s2j_bw_faithful exit=0 start=02:00:23 end=02:00:34
+s2j_bw_add_hypothesis exit=0 start=02:00:34 end=02:00:44
+s2j_bw_restrict_type exit=0 start=02:00:44 end=02:00:54
+s2j_bw_restrict_type_b exit=0 start=02:00:54 end=02:01:05
+s2j_bw_flip_strictness exit=0 start=02:01:05 end=02:01:15
+s2j_bw_weaken_conclusion exit=0 start=02:01:15 end=02:01:26
+s2j_bw_shadow_definition exit=0 start=02:01:26 end=02:01:36
+s2j_bw_shadow_definition_b exit=0 start=02:01:36 end=02:01:47
+s2j_bw_witness exit=0 start=02:01:47 end=02:01:57
+s2j_bcs_convincing exit=1 start=02:01:57 end=02:02:07
+s2j_bcs_rest exit=0 start=02:02:07 end=02:02:17
+s2j_bcs_witness exit=0 start=02:02:17 end=02:02:45
+=== PROBE end
