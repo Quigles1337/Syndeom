@@ -13,7 +13,10 @@ Branch `claude/s2-template-0.5.0`, from `main` `fbcc6c4e682e6cbaaf14d8e42a28cfcd
 |---|---|
 | `7be41123c698a07b9e56cab2aa2a1e9d257944b8` | the 0.5.0 producer: FLAW-0004's material shape and injection, the composite, the seed material, the FINDING-014 rule, the tests, the crate README |
 | `4edc3f73f43e32d615cd7ba01093215f133c3e08` | the 4 goldens of 0.5.0, produced at `7be41123…`, and the goldens README |
-| the record commit after it | this packet, ADR-0011 *Amendments*, STATE and HANDOFF Session 44 |
+| `074e5775e9626b6925fa8ff8cb32a15ad2aec069` | the records: this packet, ADR-0011 *Amendments*, STATE and HANDOFF Session 44 |
+| `1c0c5fcdf1ffd375b109f272461a63c49330e007` | Al's rulings 2 and 3 on PR 30 applied: a composite embeds one gap-or-fatal instance of FLAW-0001 through FLAW-0010; the cosmetic composite goldens removed |
+| `5afc00d7809fa34a0c163e08c6d8e353d374bcae` | the 0.5.0 goldens regenerated at `1c0c5fcd…`: FLAW-0004 (proof bytes unchanged) and the FLAW-0002 gap composite |
+| the record commit after it | the rulings recorded: this packet, ADR-0011 *Amendments*, STATE and HANDOFF Session 44's addendum |
 
 ## What was built
 
@@ -49,6 +52,10 @@ Branch `claude/s2-template-0.5.0`, from `main` `fbcc6c4e682e6cbaaf14d8e42a28cfcd
   statement, or the header line) and `replaced: null`. It is confirmed when the seed's truth is
   by a kernel-checked witness or Mathlib (D7) and every record of every embedded instance passes.
   Counts are per instance: `n_flaws_total` 2, `n_flaws_0004` 1, `n_flaws_0011` 1.
+  **Amended by Al's rulings 2 and 3 on PR 30 (below):** the embedded instance must be of
+  severity gap or fatal, so that every composite is an invalid proof, and of FLAW-0001 through
+  FLAW-0010; the cosmetic FLAW-0004 composite — FLAWS.md's example — is refused, and the
+  committed composite goldens embed `continuity_is_not_uniform`'s FLAW-0002 gap.
 - **The seed (D6).** `sqrt2_irrational` gains the FLAW-0004 `routine-true` material at step 3:
   the FLAWS.md FLAW-0011 example — `2 | p² ⇒ 2 | p` replaced by a hedge and the parity argument
   dropped. Its faithful steps, padding material and witness are unchanged, so every 0.4.0 golden
@@ -72,8 +79,10 @@ Branch `claude/s2-template-0.5.0`, from `main` `fbcc6c4e682e6cbaaf14d8e42a28cfcd
    Both realize "the aligned tactic step omitted, leaving an unsolved goal" at the site's first
    fragment line; `p1` is the one built (reading 40). The seed material was written after these
    probes compiled.
-2. **The goldens.** 4 cases — FLAW-0004 `routine-true` (informal, pair) and FLAW-0011 embedding
-   it (informal, pair) — each produced by `generate --dry-run` with seed 7 at
+2. **The goldens, first production** (superseded for the composite cases by Al's ruling 2 on PR
+   30, below; the FLAW-0004 cases were regenerated with unchanged proof bytes). 4 cases —
+   FLAW-0004 `routine-true` (informal, pair) and FLAW-0011 embedding it (informal, pair) — each
+   produced by `generate --dry-run` with seed 7 at
    `7be41123c698a07b9e56cab2aa2a1e9d257944b8` by two separate runs (`evidence/goldens-run5.py`;
    run A 2026-10-28T23:41:58Z–23:42:26Z, run B 23:42:26Z–23:42:55Z; every case exit 0, fidelity
    PASS, the provenance check passed against the commit before each run;
@@ -185,7 +194,8 @@ FINDING-013 (accepted) stand as packets 1–4 record them.
 ## Implementation readings, flagged for Al
 
 None of these changes ADR-0011's text. Each is how this implementation reads it. They continue
-packet 4's numbering.
+packet 4's numbering. **Al ruled on 2026-10-28 (below): 39, 40, 41, 42, 44, 45, 47, 48, 49, 50
+and 51 are accepted as read; 43 and 46 are replaced.**
 
 39. **The hedge is drawn, not commanded.** D5 lists `hedge` among FLAW-0004's dials as "an index
     into the fixed hedge lexicon" and says a record's dials hold "every lexicon entry drawn", as
@@ -217,7 +227,9 @@ packet 4's numbering.
     implementation follows D7 (ADR-0001's consistency rule, which the manifest's self-check
     enforces). The alternatives — force `invalid` for every composite, or refuse a composite whose
     embedded instances are all cosmetic — are Al's to choose; a composite of a gap or fatal
-    instance is `invalid`, as the FLAW-0002 composite shows.
+    instance is `invalid`, as the FLAW-0002 composite shows. **Replaced by Al's ruling 2 on PR
+    30 (below): D7 stands, and a composite requires an embedded instance of severity gap or
+    fatal; FLAWS.md's example realizes FLAW-0004 `routine-true`.**
 44. **Instance order:** the embedded instance is 1 and the composite 2, so the composite's
     inherited fields and its confirmation derive from records already made; `embedded_instances`
     names them. The records are in instance order (ADR-0001 D4).
@@ -228,7 +240,8 @@ packet 4's numbering.
 46. **One embedded instance per composite** in 0.5.0, by the whole-argument-variant rule of 0.3.0
     and 0.4.0; two, nesting, FLAW-0012 and FLAW-0013 embedded are refused, and padding with a
     composite by the one-spec rule. Whether a composite may embed FLAW-0013 is a reading STATE's
-    NEXT named for Al, not a decision taken here.
+    NEXT named for Al, not a decision taken here. **Replaced by Al's ruling 3 on PR 30 (below):
+    a composite embeds FLAW-0001 through FLAW-0010 only.**
 47. **The composite's locations:** step 0 with span `[0, len)` in the informal file; the main
     declaration at its header line in the formal file ("the main declaration at its statement
     line", D5's note), with `inserted` that line and `replaced: null`.
@@ -242,3 +255,72 @@ packet 4's numbering.
     the goldens are the FLAWS.md example only.
 51. **`nontrivial-true` and `false`** are parsed and mapped to gap and fatal, with no material in
     0.5.0, so a spec naming them is refused for lack of material, as `unused-lemma` was in 0.4.0.
+
+## Al's rulings on PR 30, and their application
+
+Al ruled on 2026-10-28 (received 2026-10-29 UTC; verbatim in ADR-0011 *Amendments*, STATE
+*Standing rulings* and HANDOFF Session 44's addendum; copy `owner-rulings-pr30.txt` under the
+external root, 1,248 bytes, SHA-256
+`8907df8358260ff8da2ce8d2b7db9b30b63516816a122b0793063983ed3be618`):
+
+1. Readings 39, 40, 41, 42, 44, 45, 47, 48, 49, 50 and 51 are accepted as read.
+2. **Reading 43 is replaced.** D7 stands. FLAW-0011 requires at least one embedded instance of
+   severity gap or fatal; a composite whose embedded instances are all cosmetic is not an
+   invalid proof and is refused, with a test. Under D7, FLAWS.md's FLAW-0011 example embeds a
+   cosmetic instance and therefore realizes FLAW-0004 `routine-true`, which the 0.5.0 goldens
+   already hold — recorded as an **erratum note against FLAWS.md 0.1.0** in ADR-0011
+   *Amendments*; FLAWS.md's text is left as it is. The two FLAW-0011 goldens are replaced by a
+   composite embedding one gap-or-fatal instance from a seed's existing material, informal and
+   pair, from two byte-identical runs, and all 0.5.0 goldens are regenerated at the fix commit so
+   that they name one `engine_commit`; the FLAW-0004 proof bytes must not change.
+3. **Reading 46 is replaced.** A composite embeds instances of FLAW-0001 through FLAW-0010 only,
+   by FLAW-0011's definition; FLAW-0012 and FLAW-0013 are never embedded.
+
+**Application**, in three further commits on the branch (no force-push):
+
+- **Commit 4, the fix** `1c0c5fcdf1ffd375b109f272461a63c49330e007`: `compose` refuses an
+  embedded instance whose severity is not gap or fatal (so a composite of cosmetic or
+  repairable instances is refused) and any class outside FLAW-0001 through FLAW-0010 (so
+  FLAW-0011, 0012, 0013 and 0014 are never embedded); the test
+  `d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance` now takes
+  `continuity_is_not_uniform`'s FLAW-0002 `forall-exists` gap composite as its subject and
+  refuses the cosmetic FLAW-0004 composite (FLAWS.md's example), a cosmetic FLAW-0007 `unused`
+  composite, a repairable FLAW-0001 `local` composite and a FLAW-0014 composite, while the
+  FLAW-0004 instance alone stays accepted; `every_case` embeds only gap-or-fatal materials of
+  FLAW-0001 through FLAW-0010 (FLAW-0001 `propagated`, FLAW-0002, FLAW-0009); the two cosmetic
+  composite goldens are removed; the crate README follows. The 20 property tests, clippy and fmt
+  stay clean.
+- **Commit 5, the regeneration** `5afc00d7809fa34a0c163e08c6d8e353d374bcae`: the four 0.5.0 goldens produced at
+  `1c0c5fcd…` by two separate runs (`evidence/goldens-run5r.py`; run A
+  2026-10-29T00:11:35Z–00:12:07Z, run B 00:12:07Z–00:12:38Z; every case exit 0, fidelity PASS,
+  the provenance check passed against the commit before each run;
+  `evidence/goldens-run5ra-summary.txt`, `evidence/goldens-run5rb-summary.txt`).
+  `evidence/goldens-copy5r.py` compared the runs file by file (every `proof.md`, `Proof.lean` and
+  `manifest.json` byte-identical, every observation equal, one engine commit), checked the
+  FLAW-0004 cases against the goldens committed at `4edc3f7` (exported under the external root:
+  `proof.md` and `Proof.lean` byte-identical, the same artifact ids `0abb0ceac4c5` and
+  `a389934b677e`, the same ground truth — only `manifest.json` and `case.json` name the new
+  commit), checked the composite's `proof.md` and `Proof.lean` against the 0.2.0 goldens
+  `continuity_is_not_uniform/flaw-0002-gap-informal` and `-pair` (byte-identical: the composite
+  changes no byte of the embedded instance's files), removed the two obsolete composite
+  directories and placed run A's outputs with a `case.json` each
+  (`evidence/goldens-regeneration-report.json`, SHA-256
+  `5e0d258b5cb3c6cb1cab78e7646ac28e2466e36b3336575afa16f8089a3239f6`, 7,397 bytes). The
+  composite's artifact ids are `21d62f8f06d1` (informal) and `dac9acd07051` (pair); its pair
+  fails at line 6, the swapped `obtain` (check K); its four records are the FLAW-0002 instance
+  in both files and the composite at step 0 and at the main declaration's header line (line 5),
+  all `gap`, `YES-KERNEL`; the artifact is `proof_status: invalid`, `correct: false`, two
+  instances confirmed. The receipts are under `goldens-5ra\` and `goldens-5rb\` of the external
+  root; the sorted lists of the four `receipt.json` SHA-256s hash to
+  `bbe9fdb30289e0dfffedcd899a76701e94bb5190d298ec71e2c28d67c4d66aa8` and
+  `5244afe6f4fe2abc1d7609b2f5058565bd2880a21001118e44cf066d4df8e652`. The goldens README and the
+  count (47 cases) follow.
+- **Commit 6, the records**: ADR-0011 *Amendments*, STATE, HANDOFF Session 44's addendum and this
+  section. The gate on the committed tree, the step-7 recheck and the push are in the pull
+  request and under the external root.
+
+**The choice of the gap instance.** `continuity_is_not_uniform`'s FLAW-0002 `forall-exists`
+gap: a true statement (its witness module is audited by the gate) whose argument swaps the
+quantifiers at step 1, a gap the kernel catches at the site in a pair, with 0.2.0 goldens
+already pinning the embedded instance's bytes. The composite therefore adds exactly its own two
+records and changes no proof byte, which the comparison script asserts.

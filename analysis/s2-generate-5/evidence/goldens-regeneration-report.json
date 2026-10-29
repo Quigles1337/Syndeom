@@ -1,0 +1,298 @@
+{
+ "run_a": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-050-20261028T2330Z/goldens-5ra",
+ "run_b": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-050-20261028T2330Z/goldens-5rb",
+ "old_goldens": "C:/Users/LEET/Codex/Temp/syndeom-s2-template-050-20261028T2330Z/old-goldens-4edc3f7",
+ "cases": [
+  {
+   "case": "continuity_is_not_uniform/flaw-0011-flaw-0002-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "3b7c165195c2cb2452ea206633d3bf54f59cc6a178df38f4af684e26340bdb50",
+     "bytes": 5635,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "25c01094ca38b7892bfb03eeb22e1cb4be369a713492f38c265618b59407b4fb",
+     "bytes": 583,
+     "identical": true
+    }
+   },
+   "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-21d62f8f06d1-s7",
+   "proof_status": "invalid",
+   "correct": false,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0002",
+     "severity": "gap",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       13,
+       141
+      ],
+      "step": 1
+     }
+    },
+    {
+     "instance": 2,
+     "class": "FLAW-0011",
+     "severity": "gap",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       151
+      ],
+      "step": 0
+     }
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 2,
+    "achieved": 2
+   },
+   "flaws_confirmed": 2,
+   "composite": {
+    "proof_bytes_equal_0_2_0_golden": true,
+    "reference": "C:/Users/LEET/Syndeom/engine/generate/tests/goldens/continuity_is_not_uniform/flaw-0002-gap-informal"
+   }
+  },
+  {
+   "case": "continuity_is_not_uniform/flaw-0011-flaw-0002-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "772f25b4d000406cc76c607392d073e94e6a0a46149c6feb5641f5a8e7ba45ce",
+     "bytes": 607,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "b4b6bfc190750162a9f631491be164e78f62d5d98c1a5960658bd9ef7ee5d403",
+     "bytes": 8647,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "25c01094ca38b7892bfb03eeb22e1cb4be369a713492f38c265618b59407b4fb",
+     "bytes": 583,
+     "identical": true
+    }
+   },
+   "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 6
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-dac9acd07051-s7",
+   "proof_status": "invalid",
+   "correct": false,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0002",
+     "severity": "gap",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       13,
+       141
+      ],
+      "step": 1
+     }
+    },
+    {
+     "instance": 1,
+     "class": "FLAW-0002",
+     "severity": "gap",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "formal",
+      "declaration": "syndeom_s2_template_continuity_is_not_uniform",
+      "line": 6
+     }
+    },
+    {
+     "instance": 2,
+     "class": "FLAW-0011",
+     "severity": "gap",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       151
+      ],
+      "step": 0
+     }
+    },
+    {
+     "instance": 2,
+     "class": "FLAW-0011",
+     "severity": "gap",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "formal",
+      "declaration": "syndeom_s2_template_continuity_is_not_uniform",
+      "line": 5
+     }
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 2,
+    "achieved": 2
+   },
+   "flaws_confirmed": 2,
+   "composite": {
+    "proof_bytes_equal_0_2_0_golden": true,
+    "reference": "C:/Users/LEET/Syndeom/engine/generate/tests/goldens/continuity_is_not_uniform/flaw-0002-gap-pair"
+   }
+  },
+  {
+   "case": "sqrt2_irrational/flaw-0004-routine-true-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "d191c7aee412456fe5ca5f0c3e217abd5831d6c685d70119188da82f57d479dc",
+     "bytes": 4197,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+     "bytes": 722,
+     "identical": true
+    }
+   },
+   "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-0abb0ceac4c5-s7",
+   "proof_status": "valid",
+   "correct": true,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "N/A",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       51
+      ],
+      "step": 3
+     }
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1,
+   "flaw_0004": {
+    "proof_bytes_unchanged": true,
+    "same_artifact_id": true,
+    "same_ground_truth": true,
+    "old_engine_commit": "7be41123c698a07b9e56cab2aa2a1e9d257944b8"
+   }
+  },
+  {
+   "case": "sqrt2_irrational/flaw-0004-routine-true-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "603c0f1b55fa2ff600f82729e666014ea1b9135beb6cb940cbafc5804bc427f2",
+     "bytes": 715,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "673bfb49c5f3eef0c8da4568c99d21c2fa1988baf86f89328aa5552c94b3e29a",
+     "bytes": 6684,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "3522ef19e781af0a5b1fdd117685b09a20b0355ce81df2b6f41a1fb6fe82d77a",
+     "bytes": 722,
+     "identical": true
+    }
+   },
+   "engine_commit": "1c0c5fcdf1ffd375b109f272461a63c49330e007",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 7
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_template-v0.5.0-a389934b677e-s7",
+   "proof_status": "valid",
+   "correct": true,
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       51
+      ],
+      "step": 3
+     }
+    },
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "formal",
+      "declaration": "syndeom_s2_template_sqrt2_irrational",
+      "line": 7
+     }
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1,
+   "flaw_0004": {
+    "proof_bytes_unchanged": true,
+    "same_artifact_id": true,
+    "same_ground_truth": true,
+    "old_engine_commit": "7be41123c698a07b9e56cab2aa2a1e9d257944b8"
+   }
+  }
+ ],
+ "all_byte_identical": true,
+ "flaw_0004_proof_bytes_unchanged": {
+  "sqrt2_irrational/flaw-0004-routine-true-informal": true,
+  "sqrt2_irrational/flaw-0004-routine-true-pair": true
+ },
+ "composite_proof_bytes_equal_0_2_0_golden": {
+  "continuity_is_not_uniform/flaw-0011-flaw-0002-informal": true,
+  "continuity_is_not_uniform/flaw-0011-flaw-0002-pair": true
+ },
+ "engine_commits": [
+  "1c0c5fcdf1ffd375b109f272461a63c49330e007"
+ ],
+ "replaced": [
+  "sqrt2_irrational/flaw-0004-routine-true-informal",
+  "sqrt2_irrational/flaw-0004-routine-true-pair"
+ ]
+}

@@ -9541,3 +9541,73 @@ is open for Al's review. Repo green: the gate on the committed tree is recorded 
 request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 44 ADDENDUM — AL'S RULINGS ON PR 30 (received 2026-10-29 UTC, 2026-10-28
+America/New_York, in this session's conversation after PR #30 opened; recorded at Al's direction
+in new commits on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr30.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-template-050-20261028T2330Z\`, 1,248 bytes, SHA-256
+`8907df8358260ff8da2ce8d2b7db9b30b63516816a122b0793063983ed3be618`):
+
+~~~text
+Rulings on PR #30 / s2_template 0.5.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as new commits on the branch; no force-push):
+
+1. Readings 39, 40, 41, 42, 44, 45, 47, 48, 49, 50 and 51 are accepted as read.
+
+2. Reading 43: D7 stands. FLAW-0011 requires at least one embedded instance of severity gap or fatal; a composite whose embedded instances are all cosmetic is not an invalid proof and is refused, with a test. Under D7, FLAWS.md's FLAW-0011 example embeds a cosmetic instance and therefore realizes FLAW-0004 routine-true, which the 0.5.0 goldens already hold; record that as an erratum note against FLAWS.md 0.1.0 and leave FLAWS.md's text as it is. Replace the two FLAW-0011 goldens with a composite embedding one gap-or-fatal instance from a seed's existing material (your choice), informal and pair, from two byte-identical runs, and regenerate all 0.5.0 goldens at the fix commit so they name one engine_commit; the FLAW-0004 proof bytes must not change.
+
+3. Reading 46: a composite embeds instances of FLAW-0001 through FLAW-0010 only, by FLAW-0011's definition; FLAW-0012 and FLAW-0013 are never embedded.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before applying the rulings, a fresh fetch at 2026-10-29T00:05:32Z (receipt `recheck-3.json`
+under `C:\Users\LEET\Codex\Temp\syndeom-orient-20261028T2316Z\`) showed `origin/main` still at
+`fbcc6c4` and the branch at `074e577`, in sync with its remote; PR 30 had no review and no
+comment on GitHub.
+
+How each ruling is applied:
+- **Ruling 1** → readings 39, 40, 41, 42, 44, 45, 47, 48, 49, 50 and 51 recorded as accepted in
+  ADR-0011 *Amendments*, STATE and the packet.
+- **Ruling 2 (reading 43 replaced)** → commit 4 `1c0c5fcdf1ffd375b109f272461a63c49330e007`:
+  `compose` refuses an embedded instance whose severity is not gap or fatal, with the test
+  `d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance` (the cosmetic FLAW-0004
+  composite, a cosmetic FLAW-0007 `unused` composite and a repairable FLAW-0001 `local`
+  composite all refused; the FLAW-0004 instance alone still accepted); the two cosmetic
+  composite goldens removed; `every_case` embeds only gap-or-fatal materials of FLAW-0001
+  through FLAW-0010; the crate README. The erratum note against FLAWS.md 0.1.0 is recorded in
+  ADR-0011 *Amendments*, STATE and the packet; FLAWS.md is unchanged. Commit 5 `5afc00d7809fa34a0c163e08c6d8e353d374bcae`: the
+  0.5.0 goldens regenerated at `1c0c5fcd…` by two runs (2026-10-29T00:11:35Z–00:12:38Z,
+  `evidence/goldens-run5r.py`) compared byte for byte (`evidence/goldens-copy5r.py`) —
+  FLAW-0004 (informal, pair) with proof bytes, ids and ground truth unchanged, checked against
+  the goldens committed at `4edc3f7` exported under the external root, and the new composite of
+  `continuity_is_not_uniform`'s FLAW-0002 `forall-exists` gap (informal, pair; the executor's
+  choice: a true statement with a kernel-caught gap whose 0.2.0 files the composite leaves
+  byte-identical, the pair failing at line 6) — with the goldens README and the count (47 cases
+  again). `evidence/goldens-regeneration-report.json` has SHA-256
+  `5e0d258b5cb3c6cb1cab78e7646ac28e2466e36b3336575afa16f8089a3239f6` (7,397 bytes); the sorted
+  `receipt.json` SHA-256 lists of the two runs hash to
+  `bbe9fdb30289e0dfffedcd899a76701e94bb5190d298ec71e2c28d67c4d66aa8` and
+  `5244afe6f4fe2abc1d7609b2f5058565bd2880a21001118e44cf066d4df8e652`; the receipts are under
+  `goldens-5ra\` and `goldens-5rb\` of the external root.
+- **Ruling 3 (reading 46 replaced)** → commit 4: `compose` accepts FLAW-0001 through FLAW-0010
+  only (FLAW-0011, 0012, 0013 and 0014 refused, with a test).
+- **Commit 6** (this one): the records — ADR-0011 *Amendments*, STATE (*Standing rulings*,
+  *Standing escalations*, the Updated bullet, the Gate S2 rows, NEXT), the packet README and
+  this addendum. The gate on the committed tree, the step-7 recheck and the push are recorded
+  in the pull request and under the external root.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No seed, no FLAW-0004 proof byte, no label and no register status changed; FLAWS.md unchanged;
+  the composite's proof bytes are the 0.2.0 FLAW-0002 goldens'.
+- Determinism: the four 0.5.0 goldens regenerate from (config, seed, observation) at one engine
+  commit; two runs agreed file by file.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** review and merge with a merge commit, so that `1c0c5fcd…`, the 0.5.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-015** (informational, backlog).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
