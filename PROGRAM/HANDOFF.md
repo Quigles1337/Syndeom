@@ -10661,3 +10661,51 @@ the committed tree is recorded in the pull request and under the external root, 
 it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 47 ADDENDUM — AL'S RULINGS ON PR 33 (received 2026-10-29 UTC, 2026-10-29
+America/New_York, in this session's conversation after PR #33 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr33.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-010-20261029T0430Z\`, 552 bytes, SHA-256
+`b641556b58d39bad152e3ad46bff49f1d1a030fe96d4eebcc181a85ad17349fc`):
+
+~~~text
+Rulings on PR #33 / s2_grammar 0.1.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 85 through 99 are accepted as read.
+
+On reading 94, record also: in a calc chain a local perturbation necessarily produces a second kernel error at the following step; the instance is one, its site is the first error, and S3 reads a count of errors as a count of lines, not of instances.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `claude/s2-grammar-0.1.0` at `13227d75…`,
+clean and in sync with its remote; PR 33 had no review and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 85–99 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence) and
+  here. Nothing regenerated.
+- **Reading 94's note** → recorded: in a `calc` chain a local perturbation necessarily produces
+  a second kernel error at the following step; the instance is one, its site is the first
+  error, and S3 reads a count of errors as a count of lines, not of instances. 0.1.0 already
+  records the `local` instance so — one instance, its formal location the site's `calc` line,
+  confirmed by check K on the first error — so no byte, golden or check changes and the version
+  stays 0.1.0.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, no check, no dial and no register status changed; nothing regenerated.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `25ad34fe…`, the `s2_grammar` 0.1.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-018** (informational, backlog); FINDING-015 (standing; not extended to the grammar),
+  FINDING-016 and FINDING-017 standing.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
