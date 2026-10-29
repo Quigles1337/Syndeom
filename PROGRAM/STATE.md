@@ -10,9 +10,9 @@
   - **not an examination**: Gate S2 has nothing to examine. The session certifies nothing.
 
   **`s2_template` 0.7.0 is built** (STATE's NEXT as it stood: S2 ordering step 4, continued) on
-  branch `claude/s2-template-0.7.0`, in three commits, for Al's review. `main` is unchanged until
-  Al merges. Every FLAWS.md 0.1.0 example now has its seed, and every class is realizable by
-  `s2_template`.
+  branch `claude/s2-template-0.7.0`, in three commits and, after Al's rulings on PR 32, a fourth
+  recording them, for Al's review. `main` is unchanged until Al merges. Every FLAWS.md 0.1.0
+  example now has its seed, and every class is realizable by `s2_template`.
   - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main`
     **synchronized** with fetched `origin/main` `89cdcf45baaf13834a8f178e0614b8b9b8420937`, tree
     `246ae476fc83205efd852b1e1ac54a3be1cabcf1`, with the disclosure append the only change.
@@ -81,6 +81,16 @@
     Gate S1 table, the constitution, the licence, the tag, `corpora/` (no artifact written) and
     every 0.1.0, 0.2.0, 0.3.0, 0.4.0, 0.5.0 and 0.6.0 golden. **NEXT** waits on this pull
     request's merge.
+  - **Al's rulings of 2026-10-28 on PR 32** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 46's addendum), recorded on the same branch: readings 66–84
+    accepted as read; reading 68 recorded with Al's erratum note against FLAWS.md 0.1.0 (the
+    FLAW-0008 example applies two transformations where the recipe says exactly one, and its
+    changed conclusion is false without the added hypothesis; under D5 the example realizes as
+    the `add-hypothesis` drift with the example's proof route; FLAWS.md's text unchanged);
+    reading 73 recorded with Al's note (a linter warning is neither a kernel rejection nor an
+    observation this program records; whether an unused-hypothesis lint enters the battery, and
+    with it the observation schema, is for the S3 detector ADR). No code, seed or golden
+    changed; the version stays 0.7.0.
 - **Previous update (Session 45):** 2026-10-29 UTC (2026-10-28 America/New_York). This was Session 45:
   - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
     fresh conversation;
@@ -2129,6 +2139,26 @@ On reading 61, record also: the cycle pair's formal file is a valid proof by con
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
+- **Al's rulings of 2026-10-28 on PR 32 (`s2_template` 0.7.0) — verbatim.** Received in
+  Session 46's conversation after PR 32 opened. The copy is `owner-rulings-pr32.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-s2-template-070-20261029T0220Z\` (883 bytes, SHA-256
+  `f8fc35725e468c98df398dfd5fac8a7fbaea03a897229c2d6b799db73e52d6cb`), transcribed from the
+  message as rendered to the executor. The rulings are also in ADR-0011 *Amendments* and in
+  HANDOFF Session 46's addendum. Their effect is under *Standing escalations* and in the Updated
+  bullet.
+
+~~~text
+Rulings on PR #32 / s2_template 0.7.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 66 through 84 are accepted as read.
+
+On reading 68, record also, as an erratum note against FLAWS.md 0.1.0: the FLAW-0008 example applies two transformations where the recipe says exactly one, and its changed conclusion is false without the added hypothesis; under D5 the example realizes as the add-hypothesis drift with the example's proof route. FLAWS.md's text is left as it is.
+
+On reading 73, record also: a linter warning is neither a kernel rejection nor an observation this program records; whether an unused-hypothesis lint enters the battery, and with it the observation schema, is for the S3 detector ADR.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -2203,10 +2233,19 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
-- **`s2_template` 0.7.0 — OPEN for Al's review** (Session 46; branch `claude/s2-template-0.7.0`;
-  `analysis/s2-generate-7/README.md`; ADR-0011 *Amendments*). Review and merge with a merge
-  commit, so that `6dba3615a001151116632169bd93b25440878ac0`, the 0.7.0 goldens'
-  `engine_commit`, stays a real commit on `main`.
+- **`s2_template` 0.7.0 — RULED by Al on 2026-10-28 (rulings on PR 32, verbatim under
+  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 46; branch
+  `claude/s2-template-0.7.0`; `analysis/s2-generate-7/README.md`). Merge with a merge commit,
+  so that `6dba3615a001151116632169bd93b25440878ac0`, the 0.7.0 goldens' `engine_commit`, stays
+  a real commit on `main`.
+  - Readings 66–84 are accepted as read. Reading 68 carries Al's recorded erratum note against
+    FLAWS.md 0.1.0: the FLAW-0008 example applies two transformations where the recipe says
+    exactly one, and its changed conclusion is false without the added hypothesis; under D5 the
+    example realizes as the `add-hypothesis` drift with the example's proof route; FLAWS.md's
+    text is left as it is. Reading 73 carries Al's recorded note: a linter warning is neither a
+    kernel rejection nor an observation this program records; whether an unused-hypothesis lint
+    enters the battery, and with it the observation schema, is for the S3 detector ADR. Nothing
+    regenerated; the version stays 0.7.0. Nothing else is awaited on the readings.
   - **The readings as flagged** (packet readings 66–84): FLAW-0008's material a replacement of
     the statement at site 0 with its record formal-only at the main declaration's header line
     (66); the drift as one edit under one textual rule per transformation, applied to the seed

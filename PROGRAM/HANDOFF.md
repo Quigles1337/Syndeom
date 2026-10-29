@@ -10267,3 +10267,55 @@ is open for Al's review. Repo green: the gate on the committed tree is recorded 
 request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 46 ADDENDUM — AL'S RULINGS ON PR 32 (received 2026-10-29 UTC, 2026-10-28
+America/New_York, in this session's conversation after PR #32 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr32.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-template-070-20261029T0220Z\`, 883 bytes, SHA-256
+`f8fc35725e468c98df398dfd5fac8a7fbaea03a897229c2d6b799db73e52d6cb`):
+
+~~~text
+Rulings on PR #32 / s2_template 0.7.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 66 through 84 are accepted as read.
+
+On reading 68, record also, as an erratum note against FLAWS.md 0.1.0: the FLAW-0008 example applies two transformations where the recipe says exactly one, and its changed conclusion is false without the added hypothesis; under D5 the example realizes as the add-hypothesis drift with the example's proof route. FLAWS.md's text is left as it is.
+
+On reading 73, record also: a linter warning is neither a kernel rejection nor an observation this program records; whether an unused-hypothesis lint enters the battery, and with it the observation schema, is for the S3 detector ADR.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `claude/s2-template-0.7.0` at `77ef9ca4…`,
+clean and in sync with its remote; PR 32 had no review and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 66–84 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet) and here. Nothing regenerated.
+- **Reading 68's erratum note** → recorded against FLAWS.md 0.1.0 in ADR-0011 *Amendments*
+  (the second such note, after the FLAW-0011 example's by ruling 2 on PR 30): the FLAW-0008
+  example applies two transformations where the recipe says exactly one, and its changed
+  conclusion is false without the added hypothesis; under D5 the example realizes as the
+  `add-hypothesis` drift with the example's proof route, which is the material 0.7.0 holds.
+  FLAWS.md's text is unchanged; `weaken-conclusion` stays the executor's material, as read.
+- **Reading 73's note** → recorded: a linter warning is neither a kernel rejection nor an
+  observation this program records; whether an unused-hypothesis lint enters the battery, and
+  with it the observation schema, is for the S3 detector ADR. 0.7.0 records nothing of the
+  warning; no byte changes.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No seed, no proof byte, no label and no register status changed; no golden rewritten.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `6dba3615…`, the 0.7.0 goldens'
+  `engine_commit`, stays a real commit on `main`.
+- **FINDING-017** (informational, backlog); FINDING-015 and FINDING-016 standing.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
