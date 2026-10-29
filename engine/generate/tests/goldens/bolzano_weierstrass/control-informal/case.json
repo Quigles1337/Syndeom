@@ -1,0 +1,13 @@
+{
+  "config": {
+    "theorem": "bolzano_weierstrass",
+    "style": "compactness",
+    "target": "informal",
+    "flaws": [],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "6dba3615a001151116632169bd93b25440878ac0",
+  "toolchain": null,
+  "observation": null
+}

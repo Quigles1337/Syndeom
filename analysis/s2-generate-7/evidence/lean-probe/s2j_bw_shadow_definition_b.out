@@ -1,0 +1,7 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-template-070-20261029T0220Z/lean-probe/s2j_bw_shadow_definition_b.lean:6:61: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+'syndeom_s2_template_bolzano_weierstrass' depends on axioms: [propext, Classical.choice, Quot.sound]

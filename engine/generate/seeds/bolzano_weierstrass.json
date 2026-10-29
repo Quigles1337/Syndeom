@@ -1,0 +1,196 @@
+{
+  "id": "bolzano_weierstrass",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0008 example (every bounded sequence of reals has a convergent subsequence, drifted in Lean by an added hypothesis and a changed conclusion): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "Every bounded sequence of real numbers has a convergent subsequence",
+  "statement": "Let $(a_n)$ be a sequence of real numbers that is bounded: there is $M$ with $|a_n| \\le M$ for every $n$. Then $(a_n)$ has a convergent subsequence: there are a strictly increasing $\\varphi : \\mathbb{N} \\to \\mathbb{N}$ and $L \\in \\mathbb{R}$ with $a_{\\varphi(n)} \\to L$.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/BolzanoWeierstrass.lean:syndeom_seed_bolzano_weierstrass"
+  },
+  "imports": ["Mathlib.Topology.MetricSpace.Sequences", "Mathlib.Topology.MetricSpace.Pseudo.Lemmas", "Mathlib.Topology.Order.MonotoneConvergence", "Mathlib.Topology.Instances.Int"],
+  "binders": "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+  "claim": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+  "styles": [
+    {
+      "id": "compactness",
+      "steps": [
+        {
+          "text": "Since $(a_n)$ is bounded, there is $M$ with $|a_n| \\le M$ for every $n$, so every term lies in the closed interval $[-M, M]$, a bounded set.",
+          "fragment": ["obtain ⟨M, hM⟩ := hb", "have hbd : Bornology.IsBounded (Set.range a) := (Metric.isBounded_Icc (-M) M).subset (by rintro _ ⟨n, rfl⟩; exact abs_le.mp (hM n))"]
+        },
+        {
+          "text": "The interval $[-M, M]$ is compact, so a sequence in it has a convergent subsequence: there are a strictly increasing $\\varphi : \\mathbb{N} \\to \\mathbb{N}$ and $L \\in \\mathbb{R}$ with $a_{\\varphi(n)} \\to L$.",
+          "fragment": ["obtain ⟨L, -, φ, hφ, hL⟩ := tendsto_subseq_of_bounded hbd (fun n => Set.mem_range_self n)"]
+        },
+        {
+          "text": "Hence $(a_{\\varphi(n)})$ is a convergent subsequence of $(a_n)$, as claimed.",
+          "fragment": ["exact ⟨φ, hφ, L, hL⟩"]
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0008",
+          "sub_variant": null,
+          "severity": "gap",
+          "lean_catchable": "NO",
+          "dials": {"transformation": "add-hypothesis"},
+          "site": 0,
+          "anchor": null,
+          "drift": {
+            "binders": "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)",
+            "claim": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+            "replaced": "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+            "inserted": "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)"
+          },
+          "steps": [
+            {
+              "from": 1,
+              "text": "Since $(a_n)$ is bounded, there is $M$ with $|a_n| \\le M$ for every $n$, so every term lies in the closed interval $[-M, M]$, a bounded set.",
+              "fragment": ["obtain ⟨M, hM⟩ := hb", "have hbdd : BddAbove (Set.range a) := ⟨M, by rintro _ ⟨n, rfl⟩; exact (abs_le.mp (hM n)).2⟩"]
+            },
+            {
+              "from": 2,
+              "text": "The interval $[-M, M]$ is compact, so a sequence in it has a convergent subsequence: there are a strictly increasing $\\varphi : \\mathbb{N} \\to \\mathbb{N}$ and $L \\in \\mathbb{R}$ with $a_{\\varphi(n)} \\to L$.",
+              "fragment": ["refine ⟨id, strictMono_id, ⨆ n, a n, ?_⟩"]
+            },
+            {
+              "from": 3,
+              "text": "Hence $(a_{\\varphi(n)})$ is a convergent subsequence of $(a_n)$, as claimed.",
+              "fragment": ["exact tendsto_atTop_ciSup hm hbdd"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0008",
+          "sub_variant": null,
+          "severity": "gap",
+          "lean_catchable": "NO",
+          "dials": {"transformation": "restrict-type"},
+          "site": 0,
+          "anchor": null,
+          "drift": {
+            "binders": "(a : ℕ → ℤ) (hb : ∃ M : ℤ, ∀ n, |a n| ≤ M)",
+            "claim": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℤ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+            "replaced": "ℝ",
+            "inserted": "ℤ"
+          },
+          "steps": [
+            {
+              "from": 1,
+              "text": "Since $(a_n)$ is bounded, there is $M$ with $|a_n| \\le M$ for every $n$, so every term lies in the closed interval $[-M, M]$, a bounded set.",
+              "fragment": ["obtain ⟨M, hM⟩ := hb", "have hbd : Bornology.IsBounded (Set.range a) := (Metric.isBounded_Icc (-M) M).subset (by rintro _ ⟨n, rfl⟩; exact abs_le.mp (hM n))"]
+            },
+            {
+              "from": 2,
+              "text": "The interval $[-M, M]$ is compact, so a sequence in it has a convergent subsequence: there are a strictly increasing $\\varphi : \\mathbb{N} \\to \\mathbb{N}$ and $L \\in \\mathbb{R}$ with $a_{\\varphi(n)} \\to L$.",
+              "fragment": ["obtain ⟨L, -, φ, hφ, hL⟩ := tendsto_subseq_of_bounded hbd (fun n => Set.mem_range_self n)"]
+            },
+            {
+              "from": 3,
+              "text": "Hence $(a_{\\varphi(n)})$ is a convergent subsequence of $(a_n)$, as claimed.",
+              "fragment": ["exact ⟨φ, hφ, L, hL⟩"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0008",
+          "sub_variant": null,
+          "severity": "gap",
+          "lean_catchable": "NO",
+          "dials": {"transformation": "flip-strictness"},
+          "site": 0,
+          "anchor": null,
+          "drift": {
+            "binders": "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| < M)",
+            "claim": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+            "replaced": "|a n| ≤ M",
+            "inserted": "|a n| < M"
+          },
+          "steps": [
+            {
+              "from": 1,
+              "text": "Since $(a_n)$ is bounded, there is $M$ with $|a_n| \\le M$ for every $n$, so every term lies in the closed interval $[-M, M]$, a bounded set.",
+              "fragment": ["obtain ⟨M, hM⟩ := hb", "have hbd : Bornology.IsBounded (Set.range a) := (Metric.isBounded_Icc (-M) M).subset (by rintro _ ⟨n, rfl⟩; exact abs_le.mp (hM n).le)"]
+            },
+            {
+              "from": 2,
+              "text": "The interval $[-M, M]$ is compact, so a sequence in it has a convergent subsequence: there are a strictly increasing $\\varphi : \\mathbb{N} \\to \\mathbb{N}$ and $L \\in \\mathbb{R}$ with $a_{\\varphi(n)} \\to L$.",
+              "fragment": ["obtain ⟨L, -, φ, hφ, hL⟩ := tendsto_subseq_of_bounded hbd (fun n => Set.mem_range_self n)"]
+            },
+            {
+              "from": 3,
+              "text": "Hence $(a_{\\varphi(n)})$ is a convergent subsequence of $(a_n)$, as claimed.",
+              "fragment": ["exact ⟨φ, hφ, L, hL⟩"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0008",
+          "sub_variant": null,
+          "severity": "fatal",
+          "lean_catchable": "NO",
+          "dials": {"transformation": "weaken-conclusion"},
+          "site": 0,
+          "anchor": null,
+          "drift": {
+            "binders": "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+            "claim": "∃ φ : ℕ → ℕ, ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+            "replaced": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ",
+            "inserted": "∃ φ : ℕ → ℕ, ∃ L : ℝ"
+          },
+          "steps": [
+            {
+              "from": 1,
+              "text": "Since $(a_n)$ is bounded, there is $M$ with $|a_n| \\le M$ for every $n$, so every term lies in the closed interval $[-M, M]$, a bounded set.",
+              "fragment": []
+            },
+            {
+              "from": 2,
+              "text": "The interval $[-M, M]$ is compact, so a sequence in it has a convergent subsequence: there are a strictly increasing $\\varphi : \\mathbb{N} \\to \\mathbb{N}$ and $L \\in \\mathbb{R}$ with $a_{\\varphi(n)} \\to L$.",
+              "fragment": ["refine ⟨fun _ => 0, a 0, ?_⟩"]
+            },
+            {
+              "from": 3,
+              "text": "Hence $(a_{\\varphi(n)})$ is a convergent subsequence of $(a_n)$, as claimed.",
+              "fragment": ["exact tendsto_const_nhds"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0008",
+          "sub_variant": null,
+          "severity": "fatal",
+          "lean_catchable": "NO",
+          "dials": {"transformation": "shadow-definition"},
+          "site": 0,
+          "anchor": null,
+          "drift": {
+            "binders": "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+            "claim": "let Convergent := fun b : ℕ → ℝ => ∃ L : ℝ, ∀ ε > 0, ∃ n, |b n - L| < ε; ∃ φ : ℕ → ℕ, StrictMono φ ∧ Convergent (a ∘ φ)",
+            "replaced": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+            "inserted": "let Convergent := fun b : ℕ → ℝ => ∃ L : ℝ, ∀ ε > 0, ∃ n, |b n - L| < ε; ∃ φ : ℕ → ℕ, StrictMono φ ∧ Convergent (a ∘ φ)"
+          },
+          "steps": [
+            {
+              "from": 1,
+              "text": "Since $(a_n)$ is bounded, there is $M$ with $|a_n| \\le M$ for every $n$, so every term lies in the closed interval $[-M, M]$, a bounded set.",
+              "fragment": ["intro Convergent"]
+            },
+            {
+              "from": 2,
+              "text": "The interval $[-M, M]$ is compact, so a sequence in it has a convergent subsequence: there are a strictly increasing $\\varphi : \\mathbb{N} \\to \\mathbb{N}$ and $L \\in \\mathbb{R}$ with $a_{\\varphi(n)} \\to L$.",
+              "fragment": ["exact ⟨id, strictMono_id, a 0, fun ε hε => ⟨0, by simpa using hε⟩⟩"]
+            },
+            {
+              "from": 3,
+              "text": "Hence $(a_{\\varphi(n)})$ is a convergent subsequence of $(a_n)$, as claimed.",
+              "fragment": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

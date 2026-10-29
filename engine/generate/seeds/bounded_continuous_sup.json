@@ -1,0 +1,53 @@
+{
+  "id": "bounded_continuous_sup",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0012 example (every bounded continuous function on the reals attains its supremum, false by the arctangent, with the extreme-value argument transplanted from a compact interval): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A bounded continuous function on the real line attains its supremum",
+  "statement": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be continuous and bounded: there is $M$ with $|f(x)| \\le M$ for every $x$. Then $f$ attains its supremum: there is $x^* \\in \\mathbb{R}$ with $f(x) \\le f(x^*)$ for every $x$.",
+  "truth": {
+    "value": false,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/BoundedContinuousSup.lean:syndeom_seed_bounded_continuous_sup_false"
+  },
+  "counterexample": "$f = \\arctan$ is continuous and bounded by $\\pi/2$ but strictly increasing, so no $x^*$ has $f(x) \\le f(x^*)$ for every $x$; a maximizing sequence $(x_n)$ for $\\arctan$ tends to $+\\infty$ and has no convergent subsequence.",
+  "imports": ["Mathlib.Topology.MetricSpace.Sequences", "Mathlib.Topology.MetricSpace.Pseudo.Lemmas", "Mathlib.Topology.Order.IsLUB"],
+  "binders": "(f : ℝ → ℝ) (hf : Continuous f) (hb : ∃ M : ℝ, ∀ x, |f x| ≤ M)",
+  "claim": "∃ x₀ : ℝ, ∀ x : ℝ, f x ≤ f x₀",
+  "styles": [
+    {
+      "id": "extreme_value",
+      "steps": [
+        {
+          "text": "Since $f$ is bounded, its set of values $\\{f(x) : x \\in \\mathbb{R}\\}$ is non-empty and bounded above, so $S = \\sup_x f(x)$ exists.",
+          "fragment": ["obtain ⟨M, hM⟩ := hb", "have hbdd : BddAbove (Set.range f) := ⟨M, by rintro _ ⟨x, rfl⟩; exact (abs_le.mp (hM x)).2⟩"]
+        },
+        {
+          "text": "By the definition of the supremum there is a sequence $(x_n)$ of real numbers with $f(x_n) \\to S$.",
+          "fragment": ["obtain ⟨u, -, hu, hu_mem⟩ := exists_seq_tendsto_sSup (Set.range_nonempty f) hbdd", "choose x hx using fun n => Set.mem_range.mp (hu_mem n)", "have hfx : f ∘ x = u := funext hx"]
+        },
+        {
+          "text": "As in the extreme value theorem on a compact interval, the points $x_n$ lie in the bounded set $[-M, M]$, so by the Bolzano–Weierstrass theorem there are a strictly increasing $\\varphi$ and $x^* \\in \\mathbb{R}$ with $x_{\\varphi(n)} \\to x^*$.",
+          "fragment": ["have hxb : Bornology.IsBounded (Set.range x) := (Metric.isBounded_Icc (-M) M).subset (by rintro _ ⟨n, rfl⟩; exact abs_le.mp (hM (x n)))", "obtain ⟨x₀, -, φ, hφ, hx₀⟩ := tendsto_subseq_of_bounded hxb (fun n => Set.mem_range_self n)"]
+        },
+        {
+          "text": "By continuity, $f(x_{\\varphi(n)}) \\to f(x^*)$; since also $f(x_{\\varphi(n)}) \\to S$ and limits are unique, $f(x^*) = S$, so $f(x) \\le S = f(x^*)$ for every $x$.",
+          "fragment": ["refine ⟨x₀, fun y => ?_⟩", "have h1 : Filter.Tendsto (f ∘ x ∘ φ) Filter.atTop (nhds (f x₀)) := (hf.tendsto x₀).comp hx₀", "have h2 : Filter.Tendsto (f ∘ x ∘ φ) Filter.atTop (nhds (sSup (Set.range f))) := by", "  rw [← Function.comp_assoc, hfx]", "  exact hu.comp hφ.tendsto_atTop", "rw [tendsto_nhds_unique h1 h2]", "exact le_csSup hbdd (Set.mem_range_self y)"]
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0012",
+          "sub_variant": null,
+          "severity": "fatal",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"dropped_hypothesis": "the domain of $f$ is a compact interval"},
+          "site": 3,
+          "anchor": null,
+          "intrinsic": true,
+          "use": {"theorem": "the Bolzano–Weierstrass theorem", "hypothesis": "the sequence $(x_n)$ is bounded"},
+          "steps": []
+        }
+      ]
+    }
+  ]
+}

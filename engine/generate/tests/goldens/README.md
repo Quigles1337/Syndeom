@@ -1,8 +1,8 @@
 # Goldens for `s2_template` (ADR-0011 D10)
 
-There are 59 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
-0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44) and 12 of 0.6.0
-(Session 45). All use seed 7. Each case directory holds:
+There are 69 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
+and 10 of 0.7.0 (Session 46). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -251,11 +251,66 @@ proved from Mathlib, the main declaration using it), which builds with the stand
   `[propext, Quot.sound]` for the faithful `sqrt2_irrational` file); the `cycle` pair's
   used-constants listing shows the main declaration using Lemma 1, and Lemma 1 using
   `tendsto_atTop_ciSup` and `le_ciSup`.
+## 0.7.0 (Session 46, 2026-10-29)
+
+On the new seed `bolzano_weierstrass` (FLAWS.md's FLAW-0008 example: every bounded sequence of
+reals has a convergent subsequence, in three aligned steps on the compact interval `[-M, M]`),
+the control (informal, formal) and FLAW-0008 for each of D5's five transformations — pair only,
+the informal and formal targets being refused (FLAWS.md: the class manifests in the pair): the
+formal statement drifts by exactly one recorded edit while `proof.md` is the control's byte for
+byte, and the drifted file builds with its own proof. On the new seed `bounded_continuous_sup`
+(FLAWS.md's FLAW-0012 example: every bounded continuous `f : ℝ → ℝ` attains its supremum, false
+by `arctan`, with the extreme-value argument of a compact interval transplanted in four aligned
+steps), FLAW-0012 (informal, formal, pair): two instances — FLAW-0005 `violated` at the hidden
+use site (step 3; the `have hxb` line, 11) and FLAW-0012 at the statement (step 0; the main
+declaration's header line, 5). Every FLAW-0008 case is `proof_status: invalid`, `correct:
+false`, of a true statement, with `lean_build` commanded `pass` and its one record formal-only
+at line 6 (`add-hypothesis` gap: `(hm : Monotone a)` appended, the proof via the supremum;
+`restrict-type` gap: ℝ → ℤ throughout, the proof text unchanged; `flip-strictness` gap:
+`|a n| ≤ M` → `|a n| < M`; `weaken-conclusion` fatal: `StrictMono φ ∧` dropped;
+`shadow-definition` fatal: `Convergent` redefined by a `let` in the claim). Every FLAW-0012 case
+is `statement_status.value: false`, `proof_status: invalid`, `correct: false`, with `lean_build`
+commanded `fail` and `n_flaws_total` 2.
+
+| Seed | Cases | Statement |
+|---|---|---|
+| `bolzano_weierstrass` | control (informal, formal); FLAW-0008 `add-hypothesis` gap, `restrict-type` gap, `flip-strictness` gap, `weaken-conclusion` fatal, `shadow-definition` fatal (pair each) | true |
+| `bounded_continuous_sup` | FLAW-0012 fatal (informal, formal, pair) | false: no control |
+
+**Provenance:**
+- The proof text is hand-authored seed material (`seeds/bolzano_weierstrass.json`: the three
+  faithful steps and the five drift materials, each naming the drifted binders and claim, the
+  one edit and its own proof; `seeds/bounded_continuous_sup.json`: the four steps of the
+  convincing argument, with its counterexample and the hidden use site's `use`; the witness
+  module proves the negation).
+- The formal files were first written by hand as Lean probes and compiled before the seed
+  records were written, one process at a time (`analysis/s2-generate-7/evidence/lean-probe/`):
+  the control golden is the faithful probe `s2j_bw_faithful.lean` without its `#print axioms`
+  tail; each drifted pair golden's `Proof.lean` is its probe (`s2j_bw_add_hypothesis.lean`,
+  `s2j_bw_restrict_type.lean`, `s2j_bw_flip_strictness.lean`,
+  `s2j_bw_weaken_conclusion.lean`, `s2j_bw_shadow_definition.lean`) without its tail; the
+  FLAW-0012 formal and pair goldens are byte-identical to `s2j_bcs_convincing.lean` (which has
+  no tail), as `analysis/s2-generate-7/evidence/goldens-production-report.json` records.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `6dba3615a001151116632169bd93b25440878ac0`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run (a run
+  between the two was refused by that check after the executor edited an input-set file while
+  it ran; it is recorded in the packet and nothing of it was used).
+- Every case's fidelity verdict is PASS. The control and the five drifted pairs build (exit 0)
+  and print `[propext, Classical.choice, Quot.sound]`; the FLAW-0012 formal and pair cases fail
+  to build (exit 1) with the first error at line 11, the first fragment line of step 3 (check K:
+  an application type mismatch, the bound on `f` applied to the points `x n`);
+  `lean_axioms_standard` is therefore unmeasured (`null`, with its reason). Each instance is
+  confirmed: every FLAW-0008 record by its check (the file builds, the faithful statement's
+  witness, the two statements differing by exactly the transformation's edit, the header line
+  as recorded), the FLAW-0005 records by check K and the span check, and the FLAW-0012 records
+  by the use-site instance and the seed's negation witness.
 
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
-`analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md` and
-`analysis/s2-generate-6/README.md`.
+`analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
+`analysis/s2-generate-6/README.md` and `analysis/s2-generate-7/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

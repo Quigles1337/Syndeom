@@ -1,0 +1,8 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-template-070-20261029T0220Z/lean-probe/s2j_bcs_convincing.lean:11:126: error: Application type mismatch: The argument
+  hM (x n)
+has type
+  |f (x n)| ≤ M
+but is expected to have type
+  |x n| ≤ M
+in the application
+  abs_le.mp (hM (x n))

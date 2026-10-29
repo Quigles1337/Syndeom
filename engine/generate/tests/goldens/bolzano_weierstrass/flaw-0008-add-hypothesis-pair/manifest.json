@@ -1,0 +1,230 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "value": true
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "pass"
+    },
+    "n_flaws_0008": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 3
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 115
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "76b5117933a7cb68f284150e1079794515fd2bdfd4be7bd00b014ef2c51d4163",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_bolzano_weierstrass",
+        "n_bytes": 631,
+        "n_declarations": 1,
+        "n_lines": 10,
+        "n_tokens": 88,
+        "storage": "regenerable"
+      },
+      "informal": {
+        "content_hash": "37e81886e5193153a1b787d88f0978d3753adb20bc1f9ed35fd7585c3e3ed514",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 836,
+        "n_lemmas": 0,
+        "n_steps": 3,
+        "n_tokens": 115,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "pair"
+  },
+  "artifact_id": "s2_template-v0.7.0-c607b52c1eac-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": true
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "pass"
+    },
+    "n_flaws_0008": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 3
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0008",
+        "dials": {
+          "transformation": "add-hypothesis"
+        },
+        "severity": "gap",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "compactness",
+    "target": "pair",
+    "theorem": "bolzano_weierstrass"
+  },
+  "config_hash": "c607b52c1eacef0ef4b55f1716cc6e24c0715e61b16b87d7e39278eed85b4c17",
+  "engine_commit": "6dba3615a001151116632169bd93b25440878ac0",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_axioms_standard": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0008": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.7.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0008",
+        "dials": {
+          "declaration": "syndeom_s2_template_bolzano_weierstrass",
+          "drifted_statement": {
+            "binders": "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)",
+            "claim": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)"
+          },
+          "edit": {
+            "inserted": "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)",
+            "replaced": "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)"
+          },
+          "faithful_statement": {
+            "binders": "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+            "claim": "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)"
+          },
+          "inserted": [
+            "theorem syndeom_s2_template_bolzano_weierstrass (a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a) : ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L) := by"
+          ],
+          "original_fragments": {
+            "1": [
+              "obtain ⟨M, hM⟩ := hb",
+              "have hbd : Bornology.IsBounded (Set.range a) := (Metric.isBounded_Icc (-M) M).subset (by rintro _ ⟨n, rfl⟩; exact abs_le.mp (hM n))"
+            ],
+            "2": [
+              "obtain ⟨L, -, φ, hφ, hL⟩ := tendsto_subseq_of_bounded hbd (fun n => Set.mem_range_self n)"
+            ],
+            "3": [
+              "exact ⟨φ, hφ, L, hL⟩"
+            ]
+          },
+          "replaced": [
+            "theorem syndeom_s2_template_bolzano_weierstrass (a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) : ∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L) := by"
+          ],
+          "site": 0,
+          "transformation": "add-hypothesis"
+        },
+        "instance": 1,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_bolzano_weierstrass",
+          "line": 6
+        },
+        "severity": "gap",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/BolzanoWeierstrass.lean:syndeom_seed_bolzano_weierstrass",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

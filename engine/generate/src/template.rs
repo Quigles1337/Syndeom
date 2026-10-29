@@ -4,7 +4,7 @@
 //! commands either one injected instance or padding, never both (D5: two whole-argument
 //! variants cannot be made disjoint, and a padded flawed argument is a later version).
 //!
-//! The crate carries six producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
+//! The crate carries seven producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
 //! 26): `0.1.0`, whose three seeds and per-record counts stay regenerable as the goldens name them;
 //! `0.2.0`, with four more seeds and counts per instance; `0.3.0`, with lemma steps (D2), the T
 //! check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the `n_lt_two_pow` seed; `0.4.0`, with
@@ -12,12 +12,17 @@
 //! carries padding material; `0.5.0`, with FLAW-0004 (the hedge lexicon, `hidden_step`; the
 //! aligned tactic step omitted), realized on `sqrt2_irrational` as FLAWS.md's FLAW-0011 example,
 //! and FLAW-0011 as a commanded composite (`embedded`) of one gap-or-fatal instance of FLAW-0001
-//! through FLAW-0010 (Al's rulings 2 and 3 on PR 30); and `0.6.0`, the version `generate` emits,
-//! with FLAW-0010 `a` (the fictional-reference lexicon, `shape`, `claim`; the formal file
-//! unchanged) on `sqrt2_irrational` and FLAW-0003 (`direct`: the goal or its contrapositive as a
-//! lemma proved by a forward reference to the theorem, check K; `cycle`: the lemma and the
-//! theorem citing each other, checked on the plan's premise graph) on the seed
-//! `bounded_monotone_converges`.
+//! through FLAW-0010 (Al's rulings 2 and 3 on PR 30); `0.6.0`, with FLAW-0010 `a` (the
+//! fictional-reference lexicon, `shape`, `claim`; the formal file unchanged) on
+//! `sqrt2_irrational` and FLAW-0003 (`direct`: the goal or its contrapositive as a lemma proved
+//! by a forward reference to the theorem, check K; `cycle`: the lemma and the theorem citing
+//! each other, checked on the plan's premise graph) on the seed `bounded_monotone_converges`;
+//! and `0.7.0`, the version `generate` emits, with FLAW-0008 (`transformation`: the formal
+//! statement drifts by exactly one recorded edit while the informal file stays faithful; the
+//! drifted file builds, `NO`) on the seed `bolzano_weierstrass` and FLAW-0012
+//! (`dropped_hypothesis`: a false statement's convincing argument, the true-case proof
+//! transplanted, failing at the hidden use site, which carries a FLAW-0005 `violated` record)
+//! on the seed `bounded_continuous_sup`.
 //!
 //! A seed's flaw material is a whole-argument variant of one style: the flawed step list, each
 //! step naming the faithful step it replaces (`from`), the flaw site, and the anchor text at the
@@ -38,7 +43,16 @@
 //! `By <reference>`, records the justification the reference stands in for, and leaves the formal
 //! file unchanged. FLAW-0003 material (0.6.0) inserts the lemma that carries the circularity;
 //! `cycle` material carries `premises` (D2), from which the record's cycle and citation spans are
-//! computed and checked.
+//! computed and checked. FLAW-0008 material (0.7.0) is replacement material of the *statement*
+//! (site 0): its `drift` names the drifted binders and claim and the one edit that carries the
+//! drift, and its steps are the drifted statement's own correct proof with every informal text
+//! faithful; the record is formal-only, at the main declaration's header line, and is confirmed
+//! when the file builds, the faithful statement has its kernel-checked witness, and the two
+//! statement texts differ by exactly the transformation's edit. FLAW-0012 material (0.7.0) is
+//! intrinsic material of a false statement whose `use` names the theorem applied at the hidden
+//! use site and the hypothesis it lacks: commanding FLAW-0012 writes the FLAW-0005 `violated`
+//! instance at that site (check K) and the FLAW-0012 instance at the statement, confirmed when
+//! the use site's records pass and the seed's negation witness is kernel-checked.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -56,13 +70,14 @@ use syndeom_manifest::{
 use crate::harness::{Observation, used_closure};
 use crate::plan::{
     FormalRendering, LemmaHeader, LemmaKind, PaddingHeader, PaddingKind, Plan, Premise, Step,
-    THEOREM_PREMISE, lemma_lines, padding_lines, premise_cycle, render_formal, render_informal,
+    THEOREM_PREMISE, header_line, lemma_lines, padding_lines, premise_cycle, render_formal,
+    render_informal,
 };
 use crate::rng::{RNG_ID, Stream};
 
 pub const GENERATOR_ID: &str = "s2_template";
 /// The producer version `generate` emits (ADR-0011 D1; ruling 5 on PR 26).
-pub const GENERATOR_VERSION: &str = "0.6.0";
+pub const GENERATOR_VERSION: &str = "0.7.0";
 /// The FLAWS.md version every record is read against (ADR-0011 D7).
 pub const TAXONOMY_VERSION: &str = "0.1.0";
 
@@ -76,10 +91,11 @@ pub enum Version {
     V0_4_0,
     V0_5_0,
     V0_6_0,
+    V0_7_0,
 }
 
 impl Version {
-    pub const CURRENT: Version = Version::V0_6_0;
+    pub const CURRENT: Version = Version::V0_7_0;
 
     pub fn parse(s: &str) -> Option<Version> {
         match s {
@@ -89,6 +105,7 @@ impl Version {
             "0.4.0" => Some(Version::V0_4_0),
             "0.5.0" => Some(Version::V0_5_0),
             "0.6.0" => Some(Version::V0_6_0),
+            "0.7.0" => Some(Version::V0_7_0),
             _ => None,
         }
     }
@@ -101,12 +118,13 @@ impl Version {
             Version::V0_4_0 => "0.4.0",
             Version::V0_5_0 => "0.5.0",
             Version::V0_6_0 => "0.6.0",
+            Version::V0_7_0 => "0.7.0",
         }
     }
 
     /// How many of [`SEED_RECORDS`] the version compiles in: the v0.1 set, then the v0.2
     /// additions, then the v0.3 addition, then the v0.4 addition (0.5.0 adds no seed), then the
-    /// v0.6 addition.
+    /// v0.6 addition, then the two v0.7 additions.
     fn seed_count(self) -> usize {
         match self {
             Version::V0_1_0 => 3,
@@ -114,16 +132,19 @@ impl Version {
             Version::V0_3_0 => 8,
             Version::V0_4_0 | Version::V0_5_0 => 9,
             Version::V0_6_0 => 10,
+            Version::V0_7_0 => 12,
         }
     }
 
     /// From 0.5.0 the injector realizes FLAW-0004 (the hedge lexicon and `hidden_step`) and
     /// FLAW-0011 as a commanded composite; from 0.6.0 FLAW-0010 `a` (the fictional-reference
-    /// lexicon) and FLAW-0003 (`direct` and `cycle`); earlier versions refuse those specs.
+    /// lexicon) and FLAW-0003 (`direct` and `cycle`); from 0.7.0 FLAW-0008 (the statement
+    /// drift) and FLAW-0012 (the dropped hypothesis); earlier versions refuse those specs.
     fn realizes(self, class: &str) -> bool {
         match class {
             "FLAW-0004" | "FLAW-0011" => self >= Version::V0_5_0,
             "FLAW-0003" | "FLAW-0010" => self >= Version::V0_6_0,
+            "FLAW-0008" | "FLAW-0012" => self >= Version::V0_7_0,
             _ => true,
         }
     }
@@ -152,6 +173,8 @@ const SEED_RECORDS: &[&str] = &[
     include_str!("../seeds/n_lt_two_pow.json"),
     include_str!("../seeds/sqrt2_irrational.json"),
     include_str!("../seeds/bounded_monotone_converges.json"),
+    include_str!("../seeds/bolzano_weierstrass.json"),
+    include_str!("../seeds/bounded_continuous_sup.json"),
 ];
 
 /// Dial keys the injector or the padding module writes into a record; a spec may not use them.
@@ -182,6 +205,11 @@ const RESERVED_DIALS: &[&str] = &[
     "asserted",
     "cycle",
     "citations",
+    "faithful_statement",
+    "drifted_statement",
+    "edit",
+    "use_site",
+    "use_instance",
 ];
 
 fn required_option<'de, D, T>(d: D) -> Result<Option<T>, D::Error>
@@ -287,7 +315,152 @@ pub struct Material {
     /// fictional reference stands in for; present iff the class is FLAW-0010.
     #[serde(default)]
     pub cited: Option<CitedStep>,
+    /// FLAW-0008 material (0.7.0): the seed's drifted statement for the material's
+    /// transformation and the one edit that carries the drift; present iff the class is
+    /// FLAW-0008, whose `site` is 0, the statement.
+    #[serde(default)]
+    pub drift: Option<Drift>,
+    /// FLAW-0012 material (0.7.0): the theorem applied at the hidden use site (`site`) and the
+    /// hypothesis the dropped one supplied there; present iff the class is FLAW-0012.
+    #[serde(default, rename = "use")]
+    pub hidden_use: Option<HiddenUse>,
     pub steps: Vec<FlawedStep>,
+}
+
+/// FLAW-0008's `transformation` dial (ADR-0011 D5; 0.7.0), FLAWS.md's recipe: exactly one of
+/// these is applied to the faithful formalization.
+pub const TRANSFORMATIONS: &[&str] = &[
+    "add-hypothesis",
+    "restrict-type",
+    "flip-strictness",
+    "weaken-conclusion",
+    "shadow-definition",
+];
+
+/// FLAW-0008 material at the statement (0.7.0; ADR-0011 D5): the drifted statement's binders and
+/// claim, which replace the faithful ones in the formal file (the informal claim is unchanged),
+/// and the one edit that carries the drift — `replaced`, the faithful text, and `inserted`, what
+/// stands in its place. The transformation fixes how the edit applies ([`check_drift`]). The
+/// material's steps are the drifted statement's own correct proof, every informal text faithful.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Drift {
+    pub binders: String,
+    pub claim: String,
+    pub replaced: String,
+    pub inserted: String,
+}
+
+/// FLAW-0012 material's hidden use site (0.7.0; ADR-0011 D5): the theorem the convincing argument
+/// applies there and the hypothesis the dropped one supplied — the FLAW-0005 `violated` record
+/// written at the site when FLAW-0012 is commanded.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct HiddenUse {
+    pub theorem: String,
+    pub hypothesis: String,
+}
+
+/// A statement as the two parts of the header the formal writer emits.
+fn statement_json(binders: &str, claim: &str) -> Value {
+    json!({"binders": binders, "claim": claim})
+}
+
+/// D5's FLAW-0008 check, "the drifted statement text differs from the faithful one by exactly
+/// the recorded transformation": the one edit `replaced` → `inserted` applied to the faithful
+/// binders and claim yields the drifted ones, in the way the transformation fixes —
+/// `add-hypothesis`: one binder `(<name> : <type>)` appended after the replaced binder text,
+/// the claim unchanged; `restrict-type`: every occurrence of one whitespace-free type token
+/// replaced by another, in the binders and the claim; `flip-strictness`: one occurrence of a
+/// text replaced by the same text with exactly one relation symbol flipped between `≤` and `<`
+/// (or `≥` and `>`); `weaken-conclusion`: one occurrence inside the claim replaced, the binders
+/// unchanged; `shadow-definition`: one occurrence inside the claim replaced by
+/// `let <name> := <definition>; <body>` whose body uses the name, the binders unchanged. Every
+/// transformation changes the statement.
+pub fn check_drift(
+    transformation: &str,
+    faithful: (&str, &str),
+    drifted: (&str, &str),
+    replaced: &str,
+    inserted: &str,
+) -> Result<(), String> {
+    let (fb, fc) = faithful;
+    let (db, dc) = drifted;
+    if replaced.is_empty() || inserted.is_empty() || replaced == inserted {
+        return Err("the edit replaces one non-empty text by a different non-empty text".into());
+    }
+    if (fb, fc) == (db, dc) {
+        return Err("the drifted statement differs from the faithful one".into());
+    }
+    let once = |hay: &str| hay.matches(replaced).count() == 1;
+    let ok = match transformation {
+        "add-hypothesis" => {
+            let added = inserted
+                .strip_prefix(replaced)
+                .map(str::trim_start)
+                .unwrap_or("");
+            dc == fc
+                && once(fb)
+                && db == fb.replacen(replaced, inserted, 1)
+                && added.starts_with('(')
+                && added.ends_with(')')
+                && added.contains(" : ")
+        }
+        "restrict-type" => {
+            !replaced.contains(char::is_whitespace)
+                && !inserted.contains(char::is_whitespace)
+                && (fb.contains(replaced) || fc.contains(replaced))
+                && db == fb.replace(replaced, inserted)
+                && dc == fc.replace(replaced, inserted)
+        }
+        "flip-strictness" => {
+            let f = format!("{fb}\n{fc}");
+            let d = format!("{db}\n{dc}");
+            let flips: Vec<(char, char)> = replaced
+                .chars()
+                .zip(inserted.chars())
+                .filter(|(a, b)| a != b)
+                .collect();
+            once(&f)
+                && d == f.replacen(replaced, inserted, 1)
+                && replaced.chars().count() == inserted.chars().count()
+                && matches!(
+                    flips.as_slice(),
+                    [('≤', '<') | ('<', '≤') | ('≥', '>') | ('>', '≥')]
+                )
+        }
+        "weaken-conclusion" => db == fb && once(fc) && dc == fc.replacen(replaced, inserted, 1),
+        "shadow-definition" => {
+            let shadow = inserted
+                .strip_prefix("let ")
+                .and_then(|rest| rest.split_once(" := "))
+                .and_then(|(name, rest)| {
+                    rest.split_once("; ")
+                        .map(|(definition, body)| (name, definition, body))
+                });
+            db == fb
+                && once(fc)
+                && dc == fc.replacen(replaced, inserted, 1)
+                && shadow.is_some_and(|(name, definition, body)| {
+                    !name.is_empty()
+                        && !name.contains(char::is_whitespace)
+                        && !definition.is_empty()
+                        && body.contains(name)
+                })
+        }
+        _ => {
+            return Err(format!(
+                "FLAW-0008's transformation is one of {TRANSFORMATIONS:?}, not {transformation:?}"
+            ));
+        }
+    };
+    if ok {
+        Ok(())
+    } else {
+        Err(format!(
+            "the drifted statement does not differ from the faithful one by exactly the {transformation} edit"
+        ))
+    }
 }
 
 #[derive(Debug, Clone, Deserialize)]
@@ -554,7 +727,8 @@ pub fn check_seed(seed: &Seed) -> Result<(), String> {
                     }
                 }
             } else {
-                if m.site < 1 || m.site as usize > style.steps.len() {
+                // FLAW-0008 material (0.7.0) sits at the statement, site 0 (check_drift_material)
+                if m.drift.is_none() && (m.site < 1 || m.site as usize > style.steps.len()) {
                     return Err(format!("seed {}: a material's site is a step", seed.id));
                 }
                 if m.steps.iter().any(|s| s.from.is_none()) {
@@ -575,6 +749,8 @@ pub fn check_seed(seed: &Seed) -> Result<(), String> {
             check_hidden_material(seed, style, m)?;
             check_cited_material(seed, style, m)?;
             check_circularity_material(seed, style, m)?;
+            check_drift_material(seed, style, m)?;
+            check_dropped_hypothesis_material(seed, style, m)?;
         }
         // FINDING-014 (packet 4): a seed's own steps never carry a padding header; only the
         // padding module sets one (a flawed step cannot carry one, by its shape).
@@ -910,6 +1086,127 @@ fn check_circularity_material(seed: &Seed, style: &Style, m: &Material) -> Resul
     Ok(())
 }
 
+/// FLAW-0008 material (0.7.0; ADR-0011 D5): `drift` is present iff the class is FLAW-0008; the
+/// material is replacement material of the statement — site 0, no anchor, neither intrinsic nor
+/// an insertion — `NO`, of severity gap or fatal as the seed marks it, with exactly the dial
+/// `transformation`; the drifted binders and claim differ from the faithful ones by exactly that
+/// transformation's edit ([`check_drift`]); and every faithful step is kept with its informal
+/// text, its lemma header and no premises (the informal file is the faithful one), the
+/// fragments being the drifted statement's own proof.
+fn check_drift_material(seed: &Seed, style: &Style, m: &Material) -> Result<(), String> {
+    let err =
+        |what: &str| Err::<(), String>(format!("seed {}: FLAW-0008 material {what}", seed.id));
+    let Some(d) = &m.drift else {
+        if m.class == "FLAW-0008" {
+            return err("carries `drift`");
+        }
+        return Ok(());
+    };
+    if m.class != "FLAW-0008" {
+        return err("is the only material that carries `drift`");
+    }
+    if m.intrinsic || m.inserts || m.anchor.is_some() {
+        return err("is replacement material of the statement, without an anchor");
+    }
+    if m.site != 0 {
+        return err("sits at the statement, site 0");
+    }
+    if m.lean_catchable != LeanCatchable::No {
+        return err("is NO: the drifted file builds (Lean checks the statement it is given)");
+    }
+    if !matches!(m.severity, Severity::Gap | Severity::Fatal) {
+        return err("is gap or fatal, as the seed marks it");
+    }
+    let transformation = m
+        .dials
+        .as_object()
+        .filter(|o| o.len() == 1)
+        .and_then(|o| o.get("transformation"))
+        .and_then(Value::as_str);
+    let Some(transformation) = transformation.filter(|t| TRANSFORMATIONS.contains(t)) else {
+        return err("has exactly the dial transformation, one of D5's five");
+    };
+    check_drift(
+        transformation,
+        (&seed.binders, &seed.claim),
+        (&d.binders, &d.claim),
+        &d.replaced,
+        &d.inserted,
+    )
+    .map_err(|e| format!("seed {}: FLAW-0008 material: {e}", seed.id))?;
+    if m.steps.len() != style.steps.len() {
+        return err("keeps every faithful step");
+    }
+    for (j, f) in style.steps.iter().enumerate() {
+        let k = (j + 1) as u64;
+        let Some(s) = m.steps.iter().find(|s| s.from == Some(k)) else {
+            return err("keeps every faithful step");
+        };
+        if s.text != f.text || s.lemma != f.lemma || !s.premises.is_empty() {
+            return err(
+                "leaves every informal step unchanged: the informal file is the faithful one",
+            );
+        }
+    }
+    Ok(())
+}
+
+/// FLAW-0012 material (0.7.0; ADR-0011 D5): `use` is present iff the class is FLAW-0012; the
+/// material is intrinsic (the convincing argument of a false statement, as the example writes
+/// it), without a sub-variant, fatal and `YES-KERNEL`, with exactly the dial
+/// `dropped_hypothesis`; `use` names the theorem applied at the hidden use site and the
+/// hypothesis it lacks; and the site is a main-proof step with a formal fragment, where check K
+/// expects the transplanted proof to fail.
+fn check_dropped_hypothesis_material(
+    seed: &Seed,
+    style: &Style,
+    m: &Material,
+) -> Result<(), String> {
+    let err =
+        |what: &str| Err::<(), String>(format!("seed {}: FLAW-0012 material {what}", seed.id));
+    let Some(u) = &m.hidden_use else {
+        if m.class == "FLAW-0012" {
+            return err("carries `use`");
+        }
+        return Ok(());
+    };
+    if m.class != "FLAW-0012" {
+        return err("is the only material that carries `use`");
+    }
+    if !m.intrinsic || m.inserts {
+        return err("is intrinsic: the convincing argument of a false statement, as written");
+    }
+    if m.sub_variant.is_some() {
+        return err("has no sub-variant");
+    }
+    if m.severity != Severity::Fatal || m.lean_catchable != LeanCatchable::YesKernel {
+        return err("is fatal and YES-KERNEL: the transplanted proof fails at the hidden use site");
+    }
+    let dropped = m
+        .dials
+        .as_object()
+        .filter(|o| o.len() == 1)
+        .and_then(|o| o.get("dropped_hypothesis"))
+        .and_then(Value::as_str);
+    if dropped.is_none_or(str::is_empty) {
+        return err(
+            "has exactly the dial dropped_hypothesis, naming the hypothesis the seed dropped",
+        );
+    }
+    if u.theorem.is_empty() || u.hypothesis.is_empty() {
+        return err("names the theorem applied at the hidden use site and the hypothesis it lacks");
+    }
+    let site = (m.site >= 1)
+        .then(|| style.steps.get(m.site as usize - 1))
+        .flatten();
+    if site.is_none_or(|s| s.fragment.is_empty() || s.lemma.is_some()) {
+        return err(
+            "has its hidden use site at a main-proof step with a formal fragment (check K)",
+        );
+    }
+    Ok(())
+}
+
 /// `artifact.kind` requested by the config.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Target {
@@ -1171,10 +1468,27 @@ pub struct Composite {
     pub embedded_instances: Vec<u64>,
 }
 
+/// FLAW-0012 as a commanded class (0.7.0; ADR-0011 D5): the record at the statement — step 0
+/// with span `[0, len)` in the informal file, the main declaration at its header line in the
+/// formal file — fatal and `YES-KERNEL`, numbered after the FLAW-0005 `violated` instance the
+/// injector writes at the hidden use site, and confirmed when that instance's records pass
+/// (check K at the use site) and the seed's negation witness is kernel-checked (D7).
+#[derive(Debug, Clone, PartialEq)]
+pub struct FalseTheorem {
+    pub instance: u64,
+    /// The spec's dial: the hypothesis the seed dropped to reach the false statement.
+    pub dropped_hypothesis: String,
+    /// The hidden use site, 1-based, and the instance recorded there.
+    pub use_site: usize,
+    pub use_instance: u64,
+    pub counterexample: String,
+}
+
 /// Everything `prepare` produces: the config as given, the plan after injection and padding,
 /// the rendered bytes, the injected instance (none for a control or a padded control; the
-/// embedded instance of a composite), the padding insertions (none unless FLAW-0013 was
-/// commanded) and the composite (none unless FLAW-0011 was commanded).
+/// embedded instance of a composite; the use-site instance of a FLAW-0012 artifact), the padding
+/// insertions (none unless FLAW-0013 was commanded), the composite (none unless FLAW-0011 was
+/// commanded) and the false theorem's own instance (none unless FLAW-0012 was commanded).
 #[derive(Debug, Clone, PartialEq)]
 pub struct Prepared {
     pub version: Version,
@@ -1190,6 +1504,7 @@ pub struct Prepared {
     pub injection: Option<Injection>,
     pub padding: Vec<PaddingInsertion>,
     pub composite: Option<Composite>,
+    pub false_theorem: Option<FalseTheorem>,
 }
 
 impl Prepared {
@@ -1294,8 +1609,8 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
         ));
     }
     let mut plan = faithful_plan(&seed, style);
-    let (injection, padding, composite) = match cfg.flaws.first() {
-        None => (None, Vec::new(), None),
+    let (injection, padding, composite, false_theorem) = match cfg.flaws.first() {
+        None => (None, Vec::new(), None, None),
         Some(spec) if spec.class == "FLAW-0013" => (
             None,
             pad(
@@ -1307,18 +1622,24 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
                 seed_value,
             )?,
             None,
+            None,
         ),
         Some(spec) if spec.class == "FLAW-0011" => {
             let (inj, comp) = compose(
                 &mut plan, &seed, style, spec, cfg.target, seed_value, version,
             )?;
-            (Some(inj), Vec::new(), Some(comp))
+            (Some(inj), Vec::new(), Some(comp), None)
+        }
+        Some(spec) if spec.class == "FLAW-0012" => {
+            let (inj, ft) = drop_hypothesis(&seed, style, spec, cfg.target, seed_value)?;
+            (Some(inj), Vec::new(), None, Some(ft))
         }
         Some(spec) => (
             Some(inject(
                 &mut plan, &seed, style, spec, cfg.target, seed_value,
             )?),
             Vec::new(),
+            None,
             None,
         ),
     };
@@ -1344,6 +1665,7 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
         injection,
         padding,
         composite,
+        false_theorem,
     })
 }
 
@@ -1562,6 +1884,60 @@ fn inject(
         }
         Value::Object(m)
     };
+
+    if let Some(drift) = &material.drift {
+        // FLAW-0008 (0.7.0; D5): the statement drifts. The informal file is the faithful one; the
+        // formal file states the seed's drifted statement with its own correct proof. The record
+        // is formal-only (`manifests_in`), at the main declaration's header line, and carries
+        // both statements and the one edit that carries the drift, so the check can rebuild it.
+        let faithful_header = header_line(&plan.main_declaration, &plan.binders, &plan.claim);
+        let drifted_header = header_line(&plan.main_declaration, &drift.binders, &drift.claim);
+        let mut original_fragments = Map::new();
+        for (j, f) in style.steps.iter().enumerate() {
+            let k = (j + 1) as u64;
+            let changed = material
+                .steps
+                .iter()
+                .find(|s| s.from == Some(k))
+                .is_none_or(|s| s.fragment != f.fragment);
+            if changed {
+                original_fragments.insert(k.to_string(), json!(f.fragment));
+            }
+        }
+        let dials = with(vec![
+            ("inserted", json!([drifted_header])),
+            ("replaced", json!([faithful_header])),
+            (
+                "faithful_statement",
+                statement_json(&plan.binders, &plan.claim),
+            ),
+            (
+                "drifted_statement",
+                statement_json(&drift.binders, &drift.claim),
+            ),
+            (
+                "edit",
+                json!({"replaced": drift.replaced, "inserted": drift.inserted}),
+            ),
+            ("original_fragments", Value::Object(original_fragments)),
+            ("declaration", json!(plan.main_declaration)),
+        ]);
+        plan.binders = drift.binders.clone();
+        plan.claim = drift.claim.clone();
+        plan.steps = material.steps.iter().map(step_of_flawed).collect();
+        return Ok(Injection {
+            instance: 1,
+            class: material.class.clone(),
+            sub_variant: material.sub_variant.clone(),
+            severity: material.severity,
+            lean_catchable: material.lean_catchable,
+            site: 0,
+            informal_inserted: drifted_header.clone(),
+            informal_dials: dials.clone(),
+            formal_inserted: vec![drifted_header],
+            formal_dials: dials,
+        });
+    }
 
     if material.intrinsic {
         // A false statement's convincing argument: the plan is the style's; nothing is replaced.
@@ -1874,6 +2250,109 @@ fn compose(
     Ok((inj, composite))
 }
 
+/// FLAW-0012 as a commanded class (ADR-0011 D5; 0.7.0): on a seed whose statement is false, the
+/// material the one dial `dropped_hypothesis` names — intrinsic, the convincing argument as the
+/// example writes it — yields two instances: the FLAW-0005 `violated` instance at the hidden use
+/// site (instance 1, fatal, `YES-KERNEL`, confirmed by check K there and by the span check in
+/// the informal file; its dials the theorem and the hypothesis the seed's `use` names, `mode`
+/// `violated`, the site's text, nothing replaced, and the counterexample), and the FLAW-0012
+/// instance at the statement (instance 2), whose records `assemble` writes from the returned
+/// [`FalseTheorem`]. The material is drawn on the stream `injector/FLAW-0012/1`.
+fn drop_hypothesis(
+    seed: &Seed,
+    style: &Style,
+    spec: &FlawSpec,
+    target: Target,
+    seed_value: u64,
+) -> Result<(Injection, FalseTheorem), String> {
+    check_spec(spec, target)?;
+    if spec.sub_variant.is_some() {
+        return Err("FLAW-0012 has no sub-variant".into());
+    }
+    exact_keys(&spec.dials, &["dropped_hypothesis"], "FLAW-0012's dials")?;
+    let dropped = spec.dials["dropped_hypothesis"]
+        .as_str()
+        .filter(|s| !s.is_empty())
+        .ok_or("FLAW-0012's dropped_hypothesis is a non-empty string")?
+        .to_string();
+    if seed.truth.value != Some(false) {
+        return Err(format!(
+            "seed {} states a true theorem; FLAW-0012 is a false theorem with a convincing proof (a true theorem with an invalid proof is FLAW-0011)",
+            seed.id
+        ));
+    }
+    let dials = Value::Object(spec.dials.clone());
+    let eligible: Vec<&Material> = style
+        .flaws
+        .iter()
+        .filter(|m| {
+            m.class == "FLAW-0012"
+                && m.hidden_use.is_some()
+                && m.severity == spec.severity
+                && m.dials == dials
+                && spec.site.is_none_or(|k| k == m.site)
+        })
+        .collect();
+    if eligible.is_empty() {
+        return Err(format!(
+            "style {} has no FLAW-0012 material with dials {dials} at site {:?}",
+            style.id, spec.site
+        ));
+    }
+    let mut stream = Stream::new(seed_value, "injector/FLAW-0012/1");
+    let material = eligible[stream.below(eligible.len() as u64) as usize];
+    let hidden = material
+        .hidden_use
+        .as_ref()
+        .ok_or("FLAW-0012 material carries `use`")?;
+    let counterexample = seed
+        .counterexample
+        .clone()
+        .ok_or("a false statement names its counterexample")?;
+    // The hidden use site: the FLAW-0005 `violated` instance, as the seed's convincing argument
+    // writes it (intrinsic: nothing is replaced).
+    let site = material.site as usize;
+    let site_step = style
+        .steps
+        .get(site.wrapping_sub(1))
+        .ok_or("the hidden use site is a step")?;
+    let inserted = match &material.anchor {
+        Some(a) => a.inserted.clone(),
+        None => site_step.text.clone(),
+    };
+    let use_dials = |inserted: Value| {
+        json!({
+            "theorem": hidden.theorem,
+            "hypothesis": hidden.hypothesis,
+            "mode": "violated",
+            "site": site,
+            "inserted": inserted,
+            "replaced": null,
+            "counterexample": counterexample,
+        })
+    };
+    let injection = Injection {
+        instance: 1,
+        class: "FLAW-0005".into(),
+        sub_variant: None,
+        severity: Severity::Fatal,
+        lean_catchable: LeanCatchable::YesKernel,
+        site,
+        informal_inserted: inserted.clone(),
+        informal_dials: use_dials(json!(inserted)),
+        formal_inserted: site_step.fragment.clone(),
+        formal_dials: use_dials(json!(site_step.fragment)),
+    };
+    let false_theorem = FalseTheorem {
+        instance: 2,
+        dropped_hypothesis: dropped,
+        use_site: site,
+        use_instance: 1,
+        counterexample,
+    };
+    Ok((injection, false_theorem))
+}
+
 /// FLAWS.md 0.1.0's *Manifests in* column, as ADR-0011 D5 realizes it: whether a class's record
 /// appears in the informal file and in the formal file. FLAW-0009 and FLAW-0008 leave the
 /// informal file unchanged; FLAW-0010 and FLAW-0003 `cycle` leave the formal file unchanged.
@@ -2096,7 +2575,69 @@ pub fn assemble(
                 confirmed,
             ));
         }
-        if let (Some(f), Some(obs), true) = (&p.formal, observation, in_formal) {
+        if let (Some(f), Some(obs), true) = (&p.formal, observation, in_formal)
+            && inj.site == 0
+        {
+            // FLAW-0008 (0.7.0, D5): the record addresses the statement — the main declaration
+            // at its header line. Confirmed when the drifted file builds (its own correct
+            // proof), the faithful statement has its kernel-checked witness (D7: the seed's
+            // reference, a library module the gate builds and audits), the two recorded
+            // statements differ by exactly the transformation's edit, the plan states the
+            // drifted one, and the header line is the recorded one.
+            let text = std::str::from_utf8(&f.bytes).map_err(|e| e.to_string())?;
+            let header = text
+                .lines()
+                .nth(f.main_line as usize - 1)
+                .ok_or("the main declaration's header line is in the formal file")?;
+            let d = &inj.formal_dials;
+            let statement = |v: &Value| -> Option<(String, String)> {
+                Some((
+                    v["binders"].as_str()?.to_string(),
+                    v["claim"].as_str()?.to_string(),
+                ))
+            };
+            let drift_ok = match (
+                d["transformation"].as_str(),
+                statement(&d["faithful_statement"]),
+                statement(&d["drifted_statement"]),
+                d["edit"]["replaced"].as_str(),
+                d["edit"]["inserted"].as_str(),
+            ) {
+                (Some(t), Some((fb, fc)), Some((db, dc)), Some(r), Some(i)) => {
+                    check_drift(t, (&fb, &fc), (&db, &dc), r, i).is_ok()
+                        && (p.plan.binders.as_str(), p.plan.claim.as_str())
+                            == (db.as_str(), dc.as_str())
+                }
+                _ => false,
+            };
+            let truth = &p.plan.truth;
+            let faithful_builds = truth.value == Some(true)
+                && matches!(
+                    truth.method,
+                    StatementMethod::LeanKernel | StatementMethod::Mathlib
+                )
+                && !truth.reference.is_empty();
+            let confirmed = obs.exit_code == 0
+                && faithful_builds
+                && drift_ok
+                && d["inserted"][0].as_str() == Some(header);
+            records.push((
+                Flaw {
+                    instance: inj.instance,
+                    class: inj.class.clone(),
+                    sub_variant: inj.sub_variant.clone(),
+                    location: Location::Formal(FormalLocation {
+                        artifact: FormalTag::Formal,
+                        declaration: main.clone(),
+                        line: f.main_line,
+                    }),
+                    severity: inj.severity,
+                    lean_catchable: inj.lean_catchable,
+                    dials: inj.formal_dials.clone(),
+                },
+                confirmed,
+            ));
+        } else if let (Some(f), Some(obs), true) = (&p.formal, observation, in_formal) {
             let [lo, hi] =
                 f.fragment_lines[inj.site - 1].ok_or("the flaw site has no formal fragment")?;
             let declaration = f.declarations[inj.site - 1].clone();
@@ -2271,6 +2812,76 @@ pub fn assemble(
                         ("inserted", json!([header])),
                         ("replaced", Value::Null),
                     ]),
+                },
+                confirmed,
+            ));
+        }
+    }
+    // FLAW-0012 as a commanded class (0.7.0, D5): one record per file the artifact has, at the
+    // statement — step 0 with span `[0, len)`, the main declaration at its header line —
+    // confirmed when every record of the use-site instance passes (check K at the hidden use
+    // site; the span check in the informal file) and the seed's negation witness is
+    // kernel-checked (D7; a library module the gate builds and audits).
+    if let Some(ft) = &p.false_theorem {
+        let use_records: Vec<&(Flaw, bool)> = records
+            .iter()
+            .filter(|(r, _)| r.instance == ft.use_instance)
+            .collect();
+        let use_ok = !use_records.is_empty() && use_records.iter().all(|(_, ok)| *ok);
+        let truth = &p.plan.truth;
+        let negation_ok = truth.value == Some(false)
+            && truth.method == StatementMethod::LeanKernel
+            && !truth.reference.is_empty();
+        let confirmed = use_ok && negation_ok;
+        let with = |inserted: Value| {
+            json!({
+                "dropped_hypothesis": ft.dropped_hypothesis,
+                "site": 0,
+                "use_site": ft.use_site,
+                "use_instance": ft.use_instance,
+                "counterexample": ft.counterexample,
+                "inserted": inserted,
+                "replaced": null,
+            })
+        };
+        if let Some(st) = &informal_stats {
+            let text = &st.steps[0];
+            records.push((
+                Flaw {
+                    instance: ft.instance,
+                    class: "FLAW-0012".into(),
+                    sub_variant: None,
+                    location: Location::Informal(InformalLocation {
+                        artifact: InformalTag::Informal,
+                        step: 0,
+                        span: [0, text.chars().count() as u64],
+                    }),
+                    severity: Severity::Fatal,
+                    lean_catchable: LeanCatchable::YesKernel,
+                    dials: with(json!(text)),
+                },
+                confirmed,
+            ));
+        }
+        if let (Some(f), Some(_)) = (&p.formal, observation) {
+            let text = std::str::from_utf8(&f.bytes).map_err(|e| e.to_string())?;
+            let header = text
+                .lines()
+                .nth(f.main_line as usize - 1)
+                .ok_or("the main declaration's header line is in the formal file")?;
+            records.push((
+                Flaw {
+                    instance: ft.instance,
+                    class: "FLAW-0012".into(),
+                    sub_variant: None,
+                    location: Location::Formal(FormalLocation {
+                        artifact: FormalTag::Formal,
+                        declaration: main.clone(),
+                        line: f.main_line,
+                    }),
+                    severity: Severity::Fatal,
+                    lean_catchable: LeanCatchable::YesKernel,
+                    dials: with(json!([header])),
                 },
                 confirmed,
             ));
