@@ -1,0 +1,177 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0001": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 119
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "961f1b788c7d0d5e2d6374597aa61b9475abe3f4c15e4e4b402b23709ecc2bb3",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_grammar_ring_chain",
+        "n_bytes": 346,
+        "n_declarations": 1,
+        "n_lines": 7,
+        "n_tokens": 119,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_grammar-v0.1.0-5fc890d89006-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0001": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "perturbation": "sign"
+        },
+        "severity": "repairable",
+        "site": "auto",
+        "sub_variant": "local"
+      }
+    ],
+    "grammar": "ring_chain",
+    "length": {
+      "n_lemmas": 0,
+      "n_steps": 4
+    },
+    "padding_ratio": 0,
+    "target": "formal"
+  },
+  "config_hash": "5fc890d890061a9cf755157c71f9e74ce1d82c9b3f3fcea50bd6e73806666743",
+  "engine_commit": "25ad34fe45c1eea8527b3aab47829b31c8685931",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0001": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_grammar",
+    "rng": "syndeom-rng/1",
+    "version": "0.1.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "inserted": [
+            "calc (x - 2 * y) ^ 2 = -4 * y * y + x * (x - 4 * y) := by ring"
+          ],
+          "monomial": {
+            "inserted": "-4 * y ^ 2",
+            "replaced": "4 * y ^ 2"
+          },
+          "original_fragments": {
+            "1": [
+              "calc (x - 2 * y) ^ 2 = 4 * y * y + x * (x - 4 * y) := by ring"
+            ]
+          },
+          "perturbation": "sign",
+          "replaced": [
+            "calc (x - 2 * y) ^ 2 = 4 * y * y + x * (x - 4 * y) := by ring"
+          ],
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_grammar_ring_chain",
+          "line": 4
+        },
+        "severity": "repairable",
+        "sub_variant": "local"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "s2_grammar-v0.1.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

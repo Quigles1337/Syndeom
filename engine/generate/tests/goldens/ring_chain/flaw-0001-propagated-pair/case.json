@@ -1,0 +1,33 @@
+{
+  "config": {
+    "grammar": "ring_chain",
+    "length": {
+      "n_steps": 4,
+      "n_lemmas": 0
+    },
+    "target": "pair",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "sub_variant": "propagated",
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "perturbation": "sign"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "25ad34fe45c1eea8527b3aab47829b31c8685931",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 4
+  }
+}

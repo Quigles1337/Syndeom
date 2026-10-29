@@ -3,8 +3,10 @@
 //! or identical; 1 usage or I/O; 2 refused; 3 a different artifact under the same id. A failed
 //! confirmation is not a refusal: the artifact is written with its FAIL verdict.
 //!
-//! `generate` emits the current producer version; `regenerate` and `verify` accept every version
-//! the crate carries, selected by the manifest's `generator.version` (ADR-0011 *Amendments*).
+//! `generate` emits the current version of the producer the config names (`theorem`:
+//! `s2_template`; `grammar`: `s2_grammar`); `regenerate` and `verify` accept every producer
+//! version the crate carries, selected by the manifest's `generator.id` and `generator.version`
+//! (ADR-0011 *Amendments*).
 
 use std::collections::BTreeMap;
 use std::fs;
@@ -14,7 +16,8 @@ use std::path::{Path, PathBuf};
 use serde_json::{Value, json};
 use syndeom_generate::harness::{self, LeanRun, Observation};
 use syndeom_generate::provenance::{self, ProvenanceError};
-use syndeom_generate::template::{self, GENERATOR_ID, GENERATOR_VERSION, Prepared, Version};
+use syndeom_generate::template::{self, Prepared, Producer};
+use syndeom_generate::{prepare_any, prepare_for};
 use syndeom_manifest::{
     Manifest, Toolchain, content_hash, from_json_str, sha256_hex, to_disk_json,
 };
@@ -191,16 +194,14 @@ fn files_of(p: &Prepared) -> Vec<(&'static str, Vec<u8>)> {
     v
 }
 
-/// The producer version a manifest names, if this crate carries it.
-fn version_of(manifest: &Manifest) -> Result<Version, Fail> {
-    let version = Version::parse(&manifest.generator.version);
-    match version {
-        Some(v) if manifest.generator.id == GENERATOR_ID => Ok(v),
-        _ => Err(Fail::Refused(format!(
-            "{} {} is not a version of this producer",
+/// The producer and version a manifest names, if this crate carries them.
+fn producer_of(manifest: &Manifest) -> Result<Producer, Fail> {
+    Producer::parse(&manifest.generator.id, &manifest.generator.version).ok_or(Fail::Refused(
+        format!(
+            "{} {} is not a producer version of this crate",
             manifest.generator.id, manifest.generator.version
-        ))),
-    }
+        ),
+    ))
 }
 
 fn generate(args: &[String]) -> Result<(), Fail> {
@@ -223,7 +224,7 @@ fn generate(args: &[String]) -> Result<(), Fail> {
         .map_err(|_| Fail::Usage("--seed is an unsigned 64-bit integer".into()))?;
     let config: Value = serde_json::from_str(&fs::read_to_string(&a["--config"])?).map_err(io)?;
     let provenance = provenance::verify_engine_commit(&root, commit)?;
-    let prepared = template::prepare(&config, seed).map_err(Fail::Refused)?;
+    let prepared = prepare_any(&config, seed).map_err(Fail::Refused)?;
     let id = prepared.artifact_id();
     let dir = new_receipt_dir(&root, &a["--receipt-dir"])?;
 
@@ -275,7 +276,7 @@ fn generate(args: &[String]) -> Result<(), Fail> {
         json!({
             "schema": "syndeom-generate-receipt/1",
             "command": std::iter::once("generate".to_string()).chain(args.iter().cloned()).collect::<Vec<_>>(),
-            "producer": {"id": GENERATOR_ID, "version": GENERATOR_VERSION},
+            "producer": {"id": prepared.producer.id(), "version": prepared.producer.version()},
             "engine_commit": commit,
             "provenance": provenance,
             "toolchain": toolchain.map(|t| json!({"lean": t.lean, "mathlib": t.mathlib})),
@@ -299,10 +300,9 @@ fn regenerate(args: &[String]) -> Result<(), Fail> {
     let (a, _) = parse_args(args, &["--manifest", "--root"], &[])?;
     let path = PathBuf::from(&a["--manifest"]);
     let manifest = load_manifest(&path)?;
-    let version = version_of(&manifest)?;
+    let producer = producer_of(&manifest)?;
     let seed = manifest.seed.ok_or(Fail::Refused("no seed".into()))?;
-    let prepared =
-        template::prepare_with(version, &manifest.config, seed).map_err(Fail::Refused)?;
+    let prepared = prepare_for(producer, &manifest.config, seed).map_err(Fail::Refused)?;
     if prepared.artifact_id() != manifest.artifact_id {
         return Err(Fail::Refused("the manifest's id does not derive".into()));
     }
@@ -372,10 +372,9 @@ fn verify(args: &[String]) -> Result<(), Fail> {
     }
     // Lean elaboration can run code, so only bytes this producer itself emits for the manifest's
     // (config, seed) are ever compiled.
-    let version = version_of(&manifest)?;
+    let producer = producer_of(&manifest)?;
     let seed = manifest.seed.ok_or(Fail::Refused("no seed".into()))?;
-    let prepared =
-        template::prepare_with(version, &manifest.config, seed).map_err(Fail::Refused)?;
+    let prepared = prepare_for(producer, &manifest.config, seed).map_err(Fail::Refused)?;
     if prepared.artifact_id() != manifest.artifact_id
         || prepared.formal.as_ref().map(|f| f.bytes.as_slice()) != Some(bytes.as_slice())
     {
@@ -407,7 +406,7 @@ fn verify(args: &[String]) -> Result<(), Fail> {
         json!({
             "schema": "syndeom-generate-receipt/1",
             "command": std::iter::once("verify".to_string()).chain(args.iter().cloned()).collect::<Vec<_>>(),
-            "producer": {"id": GENERATOR_ID, "version": version.as_str()},
+            "producer": {"id": producer.id(), "version": producer.version()},
             "artifact_ids": [manifest.artifact_id],
             "content_hash": formal.content_hash,
             "lean_commands": runs,

@@ -160,6 +160,51 @@ impl Version {
     }
 }
 
+/// The producer a [`Prepared`] artifact belongs to (ADR-0011 D1: two producers behind one
+/// interface, each with its own `generator.id` and semver `version`). `assemble` writes the
+/// producer's id and version into the manifest and counts flaws per instance for every producer
+/// but `s2_template` 0.1.0, which counted records.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Producer {
+    Template(Version),
+    Grammar(crate::grammar::GrammarVersion),
+}
+
+impl Producer {
+    /// The producer named by a manifest's `generator.id` and `generator.version`, if this crate
+    /// carries it.
+    pub fn parse(id: &str, version: &str) -> Option<Producer> {
+        match id {
+            GENERATOR_ID => Version::parse(version).map(Producer::Template),
+            crate::grammar::GENERATOR_ID => {
+                crate::grammar::GrammarVersion::parse(version).map(Producer::Grammar)
+            }
+            _ => None,
+        }
+    }
+
+    pub fn id(self) -> &'static str {
+        match self {
+            Producer::Template(_) => GENERATOR_ID,
+            Producer::Grammar(_) => crate::grammar::GENERATOR_ID,
+        }
+    }
+
+    pub fn version(self) -> &'static str {
+        match self {
+            Producer::Template(v) => v.as_str(),
+            Producer::Grammar(v) => v.as_str(),
+        }
+    }
+
+    fn counts_instances(self) -> bool {
+        match self {
+            Producer::Template(v) => v.counts_instances(),
+            Producer::Grammar(_) => true,
+        }
+    }
+}
+
 /// The seed records, compiled in so the bytes are a function of the engine commit (ADR-0011
 /// D6). The first three are 0.1.0's; a version compiles in a prefix of this list.
 const SEED_RECORDS: &[&str] = &[
@@ -1216,13 +1261,13 @@ pub enum Target {
 }
 
 impl Target {
-    fn informal(self) -> bool {
+    pub(crate) fn informal(self) -> bool {
         self != Self::Formal
     }
-    fn formal(self) -> bool {
+    pub(crate) fn formal(self) -> bool {
         self != Self::Informal
     }
-    fn kind(self) -> Kind {
+    pub(crate) fn kind(self) -> Kind {
         match self {
             Self::Informal => Kind::Informal,
             Self::Formal => Kind::Formal,
@@ -1251,7 +1296,11 @@ pub struct Config {
     pub padding_ratio: f64,
 }
 
-fn exact_keys(obj: &Map<String, Value>, keys: &[&str], what: &str) -> Result<(), String> {
+pub(crate) fn exact_keys(
+    obj: &Map<String, Value>,
+    keys: &[&str],
+    what: &str,
+) -> Result<(), String> {
     let have: BTreeSet<&str> = obj.keys().map(String::as_str).collect();
     let want: BTreeSet<&str> = keys.iter().copied().collect();
     if have != want {
@@ -1268,7 +1317,7 @@ fn parse_severity(v: &Value) -> Result<Severity, String> {
 
 /// One `FlawSpec` (ADR-0011 D3) as a config gives it or, from 0.5.0, as FLAW-0011's `embedded`
 /// list gives it; `what` names it in a refusal.
-fn parse_spec(f: &Value, what: &str) -> Result<FlawSpec, String> {
+pub(crate) fn parse_spec(f: &Value, what: &str) -> Result<FlawSpec, String> {
     let f = f.as_object().ok_or(format!("{what} is an object"))?;
     exact_keys(
         f,
@@ -1380,7 +1429,7 @@ fn severity_range(class: &str) -> Option<(Severity, Severity)> {
 }
 
 /// ADR-0011 D3: the class, target and severity refusals that do not depend on the seed.
-fn check_spec(spec: &FlawSpec, target: Target) -> Result<(), String> {
+pub(crate) fn check_spec(spec: &FlawSpec, target: Target) -> Result<(), String> {
     let (lo, hi) = severity_range(&spec.class).ok_or(format!(
         "{} is not a class of FLAWS.md {TAXONOMY_VERSION}",
         spec.class
@@ -1484,14 +1533,16 @@ pub struct FalseTheorem {
     pub counterexample: String,
 }
 
-/// Everything `prepare` produces: the config as given, the plan after injection and padding,
-/// the rendered bytes, the injected instance (none for a control or a padded control; the
-/// embedded instance of a composite; the use-site instance of a FLAW-0012 artifact), the padding
-/// insertions (none unless FLAW-0013 was commanded), the composite (none unless FLAW-0011 was
-/// commanded) and the false theorem's own instance (none unless FLAW-0012 was commanded).
+/// Everything `prepare` produces: the producer and its version, the config as given, the plan
+/// after injection and padding, the rendered bytes, the injected instance (none for a control or
+/// a padded control; the embedded instance of a composite; the use-site instance of a FLAW-0012
+/// artifact), the padding insertions (none unless FLAW-0013 was commanded), the composite (none
+/// unless FLAW-0011 was commanded) and the false theorem's own instance (none unless FLAW-0012
+/// was commanded). `s2_grammar` (ADR-0011 D1; `crate::grammar`) prepares the same structure,
+/// so one `assemble` measures both producers (D2, D8).
 #[derive(Debug, Clone, PartialEq)]
 pub struct Prepared {
-    pub version: Version,
+    pub producer: Producer,
     pub config: Value,
     /// `config_hash` (ADR-0001 D5), computed once; a config that cannot be canonicalized is
     /// refused by `prepare`.
@@ -1510,8 +1561,8 @@ pub struct Prepared {
 impl Prepared {
     pub fn artifact_id(&self) -> String {
         artifact_id(
-            GENERATOR_ID,
-            self.version.as_str(),
+            self.producer.id(),
+            self.producer.version(),
             &self.config_hash,
             Some(self.seed),
         )
@@ -1654,7 +1705,7 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
         .then(|| render_formal(&plan))
         .transpose()?;
     Ok(Prepared {
-        version,
+        producer: Producer::Template(version),
         config: config.clone(),
         config_hash: hash,
         seed: seed_value,
@@ -2365,7 +2416,7 @@ pub fn manifests_in(class: &str, sub_variant: Option<&str>) -> (bool, bool) {
 }
 
 /// The unique code-point span of `needle` in `hay`, or `None` unless it occurs exactly once.
-fn unique_span(hay: &str, needle: &str) -> Option<[u64; 2]> {
+pub(crate) fn unique_span(hay: &str, needle: &str) -> Option<[u64; 2]> {
     let mut found = hay.match_indices(needle);
     let (at, _) = found.next()?;
     if found.next().is_some() {
@@ -2402,14 +2453,18 @@ fn unused_in_file(obs: &Observation, declaration: &str, main: &str) -> bool {
         })
 }
 
-/// The flaw counts (ADR-0011 D8 as amended by ruling 3 on PR 26): per instance from 0.2.0, per
-/// record under 0.1.0. Returns `(total, confirmed, per_class → (total, confirmed))`; an
-/// instance is confirmed only when every one of its records is (Al's owner note of 2026-10-28).
-fn counts(version: Version, records: &[(Flaw, bool)]) -> (u64, u64, BTreeMap<String, (u64, u64)>) {
+/// The flaw counts (ADR-0011 D8 as amended by ruling 3 on PR 26): per instance from
+/// `s2_template` 0.2.0 and for every other producer, per record under `s2_template` 0.1.0.
+/// Returns `(total, confirmed, per_class → (total, confirmed))`; an instance is confirmed only
+/// when every one of its records is (Al's owner note of 2026-10-28).
+fn counts(
+    per_instance: bool,
+    records: &[(Flaw, bool)],
+) -> (u64, u64, BTreeMap<String, (u64, u64)>) {
     let mut per_class: BTreeMap<String, (u64, u64)> = BTreeMap::new();
     let mut total = 0;
     let mut confirmed = 0;
-    if version.counts_instances() {
+    if per_instance {
         let mut instances: BTreeMap<u64, (String, bool)> = BTreeMap::new();
         for (r, ok) in records {
             let e = instances
@@ -2887,7 +2942,7 @@ pub fn assemble(
             ));
         }
     }
-    let (n_total, n_confirmed, per_class) = counts(p.version, &records);
+    let (n_total, n_confirmed, per_class) = counts(p.producer.counts_instances(), &records);
 
     // Commanded (ADR-0011 D8).
     let mut commanded = BTreeMap::new();
@@ -3058,8 +3113,8 @@ pub fn assemble(
         artifact_id: p.artifact_id(),
         origin: Origin::Synthetic,
         generator: Generator {
-            id: GENERATOR_ID.into(),
-            version: p.version.as_str().into(),
+            id: p.producer.id().into(),
+            version: p.producer.version().into(),
             rng: RNG_ID.into(),
             llm: None,
         },

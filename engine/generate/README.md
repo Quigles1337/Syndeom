@@ -17,6 +17,15 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   FLAW-0008's statement drift and FLAW-0012's dropped hypothesis), the padding module (D2 `pad`,
   D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks K and T
   (D8, D9);
+- `src/grammar.rs` — the producer `s2_grammar`, version 0.1.0: the grammar `ring_chain` (D6) —
+  its atom library (the seed forms, the monomials and the presentations a chain is built from),
+  the derivation (`grammar/plan`, `grammar/step/<k>`, `grammar/lemma/<j>`), the plan with its
+  lemma steps, ground truth by construction with the control as the truth's reference (D7),
+  and FLAW-0001 `propagated` and `local` with generated material (D5); the plan is rendered and
+  measured by the same renderers and the same `assemble` as the template's;
+- `src/lib.rs` — the producer dispatch: `generate` prepares the producer a config names
+  (`theorem`: `s2_template`; `grammar`: `s2_grammar`), `regenerate` and `verify` the producer and
+  version a manifest names (`Producer`);
 - `src/harness.rs` — the Lean harness: `lake env lean` from `lean/`, one process at a time, and
   an audit tail printing `#print axioms` of the main declaration and the direct used-constants
   of every constant the file defined (D8; the T check's listing, from 0.3.0);
@@ -85,9 +94,57 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   the FLAW-0005 `violated` instance at the hidden use site, check K, and the class's own
   instance at the statement, confirmed with it and the seed's negation witness).
 
-The crate regenerates all seven versions: the goldens select the version their manifests name,
-and `regenerate` and `verify` accept any of them. Every seed states its `source`, never under
+- **`s2_grammar` 0.1.0** (Session 47): the grammar `ring_chain` with its control and FLAW-0001
+  (`propagated`, `local`; `perturbation` ∈ {`sign`, `coefficient`, `constant`, `exponent`}); see
+  *The grammar `ring_chain`* below. Flaw counts per instance.
+
+The crate regenerates all eight producer versions (seven of `s2_template`, one of `s2_grammar`):
+the goldens select the producer and version their manifests name, and `regenerate` and `verify`
+accept any of them. Every seed and the grammar's atom library state their `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
+
+## The grammar `ring_chain` (`s2_grammar` 0.1.0)
+
+- **The instance.** A config `{"grammar": "ring_chain", "length": {"n_steps", "n_lemmas"},
+  "target", "flaws", "padding_ratio"}` (D3; `n_steps` 1 to 256, `n_lemmas` 0 to 32 and at most
+  `n_steps`; `padding_ratio` 0 — the grammar carries no padding material yet) names a polynomial
+  identity over ℤ in `x` and `y`: a seed form `e_0` — one of fourteen products and powers of
+  small binomials and trinomials (`(x + y) ^ 2`, `(x + 2 * y) * (x - y)`, `(x + y + 1) ^ 2`, …),
+  drawn from the stream `grammar/plan` — and `n_steps` presentations `e_1 … e_n` of its
+  expansion, each drawn from its own stream `grammar/step/<k>` and differing from the one
+  before. The theorem is `e_0 = e_n` for all integers `x`, `y`; its argument is a `calc` chain
+  whose step `k` is the equality `e_{k-1} = e_k`, closed by `ring`. `n_lemmas` of the chain's
+  steps (drawn from `grammar/lemma/<j>`, ascending) are instead stated as lemma steps
+  (`theorem …_lemma_<j> : ∀ x y : ℤ, e_{k-1} = e_k := by intro x y; ring`, before the main
+  declaration in document order, D2) and cited by the chain step (`_ = e_k := …_lemma_<j> x y`;
+  the step's `premises` name the lemma). Every equality of the chain is a true identity by
+  construction: `e_1 … e_n` present one polynomial.
+- **Presentations (the atom library's rewrites).** A presentation of a polynomial — a canonical
+  list of monomials `c · x^i · y^j` — is a drawn permutation of its terms, a drawn style per
+  term (`x ^ 2` or `x * x`; `x * y` or `y * x`) and a drawn shape: expanded; one variable
+  factored out of the terms it divides (`x * (x + 2 * y) + y ^ 2`), first or last; or the terms
+  regrouped as two parenthesized sums. A shape the terms cannot take (a variable dividing fewer
+  than two terms; a grouping of two terms) resolves to expanded. The LaTeX rendering juxtaposes
+  factors (`2xy`, `x(x + 2y) + y^2`) and writes a split square with `\cdot`.
+- **Ground truth (D7).** `statement_status` is `value: true`, `method: lean-kernel`,
+  `reference: <artifact_id of the control with target formal, the same grammar, length and
+  seed>:syndeom_s2_grammar_ring_chain` — the control whose `lean_build: pass` is measured and
+  recorded in its own manifest (D8); the formal control's reference names itself.
+- **FLAW-0001 (D5).** The injector draws, on `injector/FLAW-0001/1`, a ring-closed chain step
+  (never a lemma-cited one; for `local`, never the last) when the spec's `site` is `auto`, and
+  the perturbed monomial among the kind's eligible targets at that step: `sign` flips one term's
+  sign; `coefficient` raises one non-constant term's coefficient by one in magnitude;
+  `constant` does the same to the constant term, or adds `+ 1` when there is none; `exponent`
+  raises one exponent by one where the raised monomial is not another term's. The site is
+  re-rendered under its own presentation with the perturbed terms, so its identity is false and
+  `ring` fails at that `calc` line (check K; the probes under `analysis/s2-generate-8/`).
+  `propagated` (fatal) re-derives every later step, and restates every lemma a later step cites,
+  from the perturbed polynomial, so that every later identity is true again and the chain ends
+  away from the claim of record (step 0 is untouched); `local` (repairable) changes the site
+  alone, so the next step asserts the correct consequence. The records' dials carry
+  `perturbation`, `site` (a plan step index), `monomial` (`replaced`, `inserted`), the site's
+  text or fragment `inserted` and `replaced`, and `original_steps` / `original_fragments` for
+  every step the variant changed (a restated lemma's lines included).
 
 ## Seeds whose statement is false (0.2.0)
 
@@ -252,7 +309,10 @@ is flagged for Al in ADR-0011 *Amendments*.
   else the padding declarations' lines of the formal file — in binary64; commanded as the
   config's value with tolerance `abs 0.05` (`abs 0.0` at ratio 0). A commanded ratio the count
   of paragraphs cannot reach is a FAIL verdict, not a refusal.
-- **Not yet:** `s2_grammar`, padding combined with an injected flaw (also inside a composite),
+- **Not yet:** the grammars `ineq_chain`, `case_split` and `nat_induction`; on `ring_chain`
+  every class but FLAW-0001 (FLAW-0003 `cycle`, FLAW-0004, FLAW-0007 `unused`, FLAW-0009,
+  FLAW-0010 `a`, FLAW-0011 and FLAW-0013 are the grammar's remaining v0.1 classes, D6) and
+  padding material; padding combined with an injected flaw (also inside a composite),
   composites of more than one instance, the kinds `unused-lemma` and `verbose-rewrite` (no seed
   carries their material), FLAW-0004 `nontrivial-true` and `false` and FLAW-0010 `claim: false`
   (no seed carries the false-step material), FLAW-0010 `b` and `c` (deferred), FLAW-0003
@@ -270,7 +330,10 @@ syndeom-generate regenerate --manifest <corpora/<id>/manifest.json> --root <repo
 syndeom-generate verify --artifact <corpora/<id>> --root <repo> --receipt-dir <new directory>
 ```
 
-`generate` refuses (exit 2) unless the engine commit is an exact commit and an ancestor of
+`generate` prepares the producer the config names — a `theorem` key is an `s2_template` config,
+a `grammar` key an `s2_grammar` config — at that producer's current version; `regenerate` and
+`verify` select the producer and version from the manifest's `generator.id` and
+`generator.version`. `generate` refuses (exit 2) unless the engine commit is an exact commit and an ancestor of
 `HEAD` whose blobs for the input set (`input-set.txt`: `engine/generate/**`,
 `engine/manifest/**`, `lean/Syndeom/Seeds/**`, `engine/Cargo.toml`, `engine/Cargo.lock`,
 `rust-toolchain.toml`, `lean/lean-toolchain`, `lean/lakefile.toml`, `lean/lake-manifest.json`)

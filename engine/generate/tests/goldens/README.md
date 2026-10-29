@@ -1,15 +1,17 @@
-# Goldens for `s2_template` (ADR-0011 D10)
+# Goldens for `s2_template` and `s2_grammar` (ADR-0011 D10)
 
-There are 69 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+There are 79 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
 0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
-and 10 of 0.7.0 (Session 46). All use seed 7. Each case directory holds:
+and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47). All use seed 7. Each
+case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
 
 `tests/goldens.rs` regenerates each case without Lean, from the recorded observation, under the
-producer version its `manifest.json` names (Al's ruling 5 on PR 26: the 0.1.0 goldens stay
-regenerable under the version they name), and compares the bytes. No golden is rewritten except
+producer and version its `manifest.json` names (Al's ruling 5 on PR 26: the 0.1.0 goldens stay
+regenerable under the version they name; `s2_grammar` cases under that producer), and compares
+the bytes. No golden is rewritten except
 under a ruling that says so.
 
 ## 0.1.0 (Session 40, 2026-10-28)
@@ -307,10 +309,55 @@ commanded `fail` and `n_flaws_total` 2.
   as recorded), the FLAW-0005 records by check K and the span check, and the FLAW-0012 records
   by the use-site instance and the seed's negation witness.
 
+## `s2_grammar` 0.1.0 (Session 47, 2026-10-29)
+
+On the grammar `ring_chain` (a polynomial identity over ℤ in `x` and `y`: a seed form and
+`n_steps` presentations of its expansion, proved as a `calc` chain closed by `ring`, with
+`n_lemmas` of the steps stated as lemma steps and cited), the control at the short length
+(`n_steps` 4, `n_lemmas` 0) and at the long length (24, 2), informal and formal, and FLAW-0001
+`propagated` (fatal) and `local` (repairable) with the `sign` perturbation at the short length,
+informal, formal and pair. At seed 7 the seed form is `(x - 2 * y) ^ 2` for both lengths. The
+flawed cases perturb step 1 — the first `calc` line, drawn on `injector/FLAW-0001/1` — by
+flipping the sign of `4 * y ^ 2` (rendered `4 * y * y` there), so the chain's first identity is
+false: `propagated` re-derives steps 2–4 from the perturbed polynomial and ends at
+`x ^ 2 - 4 * y * x - 4 * y ^ 2`, away from the claim `x ^ 2 - 4 * y * x + 4 * y ^ 2`; `local`
+keeps steps 2–4 faithful. Every case is a true statement (`lean-kernel`, the reference the
+formal control of its length: `s2_grammar-v0.1.0-cc0c6a4daf03-s7` for the short cases,
+`s2_grammar-v0.1.0-6589db356c9e-s7` for the long ones, each naming itself); the controls are
+`proof_status: valid`, `correct: true`; the flawed cases `invalid`, `correct: false`, with one
+instance and `lean_build` commanded `fail`.
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ring_chain` | control (informal, formal) | 4 steps, 0 lemmas |
+| `ring_chain` | control (informal, formal) | 24 steps, 2 lemmas (lemmas 1 and 2 stated and cited) |
+| `ring_chain` | FLAW-0001 `propagated` fatal `sign` (informal, formal, pair); FLAW-0001 `local` repairable `sign` (informal, formal, pair) | 4 steps, 0 lemmas; site step 1 |
+
+**Provenance:**
+- The proof text is generated (`src/grammar.rs`: the seed form table, the presentations and
+  the chain are the atom library; the FLAW-0001 material is generated at the site). The
+  `calc` chain's syntax, the lemma citation and the four perturbation kinds were first compiled
+  as hand-written Lean probes, one process at a time, before the module was written
+  (`analysis/s2-generate-8/evidence/lean-probe/`): the controls build with the standard axioms,
+  and each perturbed probe's first error is at the perturbed step's own line.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `25ad34fe45c1eea8527b3aab47829b31c8685931`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run
+  (`analysis/s2-generate-8/evidence/goldens-production-report.json`).
+- Every case's fidelity verdict is PASS. The four controls' formal files build (exit 0) and
+  print `[propext, Quot.sound]`, within the standard three; the FLAW-0001 formal and pair cases
+  fail to build (exit 1) with the first error at line 4, the site's `calc` line (check K: `ring`
+  leaves the false identity as an unsolved goal), `lean_axioms_standard` therefore unmeasured
+  (`null`, with its reason); the `propagated` cases add the theorem-level `calc.step` goal
+  after it. Each instance is confirmed: the informal record by its span (step 1, the perturbed
+  expression `-4 \cdot y \cdot y + x(x - 4y)` at `[58, 88)`), the formal record by check K.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
-`analysis/s2-generate-6/README.md` and `analysis/s2-generate-7/README.md`.
+`analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md` and
+`analysis/s2-generate-8/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps
