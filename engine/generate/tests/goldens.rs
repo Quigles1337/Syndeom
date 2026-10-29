@@ -14,7 +14,8 @@ use std::path::{Path, PathBuf};
 
 use serde_json::Value;
 use syndeom_generate::harness::Observation;
-use syndeom_generate::template::{Version, assemble, prepare_with};
+use syndeom_generate::prepare_for;
+use syndeom_generate::template::{Producer, assemble};
 use syndeom_manifest::{Toolchain, content_hash, to_disk_json};
 
 /// The 0.1.0 goldens: each seed's control and FLAWS.md example, informal and formal (Session 40).
@@ -65,16 +66,21 @@ fn dirs(path: &Path) -> Vec<PathBuf> {
 #[test]
 fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
     let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/goldens");
-    let mut by_version: BTreeMap<&'static str, u64> = BTreeMap::new();
+    let mut by_version: BTreeMap<String, u64> = BTreeMap::new();
     for seed_dir in dirs(&root) {
         for case_dir in dirs(&seed_dir) {
             let case: Value =
                 serde_json::from_slice(&fs::read(case_dir.join("case.json")).unwrap()).unwrap();
             let recorded: Value =
                 serde_json::from_slice(&fs::read(case_dir.join("manifest.json")).unwrap()).unwrap();
-            let version = Version::parse(recorded["generator"]["version"].as_str().unwrap())
-                .unwrap_or_else(|| panic!("{case_dir:?} names an unknown producer version"));
-            let p = prepare_with(version, &case["config"], case["seed"].as_u64().unwrap())
+            // the producer and version the manifest names select the code that regenerates it
+            // (ADR-0011 D1: two producers behind one interface, each with its own versions)
+            let producer = Producer::parse(
+                recorded["generator"]["id"].as_str().unwrap(),
+                recorded["generator"]["version"].as_str().unwrap(),
+            )
+            .unwrap_or_else(|| panic!("{case_dir:?} names an unknown producer version"));
+            let p = prepare_for(producer, &case["config"], case["seed"].as_u64().unwrap())
                 .unwrap_or_else(|e| panic!("{case_dir:?}: {e}"));
             let toolchain: Option<Toolchain> =
                 serde_json::from_value(case["toolchain"].clone()).unwrap();
@@ -109,41 +115,44 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
                 let r = manifest.artifact.files.formal.as_ref().unwrap();
                 assert_eq!(r.content_hash, content_hash(&f.bytes));
             }
-            *by_version.entry(version.as_str()).or_default() += 1;
+            *by_version
+                .entry(format!("{} {}", producer.id(), producer.version()))
+                .or_default() += 1;
         }
     }
+    let count = |key: &str| by_version.get(key).copied().unwrap_or(0);
     assert_eq!(
-        by_version.get("0.1.0").copied().unwrap_or(0),
+        count("s2_template 0.1.0"),
         GOLDENS_0_1_0,
         "the 0.1.0 goldens"
     );
     assert_eq!(
-        by_version.get("0.2.0").copied().unwrap_or(0),
+        count("s2_template 0.2.0"),
         GOLDENS_0_2_0,
         "the 0.2.0 goldens"
     );
     assert_eq!(
-        by_version.get("0.3.0").copied().unwrap_or(0),
+        count("s2_template 0.3.0"),
         GOLDENS_0_3_0,
         "the 0.3.0 goldens"
     );
     assert_eq!(
-        by_version.get("0.4.0").copied().unwrap_or(0),
+        count("s2_template 0.4.0"),
         GOLDENS_0_4_0,
         "the 0.4.0 goldens"
     );
     assert_eq!(
-        by_version.get("0.5.0").copied().unwrap_or(0),
+        count("s2_template 0.5.0"),
         GOLDENS_0_5_0,
         "the 0.5.0 goldens"
     );
     assert_eq!(
-        by_version.get("0.6.0").copied().unwrap_or(0),
+        count("s2_template 0.6.0"),
         GOLDENS_0_6_0,
         "the 0.6.0 goldens"
     );
     assert_eq!(
-        by_version.get("0.7.0").copied().unwrap_or(0),
+        count("s2_template 0.7.0"),
         GOLDENS_0_7_0,
         "the 0.7.0 goldens"
     );
