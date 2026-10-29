@@ -147,41 +147,57 @@ measured statistic (ADR-0011 D4) checked at tolerance `abs 0.05`.
 ## 0.5.0 (Session 44, 2026-10-28)
 
 FLAW-0004 `routine-true` on the `sqrt2_irrational` seed's step 3 — the FLAWS.md FLAW-0011
-example's hedge: `2 | p² ⇒ 2 | p` asserted with a hedge and the parity argument dropped — and
-FLAW-0011 as a commanded composite of that one instance (`embedded`), each as an informal and a
-pair artifact. The formal target is refused for FLAW-0004 (FLAWS.md: it manifests in informal)
-and so for the composite that embeds it. At seed 7 the injector draws hedge 1 of the fixed
-lexicon, `It is easy to see that`, so step 3 reads `It is easy to see that $p$ is even. Write
-$p = 2k$.`; in the formal file the proof of `have hp : 2 ∣ p := by` is omitted (the `have`
-header and the `obtain` stay; no `sorry`), and the kernel reports `unsolved goals` at line 7,
-the site's first fragment line (check K). The hidden step is routine and true, so the instance
-is cosmetic and the artifact is a valid proof of a true statement under ADR-0011 D7
-(`proof_status: valid`, `correct: true`), with `lean_build` commanded `fail`; the composite
-inherits the severity and `YES-KERNEL`, and its own records sit at step 0 (the statement) and
-at the main declaration's header line (line 4). The informal-only artifacts carry `N/A`.
+example's hedge: `2 | p² ⇒ 2 | p` asserted with a hedge and the parity argument dropped — as an
+informal and a pair artifact (the formal target is refused for FLAW-0004: FLAWS.md says it
+manifests in informal), and FLAW-0011 as a commanded composite of one gap instance,
+`continuity_is_not_uniform`'s FLAW-0002 `forall-exists` gap (`embedded`), as an informal and a
+pair artifact. At seed 7 the injector draws hedge 1 of the fixed lexicon, `It is easy to see
+that`, so step 3 reads `It is easy to see that $p$ is even. Write $p = 2k$.`; in the formal file
+the proof of `have hp : 2 ∣ p := by` is omitted (the `have` header and the `obtain` stay; no
+`sorry`), and the kernel reports `unsolved goals` at line 7, the site's first fragment line
+(check K). The hidden step is routine and true, so the instance is cosmetic and the artifact is
+a valid proof of a true statement under ADR-0011 D7 (`proof_status: valid`, `correct: true`),
+with `lean_build` commanded `fail`; the informal-only artifact carries `N/A`. The composite's
+embedded instance is the 0.2.0 FLAW-0002 instance byte for byte (the same draw, the same files,
+failing at line 6); the composite inherits `gap` and `YES-KERNEL`, its own records sit at step 0
+(the statement) and at the main declaration's header line (line 5), and the artifact is an
+invalid proof of a true statement (`proof_status: invalid`, `correct: false`), two instances.
 
 | Seed | Cases | Statement |
 |---|---|---|
-| `sqrt2_irrational` | FLAW-0004 `routine-true` cosmetic (informal, pair); FLAW-0011 embedding it, cosmetic (informal, pair) | true |
+| `sqrt2_irrational` | FLAW-0004 `routine-true` cosmetic (informal, pair) | true |
+| `continuity_is_not_uniform` | FLAW-0011 embedding FLAW-0002 `forall-exists` gap (informal, pair) | true |
 
 **Provenance:**
-- The proof text is hand-authored seed material (`seeds/sqrt2_irrational.json`): the five
-  faithful steps, and the FLAW-0004 material's bare claim at step 3 with the justification and
-  the four omitted tactic lines recorded.
-- The formal file was first written by hand as a Lean probe and compiled before the seed
+- The proof text is hand-authored seed material (`seeds/sqrt2_irrational.json`: the five
+  faithful steps and the FLAW-0004 material's bare claim at step 3 with the justification and
+  the four omitted tactic lines recorded; `seeds/continuity_is_not_uniform.json`: the 0.2.0
+  material, unchanged).
+- The hedged formal file was first written by hand as a Lean probe and compiled before the seed
   material was written, one process at a time (`analysis/s2-generate-5/evidence/lean-probe/`):
-  both pair goldens' `Proof.lean` are byte-identical to the probe `s2i_hedged_p1.lean`, which
-  has no tail, as `analysis/s2-generate-5/evidence/goldens-production-report.json` records.
-- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine
-  commit `7be41123c698a07b9e56cab2aa2a1e9d257944b8`, by two separate runs compared byte for
-  byte (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal),
-  with the running binary's compiled input hashes verified against the commit before each run.
+  the FLAW-0004 pair golden's `Proof.lean` is byte-identical to the probe `s2i_hedged_p1.lean`,
+  which has no tail. The composite's `proof.md` and `Proof.lean` are byte-identical to the
+  0.2.0 goldens `continuity_is_not_uniform/flaw-0002-gap-informal` and `-pair` (the composite
+  changes no byte of the embedded instance's files), as
+  `analysis/s2-generate-5/evidence/goldens-regeneration-report.json` records.
+- The files and manifests were first produced at engine commit `7be41123…` (two FLAW-0004
+  cases and two composites embedding that cosmetic instance) and then, by Al's ruling 2 of
+  2026-10-28 on PR 30, **regenerated at engine commit
+  `1c0c5fcdf1ffd375b109f272461a63c49330e007`**, the commit that refuses a composite whose
+  embedded instances are all cosmetic and restricts `embedded` to FLAW-0001 through FLAW-0010:
+  the two cosmetic composites were removed and replaced by the FLAW-0002 gap composite, and the
+  FLAW-0004 cases were regenerated so that the four cases name one engine commit — their proof
+  bytes, ids and ground truth unchanged, only `manifest.json` and `case.json` naming the new
+  commit. Two separate runs of `syndeom-generate generate --dry-run` at that commit produced
+  byte-identical outputs for all four cases, with the running binary's compiled input hashes
+  verified against the commit before each run.
 - Every case's fidelity verdict is PASS. Both pair cases fail to build (exit 1) with the first
-  error at line 7; `lean_axioms_standard` is therefore unmeasured (`null`, with its reason).
-  Each instance is confirmed: the informal record by the D5 check (the hedge entry, a space and
-  the bare claim; the faithful text held the justification exactly once), the formal record by
-  check K, and the composite by the seed's kernel-checked witness together with its embedded
-  instance's records.
+  error at the site's first fragment line (7 for the hedge, 6 for the swapped `obtain`);
+  `lean_axioms_standard` is therefore unmeasured (`null`, with its reason). Each instance is
+  confirmed: the FLAW-0004 informal record by the D5 check (the hedge entry, a space and the
+  bare claim; the faithful text held the justification exactly once), every formal record by
+  check K, the FLAW-0002 informal record by its span check, and the composite by the seed's
+  kernel-checked witness together with its embedded instance's records.
 
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
