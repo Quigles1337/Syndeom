@@ -1,0 +1,202 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0005": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0012": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 187
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "41127e56ddd315a957fe27cc8126e95dadd90dc613568d61562afa772d8553ce",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_bounded_continuous_sup",
+        "n_bytes": 1251,
+        "n_declarations": 1,
+        "n_lines": 19,
+        "n_tokens": 187,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_template-v0.7.0-6f6417a96546-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0005": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0012": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {
+          "dropped_hypothesis": "the domain of $f$ is a compact interval"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "extreme_value",
+    "target": "formal",
+    "theorem": "bounded_continuous_sup"
+  },
+  "config_hash": "6f6417a9654692ac2091075492ea0c9c385f9afa41c14114ad11fae5e9a81afe",
+  "engine_commit": "6dba3615a001151116632169bd93b25440878ac0",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0005": "PASS",
+      "n_flaws_0012": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.7.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {
+          "counterexample": "$f = \\arctan$ is continuous and bounded by $\\pi/2$ but strictly increasing, so no $x^*$ has $f(x) \\le f(x^*)$ for every $x$; a maximizing sequence $(x_n)$ for $\\arctan$ tends to $+\\infty$ and has no convergent subsequence.",
+          "hypothesis": "the sequence $(x_n)$ is bounded",
+          "inserted": [
+            "have hxb : Bornology.IsBounded (Set.range x) := (Metric.isBounded_Icc (-M) M).subset (by rintro _ ⟨n, rfl⟩; exact abs_le.mp (hM (x n)))",
+            "obtain ⟨x₀, -, φ, hφ, hx₀⟩ := tendsto_subseq_of_bounded hxb (fun n => Set.mem_range_self n)"
+          ],
+          "mode": "violated",
+          "replaced": null,
+          "site": 3,
+          "theorem": "the Bolzano–Weierstrass theorem"
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_bounded_continuous_sup",
+          "line": 11
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0012",
+        "dials": {
+          "counterexample": "$f = \\arctan$ is continuous and bounded by $\\pi/2$ but strictly increasing, so no $x^*$ has $f(x) \\le f(x^*)$ for every $x$; a maximizing sequence $(x_n)$ for $\\arctan$ tends to $+\\infty$ and has no convergent subsequence.",
+          "dropped_hypothesis": "the domain of $f$ is a compact interval",
+          "inserted": [
+            "theorem syndeom_s2_template_bounded_continuous_sup (f : ℝ → ℝ) (hf : Continuous f) (hb : ∃ M : ℝ, ∀ x, |f x| ≤ M) : ∃ x₀ : ℝ, ∀ x : ℝ, f x ≤ f x₀ := by"
+          ],
+          "replaced": null,
+          "site": 0,
+          "use_instance": 1,
+          "use_site": 3
+        },
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_bounded_continuous_sup",
+          "line": 5
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/BoundedContinuousSup.lean:syndeom_seed_bounded_continuous_sup_false",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}

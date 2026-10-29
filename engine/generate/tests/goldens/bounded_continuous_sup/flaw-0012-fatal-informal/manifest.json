@@ -1,0 +1,205 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "n_flaws_0005": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0012": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 4
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 144
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "510c834198010a00c6c819307b87acbe255446b1860aa79c76b3ce235dffb869",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 998,
+        "n_lemmas": 0,
+        "n_steps": 4,
+        "n_tokens": 144,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.7.0-35b526a2cabe-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "n_flaws_0005": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0012": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 4
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0012",
+        "dials": {
+          "dropped_hypothesis": "the domain of $f$ is a compact interval"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "extreme_value",
+    "target": "informal",
+    "theorem": "bounded_continuous_sup"
+  },
+  "config_hash": "35b526a2cabe034d06126f2ff80cbb5be5a3bbefe8b5c33c40d5d6ba8410885a",
+  "engine_commit": "6dba3615a001151116632169bd93b25440878ac0",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0005": "PASS",
+      "n_flaws_0012": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.7.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0005",
+        "dials": {
+          "counterexample": "$f = \\arctan$ is continuous and bounded by $\\pi/2$ but strictly increasing, so no $x^*$ has $f(x) \\le f(x^*)$ for every $x$; a maximizing sequence $(x_n)$ for $\\arctan$ tends to $+\\infty$ and has no convergent subsequence.",
+          "hypothesis": "the sequence $(x_n)$ is bounded",
+          "inserted": "As in the extreme value theorem on a compact interval, the points $x_n$ lie in the bounded set $[-M, M]$, so by the Bolzano–Weierstrass theorem there are a strictly increasing $\\varphi$ and $x^* \\in \\mathbb{R}$ with $x_{\\varphi(n)} \\to x^*$.",
+          "mode": "violated",
+          "replaced": null,
+          "site": 3,
+          "theorem": "the Bolzano–Weierstrass theorem"
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            241
+          ],
+          "step": 3
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0012",
+        "dials": {
+          "counterexample": "$f = \\arctan$ is continuous and bounded by $\\pi/2$ but strictly increasing, so no $x^*$ has $f(x) \\le f(x^*)$ for every $x$; a maximizing sequence $(x_n)$ for $\\arctan$ tends to $+\\infty$ and has no convergent subsequence.",
+          "dropped_hypothesis": "the domain of $f$ is a compact interval",
+          "inserted": "Let $f : \\mathbb{R} \\to \\mathbb{R}$ be continuous and bounded: there is $M$ with $|f(x)| \\le M$ for every $x$. Then $f$ attains its supremum: there is $x^* \\in \\mathbb{R}$ with $f(x) \\le f(x^*)$ for every $x$.",
+          "replaced": null,
+          "site": 0,
+          "use_instance": 1,
+          "use_site": 3
+        },
+        "instance": 2,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            209
+          ],
+          "step": 0
+        },
+        "severity": "fatal",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/BoundedContinuousSup.lean:syndeom_seed_bounded_continuous_sup_false",
+      "value": false
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

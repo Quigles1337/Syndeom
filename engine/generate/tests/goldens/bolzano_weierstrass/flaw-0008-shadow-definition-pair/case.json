@@ -1,0 +1,86 @@
+{
+  "config": {
+    "theorem": "bolzano_weierstrass",
+    "style": "compactness",
+    "target": "pair",
+    "flaws": [
+      {
+        "class": "FLAW-0008",
+        "sub_variant": null,
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "transformation": "shadow-definition"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "6dba3615a001151116632169bd93b25440878ac0",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "observation": {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+      "syndeom_s2_template_bolzano_weierstrass": [
+        "AddGroup.toSubNegMonoid",
+        "AddGroup.toSubtractionMonoid",
+        "AddMonoid.toAddZeroClass",
+        "AddZero.toZero",
+        "AddZeroClass.toAddZero",
+        "And",
+        "And.intro",
+        "Eq",
+        "Eq.mp",
+        "Eq.mpr",
+        "Eq.trans",
+        "Exists",
+        "Exists.intro",
+        "Function.comp",
+        "GT.gt",
+        "HSub.hSub",
+        "IsOrderedAddMonoid.toAddLeftMono",
+        "LE.le",
+        "LT.lt",
+        "Nat",
+        "Nat.instPreorder",
+        "NegZeroClass.toZero",
+        "OfNat.ofNat",
+        "Real",
+        "Real.instAddCommMonoid",
+        "Real.instAddGroup",
+        "Real.instIsOrderedAddMonoid",
+        "Real.instLE",
+        "Real.instLT",
+        "Real.instPreorder",
+        "Real.instSub",
+        "Real.instZero",
+        "Real.lattice",
+        "StrictMono",
+        "SubNegMonoid.toAddMonoid",
+        "SubNegZeroMonoid.toNegZeroClass",
+        "SubtractionMonoid.toSubNegZeroMonoid",
+        "Zero.toOfNat0",
+        "abs",
+        "abs_zero",
+        "congrArg",
+        "congrFun'",
+        "gt_iff_lt._simp_1",
+        "id",
+        "instHSub",
+        "instOfNatNat",
+        "strictMono_id",
+        "sub_self"
+      ]
+    }
+  }
+}

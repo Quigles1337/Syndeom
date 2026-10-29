@@ -46,6 +46,11 @@ const GOLDENS_0_5_0: u64 = 4;
 /// FLAW-0003 `cycle` (informal and pair, the formal target being refused), produced at the
 /// implementation commit `ef41a10c…` from two byte-identical runs.
 const GOLDENS_0_6_0: u64 = 12;
+/// The 0.7.0 goldens (Session 46): the `bolzano_weierstrass` seed's control (informal, formal)
+/// and FLAW-0008 for each of D5's five transformations (pair only, the informal and formal
+/// targets being refused) and, on `bounded_continuous_sup`, FLAW-0012 (informal, formal, pair),
+/// produced at the implementation commit `6dba3615…` from two byte-identical runs.
+const GOLDENS_0_7_0: u64 = 10;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -136,5 +141,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         by_version.get("0.6.0").copied().unwrap_or(0),
         GOLDENS_0_6_0,
         "the 0.6.0 goldens"
+    );
+    assert_eq!(
+        by_version.get("0.7.0").copied().unwrap_or(0),
+        GOLDENS_0_7_0,
+        "the 0.7.0 goldens"
     );
 }

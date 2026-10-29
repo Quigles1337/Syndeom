@@ -1,0 +1,102 @@
+{
+  "config": {
+    "theorem": "bolzano_weierstrass",
+    "style": "compactness",
+    "target": "pair",
+    "flaws": [
+      {
+        "class": "FLAW-0008",
+        "sub_variant": null,
+        "severity": "gap",
+        "site": "auto",
+        "dials": {
+          "transformation": "restrict-type"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "6dba3615a001151116632169bd93b25440878ac0",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "observation": {
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+      "syndeom_s2_template_bolzano_weierstrass": [
+        "AddCommGroup.toAddGroup",
+        "AddCommGroup.toDivisionAddCommMonoid",
+        "And",
+        "And.casesOn",
+        "And.intro",
+        "Bornology.IsBounded",
+        "Bornology.IsBounded.subset",
+        "ConditionallyCompleteLinearOrder.toCompactIccSpace",
+        "DistribLattice.toLattice",
+        "Eq",
+        "Eq.ndrec",
+        "Exists",
+        "Exists.casesOn",
+        "Exists.intro",
+        "Filter.Tendsto",
+        "Filter.atTop",
+        "Function.comp",
+        "Iff.mp",
+        "Int",
+        "Int.instAddCommGroup",
+        "Int.instAddGroup",
+        "Int.instConditionallyCompleteLinearOrder",
+        "Int.instIsOrderedAddMonoid",
+        "Int.instLEInt",
+        "Int.instLinearOrder",
+        "Int.instLocallyFiniteOrder",
+        "Int.instMetricSpace",
+        "Int.instNegInt",
+        "Int.instPreorder",
+        "Int.instProperSpace",
+        "LE.le",
+        "Lattice.toSemilatticeInf",
+        "Membership.mem",
+        "Metric.isBounded_Icc",
+        "MetricSpace.toPseudoMetricSpace",
+        "Nat",
+        "Nat.instPreorder",
+        "Neg.neg",
+        "NegZeroClass.toNeg",
+        "OrderTopology.of_linearLocallyFinite",
+        "PartialOrder.toPreorder",
+        "Preorder.toLE",
+        "PseudoMetricSpace.toBornology",
+        "PseudoMetricSpace.toUniformSpace",
+        "SemilatticeInf.toPartialOrder",
+        "Set",
+        "Set.Icc",
+        "Set.instMembership",
+        "Set.mem_range_self",
+        "Set.range",
+        "StrictMono",
+        "SubNegZeroMonoid.toNegZeroClass",
+        "SubtractionCommMonoid.toSubtractionMonoid",
+        "SubtractionMonoid.toSubNegZeroMonoid",
+        "UniformSpace.toTopologicalSpace",
+        "abs",
+        "abs_le",
+        "closure",
+        "instDiscreteTopologyInt",
+        "instDistribLatticeOfLinearOrder",
+        "instLatticeInt",
+        "instTopologicalSpaceInt",
+        "nhds",
+        "tendsto_subseq_of_bounded"
+      ]
+    }
+  }
+}
