@@ -1,0 +1,30 @@
+{
+  "config": {
+    "theorem": "bounded_monotone_converges",
+    "style": "supremum",
+    "target": "pair",
+    "flaws": [
+      {
+        "class": "FLAW-0003",
+        "sub_variant": "direct",
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "form": "restated-goal"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "ef41a10ce16db34c1ebe3ea66a456df97df83be1",
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  },
+  "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 5
+  }
+}

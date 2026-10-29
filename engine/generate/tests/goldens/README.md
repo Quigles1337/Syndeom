@@ -1,7 +1,8 @@
 # Goldens for `s2_template` (ADR-0011 D10)
 
-There are 47 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
-0.3.0 (Session 42), 8 of 0.4.0 (Session 43) and 4 of 0.5.0 (Session 44). All use seed 7. Each case directory holds:
+There are 59 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44) and 12 of 0.6.0
+(Session 45). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -199,9 +200,62 @@ invalid proof of a true statement (`proof_status: invalid`, `correct: false`), t
   check K, the FLAW-0002 informal record by its span check, and the composite by the seed's
   kernel-checked witness together with its embedded instance's records.
 
+## 0.6.0 (Session 45, 2026-10-29)
+
+FLAW-0010 `a` (`shape: journal`, `claim: true`) on the `sqrt2_irrational` seed's step 3 — the
+FLAW-0004 material's bare claim, its justification replaced by a fictional reference drawn from
+the fixed lexicon — as an informal and a pair artifact (the formal target is refused: FLAWS.md
+says the class manifests in informal, and a pair's formal file is the faithful one); and, on the
+new seed `bounded_monotone_converges` (FLAWS.md's FLAW-0003 example: a monotone real sequence
+that is bounded above converges, in two aligned steps on the supremum), the control (informal,
+formal), FLAW-0003 `direct` with `form: restated-goal` and with `form: contrapositive` (informal,
+formal, pair each) and FLAW-0003 `cycle` (`cycle_length: 2`; informal and pair — the formal
+target is refused, a cycle having no formal manifestation). At seed 7 the injector draws author
+2, year 0, venue 1 and result 3 of the lexicon, so step 3 reads `By [Fictitious 19XX, Annals of
+Imaginary Results, Corollary 1.7] $p$ is even. Write $p = 2k$.`, the record spanning the
+reference; the formal file of the FLAW-0010 pair is byte-identical to the seed's control
+`Proof.lean`, so the artifact is `N/A`, invalid (gap), with `lean_build` commanded `pass`. The
+`direct` cases insert Lemma 1 (the goal, or its contrapositive) whose proof is `exact
+syndeom_s2_template_bounded_monotone_converges`, a forward reference: the kernel reports an
+unknown identifier at line 5, inside the lemma's declaration (lines 4–5; check K), and the key
+step cites Lemma 1. The `cycle` cases insert Lemma 1 whose proof cites the theorem while the key
+step cites Lemma 1; the record (informal-only, `NO`) carries the cycle `[lemma_1, main]` and
+the two citation phrases' spans, and the pair's formal file keeps a faithful proof (the lemma
+proved from Mathlib, the main declaration using it), which builds with the standard three axioms.
+
+| Seed | Cases | Statement |
+|---|---|---|
+| `sqrt2_irrational` | FLAW-0010 `a` `journal` `claim: true` gap (informal, pair) | true |
+| `bounded_monotone_converges` | control (informal, formal); FLAW-0003 `direct` `restated-goal` fatal (informal, formal, pair); FLAW-0003 `direct` `contrapositive` fatal (informal, formal, pair); FLAW-0003 `cycle` fatal (informal, pair) | true |
+
+**Provenance:**
+- The proof text is hand-authored seed material (`seeds/sqrt2_irrational.json`: the FLAW-0010
+  material's bare claim at step 3 with the justification recorded, every fragment faithful;
+  `seeds/bounded_monotone_converges.json`: the two faithful steps and the three FLAW-0003
+  materials, each inserting Lemma 1).
+- The formal files were first written by hand as Lean probes and compiled before the seed record
+  was written, one process at a time (`analysis/s2-generate-6/evidence/lean-probe/`): the
+  control golden is the faithful probe `s2i_faithful.lean` without its `#print axioms` tail, the
+  `direct` formal and pair goldens are byte-identical to `s2i_direct_restated.lean` and
+  `s2i_direct_contrapositive.lean` (which have no tail), the `cycle` pair golden is
+  `s2i_cycle.lean` without its tail, and the FLAW-0010 pair golden's `Proof.lean` is the 0.4.0
+  control golden's, as `analysis/s2-generate-6/evidence/goldens-production-report.json` records.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `ef41a10ce16db34c1ebe3ea66a456df97df83be1`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run.
+- Every case's fidelity verdict is PASS. The four `direct` formal and pair cases fail to build
+  (exit 1) with the first error at line 5; `lean_axioms_standard` is therefore unmeasured
+  (`null`, with its reason). The control, the `cycle` pair and the FLAW-0010 pair build (exit 0)
+  and print the standard axioms (`[propext, Classical.choice, Quot.sound]` for the new seed,
+  `[propext, Quot.sound]` for the faithful `sqrt2_irrational` file); the `cycle` pair's
+  used-constants listing shows the main declaration using Lemma 1, and Lemma 1 using
+  `tendsto_atTop_ciSup` and `le_ciSup`.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
-`analysis/s2-generate-4/README.md` and `analysis/s2-generate-5/README.md`.
+`analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md` and
+`analysis/s2-generate-6/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

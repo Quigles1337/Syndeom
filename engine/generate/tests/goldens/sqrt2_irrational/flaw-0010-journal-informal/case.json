@@ -1,0 +1,24 @@
+{
+  "config": {
+    "theorem": "sqrt2_irrational",
+    "style": "descent",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0010",
+        "sub_variant": "a",
+        "severity": "gap",
+        "site": "auto",
+        "dials": {
+          "shape": "journal",
+          "claim": true
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "ef41a10ce16db34c1ebe3ea66a456df97df83be1",
+  "toolchain": null,
+  "observation": null
+}

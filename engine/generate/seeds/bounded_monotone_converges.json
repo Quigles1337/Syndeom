@@ -1,0 +1,103 @@
+{
+  "id": "bounded_monotone_converges",
+  "source": "PROGRAM/FLAWS.md 0.1.0, FLAW-0003 example (every bounded monotone real sequence converges, with the circular proof that lets $L = \\lim a_n$ before the limit is known to exist): executor-authored synthetic material, outside the S1 corpus (ADR-0011 D6)",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "title": "A bounded monotone sequence of real numbers converges",
+  "statement": "Let $(a_n)$ be a monotone (non-decreasing) sequence of real numbers that is bounded above. Then $(a_n)$ converges: there is $L \\in \\mathbb{R}$ with $a_n \\to L$.",
+  "truth": {
+    "value": true,
+    "method": "lean-kernel",
+    "reference": "lean/Syndeom/Seeds/BoundedMonotoneConverges.lean:syndeom_seed_bounded_monotone_converges"
+  },
+  "imports": ["Mathlib.Topology.Order.MonotoneConvergence", "Mathlib.Topology.MetricSpace.Pseudo.Lemmas"],
+  "binders": "(a : ℕ → ℝ) (hmono : Monotone a) (hbdd : BddAbove (Set.range a))",
+  "claim": "∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L)",
+  "styles": [
+    {
+      "id": "supremum",
+      "steps": [
+        {
+          "text": "Since $(a_n)$ is bounded above, the set $\\{a_n : n \\in \\mathbb{N}\\}$ is non-empty and bounded above, so by the completeness of $\\mathbb{R}$ it has a least upper bound; let $L = \\sup_n a_n$.",
+          "fragment": ["refine ⟨⨆ n, a n, ?_⟩"]
+        },
+        {
+          "text": "Since $(a_n)$ is monotone, $a_n \\to L$: given $\\varepsilon > 0$, by the definition of the supremum there is $N$ with $L - \\varepsilon < a_N$, and then $L - \\varepsilon < a_N \\le a_n \\le L$ for all $n \\ge N$.",
+          "fragment": ["exact tendsto_atTop_ciSup hmono hbdd"]
+        }
+      ],
+      "flaws": [
+        {
+          "class": "FLAW-0003",
+          "sub_variant": "direct",
+          "severity": "fatal",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"form": "restated-goal"},
+          "site": 1,
+          "anchor": null,
+          "inserts": true,
+          "steps": [
+            {
+              "from": null,
+              "text": "Lemma 1. Every monotone sequence of real numbers that is bounded above converges to some $L \\in \\mathbb{R}$. Proof of the lemma: this is the statement to be proved, which we take as established.",
+              "fragment": ["exact syndeom_s2_template_bounded_monotone_converges"],
+              "lemma": {"kind": "theorem", "name": "syndeom_s2_template_bounded_monotone_converges_lemma_1", "claim": "∀ a : ℕ → ℝ, Monotone a → BddAbove (Set.range a) → ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L)"}
+            },
+            {
+              "from": 2,
+              "text": "Let $L = \\lim_n a_n$, which exists by Lemma 1. For $\\varepsilon > 0$ choose $N$ with $|a_n - L| < \\varepsilon$ for all $n \\ge N$; hence $a_n \\to L$.",
+              "fragment": ["exact syndeom_s2_template_bounded_monotone_converges_lemma_1 a hmono hbdd"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0003",
+          "sub_variant": "direct",
+          "severity": "fatal",
+          "lean_catchable": "YES-KERNEL",
+          "dials": {"form": "contrapositive"},
+          "site": 1,
+          "anchor": null,
+          "inserts": true,
+          "steps": [
+            {
+              "from": null,
+              "text": "Lemma 1. A monotone sequence of real numbers that does not converge is not bounded above. Proof of the lemma: if such a sequence were bounded above, it would converge by the theorem, contrary to the assumption.",
+              "fragment": ["exact fun a ha hn hb => hn (syndeom_s2_template_bounded_monotone_converges a ha hb)"],
+              "lemma": {"kind": "theorem", "name": "syndeom_s2_template_bounded_monotone_converges_lemma_1", "claim": "∀ a : ℕ → ℝ, Monotone a → (¬ ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L)) → ¬ BddAbove (Set.range a)"}
+            },
+            {
+              "from": 2,
+              "text": "Suppose, for contradiction, that $(a_n)$ does not converge. By Lemma 1 it is not bounded above, contrary to the hypothesis. Hence $(a_n)$ converges.",
+              "fragment": ["by_contra hn", "exact syndeom_s2_template_bounded_monotone_converges_lemma_1 a hmono hn hbdd"]
+            }
+          ]
+        },
+        {
+          "class": "FLAW-0003",
+          "sub_variant": "cycle",
+          "severity": "fatal",
+          "lean_catchable": "NO",
+          "dials": {"cycle_length": 2},
+          "site": 1,
+          "anchor": null,
+          "inserts": true,
+          "steps": [
+            {
+              "from": null,
+              "text": "Lemma 1. Every monotone sequence of real numbers that is bounded above has a limit $L$ with $a_n \\le L$ for every $n$. Proof of the lemma: by the theorem, $(a_n)$ converges to some $L$, and since $(a_n)$ is monotone, $a_n \\le L$ for every $n$.",
+              "fragment": ["intro a ha hb", "exact ⟨⨆ n, a n, tendsto_atTop_ciSup ha hb, fun n => le_ciSup hb n⟩"],
+              "lemma": {"kind": "theorem", "name": "syndeom_s2_template_bounded_monotone_converges_lemma_1", "claim": "∀ a : ℕ → ℝ, Monotone a → BddAbove (Set.range a) → ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L) ∧ ∀ n, a n ≤ L"},
+              "premises": [{"cites": "theorem", "phrase": "by the theorem"}]
+            },
+            {
+              "from": 2,
+              "text": "Let $L$ be the limit given by Lemma 1. For $\\varepsilon > 0$ choose $N$ with $|a_n - L| < \\varepsilon$ for all $n \\ge N$; hence $a_n \\to L$.",
+              "fragment": ["obtain ⟨L, hL, -⟩ := syndeom_s2_template_bounded_monotone_converges_lemma_1 a hmono hbdd", "exact ⟨L, hL⟩"],
+              "premises": [{"cites": "syndeom_s2_template_bounded_monotone_converges_lemma_1", "phrase": "by Lemma 1"}]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

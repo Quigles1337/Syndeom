@@ -6,13 +6,16 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   pure renderers: `syndeom-informal-md/1` and `syndeom-lean/1` (D2); from 0.3.0 a step may be a
   lemma (`Lemma N.` in the informal file, its own declaration before the main one in the formal
   file); from 0.4.0 a step may be FLAW-0013 padding (a whole paragraph in the informal file, its
-  matching unused declaration before the main one in the formal file);
+  matching unused declaration before the main one in the formal file); from 0.6.0 a step may
+  carry `premises` (what it cites, with the citing phrase), which render to nothing and form
+  the plan's premise graph;
 - `src/rng.rs` — `syndeom-rng/1`, SplitMix64-seeded xoshiro256** streams per label (D4);
-- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0
-  and 0.5.0: seed records, the config and its refusals (D3), the injector (D5; from 0.5.0 with
-  FLAW-0004's hedge lexicon and FLAW-0011 as a commanded composite), the padding module (D2
-  `pad`, D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks
-  K and T (D8, D9);
+- `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0,
+  0.5.0 and 0.6.0: seed records, the config and its refusals (D3), the injector (D5; from 0.5.0
+  with FLAW-0004's hedge lexicon and FLAW-0011 as a commanded composite; from 0.6.0 with
+  FLAW-0010's fictional-reference lexicon and FLAW-0003's `direct` and `cycle`), the padding
+  module (D2 `pad`, D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest
+  with checks K and T (D8, D9);
 - `src/harness.rs` — the Lean harness: `lake env lean` from `lean/`, one process at a time, and
   an audit tail printing `#print axioms` of the main declaration and the direct used-constants
   of every constant the file defined (D8; the T check's listing, from 0.3.0);
@@ -45,7 +48,7 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   first seed with padding material (seven paragraphs: four restated definitions and three
   re-derivations of `2 | p² ⇒ 2 | p`); the padding module (D2 `pad`, D5 FLAW-0013, Options 8);
   check T for the padding declarations; `padding_ratio` measured.
-- **`s2_template` 0.5.0** (Session 44; the version `generate` emits): the 0.4.0 seeds, with
+- **`s2_template` 0.5.0** (Session 44): the 0.4.0 seeds, with
   FLAW-0004 material on `sqrt2_irrational` (`hidden_step: routine-true` at step 3: the FLAWS.md
   FLAW-0011 example's `2 | p² ⇒ 2 | p` hedged, the parity argument dropped); FLAW-0004 (D5: the
   hedge drawn from the fixed lexicon and prefixed to the bare claim, the justification deleted,
@@ -55,8 +58,21 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   or fatal, Al's rulings 2 and 3 on PR 30 — on a true statement; the composite's own record at
   the statement, its severity and `lean_catchable` inherited); and the seed rule that no style
   step carries a padding header (FINDING-014).
+- **`s2_template` 0.6.0** (Session 45; the version `generate` emits): the 0.5.0 seeds, with
+  FLAW-0010 material on `sqrt2_irrational` (sub-variant `a`, `claim: true`, at step 3: the
+  FLAW-0004 material's bare claim, its justification replaced by a fictional reference), and
+  `bounded_monotone_converges` (FLAWS.md's FLAW-0003 example: every monotone real sequence that
+  is bounded above converges; two aligned steps on the supremum, with a witness module audited
+  by the gate), carrying FLAW-0003 `direct` (`form: restated-goal` and `contrapositive`) and
+  `cycle` (`cycle_length: 2`) material; FLAW-0010 `a` (D5: the reference drawn from the fixed
+  lexicon of obviously fictional tokens and prefixed as `By <reference>` to the bare claim, the
+  formal file unchanged, `N/A`); FLAW-0003 `direct` (D5: the goal, or its contrapositive, as
+  Lemma 1 whose formal proof is a forward reference to the main declaration, check K) and
+  `cycle` (D5: Lemma 1 cites the theorem and the key step cites Lemma 1; informal-only, `NO`;
+  checked on the plan's premise graph and the citation phrases' spans; the formal file keeps a
+  faithful proof).
 
-The crate regenerates all five versions: the goldens select the version their manifests name,
+The crate regenerates all six versions: the goldens select the version their manifests name,
 and `regenerate` and `verify` accept any of them. Every seed states its `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
@@ -124,6 +140,33 @@ is flagged for Al in ADR-0011 *Amendments*.
   FLAWS.md's FLAW-0011 example embeds a cosmetic instance (the routine-true hedge) and so
   realizes FLAW-0004 `routine-true`, not a composite — an erratum note against FLAWS.md 0.1.0,
   recorded in ADR-0011 *Amendments* by Al's ruling 2 on PR 30; FLAWS.md's text is unchanged.
+- **FLAW-0010 `a`** (0.6.0): replacement material whose `cited` names the bare claim and the
+  justification the reference stands in for; the config's dials are `shape` (`journal`, `book`
+  or `preprint`: which venue list the draw uses) and `claim` (`true`, gap: the cited step is
+  true; `false`, fatal: it needs the seed's false-step material, which no seed carries yet).
+  The injector draws the author, the year, the venue and the result from the fixed lexicon of
+  obviously fictional tokens (`Placeholder`, `Nonesuch`, `Fictitious`, `Hypothetical`; `19XX`,
+  `20XX`; three venues per shape; `Theorem 4.2`, `Lemma 3.1`, `Proposition 2.5`,
+  `Corollary 1.7`) on the stream `injector/FLAW-0010/1` after the material, in that order, and
+  the site step becomes `By [<author> <year>, <venue>, <result>]` followed by the bare claim.
+  The record spans the reference: `inserted` is the reference, `replaced` the justification;
+  the dials carry the drawn indices (`author`, `year`, `venue`, `result`), `reference`,
+  `asserted` (the bare claim), `justification` and the originals. The formal file is unchanged,
+  so the instance is `N/A` and informal-only (a pair's formal file is the faithful one; the
+  target `formal` is refused). Sub-variants `b` and `c` need real references and are refused
+  (ADR-0011 Options 5).
+- **FLAW-0003** (0.6.0): insertion material whose site is a `theorem` lemma, fatal. `direct`
+  (dial `form`: `restated-goal` or `contrapositive`) inserts Lemma 1 — the goal, or its
+  contrapositive — whose formal proof references the main declaration, declared later in the
+  file, so the kernel reports an unknown identifier at the lemma's declaration (check K,
+  `YES-KERNEL`); the key step cites Lemma 1. `cycle` (dial `cycle_length`, 2 in this version)
+  inserts Lemma 1, whose proof cites the theorem, and the key step cites Lemma 1; it is
+  informal-only (`NO`; the target `formal` is refused), and the formal file keeps a faithful
+  proof — the lemma proved from Mathlib, the main declaration using it — which builds. The
+  material's steps carry `premises` (`cites`: a lemma's declaration or `theorem`; `phrase`: the
+  citing text, exactly once in its step); the record's dials carry `cycle` (the declarations
+  visited from the lemma back to itself) and `citations` (each phrase's step and span), and the
+  originals.
 - **Counts** (0.2.0): `n_flaws_total`, `n_flaws_<NNNN>` and `flaws_confirmed` count instances. A
   pair's two records of one instance share its `instance`; the instance is confirmed only when
   both records pass their checks (Al's owner note of 2026-10-28).
@@ -143,7 +186,13 @@ is flagged for Al in ADR-0011 *Amendments*.
 
   - a FLAW-0011 record (0.5.0): the statement's truth is by a kernel-checked witness or Mathlib
     (D7; the witness is a library module the gate builds) and every record of every embedded
-    instance passes its check.
+    instance passes its check;
+  - a FLAW-0010 record (0.6.0): the span equals the reference the recorded lexicon indices
+    name, every token of it is in the lexicon, the step is `By <reference>` followed by the
+    bare claim, and the faithful step held the justification exactly once;
+  - a FLAW-0003 `cycle` record (0.6.0): the plan's premise graph contains the recorded cycle
+    through the inserted lemma, and each citation phrase is at its recorded span in the
+    rendered step. (`direct` is confirmed by check K.)
 
   No other check exists yet, so no other class is confirmed by this version.
 - **`padding_ratio`** (0.4.0; ADR-0001 D4, ADR-0011 D8): achieved as the tokens inside the
@@ -153,9 +202,11 @@ is flagged for Al in ADR-0011 *Amendments*.
   of paragraphs cannot reach is a FAIL verdict, not a refusal.
 - **Not yet:** `s2_grammar`, padding combined with an injected flaw (also inside a composite),
   composites of more than one instance, the kinds `unused-lemma` and `verbose-rewrite` (no seed
-  carries their material), FLAW-0004 `nontrivial-true` and `false` (no seed carries the
-  material), FLAW-0009 `native_decide`, FLAW-0012 as a commanded class, the seeds for the
-  remaining FLAWS.md examples, and the fidelity sweep. They come in later sessions (D11).
+  carries their material), FLAW-0004 `nontrivial-true` and `false` and FLAW-0010 `claim: false`
+  (no seed carries the false-step material), FLAW-0010 `b` and `c` (deferred), FLAW-0003
+  `cycle` of length other than 2, FLAW-0009 `native_decide`, FLAW-0012 as a commanded class,
+  the seeds for the remaining FLAWS.md examples (FLAW-0008, FLAW-0012), and the fidelity sweep.
+  They come in later sessions (D11).
 
 ## CLI
 

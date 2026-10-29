@@ -39,6 +39,13 @@ const GOLDENS_0_4_0: u64 = 8;
 /// `continuity_is_not_uniform`'s FLAW-0002 `forall-exists` (informal and pair), regenerated at
 /// `1c0c5fcd…` after Al's rulings 2 and 3 on PR 30 so that they name one engine commit.
 const GOLDENS_0_5_0: u64 = 4;
+/// The 0.6.0 goldens (Session 45): FLAW-0010 `a` `journal` on `sqrt2_irrational` (the fictional
+/// reference drawn and prefixed to the bare claim of step 3; informal and pair, the formal
+/// target being refused) and the `bounded_monotone_converges` seed's control (informal, formal),
+/// FLAW-0003 `direct` `restated-goal` and `contrapositive` (informal, formal, pair each) and
+/// FLAW-0003 `cycle` (informal and pair, the formal target being refused), produced at the
+/// implementation commit `ef41a10c…` from two byte-identical runs.
+const GOLDENS_0_6_0: u64 = 12;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -124,5 +131,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         by_version.get("0.5.0").copied().unwrap_or(0),
         GOLDENS_0_5_0,
         "the 0.5.0 goldens"
+    );
+    assert_eq!(
+        by_version.get("0.6.0").copied().unwrap_or(0),
+        GOLDENS_0_6_0,
+        "the 0.6.0 goldens"
     );
 }

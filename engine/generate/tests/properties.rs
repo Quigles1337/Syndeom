@@ -9,12 +9,14 @@ use syndeom_generate::harness::{
     Observation, audit_bytes, first_error_line, parse_axioms, parse_used_constants, used_closure,
 };
 use syndeom_generate::plan::{
-    PaddingHeader, PaddingKind, own_declarations, render_formal, render_informal,
+    PaddingHeader, PaddingKind, Premise, own_declarations, premise_cycle, render_formal,
+    render_informal,
 };
 use syndeom_generate::rng::Stream;
 use syndeom_generate::template::{
-    HEDGES, Prepared, Version, assemble, check_seed, faithful_plan, manifests_in, prepare,
-    prepare_with, seeds,
+    CITATION_AUTHORS, CITATION_RESULTS, CITATION_SHAPES, CITATION_YEARS, HEDGES, Prepared, Version,
+    assemble, check_seed, citation_reference, citation_tokens_in_lexicon, citation_venues,
+    faithful_plan, manifests_in, prepare, prepare_with, seeds,
 };
 use syndeom_manifest::{
     LeanCatchable, Location, ProofStatus, Severity, Toolchain, Verdict, parse_informal_md,
@@ -170,25 +172,42 @@ fn every_case() -> Vec<Value> {
             }
             for m in &style.flaws {
                 let sev = serde_json::to_value(m.severity).unwrap();
-                let inner = json!({
-                    "class": m.class, "sub_variant": m.sub_variant, "severity": sev,
-                    "site": m.site, "dials": m.dials
-                });
-                specs.push(json!([inner]));
-                // FLAW-0011 as a commanded composite (0.5.0): the same material embedded, on a
-                // seed whose statement is true, with the inherited severity — an instance of
-                // FLAW-0001 through FLAW-0010 of severity gap or fatal (Al's rulings 2 and 3 on
-                // PR 30)
-                let number: u32 = m.class[5..].parse().unwrap();
-                let invalidating = matches!(
-                    m.severity,
-                    syndeom_manifest::Severity::Gap | syndeom_manifest::Severity::Fatal
-                );
-                if seed.truth.value == Some(true) && (1..=10).contains(&number) && invalidating {
-                    specs.push(json!([{
-                        "class": "FLAW-0011", "sub_variant": null, "severity": sev,
-                        "site": "auto", "dials": {"embedded": [inner]}
-                    }]));
+                // FLAW-0010 (0.6.0): the config adds `shape`, which is not a material property;
+                // every shape is a case
+                let dial_sets: Vec<Value> = if m.class == "FLAW-0010" {
+                    CITATION_SHAPES
+                        .iter()
+                        .map(|shape| {
+                            let mut d = m.dials.as_object().unwrap().clone();
+                            d.insert("shape".into(), json!(shape));
+                            Value::Object(d)
+                        })
+                        .collect()
+                } else {
+                    vec![m.dials.clone()]
+                };
+                for dials in dial_sets {
+                    let inner = json!({
+                        "class": m.class, "sub_variant": m.sub_variant, "severity": sev,
+                        "site": m.site, "dials": dials
+                    });
+                    specs.push(json!([inner]));
+                    // FLAW-0011 as a commanded composite (0.5.0): the same material embedded,
+                    // on a seed whose statement is true, with the inherited severity — an
+                    // instance of FLAW-0001 through FLAW-0010 of severity gap or fatal (Al's
+                    // rulings 2 and 3 on PR 30)
+                    let number: u32 = m.class[5..].parse().unwrap();
+                    let invalidating = matches!(
+                        m.severity,
+                        syndeom_manifest::Severity::Gap | syndeom_manifest::Severity::Fatal
+                    );
+                    if seed.truth.value == Some(true) && (1..=10).contains(&number) && invalidating
+                    {
+                        specs.push(json!([{
+                            "class": "FLAW-0011", "sub_variant": null, "severity": sev,
+                            "site": "auto", "dials": {"embedded": [inner]}
+                        }]));
+                    }
                 }
             }
             for flaws in specs {
@@ -196,15 +215,17 @@ fn every_case() -> Vec<Value> {
                     // D3: a class the target cannot realize is refused, not a case; a composite
                     // is refused where its embedded class is
                     let class = flaws[0]["class"].as_str().unwrap_or("");
-                    let class = flaws[0]["dials"]["embedded"][0]["class"]
-                        .as_str()
-                        .unwrap_or(class);
-                    let refused = matches!(
-                        (class, target),
-                        ("FLAW-0009", "informal")
-                            | ("FLAW-0008", "informal" | "formal")
-                            | ("FLAW-0004" | "FLAW-0010", "formal")
-                    );
+                    let sub = flaws[0]["sub_variant"].as_str().unwrap_or("");
+                    let embedded = &flaws[0]["dials"]["embedded"][0];
+                    let class = embedded["class"].as_str().unwrap_or(class);
+                    let sub = embedded["sub_variant"].as_str().unwrap_or(sub);
+                    let refused =
+                        matches!(
+                            (class, target),
+                            ("FLAW-0009", "informal")
+                                | ("FLAW-0008", "informal" | "formal")
+                                | ("FLAW-0004" | "FLAW-0010", "formal")
+                        ) || (class == "FLAW-0003" && sub == "cycle" && target == "formal");
                     if !refused {
                         out.push(config(&seed.id, &style.id, target, flaws.clone()));
                     }
@@ -248,7 +269,7 @@ fn d9_determinism_and_idempotence() {
                 syndeom_manifest::to_disk_json(&m2).unwrap()
             );
             assert_eq!(m1.artifact_id, p1.artifact_id());
-            assert!(m1.artifact_id.starts_with("s2_template-v0.5.0-"));
+            assert!(m1.artifact_id.starts_with("s2_template-v0.6.0-"));
         }
     }
 }
@@ -369,8 +390,9 @@ fn d10_locations_resolve_to_the_dials_text() {
                 );
                 assert!(r.sub_variant.is_none(), "{c}");
             } else if r.dials["replaced"].is_null() {
-                // an inserted step (0.3.0): nothing replaced, the originals recorded
-                assert_eq!(r.class, "FLAW-0007", "{c}");
+                // an inserted step (0.3.0 FLAW-0007; 0.6.0 FLAW-0003's lemma): nothing
+                // replaced, the originals recorded
+                assert!(matches!(r.class.as_str(), "FLAW-0007" | "FLAW-0003"), "{c}");
                 assert!(
                     r.dials["original_steps"].is_object()
                         || r.dials["original_fragments"].is_object()
@@ -582,8 +604,10 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
     assert_eq!(seeds(Version::V0_1_0).len(), 3);
     assert_eq!(seeds(Version::V0_2_0).len(), 7);
     assert_eq!(seeds(Version::V0_3_0).len(), 8);
-    let all = seeds(Version::V0_4_0);
-    assert_eq!(all.len(), 9);
+    assert_eq!(seeds(Version::V0_4_0).len(), 9);
+    assert_eq!(seeds(Version::V0_5_0).len(), 9);
+    let all = seeds(Version::V0_6_0);
+    assert_eq!(all.len(), 10);
     let ids: Vec<&str> = all.iter().map(|s| s.id.as_str()).collect();
     assert_eq!(
         ids,
@@ -597,6 +621,7 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
             "horses",
             "n_lt_two_pow",
             "sqrt2_irrational",
+            "bounded_monotone_converges",
         ]
     );
     for seed in &all {
@@ -640,6 +665,28 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
                     assert_eq!(m.dials, json!({"hidden_step": "routine-true"}));
                     assert_eq!(m.severity, Severity::Cosmetic);
                 }
+                // FLAW-0010 material (0.6.0): `cited` iff the class, on sqrt2_irrational only,
+                // sub-variant a, claim true (gap), N/A
+                assert_eq!(m.cited.is_some(), m.class == "FLAW-0010", "{}", seed.id);
+                if m.class == "FLAW-0010" {
+                    assert_eq!(seed.id, "sqrt2_irrational");
+                    assert_eq!(m.sub_variant.as_deref(), Some("a"));
+                    assert_eq!(m.dials, json!({"claim": true}));
+                    assert_eq!(m.severity, Severity::Gap);
+                    assert_eq!(m.lean_catchable, LeanCatchable::NotApplicable);
+                }
+                // FLAW-0003 material (0.6.0): insertion material on bounded_monotone_converges
+                // only; premises on its cycle material and nowhere else
+                if m.class == "FLAW-0003" {
+                    assert_eq!(seed.id, "bounded_monotone_converges");
+                    assert!(m.inserts && m.severity == Severity::Fatal);
+                }
+                assert_eq!(
+                    m.steps.iter().any(|s| !s.premises.is_empty()),
+                    m.class == "FLAW-0003" && m.sub_variant.as_deref() == Some("cycle"),
+                    "{}",
+                    seed.id
+                );
                 let site_text = style.steps.get(m.site as usize - 1);
                 if m.intrinsic {
                     assert!(m.steps.is_empty());
@@ -731,6 +778,40 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
     assert!(mutate(&|m| m.lean_catchable = LeanCatchable::NotApplicable).is_err());
     assert!(mutate(&|m| m.class = "FLAW-0010".into()).is_err());
     assert!(mutate(&|m| m.hidden = None).is_err());
+    // the FLAW-0010 material's shape rules (0.6.0): the bare claim at the site, the justification
+    // held exactly once by the faithful step, every fragment and every other step faithful, the
+    // severity its claim fixes, sub-variant a, N/A, `cited` on FLAW-0010 only
+    let k = sqrt2.styles[0]
+        .flaws
+        .iter()
+        .position(|m| m.class == "FLAW-0010")
+        .unwrap();
+    let mutate_c = |f: &dyn Fn(&mut syndeom_generate::template::Material)| {
+        let mut s = sqrt2.clone();
+        f(&mut s.styles[0].flaws[k]);
+        check_seed(&s)
+    };
+    assert!(mutate_c(&|_| {}).is_ok());
+    assert!(mutate_c(&|m| m.steps[2].text = "Clearly $p$ is even.".into()).is_err());
+    assert!(mutate_c(&|m| m.steps[2].fragment.clear()).is_err());
+    assert!(mutate_c(&|m| m.steps[0].text = "changed".into()).is_err());
+    assert!(
+        mutate_c(&|m| {
+            m.steps.remove(0);
+        })
+        .is_err()
+    );
+    assert!(
+        mutate_c(&|m| m.cited.as_mut().unwrap().justification = "no such text".into()).is_err()
+    );
+    assert!(mutate_c(&|m| m.cited.as_mut().unwrap().justification = "$p$".into()).is_err());
+    assert!(mutate_c(&|m| m.severity = Severity::Fatal).is_err());
+    assert!(mutate_c(&|m| m.dials = json!({"claim": false})).is_err());
+    assert!(mutate_c(&|m| m.dials = json!({"claim": true, "shape": "journal"})).is_err());
+    assert!(mutate_c(&|m| m.lean_catchable = LeanCatchable::YesKernel).is_err());
+    assert!(mutate_c(&|m| m.sub_variant = Some("b".into())).is_err());
+    assert!(mutate_c(&|m| m.cited = None).is_err());
+    assert!(mutate_c(&|m| m.class = "FLAW-0004".into()).is_err());
 }
 
 #[test]
@@ -754,6 +835,7 @@ fn d1_the_earlier_seed_sets_are_closed() {
         "horses",
         "n_lt_two_pow",
         "sqrt2_irrational",
+        "bounded_monotone_converges",
     ] {
         let style = style_of(id);
         assert!(
@@ -765,7 +847,11 @@ fn d1_the_earlier_seed_sets_are_closed() {
             .is_err()
         );
     }
-    for id in ["n_lt_two_pow", "sqrt2_irrational"] {
+    for id in [
+        "n_lt_two_pow",
+        "sqrt2_irrational",
+        "bounded_monotone_converges",
+    ] {
         let style = style_of(id);
         assert!(
             prepare_with(
@@ -784,6 +870,26 @@ fn d1_the_earlier_seed_sets_are_closed() {
             7
         )
         .is_err()
+    );
+    // the 0.6.0 seed is a seed of no earlier version
+    let bmc = style_of("bounded_monotone_converges");
+    for v in [Version::V0_3_0, Version::V0_4_0, Version::V0_5_0] {
+        assert!(
+            prepare_with(
+                v,
+                &config("bounded_monotone_converges", &bmc, "informal", json!([])),
+                7
+            )
+            .is_err()
+        );
+    }
+    assert!(
+        prepare_with(
+            Version::V0_6_0,
+            &config("bounded_monotone_converges", &bmc, "informal", json!([])),
+            7
+        )
+        .is_ok()
     );
     let padded_old = json!({
         "theorem": "n_lt_two_pow", "style": "helper_lemma", "target": "informal",
@@ -820,8 +926,30 @@ fn d1_the_earlier_seed_sets_are_closed() {
     }
     assert!(prepare_with(Version::V0_5_0, &hedged, 7).is_ok());
     assert!(prepare_with(Version::V0_5_0, &composite, 7).is_ok());
-    assert!(Version::parse("0.6.0").is_none());
-    assert_eq!(Version::CURRENT.as_str(), "0.5.0");
+    // FLAW-0010 and FLAW-0003 (0.6.0) are refused by 0.5.0 and every earlier version
+    let cited = config(
+        "sqrt2_irrational",
+        &style,
+        "pair",
+        json!([spec(
+            "FLAW-0010",
+            Some("a"),
+            "gap",
+            json!({"shape": "journal", "claim": true})
+        )]),
+    );
+    for v in [
+        Version::V0_1_0,
+        Version::V0_2_0,
+        Version::V0_3_0,
+        Version::V0_4_0,
+        Version::V0_5_0,
+    ] {
+        assert!(prepare_with(v, &cited, 7).is_err());
+    }
+    assert!(prepare_with(Version::V0_6_0, &cited, 7).is_ok());
+    assert!(Version::parse("0.7.0").is_none());
+    assert_eq!(Version::CURRENT.as_str(), "0.6.0");
 }
 
 #[test]
@@ -2065,4 +2193,603 @@ fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
         assert!(prepare(&c, 7).is_err(), "should refuse {c}");
     }
     assert!(prepare_with(Version::V0_4_0, &pair, 7).is_err());
+}
+
+#[test]
+fn d5_flaw_0010_replaces_the_justification_by_a_fictional_reference() {
+    // ADR-0011 D5 (0.6.0), the shape of FLAWS.md's FLAW-0010 example: a step's justification
+    // replaced by a reference built from the fixed lexicon of obviously fictional tokens, on
+    // sqrt2_irrational's step 3 (the FLAW-0004 material's bare claim reused); the formal file is
+    // unchanged, so the instance is N/A and its record is informal-only.
+    let seed = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "sqrt2_irrational")
+        .unwrap();
+    let faithful = &seed.styles[0].steps;
+    let cite = |shape: &str, claim: bool, severity: &str| {
+        spec(
+            "FLAW-0010",
+            Some("a"),
+            severity,
+            json!({"shape": shape, "claim": claim}),
+        )
+    };
+    let s2 = |target: &str, flaws: Value| config("sqrt2_irrational", "descent", target, flaws);
+    let pair = s2("pair", json!([cite("journal", true, "gap")]));
+    let (p, m) = build(&pair, 7);
+    let inj = p.injection.as_ref().unwrap();
+    assert!(p.composite.is_none() && p.padding.is_empty());
+    assert_eq!(
+        (
+            inj.class.as_str(),
+            inj.sub_variant.as_deref(),
+            inj.site,
+            inj.lean_catchable,
+            inj.severity
+        ),
+        (
+            "FLAW-0010",
+            Some("a"),
+            3,
+            LeanCatchable::NotApplicable,
+            Severity::Gap
+        )
+    );
+    // the draws, after the material draw, on the instance's stream: author, year, venue, result
+    let mut stream = Stream::new(7, "injector/FLAW-0010/1");
+    assert_eq!(stream.below(1), 0);
+    let author = stream.below(CITATION_AUTHORS.len() as u64) as usize;
+    let year = stream.below(CITATION_YEARS.len() as u64) as usize;
+    let venue = stream.below(citation_venues("journal").unwrap().len() as u64) as usize;
+    let result = stream.below(CITATION_RESULTS.len() as u64) as usize;
+    let reference = citation_reference("journal", author, year, venue, result).unwrap();
+    let d = &inj.informal_dials;
+    assert_eq!(
+        (
+            d["author"].as_u64(),
+            d["year"].as_u64(),
+            d["venue"].as_u64(),
+            d["result"].as_u64()
+        ),
+        (
+            Some(author as u64),
+            Some(year as u64),
+            Some(venue as u64),
+            Some(result as u64)
+        )
+    );
+    assert_eq!(d["reference"], json!(reference));
+    assert_eq!(d["shape"], json!("journal"));
+    assert_eq!(d["claim"], json!(true));
+    assert!(reference.starts_with('[') && reference.ends_with(']'));
+    assert!(citation_tokens_in_lexicon(&reference));
+    let claim = "$p$ is even. Write $p = 2k$.";
+    let justification =
+        "if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd";
+    assert_eq!(d["asserted"], json!(claim));
+    assert_eq!(d["justification"], json!(justification));
+    assert_eq!(inj.informal_inserted, reference);
+    assert_eq!(d["replaced"], json!(justification));
+    assert_eq!(d["original_steps"], json!({"3": faithful[2].text}));
+    assert!(d.get("hedge").is_none() && d.get("original_fragments").is_none());
+    assert_eq!(inj.formal_dials["original_fragments"], json!({}));
+    // the informal file: step 3 is "By <reference> <claim>"; the other steps are faithful
+    let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+    assert_eq!(st.n_steps, 5);
+    assert_eq!(st.steps[3], format!("By {reference} {claim}"));
+    for k in [1, 2, 4, 5] {
+        assert_eq!(st.steps[k], faithful[k - 1].text);
+    }
+    // the formal file is the faithful one: byte-identical to the control's
+    let (pc, _) = build(&s2("formal", json!([])), 7);
+    assert_eq!(
+        p.formal.as_ref().unwrap().bytes,
+        pc.formal.as_ref().unwrap().bytes
+    );
+    // one record, informal, N/A, gap, spanning the reference; the proof invalid; the formal file
+    // predicted to build with standard axioms
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(
+        gt.flaws.len(),
+        1,
+        "a pair records the instance once: informal-only"
+    );
+    let r = &gt.flaws[0];
+    assert_eq!(r.instance, 1);
+    match &r.location {
+        Location::Informal(loc) => {
+            assert_eq!(loc.step, 3);
+            assert_eq!(loc.span[0], 3, "after `By `");
+            assert_eq!(span_text(&st.steps[3], loc.span).unwrap(), reference);
+        }
+        _ => unreachable!(),
+    }
+    assert_eq!(gt.proof_status, ProofStatus::Invalid);
+    assert!(!gt.correct);
+    assert_eq!(gt.statement_status.value, Some(true));
+    assert_eq!(m.commanded["lean_build"].value, json!("pass"));
+    assert_eq!(m.commanded["lean_axioms_standard"].value, json!(true));
+    assert_eq!(m.commanded["n_flaws_total"].value, json!(1));
+    assert_eq!(m.commanded["n_flaws_0010"].value, json!(1));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    // every shape draws references whose tokens are all in the lexicon and whose venue is the
+    // shape's, varying with the seed; the same (config, seed) draws the same reference
+    for shape in CITATION_SHAPES {
+        let c = s2("informal", json!([cite(shape, true, "gap")]));
+        let mut seen = std::collections::BTreeSet::new();
+        for s in 0..40u64 {
+            let (ps, ms) = build(&c, s);
+            let reference = ps.injection.as_ref().unwrap().informal_inserted.clone();
+            assert!(citation_tokens_in_lexicon(&reference), "{reference}");
+            assert!(
+                citation_venues(shape)
+                    .unwrap()
+                    .iter()
+                    .any(|v| reference.contains(v)),
+                "{shape}: {reference}"
+            );
+            assert_eq!(ms.fidelity.verdict, Verdict::Pass);
+            assert_eq!(ms.ground_truth.as_ref().unwrap().flaws.len(), 1);
+            seen.insert(reference);
+        }
+        assert!(seen.len() > 1, "{shape}: the draws vary with the seed");
+    }
+    let (p2, _) = build(&pair, 7);
+    assert_eq!(p2.injection, p.injection);
+    // the lexicon check refuses tokens outside the lexicon, and an index out of range names
+    // no reference
+    assert!(!citation_tokens_in_lexicon("[Smith 1987, Theorem 4.2]"));
+    assert!(!citation_tokens_in_lexicon(""));
+    assert!(citation_reference("journal", 9, 0, 0, 0).is_none());
+    assert!(citation_reference("thesis", 0, 0, 0, 0).is_none());
+    assert_eq!(
+        citation_reference("journal", 0, 0, 0, 0).as_deref(),
+        Some("[Placeholder 19XX, Journal of Nonexistent Mathematics, Theorem 4.2]")
+    );
+    // refusals: the formal target; sub-variants b, c and none; claim false (no material); a
+    // severity the claim does not fix; an unknown, missing or extra shape; a non-boolean claim;
+    // the injector's own dial names; an ineligible explicit site; and the versions before 0.6.0
+    for c in [
+        s2("formal", json!([cite("journal", true, "gap")])),
+        s2(
+            "pair",
+            json!([spec(
+                "FLAW-0010",
+                Some("b"),
+                "gap",
+                json!({"shape": "journal", "claim": true})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([spec(
+                "FLAW-0010",
+                Some("c"),
+                "gap",
+                json!({"shape": "journal", "claim": true})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([spec(
+                "FLAW-0010",
+                None,
+                "gap",
+                json!({"shape": "journal", "claim": true})
+            )]),
+        ),
+        s2("pair", json!([cite("journal", false, "fatal")])),
+        s2("pair", json!([cite("journal", true, "fatal")])),
+        s2("pair", json!([cite("thesis", true, "gap")])),
+        s2(
+            "pair",
+            json!([spec("FLAW-0010", Some("a"), "gap", json!({"claim": true}))]),
+        ),
+        s2(
+            "pair",
+            json!([spec(
+                "FLAW-0010",
+                Some("a"),
+                "gap",
+                json!({"shape": "journal", "claim": "true"})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([spec(
+                "FLAW-0010",
+                Some("a"),
+                "gap",
+                json!({"shape": "journal", "claim": true, "reference": "[x]"})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([spec(
+                "FLAW-0010",
+                Some("a"),
+                "gap",
+                json!({"shape": "journal", "claim": true, "author": 0})
+            )]),
+        ),
+        s2(
+            "pair",
+            json!([{"class": "FLAW-0010", "sub_variant": "a", "severity": "gap", "site": 2, "dials": {"shape": "journal", "claim": true}}]),
+        ),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
+    for v in [Version::V0_4_0, Version::V0_5_0] {
+        assert!(prepare_with(v, &pair, 7).is_err());
+    }
+}
+
+#[test]
+fn d5_flaw_0003_direct_forward_references_the_theorem_and_cycle_cites_in_a_circle() {
+    // ADR-0011 D5 (0.6.0), FLAWS.md's FLAW-0003 example on bounded_monotone_converges: `direct`
+    // restates the goal (or its contrapositive) as Lemma 1, "proved" by the theorem — a forward
+    // reference the kernel rejects at the lemma's declaration (check K); `cycle` has Lemma 1
+    // cite the theorem and the key step cite Lemma 1, informal-only, checked on the plan's
+    // premise graph, the formal file keeping a faithful proof.
+    let seed = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "bounded_monotone_converges")
+        .unwrap();
+    let faithful = &seed.styles[0].steps;
+    assert_eq!(faithful.len(), 2);
+    let bmc = |target: &str, flaws: Value| {
+        config("bounded_monotone_converges", "supremum", target, flaws)
+    };
+    let direct = |form: &str| spec("FLAW-0003", Some("direct"), "fatal", json!({"form": form}));
+    let cycle = spec(
+        "FLAW-0003",
+        Some("cycle"),
+        "fatal",
+        json!({"cycle_length": 2}),
+    );
+    let main = "syndeom_s2_template_bounded_monotone_converges";
+    let lemma = "syndeom_s2_template_bounded_monotone_converges_lemma_1";
+
+    // direct, restated-goal
+    let (p, m) = build(&bmc("pair", json!([direct("restated-goal")])), 7);
+    let inj = p.injection.as_ref().unwrap();
+    assert_eq!(
+        (
+            inj.class.as_str(),
+            inj.sub_variant.as_deref(),
+            inj.site,
+            inj.lean_catchable,
+            inj.severity
+        ),
+        (
+            "FLAW-0003",
+            Some("direct"),
+            1,
+            LeanCatchable::YesKernel,
+            Severity::Fatal
+        )
+    );
+    let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+    assert_eq!((st.n_steps, st.n_lemmas), (2, 1));
+    assert!(st.steps[1].starts_with("Lemma 1. ") && st.steps[2].contains("by Lemma 1"));
+    let f = p.formal.as_ref().unwrap();
+    let text = String::from_utf8(f.bytes.clone()).unwrap();
+    let lines: Vec<&str> = text.lines().collect();
+    assert_eq!(
+        lines[3],
+        format!(
+            "theorem {lemma} : ∀ a : ℕ → ℝ, Monotone a → BddAbove (Set.range a) → ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L) := by"
+        )
+    );
+    assert_eq!(lines[4], format!("  exact {main}"));
+    assert_eq!(f.fragment_lines, vec![Some([4, 5]), Some([8, 8])]);
+    assert_eq!(f.main_line, 7);
+    let d = &inj.informal_dials;
+    assert!(d["replaced"].is_null());
+    assert_eq!(d["form"], json!("restated-goal"));
+    assert_eq!(
+        d["original_steps"],
+        json!({"1": faithful[0].text, "2": faithful[1].text})
+    );
+    assert!(d.get("cycle").is_none() && d.get("citations").is_none());
+    assert_eq!(inj.formal_dials["declaration"], json!(lemma));
+    assert_eq!(
+        inj.formal_dials["original_fragments"],
+        json!({"1": faithful[0].fragment, "2": faithful[1].fragment})
+    );
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(gt.flaws.len(), 2);
+    assert!(gt.flaws.iter().all(|r| r.instance == 1
+        && r.severity == Severity::Fatal
+        && r.lean_catchable == LeanCatchable::YesKernel));
+    match &gt.flaws[1].location {
+        Location::Formal(loc) => assert_eq!((loc.declaration.as_str(), loc.line), (lemma, 4)),
+        _ => unreachable!(),
+    }
+    assert_eq!(gt.proof_status, ProofStatus::Invalid);
+    assert!(!gt.correct);
+    assert_eq!(gt.statement_status.value, Some(true));
+    assert_eq!(m.commanded["lean_build"].value, json!("fail"));
+    assert!(!m.commanded.contains_key("lean_axioms_standard"));
+    assert_eq!(m.commanded["n_lemmas"].value, json!(1));
+    assert_eq!(m.commanded["n_steps"].value, json!(2));
+    assert_eq!(m.commanded["n_flaws_0003"].value, json!(1));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    // the error at the lemma's proof line, as Lean reports it, confirms; elsewhere, or a build
+    // that passes, does not
+    let at_proof = Observation {
+        exit_code: 1,
+        first_error_line: Some(5),
+        axioms: None,
+        used_constants: None,
+    };
+    let m2 = assemble(&p, COMMIT, Some(toolchain()), Some(&at_proof)).unwrap();
+    assert_eq!(m2.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert_eq!(m2.fidelity.verdict, Verdict::Pass);
+    for obs in [
+        Observation {
+            exit_code: 1,
+            first_error_line: Some(8),
+            axioms: None,
+            used_constants: None,
+        },
+        Observation {
+            exit_code: 0,
+            first_error_line: None,
+            axioms: Some(vec![]),
+            used_constants: None,
+        },
+    ] {
+        let m3 = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(m3.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(m3.fidelity.verdict, Verdict::Fail);
+    }
+    // contrapositive: Lemma 1 is the contrapositive, proved by the theorem forward
+    let (pc, mc) = build(&bmc("formal", json!([direct("contrapositive")])), 7);
+    let textc = String::from_utf8(pc.formal.as_ref().unwrap().bytes.clone()).unwrap();
+    assert!(textc.contains(&format!(
+        "\ntheorem {lemma} : ∀ a : ℕ → ℝ, Monotone a → (¬ ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L)) → ¬ BddAbove (Set.range a) := by\n  exact fun a ha hn hb => hn ({main} a ha hb)\n"
+    )));
+    assert!(textc.contains("\n  by_contra hn\n"));
+    assert_eq!(
+        pc.injection.as_ref().unwrap().informal_dials["form"],
+        json!("contrapositive")
+    );
+    assert_eq!(mc.ground_truth.as_ref().unwrap().flaws.len(), 1);
+    assert_eq!(mc.fidelity.verdict, Verdict::Pass);
+
+    // cycle
+    let (py, my) = build(&bmc("pair", json!([cycle.clone()])), 7);
+    let injy = py.injection.as_ref().unwrap();
+    assert_eq!(
+        (injy.site, injy.lean_catchable, injy.severity),
+        (1, LeanCatchable::No, Severity::Fatal)
+    );
+    let dy = &injy.informal_dials;
+    assert_eq!(dy["cycle_length"], json!(2));
+    assert_eq!(dy["cycle"], json!([lemma, main]));
+    assert!(dy["replaced"].is_null());
+    let sty = parse_informal_md(py.informal.as_ref().unwrap()).unwrap();
+    let citations = dy["citations"].as_array().unwrap();
+    assert_eq!(citations.len(), 2);
+    for (c, (step, phrase)) in citations
+        .iter()
+        .zip([(1u64, "by the theorem"), (2u64, "by Lemma 1")])
+    {
+        assert_eq!(c["step"], json!(step));
+        assert_eq!(c["phrase"], json!(phrase));
+        let span = [
+            c["span"][0].as_u64().unwrap(),
+            c["span"][1].as_u64().unwrap(),
+        ];
+        assert_eq!(
+            span_text(&sty.steps[step as usize], span).as_deref(),
+            Some(phrase)
+        );
+    }
+    assert_eq!(py.plan.steps[0].premises.len(), 1);
+    assert_eq!(py.plan.steps[1].premises.len(), 1);
+    assert_eq!(
+        premise_cycle(&py.plan, lemma, 2),
+        Some(vec![lemma.to_string(), main.to_string()])
+    );
+    assert!(premise_cycle(&py.plan, lemma, 3).is_none());
+    assert!(premise_cycle(&py.plan, lemma, 1).is_none());
+    assert!(
+        premise_cycle(&p.plan, lemma, 2).is_none(),
+        "the direct material carries no premises"
+    );
+    let gty = my.ground_truth.as_ref().unwrap();
+    assert_eq!(
+        gty.flaws.len(),
+        1,
+        "informal-only: the formal file has no record"
+    );
+    match &gty.flaws[0].location {
+        Location::Informal(loc) => {
+            assert_eq!(loc.step, 1);
+            assert_eq!(loc.span, [0, sty.steps[1].chars().count() as u64]);
+        }
+        _ => unreachable!(),
+    }
+    assert_eq!(gty.proof_status, ProofStatus::Invalid);
+    assert!(!gty.correct);
+    assert_eq!(my.commanded["lean_build"].value, json!("pass"));
+    assert_eq!(my.commanded["lean_axioms_standard"].value, json!(true));
+    assert_eq!(my.commanded["n_lemmas"].value, json!(1));
+    assert_eq!(my.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert_eq!(my.fidelity.verdict, Verdict::Pass);
+    let texty = String::from_utf8(py.formal.as_ref().unwrap().bytes.clone()).unwrap();
+    assert!(!texty.contains(&format!("exact {main}")));
+    assert!(texty.contains("tendsto_atTop_ciSup ha hb"));
+    assert_eq!(
+        parse_lean(&py.formal.as_ref().unwrap().bytes)
+            .unwrap()
+            .n_declarations,
+        2
+    );
+    // the informal-only cycle has the same informal bytes
+    let (pi, mi) = build(&bmc("informal", json!([cycle.clone()])), 7);
+    assert_eq!(pi.informal, py.informal);
+    assert_eq!(mi.fidelity.verdict, Verdict::Pass);
+    assert!(!mi.commanded.contains_key("lean_build"));
+    // a composite of the cycle: an invalid proof of a true statement, NO inherited
+    let (pz, mz) = build(
+        &bmc(
+            "pair",
+            json!([spec(
+                "FLAW-0011",
+                None,
+                "fatal",
+                json!({"embedded": [cycle.clone()]})
+            )]),
+        ),
+        7,
+    );
+    assert_eq!(
+        pz.composite.as_ref().unwrap().lean_catchable,
+        LeanCatchable::No
+    );
+    assert_eq!(mz.ground_truth.as_ref().unwrap().flaws.len(), 3);
+    assert_eq!(mz.commanded["lean_build"].value, json!("pass"));
+    assert_eq!(mz.fidelity.verdict, Verdict::Pass);
+    // refusals: the cycle's formal target; an unknown form; a severity below fatal; no
+    // sub-variant; another cycle length; the injector's own dial names; an ineligible explicit
+    // site; a seed without the material; and the versions before 0.6.0
+    for c in [
+        bmc("formal", json!([cycle.clone()])),
+        bmc(
+            "pair",
+            json!([spec(
+                "FLAW-0003",
+                Some("direct"),
+                "fatal",
+                json!({"form": "restated"})
+            )]),
+        ),
+        bmc(
+            "pair",
+            json!([spec(
+                "FLAW-0003",
+                Some("direct"),
+                "gap",
+                json!({"form": "restated-goal"})
+            )]),
+        ),
+        bmc(
+            "pair",
+            json!([spec(
+                "FLAW-0003",
+                None,
+                "fatal",
+                json!({"form": "restated-goal"})
+            )]),
+        ),
+        bmc(
+            "pair",
+            json!([spec(
+                "FLAW-0003",
+                Some("cycle"),
+                "fatal",
+                json!({"cycle_length": 3})
+            )]),
+        ),
+        bmc(
+            "pair",
+            json!([spec(
+                "FLAW-0003",
+                Some("cycle"),
+                "fatal",
+                json!({"cycle_length": 2, "cycle": []})
+            )]),
+        ),
+        bmc(
+            "pair",
+            json!([spec(
+                "FLAW-0003",
+                Some("cycle"),
+                "fatal",
+                json!({"cycle_length": 2, "citations": []})
+            )]),
+        ),
+        bmc(
+            "pair",
+            json!([{"class": "FLAW-0003", "sub_variant": "direct", "severity": "fatal", "site": 2, "dials": {"form": "restated-goal"}}]),
+        ),
+        config(
+            "sqrt2_irrational",
+            "descent",
+            "pair",
+            json!([direct("restated-goal")]),
+        ),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
+    for v in [Version::V0_4_0, Version::V0_5_0] {
+        assert!(prepare_with(v, &bmc("pair", json!([cycle.clone()])), 7).is_err());
+        assert!(
+            prepare_with(v, &bmc("pair", json!([])), 7).is_err(),
+            "the seed is not in {v:?}"
+        );
+    }
+    // the seed's shape rules: premises on the cycle material only, each phrase once and citing
+    // the theorem or a lemma of the material, the cycle present, NO; `direct` YES-KERNEL with
+    // the forward reference and exactly the dial form
+    let i = seed.styles[0]
+        .flaws
+        .iter()
+        .position(|m| m.sub_variant.as_deref() == Some("cycle"))
+        .unwrap();
+    let mutate = |f: &dyn Fn(&mut syndeom_generate::template::Material)| {
+        let mut s = seed.clone();
+        f(&mut s.styles[0].flaws[i]);
+        check_seed(&s)
+    };
+    assert!(mutate(&|_| {}).is_ok());
+    assert!(mutate(&|m| m.steps[0].premises.clear()).is_err());
+    assert!(mutate(&|m| m.steps[1].premises.clear()).is_err());
+    assert!(mutate(&|m| m.steps[0].premises[0].phrase = "no such phrase".into()).is_err());
+    assert!(mutate(&|m| m.steps[0].premises[0].cites = "nowhere".into()).is_err());
+    assert!(mutate(&|m| m.lean_catchable = LeanCatchable::YesKernel).is_err());
+    assert!(mutate(&|m| m.dials = json!({"cycle_length": 3})).is_err());
+    assert!(mutate(&|m| m.severity = Severity::Gap).is_err());
+    assert!(mutate(&|m| m.inserts = false).is_err());
+    assert!(mutate(&|m| m.sub_variant = Some("loop".into())).is_err());
+    let j = seed.styles[0]
+        .flaws
+        .iter()
+        .position(|m| m.dials == json!({"form": "restated-goal"}))
+        .unwrap();
+    let mutate_d = |f: &dyn Fn(&mut syndeom_generate::template::Material)| {
+        let mut s = seed.clone();
+        f(&mut s.styles[0].flaws[j]);
+        check_seed(&s)
+    };
+    assert!(mutate_d(&|_| {}).is_ok());
+    assert!(mutate_d(&|m| m.lean_catchable = LeanCatchable::No).is_err());
+    assert!(mutate_d(&|m| m.steps[0].fragment = vec!["exact trivial".into()]).is_err());
+    assert!(mutate_d(&|m| m.severity = Severity::Gap).is_err());
+    assert!(mutate_d(&|m| m.dials = json!({"form": "goal"})).is_err());
+    assert!(
+        mutate_d(&|m| {
+            m.steps[0].premises.push(Premise {
+                cites: "theorem".into(),
+                phrase: "we take as established".into(),
+            });
+        })
+        .is_err()
+    );
+    // premises belong to FLAW-0003 cycle material only
+    let sqrt2 = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "sqrt2_irrational")
+        .unwrap();
+    let mut bad = sqrt2.clone();
+    bad.styles[0].flaws[0].steps[0].premises.push(Premise {
+        cites: "theorem".into(),
+        phrase: "Suppose".into(),
+    });
+    assert!(check_seed(&bad).is_err());
 }

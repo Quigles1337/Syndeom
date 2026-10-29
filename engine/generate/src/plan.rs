@@ -66,6 +66,20 @@ pub struct LemmaHeader {
     pub claim: String,
 }
 
+/// The name a premise uses to cite the main declaration (0.6.0; ADR-0011 D2).
+pub const THEOREM_PREMISE: &str = "theorem";
+
+/// A premise a step cites (ADR-0011 D2 `premises`; 0.6.0): `cites` names a lemma step's
+/// declaration, or [`THEOREM_PREMISE`] for the main declaration; `phrase` is the citing text
+/// inside the step, which occurs there exactly once. Premises render to nothing; the FLAW-0003
+/// `cycle` check reads them from the plan's premise graph (D5).
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Premise {
+    pub cites: String,
+    pub phrase: String,
+}
+
 /// One step of the argument: its informal text (ADR-0001 D3, without the marker) and the aligned
 /// Lean fragment — tactic lines of the main proof with their relative indentation, or, for a
 /// lemma step, the lemma's proof. A step may have no fragment (its content is carried by a
@@ -82,6 +96,10 @@ pub struct Step {
     /// only by the padding module. A step is never both a lemma and padding.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub padding: Option<PaddingHeader>,
+    /// The premises the step cites (0.6.0; ADR-0011 D2): empty in every seed's own steps and in
+    /// every material but FLAW-0003 `cycle`'s. They change no byte of either file.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub premises: Vec<Premise>,
 }
 
 /// A whole artifact before rendering (ADR-0011 D2). Lemmas are steps with a [`LemmaHeader`]
@@ -126,6 +144,69 @@ pub fn own_declarations(rendering: &FormalRendering) -> Vec<String> {
         }
     }
     out
+}
+
+/// The plan's premise graph (0.6.0; ADR-0011 D2, D5): one edge per premise, from the declaration
+/// the citing step belongs to — its lemma's or padding declaration's name, or the main declaration
+/// for a main-proof step — to the declaration it cites ([`THEOREM_PREMISE`] is the main one).
+pub fn premise_edges(plan: &Plan) -> Vec<(String, String)> {
+    let mut edges = Vec::new();
+    for step in &plan.steps {
+        let from = match (&step.lemma, &step.padding) {
+            (Some(l), _) => l.name.clone(),
+            (None, Some(p)) => p.name.clone(),
+            (None, None) => plan.main_declaration.clone(),
+        };
+        for premise in &step.premises {
+            let to = if premise.cites == THEOREM_PREMISE {
+                plan.main_declaration.clone()
+            } else {
+                premise.cites.clone()
+            };
+            edges.push((from.clone(), to));
+        }
+    }
+    edges
+}
+
+/// A cycle of exactly `length` edges through `start` in the premise graph, as the `length`
+/// distinct declarations visited from `start` in order (FLAW-0003 `cycle`'s check, D5), or
+/// `None` when there is none.
+pub fn premise_cycle(plan: &Plan, start: &str, length: usize) -> Option<Vec<String>> {
+    fn walk(
+        edges: &[(String, String)],
+        start: &str,
+        path: &mut Vec<String>,
+        length: usize,
+    ) -> bool {
+        let here = path.last().cloned().unwrap_or_default();
+        for (from, to) in edges {
+            if *from != here {
+                continue;
+            }
+            if path.len() == length {
+                if to == start {
+                    return true;
+                }
+                continue;
+            }
+            if path.iter().any(|p| p == to) {
+                continue;
+            }
+            path.push(to.clone());
+            if walk(edges, start, path, length) {
+                return true;
+            }
+            path.pop();
+        }
+        false
+    }
+    if length == 0 {
+        return None;
+    }
+    let edges = premise_edges(plan);
+    let mut path = vec![start.to_string()];
+    walk(&edges, start, &mut path, length).then_some(path)
 }
 
 fn check_text(what: &str, text: &str) -> Result<(), String> {

@@ -1,0 +1,170 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0003": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 1
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 2
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 86
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "d26d7968fc8841bbe89f8e719e8fab98631eed55372d15666ff2c7c23906136d",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 634,
+        "n_lemmas": 1,
+        "n_steps": 2,
+        "n_tokens": 86,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_template-v0.6.0-21d619bec38a-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0003": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0003",
+        "dials": {
+          "form": "contrapositive"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": "direct"
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "supremum",
+    "target": "informal",
+    "theorem": "bounded_monotone_converges"
+  },
+  "config_hash": "21d619bec38a6fe90d1fd39049553ea9aee06faf51532c60537df77b802b2c14",
+  "engine_commit": "ef41a10ce16db34c1ebe3ea66a456df97df83be1",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0003": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.6.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0003",
+        "dials": {
+          "form": "contrapositive",
+          "inserted": "Lemma 1. A monotone sequence of real numbers that does not converge is not bounded above. Proof of the lemma: if such a sequence were bounded above, it would converge by the theorem, contrary to the assumption.",
+          "original_steps": {
+            "1": "Since $(a_n)$ is bounded above, the set $\\{a_n : n \\in \\mathbb{N}\\}$ is non-empty and bounded above, so by the completeness of $\\mathbb{R}$ it has a least upper bound; let $L = \\sup_n a_n$.",
+            "2": "Since $(a_n)$ is monotone, $a_n \\to L$: given $\\varepsilon > 0$, by the definition of the supremum there is $N$ with $L - \\varepsilon < a_N$, and then $L - \\varepsilon < a_N \\le a_n \\le L$ for all $n \\ge N$."
+          },
+          "replaced": null,
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            210
+          ],
+          "step": 1
+        },
+        "severity": "fatal",
+        "sub_variant": "direct"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/BoundedMonotoneConverges.lean:syndeom_seed_bounded_monotone_converges",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}
