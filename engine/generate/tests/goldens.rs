@@ -34,10 +34,11 @@ const GOLDENS_0_3_0: u64 = 9;
 /// byte-identical runs.
 const GOLDENS_0_4_0: u64 = 8;
 /// The 0.5.0 goldens (Session 44): FLAW-0004 `routine-true` on `sqrt2_irrational` (the hedge
-/// drawn, the justification deleted, the proof of `hp` omitted) and FLAW-0011 as a commanded
-/// composite of that instance, each as informal and pair (the formal target is refused for
-/// FLAW-0004), produced at the implementation commit `7be41123…` from two byte-identical runs.
-const GOLDENS_0_5_0: u64 = 4;
+/// drawn, the justification deleted, the proof of `hp` omitted), informal and pair (the formal
+/// target is refused for FLAW-0004). The composite cases of the first production embedded that
+/// cosmetic instance and were removed by Al's ruling 2 on PR 30; the regenerated set, with a
+/// composite of a gap instance, is added by the next commit at one engine commit.
+const GOLDENS_0_5_0: u64 = 2;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)

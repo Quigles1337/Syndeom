@@ -10,8 +10,9 @@
 //! check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the `n_lt_two_pow` seed; `0.4.0`, with
 //! the padding module (D2 `pad`, D5 FLAW-0013, Options 8) and the `sqrt2_irrational` seed, which
 //! carries padding material; and `0.5.0`, the version `generate` emits, with FLAW-0004 (the
-//! hedge lexicon, `hidden_step`; the aligned tactic step omitted) and FLAW-0011 as a commanded
-//! composite (`embedded`), both realized on `sqrt2_irrational` as FLAWS.md's examples.
+//! hedge lexicon, `hidden_step`; the aligned tactic step omitted), realized on `sqrt2_irrational`
+//! as FLAWS.md's FLAW-0011 example, and FLAW-0011 as a commanded composite (`embedded`) of one
+//! gap-or-fatal instance of FLAW-0001 through FLAW-0010 (Al's rulings 2 and 3 on PR 30).
 //!
 //! A seed's flaw material is a whole-argument variant of one style: the flawed step list, each
 //! step naming the faithful step it replaces (`from`), the flaw site, and the anchor text at the
@@ -25,8 +26,8 @@
 //! (0.5.0) is replacement material whose site step is the bare claim: the injector draws a hedge
 //! from the fixed lexicon and prefixes it, records the justification the faithful step held and
 //! the tactic lines omitted from the aligned fragment, and the kernel reports the unsolved goal at
-//! the site. A FLAW-0011 composite (0.5.0) applies one embedded spec to a true statement and adds
-//! its own record at the statement.
+//! the site. A FLAW-0011 composite (0.5.0) applies one embedded spec of severity gap or fatal to
+//! a true statement, so that the argument is invalid, and adds its own record at the statement.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -1322,10 +1323,12 @@ fn inject(
 
 /// FLAW-0011 as a commanded composite (ADR-0011 D5; 0.5.0): `embedded` lists the FlawSpecs to
 /// apply to a seed whose statement is true — one in 0.5.0, since the materials are
-/// whole-argument variants (D5's disjointness rule) — never a composite, a false statement or
-/// padding. The composite's severity and `lean_catchable` are its most severe embedded
-/// instance's; its own record addresses the statement and is numbered after the embedded
-/// instance.
+/// whole-argument variants (D5's disjointness rule) — of FLAW-0001 through FLAW-0010 only
+/// (FLAW-0011's definition; Al's ruling 3 on PR 30) and of severity gap or fatal, so that the
+/// composite is an invalid proof under D7 (Al's ruling 2 on PR 30: a composite whose embedded
+/// instances are all cosmetic is refused). The composite's severity and `lean_catchable` are
+/// its most severe embedded instance's; its own record addresses the statement and is numbered
+/// after the embedded instance.
 fn compose(
     plan: &mut Plan,
     seed: &Seed,
@@ -1356,13 +1359,20 @@ fn compose(
         ));
     }
     let inner = parse_spec(&embedded[0], "FLAW-0011's embedded[0]")?;
-    if matches!(
-        inner.class.as_str(),
-        "FLAW-0011" | "FLAW-0012" | "FLAW-0013"
-    ) {
+    let number = inner
+        .class
+        .strip_prefix("FLAW-")
+        .and_then(|n| n.parse::<u32>().ok());
+    if !matches!(number, Some(1..=10)) {
         return Err(format!(
-            "FLAW-0011 embeds a flaw of FLAW-0001..0010 (FLAWS.md), not {}",
+            "FLAW-0011 embeds an instance of FLAW-0001 through FLAW-0010 (FLAWS.md's definition; Al's ruling 3 on PR 30), not {}",
             inner.class
+        ));
+    }
+    if !matches!(inner.severity, Severity::Gap | Severity::Fatal) {
+        return Err(format!(
+            "FLAW-0011 requires an embedded instance of severity gap or fatal; a composite of {:?} instances is not an invalid proof (D7; Al's ruling 2 on PR 30)",
+            inner.severity
         ));
     }
     if !version.realizes(&inner.class) {

@@ -51,7 +51,8 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   hedge drawn from the fixed lexicon and prefixed to the bare claim, the justification deleted,
   the aligned tactic lines omitted so the kernel reports an unsolved goal at the site, never
   `sorry`; `N/A` for an informal-only target); FLAW-0011 as a commanded composite (D5:
-  `embedded`, one instance in this version, on a true statement; the composite's own record at
+  `embedded`, one instance in this version — of FLAW-0001 through FLAW-0010 and of severity gap
+  or fatal, Al's rulings 2 and 3 on PR 30 — on a true statement; the composite's own record at
   the statement, its severity and `lean_catchable` inherited); and the seed rule that no style
   step carries a padding header (FINDING-014).
 
@@ -111,14 +112,18 @@ is flagged for Al in ADR-0011 *Amendments*.
   `replaced` and the originals. The target `formal` is refused (FLAWS.md: manifests in
   informal); for a pair the instance is `YES-KERNEL`, for an informal-only artifact `N/A`.
 - **FLAW-0011** (0.5.0): commanded with the one dial `embedded`, a list of FlawSpecs — exactly
-  one in this version, since the materials are whole-argument variants — never FLAW-0011,
-  FLAW-0012 or FLAW-0013, on a seed whose statement is true; the spec's severity must be the
+  one in this version, since the materials are whole-argument variants — of FLAW-0001 through
+  FLAW-0010 only (FLAW-0011's definition; Al's ruling 3 on PR 30) and of severity gap or fatal
+  (Al's ruling 2 on PR 30: a composite of cosmetic or repairable instances is not an invalid
+  proof and is refused), on a seed whose statement is true; the spec's severity must be the
   embedded instance's (it inherits). The embedded instance is injected as instance 1 and the
   composite is instance 2, with a record in each file the artifact has: step 0 with span
   `[0, len)` in the informal file, the main declaration at its header line in the formal file,
   `lean_catchable` inherited, dials `embedded`, `embedded_instances`, `site: 0`, `inserted` and
-  `replaced: null`. Under D7 a composite of a cosmetic instance is a valid proof (the FLAWS.md
-  example), a composite of a gap or worse an invalid one.
+  `replaced: null`. Every composite is therefore an invalid proof of a true statement under D7.
+  FLAWS.md's FLAW-0011 example embeds a cosmetic instance (the routine-true hedge) and so
+  realizes FLAW-0004 `routine-true`, not a composite — an erratum note against FLAWS.md 0.1.0,
+  recorded in ADR-0011 *Amendments* by Al's ruling 2 on PR 30; FLAWS.md's text is unchanged.
 - **Counts** (0.2.0): `n_flaws_total`, `n_flaws_<NNNN>` and `flaws_confirmed` count instances. A
   pair's two records of one instance share its `instance`; the instance is confirmed only when
   both records pass their checks (Al's owner note of 2026-10-28).

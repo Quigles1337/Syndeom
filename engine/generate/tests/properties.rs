@@ -176,8 +176,15 @@ fn every_case() -> Vec<Value> {
                 });
                 specs.push(json!([inner]));
                 // FLAW-0011 as a commanded composite (0.5.0): the same material embedded, on a
-                // seed whose statement is true, with the inherited severity
-                if seed.truth.value == Some(true) {
+                // seed whose statement is true, with the inherited severity — an instance of
+                // FLAW-0001 through FLAW-0010 of severity gap or fatal (Al's rulings 2 and 3 on
+                // PR 30)
+                let number: u32 = m.class[5..].parse().unwrap();
+                let invalidating = matches!(
+                    m.severity,
+                    syndeom_manifest::Severity::Gap | syndeom_manifest::Severity::Fatal
+                );
+                if seed.truth.value == Some(true) && (1..=10).contains(&number) && invalidating {
                     specs.push(json!([{
                         "class": "FLAW-0011", "sub_variant": null, "severity": sev,
                         "site": "auto", "dials": {"embedded": [inner]}
@@ -790,16 +797,16 @@ fn d1_the_earlier_seed_sets_are_closed() {
         "cosmetic",
         json!({"hidden_step": "routine-true"}),
     );
-    let hedged = config("sqrt2_irrational", &style, "pair", json!([hedge.clone()]));
+    let hedged = config("sqrt2_irrational", &style, "pair", json!([hedge]));
     let composite = config(
-        "sqrt2_irrational",
-        &style,
+        "continuity_is_not_uniform",
+        &style_of("continuity_is_not_uniform"),
         "pair",
         json!([spec(
             "FLAW-0011",
             None,
-            "cosmetic",
-            json!({"embedded": [hedge]})
+            "gap",
+            json!({"embedded": [spec("FLAW-0002", None, "gap", json!({"swap": "forall-exists"}))]})
         )]),
     );
     for v in [
@@ -1749,43 +1756,30 @@ fn d5_flaw_0004_deletes_the_justification_and_prefixes_a_drawn_hedge() {
 
 #[test]
 fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
-    // ADR-0011 D5 (0.5.0), the FLAWS.md FLAW-0011 example: a true statement whose argument
-    // carries the FLAW-0004 instance above; the composite's own record addresses the statement.
-    let inner = spec(
-        "FLAW-0004",
-        None,
-        "cosmetic",
-        json!({"hidden_step": "routine-true"}),
-    );
+    // ADR-0011 D5 (0.5.0) as ruled on PR 30: a true statement whose argument carries one
+    // embedded instance of FLAW-0001 through FLAW-0010 of severity gap or fatal; the composite's
+    // own record addresses the statement. The subject is continuity_is_not_uniform's FLAW-0002
+    // forall-exists gap.
+    let inner = spec("FLAW-0002", None, "gap", json!({"swap": "forall-exists"}));
     let composite = |severity: &str, embedded: Value| {
         spec("FLAW-0011", None, severity, json!({"embedded": embedded}))
     };
-    let pair = config(
-        "sqrt2_irrational",
-        "descent",
-        "pair",
-        json!([composite("cosmetic", json!([inner.clone()]))]),
-    );
+    let cont = |target: &str, flaws: Value| {
+        config("continuity_is_not_uniform", "epsilon_delta", target, flaws)
+    };
+    let pair = cont("pair", json!([composite("gap", json!([inner.clone()]))]));
     let (p, m) = build(&pair, 7);
     let comp = p.composite.as_ref().unwrap();
     let inj = p.injection.as_ref().unwrap();
     assert_eq!(
         (comp.instance, comp.severity, comp.lean_catchable),
-        (2, Severity::Cosmetic, LeanCatchable::YesKernel)
+        (2, Severity::Gap, LeanCatchable::YesKernel)
     );
     assert_eq!(comp.embedded_instances, vec![1]);
     assert_eq!(comp.embedded, json!([inner.clone()]));
     assert_eq!(inj.instance, 1);
-    // the embedded instance is the standalone FLAW-0004 instance: the same draw, the same bytes
-    let (ps, _) = build(
-        &config(
-            "sqrt2_irrational",
-            "descent",
-            "pair",
-            json!([inner.clone()]),
-        ),
-        7,
-    );
+    // the embedded instance is the standalone FLAW-0002 instance: the same draw, the same bytes
+    let (ps, _) = build(&cont("pair", json!([inner.clone()])), 7);
     assert_eq!(p.injection, ps.injection);
     assert_eq!(p.informal, ps.informal);
     assert_eq!(p.formal, ps.formal);
@@ -1798,8 +1792,8 @@ fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
             .map(|r| (r.instance, r.class.as_str()))
             .collect::<Vec<_>>(),
         vec![
-            (1, "FLAW-0004"),
-            (1, "FLAW-0004"),
+            (1, "FLAW-0002"),
+            (1, "FLAW-0002"),
             (2, "FLAW-0011"),
             (2, "FLAW-0011")
         ]
@@ -1815,19 +1809,24 @@ fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
     assert_eq!(gt.flaws[2].dials["inserted"], json!(st.steps[0]));
     let f = p.formal.as_ref().unwrap();
     let text = String::from_utf8(f.bytes.clone()).unwrap();
+    let lines: Vec<&str> = text.lines().collect();
     match &gt.flaws[3].location {
         Location::Formal(loc) => {
             assert_eq!(loc.declaration, p.plan.main_declaration);
-            assert_eq!((loc.line, f.main_line), (4, 4));
+            assert_eq!(loc.line, f.main_line);
+            assert!(
+                lines[loc.line as usize - 1]
+                    .starts_with("theorem syndeom_s2_template_continuity_is_not_uniform ")
+            );
             assert_eq!(
                 gt.flaws[3].dials["inserted"],
-                json!([text.lines().nth(3).unwrap()])
+                json!([lines[loc.line as usize - 1]])
             );
         }
         _ => unreachable!(),
     }
     for r in &gt.flaws[2..] {
-        assert_eq!(r.severity, Severity::Cosmetic);
+        assert_eq!(r.severity, Severity::Gap);
         assert_eq!(r.lean_catchable, LeanCatchable::YesKernel);
         assert!(r.sub_variant.is_none());
         assert_eq!(r.dials["embedded"], json!([inner.clone()]));
@@ -1835,20 +1834,21 @@ fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
         assert_eq!(r.dials["site"], json!(0));
         assert!(r.dials["replaced"].is_null());
     }
-    // the statement is true by the seed's witness; the embedded instance is cosmetic, so the
-    // proof is valid and the artifact correct under D7 (a reading flagged for Al)
+    // the statement is true by the seed's witness and the argument invalid (the gap): a true
+    // theorem with an invalid proof, as FLAWS.md's recipe says
     assert_eq!(gt.statement_status.value, Some(true));
-    assert_eq!(gt.proof_status, ProofStatus::Valid);
-    assert!(gt.correct);
+    assert_eq!(gt.proof_status, ProofStatus::Invalid);
+    assert!(!gt.correct);
     // counts per instance: two instances, one per class; the formal file fails at the site
     assert_eq!(m.commanded["n_flaws_total"].value, json!(2));
-    assert_eq!(m.commanded["n_flaws_0004"].value, json!(1));
+    assert_eq!(m.commanded["n_flaws_0002"].value, json!(1));
     assert_eq!(m.commanded["n_flaws_0011"].value, json!(1));
     assert_eq!(m.commanded["flaws_confirmed"].value, json!(2));
     assert_eq!(m.commanded["lean_build"].value, json!("fail"));
     assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(2)));
     assert_eq!(m.achieved["n_flaws_0011"].value, Some(json!(1)));
     assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    assert_eq!(f.fragment_lines[inj.site - 1].map(|r| r[0]), Some(6));
     // the composite is confirmed only when every embedded record is: a build that passes fails
     // the embedded formal record, and the composite with it
     let built = Observation {
@@ -1860,107 +1860,186 @@ fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
     let m2 = assemble(&p, COMMIT, Some(toolchain()), Some(&built)).unwrap();
     assert_eq!(m2.achieved["flaws_confirmed"].value, Some(json!(0)));
     assert_eq!(m2.achieved["n_flaws_0011"].value, Some(json!(0)));
-    assert_eq!(m2.achieved["n_flaws_0004"].value, Some(json!(0)));
+    assert_eq!(m2.achieved["n_flaws_0002"].value, Some(json!(0)));
     assert_eq!(m2.fidelity.verdict, Verdict::Fail);
-    // informal-only: the embedded instance is N/A there, and so is the composite; two records
-    let informal = config(
-        "sqrt2_irrational",
-        "descent",
-        "informal",
-        json!([composite("cosmetic", json!([inner.clone()]))]),
+    // informal-only: two records, the instance's lean_catchable kept (FLAW-0002 has no
+    // informal-only exception), no lean_build commanded
+    let (pi, mi) = build(
+        &cont(
+            "informal",
+            json!([composite("gap", json!([inner.clone()]))]),
+        ),
+        7,
     );
-    let (pi, mi) = build(&informal, 7);
     let gti = mi.ground_truth.as_ref().unwrap();
     assert_eq!(gti.flaws.len(), 2);
     assert!(
         gti.flaws
             .iter()
-            .all(|r| r.lean_catchable == LeanCatchable::NotApplicable)
+            .all(|r| r.lean_catchable == LeanCatchable::YesKernel)
     );
+    assert_eq!(gti.proof_status, ProofStatus::Invalid);
     assert_eq!(
         pi.composite.as_ref().unwrap().lean_catchable,
-        LeanCatchable::NotApplicable
+        LeanCatchable::YesKernel
     );
+    assert!(!mi.commanded.contains_key("lean_build"));
     assert_eq!(mi.fidelity.verdict, Verdict::Pass);
-    // a composite of a gap instance is an invalid proof of a true statement, as FLAWS.md's
-    // recipe says; the composite inherits the gap
-    let cont = seeds(Version::CURRENT)
-        .into_iter()
-        .find(|s| s.id == "continuity_is_not_uniform")
-        .unwrap();
-    let mat = &cont.styles[0].flaws[0];
-    let sev = serde_json::to_value(mat.severity).unwrap();
-    let inner2 = json!({"class": mat.class, "sub_variant": mat.sub_variant, "severity": sev,
-                        "site": "auto", "dials": mat.dials});
-    let (_, mg) = build(
+    // a fatal instance composes too, and the composite inherits fatal
+    let fatal = spec(
+        "FLAW-0001",
+        Some("propagated"),
+        "fatal",
+        json!({"perturbation": "sign"}),
+    );
+    let (pf, mf) = build(
         &config(
-            &cont.id,
-            &cont.styles[0].id,
+            "sq_plus_one_ge_two_x",
+            "expand_square",
             "pair",
-            json!([composite("gap", json!([inner2]))]),
+            json!([composite("fatal", json!([fatal.clone()]))]),
         ),
         7,
     );
-    let gtg = mg.ground_truth.as_ref().unwrap();
-    assert_eq!(gtg.proof_status, ProofStatus::Invalid);
-    assert!(!gtg.correct && gtg.statement_status.value == Some(true));
-    assert_eq!(gtg.flaws.len(), 4);
-    assert!(gtg.flaws[2..].iter().all(|r| r.severity == Severity::Gap));
-    assert_eq!(mg.fidelity.verdict, Verdict::Pass);
+    assert_eq!(pf.composite.as_ref().unwrap().severity, Severity::Fatal);
+    let gtf = mf.ground_truth.as_ref().unwrap();
+    assert_eq!(gtf.proof_status, ProofStatus::Invalid);
+    assert!(gtf.flaws[2..].iter().all(|r| r.severity == Severity::Fatal));
+    assert_eq!(mf.fidelity.verdict, Verdict::Pass);
+    // Al's ruling 2 on PR 30: a composite whose embedded instances are all cosmetic is not an
+    // invalid proof and is refused — FLAWS.md's FLAW-0011 example (the routine-true hedge)
+    // therefore realizes FLAW-0004 routine-true, which stands alone; a repairable instance is
+    // refused likewise. Al's ruling 3: FLAW-0011 through FLAW-0014 are never embedded.
+    let hedge = spec(
+        "FLAW-0004",
+        None,
+        "cosmetic",
+        json!({"hidden_step": "routine-true"}),
+    );
+    let s2 = |flaws: Value| config("sqrt2_irrational", "descent", "pair", flaws);
+    assert!(prepare(&s2(json!([hedge.clone()])), 7).is_ok());
+    for c in [
+        s2(json!([composite("cosmetic", json!([hedge.clone()]))])),
+        s2(json!([composite("gap", json!([hedge.clone()]))])),
+        config(
+            "n_lt_two_pow",
+            "helper_lemma",
+            "pair",
+            json!([composite(
+                "cosmetic",
+                json!([spec(
+                    "FLAW-0007",
+                    Some("unused"),
+                    "cosmetic",
+                    json!({"count": 1, "length_steps": 1})
+                )])
+            )]),
+        ),
+        config(
+            "sq_plus_one_ge_two_x",
+            "expand_square",
+            "pair",
+            json!([composite(
+                "repairable",
+                json!([spec(
+                    "FLAW-0001",
+                    Some("local"),
+                    "repairable",
+                    json!({"perturbation": "sign"})
+                )])
+            )]),
+        ),
+        config(
+            "n_sq_mod_four",
+            "parity",
+            "pair",
+            json!([composite(
+                "gap",
+                json!([spec(
+                    "FLAW-0014",
+                    None,
+                    "gap",
+                    json!({"omitted_case": "odd", "holds": true})
+                )])
+            )]),
+        ),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
     // refusals: nothing embedded; two instances; a severity not inherited; a sub-variant; an
     // explicit site; other dials; nesting; padding or a false-statement class embedded; a
     // malformed embedded spec; the embedded class's target refusal; a false statement; padding
     // with a composite; a second top-level spec; the version before 0.5.0
-    let s2 = |flaws: Value| config("sqrt2_irrational", "descent", "pair", flaws);
     for c in [
-        s2(json!([composite("cosmetic", json!([]))])),
-        s2(json!([composite(
-            "cosmetic",
-            json!([inner.clone(), inner.clone()])
-        )])),
-        s2(json!([composite("gap", json!([inner.clone()]))])),
-        s2(json!([spec(
-            "FLAW-0011",
-            Some("x"),
-            "cosmetic",
-            json!({"embedded": [inner.clone()]})
-        )])),
-        s2(
-            json!([{"class": "FLAW-0011", "sub_variant": null, "severity": "cosmetic", "site": 1, "dials": {"embedded": [inner.clone()]}}]),
+        cont("pair", json!([composite("gap", json!([]))])),
+        cont(
+            "pair",
+            json!([composite("gap", json!([inner.clone(), inner.clone()]))]),
         ),
-        s2(json!([spec("FLAW-0011", None, "cosmetic", json!({}))])),
-        s2(json!([spec(
-            "FLAW-0011",
-            None,
-            "cosmetic",
-            json!({"embedded": [inner.clone()], "x": 1})
-        )])),
-        s2(json!([composite(
-            "cosmetic",
-            json!([composite("cosmetic", json!([inner.clone()]))])
-        )])),
+        cont("pair", json!([composite("fatal", json!([inner.clone()]))])),
+        cont(
+            "pair",
+            json!([spec(
+                "FLAW-0011",
+                Some("x"),
+                "gap",
+                json!({"embedded": [inner.clone()]})
+            )]),
+        ),
+        cont(
+            "pair",
+            json!([{"class": "FLAW-0011", "sub_variant": null, "severity": "gap", "site": 1, "dials": {"embedded": [inner.clone()]}}]),
+        ),
+        cont("pair", json!([spec("FLAW-0011", None, "gap", json!({}))])),
+        cont(
+            "pair",
+            json!([spec(
+                "FLAW-0011",
+                None,
+                "gap",
+                json!({"embedded": [inner.clone()], "x": 1})
+            )]),
+        ),
+        cont(
+            "pair",
+            json!([composite(
+                "gap",
+                json!([composite("gap", json!([inner.clone()]))])
+            )]),
+        ),
         s2(json!([composite(
             "cosmetic",
             json!([padding_spec(json!(["re-derivation"]), 1, "drawn")])
         )])),
-        s2(json!([composite(
-            "cosmetic",
-            json!([spec(
-                "FLAW-0012",
-                None,
+        cont(
+            "pair",
+            json!([composite(
                 "fatal",
-                json!({"dropped_hypothesis": "x"})
-            )])
-        )])),
-        s2(json!([composite(
-            "cosmetic",
-            json!([{"class": "FLAW-0004"}])
-        )])),
+                json!([spec(
+                    "FLAW-0012",
+                    None,
+                    "fatal",
+                    json!({"dropped_hypothesis": "x"})
+                )])
+            )]),
+        ),
+        cont(
+            "pair",
+            json!([composite("gap", json!([{"class": "FLAW-0002"}]))]),
+        ),
         config(
-            "sqrt2_irrational",
-            "descent",
-            "formal",
-            json!([composite("cosmetic", json!([inner.clone()]))]),
+            "n_lt_two_pow",
+            "helper_lemma",
+            "informal",
+            json!([composite(
+                "gap",
+                json!([spec(
+                    "FLAW-0009",
+                    None,
+                    "gap",
+                    json!({"mode": "axiom", "truth": true})
+                )])
+            )]),
         ),
         config(
             "horses",
@@ -1976,12 +2055,12 @@ fn d5_flaw_0011_is_a_commanded_composite_of_one_embedded_instance() {
                 )])
             )]),
         ),
-        json!({"theorem": "sqrt2_irrational", "style": "descent", "target": "pair",
-               "flaws": [composite("cosmetic", json!([inner.clone()]))], "padding_ratio": 0.2}),
-        s2(json!([
-            composite("cosmetic", json!([inner.clone()])),
-            inner.clone()
-        ])),
+        json!({"theorem": "continuity_is_not_uniform", "style": "epsilon_delta", "target": "pair",
+               "flaws": [composite("gap", json!([inner.clone()]))], "padding_ratio": 0.2}),
+        cont(
+            "pair",
+            json!([composite("gap", json!([inner.clone()])), inner.clone()]),
+        ),
     ] {
         assert!(prepare(&c, 7).is_err(), "should refuse {c}");
     }
