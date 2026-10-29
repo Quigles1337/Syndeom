@@ -15,3 +15,4 @@ import Syndeom
 #print axioms syndeom_seed_n_lt_two_pow
 #print axioms syndeom_seed_n_lt_two_pow_lemma_false
 #print axioms syndeom_seed_sqrt2_irrational
+#print axioms syndeom_seed_bounded_monotone_converges

@@ -116,6 +116,66 @@
               ]
             }
           ]
+        },
+        {
+          "class": "FLAW-0010",
+          "sub_variant": "a",
+          "severity": "gap",
+          "lean_catchable": "N/A",
+          "dials": {"claim": true},
+          "site": 3,
+          "anchor": null,
+          "cited": {
+            "claim": "$p$ is even. Write $p = 2k$.",
+            "justification": "if $p$ were odd, $p^2$ would be odd, because the square of an odd number is odd"
+          },
+          "steps": [
+            {
+              "from": 1,
+              "text": "Suppose, for contradiction, that $p^2 = 2q^2$ for natural numbers $p$ and $q$ with $\\gcd(p, q) = 1$.",
+              "fragment": ["intro hpq"]
+            },
+            {
+              "from": 2,
+              "text": "Then $p^2 = 2q^2$ is even, being twice the natural number $q^2$.",
+              "fragment": ["have hp2 : 2 ∣ p ^ 2 := ⟨q ^ 2, hpq⟩"]
+            },
+            {
+              "from": 3,
+              "text": "$p$ is even. Write $p = 2k$.",
+              "fragment": [
+                "have hp : 2 ∣ p := by",
+                "  rcases Nat.mod_two_eq_zero_or_one p with hp | hp",
+                "  · exact Nat.dvd_of_mod_eq_zero hp",
+                "  · have h1 : p ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hp]",
+                "    omega",
+                "obtain ⟨k, hk⟩ := hp"
+              ]
+            },
+            {
+              "from": 4,
+              "text": "Substituting, $4k^2 = 2q^2$, so $q^2 = 2k^2$ is even, and by the same argument $q$ is even. Write $q = 2m$.",
+              "fragment": [
+                "have h4 : 2 * q ^ 2 = 2 * (2 * k ^ 2) := by rw [← hpq, hk]; ring",
+                "have hq2 : 2 ∣ q ^ 2 := ⟨k ^ 2, by omega⟩",
+                "have hq : 2 ∣ q := by",
+                "  rcases Nat.mod_two_eq_zero_or_one q with hq | hq",
+                "  · exact Nat.dvd_of_mod_eq_zero hq",
+                "  · have h1 : q ^ 2 % 2 = 1 := by rw [Nat.pow_mod, hq]",
+                "    omega",
+                "obtain ⟨m, hm⟩ := hq"
+              ]
+            },
+            {
+              "from": 5,
+              "text": "Thus $2$ divides both $p$ and $q$, so $2$ divides $\\gcd(p, q) = 1$, which is absurd. Hence no such $p$ and $q$ exist, and $\\sqrt{2}$ is irrational.",
+              "fragment": [
+                "have h2 : 2 ∣ Nat.gcd p q := Nat.dvd_gcd ⟨k, hk⟩ ⟨m, hm⟩",
+                "rw [h.gcd_eq_one] at h2",
+                "omega"
+              ]
+            }
+          ]
         }
       ]
     }

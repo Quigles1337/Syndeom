@@ -4,15 +4,20 @@
 //! commands either one injected instance or padding, never both (D5: two whole-argument
 //! variants cannot be made disjoint, and a padded flawed argument is a later version).
 //!
-//! The crate carries five producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
+//! The crate carries six producer versions (ADR-0011 *Amendments*, Al's rulings 3 and 5 on PR
 //! 26): `0.1.0`, whose three seeds and per-record counts stay regenerable as the goldens name them;
 //! `0.2.0`, with four more seeds and counts per instance; `0.3.0`, with lemma steps (D2), the T
 //! check (D5, D8: FLAW-0007 `unused` and FLAW-0009) and the `n_lt_two_pow` seed; `0.4.0`, with
 //! the padding module (D2 `pad`, D5 FLAW-0013, Options 8) and the `sqrt2_irrational` seed, which
-//! carries padding material; and `0.5.0`, the version `generate` emits, with FLAW-0004 (the
-//! hedge lexicon, `hidden_step`; the aligned tactic step omitted), realized on `sqrt2_irrational`
-//! as FLAWS.md's FLAW-0011 example, and FLAW-0011 as a commanded composite (`embedded`) of one
-//! gap-or-fatal instance of FLAW-0001 through FLAW-0010 (Al's rulings 2 and 3 on PR 30).
+//! carries padding material; `0.5.0`, with FLAW-0004 (the hedge lexicon, `hidden_step`; the
+//! aligned tactic step omitted), realized on `sqrt2_irrational` as FLAWS.md's FLAW-0011 example,
+//! and FLAW-0011 as a commanded composite (`embedded`) of one gap-or-fatal instance of FLAW-0001
+//! through FLAW-0010 (Al's rulings 2 and 3 on PR 30); and `0.6.0`, the version `generate` emits,
+//! with FLAW-0010 `a` (the fictional-reference lexicon, `shape`, `claim`; the formal file
+//! unchanged) on `sqrt2_irrational` and FLAW-0003 (`direct`: the goal or its contrapositive as a
+//! lemma proved by a forward reference to the theorem, check K; `cycle`: the lemma and the
+//! theorem citing each other, checked on the plan's premise graph) on the seed
+//! `bounded_monotone_converges`.
 //!
 //! A seed's flaw material is a whole-argument variant of one style: the flawed step list, each
 //! step naming the faithful step it replaces (`from`), the flaw site, and the anchor text at the
@@ -28,6 +33,12 @@
 //! the tactic lines omitted from the aligned fragment, and the kernel reports the unsolved goal at
 //! the site. A FLAW-0011 composite (0.5.0) applies one embedded spec of severity gap or fatal to
 //! a true statement, so that the argument is invalid, and adds its own record at the statement.
+//! FLAW-0010 material (0.6.0) is replacement material whose site step is the bare claim: the
+//! injector draws a reference from the fixed lexicon of obviously fictional tokens and prefixes
+//! `By <reference>`, records the justification the reference stands in for, and leaves the formal
+//! file unchanged. FLAW-0003 material (0.6.0) inserts the lemma that carries the circularity;
+//! `cycle` material carries `premises` (D2), from which the record's cycle and citation spans are
+//! computed and checked.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -44,14 +55,14 @@ use syndeom_manifest::{
 
 use crate::harness::{Observation, used_closure};
 use crate::plan::{
-    FormalRendering, LemmaHeader, PaddingHeader, PaddingKind, Plan, Step, lemma_lines,
-    padding_lines, render_formal, render_informal,
+    FormalRendering, LemmaHeader, LemmaKind, PaddingHeader, PaddingKind, Plan, Premise, Step,
+    THEOREM_PREMISE, lemma_lines, padding_lines, premise_cycle, render_formal, render_informal,
 };
 use crate::rng::{RNG_ID, Stream};
 
 pub const GENERATOR_ID: &str = "s2_template";
 /// The producer version `generate` emits (ADR-0011 D1; ruling 5 on PR 26).
-pub const GENERATOR_VERSION: &str = "0.5.0";
+pub const GENERATOR_VERSION: &str = "0.6.0";
 /// The FLAWS.md version every record is read against (ADR-0011 D7).
 pub const TAXONOMY_VERSION: &str = "0.1.0";
 
@@ -64,10 +75,11 @@ pub enum Version {
     V0_3_0,
     V0_4_0,
     V0_5_0,
+    V0_6_0,
 }
 
 impl Version {
-    pub const CURRENT: Version = Version::V0_5_0;
+    pub const CURRENT: Version = Version::V0_6_0;
 
     pub fn parse(s: &str) -> Option<Version> {
         match s {
@@ -76,6 +88,7 @@ impl Version {
             "0.3.0" => Some(Version::V0_3_0),
             "0.4.0" => Some(Version::V0_4_0),
             "0.5.0" => Some(Version::V0_5_0),
+            "0.6.0" => Some(Version::V0_6_0),
             _ => None,
         }
     }
@@ -87,25 +100,30 @@ impl Version {
             Version::V0_3_0 => "0.3.0",
             Version::V0_4_0 => "0.4.0",
             Version::V0_5_0 => "0.5.0",
+            Version::V0_6_0 => "0.6.0",
         }
     }
 
     /// How many of [`SEED_RECORDS`] the version compiles in: the v0.1 set, then the v0.2
-    /// additions, then the v0.3 addition, then the v0.4 addition; 0.5.0 adds no seed.
+    /// additions, then the v0.3 addition, then the v0.4 addition (0.5.0 adds no seed), then the
+    /// v0.6 addition.
     fn seed_count(self) -> usize {
         match self {
             Version::V0_1_0 => 3,
             Version::V0_2_0 => 7,
             Version::V0_3_0 => 8,
             Version::V0_4_0 | Version::V0_5_0 => 9,
+            Version::V0_6_0 => 10,
         }
     }
 
     /// From 0.5.0 the injector realizes FLAW-0004 (the hedge lexicon and `hidden_step`) and
-    /// FLAW-0011 as a commanded composite; earlier versions refuse both specs.
+    /// FLAW-0011 as a commanded composite; from 0.6.0 FLAW-0010 `a` (the fictional-reference
+    /// lexicon) and FLAW-0003 (`direct` and `cycle`); earlier versions refuse those specs.
     fn realizes(self, class: &str) -> bool {
         match class {
             "FLAW-0004" | "FLAW-0011" => self >= Version::V0_5_0,
+            "FLAW-0003" | "FLAW-0010" => self >= Version::V0_6_0,
             _ => true,
         }
     }
@@ -133,9 +151,12 @@ const SEED_RECORDS: &[&str] = &[
     include_str!("../seeds/horses.json"),
     include_str!("../seeds/n_lt_two_pow.json"),
     include_str!("../seeds/sqrt2_irrational.json"),
+    include_str!("../seeds/bounded_monotone_converges.json"),
 ];
 
 /// Dial keys the injector or the padding module writes into a record; a spec may not use them.
+/// `claim` is FLAW-0004's recorded bare claim and, as the one exception, FLAW-0010's own
+/// `true | false` dial (ADR-0011 D5), which the config sets.
 const RESERVED_DIALS: &[&str] = &[
     "site",
     "inserted",
@@ -153,6 +174,14 @@ const RESERVED_DIALS: &[&str] = &[
     "claim",
     "omitted",
     "embedded_instances",
+    "author",
+    "year",
+    "venue",
+    "result",
+    "reference",
+    "asserted",
+    "cycle",
+    "citations",
 ];
 
 fn required_option<'de, D, T>(d: D) -> Result<Option<T>, D::Error>
@@ -213,6 +242,7 @@ impl Paragraph {
                 name: self.name.clone(),
                 claim: self.claim.clone(),
             }),
+            premises: Vec::new(),
         }
     }
 }
@@ -253,6 +283,10 @@ pub struct Material {
     /// lines; present iff the class is FLAW-0004.
     #[serde(default)]
     pub hidden: Option<HiddenStep>,
+    /// FLAW-0010 material (0.6.0): the cited step's bare claim and the justification the
+    /// fictional reference stands in for; present iff the class is FLAW-0010.
+    #[serde(default)]
+    pub cited: Option<CitedStep>,
     pub steps: Vec<FlawedStep>,
 }
 
@@ -298,6 +332,137 @@ pub struct HiddenStep {
     pub omitted: Vec<String>,
 }
 
+/// FLAW-0010 `a`'s fixed lexicon of obviously fictional tokens (ADR-0011 D5; 0.6.0): never a
+/// real author's name, venue or identifier. A reference is `[<author> <year>, <venue>, <result>]`
+/// — the shape of FLAWS.md's example `[Placeholder 19XX, Theorem 4.2]` with the venue the spec's
+/// `shape` selects — and every token of it is a token of one of these entries.
+pub const CITATION_AUTHORS: &[&str] = &["Placeholder", "Nonesuch", "Fictitious", "Hypothetical"];
+pub const CITATION_YEARS: &[&str] = &["19XX", "20XX"];
+pub const CITATION_VENUES_JOURNAL: &[&str] = &[
+    "Journal of Nonexistent Mathematics",
+    "Annals of Imaginary Results",
+    "Fictitious Mathematical Quarterly",
+];
+pub const CITATION_VENUES_BOOK: &[&str] = &[
+    "Treatise on Nonesuch Lemmas",
+    "Elements of Imaginary Analysis",
+    "Handbook of Fictitious Theorems",
+];
+pub const CITATION_VENUES_PREPRINT: &[&str] = &[
+    "preprint XXXX.XXXXX",
+    "preprint YYYY.YYYYY",
+    "preprint ZZZZ.ZZZZZ",
+];
+pub const CITATION_RESULTS: &[&str] = &[
+    "Theorem 4.2",
+    "Lemma 3.1",
+    "Proposition 2.5",
+    "Corollary 1.7",
+];
+/// FLAW-0010's `shape` dial (ADR-0011 D5).
+pub const CITATION_SHAPES: &[&str] = &["journal", "book", "preprint"];
+
+/// The venue list a `shape` draws from.
+pub fn citation_venues(shape: &str) -> Option<&'static [&'static str]> {
+    match shape {
+        "journal" => Some(CITATION_VENUES_JOURNAL),
+        "book" => Some(CITATION_VENUES_BOOK),
+        "preprint" => Some(CITATION_VENUES_PREPRINT),
+        _ => None,
+    }
+}
+
+/// The reference the lexicon indices name, or `None` if the shape is unknown or an index is out
+/// of range.
+pub fn citation_reference(
+    shape: &str,
+    author: usize,
+    year: usize,
+    venue: usize,
+    result: usize,
+) -> Option<String> {
+    Some(format!(
+        "[{} {}, {}, {}]",
+        CITATION_AUTHORS.get(author)?,
+        CITATION_YEARS.get(year)?,
+        citation_venues(shape)?.get(venue)?,
+        CITATION_RESULTS.get(result)?
+    ))
+}
+
+/// D5's check: every token of `reference` — split on whitespace, with brackets and commas
+/// stripped — is a token of some lexicon entry, and there is at least one.
+pub fn citation_tokens_in_lexicon(reference: &str) -> bool {
+    let lexicon: BTreeSet<&str> = CITATION_AUTHORS
+        .iter()
+        .chain(CITATION_YEARS)
+        .chain(CITATION_VENUES_JOURNAL)
+        .chain(CITATION_VENUES_BOOK)
+        .chain(CITATION_VENUES_PREPRINT)
+        .chain(CITATION_RESULTS)
+        .flat_map(|e| e.split_whitespace())
+        .collect();
+    let tokens: Vec<&str> = reference
+        .split_whitespace()
+        .map(|t| t.trim_matches(|c| matches!(c, '[' | ']' | ',')))
+        .filter(|t| !t.is_empty())
+        .collect();
+    !tokens.is_empty() && tokens.iter().all(|t| lexicon.contains(t))
+}
+
+/// A drawn citation (0.6.0): the lexicon indices and the reference they name.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Citation {
+    pub author: usize,
+    pub year: usize,
+    pub venue: usize,
+    pub result: usize,
+    pub reference: String,
+}
+
+/// Draw a citation from `stream`, after the material draw: the author, the year, the venue (from
+/// the shape's list) and the result, in that order. The order is part of the producer's rng
+/// definition (ADR-0011 D4).
+pub fn draw_citation(stream: &mut Stream, shape: &str) -> Result<Citation, String> {
+    let venues = citation_venues(shape).ok_or(format!(
+        "FLAW-0010's shape is one of {CITATION_SHAPES:?}, not {shape:?}"
+    ))?;
+    let author = stream.below(CITATION_AUTHORS.len() as u64) as usize;
+    let year = stream.below(CITATION_YEARS.len() as u64) as usize;
+    let venue = stream.below(venues.len() as u64) as usize;
+    let result = stream.below(CITATION_RESULTS.len() as u64) as usize;
+    let reference = citation_reference(shape, author, year, venue, result)
+        .ok_or("a drawn lexicon index is in range")?;
+    Ok(Citation {
+        author,
+        year,
+        venue,
+        result,
+        reference,
+    })
+}
+
+/// FLAW-0010's `claim` dial and the severity it fixes (ADR-0011 D5): the cited step is true
+/// (gap) or false (fatal).
+fn citation_claim_severity(claim: bool) -> Severity {
+    if claim {
+        Severity::Gap
+    } else {
+        Severity::Fatal
+    }
+}
+
+/// FLAW-0010 `a` material at a site (0.6.0; ADR-0011 D5): the step's bare claim, to which the
+/// injector prefixes `By <reference>`, and the justification the reference stands in for, which
+/// the faithful step holds exactly once. The formal fragment is the faithful one: the class has
+/// no formal manifestation.
+#[derive(Debug, Clone, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CitedStep {
+    pub claim: String,
+    pub justification: String,
+}
+
 #[derive(Debug, Clone, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct FlawedStep {
@@ -309,6 +474,20 @@ pub struct FlawedStep {
     /// The lemma header of a lemma step (0.3.0).
     #[serde(default)]
     pub lemma: Option<LemmaHeader>,
+    /// The premises the step cites (0.6.0; FLAW-0003 `cycle` material only).
+    #[serde(default)]
+    pub premises: Vec<Premise>,
+}
+
+/// A flawed step as a step of the plan.
+fn step_of_flawed(s: &FlawedStep) -> Step {
+    Step {
+        text: s.text.clone(),
+        fragment: s.fragment.clone(),
+        lemma: s.lemma.clone(),
+        padding: None,
+        premises: s.premises.clone(),
+    }
 }
 
 /// Every seed record a producer version compiles in.
@@ -394,6 +573,8 @@ pub fn check_seed(seed: &Seed) -> Result<(), String> {
                 ));
             }
             check_hidden_material(seed, style, m)?;
+            check_cited_material(seed, style, m)?;
+            check_circularity_material(seed, style, m)?;
         }
         // FINDING-014 (packet 4): a seed's own steps never carry a padding header; only the
         // padding module sets one (a flawed step cannot carry one, by its shape).
@@ -537,6 +718,198 @@ fn check_hidden_material(seed: &Seed, style: &Style, m: &Material) -> Result<(),
     Ok(())
 }
 
+/// FLAW-0010 material (0.6.0): `cited` is present iff the class is FLAW-0010; the material is
+/// sub-variant `a`, replacement material at a main-proof step without an anchor, `N/A`; its one
+/// dial `claim` fixes the severity; the site step's text is the bare claim; the faithful site step
+/// holds the justification exactly once and the claim does not; every fragment and every other
+/// step's text are the faithful ones (the formal file is unchanged).
+fn check_cited_material(seed: &Seed, style: &Style, m: &Material) -> Result<(), String> {
+    let err =
+        |what: &str| Err::<(), String>(format!("seed {}: FLAW-0010 material {what}", seed.id));
+    let Some(cs) = &m.cited else {
+        if m.class == "FLAW-0010" {
+            return err("carries `cited`");
+        }
+        return Ok(());
+    };
+    if m.class != "FLAW-0010" {
+        return err("is the only material that carries `cited`");
+    }
+    if m.sub_variant.as_deref() != Some("a") {
+        return err("is sub-variant `a` (b and c are deferred, ADR-0011 Options 5)");
+    }
+    if m.intrinsic || m.inserts || m.anchor.is_some() {
+        return err("is replacement material without an anchor");
+    }
+    if m.lean_catchable != LeanCatchable::NotApplicable {
+        return err("is N/A: the formal file is unchanged");
+    }
+    let claim = m
+        .dials
+        .as_object()
+        .filter(|d| d.len() == 1)
+        .and_then(|d| d.get("claim"))
+        .and_then(Value::as_bool);
+    let Some(claim) = claim else {
+        return err("has exactly the dial claim, true or false");
+    };
+    if citation_claim_severity(claim) != m.severity {
+        return err("has the severity its claim fixes (true: gap; false: fatal)");
+    }
+    if m.steps.len() != style.steps.len() {
+        return err("keeps every faithful step");
+    }
+    for (j, f) in style.steps.iter().enumerate() {
+        let k = (j + 1) as u64;
+        let Some(s) = m.steps.iter().find(|s| s.from == Some(k)) else {
+            return err("keeps every faithful step");
+        };
+        if s.fragment != f.fragment || s.lemma != f.lemma || !s.premises.is_empty() {
+            return err("leaves every formal fragment unchanged");
+        }
+        if k == m.site {
+            if f.lemma.is_some() {
+                return err("sits at a main-proof step in 0.6.0");
+            }
+            if s.text != cs.claim {
+                return err(
+                    "has its site step's text equal to the bare claim (the injector prefixes the reference)",
+                );
+            }
+            if cs.justification.is_empty() || f.text.matches(cs.justification.as_str()).count() != 1
+            {
+                return err("names a justification the faithful step holds exactly once");
+            }
+            if cs.claim.contains(cs.justification.as_str()) {
+                return err("replaces the justification, so the claim does not hold it");
+            }
+        } else if s.text != f.text {
+            return err("changes the site step only");
+        }
+    }
+    Ok(())
+}
+
+/// True iff `name` occurs in `line` as a whole Lean identifier: not preceded or followed by an
+/// identifier character (so `foo` does not match inside `foo_lemma_1` or `Foo.foo`).
+fn mentions_identifier(line: &str, name: &str) -> bool {
+    let ident = |c: char| c.is_alphanumeric() || matches!(c, '_' | '.' | '\'' | '!' | '?');
+    line.match_indices(name).any(|(at, _)| {
+        let before = line[..at].chars().next_back().is_none_or(|c| !ident(c));
+        let after = line[at + name.len()..]
+            .chars()
+            .next()
+            .is_none_or(|c| !ident(c));
+        before && after
+    })
+}
+
+/// FLAW-0003 material (0.6.0; ADR-0011 D5): insertion material whose site is a `theorem` lemma,
+/// fatal. `direct` is `YES-KERNEL` with exactly the dial `form` (`restated-goal` or
+/// `contrapositive`), its lemma proved by a forward reference to the main declaration, and
+/// carries no premises (its check is K). `cycle` is `NO` with exactly the dial `cycle_length`
+/// (2 in 0.6.0), never references the main declaration formally, and carries premises whose
+/// phrases each occur exactly once in their step, citing the theorem or a lemma of the material,
+/// and whose graph contains the cycle through the lemma. No other material carries premises.
+fn check_circularity_material(seed: &Seed, style: &Style, m: &Material) -> Result<(), String> {
+    let err =
+        |what: &str| Err::<(), String>(format!("seed {}: FLAW-0003 material {what}", seed.id));
+    if m.class != "FLAW-0003" {
+        if m.steps.iter().any(|s| !s.premises.is_empty()) {
+            return Err(format!(
+                "seed {}: premises belong to FLAW-0003 cycle material in 0.6.0",
+                seed.id
+            ));
+        }
+        return Ok(());
+    }
+    if m.intrinsic || !m.inserts || m.anchor.is_some() {
+        return err("inserts the lemma that carries the circularity");
+    }
+    if m.severity != Severity::Fatal {
+        return err("is fatal");
+    }
+    let Some(site) = (m.site >= 1)
+        .then(|| m.steps.get(m.site as usize - 1))
+        .flatten()
+    else {
+        return err("sits at one of its own steps");
+    };
+    let Some(lemma) = &site.lemma else {
+        return err("has a lemma at its site");
+    };
+    if lemma.kind != LemmaKind::Theorem {
+        return err("declares its lemma as a theorem");
+    }
+    let main = main_declaration(&seed.id);
+    // the main declaration's name as a whole identifier (the lemma's name extends it)
+    let references_main = |s: &FlawedStep| s.fragment.iter().any(|l| mentions_identifier(l, &main));
+    match m.sub_variant.as_deref() {
+        Some("direct") => {
+            if m.lean_catchable != LeanCatchable::YesKernel {
+                return err(
+                    "`direct` is YES-KERNEL: the lemma's proof references the main declaration forward",
+                );
+            }
+            let form = m
+                .dials
+                .as_object()
+                .filter(|d| d.len() == 1)
+                .and_then(|d| d.get("form"))
+                .and_then(Value::as_str);
+            if !matches!(form, Some("restated-goal" | "contrapositive")) {
+                return err("`direct` has exactly the dial form, restated-goal or contrapositive");
+            }
+            if !references_main(site) {
+                return err(
+                    "`direct` proves its lemma by the main declaration, a forward reference",
+                );
+            }
+            if m.steps.iter().any(|s| !s.premises.is_empty()) {
+                return err("`direct` carries no premises in 0.6.0; its check is K");
+            }
+        }
+        Some("cycle") => {
+            if m.lean_catchable != LeanCatchable::No {
+                return err("`cycle` is NO: the formal file keeps a faithful proof");
+            }
+            let n = m
+                .dials
+                .as_object()
+                .filter(|d| d.len() == 1)
+                .and_then(|d| d.get("cycle_length"))
+                .and_then(Value::as_u64);
+            if n != Some(2) {
+                return err("`cycle` has exactly the dial cycle_length, 2 in 0.6.0");
+            }
+            if m.steps.iter().any(references_main) {
+                return err("`cycle` never references the main declaration formally");
+            }
+            for s in &m.steps {
+                for premise in &s.premises {
+                    if s.text.matches(premise.phrase.as_str()).count() != 1 {
+                        return err("has each citation phrase exactly once in its step");
+                    }
+                    let known = premise.cites == THEOREM_PREMISE
+                        || m.steps
+                            .iter()
+                            .any(|t| t.lemma.as_ref().is_some_and(|l| l.name == premise.cites));
+                    if !known {
+                        return err("cites the theorem or a lemma of the material");
+                    }
+                }
+            }
+            let mut plan = faithful_plan(seed, style);
+            plan.steps = m.steps.iter().map(step_of_flawed).collect();
+            if premise_cycle(&plan, &lemma.name, 2).is_none() {
+                return err("has a premise graph with the cycle through its lemma");
+            }
+        }
+        _ => return err("is `direct` or `cycle`"),
+    }
+    Ok(())
+}
+
 /// `artifact.kind` requested by the config.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Target {
@@ -613,20 +986,26 @@ fn parse_spec(f: &Value, what: &str) -> Result<FlawSpec, String> {
                 .ok_or(format!("{what}.site is \"auto\" or a step index"))?,
         ),
     };
+    let class = f["class"]
+        .as_str()
+        .ok_or(format!("{what}.class is a string"))?
+        .to_string();
     let dials = f["dials"]
         .as_object()
         .ok_or(format!("{what}.dials is an object"))?
         .clone();
-    if let Some(k) = RESERVED_DIALS.iter().find(|k| dials.contains_key(**k)) {
+    // FLAW-0010's `claim` (true | false) is the config's own dial (ADR-0011 D5); for every other
+    // class `claim` is a name the injector writes.
+    if let Some(k) = RESERVED_DIALS
+        .iter()
+        .find(|k| dials.contains_key(**k) && !(class == "FLAW-0010" && **k == "claim"))
+    {
         return Err(format!(
             "{what}.dials may not set {k:?}: the injector records it"
         ));
     }
     Ok(FlawSpec {
-        class: f["class"]
-            .as_str()
-            .ok_or(format!("{what}.class is a string"))?
-            .to_string(),
+        class,
         sub_variant: match &f["sub_variant"] {
             Value::Null => None,
             Value::String(s) => Some(s.clone()),
@@ -721,6 +1100,9 @@ fn check_spec(spec: &FlawSpec, target: Target) -> Result<(), String> {
         ("FLAW-0008", _) => true,
         ("FLAW-0009", Target::Informal) => true,
         ("FLAW-0004" | "FLAW-0010", Target::Formal) => true,
+        // FLAW-0003 `cycle` is informal-only (0.6.0): declaration order forbids a formal cycle,
+        // so a formal-only artifact has nothing to carry it
+        ("FLAW-0003", Target::Formal) if spec.sub_variant.as_deref() == Some("cycle") => true,
         _ => false,
     };
     if refused {
@@ -728,6 +1110,18 @@ fn check_spec(spec: &FlawSpec, target: Target) -> Result<(), String> {
             "{} cannot be realized with target {target:?}",
             spec.class
         ));
+    }
+    if spec.class == "FLAW-0010" {
+        match spec.sub_variant.as_deref() {
+            Some("a") => {}
+            Some("b" | "c") => {
+                return Err(
+                    "FLAW-0010 sub-variants b and c need real references and are deferred (ADR-0011 Options 5); v0.1 realizes a only"
+                        .into(),
+                );
+            }
+            _ => return Err("FLAW-0010's sub_variant is \"a\" in v0.1".into()),
+        }
     }
     Ok(())
 }
@@ -1119,7 +1513,26 @@ fn inject(
     seed_value: u64,
 ) -> Result<Injection, String> {
     check_spec(spec, target)?;
-    let dials = Value::Object(spec.dials.clone());
+    // FLAW-0010 (0.6.0): `shape` selects the venue list and is not a property of the material,
+    // which is matched on the remaining dial (`claim`).
+    let shape = if spec.class == "FLAW-0010" {
+        exact_keys(&spec.dials, &["shape", "claim"], "FLAW-0010's dials")?;
+        let shape = spec.dials["shape"]
+            .as_str()
+            .filter(|s| CITATION_SHAPES.contains(s))
+            .ok_or(format!("FLAW-0010's shape is one of {CITATION_SHAPES:?}"))?;
+        if !spec.dials["claim"].is_boolean() {
+            return Err("FLAW-0010's claim is true or false".into());
+        }
+        Some(shape.to_string())
+    } else {
+        None
+    };
+    let mut matched = spec.dials.clone();
+    if shape.is_some() {
+        matched.remove("shape");
+    }
+    let dials = Value::Object(matched);
     let eligible: Vec<&Material> = style
         .flaws
         .iter()
@@ -1222,9 +1635,20 @@ fn inject(
     // so the instance is `N/A` there (D5).
     let hidden = material.hidden.as_ref();
     let hedge = hidden.map(|_| stream.below(HEDGES.len() as u64) as usize);
+    // FLAW-0010 (0.6.0): the reference is drawn from the instance's stream after the material —
+    // author, year, venue (the shape's list), result — and prefixed as `By <reference>` to the
+    // material's bare claim; the justification it stands in for is recorded. The formal file is
+    // unchanged, so the instance is `N/A` for every target.
+    let cited = material.cited.as_ref();
+    let citation = match (cited, &shape) {
+        (Some(_), Some(shape)) => Some(draw_citation(&mut stream, shape)?),
+        (Some(_), None) => return Err("FLAW-0010 material is commanded with a shape".into()),
+        _ => None,
+    };
     let flawed_site = &material.steps[site - 1];
-    let site_text = match (hidden, hedge) {
-        (Some(hs), Some(i)) => format!("{} {}", HEDGES[i], hs.claim),
+    let site_text = match (hidden, hedge, cited, &citation) {
+        (Some(hs), Some(i), _, _) => format!("{} {}", HEDGES[i], hs.claim),
+        (_, _, Some(cs), Some(c)) => format!("By {} {}", c.reference, cs.claim),
         _ => flawed_site.text.clone(),
     };
     let flawed_step = Step {
@@ -1232,6 +1656,7 @@ fn inject(
         fragment: flawed_site.fragment.clone(),
         lemma: flawed_site.lemma.clone(),
         padding: None,
+        premises: flawed_site.premises.clone(),
     };
     let hedged = |formal: bool| -> Vec<(&str, Value)> {
         match (hidden, hedge) {
@@ -1248,10 +1673,51 @@ fn inject(
             _ => Vec::new(),
         }
     };
-    // Informal: the anchor's text, or the whole step; an inserted step replaces nothing.
+    let cited_dials = || -> Vec<(&str, Value)> {
+        match (cited, &citation) {
+            (Some(cs), Some(c)) => vec![
+                ("author", json!(c.author)),
+                ("year", json!(c.year)),
+                ("venue", json!(c.venue)),
+                ("result", json!(c.result)),
+                ("reference", json!(c.reference)),
+                ("asserted", json!(cs.claim)),
+                ("justification", json!(cs.justification)),
+            ],
+            _ => Vec::new(),
+        }
+    };
+    // FLAW-0003 `cycle` (0.6.0): the citation phrases' spans in the flawed steps and the cycle of
+    // the plan's premise graph through the inserted lemma, recorded for the D5 check.
+    let mut cycle_extra: Vec<(&str, Value)> = Vec::new();
+    if material.class == "FLAW-0003" && material.sub_variant.as_deref() == Some("cycle") {
+        let mut citations = Vec::new();
+        for (j, s) in material.steps.iter().enumerate() {
+            for premise in &s.premises {
+                let span = unique_span(&s.text, &premise.phrase)
+                    .ok_or("a citation phrase occurs exactly once in its step")?;
+                citations.push(json!({"step": j + 1, "span": span, "phrase": premise.phrase}));
+            }
+        }
+        let n = spec.dials["cycle_length"]
+            .as_u64()
+            .ok_or("FLAW-0003 cycle's cycle_length is an integer")? as usize;
+        let mut probe = plan.clone();
+        probe.steps = material.steps.iter().map(step_of_flawed).collect();
+        let lemma = flawed_site
+            .lemma
+            .as_ref()
+            .ok_or("the cycle's site is a lemma")?;
+        let cycle = premise_cycle(&probe, &lemma.name, n)
+            .ok_or("the plan's premise graph contains the commanded cycle")?;
+        cycle_extra = vec![("cycle", json!(cycle)), ("citations", json!(citations))];
+    }
+    // Informal: the anchor's text, or the whole step; an inserted step replaces nothing; a
+    // fictional reference (0.6.0) stands in for the justification it replaced.
     let faithful_site = (!material.inserts).then(|| &faithful[(material.site - 1) as usize]);
-    let (inserted, replaced) = match (&material.anchor, faithful_site) {
-        (Some(a), _) => (
+    let (inserted, replaced) = match (&material.anchor, faithful_site, cited, &citation) {
+        (_, _, Some(cs), Some(c)) => (c.reference.clone(), Some(cs.justification.clone())),
+        (Some(a), _, _, _) => (
             a.inserted.clone(),
             Some(
                 a.replaced
@@ -1259,10 +1725,12 @@ fn inject(
                     .ok_or("material that is not intrinsic replaces text at its anchor")?,
             ),
         ),
-        (None, Some(f)) => (site_text.clone(), Some(f.text.clone())),
-        (None, None) => (site_text.clone(), None),
+        (None, Some(f), _, _) => (site_text.clone(), Some(f.text.clone())),
+        (None, None, _, _) => (site_text.clone(), None),
     };
     let mut informal_extra = hedged(false);
+    informal_extra.extend(cited_dials());
+    informal_extra.extend(cycle_extra);
     informal_extra.extend([
         ("inserted", json!(inserted)),
         ("replaced", json!(replaced)),
@@ -1300,6 +1768,7 @@ fn inject(
             fragment: s.fragment.clone(),
             lemma: s.lemma.clone(),
             padding: None,
+            premises: s.premises.clone(),
         })
         .collect();
     let lean_catchable = if hidden.is_some() && target == Target::Informal {
@@ -1544,6 +2013,71 @@ pub fn assemble(
                         .as_str()
                         .is_some_and(|r| r.matches(justification).count() == 1)
                     && !text.contains(justification);
+            }
+            // FLAW-0010 (0.6.0, D5): the span equals the reference the recorded lexicon indices
+            // name, every token of it is in the lexicon, the step is `By <reference>` and the
+            // bare claim, and the faithful step held the justification exactly once.
+            if inj.class == "FLAW-0010" {
+                let d = &inj.informal_dials;
+                let index = |k: &str| d[k].as_u64().map(|x| x as usize);
+                let rebuilt = match (
+                    d["shape"].as_str(),
+                    index("author"),
+                    index("year"),
+                    index("venue"),
+                    index("result"),
+                ) {
+                    (Some(shape), Some(a), Some(y), Some(v), Some(r)) => {
+                        citation_reference(shape, a, y, v, r)
+                    }
+                    _ => None,
+                };
+                let asserted = d["asserted"].as_str().unwrap_or_default();
+                let justification = d["justification"].as_str().unwrap_or_default();
+                let original = d["original_steps"][inj.site.to_string()]
+                    .as_str()
+                    .unwrap_or_default();
+                confirmed = confirmed
+                    && rebuilt.as_deref() == Some(inj.informal_inserted.as_str())
+                    && citation_tokens_in_lexicon(&inj.informal_inserted)
+                    && *text == format!("By {} {asserted}", inj.informal_inserted)
+                    && !justification.is_empty()
+                    && original.matches(justification).count() == 1
+                    && !text.contains(justification);
+            }
+            // FLAW-0003 `cycle` (0.6.0, D5): the plan's premise graph contains the recorded
+            // cycle through the inserted lemma, and each citation phrase is at its recorded span.
+            if inj.class == "FLAW-0003" && inj.sub_variant.as_deref() == Some("cycle") {
+                let d = &inj.informal_dials;
+                let n = d["cycle_length"].as_u64().unwrap_or(0) as usize;
+                let lemma = p
+                    .plan
+                    .steps
+                    .get(inj.site - 1)
+                    .and_then(|s| s.lemma.as_ref())
+                    .map(|l| l.name.clone());
+                let cycle_ok = lemma
+                    .and_then(|l| premise_cycle(&p.plan, &l, n))
+                    .is_some_and(|c| json!(c) == d["cycle"]);
+                let citations_ok = d["citations"].as_array().is_some_and(|cs| {
+                    !cs.is_empty()
+                        && cs.iter().all(|c| {
+                            let step = c["step"].as_u64().map(|k| k as usize);
+                            let span = c["span"]
+                                .as_array()
+                                .and_then(|s| Some([s.first()?.as_u64()?, s.get(1)?.as_u64()?]));
+                            match (step, span, c["phrase"].as_str()) {
+                                (Some(k), Some(span), Some(phrase)) => {
+                                    st.steps.get(k).is_some_and(|t| {
+                                        span_text(t, span).as_deref() == Some(phrase)
+                                            && t.matches(phrase).count() == 1
+                                    })
+                                }
+                                _ => false,
+                            }
+                        })
+                });
+                confirmed = confirmed && cycle_ok && citations_ok;
             }
             records.push((
                 Flaw {
