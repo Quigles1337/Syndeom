@@ -9893,3 +9893,54 @@ is open for Al's review. Repo green: the gate on the committed tree is recorded 
 request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 45 ADDENDUM — AL'S RULINGS ON PR 31 (received 2026-10-29 UTC, 2026-10-28
+America/New_York, in this session's conversation after PR #31 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr31.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-template-060-20261029T0029Z\\`, 793 bytes, SHA-256
+`fe937f3eae7cb0d4f250df5e001e76bd922ae4c3fe40b15e8f35523f52f8748a`):
+
+~~~text
+Rulings on PR #31 / s2_template 0.6.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 52 through 65 are accepted as read.
+
+On reading 52, record also: FLAW-0010 a's references are placeholder-shaped by D5's design, so S3 reads detection rates for that class as rates against obviously fictional references; a plausible-shaped lexicon, if one is ever wanted, is a later producer version and never attaches a real name to a fictional work.
+
+On reading 61, record also: the cycle pair's formal file is a valid proof by construction; the instance is informal-only, and the pair is invalid under D7's either-file rule.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout — left clean on `main` at the session's close — was
+switched back to `claude/s2-template-0.6.0` at `7f0c85ff…`, in sync with its remote; PR 31 had
+no review and no comment on GitHub.
+
+How each ruling is applied:
+- **Readings 52–65 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, NEXT) and here. Nothing regenerated.
+- **Reading 52's note** → recorded: FLAW-0010 `a`'s references are placeholder-shaped by D5's
+  design; S3 reads the class's detection rates as rates against obviously fictional references;
+  a plausible-shaped lexicon, if ever wanted, is a later producer version and never attaches a
+  real name to a fictional work. 0.6.0's lexicon stands; no byte changes.
+- **Reading 61's note** → recorded: the cycle pair's formal file is a valid proof by
+  construction; the instance is informal-only; the pair is invalid under D7's either-file rule,
+  which is how 0.6.0 already records it (`proof_status: invalid`, one informal record,
+  `lean_build` commanded `pass`). No seed, golden or check changes; the version stays 0.6.0.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and under
+  the external root.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No seed, no proof byte, no label and no register status changed; no golden rewritten.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `ef41a10c…`, the 0.6.0 goldens'
+  `engine_commit`, stays a real commit on `main`.
+- **FINDING-016** (informational, backlog); FINDING-015 standing.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

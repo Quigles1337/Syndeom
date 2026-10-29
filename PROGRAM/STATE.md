@@ -76,6 +76,14 @@
     Gate S1 table, the constitution, the licence, the tag, `corpora/` (no artifact written) and
     every 0.1.0, 0.2.0, 0.3.0, 0.4.0 and 0.5.0 golden. **NEXT** waits on this pull request's
     merge.
+  - **Al's rulings of 2026-10-28 on PR 31** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 45's addendum), recorded on the same branch: readings 52–65
+    accepted as read; reading 52 recorded with Al's note (the references placeholder-shaped by
+    D5's design, S3 reading the class's detection rates as rates against obviously fictional
+    references; a plausible-shaped lexicon a later producer version that never attaches a real
+    name to a fictional work); reading 61 recorded with Al's note (the cycle pair's formal file
+    a valid proof by construction, the instance informal-only, the pair invalid under D7's
+    either-file rule). No code, seed or golden changed; the version stays 0.6.0.
 - **Previous update (Session 44):** 2026-10-28 UTC (2026-10-28 America/New_York). This was Session 44:
   - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
     fresh conversation;
@@ -1789,7 +1797,7 @@ repository: false", no Git snapshot was attached, and the `C--Users-LEET` index 
   and measured Session 39 (2026-10-28), accepted as amended by Al's rulings of 2026-10-28 on PR 25
   (*Amendments* 1), in effect at the merge; ADR-0011 amended Sessions 41–45 (*Amendments*: Al's
   owner note of 2026-10-28 and the `s2_template` 0.2.0, 0.3.0, 0.4.0, 0.5.0 and 0.6.0
-  revisions, with Al's rulings on PRs 26, 27, 28, 29 and 30); ADR-0014 is the next free
+  revisions, with Al's rulings on PRs 26, 27, 28, 29, 30 and 31); ADR-0014 is the next free
   number.**
 - **S3 calibration ADR obligation for undetermined items (Al's ruling (ii), 2026-10-13):**
   items whose `statement_status.value` is `null` (`method: "undetermined"`, ADR-0001 as amended)
@@ -2009,6 +2017,25 @@ Rulings on PR #30 / s2_template 0.5.0 (record verbatim in ADR-0011 Amendments, S
 
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
+- **Al's rulings of 2026-10-28 on PR 31 (`s2_template` 0.6.0) — verbatim.** Received in
+  Session 45's conversation after PR 31 opened (2026-10-29 UTC). The copy is
+  `owner-rulings-pr31.txt` under `C:\Users\LEET\Codex\Temp\syndeom-s2-template-060-20261029T0029Z\\`
+  (793 bytes, SHA-256 `fe937f3eae7cb0d4f250df5e001e76bd922ae4c3fe40b15e8f35523f52f8748a`),
+  transcribed from the message as rendered to the executor. The rulings are also in ADR-0011
+  *Amendments* and in HANDOFF Session 45's addendum. Their effect is under *Standing
+  escalations* and in the Updated bullet.
+
+~~~text
+Rulings on PR #31 / s2_template 0.6.0 (record verbatim in ADR-0011 Amendments, STATE and this session's HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 52 through 65 are accepted as read.
+
+On reading 52, record also: FLAW-0010 a's references are placeholder-shaped by D5's design, so S3 reads detection rates for that class as rates against obviously fictional references; a plausible-shaped lexicon, if one is ever wanted, is a later producer version and never attaches a real name to a fictional work.
+
+On reading 61, record also: the cycle pair's formal file is a valid proof by construction; the instance is informal-only, and the pair is invalid under D7's either-file rule.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
 
 ## Carried from S0 (notes, not actions)
 
@@ -2084,9 +2111,17 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
-- **`s2_template` 0.6.0 — AWAITING Al's review and merge** (Session 45; branch
+- **`s2_template` 0.6.0 — RULED by Al on 2026-10-28 (rulings on PR 31, verbatim under
+  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 45; branch
   `claude/s2-template-0.6.0`; `analysis/s2-generate-6/README.md`).
-  - **Readings 52–65 flagged for Al** (the packet; ADR-0011 *Amendments*): the reference's form
+  - Readings 52–65 are accepted as read. Reading 52 carries Al's recorded note: FLAW-0010 `a`'s
+    references are placeholder-shaped by D5's design, so S3 reads detection rates for that class
+    as rates against obviously fictional references; a plausible-shaped lexicon, if one is ever
+    wanted, is a later producer version and never attaches a real name to a fictional work.
+    Reading 61 carries Al's recorded note: the cycle pair's formal file is a valid proof by
+    construction; the instance is informal-only, and the pair is invalid under D7's either-file
+    rule. Nothing regenerated; the version stays 0.6.0. Nothing else is awaited on the readings.
+  - **The readings as flagged** (the packet; ADR-0011 *Amendments*): the reference's form
     `[<author> <year>, <venue>, <result>]` and the executor's lexicon of obviously fictional
     tokens (52); the draw order author, year, venue, result as part of the rng definition (53);
     `shape` a config dial matched outside the material (54); the record spanning the reference
@@ -2639,8 +2674,9 @@ Executable cold:
    first, by digest where ADR-0005 *Amendments* 1–3 allow it.
 2. Confirm that the 0.6.0 pull request is merged, with a merge commit on fetched `origin/main`,
    and that `ef41a10ce16db34c1ebe3ea66a456df97df83be1` (the 0.6.0 goldens' `engine_commit`) is an
-   ancestor of `main`. **If either fails, record that and stop.** Any later ruling — on readings
-   52–65, FINDING-015 or FINDING-016 — is recorded verbatim, in STATE, HANDOFF and, where it
+   ancestor of `main`. **If either fails, record that and stop.** Any later ruling — beyond Al's
+   rulings of 2026-10-28 on PR 31, which are recorded, or on FINDING-015 or FINDING-016 — is
+   recorded verbatim, in STATE, HANDOFF and, where it
    amends the design, ADR-0011 *Amendments*, before anything else; a ruling that changes a seed,
    a dial or a check bumps the producer again, and no golden is rewritten.
 3. **`s2_template` 0.7.0, FLAW-0008 on the new seed `bolzano_weierstrass`** (D6's v0.1 list;
