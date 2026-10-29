@@ -14,9 +14,10 @@ use syndeom_generate::plan::{
 };
 use syndeom_generate::rng::Stream;
 use syndeom_generate::template::{
-    CITATION_AUTHORS, CITATION_RESULTS, CITATION_SHAPES, CITATION_YEARS, HEDGES, Prepared, Version,
-    assemble, check_seed, citation_reference, citation_tokens_in_lexicon, citation_venues,
-    faithful_plan, manifests_in, prepare, prepare_with, seeds,
+    CITATION_AUTHORS, CITATION_RESULTS, CITATION_SHAPES, CITATION_YEARS, HEDGES, Prepared,
+    TRANSFORMATIONS, Version, assemble, check_drift, check_seed, citation_reference,
+    citation_tokens_in_lexicon, citation_venues, faithful_plan, manifests_in, prepare,
+    prepare_with, seeds,
 };
 use syndeom_manifest::{
     LeanCatchable, Location, ProofStatus, Severity, Toolchain, Verdict, parse_informal_md,
@@ -187,9 +188,16 @@ fn every_case() -> Vec<Value> {
                     vec![m.dials.clone()]
                 };
                 for dials in dial_sets {
+                    // FLAW-0008 (0.7.0) sits at the statement (site 0), which a spec names as
+                    // "auto"; every other material's site is an eligible explicit site
+                    let site = if m.site == 0 {
+                        json!("auto")
+                    } else {
+                        json!(m.site)
+                    };
                     let inner = json!({
                         "class": m.class, "sub_variant": m.sub_variant, "severity": sev,
-                        "site": m.site, "dials": dials
+                        "site": site, "dials": dials
                     });
                     specs.push(json!([inner]));
                     // FLAW-0011 as a commanded composite (0.5.0): the same material embedded,
@@ -269,7 +277,7 @@ fn d9_determinism_and_idempotence() {
                 syndeom_manifest::to_disk_json(&m2).unwrap()
             );
             assert_eq!(m1.artifact_id, p1.artifact_id());
-            assert!(m1.artifact_id.starts_with("s2_template-v0.6.0-"));
+            assert!(m1.artifact_id.starts_with("s2_template-v0.7.0-"));
         }
     }
 }
@@ -315,8 +323,14 @@ fn d10_locations_resolve_to_the_dials_text() {
                     let text = std::str::from_utf8(&f.bytes).unwrap();
                     let lines: Vec<&str> = text.lines().collect();
                     let inserted = r.dials["inserted"].as_array().unwrap();
-                    if r.class == "FLAW-0011" {
-                        // the composite (0.5.0): the main declaration at its header line
+                    if r.dials["site"] == json!(0) {
+                        // a record at the statement — the composite (0.5.0), FLAW-0008's
+                        // drifted statement and FLAW-0012's false statement (0.7.0): the main
+                        // declaration at its header line
+                        assert!(
+                            matches!(r.class.as_str(), "FLAW-0011" | "FLAW-0008" | "FLAW-0012"),
+                            "{c}"
+                        );
                         assert_eq!(loc.declaration, p.plan.main_declaration, "{c}");
                         assert_eq!(loc.line, f.main_line, "{c}");
                         assert_eq!(
@@ -588,7 +602,21 @@ fn d7_a_false_statement_seed_yields_an_invalid_incorrect_artifact_with_its_count
                 assert_eq!(gt.statement_status.value, Some(false));
                 assert_eq!(gt.proof_status, ProofStatus::Invalid);
                 assert!(!gt.correct);
-                assert_eq!(gt.flaws.len(), 2);
+                // one instance with two records; FLAW-0012 (0.7.0) adds its own instance at the
+                // statement after the use site's, two records each
+                let mut instances: Vec<u64> = gt.flaws.iter().map(|r| r.instance).collect();
+                instances.dedup();
+                assert_eq!(
+                    instances,
+                    if m.class == "FLAW-0012" {
+                        vec![1, 2]
+                    } else {
+                        vec![1]
+                    },
+                    "{}",
+                    seed.id
+                );
+                assert_eq!(gt.flaws.len(), 2 * instances.len());
                 for r in &gt.flaws {
                     assert!(r.dials["replaced"].is_null());
                     assert_eq!(r.dials["counterexample"], json!(seed.counterexample));
@@ -606,8 +634,9 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
     assert_eq!(seeds(Version::V0_3_0).len(), 8);
     assert_eq!(seeds(Version::V0_4_0).len(), 9);
     assert_eq!(seeds(Version::V0_5_0).len(), 9);
-    let all = seeds(Version::V0_6_0);
-    assert_eq!(all.len(), 10);
+    assert_eq!(seeds(Version::V0_6_0).len(), 10);
+    let all = seeds(Version::V0_7_0);
+    assert_eq!(all.len(), 12);
     let ids: Vec<&str> = all.iter().map(|s| s.id.as_str()).collect();
     assert_eq!(
         ids,
@@ -622,6 +651,8 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
             "n_lt_two_pow",
             "sqrt2_irrational",
             "bounded_monotone_converges",
+            "bolzano_weierstrass",
+            "bounded_continuous_sup",
         ]
     );
     for seed in &all {
@@ -687,6 +718,47 @@ fn d6_seed_records_are_sourced_outside_the_s1_corpus_and_well_formed() {
                     "{}",
                     seed.id
                 );
+                // FLAW-0008 material (0.7.0): `drift` iff the class, on bolzano_weierstrass
+                // only, at the statement (site 0), NO, one of D5's five transformations, every
+                // faithful step kept with its text
+                assert_eq!(m.drift.is_some(), m.class == "FLAW-0008", "{}", seed.id);
+                if let Some(d) = &m.drift {
+                    assert_eq!(seed.id, "bolzano_weierstrass");
+                    assert_eq!((m.site, m.lean_catchable), (0, LeanCatchable::No));
+                    let t = m.dials["transformation"].as_str().unwrap();
+                    assert!(TRANSFORMATIONS.contains(&t), "{t}");
+                    assert!(
+                        check_drift(
+                            t,
+                            (&seed.binders, &seed.claim),
+                            (&d.binders, &d.claim),
+                            &d.replaced,
+                            &d.inserted
+                        )
+                        .is_ok()
+                    );
+                    assert_eq!(m.steps.len(), style.steps.len());
+                    for (s, f) in m.steps.iter().zip(&style.steps) {
+                        assert_eq!(s.text, f.text);
+                    }
+                    continue;
+                }
+                // FLAW-0012 material (0.7.0): `use` iff the class, on bounded_continuous_sup
+                // only, intrinsic, fatal, YES-KERNEL, at the hidden use site
+                assert_eq!(
+                    m.hidden_use.is_some(),
+                    m.class == "FLAW-0012",
+                    "{}",
+                    seed.id
+                );
+                if let Some(u) = &m.hidden_use {
+                    assert_eq!(seed.id, "bounded_continuous_sup");
+                    assert!(m.intrinsic && m.severity == Severity::Fatal);
+                    assert_eq!(m.lean_catchable, LeanCatchable::YesKernel);
+                    assert_eq!(m.site, 3);
+                    assert!(!u.theorem.is_empty() && !u.hypothesis.is_empty());
+                    assert!(m.dials["dropped_hypothesis"].is_string());
+                }
                 let site_text = style.steps.get(m.site as usize - 1);
                 if m.intrinsic {
                     assert!(m.steps.is_empty());
@@ -836,6 +908,8 @@ fn d1_the_earlier_seed_sets_are_closed() {
         "n_lt_two_pow",
         "sqrt2_irrational",
         "bounded_monotone_converges",
+        "bolzano_weierstrass",
+        "bounded_continuous_sup",
     ] {
         let style = style_of(id);
         assert!(
@@ -851,6 +925,8 @@ fn d1_the_earlier_seed_sets_are_closed() {
         "n_lt_two_pow",
         "sqrt2_irrational",
         "bounded_monotone_converges",
+        "bolzano_weierstrass",
+        "bounded_continuous_sup",
     ] {
         let style = style_of(id);
         assert!(
@@ -948,8 +1024,55 @@ fn d1_the_earlier_seed_sets_are_closed() {
         assert!(prepare_with(v, &cited, 7).is_err());
     }
     assert!(prepare_with(Version::V0_6_0, &cited, 7).is_ok());
-    assert!(Version::parse("0.7.0").is_none());
-    assert_eq!(Version::CURRENT.as_str(), "0.6.0");
+    // the 0.7.0 seeds are seeds of no earlier version, and FLAW-0008 and FLAW-0012 (0.7.0) are
+    // refused by 0.6.0 and every earlier version
+    let bw = style_of("bolzano_weierstrass");
+    let bcs = style_of("bounded_continuous_sup");
+    let drifted = config(
+        "bolzano_weierstrass",
+        &bw,
+        "pair",
+        json!([spec(
+            "FLAW-0008",
+            None,
+            "gap",
+            json!({"transformation": "add-hypothesis"})
+        )]),
+    );
+    let dropped = config(
+        "bounded_continuous_sup",
+        &bcs,
+        "pair",
+        json!([spec(
+            "FLAW-0012",
+            None,
+            "fatal",
+            json!({"dropped_hypothesis": "the domain of $f$ is a compact interval"})
+        )]),
+    );
+    for v in [
+        Version::V0_3_0,
+        Version::V0_4_0,
+        Version::V0_5_0,
+        Version::V0_6_0,
+    ] {
+        assert!(
+            prepare_with(
+                v,
+                &config("bolzano_weierstrass", &bw, "informal", json!([])),
+                7
+            )
+            .is_err(),
+            "the seed is not in {v:?}"
+        );
+        assert!(prepare_with(v, &drifted, 7).is_err());
+        assert!(prepare_with(v, &dropped, 7).is_err());
+    }
+    assert!(prepare_with(Version::V0_7_0, &drifted, 7).is_ok());
+    assert!(prepare_with(Version::V0_7_0, &dropped, 7).is_ok());
+    assert!(Version::parse("0.7.0").is_some());
+    assert!(Version::parse("0.8.0").is_none());
+    assert_eq!(Version::CURRENT.as_str(), "0.7.0");
 }
 
 #[test]
@@ -2790,6 +2913,839 @@ fn d5_flaw_0003_direct_forward_references_the_theorem_and_cycle_cites_in_a_circl
     bad.styles[0].flaws[0].steps[0].premises.push(Premise {
         cites: "theorem".into(),
         phrase: "Suppose".into(),
+    });
+    assert!(check_seed(&bad).is_err());
+}
+
+#[test]
+fn d5_flaw_0008_drifts_the_formal_statement_by_one_recorded_edit() {
+    // ADR-0011 D5 (0.7.0), FLAWS.md's FLAW-0008 example on bolzano_weierstrass: the informal file
+    // stays faithful while the formal statement drifts by exactly one transformation, with its
+    // own correct proof; the record is formal-only, at the main declaration's header line, NO,
+    // and confirmed when the file builds, the faithful statement has its kernel-checked witness
+    // and the recorded statements differ by exactly the transformation's edit.
+    let seed = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "bolzano_weierstrass")
+        .unwrap();
+    let faithful = &seed.styles[0].steps;
+    assert_eq!(faithful.len(), 3);
+    let bw =
+        |target: &str, flaws: Value| config("bolzano_weierstrass", "compactness", target, flaws);
+    let drift =
+        |t: &str, severity: &str| spec("FLAW-0008", None, severity, json!({"transformation": t}));
+    let main = "syndeom_s2_template_bolzano_weierstrass";
+    let faithful_binders = "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)";
+    let faithful_claim =
+        "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)";
+    assert_eq!(
+        (seed.binders.as_str(), seed.claim.as_str()),
+        (faithful_binders, faithful_claim)
+    );
+    let header = |binders: &str, claim: &str| format!("theorem {main} {binders} : {claim} := by");
+    let faithful_header = header(faithful_binders, faithful_claim);
+    // the control: a correct proof of a true statement, the faithful header at line 6
+    let (pc, mc) = build(&bw("pair", json!([])), 7);
+    let control = String::from_utf8(pc.formal.as_ref().unwrap().bytes.clone()).unwrap();
+    assert_eq!(control.lines().nth(5), Some(faithful_header.as_str()));
+    assert!(mc.ground_truth.as_ref().unwrap().correct);
+
+    // add-hypothesis: one binder appended, the claim unchanged, the proof via the supremum
+    let added_binders = "(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)";
+    let (p, m) = build(&bw("pair", json!([drift("add-hypothesis", "gap")])), 7);
+    let inj = p.injection.as_ref().unwrap();
+    assert_eq!(
+        (
+            inj.class.as_str(),
+            inj.site,
+            inj.lean_catchable,
+            inj.severity
+        ),
+        ("FLAW-0008", 0, LeanCatchable::No, Severity::Gap)
+    );
+    assert!(p.composite.is_none() && p.false_theorem.is_none() && p.padding.is_empty());
+    assert_eq!(
+        p.informal, pc.informal,
+        "the informal file is the control's, byte for byte"
+    );
+    let f = p.formal.as_ref().unwrap();
+    let text = String::from_utf8(f.bytes.clone()).unwrap();
+    let lines: Vec<&str> = text.lines().collect();
+    let drifted_header = header(added_binders, faithful_claim);
+    assert_eq!(f.main_line, 6);
+    assert_eq!(lines[5], drifted_header);
+    assert_eq!(lines[8], "  refine ⟨id, strictMono_id, ⨆ n, a n, ?_⟩");
+    assert_eq!(lines[9], "  exact tendsto_atTop_ciSup hm hbdd");
+    assert_eq!(lines.len(), 10);
+    assert_eq!(
+        (p.plan.binders.as_str(), p.plan.claim.as_str()),
+        (added_binders, faithful_claim)
+    );
+    let d = &inj.formal_dials;
+    assert_eq!(d["transformation"], json!("add-hypothesis"));
+    assert_eq!(d["site"], json!(0));
+    assert_eq!(d["inserted"], json!([drifted_header]));
+    assert_eq!(d["replaced"], json!([faithful_header]));
+    assert_eq!(
+        d["faithful_statement"],
+        json!({"binders": faithful_binders, "claim": faithful_claim})
+    );
+    assert_eq!(
+        d["drifted_statement"],
+        json!({"binders": added_binders, "claim": faithful_claim})
+    );
+    assert_eq!(
+        d["edit"],
+        json!({"replaced": "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)", "inserted": "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)"})
+    );
+    assert_eq!(d["declaration"], json!(main));
+    assert_eq!(
+        d["original_fragments"],
+        json!({"1": faithful[0].fragment, "2": faithful[1].fragment, "3": faithful[2].fragment})
+    );
+    assert!(d.get("original_steps").is_none());
+    assert_eq!(inj.informal_dials, inj.formal_dials);
+    // one record, formal, at the header line; the pair invalid although its file builds (D7)
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(
+        gt.flaws.len(),
+        1,
+        "formal-only: the informal file has no record"
+    );
+    let r = &gt.flaws[0];
+    assert_eq!(
+        (r.instance, r.class.as_str(), r.severity, r.lean_catchable),
+        (1, "FLAW-0008", Severity::Gap, LeanCatchable::No)
+    );
+    assert!(r.sub_variant.is_none());
+    match &r.location {
+        Location::Formal(loc) => assert_eq!((loc.declaration.as_str(), loc.line), (main, 6)),
+        _ => unreachable!(),
+    }
+    assert_eq!(gt.proof_status, ProofStatus::Invalid);
+    assert!(!gt.correct);
+    assert_eq!(gt.statement_status.value, Some(true));
+    assert_eq!(m.commanded["lean_build"].value, json!("pass"));
+    assert_eq!(m.commanded["lean_axioms_standard"].value, json!(true));
+    assert_eq!(m.commanded["n_flaws_total"].value, json!(1));
+    assert_eq!(m.commanded["n_flaws_0008"].value, json!(1));
+    assert_eq!(m.commanded["n_steps"].value, json!(3));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(1)));
+    assert_eq!(m.achieved["n_flaws_0008"].value, Some(json!(1)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    // a file that does not build does not confirm; nor does a record whose edit does not yield
+    // the drifted statement, or whose statement is not the plan's
+    let failed = Observation {
+        exit_code: 1,
+        first_error_line: Some(6),
+        axioms: None,
+        used_constants: None,
+    };
+    let m2 = assemble(&p, COMMIT, Some(toolchain()), Some(&failed)).unwrap();
+    assert_eq!(m2.achieved["flaws_confirmed"].value, Some(json!(0)));
+    assert_eq!(m2.fidelity.per_statistic["lean_build"], Verdict::Fail);
+    assert_eq!(m2.fidelity.verdict, Verdict::Fail);
+    let obs = predicted(&p).unwrap();
+    let mut tampered = p.clone();
+    tampered.injection.as_mut().unwrap().formal_dials["edit"]["inserted"] =
+        json!("(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a) (hz : True)");
+    let m3 = assemble(&tampered, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+    assert_eq!(m3.achieved["flaws_confirmed"].value, Some(json!(0)));
+    assert_eq!(m3.fidelity.verdict, Verdict::Fail);
+    let mut tampered = p.clone();
+    tampered.injection.as_mut().unwrap().formal_dials["drifted_statement"]["claim"] = json!("True");
+    let m4 = assemble(&tampered, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+    assert_eq!(m4.achieved["flaws_confirmed"].value, Some(json!(0)));
+
+    // every transformation of the seed: its header, its proof, PASS; the same draw twice
+    let cases: [(&str, &str, String, usize); 4] = [
+        (
+            "restrict-type",
+            "gap",
+            header(
+                "(a : ℕ → ℤ) (hb : ∃ M : ℤ, ∀ n, |a n| ≤ M)",
+                "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℤ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+            ),
+            10,
+        ),
+        (
+            "flip-strictness",
+            "gap",
+            header("(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| < M)", faithful_claim),
+            10,
+        ),
+        (
+            "weaken-conclusion",
+            "fatal",
+            header(
+                faithful_binders,
+                "∃ φ : ℕ → ℕ, ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)",
+            ),
+            8,
+        ),
+        (
+            "shadow-definition",
+            "fatal",
+            header(
+                faithful_binders,
+                "let Convergent := fun b : ℕ → ℝ => ∃ L : ℝ, ∀ ε > 0, ∃ n, |b n - L| < ε; ∃ φ : ℕ → ℕ, StrictMono φ ∧ Convergent (a ∘ φ)",
+            ),
+            8,
+        ),
+    ];
+    for (t, severity, expected_header, n_lines) in &cases {
+        let c = bw("pair", json!([drift(t, severity)]));
+        let (pt, mt) = build(&c, 7);
+        let ft = pt.formal.as_ref().unwrap();
+        let textt = String::from_utf8(ft.bytes.clone()).unwrap();
+        let linest: Vec<&str> = textt.lines().collect();
+        assert_eq!(linest[5], expected_header.as_str(), "{t}");
+        assert_eq!(linest.len(), *n_lines, "{t}");
+        assert_eq!(pt.informal, pc.informal, "{t}");
+        let gtt = mt.ground_truth.as_ref().unwrap();
+        assert_eq!(gtt.flaws.len(), 1, "{t}");
+        assert_eq!(gtt.flaws[0].dials["transformation"], json!(t));
+        assert_eq!(gtt.proof_status, ProofStatus::Invalid, "{t}");
+        assert_eq!(mt.commanded["lean_build"].value, json!("pass"), "{t}");
+        assert_eq!(mt.achieved["flaws_confirmed"].value, Some(json!(1)), "{t}");
+        assert_eq!(mt.fidelity.verdict, Verdict::Pass, "{t}");
+        let (pt2, _) = build(&c, 7);
+        assert_eq!(pt2.injection, pt.injection, "{t}");
+    }
+    // restrict-type changes the statement alone: its proof is the faithful one, byte for byte
+    let (pz, _) = build(&bw("pair", json!([drift("restrict-type", "gap")])), 7);
+    let textz = String::from_utf8(pz.formal.as_ref().unwrap().bytes.clone()).unwrap();
+    assert_eq!(
+        textz.lines().skip(6).collect::<Vec<_>>(),
+        control.lines().skip(6).collect::<Vec<_>>()
+    );
+    assert_eq!(
+        pz.injection.as_ref().unwrap().formal_dials["original_fragments"],
+        json!({})
+    );
+    // the composite of a drift: an invalid proof of a true statement, NO inherited, three records
+    let (pk, mk) = build(
+        &bw(
+            "pair",
+            json!([spec(
+                "FLAW-0011",
+                None,
+                "gap",
+                json!({"embedded": [drift("add-hypothesis", "gap")]})
+            )]),
+        ),
+        7,
+    );
+    assert_eq!(
+        pk.composite.as_ref().unwrap().lean_catchable,
+        LeanCatchable::No
+    );
+    assert_eq!(mk.ground_truth.as_ref().unwrap().flaws.len(), 3);
+    assert_eq!(mk.commanded["lean_build"].value, json!("pass"));
+    assert_eq!(mk.fidelity.verdict, Verdict::Pass);
+
+    // the rule of D5's check, transformation by transformation
+    let fb = faithful_binders;
+    let fc = faithful_claim;
+    assert!(
+        check_drift(
+            "add-hypothesis",
+            (fb, fc),
+            (added_binders, fc),
+            "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+            "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)"
+        )
+        .is_ok()
+    );
+    assert!(
+        check_drift(
+            "add-hypothesis",
+            (fb, fc),
+            (added_binders, "True"),
+            "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+            "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) (hm : Monotone a)"
+        )
+        .is_err(),
+        "the claim changed too"
+    );
+    assert!(
+        check_drift(
+            "add-hypothesis",
+            (fb, fc),
+            ("(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) hm", fc),
+            "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)",
+            "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M) hm"
+        )
+        .is_err(),
+        "not a binder"
+    );
+    assert!(
+        check_drift(
+            "restrict-type",
+            (fb, fc),
+            (
+                cases[0]
+                    .2
+                    .strip_prefix(&format!("theorem {main} "))
+                    .unwrap()
+                    .split_once(" : ∃ φ")
+                    .unwrap()
+                    .0,
+                "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℤ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)"
+            ),
+            "ℝ",
+            "ℤ"
+        )
+        .is_ok()
+    );
+    assert!(
+        check_drift(
+            "restrict-type",
+            (fb, fc),
+            ("(a : ℕ → ℤ) (hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)", fc),
+            "ℝ",
+            "ℤ"
+        )
+        .is_err(),
+        "not every occurrence"
+    );
+    assert!(
+        check_drift("restrict-type", (fb, fc), (fb, fc), "ℚ", "ℤ").is_err(),
+        "no occurrence"
+    );
+    assert!(
+        check_drift(
+            "flip-strictness",
+            (fb, fc),
+            ("(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| < M)", fc),
+            "|a n| ≤ M",
+            "|a n| < M"
+        )
+        .is_ok()
+    );
+    assert!(
+        check_drift(
+            "flip-strictness",
+            (fb, fc),
+            ("(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| = M)", fc),
+            "|a n| ≤ M",
+            "|a n| = M"
+        )
+        .is_err(),
+        "not a strictness flip"
+    );
+    assert!(
+        check_drift(
+            "flip-strictness",
+            (fb, fc),
+            ("(a : ℕ → ℝ) (hb : ∃ M : ℝ, ∀ n, |a n| < M)", fc),
+            "≤",
+            "<"
+        )
+        .is_ok()
+    );
+    assert!(
+        check_drift(
+            "weaken-conclusion",
+            (fb, fc),
+            (
+                fb,
+                "∃ φ : ℕ → ℕ, ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)"
+            ),
+            "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ",
+            "∃ φ : ℕ → ℕ, ∃ L : ℝ"
+        )
+        .is_ok()
+    );
+    assert!(
+        check_drift(
+            "weaken-conclusion",
+            (fb, fc),
+            (
+                added_binders,
+                "∃ φ : ℕ → ℕ, ∃ L : ℝ, Filter.Tendsto (a ∘ φ) Filter.atTop (nhds L)"
+            ),
+            "∃ φ : ℕ → ℕ, StrictMono φ ∧ ∃ L : ℝ",
+            "∃ φ : ℕ → ℕ, ∃ L : ℝ"
+        )
+        .is_err(),
+        "the binders changed too"
+    );
+    let shadow = "let Convergent := fun b : ℕ → ℝ => ∃ L : ℝ, ∀ ε > 0, ∃ n, |b n - L| < ε; ∃ φ : ℕ → ℕ, StrictMono φ ∧ Convergent (a ∘ φ)";
+    assert!(check_drift("shadow-definition", (fb, fc), (fb, shadow), fc, shadow).is_ok());
+    assert!(
+        check_drift(
+            "shadow-definition",
+            (fb, fc),
+            (fb, "∃ φ : ℕ → ℕ, StrictMono φ ∧ True"),
+            fc,
+            "∃ φ : ℕ → ℕ, StrictMono φ ∧ True"
+        )
+        .is_err(),
+        "no local definition"
+    );
+    assert!(
+        check_drift(
+            "shadow-definition",
+            (fb, fc),
+            (fb, "let C := True; ∃ φ : ℕ → ℕ, StrictMono φ"),
+            fc,
+            "let C := True; ∃ φ : ℕ → ℕ, StrictMono φ"
+        )
+        .is_err(),
+        "the body does not use the name"
+    );
+    assert!(check_drift("rename", (fb, fc), (added_binders, fc), "a", "b").is_err());
+    assert!(check_drift("weaken-conclusion", (fb, fc), (fb, fc), "x", "x").is_err());
+    assert!(check_drift("weaken-conclusion", (fb, fc), (fb, fc), "", "x").is_err());
+
+    // refusals: the targets informal and formal; an unknown transformation; a severity the seed
+    // does not mark; a sub-variant; an explicit site; the injector's own dial names; another
+    // seed; the version before 0.7.0
+    let s2 = |flaws: Value| config("sqrt2_irrational", "descent", "pair", flaws);
+    for c in [
+        bw("informal", json!([drift("add-hypothesis", "gap")])),
+        bw("formal", json!([drift("add-hypothesis", "gap")])),
+        bw("pair", json!([drift("rename", "gap")])),
+        bw("pair", json!([drift("add-hypothesis", "fatal")])),
+        bw("pair", json!([drift("weaken-conclusion", "gap")])),
+        bw("pair", json!([drift("add-hypothesis", "cosmetic")])),
+        bw(
+            "pair",
+            json!([spec(
+                "FLAW-0008",
+                Some("binder"),
+                "gap",
+                json!({"transformation": "add-hypothesis"})
+            )]),
+        ),
+        bw(
+            "pair",
+            json!([{"class": "FLAW-0008", "sub_variant": null, "severity": "gap", "site": 1, "dials": {"transformation": "add-hypothesis"}}]),
+        ),
+        bw("pair", json!([spec("FLAW-0008", None, "gap", json!({}))])),
+        bw(
+            "pair",
+            json!([spec(
+                "FLAW-0008",
+                None,
+                "gap",
+                json!({"transformation": "add-hypothesis", "edit": {}})
+            )]),
+        ),
+        bw(
+            "pair",
+            json!([spec(
+                "FLAW-0008",
+                None,
+                "gap",
+                json!({"transformation": "add-hypothesis", "faithful_statement": {}})
+            )]),
+        ),
+        s2(json!([drift("add-hypothesis", "gap")])),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
+    for v in [Version::V0_5_0, Version::V0_6_0] {
+        assert!(prepare_with(v, &bw("pair", json!([drift("add-hypothesis", "gap")])), 7).is_err());
+    }
+    // the seed's shape rules: site 0, NO, gap or fatal, exactly the dial transformation, the
+    // drift rule, every faithful step kept with its text, `drift` on FLAW-0008 only
+    let i = seed.styles[0]
+        .flaws
+        .iter()
+        .position(|m| m.dials == json!({"transformation": "add-hypothesis"}))
+        .unwrap();
+    let mutate = |f: &dyn Fn(&mut syndeom_generate::template::Material)| {
+        let mut s = seed.clone();
+        f(&mut s.styles[0].flaws[i]);
+        check_seed(&s)
+    };
+    assert!(mutate(&|_| {}).is_ok());
+    assert!(mutate(&|m| m.site = 1).is_err());
+    assert!(mutate(&|m| m.lean_catchable = LeanCatchable::YesKernel).is_err());
+    assert!(mutate(&|m| m.severity = Severity::Cosmetic).is_err());
+    assert!(mutate(&|m| m.dials = json!({"transformation": "rename"})).is_err());
+    assert!(mutate(&|m| m.dials = json!({"transformation": "add-hypothesis", "x": 1})).is_err());
+    assert!(mutate(&|m| m.drift.as_mut().unwrap().claim = "True".into()).is_err());
+    assert!(
+        mutate(&|m| m.drift.as_mut().unwrap().inserted = "(hb : ∃ M : ℝ, ∀ n, |a n| ≤ M)".into())
+            .is_err()
+    );
+    assert!(mutate(&|m| m.steps[1].text = "changed".into()).is_err());
+    assert!(
+        mutate(&|m| {
+            m.steps.remove(0);
+        })
+        .is_err()
+    );
+    assert!(mutate(&|m| m.drift = None).is_err());
+    assert!(mutate(&|m| m.inserts = true).is_err());
+    assert!(mutate(&|m| m.class = "FLAW-0002".into()).is_err());
+    assert!(
+        mutate(&|m| m.steps[0].fragment.clear()).is_ok(),
+        "the proof is the material's own"
+    );
+}
+
+#[test]
+fn d5_flaw_0012_transplants_the_true_case_proof_and_records_the_hidden_use_site() {
+    // ADR-0011 D5 (0.7.0), FLAWS.md's FLAW-0012 example on bounded_continuous_sup: a false
+    // statement (arctan) with the extreme-value argument transplanted from a compact interval; the
+    // hidden use site (the Bolzano–Weierstrass step, whose boundedness the domain no longer
+    // supplies) carries the FLAW-0005 `violated` instance, confirmed by check K, and the
+    // FLAW-0012 instance addresses the statement, confirmed with it and the negation witness.
+    let seed = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "bounded_continuous_sup")
+        .unwrap();
+    let faithful = &seed.styles[0].steps;
+    assert_eq!(faithful.len(), 4);
+    assert_eq!(seed.truth.value, Some(false));
+    let bcs = |target: &str, flaws: Value| {
+        config("bounded_continuous_sup", "extreme_value", target, flaws)
+    };
+    let dropped = spec(
+        "FLAW-0012",
+        None,
+        "fatal",
+        json!({"dropped_hypothesis": "the domain of $f$ is a compact interval"}),
+    );
+    let main = "syndeom_s2_template_bounded_continuous_sup";
+    let (p, m) = build(&bcs("pair", json!([dropped.clone()])), 7);
+    let inj = p.injection.as_ref().unwrap();
+    let ft = p.false_theorem.as_ref().unwrap();
+    assert_eq!(
+        (
+            inj.instance,
+            inj.class.as_str(),
+            inj.sub_variant.as_deref(),
+            inj.site,
+            inj.severity,
+            inj.lean_catchable
+        ),
+        (
+            1,
+            "FLAW-0005",
+            None,
+            3,
+            Severity::Fatal,
+            LeanCatchable::YesKernel
+        )
+    );
+    assert_eq!((ft.instance, ft.use_site, ft.use_instance), (2, 3, 1));
+    assert_eq!(
+        ft.dropped_hypothesis,
+        "the domain of $f$ is a compact interval"
+    );
+    assert_eq!(Some(&ft.counterexample), seed.counterexample.as_ref());
+    assert!(p.composite.is_none() && p.padding.is_empty());
+    // the files are the convincing argument as the seed writes it; the use site is step 3,
+    // lines 11–12 of the formal file, whose first line applies the bound to the wrong sequence
+    let plan = faithful_plan_of("bounded_continuous_sup");
+    assert_eq!(
+        p.informal.as_ref().unwrap(),
+        &render_informal(&plan).unwrap()
+    );
+    let f = p.formal.as_ref().unwrap();
+    assert_eq!(f.bytes, render_formal(&plan).unwrap().bytes);
+    assert_eq!(f.main_line, 5);
+    assert_eq!(
+        f.fragment_lines,
+        vec![Some([6, 7]), Some([8, 10]), Some([11, 12]), Some([13, 19])]
+    );
+    let text = String::from_utf8(f.bytes.clone()).unwrap();
+    let lines: Vec<&str> = text.lines().collect();
+    assert!(lines[4].starts_with(&format!("theorem {main} (f : ℝ → ℝ) (hf : Continuous f) (hb : ∃ M : ℝ, ∀ x, |f x| ≤ M) : ∃ x₀ : ℝ, ∀ x : ℝ, f x ≤ f x₀ := by")));
+    assert!(lines[10].starts_with("  have hxb : Bornology.IsBounded (Set.range x) :="));
+    assert!(lines[10].ends_with("exact abs_le.mp (hM (x n)))"));
+    // the use-site record's dials: the theorem, the hypothesis it lacks, `violated`, the site's
+    // text as written, nothing replaced, the counterexample
+    let d = &inj.informal_dials;
+    assert_eq!(d["theorem"], json!("the Bolzano–Weierstrass theorem"));
+    assert_eq!(d["hypothesis"], json!("the sequence $(x_n)$ is bounded"));
+    assert_eq!(d["mode"], json!("violated"));
+    assert_eq!(d["site"], json!(3));
+    assert_eq!(d["inserted"], json!(faithful[2].text));
+    assert!(d["replaced"].is_null());
+    assert_eq!(d["counterexample"], json!(seed.counterexample));
+    assert!(d.get("original_steps").is_none() && d.get("dropped_hypothesis").is_none());
+    assert_eq!(inj.formal_dials["inserted"], json!(faithful[2].fragment));
+    // four records: the use site's instance in both files, then the false theorem's at the
+    // statement — step 0, the main declaration at its header line
+    let gt = m.ground_truth.as_ref().unwrap();
+    assert_eq!(
+        gt.flaws
+            .iter()
+            .map(|r| (r.instance, r.class.as_str()))
+            .collect::<Vec<_>>(),
+        vec![
+            (1, "FLAW-0005"),
+            (1, "FLAW-0005"),
+            (2, "FLAW-0012"),
+            (2, "FLAW-0012")
+        ]
+    );
+    let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+    match &gt.flaws[0].location {
+        Location::Informal(loc) => {
+            assert_eq!(loc.step, 3);
+            assert_eq!(loc.span, [0, st.steps[3].chars().count() as u64]);
+        }
+        _ => unreachable!(),
+    }
+    match &gt.flaws[1].location {
+        Location::Formal(loc) => assert_eq!((loc.declaration.as_str(), loc.line), (main, 11)),
+        _ => unreachable!(),
+    }
+    match &gt.flaws[2].location {
+        Location::Informal(loc) => {
+            assert_eq!(loc.step, 0);
+            assert_eq!(loc.span, [0, st.steps[0].chars().count() as u64]);
+        }
+        _ => unreachable!(),
+    }
+    match &gt.flaws[3].location {
+        Location::Formal(loc) => assert_eq!((loc.declaration.as_str(), loc.line), (main, 5)),
+        _ => unreachable!(),
+    }
+    for r in &gt.flaws[2..] {
+        assert_eq!(
+            (r.severity, r.lean_catchable),
+            (Severity::Fatal, LeanCatchable::YesKernel)
+        );
+        assert!(r.sub_variant.is_none());
+        assert_eq!(
+            r.dials["dropped_hypothesis"],
+            json!("the domain of $f$ is a compact interval")
+        );
+        assert_eq!(r.dials["site"], json!(0));
+        assert_eq!(r.dials["use_site"], json!(3));
+        assert_eq!(r.dials["use_instance"], json!(1));
+        assert_eq!(r.dials["counterexample"], json!(seed.counterexample));
+        assert!(r.dials["replaced"].is_null());
+    }
+    assert_eq!(gt.flaws[2].dials["inserted"], json!(st.steps[0]));
+    assert_eq!(gt.flaws[3].dials["inserted"], json!([lines[4]]));
+    assert_eq!(gt.statement_status.value, Some(false));
+    assert!(gt.statement_status.reference.ends_with("_false"));
+    assert_eq!(gt.proof_status, ProofStatus::Invalid);
+    assert!(!gt.correct);
+    // counts per instance: two instances, one per class; the formal file fails at the use site
+    assert_eq!(m.commanded["n_flaws_total"].value, json!(2));
+    assert_eq!(m.commanded["n_flaws_0005"].value, json!(1));
+    assert_eq!(m.commanded["n_flaws_0012"].value, json!(1));
+    assert_eq!(m.commanded["flaws_confirmed"].value, json!(2));
+    assert_eq!(m.commanded["lean_build"].value, json!("fail"));
+    assert!(!m.commanded.contains_key("lean_axioms_standard"));
+    assert_eq!(m.commanded["n_steps"].value, json!(4));
+    assert_eq!(m.commanded["n_lemmas"].value, json!(0));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(2)));
+    assert_eq!(m.achieved["n_flaws_0012"].value, Some(json!(1)));
+    assert_eq!(m.achieved["n_flaws_0005"].value, Some(json!(1)));
+    assert_eq!(m.fidelity.verdict, Verdict::Pass);
+    // check K anywhere inside the use site's lines confirms both instances; a build that passes,
+    // or an error elsewhere, confirms neither
+    let at_site = Observation {
+        exit_code: 1,
+        first_error_line: Some(12),
+        axioms: None,
+        used_constants: None,
+    };
+    let m2 = assemble(&p, COMMIT, Some(toolchain()), Some(&at_site)).unwrap();
+    assert_eq!(m2.achieved["flaws_confirmed"].value, Some(json!(2)));
+    assert_eq!(m2.fidelity.verdict, Verdict::Pass);
+    for obs in [
+        Observation {
+            exit_code: 0,
+            first_error_line: None,
+            axioms: Some(vec![]),
+            used_constants: None,
+        },
+        Observation {
+            exit_code: 1,
+            first_error_line: Some(7),
+            axioms: None,
+            used_constants: None,
+        },
+    ] {
+        let m3 = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(m3.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(m3.achieved["n_flaws_0005"].value, Some(json!(0)));
+        assert_eq!(m3.achieved["n_flaws_0012"].value, Some(json!(0)));
+        assert_eq!(m3.fidelity.verdict, Verdict::Fail);
+    }
+    // informal-only: two records, YES-KERNEL kept, no lean_build; formal-only: two records
+    let (pi, mi) = build(&bcs("informal", json!([dropped.clone()])), 7);
+    let gti = mi.ground_truth.as_ref().unwrap();
+    assert_eq!(gti.flaws.len(), 2);
+    assert!(
+        gti.flaws
+            .iter()
+            .all(|r| r.lean_catchable == LeanCatchable::YesKernel)
+    );
+    assert!(
+        gti.flaws
+            .iter()
+            .all(|r| matches!(r.location, Location::Informal(_)))
+    );
+    assert_eq!(pi.informal, p.informal);
+    assert!(!mi.commanded.contains_key("lean_build"));
+    assert_eq!(mi.achieved["flaws_confirmed"].value, Some(json!(2)));
+    assert_eq!(mi.fidelity.verdict, Verdict::Pass);
+    let (pf, mf) = build(&bcs("formal", json!([dropped.clone()])), 7);
+    let gtf = mf.ground_truth.as_ref().unwrap();
+    assert_eq!(gtf.flaws.len(), 2);
+    assert!(
+        gtf.flaws
+            .iter()
+            .all(|r| matches!(r.location, Location::Formal(_)))
+    );
+    assert_eq!(pf.formal, p.formal);
+    assert_eq!(mf.commanded["lean_build"].value, json!("fail"));
+    assert_eq!(mf.fidelity.verdict, Verdict::Pass);
+    // the same (config, seed) draws the same material, on the stream injector/FLAW-0012/1; the
+    // use site may be named explicitly
+    let (p2, _) = build(&bcs("pair", json!([dropped.clone()])), 7);
+    assert_eq!(p2.injection, p.injection);
+    assert_eq!(p2.false_theorem, p.false_theorem);
+    let mut stream = Stream::new(7, "injector/FLAW-0012/1");
+    assert_eq!(stream.below(1), 0);
+    assert!(
+        prepare(
+            &bcs(
+                "pair",
+                json!([{"class": "FLAW-0012", "sub_variant": null, "severity": "fatal", "site": 3, "dials": {"dropped_hypothesis": "the domain of $f$ is a compact interval"}}])
+            ),
+            7
+        )
+        .is_ok()
+    );
+    // refusals: the seed has no control and no FLAW-0005 of its own; a true statement; a
+    // sub-variant; a severity below fatal; other, empty or extra dials; the injector's own dial
+    // names; another hypothesis; an ineligible explicit site; a composite embedding it;
+    // padding; the version before 0.7.0
+    let cont = |flaws: Value| config("continuity_is_not_uniform", "epsilon_delta", "pair", flaws);
+    for c in [
+        bcs("pair", json!([])),
+        bcs(
+            "pair",
+            json!([spec(
+                "FLAW-0005",
+                None,
+                "fatal",
+                json!({"theorem": "the Bolzano–Weierstrass theorem", "hypothesis": "the sequence $(x_n)$ is bounded", "mode": "violated"})
+            )]),
+        ),
+        cont(json!([dropped.clone()])),
+        bcs(
+            "pair",
+            json!([spec(
+                "FLAW-0012",
+                Some("transplant"),
+                "fatal",
+                json!({"dropped_hypothesis": "the domain of $f$ is a compact interval"})
+            )]),
+        ),
+        bcs(
+            "pair",
+            json!([spec(
+                "FLAW-0012",
+                None,
+                "gap",
+                json!({"dropped_hypothesis": "the domain of $f$ is a compact interval"})
+            )]),
+        ),
+        bcs("pair", json!([spec("FLAW-0012", None, "fatal", json!({}))])),
+        bcs(
+            "pair",
+            json!([spec(
+                "FLAW-0012",
+                None,
+                "fatal",
+                json!({"dropped_hypothesis": ""})
+            )]),
+        ),
+        bcs(
+            "pair",
+            json!([spec(
+                "FLAW-0012",
+                None,
+                "fatal",
+                json!({"dropped_hypothesis": "the domain of $f$ is a compact interval", "x": 1})
+            )]),
+        ),
+        bcs(
+            "pair",
+            json!([spec(
+                "FLAW-0012",
+                None,
+                "fatal",
+                json!({"dropped_hypothesis": "the domain of $f$ is a compact interval", "use_site": 3})
+            )]),
+        ),
+        bcs(
+            "pair",
+            json!([spec(
+                "FLAW-0012",
+                None,
+                "fatal",
+                json!({"dropped_hypothesis": "continuity of $f$"})
+            )]),
+        ),
+        bcs(
+            "pair",
+            json!([{"class": "FLAW-0012", "sub_variant": null, "severity": "fatal", "site": 1, "dials": {"dropped_hypothesis": "the domain of $f$ is a compact interval"}}]),
+        ),
+        cont(json!([spec(
+            "FLAW-0011",
+            None,
+            "fatal",
+            json!({"embedded": [dropped.clone()]})
+        )])),
+        json!({"theorem": "bounded_continuous_sup", "style": "extreme_value", "target": "pair",
+               "flaws": [padding_spec(json!(["re-derivation"]), 1, "drawn")], "padding_ratio": 0.2}),
+    ] {
+        assert!(prepare(&c, 7).is_err(), "should refuse {c}");
+    }
+    for v in [Version::V0_5_0, Version::V0_6_0] {
+        assert!(prepare_with(v, &bcs("pair", json!([dropped.clone()])), 7).is_err());
+    }
+    // the seed's shape rules: intrinsic, fatal, YES-KERNEL, no sub-variant, exactly the dial
+    // dropped_hypothesis, `use` naming the theorem and the hypothesis, the site a main-proof
+    // step with a fragment, `use` on FLAW-0012 only
+    let mutate = |f: &dyn Fn(&mut syndeom_generate::template::Material)| {
+        let mut s = seed.clone();
+        f(&mut s.styles[0].flaws[0]);
+        check_seed(&s)
+    };
+    assert!(mutate(&|_| {}).is_ok());
+    assert!(mutate(&|m| m.hidden_use = None).is_err());
+    assert!(mutate(&|m| m.class = "FLAW-0005".into()).is_err());
+    assert!(mutate(&|m| m.severity = Severity::Gap).is_err());
+    assert!(mutate(&|m| m.lean_catchable = LeanCatchable::No).is_err());
+    assert!(mutate(&|m| m.sub_variant = Some("x".into())).is_err());
+    assert!(mutate(&|m| m.dials = json!({})).is_err());
+    assert!(mutate(&|m| m.dials = json!({"dropped_hypothesis": ""})).is_err());
+    assert!(mutate(&|m| m.dials = json!({"dropped_hypothesis": "x", "y": 1})).is_err());
+    assert!(mutate(&|m| m.hidden_use.as_mut().unwrap().theorem.clear()).is_err());
+    assert!(mutate(&|m| m.hidden_use.as_mut().unwrap().hypothesis.clear()).is_err());
+    assert!(mutate(&|m| m.site = 5).is_err());
+    assert!(mutate(&|m| m.site = 0).is_err());
+    assert!(mutate(&|m| m.intrinsic = false).is_err());
+    assert!(
+        mutate(&|m| m.site = 4).is_ok(),
+        "another main-proof step with a fragment"
+    );
+    // `use` belongs to FLAW-0012 material only
+    let rolle = seeds(Version::CURRENT)
+        .into_iter()
+        .find(|s| s.id == "rolle_abs")
+        .unwrap();
+    let mut bad = rolle.clone();
+    bad.styles[0].flaws[0].hidden_use = Some(syndeom_generate::template::HiddenUse {
+        theorem: "Rolle's theorem".into(),
+        hypothesis: "differentiability".into(),
     });
     assert!(check_seed(&bad).is_err());
 }

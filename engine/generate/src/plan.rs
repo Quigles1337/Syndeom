@@ -320,6 +320,18 @@ fn declaration_of(step: &Step) -> Result<Option<(String, Vec<String>)>, String> 
     }
 }
 
+/// The main declaration's header line as the formal writer emits it: `theorem <name> <binders> :
+/// <claim> := by`, or without the binders and the double space when there are none (0.7.0 names
+/// this; the bytes are 0.1.0's). A FLAW-0008 record (0.7.0) holds the faithful and the drifted
+/// header as `replaced` and `inserted`.
+pub fn header_line(main_declaration: &str, binders: &str, claim: &str) -> String {
+    if binders.is_empty() {
+        format!("theorem {main_declaration} : {claim} := by")
+    } else {
+        format!("theorem {main_declaration} {binders} : {claim} := by")
+    }
+}
+
 fn check_fragment(k: usize, step: &Step) -> Result<(), String> {
     for l in &step.fragment {
         if l.trim().is_empty() || l.ends_with(' ') || l.contains(['\r', '\t', '\n']) {
@@ -402,14 +414,7 @@ pub fn render_formal(plan: &Plan) -> Result<FormalRendering, String> {
         check_text("doc", doc)?;
         push(&mut out, &format!("/-- {doc} -/"));
     }
-    let header = if plan.binders.is_empty() {
-        format!("theorem {} : {} := by", plan.main_declaration, plan.claim)
-    } else {
-        format!(
-            "theorem {} {} : {} := by",
-            plan.main_declaration, plan.binders, plan.claim
-        )
-    };
+    let header = header_line(&plan.main_declaration, &plan.binders, &plan.claim);
     let main_line = push(&mut out, &header);
     let mut any = false;
     for (i, step) in plan.steps.iter().enumerate() {

@@ -11,11 +11,12 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   the plan's premise graph;
 - `src/rng.rs` — `syndeom-rng/1`, SplitMix64-seeded xoshiro256** streams per label (D4);
 - `src/template.rs` — the producer `s2_template`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0,
-  0.5.0 and 0.6.0: seed records, the config and its refusals (D3), the injector (D5; from 0.5.0
-  with FLAW-0004's hedge lexicon and FLAW-0011 as a commanded composite; from 0.6.0 with
-  FLAW-0010's fictional-reference lexicon and FLAW-0003's `direct` and `cycle`), the padding
-  module (D2 `pad`, D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest
-  with checks K and T (D8, D9);
+  0.5.0, 0.6.0 and 0.7.0: seed records, the config and its refusals (D3), the injector (D5; from
+  0.5.0 with FLAW-0004's hedge lexicon and FLAW-0011 as a commanded composite; from 0.6.0 with
+  FLAW-0010's fictional-reference lexicon and FLAW-0003's `direct` and `cycle`; from 0.7.0 with
+  FLAW-0008's statement drift and FLAW-0012's dropped hypothesis), the padding module (D2 `pad`,
+  D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks K and T
+  (D8, D9);
 - `src/harness.rs` — the Lean harness: `lake env lean` from `lean/`, one process at a time, and
   an audit tail printing `#print axioms` of the main declaration and the direct used-constants
   of every constant the file defined (D8; the T check's listing, from 0.3.0);
@@ -58,7 +59,7 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   or fatal, Al's rulings 2 and 3 on PR 30 — on a true statement; the composite's own record at
   the statement, its severity and `lean_catchable` inherited); and the seed rule that no style
   step carries a padding header (FINDING-014).
-- **`s2_template` 0.6.0** (Session 45; the version `generate` emits): the 0.5.0 seeds, with
+- **`s2_template` 0.6.0** (Session 45): the 0.5.0 seeds, with
   FLAW-0010 material on `sqrt2_irrational` (sub-variant `a`, `claim: true`, at step 3: the
   FLAW-0004 material's bare claim, its justification replaced by a fictional reference), and
   `bounded_monotone_converges` (FLAWS.md's FLAW-0003 example: every monotone real sequence that
@@ -71,8 +72,20 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   `cycle` (D5: Lemma 1 cites the theorem and the key step cites Lemma 1; informal-only, `NO`;
   checked on the plan's premise graph and the citation phrases' spans; the formal file keeps a
   faithful proof).
+- **`s2_template` 0.7.0** (Session 46; the version `generate` emits): the 0.6.0 seeds and two
+  more — `bolzano_weierstrass` (FLAWS.md's FLAW-0008 example: every bounded real sequence has a
+  convergent subsequence; three aligned steps on the compact interval `[-M, M]`, with a witness
+  module audited by the gate), carrying FLAW-0008 material for each of D5's five
+  transformations, and `bounded_continuous_sup` (FLAWS.md's FLAW-0012 example: every bounded
+  continuous `f : ℝ → ℝ` attains its supremum, false by `arctan`; the extreme-value argument of
+  a compact interval transplanted, in four aligned steps; the witness module proves the
+  negation), carrying FLAW-0012 material; FLAW-0008 (D5: the formal statement drifts by exactly
+  one recorded edit while the informal file stays faithful; the drifted file builds with its own
+  proof, `NO`, the record formal-only at the main declaration's header line) and FLAW-0012 (D5:
+  the FLAW-0005 `violated` instance at the hidden use site, check K, and the class's own
+  instance at the statement, confirmed with it and the seed's negation witness).
 
-The crate regenerates all six versions: the goldens select the version their manifests name,
+The crate regenerates all seven versions: the goldens select the version their manifests name,
 and `regenerate` and `verify` accept any of them. Every seed states its `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
@@ -167,6 +180,37 @@ is flagged for Al in ADR-0011 *Amendments*.
   citing text, exactly once in its step); the record's dials carry `cycle` (the declarations
   visited from the lemma back to itself) and `citations` (each phrase's step and span), and the
   originals.
+- **FLAW-0008** (0.7.0): replacement material of the *statement* — `site` 0, no anchor — whose
+  `drift` names the drifted binders and claim and the one edit that carries the drift
+  (`replaced`, the faithful text; `inserted`, what stands in its place), with the one dial
+  `transformation` (`add-hypothesis`: one binder appended, the claim unchanged; `restrict-type`:
+  every occurrence of one type token replaced by another; `flip-strictness`: one relation
+  symbol flipped between `≤` and `<`; `weaken-conclusion`: one edit inside the claim;
+  `shadow-definition`: the claim rewritten as `let <name> := <definition>; <body>`, a term
+  redefined locally) and the severity the seed marks (gap where the drifted statement is
+  strictly weaker, fatal where it is trivialized). The target is `pair` only (FLAWS.md: the
+  class manifests in the pair). The informal file is the faithful one, byte for byte; the
+  formal file states the drifted statement with its own correct proof, so the instance is `NO`
+  with `lean_build` commanded `pass`. The one record is formal-only, at the main declaration's
+  header line; its dials carry `transformation`, `site: 0`, `inserted` and `replaced` (the
+  drifted and the faithful header lines), `faithful_statement` and `drifted_statement` (each
+  as binders and claim), `edit` (`replaced`, `inserted`), `original_fragments` (the faithful
+  fragments the drifted proof changed) and `declaration`. The seed's material for
+  `restrict-type` keeps the faithful proof text unchanged; `weaken-conclusion` and
+  `shadow-definition` trivialize the statement and leave the bound unused (Lean's linter warns;
+  the kernel accepts).
+- **FLAW-0012** (0.7.0): intrinsic material of a seed whose statement is false, with the one
+  dial `dropped_hypothesis` (the hypothesis the seed dropped to reach its nearby false
+  statement) and `use` naming the theorem applied at the hidden use site and the hypothesis it
+  lacks. Commanding FLAW-0012 writes two instances: instance 1, a FLAW-0005 `violated` record
+  at the use site in each file the artifact has (fatal, `YES-KERNEL`; dials `theorem`,
+  `hypothesis`, `mode`, `site`, the site's text as written, `replaced: null` and the
+  counterexample), and instance 2, the FLAW-0012 record at the statement in each file — step 0
+  with span `[0, len)`, the main declaration at its header line — fatal and `YES-KERNEL`, with
+  dials `dropped_hypothesis`, `site: 0`, `use_site`, `use_instance`, `counterexample`,
+  `inserted` and `replaced: null`. The seed has no control and no FLAW-0005 material of its own:
+  the use-site record exists only through FLAW-0012. A composite never embeds FLAW-0012 (Al's
+  ruling 3 on PR 30).
 - **Counts** (0.2.0): `n_flaws_total`, `n_flaws_<NNNN>` and `flaws_confirmed` count instances. A
   pair's two records of one instance share its `instance`; the instance is confirmed only when
   both records pass their checks (Al's owner note of 2026-10-28).
@@ -193,6 +237,14 @@ is flagged for Al in ADR-0011 *Amendments*.
   - a FLAW-0003 `cycle` record (0.6.0): the plan's premise graph contains the recorded cycle
     through the inserted lemma, and each citation phrase is at its recorded span in the
     rendered step. (`direct` is confirmed by check K.)
+  - a FLAW-0008 record (0.7.0): the drifted file builds (exit 0); the faithful statement has
+    its kernel-checked witness (D7; the seed's reference, a library module the gate builds and
+    audits); the recorded faithful and drifted statements differ by exactly the transformation's
+    edit (`check_drift`, the same rule the seed is held to); the plan states the drifted one;
+    and the header line of the file is the recorded `inserted` line.
+  - a FLAW-0012 record (0.7.0): every record of the use-site instance passes (check K at the
+    hidden use site; the span check in the informal file) and the seed's negation witness is
+    kernel-checked (D7; a library module the gate builds and audits).
 
   No other check exists yet, so no other class is confirmed by this version.
 - **`padding_ratio`** (0.4.0; ADR-0001 D4, ADR-0011 D8): achieved as the tokens inside the
@@ -204,9 +256,10 @@ is flagged for Al in ADR-0011 *Amendments*.
   composites of more than one instance, the kinds `unused-lemma` and `verbose-rewrite` (no seed
   carries their material), FLAW-0004 `nontrivial-true` and `false` and FLAW-0010 `claim: false`
   (no seed carries the false-step material), FLAW-0010 `b` and `c` (deferred), FLAW-0003
-  `cycle` of length other than 2, FLAW-0009 `native_decide`, FLAW-0012 as a commanded class,
-  the seeds for the remaining FLAWS.md examples (FLAW-0008, FLAW-0012), and the fidelity sweep.
-  They come in later sessions (D11).
+  `cycle` of length other than 2, FLAW-0009 `native_decide`, FLAW-0007 `vacuous`, FLAW-0008 on
+  any seed but `bolzano_weierstrass` and FLAW-0012 on any seed but `bounded_continuous_sup`
+  (every FLAWS.md example now has its seed), and the fidelity sweep. They come in later
+  sessions (D11).
 
 ## CLI
 
