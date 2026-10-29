@@ -1,0 +1,61 @@
+sqrt2_irrational/flaw-0010-journal-informal exit=0 start=2026-10-29T01:04:18.048Z end=2026-10-29T01:04:22.306Z
+s2_template-v0.6.0-85901aa05744-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+sqrt2_irrational/flaw-0010-journal-pair exit=0 start=2026-10-29T01:04:22.308Z end=2026-10-29T01:04:42.156Z
+s2_template-v0.6.0-056268672274-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/control-informal exit=0 start=2026-10-29T01:04:42.158Z end=2026-10-29T01:04:46.560Z
+s2_template-v0.6.0-8c528ce85bee-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/control-formal exit=0 start=2026-10-29T01:04:46.561Z end=2026-10-29T01:05:08.402Z
+s2_template-v0.6.0-4f1af4b37228-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-direct-restated-goal-informal exit=0 start=2026-10-29T01:05:08.404Z end=2026-10-29T01:05:12.765Z
+s2_template-v0.6.0-519269042b85-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-direct-restated-goal-formal exit=0 start=2026-10-29T01:05:12.766Z end=2026-10-29T01:05:25.411Z
+s2_template-v0.6.0-a3ed502beb34-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-direct-restated-goal-pair exit=0 start=2026-10-29T01:05:25.412Z end=2026-10-29T01:05:38.466Z
+s2_template-v0.6.0-dd04799bf167-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-direct-contrapositive-informal exit=0 start=2026-10-29T01:05:38.467Z end=2026-10-29T01:05:42.908Z
+s2_template-v0.6.0-21d619bec38a-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-direct-contrapositive-formal exit=0 start=2026-10-29T01:05:42.910Z end=2026-10-29T01:05:56.013Z
+s2_template-v0.6.0-b24c3986bb97-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-direct-contrapositive-pair exit=0 start=2026-10-29T01:05:56.015Z end=2026-10-29T01:06:08.783Z
+s2_template-v0.6.0-89eefff7cd6d-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-cycle-informal exit=0 start=2026-10-29T01:06:08.785Z end=2026-10-29T01:06:13.216Z
+s2_template-v0.6.0-53fd4a38ecf5-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+bounded_monotone_converges/flaw-0003-cycle-pair exit=0 start=2026-10-29T01:06:13.217Z end=2026-10-29T01:06:34.500Z
+s2_template-v0.6.0-97f01aae2ad7-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end

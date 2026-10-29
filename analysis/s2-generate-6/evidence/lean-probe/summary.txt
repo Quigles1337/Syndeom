@@ -1,0 +1,6 @@
+s2i_faithful exit=0 start=00:42:02 end=00:42:11
+s2i_direct_restated exit=1 start=00:42:11 end=00:42:20
+s2i_direct_contrapositive exit=1 start=00:42:20 end=00:42:29
+s2i_cycle exit=0 start=00:42:29 end=00:42:37
+s2i_witness exit=0 start=00:42:37 end=00:42:46
+=== PROBE end

@@ -1,0 +1,1 @@
+'syndeom_s2_template_bounded_monotone_converges' depends on axioms: [propext, Classical.choice, Quot.sound]
