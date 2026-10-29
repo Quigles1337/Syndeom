@@ -1,0 +1,23 @@
+{
+  "config": {
+    "theorem": "bounded_monotone_converges",
+    "style": "supremum",
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0003",
+        "sub_variant": "direct",
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "form": "contrapositive"
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "ef41a10ce16db34c1ebe3ea66a456df97df83be1",
+  "toolchain": null,
+  "observation": null
+}

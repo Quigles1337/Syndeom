@@ -1,0 +1,173 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "lean_axioms_standard": {
+      "ci95": null,
+      "estimator": "print_axioms_subset_standard",
+      "reason": "the formal file did not build, so no axiom print exists",
+      "value": null
+    },
+    "lean_build": {
+      "ci95": null,
+      "estimator": "lake_env_lean_exit",
+      "value": "fail"
+    },
+    "n_flaws_0003": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "lean_1_token_count",
+      "value": 66
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "formal": {
+        "content_hash": "4ec8c4a29ca35ee4a8d1159343bb5fc38cf65b4345457e4598339438f20dcd43",
+        "file": "Proof.lean",
+        "format": "syndeom-lean/1",
+        "main_declaration": "syndeom_s2_template_bounded_monotone_converges",
+        "n_bytes": 605,
+        "n_declarations": 2,
+        "n_lines": 8,
+        "n_tokens": 66,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "formal"
+  },
+  "artifact_id": "s2_template-v0.6.0-a3ed502beb34-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "lean_build": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": "fail"
+    },
+    "n_flaws_0003": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0003",
+        "dials": {
+          "form": "restated-goal"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": "direct"
+      }
+    ],
+    "padding_ratio": 0,
+    "style": "supremum",
+    "target": "formal",
+    "theorem": "bounded_monotone_converges"
+  },
+  "config_hash": "a3ed502beb3413f80f23efc2a918c2731531583cd9cb3bd515ccf6e64aa83740",
+  "engine_commit": "ef41a10ce16db34c1ebe3ea66a456df97df83be1",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "lean_build": "PASS",
+      "n_flaws_0003": "PASS",
+      "n_flaws_total": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_template",
+    "rng": "syndeom-rng/1",
+    "version": "0.6.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0003",
+        "dials": {
+          "declaration": "syndeom_s2_template_bounded_monotone_converges_lemma_1",
+          "form": "restated-goal",
+          "inserted": [
+            "theorem syndeom_s2_template_bounded_monotone_converges_lemma_1 : ∀ a : ℕ → ℝ, Monotone a → BddAbove (Set.range a) → ∃ L : ℝ, Filter.Tendsto a Filter.atTop (nhds L) := by",
+            "  exact syndeom_s2_template_bounded_monotone_converges"
+          ],
+          "original_fragments": {
+            "1": [
+              "refine ⟨⨆ n, a n, ?_⟩"
+            ],
+            "2": [
+              "exact tendsto_atTop_ciSup hmono hbdd"
+            ]
+          },
+          "replaced": null,
+          "site": 1
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "formal",
+          "declaration": "syndeom_s2_template_bounded_monotone_converges_lemma_1",
+          "line": 4
+        },
+        "severity": "fatal",
+        "sub_variant": "direct"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "lean/Syndeom/Seeds/BoundedMonotoneConverges.lean:syndeom_seed_bounded_monotone_converges",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": {
+    "lean": "leanprover/lean4:v4.34.1",
+    "mathlib": "d13f23b723b8a846827a245b89c10fc7d3f11612"
+  }
+}
