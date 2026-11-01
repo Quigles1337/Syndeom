@@ -1,0 +1,211 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "n_flaws_0013": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 2
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 6
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 155
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.4
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "2efb4536324d0fb845f9b45bf733f9bab81f5b954cdf9cfce439aed86427f7f8",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 856,
+        "n_lemmas": 0,
+        "n_steps": 6,
+        "n_tokens": 155,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_grammar-v0.2.0-0aa6313e3136-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "n_flaws_0013": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 2
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 6
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.05
+      },
+      "value": 0.4
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 2,
+          "kinds": [
+            "re-derivation",
+            "unused-lemma"
+          ],
+          "placement": "drawn"
+        },
+        "severity": "cosmetic",
+        "site": "auto",
+        "sub_variant": null
+      }
+    ],
+    "grammar": "ring_chain",
+    "length": {
+      "n_lemmas": 0,
+      "n_steps": 4
+    },
+    "padding_ratio": 0.4,
+    "target": "informal"
+  },
+  "config_hash": "0aa6313e31366390de286a5010d6f7d533fd666079fc100a890a5bc81cc7151f",
+  "engine_commit": "de6965c55e9f296f7456bd3934ade481cd16bf2d",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0013": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_grammar",
+    "rng": "syndeom-rng/1",
+    "version": "0.2.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 2,
+          "inserted": "As a check, the same polynomial admits another presentation: for all integers $x$ and $y$, $x(-4y + x) + 4y^2 = 4 \\cdot y \\cdot y + x(x - 4y)$; both sides expand to the same polynomial.",
+          "kind": "re-derivation",
+          "kinds": [
+            "re-derivation",
+            "unused-lemma"
+          ],
+          "placement": "drawn",
+          "ratio": 0.4,
+          "replaced": null,
+          "seed_form": 5,
+          "site": 4
+        },
+        "instance": 1,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            185
+          ],
+          "step": 4
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      },
+      {
+        "class": "FLAW-0013",
+        "dials": {
+          "count": 2,
+          "inserted": "Note the identity: for all integers $x$ and $y$, $(x + y)(x - y) = -y^2 + x^2$; both sides expand to the same polynomial.",
+          "kind": "unused-lemma",
+          "kinds": [
+            "re-derivation",
+            "unused-lemma"
+          ],
+          "placement": "drawn",
+          "ratio": 0.4,
+          "replaced": null,
+          "seed_form": 3,
+          "site": 2
+        },
+        "instance": 2,
+        "lean_catchable": "NO",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            0,
+            121
+          ],
+          "step": 2
+        },
+        "severity": "cosmetic",
+        "sub_variant": null
+      }
+    ],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "s2_grammar-v0.2.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}
