@@ -1,8 +1,12 @@
-//! `s2_grammar` 0.1.0 (ADR-0011 D1, D6): the grammar `ring_chain`, its control and FLAW-0001 —
+//! `s2_grammar` (ADR-0011 D1, D6): the grammar `ring_chain`, its control and FLAW-0001 —
 //! the atom library, the presentations, the derivation, the plan and its two renderings, the
 //! reference of a grammar instance's truth (D7), the commanded and achieved statistics (D8),
 //! determinism (D9), FLAW-0001 `propagated` and `local` with their records and check K (D5),
-//! and the refusals (D3, D6).
+//! and the refusals (D3, D6) — and, from 0.2.0, FLAW-0007 `unused` (irrelevant lemmas generated
+//! from the atom library, cited by nowhere, each its own instance, check T) and FLAW-0013
+//! (generated padding paragraphs with their unused declarations, `padding_ratio` measured).
+
+use std::collections::{BTreeMap, BTreeSet};
 
 use serde_json::{Value, json};
 use syndeom_generate::grammar::{
@@ -11,11 +15,12 @@ use syndeom_generate::grammar::{
     targets,
 };
 use syndeom_generate::harness::Observation;
-use syndeom_generate::template::{Prepared, Producer, assemble};
+use syndeom_generate::plan::{PaddingKind, lemma_lines, own_declarations, padding_lines};
+use syndeom_generate::template::{Injection, Prepared, Producer, assemble};
 use syndeom_generate::{prepare_any, prepare_for};
 use syndeom_manifest::{
-    Location, Manifest, ProofStatus, Severity, StatementMethod, Toolchain, parse_informal_md,
-    parse_lean,
+    LeanCatchable, Location, Manifest, ProofStatus, Severity, StatementMethod, Toolchain,
+    parse_informal_md, parse_lean,
 };
 
 const COMMIT: &str = "0123456789abcdef0123456789abcdef01234567";
@@ -52,23 +57,90 @@ fn local(perturbation: &str) -> Value {
     flaw("local", "repairable", perturbation, json!("auto"))
 }
 
-/// The observation D5 predicts: a control builds with standard axioms; a FLAW-0001 instance
-/// fails at the site's `calc` line (check K).
+/// A FLAW-0007 `unused` spec (0.2.0): `count` irrelevant lemmas, one identity each.
+fn unused_spec(count: u64) -> Value {
+    json!([{
+        "class": "FLAW-0007", "sub_variant": "unused", "severity": "cosmetic", "site": "auto",
+        "dials": {"count": count, "length_steps": 1}
+    }])
+}
+
+/// A FLAW-0013 spec (0.2.0): the eligible kinds, how many paragraphs, and where they go.
+fn padding_spec(kinds: Value, count: u64, placement: &str) -> Value {
+    json!([{
+        "class": "FLAW-0013", "sub_variant": null, "severity": "cosmetic", "site": "auto",
+        "dials": {"kinds": kinds, "count": count, "placement": placement}
+    }])
+}
+
+/// A padded config whose commanded `padding_ratio` is the ratio the paragraphs achieve at seed
+/// 7 (the ratio is compared only in `measure`, ADR-0011 D4: a config commands what its count
+/// yields, as the goldens do), read from a probe at ratio 1 — a FAIL verdict, not a refusal.
+fn padded(n: u64, m: u64, target: &str, kinds: Value, count: u64, placement: &str) -> Value {
+    let flaws = padding_spec(kinds, count, placement);
+    let mut probe = config(n, m, target, flaws.clone());
+    probe["padding_ratio"] = json!(1);
+    let (_, pm) = build(&probe, 7);
+    assert_eq!(
+        verdict(&pm),
+        json!("FAIL"),
+        "a ratio the count cannot reach is a FAIL verdict, not a refusal"
+    );
+    let ratio = pm.achieved["padding_ratio"]
+        .value
+        .as_ref()
+        .and_then(Value::as_f64)
+        .unwrap();
+    assert!(ratio > 0.0 && ratio < 1.0, "{ratio}");
+    let mut c = config(n, m, target, flaws);
+    c["padding_ratio"] = json!(ratio);
+    c
+}
+
+/// The observation D5 predicts: a FLAW-0001 instance fails at the site's `calc` line (check K);
+/// everything else builds with standard axioms, every own declaration using nothing of the
+/// file's own, and the main declaration using every cited lemma — never an unused lemma (0.2.0,
+/// FLAW-0007) or a padding declaration (0.2.0, FLAW-0013), which check T reads.
 fn predicted(p: &Prepared) -> Option<Observation> {
     let f = p.formal.as_ref()?;
     Some(match &p.injection {
-        Some(inj) => Observation {
+        Some(inj) if inj.lean_catchable == LeanCatchable::YesKernel => Observation {
             exit_code: 1,
             first_error_line: f.fragment_lines[inj.site - 1].map(|r| r[0]),
             axioms: None,
             used_constants: None,
         },
-        None => Observation {
-            exit_code: 0,
-            first_error_line: None,
-            axioms: Some(vec!["propext".to_string()]),
-            used_constants: None,
-        },
+        _ => {
+            let unused: Vec<&str> = p
+                .injection
+                .iter()
+                .chain(&p.further)
+                .filter_map(|i| i.formal_dials["declaration"].as_str())
+                .collect();
+            let pads: Vec<&str> = p.padding.iter().map(|i| i.declaration.as_str()).collect();
+            let own = own_declarations(f);
+            let mut map: BTreeMap<String, Vec<String>> = BTreeMap::new();
+            for d in &own {
+                map.insert(d.clone(), Vec::new());
+            }
+            let mut uses: Vec<String> = own
+                .iter()
+                .filter(|d| {
+                    **d != p.plan.main_declaration
+                        && !unused.contains(&d.as_str())
+                        && !pads.contains(&d.as_str())
+                })
+                .cloned()
+                .collect();
+            uses.sort();
+            map.insert(p.plan.main_declaration.clone(), uses);
+            Observation {
+                exit_code: 0,
+                first_error_line: None,
+                axioms: Some(vec!["propext".to_string(), "Quot.sound".to_string()]),
+                used_constants: Some(map),
+            }
+        }
     })
 }
 
@@ -260,11 +332,11 @@ fn d6_every_step_presents_the_polynomial_and_differs_from_the_step_before() {
 fn d2_the_plan_renders_the_lemmas_then_a_calc_chain_closed_by_ring_or_a_cited_lemma() {
     let c = config(6, 2, "pair", json!([]));
     let (p, m) = build(&c, 7);
-    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_1_0));
+    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_2_0));
     assert_eq!(m.generator.id, "s2_grammar");
-    assert_eq!(m.generator.version, "0.1.0");
+    assert_eq!(m.generator.version, "0.2.0");
     assert_eq!(m.generator.rng, "syndeom-rng/1");
-    assert!(m.artifact_id.starts_with("s2_grammar-v0.1.0-"));
+    assert!(m.artifact_id.starts_with("s2_grammar-v0.2.0-"));
     assert!(m.artifact_id.ends_with("-s7"));
     let plan = &p.plan;
     assert_eq!(plan.steps.len(), 8);
@@ -364,7 +436,7 @@ fn d7_a_control_is_correct_and_unflawed_and_its_truth_names_the_formal_control()
         assert!(gt.correct);
         assert_eq!(gt.statement_status.value, Some(true));
         assert_eq!(gt.statement_status.method, StatementMethod::LeanKernel);
-        let reference = control_reference(GrammarVersion::V0_1_0, "ring_chain", n, m, 7).unwrap();
+        let reference = control_reference(GrammarVersion::CURRENT, "ring_chain", n, m, 7).unwrap();
         assert_eq!(gt.statement_status.reference, reference);
         // the reference is the formal control's own artifact id and the main declaration
         let (fc, fm) = build(&config(n, m, "formal", json!([])), 7);
@@ -395,7 +467,12 @@ fn d7_a_control_is_correct_and_unflawed_and_its_truth_names_the_formal_control()
         assert!(p.padding.is_empty() && p.composite.is_none() && p.false_theorem.is_none());
     }
     // the reference does not depend on the number form of the control's config
-    let a = control_reference(GrammarVersion::V0_1_0, "ring_chain", 4, 0, 7).unwrap();
+    let a = control_reference(GrammarVersion::CURRENT, "ring_chain", 4, 0, 7).unwrap();
+    // the 0.1.0 reference names the 0.1.0 control, which the 0.1.0 goldens hold
+    assert_ne!(
+        a,
+        control_reference(GrammarVersion::V0_1_0, "ring_chain", 4, 0, 7).unwrap()
+    );
     let (pa, _) = build(
         &json!({"grammar": "ring_chain", "length": {"n_steps": 4, "n_lemmas": 0}, "target": "formal", "flaws": [], "padding_ratio": 0.0}),
         7,
@@ -425,18 +502,36 @@ fn d9_determinism_and_idempotence() {
     );
     // generate's dispatch: a grammar config is an s2_grammar config
     let any = prepare_any(&c, 7).unwrap();
-    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_1_0));
+    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_2_0));
     assert!(prepare_any(&json!({"theorem": "nat_le_sq", "grammar": "ring_chain"}), 7).is_err());
     assert!(prepare_any(&json!({"length": {"n_steps": 1, "n_lemmas": 0}}), 7).is_err());
     assert_eq!(
         Producer::parse("s2_grammar", "0.1.0"),
         Some(Producer::Grammar(GrammarVersion::V0_1_0))
     );
-    assert_eq!(Producer::parse("s2_grammar", "0.2.0"), None);
+    assert_eq!(
+        Producer::parse("s2_grammar", "0.2.0"),
+        Some(Producer::Grammar(GrammarVersion::V0_2_0))
+    );
+    assert_eq!(Producer::parse("s2_grammar", "0.3.0"), None);
     assert_eq!(Producer::parse("s2_grammars", "0.1.0"), None);
-    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.1.0");
+    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.2.0");
     assert!(grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0001"));
+    assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0007"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0013"));
+    assert!(grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0001"));
+    assert!(grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0007"));
+    assert!(grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0013"));
+    assert!(!grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0004"));
+    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.2.0: only the version,
+    // and with it the id and the manifest, differ
+    let old = prepare_for(Producer::Grammar(GrammarVersion::V0_1_0), &c, 7).unwrap();
+    assert_eq!(old.informal, p1.informal);
+    assert_eq!(
+        old.formal.as_ref().map(|f| &f.bytes),
+        p1.formal.as_ref().map(|f| &f.bytes)
+    );
+    assert_ne!(old.artifact_id(), p1.artifact_id());
 }
 
 #[test]
@@ -743,16 +838,19 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     assert!(refused(&c), "a grammar of a later version");
     let mut c = config(4, 0, "informal", json!([]));
     c["padding_ratio"] = json!(0.2);
-    assert!(refused(&c), "no padding material");
-    assert!(refused(&config(
-        4,
-        0,
-        "informal",
-        json!([{
-            "class": "FLAW-0013", "sub_variant": null, "severity": "cosmetic", "site": "auto",
-            "dials": {"kinds": ["re-derivation"], "count": 1, "placement": "before"}
-        }])
-    )));
+    assert!(refused(&c), "a ratio without the FLAW-0013 spec");
+    assert!(
+        refused(&config(
+            4,
+            0,
+            "informal",
+            json!([{
+                "class": "FLAW-0013", "sub_variant": null, "severity": "cosmetic", "site": "auto",
+                "dials": {"kinds": ["re-derivation"], "count": 1, "placement": "before"}
+            }])
+        )),
+        "the FLAW-0013 spec without a positive ratio"
+    );
     assert!(
         refused(&config(
             4,
@@ -885,7 +983,7 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     c["target"] = json!("both");
     assert!(refused(&c));
     // the version a manifest names must exist
-    assert!(GrammarVersion::parse("0.2.0").is_none());
+    assert!(GrammarVersion::parse("0.3.0").is_none());
 }
 
 #[test]
@@ -915,4 +1013,603 @@ fn d8_a_long_instance_renders_and_measures() {
     assert_eq!(verdict(&m), json!("PASS"));
     assert_eq!(m.ground_truth.as_ref().unwrap().flaws.len(), 2);
     assert!(p.injection.as_ref().unwrap().site > 32);
+    // 0.2.0: the most unused lemmas, and the most padding, on the longest instance
+    let (p, m) = build(&config(256, 32, "pair", unused_spec(13)), 7);
+    assert_eq!(p.plan.steps.len(), 301);
+    assert_eq!(m.commanded["n_lemmas"].value, json!(45));
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(13)));
+    assert_eq!(verdict(&m), json!("PASS"));
+    let c = padded(
+        256,
+        32,
+        "pair",
+        json!(["re-derivation", "unused-lemma"]),
+        32,
+        "drawn",
+    );
+    let (p, m) = build(&c, 7);
+    assert_eq!(p.plan.steps.len(), 320);
+    assert_eq!(p.padding.len(), 32);
+    assert_eq!(m.achieved["flaws_confirmed"].value, Some(json!(32)));
+    assert_eq!(verdict(&m), json!("PASS"));
+}
+
+#[test]
+fn d5_flaw_0007_unused_inserts_irrelevant_lemmas_after_the_cited_ones_cited_nowhere() {
+    for (n, m, count) in [(4u64, 0u64, 1u64), (4, 0, 2), (6, 2, 3), (3, 2, 13)] {
+        let control = grammar::prepare(&config(n, m, "pair", json!([])), 7).unwrap();
+        let c = config(n, m, "pair", unused_spec(count));
+        let (p, manifest) = build(&c, 7);
+        let (n, m, count) = (n as usize, m as usize, count as usize);
+        let d = derive(n, m, 7);
+        // the plan: the cited lemmas, then the unused ones, then the chain; no faithful step
+        // changes, and step 0 is untouched
+        assert_eq!(p.plan.steps.len(), n + m + count);
+        assert_eq!(p.plan.claim, control.plan.claim);
+        assert_eq!(p.plan.statement, control.plan.statement);
+        for k in 0..m {
+            assert_eq!(p.plan.steps[k], control.plan.steps[k]);
+        }
+        for k in 0..n {
+            assert_eq!(p.plan.steps[m + count + k], control.plan.steps[m + k]);
+        }
+        assert!(p.padding.is_empty() && p.composite.is_none() && p.false_theorem.is_none());
+        let instances: Vec<&Injection> = p.injection.iter().chain(&p.further).collect();
+        assert_eq!(instances.len(), count);
+        let mut forms: BTreeSet<usize> = BTreeSet::new();
+        for (i, inj) in instances.iter().enumerate() {
+            let number = m + i + 1;
+            assert_eq!(inj.instance as usize, i + 1);
+            assert_eq!(inj.class, "FLAW-0007");
+            assert_eq!(inj.sub_variant.as_deref(), Some("unused"));
+            assert_eq!(inj.severity, Severity::Cosmetic);
+            assert_eq!(inj.lean_catchable, LeanCatchable::YesTooling);
+            assert_eq!(inj.site, number);
+            let s = &p.plan.steps[number - 1];
+            let l = s.lemma.as_ref().expect("an unused lemma is a lemma step");
+            assert_eq!(l.name, format!("{MAIN_DECLARATION}_unused_{}", i + 1));
+            assert!(
+                s.text
+                    .starts_with(&format!("Lemma {number}. For all integers $x$ and $y$, $"))
+            );
+            assert!(
+                s.text
+                    .ends_with("$; both sides expand to the same polynomial.")
+            );
+            assert_eq!(
+                s.fragment,
+                vec!["intro x y".to_string(), "ring".to_string()]
+            );
+            assert!(s.premises.is_empty() && s.padding.is_none());
+            // the identity: a seed form the instance does not use, drawn without replacement,
+            // equated to a presentation of its expansion
+            let form = inj.informal_dials["seed_form"].as_u64().unwrap() as usize;
+            assert!((1..=SEED_FORMS.len()).contains(&form) && form - 1 != d.form);
+            assert!(forms.insert(form), "forms are drawn without replacement");
+            let sf = &SEED_FORMS[form - 1];
+            let claim = l.claim.strip_prefix("∀ x y : ℤ, ").unwrap();
+            let (a, b) = claim.split_once(" = ").unwrap();
+            assert_eq!(a, sf.lean());
+            assert_ne!(a, b);
+            assert!(s.text.contains(&format!("${} = ", sf.latex())));
+            // nothing cites the lemma
+            assert!(p.plan.steps.iter().all(|t| {
+                !t.fragment.iter().any(|f| f.contains(&l.name))
+                    && t.premises.iter().all(|pr| pr.cites != l.name)
+            }));
+            // the dials: the spec's, the site, the form, the inserted text or lines, nothing
+            // replaced, no originals
+            let di = &inj.informal_dials;
+            assert_eq!(di["count"], json!(count));
+            assert_eq!(di["length_steps"], json!(1));
+            assert_eq!(di["site"], json!(number));
+            assert_eq!(di["inserted"], json!(s.text));
+            assert!(di["replaced"].is_null());
+            assert_eq!(di["original_steps"], json!({}));
+            let df = &inj.formal_dials;
+            assert_eq!(df["declaration"], json!(l.name));
+            assert_eq!(df["inserted"], json!(lemma_lines(s).unwrap()));
+            assert_eq!(df["seed_form"], json!(form));
+            assert!(df["replaced"].is_null());
+            assert_eq!(df["original_fragments"], json!({}));
+        }
+        // the records: two per instance, a valid proof of a true statement, confirmed under
+        // the predicted T
+        let gt = manifest.ground_truth.as_ref().unwrap();
+        assert_eq!(gt.flaws.len(), 2 * count);
+        assert_eq!(gt.proof_status, ProofStatus::Valid);
+        assert!(gt.correct);
+        assert_eq!(gt.statement_status.value, Some(true));
+        let formal = p.formal.as_ref().unwrap();
+        let informal = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+        for r in &gt.flaws {
+            assert_eq!(r.class, "FLAW-0007");
+            assert_eq!(r.sub_variant.as_deref(), Some("unused"));
+            assert_eq!(r.severity, Severity::Cosmetic);
+            assert_eq!(r.lean_catchable, LeanCatchable::YesTooling);
+            let number = m + r.instance as usize;
+            match &r.location {
+                Location::Informal(l) => {
+                    assert_eq!(l.step, number as u64);
+                    assert_eq!(l.span, [0, informal.steps[number].chars().count() as u64]);
+                }
+                Location::Formal(l) => {
+                    assert_eq!(
+                        l.declaration,
+                        format!("{MAIN_DECLARATION}_unused_{}", r.instance)
+                    );
+                    assert_eq!(l.line, formal.fragment_lines[number - 1].unwrap()[0]);
+                }
+                other => panic!("{other:?}"),
+            }
+        }
+        assert_eq!(manifest.commanded["n_steps"].value, json!(n + m + count));
+        assert_eq!(manifest.commanded["n_lemmas"].value, json!(m + count));
+        assert_eq!(manifest.commanded["n_flaws_total"].value, json!(count));
+        assert_eq!(manifest.commanded["n_flaws_0007"].value, json!(count));
+        assert_eq!(manifest.commanded["lean_build"].value, json!("pass"));
+        assert_eq!(
+            manifest.commanded["lean_axioms_standard"].value,
+            json!(true)
+        );
+        assert_eq!(
+            manifest.achieved["flaws_confirmed"].value,
+            Some(json!(count))
+        );
+        assert_eq!(manifest.achieved["n_lemmas"].value, Some(json!(m + count)));
+        assert_eq!(informal.n_lemmas as usize, m + count);
+        assert_eq!(verdict(&manifest), json!("PASS"));
+        // the formal file: the cited lemmas, then the unused ones, then the main declaration
+        let text = String::from_utf8(formal.bytes.clone()).unwrap();
+        let pos = |needle: &str| text.find(needle).unwrap_or_else(|| panic!("{needle}"));
+        let main_at = pos(&format!("\ntheorem {MAIN_DECLARATION} (x y : ℤ) : "));
+        for i in 1..=count {
+            let at = pos(&format!(
+                "\ntheorem {MAIN_DECLARATION}_unused_{i} : ∀ x y : ℤ, "
+            ));
+            assert!(at < main_at);
+            for j in 1..=m {
+                assert!(pos(&format!("theorem {MAIN_DECLARATION}_lemma_{j} :")) < at);
+            }
+        }
+        assert_eq!(
+            parse_lean(&formal.bytes).unwrap().n_declarations as usize,
+            1 + m + count
+        );
+        // check T refuses confirmation when the main declaration uses an unused lemma,
+        // directly or through an auxiliary constant of the file, and when no listing exists;
+        // the artifact's verdict is then FAIL, not a refusal
+        let name = format!("{MAIN_DECLARATION}_unused_1");
+        let mut obs = predicted(&p).unwrap();
+        obs.used_constants
+            .as_mut()
+            .unwrap()
+            .get_mut(MAIN_DECLARATION)
+            .unwrap()
+            .push(name.clone());
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(
+            bad.achieved["flaws_confirmed"].value,
+            Some(json!(count - 1))
+        );
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        let mut obs = predicted(&p).unwrap();
+        {
+            let used = obs.used_constants.as_mut().unwrap();
+            used.insert("aux._proof_1".into(), vec![name.clone()]);
+            used.get_mut(MAIN_DECLARATION)
+                .unwrap()
+                .push("aux._proof_1".into());
+        }
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(
+            bad.achieved["flaws_confirmed"].value,
+            Some(json!(count - 1))
+        );
+        let mut obs = predicted(&p).unwrap();
+        obs.used_constants = None;
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        // the informal-only and formal-only targets carry one record per instance
+        let (pi, mi) = build(
+            &config(n as u64, m as u64, "informal", unused_spec(count as u64)),
+            7,
+        );
+        assert_eq!(mi.ground_truth.as_ref().unwrap().flaws.len(), count);
+        assert_eq!(pi.injection.iter().chain(&pi.further).count(), count);
+        assert!(!mi.commanded.contains_key("lean_build"));
+        assert_eq!(verdict(&mi), json!("PASS"));
+        let (_, mf) = build(
+            &config(n as u64, m as u64, "formal", unused_spec(count as u64)),
+            7,
+        );
+        assert_eq!(mf.ground_truth.as_ref().unwrap().flaws.len(), count);
+        assert_eq!(mf.commanded["lean_build"].value, json!("pass"));
+        assert_eq!(verdict(&mf), json!("PASS"));
+    }
+    // determinism: two preparations agree; another seed draws other forms or presentations
+    let c = config(6, 1, "pair", unused_spec(2));
+    let (p1, m1) = build(&c, 7);
+    let (p2, m2) = build(&c, 7);
+    assert_eq!(p1, p2);
+    assert_eq!(m1, m2);
+    let (p3, _) = build(&c, 8);
+    assert_ne!(p3.plan.steps, p1.plan.steps);
+    // the refusals
+    let refused = |flaws: Value| grammar::prepare(&config(4, 0, "pair", flaws), 7).is_err();
+    let spec = |sub: Value, severity: &str, site: Value, dials: Value| {
+        json!([{
+            "class": "FLAW-0007", "sub_variant": sub, "severity": severity, "site": site,
+            "dials": dials
+        }])
+    };
+    let one = json!({"count": 1, "length_steps": 1});
+    assert!(
+        refused(spec(json!("vacuous"), "fatal", json!("auto"), one.clone())),
+        "vacuous needs hand-authored unsatisfiable hypotheses"
+    );
+    assert!(refused(spec(
+        json!(null),
+        "cosmetic",
+        json!("auto"),
+        one.clone()
+    )));
+    assert!(
+        refused(spec(json!("unused"), "gap", json!("auto"), one.clone())),
+        "unused is cosmetic"
+    );
+    assert!(
+        refused(spec(json!("unused"), "cosmetic", json!(1), one.clone())),
+        "the site is auto"
+    );
+    assert!(refused(spec(
+        json!("unused"),
+        "cosmetic",
+        json!("auto"),
+        json!({"count": 0, "length_steps": 1})
+    )));
+    assert!(
+        refused(spec(
+            json!("unused"),
+            "cosmetic",
+            json!("auto"),
+            json!({"count": 14, "length_steps": 1})
+        )),
+        "at most the other thirteen forms"
+    );
+    assert!(
+        refused(spec(
+            json!("unused"),
+            "cosmetic",
+            json!("auto"),
+            json!({"count": 1, "length_steps": 2})
+        )),
+        "one identity per lemma"
+    );
+    assert!(
+        refused(spec(
+            json!("unused"),
+            "cosmetic",
+            json!("auto"),
+            json!({"count": 1})
+        )),
+        "both dials"
+    );
+    assert!(
+        refused(spec(
+            json!("unused"),
+            "cosmetic",
+            json!("auto"),
+            json!({"count": 1, "length_steps": 1, "seed_form": 3})
+        )),
+        "a reserved dial"
+    );
+    let two = json!([unused_spec(1)[0], propagated("sign")[0]]);
+    assert!(refused(two), "one spec per artifact");
+    // 0.1.0 never realized the class: its goldens regenerate under the version they name
+    assert!(
+        prepare_for(
+            Producer::Grammar(GrammarVersion::V0_1_0),
+            &config(4, 0, "pair", unused_spec(1)),
+            7
+        )
+        .is_err()
+    );
+}
+
+#[test]
+fn d5_flaw_0013_pads_with_generated_identities_and_their_unused_declarations() {
+    for (n, m, kinds, count, placement) in [
+        (4u64, 0u64, json!(["re-derivation"]), 1u64, "drawn"),
+        (4, 0, json!(["unused-lemma"]), 2, "before"),
+        (4, 0, json!(["re-derivation", "unused-lemma"]), 2, "drawn"),
+        (6, 2, json!(["re-derivation", "unused-lemma"]), 5, "drawn"),
+        (6, 2, json!(["unused-lemma", "re-derivation"]), 32, "before"),
+    ] {
+        let control = grammar::prepare(&config(n, m, "pair", json!([])), 7).unwrap();
+        let c = padded(n, m, "pair", kinds.clone(), count, placement);
+        let (p, manifest) = build(&c, 7);
+        let (n, m, count) = (n as usize, m as usize, count as usize);
+        let d = derive(n, m, 7);
+        assert_eq!(p.plan.steps.len(), n + m + count);
+        assert_eq!(p.padding.len(), count);
+        assert!(p.injection.is_none() && p.further.is_empty());
+        assert_eq!(p.plan.claim, control.plan.claim);
+        // the argument's order is preserved: deleting the padding steps gives the control's
+        // plan (ADR-0011 Options 8)
+        let rest: Vec<_> = p
+            .plan
+            .steps
+            .iter()
+            .filter(|s| s.padding.is_none())
+            .cloned()
+            .collect();
+        assert_eq!(rest, control.plan.steps);
+        let named: Vec<String> = kinds
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|k| k.as_str().unwrap().to_string())
+            .collect();
+        for ins in &p.padding {
+            let s = &p.plan.steps[ins.site - 1];
+            let h = s.padding.as_ref().expect("a padding step");
+            assert!(s.lemma.is_none() && s.premises.is_empty());
+            assert!(!s.text.starts_with("Lemma"));
+            assert_eq!(h.kind, ins.kind);
+            assert!(named.contains(&h.kind.as_str().to_string()));
+            assert_eq!(h.name, format!("{MAIN_DECLARATION}_pad_{}", ins.instance));
+            assert_eq!(ins.declaration, h.name);
+            assert_eq!(ins.paragraph, ins.instance);
+            assert_eq!(ins.text, s.text);
+            assert_eq!(
+                s.fragment,
+                vec!["intro x y".to_string(), "ring".to_string()]
+            );
+            let form = ins.informal_dials["seed_form"].as_u64().unwrap() as usize;
+            let (a, b) = h
+                .claim
+                .strip_prefix("∀ x y : ℤ, ")
+                .unwrap()
+                .split_once(" = ")
+                .unwrap();
+            assert_ne!(a, b);
+            match h.kind {
+                PaddingKind::ReDerivation => {
+                    assert_eq!(form - 1, d.form, "the instance's own polynomial");
+                    assert!(s.text.starts_with("As a check, "));
+                }
+                PaddingKind::UnusedLemma => {
+                    assert_ne!(form - 1, d.form, "a seed form the instance does not use");
+                    assert_eq!(a, SEED_FORMS[form - 1].lean());
+                    assert!(s.text.starts_with("Note the identity: "));
+                }
+                other => panic!("{other:?}"),
+            }
+            assert!(
+                s.text
+                    .ends_with("$; both sides expand to the same polynomial.")
+            );
+            assert!(
+                p.plan
+                    .steps
+                    .iter()
+                    .all(|t| !t.fragment.iter().any(|f| f.contains(&h.name)))
+            );
+            let di = &ins.informal_dials;
+            assert_eq!(di["kinds"], kinds);
+            assert_eq!(di["count"], json!(count));
+            assert_eq!(di["placement"], json!(placement));
+            assert_eq!(di["ratio"], c["padding_ratio"]);
+            assert_eq!(di["site"], json!(ins.site));
+            assert_eq!(di["kind"], json!(h.kind.as_str()));
+            assert_eq!(di["inserted"], json!(s.text));
+            assert!(di["replaced"].is_null());
+            assert!(di.get("paragraph").is_none());
+            let df = &ins.formal_dials;
+            assert_eq!(df["declaration"], json!(h.name));
+            assert_eq!(df["inserted"], json!(padding_lines(s).unwrap()));
+            assert_eq!(df["seed_form"], json!(form));
+            assert!(df["replaced"].is_null());
+            if placement == "before" {
+                assert_eq!(
+                    ins.site, ins.instance as usize,
+                    "before the first step, in drawn order"
+                );
+            }
+        }
+        // the records: one instance per paragraph, informal NO, formal YES-TOOLING, confirmed
+        let gt = manifest.ground_truth.as_ref().unwrap();
+        assert_eq!(gt.flaws.len(), 2 * count);
+        assert_eq!(gt.proof_status, ProofStatus::Valid);
+        assert!(gt.correct);
+        let formal = p.formal.as_ref().unwrap();
+        let informal = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+        for r in &gt.flaws {
+            assert_eq!(r.class, "FLAW-0013");
+            assert_eq!(r.sub_variant, None);
+            assert_eq!(r.severity, Severity::Cosmetic);
+            let ins = &p.padding[r.instance as usize - 1];
+            match &r.location {
+                Location::Informal(l) => {
+                    assert_eq!(r.lean_catchable, LeanCatchable::No);
+                    assert_eq!(l.step, ins.site as u64);
+                    assert_eq!(l.span, [0, informal.steps[ins.site].chars().count() as u64]);
+                }
+                Location::Formal(l) => {
+                    assert_eq!(r.lean_catchable, LeanCatchable::YesTooling);
+                    assert_eq!(l.declaration, ins.declaration);
+                    assert_eq!(l.line, formal.fragment_lines[ins.site - 1].unwrap()[0]);
+                }
+                other => panic!("{other:?}"),
+            }
+        }
+        assert_eq!(manifest.commanded["n_steps"].value, json!(n + m + count));
+        assert_eq!(manifest.commanded["n_lemmas"].value, json!(m));
+        assert_eq!(manifest.commanded["n_flaws_total"].value, json!(count));
+        assert_eq!(manifest.commanded["n_flaws_0013"].value, json!(count));
+        assert_eq!(manifest.commanded["lean_build"].value, json!("pass"));
+        assert_eq!(
+            json!(manifest.commanded["padding_ratio"].tolerance),
+            json!({"abs": 0.05})
+        );
+        assert_eq!(
+            manifest.achieved["flaws_confirmed"].value,
+            Some(json!(count))
+        );
+        assert_eq!(informal.n_lemmas as usize, m);
+        assert_eq!(
+            parse_lean(&formal.bytes).unwrap().n_declarations as usize,
+            1 + m + count
+        );
+        assert_eq!(verdict(&manifest), json!("PASS"));
+        // check T refuses confirmation when the main declaration uses a padding declaration
+        let mut obs = predicted(&p).unwrap();
+        obs.used_constants
+            .as_mut()
+            .unwrap()
+            .get_mut(MAIN_DECLARATION)
+            .unwrap()
+            .push(p.padding[0].declaration.clone());
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(
+            bad.achieved["flaws_confirmed"].value,
+            Some(json!(count - 1))
+        );
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        // the informal-only and formal-only targets: one record per paragraph, the ratio over
+        // the file that `n_tokens` is measured on
+        let (pi, mi) = build(
+            &padded(
+                n as u64,
+                m as u64,
+                "informal",
+                kinds.clone(),
+                count as u64,
+                placement,
+            ),
+            7,
+        );
+        assert_eq!(mi.ground_truth.as_ref().unwrap().flaws.len(), count);
+        assert_eq!(pi.padding.len(), count);
+        assert_eq!(verdict(&mi), json!("PASS"));
+        let (_, mf) = build(
+            &padded(
+                n as u64,
+                m as u64,
+                "formal",
+                kinds.clone(),
+                count as u64,
+                placement,
+            ),
+            7,
+        );
+        assert_eq!(mf.ground_truth.as_ref().unwrap().flaws.len(), count);
+        assert!(
+            mf.achieved["padding_ratio"]
+                .value
+                .as_ref()
+                .and_then(Value::as_f64)
+                .unwrap()
+                > 0.0
+        );
+        assert_eq!(verdict(&mf), json!("PASS"));
+    }
+    // both kinds occur when both are named, over a few seeds
+    let mut seen: BTreeSet<PaddingKind> = BTreeSet::new();
+    for seed in 0..8 {
+        let mut c = config(
+            4,
+            0,
+            "informal",
+            padding_spec(json!(["re-derivation", "unused-lemma"]), 3, "drawn"),
+        );
+        c["padding_ratio"] = json!(1);
+        for ins in &grammar::prepare(&c, seed).unwrap().padding {
+            seen.insert(ins.kind);
+        }
+    }
+    assert_eq!(seen.len(), 2);
+    // determinism
+    let c = padded(
+        6,
+        1,
+        "pair",
+        json!(["re-derivation", "unused-lemma"]),
+        3,
+        "drawn",
+    );
+    let (p1, m1) = build(&c, 7);
+    let (p2, m2) = build(&c, 7);
+    assert_eq!(p1, p2);
+    assert_eq!(m1, m2);
+    // the refusals
+    let refused = |c: &Value| grammar::prepare(c, 7).is_err();
+    let with_ratio = |flaws: Value, ratio: f64| {
+        let mut c = config(4, 0, "pair", flaws);
+        c["padding_ratio"] = json!(ratio);
+        c
+    };
+    let one = |kinds: Value| padding_spec(kinds, 1, "drawn");
+    assert!(
+        refused(&with_ratio(one(json!(["re-derivation"])), 0.0)),
+        "the spec needs a positive ratio"
+    );
+    assert!(
+        refused(&with_ratio(json!([]), 0.2)),
+        "a ratio needs the spec"
+    );
+    assert!(
+        refused(&with_ratio(one(json!(["restated-definition"])), 0.2)),
+        "no material"
+    );
+    assert!(refused(&with_ratio(one(json!(["verbose-rewrite"])), 0.2)));
+    assert!(refused(&with_ratio(
+        one(json!(["re-derivation", "restated-definition"])),
+        0.2
+    )));
+    assert!(refused(&with_ratio(one(json!([])), 0.2)));
+    assert!(refused(&with_ratio(
+        padding_spec(json!(["re-derivation", "re-derivation"]), 2, "drawn"),
+        0.2
+    )));
+    assert!(refused(&with_ratio(one(json!(["nonsense"])), 0.2)));
+    assert!(refused(&with_ratio(
+        padding_spec(json!(["re-derivation"]), 0, "drawn"),
+        0.2
+    )));
+    assert!(refused(&with_ratio(
+        padding_spec(json!(["re-derivation"]), 33, "drawn"),
+        0.2
+    )));
+    assert!(refused(&with_ratio(
+        padding_spec(json!(["re-derivation"]), 1, "after"),
+        0.2
+    )));
+    let mut s = one(json!(["re-derivation"]));
+    s[0]["sub_variant"] = json!("x");
+    assert!(refused(&with_ratio(s, 0.2)));
+    let mut s = one(json!(["re-derivation"]));
+    s[0]["site"] = json!(1);
+    assert!(refused(&with_ratio(s, 0.2)), "the site is auto");
+    let mut s = one(json!(["re-derivation"]));
+    s[0]["severity"] = json!("gap");
+    assert!(refused(&with_ratio(s, 0.2)));
+    let mut s = one(json!(["re-derivation"]));
+    s[0]["dials"]["ratio"] = json!(0.2);
+    assert!(refused(&with_ratio(s, 0.2)), "a reserved dial");
+    let two = json!([one(json!(["re-derivation"]))[0], propagated("sign")[0]]);
+    assert!(refused(&with_ratio(two, 0.2)), "one spec per artifact");
+    let two = json!([one(json!(["re-derivation"]))[0], unused_spec(1)[0]]);
+    assert!(refused(&with_ratio(two, 0.2)));
+    // 0.1.0 refuses padding: its goldens regenerate under the version they name
+    assert!(
+        prepare_for(
+            Producer::Grammar(GrammarVersion::V0_1_0),
+            &with_ratio(one(json!(["re-derivation"])), 0.2),
+            7
+        )
+        .is_err()
+    );
 }

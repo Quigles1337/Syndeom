@@ -35,9 +35,23 @@
 //! RNG labels this producer draws from are `grammar/plan` (the seed form), `grammar/step/<k>`
 //! (step k's presentation), `grammar/lemma/<j>` (the step lemma j states) and
 //! `injector/FLAW-0001/1` (the site and the perturbed monomial).
+//!
+//! **0.2.0 — FLAW-0007 `unused` and FLAW-0013 (D5), with generated material.** FLAW-0007
+//! `unused` inserts `count` true irrelevant identities as lemma steps cited by nothing — each
+//! `theorem …_unused_<i> : ∀ x y : ℤ, e = p := by intro x y; ring`, where `e` is a seed form the
+//! instance does not use, drawn without replacement on `injector/FLAW-0007/1`, and `p` a
+//! presentation of its expansion drawn on the same stream — after the cited lemmas in document
+//! order, so that no faithful step changes; each lemma is its own instance, cosmetic,
+//! `YES-TOOLING`, confirmed by check T. FLAW-0013 inserts `count` whole paragraphs of true
+//! irrelevant material, each with its matching unused declaration `…_pad_<i>`, drawn on the
+//! stream `padding` as `s2_template` 0.4.0 draws its paragraphs: a `re-derivation` presents the
+//! instance's own polynomial in two drawn presentations, an `unused-lemma` equates a seed form
+//! the instance does not use to a drawn presentation of its expansion (`restated-definition` and
+//! `verbose-rewrite` have no generated material and are refused); the positions follow
+//! `placement`, and `padding_ratio` is measured as 0.4.0 measures it.
 
 use std::cmp::Reverse;
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 use serde_json::{Map, Value, json};
 use syndeom_manifest::{
@@ -45,17 +59,18 @@ use syndeom_manifest::{
 };
 
 use crate::plan::{
-    LemmaHeader, LemmaKind, Plan, Premise, Step, lemma_lines, render_formal, render_informal,
+    LemmaHeader, LemmaKind, PaddingHeader, PaddingKind, Plan, Premise, Step, lemma_lines,
+    padding_lines, render_formal, render_informal,
 };
 use crate::rng::Stream;
 use crate::template::{
-    FlawSpec, Injection, Prepared, Producer, Target, check_spec, exact_keys, parse_spec,
-    unique_span,
+    FlawSpec, Injection, PaddingInsertion, Prepared, Producer, Target, check_spec, exact_keys,
+    parse_spec, unique_span,
 };
 
 pub const GENERATOR_ID: &str = "s2_grammar";
 /// The producer version `generate` emits (ADR-0011 D1).
-pub const GENERATOR_VERSION: &str = "0.1.0";
+pub const GENERATOR_VERSION: &str = "0.2.0";
 /// The one grammar of 0.1.0 (ADR-0011 D6).
 pub const RING_CHAIN: &str = "ring_chain";
 /// The main declaration's name (ADR-0011 D2: `syndeom_s2_<producer>_<theorem>`).
@@ -67,6 +82,17 @@ pub const N_STEPS_RANGE: (u64, u64) = (1, 256);
 pub const N_LEMMAS_RANGE: (u64, u64) = (0, 32);
 /// FLAW-0001's `perturbation` dial (ADR-0011 D5).
 pub const PERTURBATIONS: &[&str] = &["sign", "coefficient", "constant", "exponent"];
+/// FLAW-0007 `unused`'s `count` range (0.2.0; ADR-0011 D5): the unused lemmas state the seed
+/// forms the instance does not use, drawn without replacement, so at most the other thirteen.
+pub const UNUSED_COUNT_RANGE: (u64, u64) = (1, 13);
+/// FLAW-0007 `unused`'s `length_steps` (0.2.0): each unused lemma is one identity, one step.
+pub const UNUSED_LENGTH_STEPS: u64 = 1;
+/// FLAW-0013's `count` range (0.2.0; ADR-0011 D5), the lemma range's bound.
+pub const PADDING_COUNT_RANGE: (u64, u64) = (1, 32);
+/// The padding kinds a generated identity can be (0.2.0; ADR-0011 D5): the instance's own
+/// polynomial presented again is a `re-derivation`; an identity of a seed form the instance
+/// does not use is an `unused-lemma`. The other two kinds have no generated material.
+pub const PADDING_KINDS: &[PaddingKind] = &[PaddingKind::ReDerivation, PaddingKind::UnusedLemma];
 /// Where the material comes from (ADR-0011 D6, Al's ruling 1 of 2026-10-27).
 pub const SOURCE: &str = "engine/generate/src/grammar.rs, s2_grammar 0.1.0: the ring_chain atom library (SEED_FORMS and the presentations of `present`), executor-authored synthetic material outside the S1 corpus (ADR-0011 D6)";
 
@@ -74,14 +100,16 @@ pub const SOURCE: &str = "engine/generate/src/grammar.rs, s2_grammar 0.1.0: the 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
 pub enum GrammarVersion {
     V0_1_0,
+    V0_2_0,
 }
 
 impl GrammarVersion {
-    pub const CURRENT: GrammarVersion = GrammarVersion::V0_1_0;
+    pub const CURRENT: GrammarVersion = GrammarVersion::V0_2_0;
 
     pub fn parse(s: &str) -> Option<GrammarVersion> {
         match s {
             "0.1.0" => Some(GrammarVersion::V0_1_0),
+            "0.2.0" => Some(GrammarVersion::V0_2_0),
             _ => None,
         }
     }
@@ -89,7 +117,13 @@ impl GrammarVersion {
     pub fn as_str(self) -> &'static str {
         match self {
             GrammarVersion::V0_1_0 => "0.1.0",
+            GrammarVersion::V0_2_0 => "0.2.0",
         }
+    }
+
+    /// From 0.2.0 the grammar carries padding material (FLAW-0013); 0.1.0 refuses it.
+    fn pads(self) -> bool {
+        self >= GrammarVersion::V0_2_0
     }
 }
 
@@ -906,20 +940,30 @@ pub fn prepare_with(
             "length.n_lemmas is at most length.n_steps: every lemma states one chain step".into(),
         );
     }
-    if cfg.padding_ratio != 0.0 || cfg.flaws.iter().any(|s| s.class == "FLAW-0013") {
-        return Err(format!(
-            "s2_grammar {} carries no FLAW-0013 padding material; padding_ratio is 0",
-            version.as_str()
-        ));
+    // Padding (0.2.0): commanded by a FLAW-0013 spec together with a positive `padding_ratio`,
+    // and by nothing else (as `s2_template` 0.4.0 reads D3 and D5); 0.1.0 refuses both.
+    let pads = cfg.flaws.iter().any(|s| s.class == "FLAW-0013");
+    if !version.pads() {
+        if cfg.padding_ratio != 0.0 || pads {
+            return Err(format!(
+                "s2_grammar {} carries no FLAW-0013 padding material; padding_ratio is 0",
+                version.as_str()
+            ));
+        }
+    } else if (cfg.padding_ratio > 0.0) != pads {
+        return Err(
+            "padding is commanded by a FLAW-0013 spec with a positive padding_ratio, and by nothing else"
+                .into(),
+        );
     }
     if cfg.flaws.len() > 1 {
         return Err(format!(
-            "s2_grammar {} injects one instance per artifact (ADR-0011 D5)",
+            "s2_grammar {} takes one spec per artifact (ADR-0011 D5); a padded flawed argument is a later version",
             version.as_str()
         ));
     }
     if let Some(spec) = cfg.flaws.first()
-        && spec.class != "FLAW-0001"
+        && !realizes(version, &spec.class)
     {
         return Err(format!(
             "{} is not realized by s2_grammar {}",
@@ -936,11 +980,31 @@ pub fn prepare_with(
         reference: control_reference(version, &cfg.grammar, cfg.n_steps, cfg.n_lemmas, seed_value)?,
     };
     let faithful = plan_of(&d, truth);
-    let (plan, injection) = match cfg.flaws.first() {
-        None => (faithful, None),
+    let (plan, injection, further, padding) = match cfg.flaws.first() {
+        None => (faithful, None, Vec::new(), Vec::new()),
+        Some(spec) if spec.class == "FLAW-0007" => {
+            let (plan, lemmas) = insert_unused(&d, &faithful, spec, cfg.target, seed_value)?;
+            let mut lemmas = lemmas.into_iter();
+            let first = lemmas
+                .next()
+                .ok_or("FLAW-0007 unused inserts at least one lemma")?;
+            (plan, Some(first), lemmas.collect(), Vec::new())
+        }
+        Some(spec) if spec.class == "FLAW-0013" => {
+            let (plan, paragraphs) = pad(
+                version,
+                &d,
+                &faithful,
+                spec,
+                cfg.padding_ratio,
+                cfg.target,
+                seed_value,
+            )?;
+            (plan, None, Vec::new(), paragraphs)
+        }
         Some(spec) => {
             let (plan, inj) = inject(&d, &faithful, spec, cfg.target, seed_value)?;
-            (plan, Some(inj))
+            (plan, Some(inj), Vec::new(), Vec::new())
         }
     };
     let informal = cfg
@@ -963,7 +1027,8 @@ pub fn prepare_with(
         informal,
         formal,
         injection,
-        padding: Vec::new(),
+        further,
+        padding,
         composite: None,
         false_theorem: None,
     })
@@ -1237,10 +1302,335 @@ fn inject(
     Ok((plan, injection))
 }
 
-/// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0.
+// ---- FLAW-0007 `unused` and FLAW-0013 (0.2.0) --------------------------------------------------
+
+fn unused_name(i: usize) -> String {
+    format!("{MAIN_DECLARATION}_unused_{i}")
+}
+
+fn pad_name(i: usize) -> String {
+    format!("{MAIN_DECLARATION}_pad_{i}")
+}
+
+/// The seed forms an instance does not use, in table order: the material of an unused lemma
+/// and of an `unused-lemma` paragraph (ADR-0011 D5: true irrelevant identities).
+fn other_forms(form: usize) -> Vec<usize> {
+    (0..SEED_FORMS.len()).filter(|&f| f != form).collect()
+}
+
+/// An irrelevant identity of a seed form: the form, as a chain's `e_0`, equated to a
+/// presentation of its expansion drawn from `stream`.
+fn form_identity(stream: &mut Stream, form: usize) -> (Rendered, Rendered) {
+    let sf = &SEED_FORMS[form];
+    let a = seed_rendered(sf);
+    let (_, b) = present(stream, &sf.poly(), &a.lean);
+    (a, b)
+}
+
+/// The claim of a closed identity `∀ x y : ℤ, a = b`, proved by `intro x y` and `ring`.
+fn identity_claim(a: &Rendered, b: &Rendered) -> String {
+    format!("∀ x y : ℤ, {} = {}", a.lean, b.lean)
+}
+
+fn identity_proof() -> Vec<String> {
+    vec!["intro x y".to_string(), "ring".to_string()]
+}
+
+/// FLAW-0007 `unused` on `ring_chain` (ADR-0011 D5; 0.2.0): `count` true irrelevant identities
+/// — each a seed form the instance does not use, drawn without replacement on
+/// `injector/FLAW-0007/1`, equated to a presentation of its expansion drawn on the same stream
+/// — inserted as lemma steps after the cited lemmas in document order, numbered after them (so
+/// no faithful step changes and no cited lemma is renumbered) and cited by nothing. Each lemma
+/// is its own instance, cosmetic and `YES-TOOLING`, with a record in each file the artifact has
+/// (the informal record spanning the whole step, the formal one at the declaration's first
+/// line; check T, as `s2_template` 0.3.0 reads it). `length_steps` is 1: a lemma is one identity.
+fn insert_unused(
+    d: &Derivation,
+    faithful: &Plan,
+    spec: &FlawSpec,
+    target: Target,
+    seed: u64,
+) -> Result<(Plan, Vec<Injection>), String> {
+    check_spec(spec, target)?;
+    match spec.sub_variant.as_deref() {
+        Some("unused") => {}
+        Some("vacuous") => {
+            return Err(
+                "FLAW-0007 vacuous needs hand-authored unsatisfiable hypotheses and is s2_template-only (ADR-0011 D6)"
+                    .into(),
+            );
+        }
+        _ => return Err("FLAW-0007's sub_variant is \"unused\" in s2_grammar".into()),
+    }
+    if spec.severity != Severity::Cosmetic {
+        return Err("FLAW-0007 unused is cosmetic (ADR-0011 D5)".into());
+    }
+    if spec.site.is_some() {
+        return Err(
+            "FLAW-0007 unused's lemmas follow the cited lemmas, so its site is \"auto\"".into(),
+        );
+    }
+    exact_keys(
+        &spec.dials,
+        &["count", "length_steps"],
+        "FLAW-0007 unused's dials",
+    )?;
+    let count = spec.dials["count"]
+        .as_u64()
+        .filter(|c| (UNUSED_COUNT_RANGE.0..=UNUSED_COUNT_RANGE.1).contains(c))
+        .ok_or(format!(
+            "FLAW-0007 unused's count is {} to {} in s2_grammar: the unused lemmas state the seed forms the instance does not use, drawn without replacement",
+            UNUSED_COUNT_RANGE.0, UNUSED_COUNT_RANGE.1
+        ))?;
+    if spec.dials["length_steps"].as_u64() != Some(UNUSED_LENGTH_STEPS) {
+        return Err(format!(
+            "FLAW-0007 unused's length_steps is {UNUSED_LENGTH_STEPS} in s2_grammar: each unused lemma is one identity"
+        ));
+    }
+    let m = d.sites.len();
+    let mut stream = Stream::new(seed, "injector/FLAW-0007/1");
+    let mut remaining = other_forms(d.form);
+    let mut plan = faithful.clone();
+    let mut out = Vec::new();
+    for i in 1..=count as usize {
+        let form = remaining.remove(stream.below(remaining.len() as u64) as usize);
+        let (a, b) = form_identity(&mut stream, form);
+        let site = m + i;
+        let step = Step {
+            text: format!(
+                "Lemma {site}. For all integers $x$ and $y$, ${} = {}$; both sides expand to the same polynomial.",
+                a.latex, b.latex
+            ),
+            fragment: identity_proof(),
+            lemma: Some(LemmaHeader {
+                kind: LemmaKind::Theorem,
+                name: unused_name(i),
+                claim: identity_claim(&a, &b),
+            }),
+            padding: None,
+            premises: Vec::new(),
+        };
+        let lines = lemma_lines(&step)?;
+        plan.steps.insert(site - 1, step.clone());
+        let with = |extra: Vec<(&str, Value)>| {
+            let mut dials = spec.dials.clone();
+            dials.insert("site".into(), json!(site));
+            dials.insert("seed_form".into(), json!(form + 1));
+            for (k, v) in extra {
+                dials.insert(k.into(), v);
+            }
+            Value::Object(dials)
+        };
+        out.push(Injection {
+            instance: i as u64,
+            class: "FLAW-0007".to_string(),
+            sub_variant: Some("unused".to_string()),
+            severity: Severity::Cosmetic,
+            lean_catchable: LeanCatchable::YesTooling,
+            site,
+            informal_inserted: step.text.clone(),
+            informal_dials: with(vec![
+                ("inserted", json!(step.text)),
+                ("replaced", Value::Null),
+                ("original_steps", json!({})),
+            ]),
+            formal_inserted: lines.clone(),
+            formal_dials: with(vec![
+                ("inserted", json!(lines)),
+                ("replaced", Value::Null),
+                ("original_fragments", json!({})),
+                ("declaration", json!(unused_name(i))),
+            ]),
+        });
+    }
+    Ok((plan, out))
+}
+
+/// FLAW-0013 on `ring_chain` (ADR-0011 D2 `pad`, D5; 0.2.0, as `s2_template` 0.4.0 reads it):
+/// `count` whole paragraphs of true irrelevant material generated from the atom library, each
+/// with its matching unused declaration `…_pad_<i>`, drawn on the stream `padding` — per
+/// paragraph a kind among the spec's `kinds` (`re-derivation`: the instance's own polynomial in
+/// two drawn presentations; `unused-lemma`: a seed form the instance does not use, equated to a
+/// drawn presentation of its expansion), then, under `drawn`, a position before a step of the
+/// plan as it then stands (`before`: every paragraph before the first step, in drawn order).
+/// One record per paragraph in each file, each paragraph its own instance; the config's
+/// `padding_ratio` is recorded as the `ratio` dial and compared only after rendering (D4, D8).
+/// The record carries `seed_form` (the seed form the identity presents) where a seed's
+/// material would carry `paragraph`: a grammar has no material list.
+fn pad(
+    version: GrammarVersion,
+    d: &Derivation,
+    faithful: &Plan,
+    spec: &FlawSpec,
+    ratio: f64,
+    target: Target,
+    seed: u64,
+) -> Result<(Plan, Vec<PaddingInsertion>), String> {
+    check_spec(spec, target)?;
+    if spec.sub_variant.is_some() {
+        return Err("FLAW-0013 has no sub-variant".into());
+    }
+    if spec.site.is_some() {
+        return Err(
+            "FLAW-0013's positions are drawn from the padding stream, so its site is \"auto\""
+                .into(),
+        );
+    }
+    exact_keys(
+        &spec.dials,
+        &["kinds", "count", "placement"],
+        "FLAW-0013's dials",
+    )?;
+    let kinds: Vec<PaddingKind> = spec.dials["kinds"]
+        .as_array()
+        .ok_or("FLAW-0013's kinds is an array")?
+        .iter()
+        .map(|k| serde_json::from_value(k.clone()).map_err(|_| format!("unknown padding kind {k}")))
+        .collect::<Result<_, _>>()?;
+    if kinds.is_empty() {
+        return Err("FLAW-0013's kinds names at least one kind".into());
+    }
+    if kinds.iter().collect::<BTreeSet<_>>().len() != kinds.len() {
+        return Err("FLAW-0013's kinds names each kind once".into());
+    }
+    if let Some(k) = kinds.iter().find(|k| !PADDING_KINDS.contains(k)) {
+        return Err(format!(
+            "s2_grammar {} carries no {} padding material: a generated identity is a re-derivation or an unused-lemma",
+            version.as_str(),
+            k.as_str()
+        ));
+    }
+    let count = spec.dials["count"]
+        .as_u64()
+        .filter(|c| (PADDING_COUNT_RANGE.0..=PADDING_COUNT_RANGE.1).contains(c))
+        .ok_or(format!(
+            "FLAW-0013's count is {} to {} in s2_grammar",
+            PADDING_COUNT_RANGE.0, PADDING_COUNT_RANGE.1
+        ))?;
+    let before = match spec.dials["placement"].as_str() {
+        Some("before") => true,
+        Some("drawn") => false,
+        _ => return Err("FLAW-0013's placement is \"before\" or \"drawn\"".into()),
+    };
+    /// Which inserted paragraph a step of the padded plan is, if it is one.
+    struct Marker {
+        instance: u64,
+        kind: PaddingKind,
+        form: usize,
+    }
+    let mut stream = Stream::new(seed, "padding");
+    let others = other_forms(d.form);
+    let mut steps: Vec<(Step, Option<Marker>)> =
+        faithful.steps.iter().cloned().map(|s| (s, None)).collect();
+    for instance in 1..=count {
+        let kind = kinds[stream.below(kinds.len() as u64) as usize];
+        let (form, a, b, text) = match kind {
+            PaddingKind::ReDerivation => {
+                let (_, a) = present(&mut stream, &d.poly, "");
+                let (_, b) = present(&mut stream, &d.poly, &a.lean);
+                let text = format!(
+                    "As a check, the same polynomial admits another presentation: for all integers $x$ and $y$, ${} = {}$; both sides expand to the same polynomial.",
+                    a.latex, b.latex
+                );
+                (d.form, a, b, text)
+            }
+            PaddingKind::UnusedLemma => {
+                let form = others[stream.below(others.len() as u64) as usize];
+                let (a, b) = form_identity(&mut stream, form);
+                let text = format!(
+                    "Note the identity: for all integers $x$ and $y$, ${} = {}$; both sides expand to the same polynomial.",
+                    a.latex, b.latex
+                );
+                (form, a, b, text)
+            }
+            other => {
+                return Err(format!(
+                    "s2_grammar {} carries no {} padding material",
+                    version.as_str(),
+                    other.as_str()
+                ));
+            }
+        };
+        let position = if before {
+            (instance - 1) as usize
+        } else {
+            stream.below(steps.len() as u64) as usize
+        };
+        let step = Step {
+            text,
+            fragment: identity_proof(),
+            lemma: None,
+            padding: Some(PaddingHeader {
+                kind,
+                name: pad_name(instance as usize),
+                claim: identity_claim(&a, &b),
+            }),
+            premises: Vec::new(),
+        };
+        let marker = Marker {
+            instance,
+            kind,
+            form,
+        };
+        steps.insert(position, (step, Some(marker)));
+    }
+    let mut plan = faithful.clone();
+    plan.steps = steps.iter().map(|(s, _)| s.clone()).collect();
+    let mut out: Vec<PaddingInsertion> = Vec::new();
+    for (k, (step, marker)) in steps.iter().enumerate() {
+        let Some(Marker {
+            instance,
+            kind,
+            form,
+        }) = marker
+        else {
+            continue;
+        };
+        let site = k + 1;
+        let declaration = step
+            .padding
+            .as_ref()
+            .map(|p| p.name.clone())
+            .ok_or("a padding step carries its header")?;
+        let with = |extra: Vec<(&str, Value)>| {
+            let mut dials = spec.dials.clone();
+            dials.insert("ratio".into(), json!(ratio));
+            dials.insert("site".into(), json!(site));
+            dials.insert("kind".into(), json!(kind.as_str()));
+            dials.insert("seed_form".into(), json!(form + 1));
+            for (key, v) in extra {
+                dials.insert(key.into(), v);
+            }
+            Value::Object(dials)
+        };
+        out.push(PaddingInsertion {
+            instance: *instance,
+            kind: *kind,
+            paragraph: *instance,
+            site,
+            text: step.text.clone(),
+            declaration: declaration.clone(),
+            informal_dials: with(vec![
+                ("inserted", json!(step.text)),
+                ("replaced", Value::Null),
+            ]),
+            formal_dials: with(vec![
+                ("inserted", json!(padding_lines(step)?)),
+                ("replaced", Value::Null),
+                ("declaration", json!(declaration)),
+            ]),
+        });
+    }
+    out.sort_by_key(|i| i.instance);
+    Ok((plan, out))
+}
+
+/// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0; FLAW-0007
+/// `unused` and FLAW-0013 from 0.2.0.
 pub fn realizes(version: GrammarVersion, class: &str) -> bool {
     match version {
         GrammarVersion::V0_1_0 => class == "FLAW-0001",
+        GrammarVersion::V0_2_0 => matches!(class, "FLAW-0001" | "FLAW-0007" | "FLAW-0013"),
     }
 }
 
