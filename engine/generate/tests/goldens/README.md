@@ -369,8 +369,9 @@ own instance, cosmetic, `YES-TOOLING` in both files, the informal records spanni
 valid proof (`proof_status: valid`, `correct: true`) with `n_flaws_0007` 2. The padding
 paragraphs are generated on `padding`: at seed 7 paragraph 1 is a `re-derivation` of the
 instance's own polynomial (`x * (-4 * y + x) + 4 * y ^ 2 = 4 * y * y + x * (x - 4 * y)`; seed
-form 5) placed before step 4 of the plan as it then stood, and paragraph 2 an `unused-lemma`
-(`(x + y) * (x - y) = -y ^ 2 + x ^ 2`; seed form 3) placed at step 2, each a plain step with
+form 5) drawn before step 3 of the plan as it then stood — step 4 once paragraph 2 was inserted
+at step 2 — and paragraph 2 an `unused-lemma` (`(x + y) * (x - y) = -y ^ 2 + x ^ 2`; seed form
+3) placed at step 2, each a plain step with
 its declaration `…_pad_1` (line 7) and `…_pad_2` (line 3) in document order; the informal
 records are `NO`, the formal ones `YES-TOOLING`. The commanded `padding_ratio` of a padded case
 is the ratio its paragraphs achieve at seed 7, to two decimals (informal and pair: 0.4 over

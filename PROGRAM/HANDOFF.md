@@ -11027,3 +11027,68 @@ the committed tree is recorded in the pull request and under the external root, 
 tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 48 ADDENDUM — AL'S RULINGS ON PR 34 (received 2026-11-01 UTC, 2026-11-01
+America/New_York, in this session's conversation after PR #34 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr34.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-020-20261101T1800Z\`, 1,917 bytes, SHA-256
+`f2c39915ce4290660217f12a819a699bbc7740a1656bc4b13edd55c610f51f08`):
+
+~~~text
+Rulings on PR #34 / s2_grammar 0.2.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 100 through 112 are accepted as read.
+
+On reading 105, record also: restated-definition and verbose-rewrite are refused on ring_chain for lack of material, not excluded from grammars; a grammar whose plan states a definition, or whose steps admit a verbose rewrite, realizes them in its own version.
+
+Correct one sentence of analysis/s2-generate-9/README.md in the same commit: the FLAW-0013 goldens’ re-derivation paragraph was drawn before step 3 of the plan as it then stood and became step 4 when the second paragraph was inserted at step 2; the records and the goldens are right.
+
+On s2_grammar 0.3.0’s truth: false (STATE’s NEXT, step 3), record before any code: on a calc chain every step closes by ring, so a false identity can enter a true step’s proof only vacuously — a linear_combination coefficient that normalizes to zero, or an instance of the false universal that ring closes on its own — and such a use does not realize a false statement from which the main theorem still follows; the linear_combination example in STATE’s NEXT is superseded by this note. A load-bearing use has two candidate shapes, both to be probed before anything is chosen or refused: a false intermediate presentation, justified by the axiom at one step and undone by a second use of the axiom at the next (a composite in FLAW-0012’s sense, whose false step’s own record and kernel-catchability are readings); and ex falso at the cited step, the axiom’s instance at the negation witness point refuted by norm_num or decide. Which shape is realized, or that neither is, is a reading for the 0.3.0 pull request, not a refusal made in advance.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `claude/s2-grammar-0.2.0` at `abb68fb7…`,
+clean and in sync with its remote; PR 34 had no review and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 100–112 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet) and here. Nothing regenerated.
+- **Reading 105's note** → recorded: `restated-definition` and `verbose-rewrite` are refused on
+  `ring_chain` for lack of material, not excluded from grammars; a grammar whose plan states a
+  definition, or whose steps admit a verbose rewrite, realizes them in its own version. 0.2.0's
+  refusal message already says "no … padding material", so no byte changes.
+- **The packet sentence** → corrected in `analysis/s2-generate-9/README.md` (the re-derivation
+  paragraph was drawn before step 3 of the plan as it then stood and became step 4 when the
+  second paragraph was inserted at step 2; the records and the goldens are right). I verified
+  the correction against the producer: the position is drawn as `below(steps.len())` over the
+  four chain steps, so an index of 2 — before the third step — shifts to step 4 once the second
+  paragraph lands at step 2. **Beyond the ruling's named file:** the goldens README
+  (`engine/generate/tests/goldens/README.md`) carried the same wrong sentence and is corrected
+  with it, in the same commit; flagged here for Al, since the ruling named one file. No golden,
+  manifest or record changes: the records say step 4 and step 2, which is right.
+- **The `truth: false` note for 0.3.0** → recorded in STATE's NEXT (step 3 replaced: the
+  `linear_combination` example is superseded; the vacuous-use point; the two candidate
+  load-bearing shapes, both to be probed before anything is chosen or refused; which shape is
+  realized, or neither, a reading for the 0.3.0 pull request, not a refusal in advance; step 4
+  now asks for probes of both shapes), in ADR-0011 *Amendments* and here.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE, the two READMEs and this
+  addendum. The gate on the committed tree, the step-7 recheck and the push are recorded in the
+  pull request and under the external root.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, no check, no dial and no register status changed; nothing regenerated.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `de6965c5…`, the `s2_grammar` 0.2.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **The goldens README correction** beyond the ruling's named file (above), for Al's
+  confirmation.
+- **FINDING-018** (informational, backlog; scope extended); FINDING-015 (standing; not extended
+  to the grammar), FINDING-016 and FINDING-017 standing.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

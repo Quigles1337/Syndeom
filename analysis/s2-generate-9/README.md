@@ -114,8 +114,10 @@ Branch `claude/s2-grammar-0.2.0`, from `main` `153140185cbb6a371d950b2f3d22cca95
      `n_lemmas` 2 and `n_steps` 6 commanded where an informal file exists, `lean_build` `pass`,
      `lean_axioms_standard` `true`; 143 informal tokens, 179 formal tokens;
    - the FLAW-0013 cases draw a `re-derivation` of the instance's own polynomial
-     (`x * (-4 * y + x) + 4 * y ^ 2 = 4 * y * y + x * (x - 4 * y)`; `seed_form` 5) placed before
-     step 4 of the plan as it then stood, and an `unused-lemma` (`(x + y) * (x - y) = -y ^ 2 +
+     (`x * (-4 * y + x) + 4 * y ^ 2 = 4 * y * y + x * (x - 4 * y)`; `seed_form` 5) drawn before
+     step 3 of the plan as it then stood — it became step 4 when the second paragraph was
+     inserted at step 2 (Al's correction on PR 34; the records and the goldens are right) —
+     and an `unused-lemma` (`(x + y) * (x - y) = -y ^ 2 +
      x ^ 2`; `seed_form` 3) at step 2 — the declarations `…_pad_2` at line 3 and `…_pad_1` at
      line 7, in document order; the formal files build, print `[propext, Quot.sound]`, the
      closure holds the main declaration only; the informal records (`NO`) span steps 4 and 2

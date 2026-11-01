@@ -84,6 +84,21 @@
     Gate S1 table, the constitution, the licence, the tag, `corpora/` (no artifact written),
     every `s2_template` seed, dial, check and golden, every `s2_grammar` 0.1.0 golden. **NEXT**
     waits on this pull request's merge.
+  - **Al's rulings of 2026-11-01 on PR 34** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 48's addendum), recorded on the same branch: readings
+    100–112 accepted as read; reading 105 recorded with Al's note (`restated-definition` and
+    `verbose-rewrite` are refused on `ring_chain` for lack of material, not excluded from
+    grammars; a grammar whose plan states a definition, or whose steps admit a verbose
+    rewrite, realizes them in its own version); one sentence of the packet README corrected
+    at Al's direction (the FLAW-0013 goldens' re-derivation paragraph was drawn before step 3
+    of the plan as it then stood and became step 4 when the second paragraph was inserted at
+    step 2; the records and the goldens are right), and the same sentence in the goldens
+    README with it (flagged); Al's note on `s2_grammar` 0.3.0's `truth: false` recorded under
+    NEXT before any code (the `linear_combination` example superseded; a false identity can
+    enter a true `calc` step's proof only vacuously; two candidate load-bearing shapes, both
+    to be probed before anything is chosen or refused; which is realized, or neither, a
+    reading for the 0.3.0 pull request). No code, golden or check changed; the version stays
+    0.2.0.
 - **Previous update (Session 47):** 2026-10-29 UTC (2026-10-28 America/New_York). This was Session 47:
   - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
     fresh conversation;
@@ -2350,6 +2365,28 @@ On reading 94, record also: in a calc chain a local perturbation necessarily pro
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
+- **Al's rulings of 2026-11-01 on PR 34 (`s2_grammar` 0.2.0) — verbatim.** Received in
+  Session 48's conversation after PR 34 opened. The copy is `owner-rulings-pr34.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-020-20261101T1800Z\` (1,917 bytes, SHA-256
+  `f2c39915ce4290660217f12a819a699bbc7740a1656bc4b13edd55c610f51f08`), transcribed from the
+  message as rendered to the executor. The rulings are also in ADR-0011 *Amendments* and in
+  HANDOFF Session 48's addendum. Their effect is under *Standing escalations*, in the Updated
+  bullet and in NEXT (the `truth: false` note for `s2_grammar` 0.3.0).
+
+~~~text
+Rulings on PR #34 / s2_grammar 0.2.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 100 through 112 are accepted as read.
+
+On reading 105, record also: restated-definition and verbose-rewrite are refused on ring_chain for lack of material, not excluded from grammars; a grammar whose plan states a definition, or whose steps admit a verbose rewrite, realizes them in its own version.
+
+Correct one sentence of analysis/s2-generate-9/README.md in the same commit: the FLAW-0013 goldens’ re-derivation paragraph was drawn before step 3 of the plan as it then stood and became step 4 when the second paragraph was inserted at step 2; the records and the goldens are right.
+
+On s2_grammar 0.3.0’s truth: false (STATE’s NEXT, step 3), record before any code: on a calc chain every step closes by ring, so a false identity can enter a true step’s proof only vacuously — a linear_combination coefficient that normalizes to zero, or an instance of the false universal that ring closes on its own — and such a use does not realize a false statement from which the main theorem still follows; the linear_combination example in STATE’s NEXT is superseded by this note. A load-bearing use has two candidate shapes, both to be probed before anything is chosen or refused: a false intermediate presentation, justified by the axiom at one step and undone by a second use of the axiom at the next (a composite in FLAW-0012’s sense, whose false step’s own record and kernel-catchability are readings); and ex falso at the cited step, the axiom’s instance at the negation witness point refuted by norm_num or decide. Which shape is realized, or that neither is, is a reading for the 0.3.0 pull request, not a refusal made in advance.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -2424,11 +2461,23 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
-- **`s2_grammar` 0.2.0 — AWAITING Al's review** (Session 48; branch `claude/s2-grammar-0.2.0`;
-  `analysis/s2-generate-9/README.md`). Merge with a merge commit, so that
+- **`s2_grammar` 0.2.0 — RULED by Al on 2026-11-01 (rulings on PR 34, verbatim under
+  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 48; branch
+  `claude/s2-grammar-0.2.0`; `analysis/s2-generate-9/README.md`). Merge with a merge commit, so that
   `de6965c55e9f296f7456bd3934ade481cd16bf2d`, the goldens' `engine_commit`, stays a real commit
   on `main`.
-  - **Readings 100–112** (packet readings; ADR-0011 *Amendments*): the unused lemmas follow
+  - Readings 100–112 are accepted as read. Reading 105 carries Al's recorded note:
+    `restated-definition` and `verbose-rewrite` are refused on `ring_chain` for lack of
+    material, not excluded from grammars; a grammar whose plan states a definition, or whose
+    steps admit a verbose rewrite, realizes them in its own version. One sentence of the
+    packet README is corrected at Al's direction (the re-derivation paragraph was drawn
+    before step 3 of the plan as it then stood and became step 4 when the second paragraph
+    was inserted at step 2; the records and the goldens are right), and the same sentence in
+    the goldens README with it — the executor's extension of the ruling to an identical
+    sentence, for Al's confirmation. Al's note on 0.3.0's `truth: false` is recorded under
+    NEXT. Nothing regenerated; the version stays 0.2.0. Nothing else is awaited on the
+    readings.
+  - **The readings as flagged** (packet readings 100–112; ADR-0011 *Amendments*): the unused lemmas follow
     the cited lemmas in document order and are numbered after them, so no faithful step changes
     (100); **each unused lemma its own instance, the first in `Prepared.injection` and the rest
     in `Prepared.further`, measured alike (101)**; the material a seed form the instance does
@@ -3112,17 +3161,21 @@ Executable cold:
    declaration lines and `inserted` the axiom line, Al's ruling on reading 24): `truth: true`
    replaces a cited lemma's declaration (`n_lemmas` ≥ 1; the lemma drawn on
    `injector/FLAW-0009/1`) by an `axiom` of the same identity, the informal file unchanged.
-   **`truth: false` is the session's first reading to flag before any code:** Al's reading of
-   FLAWS.md's recipe (ruling on PR 28) asks for a false statement from which the main theorem
-   still follows, and on a `calc` chain a false identity cited at a step leaves the next step
-   false; the session lists the options (for example an axiom of a perturbed identity from
-   which the faithful step follows by `linear_combination`, which needs that tactic's module in
-   the grammar's import set and a probe) and, if none satisfies the ruling with generated
-   material, refuses `truth: false` for lack of material, as the template refuses
-   `native_decide`, and records that as a reading. `native_decide` stays refused.
+   **`truth: false`, recorded before any code (Al's ruling of 2026-11-01 on PR 34):** on a
+   `calc` chain every step closes by `ring`, so a false identity can enter a true step's proof
+   only vacuously — a `linear_combination` coefficient that normalizes to zero, or an instance
+   of the false universal that `ring` closes on its own — and such a use does not realize a
+   false statement from which the main theorem still follows (Al's reading of FLAWS.md's
+   recipe, ruling on PR 28). A load-bearing use has two candidate shapes, **both to be probed
+   before anything is chosen or refused:** a false intermediate presentation, justified by
+   the axiom at one step and undone by a second use of the axiom at the next (a composite in
+   FLAW-0012's sense, whose false step's own record and kernel-catchability are readings);
+   and ex falso at the cited step, the axiom's instance at the negation witness point refuted
+   by `norm_num` or `decide`. Which shape is realized, or that neither is, is a reading for
+   the 0.3.0 pull request, not a refusal made in advance. `native_decide` stays refused.
 4. Lean probes compiled first, one process at a time: a chain with a cited lemma replaced by an
-   axiom of the same identity, the audit tail's axiom print read; a probe of whatever
-   `truth: false` design is proposed, before any code.
+   axiom of the same identity, the audit tail's axiom print read; probes of both `truth:
+   false` shapes Al's ruling names, before any code.
 5. The goldens: FLAW-0009 `axiom` `truth: true` (formal, pair) at a short length with one lemma
    — (4, 1), seed 7 — from two production runs compared byte for byte, with the (4, 1) formal
    control so that the truth reference names a golden; the earlier goldens stay regenerable
