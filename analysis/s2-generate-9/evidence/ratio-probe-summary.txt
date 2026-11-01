@@ -1,0 +1,11 @@
+ratio-probe-informal exit=0 start=2026-11-01T18:00:52.128Z end=2026-11-01T18:00:58.070Z
+s2_grammar-v0.2.0-24f04e1c666a-s7
+fidelity: Fail
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ratio-probe-formal exit=0 start=2026-11-01T18:00:58.077Z end=2026-11-01T18:01:18.816Z
+s2_grammar-v0.2.0-91fe7b024b06-s7
+fidelity: Fail
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== RATIO PROBE end

@@ -1,0 +1,41 @@
+ring_chain/v0.2.0-control-short-informal exit=0 start=2026-11-01T18:04:35.698Z end=2026-11-01T18:04:41.565Z
+s2_grammar-v0.2.0-82300f31bd83-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.2.0-control-short-formal exit=0 start=2026-11-01T18:04:41.566Z end=2026-11-01T18:05:02.206Z
+s2_grammar-v0.2.0-cc0c6a4daf03-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.2.0-flaw-0007-unused-informal exit=0 start=2026-11-01T18:05:02.208Z end=2026-11-01T18:05:08.011Z
+s2_grammar-v0.2.0-b547d2bf7d1a-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.2.0-flaw-0007-unused-formal exit=0 start=2026-11-01T18:05:08.012Z end=2026-11-01T18:05:28.509Z
+s2_grammar-v0.2.0-0924ba72990b-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.2.0-flaw-0007-unused-pair exit=0 start=2026-11-01T18:05:28.512Z end=2026-11-01T18:05:49.528Z
+s2_grammar-v0.2.0-79eaa0f0ccb5-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.2.0-flaw-0013-drawn-informal exit=0 start=2026-11-01T18:05:49.529Z end=2026-11-01T18:05:55.719Z
+s2_grammar-v0.2.0-0aa6313e3136-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.2.0-flaw-0013-drawn-formal exit=0 start=2026-11-01T18:05:55.720Z end=2026-11-01T18:06:16.913Z
+s2_grammar-v0.2.0-cdd5d214eb95-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.2.0-flaw-0013-drawn-pair exit=0 start=2026-11-01T18:06:16.915Z end=2026-11-01T18:06:38.267Z
+s2_grammar-v0.2.0-c85d97da4289-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end
