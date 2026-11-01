@@ -1,9 +1,9 @@
 # Goldens for `s2_template` and `s2_grammar` (ADR-0011 D10)
 
-There are 79 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+There are 87 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
 0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
-and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47). All use seed 7. Each
-case directory holds:
+and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47) and 8 of 0.2.0
+(Session 48). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -353,11 +353,62 @@ instance and `lean_build` commanded `fail`.
   after it. Each instance is confirmed: the informal record by its span (step 1, the perturbed
   expression `-4 \cdot y \cdot y + x(x - 4y)` at `[58, 88)`), the formal record by check K.
 
+## `s2_grammar` 0.2.0 (Session 48, 2026-11-01)
+
+On `ring_chain` at the short length (`n_steps` 4, `n_lemmas` 0; the seed form `(x - 2 * y) ^ 2`
+at seed 7, as in 0.1.0): the control (informal, formal — so that the flawed cases' truth
+reference, the formal control of the same version, length and seed, names a golden), FLAW-0007
+`unused` with `count` 2 and `length_steps` 1 (informal, formal, pair) and FLAW-0013 with
+`kinds: ["re-derivation", "unused-lemma"]`, `count: 2`, `placement: "drawn"` (informal, formal,
+pair). The control's proof bytes are the 0.1.0 control's; only the version, the id and the
+manifest differ. The unused lemmas are generated on `injector/FLAW-0007/1`: at seed 7 they
+state `(x - y) ^ 2 = y * y + x * (-2 * y + x)` (seed form 2) and `(x + y) * (x - y) = -y ^ 2 +
+x ^ 2` (seed form 3) as Lemma 1 and Lemma 2, before the chain, cited by nothing; each is its
+own instance, cosmetic, `YES-TOOLING` in both files, the informal records spanning steps 1 and
+2 whole and the formal ones at the declarations' first lines (3 and 7), so the artifact is a
+valid proof (`proof_status: valid`, `correct: true`) with `n_flaws_0007` 2. The padding
+paragraphs are generated on `padding`: at seed 7 paragraph 1 is a `re-derivation` of the
+instance's own polynomial (`x * (-4 * y + x) + 4 * y ^ 2 = 4 * y * y + x * (x - 4 * y)`; seed
+form 5) drawn before step 3 of the plan as it then stood — step 4 once paragraph 2 was inserted
+at step 2 — and paragraph 2 an `unused-lemma` (`(x + y) * (x - y) = -y ^ 2 + x ^ 2`; seed form
+3) placed at step 2, each a plain step with
+its declaration `…_pad_1` (line 7) and `…_pad_2` (line 3) in document order; the informal
+records are `NO`, the formal ones `YES-TOOLING`. The commanded `padding_ratio` of a padded case
+is the ratio its paragraphs achieve at seed 7, to two decimals (informal and pair: 0.4 over
+155 tokens; formal-only: 0.37, from 0.3704 over 189 tokens), as the 0.4.0 goldens command
+theirs (ADR-0011 D4; `analysis/s2-generate-9/evidence/ratios.json`).
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ring_chain` | control (informal, formal) | 4 steps, 0 lemmas |
+| `ring_chain` | FLAW-0007 `unused` cosmetic, `count` 2 (informal, formal, pair) | 4 steps, 0 lemmas; Lemma 1 and Lemma 2 at steps 1–2 |
+| `ring_chain` | FLAW-0013 `re-derivation` + `unused-lemma`, `count` 2, `drawn`, cosmetic (informal, formal, pair) | 4 steps, 0 lemmas; paragraphs at steps 2 and 4 |
+
+**Provenance:**
+- The proof text is generated (`src/grammar.rs`: the atom library; the unused lemmas and the
+  padding paragraphs are identities of seed forms and their presentations). The shapes — unused
+  lemmas after a cited lemma, and padding declarations around a cited lemma — were first
+  compiled as hand-written Lean probes, one process at a time, before the module was written
+  (`analysis/s2-generate-9/evidence/lean-probe/`): both build with `[propext, Quot.sound]`, and
+  the audit tail's closure from the main declaration holds the cited lemma only.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `de6965c55e9f296f7456bd3934ade481cd16bf2d`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run
+  (`analysis/s2-generate-9/evidence/goldens-production-report.json`).
+- Every case's fidelity verdict is PASS. Every formal and pair case builds (exit 0) and prints
+  `[propext, Quot.sound]`; the used-constants listing names the unused lemmas and the padding
+  declarations, none of them reachable from the main declaration, whose closure holds itself
+  only (check T confirms every instance: `flaws_confirmed` 2). The FLAW-0007 informal records
+  are confirmed by their spans (the whole step), the FLAW-0013 informal records by the step
+  holding exactly the paragraph's text; the achieved ratios lie within `abs 0.05` of the
+  commanded ones.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
-`analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md` and
-`analysis/s2-generate-8/README.md`.
+`analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md`,
+`analysis/s2-generate-8/README.md` and `analysis/s2-generate-9/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

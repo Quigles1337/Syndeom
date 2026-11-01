@@ -236,6 +236,7 @@ const RESERVED_DIALS: &[&str] = &[
     "ratio",
     "kind",
     "paragraph",
+    "seed_form",
     "hedge",
     "hedge_text",
     "justification",
@@ -1536,10 +1537,12 @@ pub struct FalseTheorem {
 /// Everything `prepare` produces: the producer and its version, the config as given, the plan
 /// after injection and padding, the rendered bytes, the injected instance (none for a control or
 /// a padded control; the embedded instance of a composite; the use-site instance of a FLAW-0012
-/// artifact), the padding insertions (none unless FLAW-0013 was commanded), the composite (none
-/// unless FLAW-0011 was commanded) and the false theorem's own instance (none unless FLAW-0012
-/// was commanded). `s2_grammar` (ADR-0011 D1; `crate::grammar`) prepares the same structure,
-/// so one `assemble` measures both producers (D2, D8).
+/// artifact), the further injected instances of a spec that yields several (`s2_grammar` 0.2.0:
+/// FLAW-0007 `unused` with `count` lemmas, each its own instance, the first in `injection`;
+/// empty for every `s2_template` version), the padding insertions (none unless FLAW-0013 was
+/// commanded), the composite (none unless FLAW-0011 was commanded) and the false theorem's own
+/// instance (none unless FLAW-0012 was commanded). `s2_grammar` (ADR-0011 D1; `crate::grammar`)
+/// prepares the same structure, so one `assemble` measures both producers (D2, D8).
 #[derive(Debug, Clone, PartialEq)]
 pub struct Prepared {
     pub producer: Producer,
@@ -1553,6 +1556,9 @@ pub struct Prepared {
     pub informal: Option<Vec<u8>>,
     pub formal: Option<FormalRendering>,
     pub injection: Option<Injection>,
+    /// Instances 2, 3, … of a spec that yields several, measured exactly as `injection` is
+    /// (`s2_grammar` 0.2.0); empty for every `s2_template` version.
+    pub further: Vec<Injection>,
     pub padding: Vec<PaddingInsertion>,
     pub composite: Option<Composite>,
     pub false_theorem: Option<FalseTheorem>,
@@ -1714,6 +1720,7 @@ pub fn prepare_with(version: Version, config: &Value, seed_value: u64) -> Result
         informal,
         formal,
         injection,
+        further: Vec::new(),
         padding,
         composite,
         false_theorem,
@@ -2518,9 +2525,10 @@ pub fn assemble(
         .map_err(|e| format!("rendered formal bytes: {e}"))?;
     let main = p.plan.main_declaration.clone();
 
-    // Records, each with its confirmation check (S2.2).
+    // Records, each with its confirmation check (S2.2). An injected instance and, after it, the
+    // further instances of a spec that yields several (`s2_grammar` 0.2.0) are measured alike.
     let mut records: Vec<(Flaw, bool)> = Vec::new();
-    if let Some(inj) = &p.injection {
+    for inj in p.injection.iter().chain(&p.further) {
         let (in_informal, in_formal) = manifests_in(&inj.class, inj.sub_variant.as_deref());
         if let (Some(st), true) = (&informal_stats, in_informal) {
             let text = &st.steps[inj.site];

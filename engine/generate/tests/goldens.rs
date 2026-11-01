@@ -1,6 +1,7 @@
 //! The goldens (ADR-0011 D10): for every seed, the control (where the statement is true) and the
 //! FLAWS.md example's flawed artifact, informal and formal, and from the 0.2.0 seeds the pair too;
-//! for the grammar `ring_chain` (`s2_grammar` 0.1.0), the controls at two lengths and FLAW-0001.
+//! for the grammar `ring_chain` (`s2_grammar` 0.1.0), the controls at two lengths and FLAW-0001,
+//! and (0.2.0) the short control, FLAW-0007 `unused` and FLAW-0013.
 //! Each case directory holds `case.json` (the config, the seed, the engine commit, the toolchain
 //! and the harness observation measured at implementation) and the exact bytes: `proof.md` or
 //! `Proof.lean`, and `manifest.json`. The test regenerates every case without Lean, from the
@@ -59,6 +60,12 @@ const GOLDENS_0_7_0: u64 = 10;
 /// (informal, formal, pair each), produced at the implementation commit `25ad34fe…` from two
 /// byte-identical runs.
 const GOLDENS_GRAMMAR_0_1_0: u64 = 10;
+/// The `s2_grammar` 0.2.0 goldens (Session 48): on `ring_chain` at the short length, the
+/// control (informal, formal — so that the flawed cases' truth reference names a golden),
+/// FLAW-0007 `unused` with two generated lemmas (informal, formal, pair) and FLAW-0013 with two
+/// drawn paragraphs of the kinds `re-derivation` and `unused-lemma` (informal, formal, pair),
+/// produced at the implementation commit `de6965c5…` from two byte-identical runs.
+const GOLDENS_GRAMMAR_0_2_0: u64 = 8;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -167,5 +174,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         count("s2_grammar 0.1.0"),
         GOLDENS_GRAMMAR_0_1_0,
         "the s2_grammar 0.1.0 goldens"
+    );
+    assert_eq!(
+        count("s2_grammar 0.2.0"),
+        GOLDENS_GRAMMAR_0_2_0,
+        "the s2_grammar 0.2.0 goldens"
     );
 }

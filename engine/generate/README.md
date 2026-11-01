@@ -17,11 +17,14 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   FLAW-0008's statement drift and FLAW-0012's dropped hypothesis), the padding module (D2 `pad`,
   D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks K and T
   (D8, D9);
-- `src/grammar.rs` — the producer `s2_grammar`, version 0.1.0: the grammar `ring_chain` (D6) —
-  its atom library (the seed forms, the monomials and the presentations a chain is built from),
-  the derivation (`grammar/plan`, `grammar/step/<k>`, `grammar/lemma/<j>`), the plan with its
-  lemma steps, ground truth by construction with the control as the truth's reference (D7),
-  and FLAW-0001 `propagated` and `local` with generated material (D5); the plan is rendered and
+- `src/grammar.rs` — the producer `s2_grammar`, in its versions 0.1.0 and 0.2.0: the grammar
+  `ring_chain` (D6) — its atom library (the seed forms, the monomials and the presentations a
+  chain is built from), the derivation (`grammar/plan`, `grammar/step/<k>`,
+  `grammar/lemma/<j>`), the plan with its lemma steps, ground truth by construction with the
+  control as the truth's reference (D7), FLAW-0001 `propagated` and `local` with generated
+  material (D5) and, from 0.2.0, FLAW-0007 `unused` (irrelevant identities as lemma steps cited
+  by nothing, drawn on `injector/FLAW-0007/1`) and FLAW-0013 (padding paragraphs of generated
+  identities with their unused declarations, drawn on `padding`); the plan is rendered and
   measured by the same renderers and the same `assemble` as the template's;
 - `src/lib.rs` — the producer dispatch: `generate` prepares the producer a config names
   (`theorem`: `s2_template`; `grammar`: `s2_grammar`), `regenerate` and `verify` the producer and
@@ -97,17 +100,22 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
 - **`s2_grammar` 0.1.0** (Session 47): the grammar `ring_chain` with its control and FLAW-0001
   (`propagated`, `local`; `perturbation` ∈ {`sign`, `coefficient`, `constant`, `exponent`}); see
   *The grammar `ring_chain`* below. Flaw counts per instance.
+- **`s2_grammar` 0.2.0** (Session 48): FLAW-0007 `unused` (`count` 1 to 13 irrelevant
+  identities, each a seed form the instance does not use, as lemma steps after the cited
+  lemmas, cited nowhere, one instance each; `length_steps` 1) and FLAW-0013 (`count` 1 to 32
+  generated padding paragraphs of the kinds `re-derivation` and `unused-lemma`, each with its
+  unused declaration; `padding_ratio` measured) on `ring_chain`; the 0.1.0 bytes unchanged.
 
-The crate regenerates all eight producer versions (seven of `s2_template`, one of `s2_grammar`):
+The crate regenerates all nine producer versions (seven of `s2_template`, two of `s2_grammar`):
 the goldens select the producer and version their manifests name, and `regenerate` and `verify`
 accept any of them. Every seed and the grammar's atom library state their `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
-## The grammar `ring_chain` (`s2_grammar` 0.1.0)
+## The grammar `ring_chain` (`s2_grammar` 0.1.0 and 0.2.0)
 
 - **The instance.** A config `{"grammar": "ring_chain", "length": {"n_steps", "n_lemmas"},
   "target", "flaws", "padding_ratio"}` (D3; `n_steps` 1 to 256, `n_lemmas` 0 to 32 and at most
-  `n_steps`; `padding_ratio` 0 — the grammar carries no padding material yet) names a polynomial
+  `n_steps`; `padding_ratio` 0 unless FLAW-0013 is commanded, from 0.2.0) names a polynomial
   identity over ℤ in `x` and `y`: a seed form `e_0` — one of fourteen products and powers of
   small binomials and trinomials (`(x + y) ^ 2`, `(x + 2 * y) * (x - y)`, `(x + y + 1) ^ 2`, …),
   drawn from the stream `grammar/plan` — and `n_steps` presentations `e_1 … e_n` of its
@@ -145,6 +153,33 @@ accept any of them. Every seed and the grammar's atom library state their `sourc
   `perturbation`, `site` (a plan step index), `monomial` (`replaced`, `inserted`), the site's
   text or fragment `inserted` and `replaced`, and `original_steps` / `original_fragments` for
   every step the variant changed (a restated lemma's lines included).
+- **FLAW-0007 `unused` (0.2.0; D5).** `count` (1 to 13) true irrelevant identities, each a seed
+  form the instance does not use — drawn without replacement on `injector/FLAW-0007/1` —
+  equated to a presentation of its expansion drawn on the same stream, inserted as lemma steps
+  (`theorem …_unused_<i> : ∀ x y : ℤ, e = p := by intro x y; ring`; `Lemma N.` in the informal
+  file) after the cited lemmas in document order and numbered after them, so that no faithful
+  step changes and no cited lemma is renumbered; cited by nothing. Each lemma is its own
+  instance, cosmetic, `YES-TOOLING` in both files, the informal record spanning the whole step
+  and the formal one at the declaration's first line, confirmed by check T (the declaration
+  listed by the audit tail and outside the main declaration's used-constants closure).
+  `length_steps` is 1 (one identity per lemma); the site is `auto` (the lemmas' positions are
+  fixed); `vacuous` is `s2_template`-only. The records' dials carry `count`, `length_steps`,
+  `site`, `seed_form` (the form's 1-based index in the table), `inserted`, `replaced: null`,
+  empty `original_steps` / `original_fragments` and, in the formal file, `declaration`.
+- **FLAW-0013 (0.2.0; D5), as `s2_template` 0.4.0 reads it.** Commanded by one FLAW-0013 spec
+  (`kinds`, `count` 1 to 32, `placement` `before` | `drawn`) with a positive `padding_ratio`, and
+  by nothing else. The paragraphs are generated on the stream `padding`: per paragraph a kind
+  among the spec's kinds — `re-derivation`: the instance's own polynomial in two drawn
+  presentations; `unused-lemma`: a seed form the instance does not use (drawn with
+  replacement) equated to a drawn presentation of its expansion — then, under `drawn`, a
+  position before a step of the plan as it then stands. `restated-definition` and
+  `verbose-rewrite` have no generated material and are refused. Each paragraph is a plain step
+  (never `Lemma N.`) with its unused declaration `…_pad_<i>` (`∀ x y : ℤ, a = b`, proved by
+  `intro x y; ring`), its own instance: the informal record `NO` over the whole step, the formal
+  record `YES-TOOLING` at the declaration's first line, confirmed by check T; `padding_ratio` is
+  measured as 0.4.0 measures it. The dials carry the spec's dials, `ratio`, `site`, `kind`,
+  `seed_form` (where a seed's material would carry `paragraph`), `inserted`, `replaced: null`
+  and, in the formal file, `declaration`.
 
 ## Seeds whose statement is false (0.2.0)
 

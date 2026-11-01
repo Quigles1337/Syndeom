@@ -1,0 +1,14 @@
+{
+  "informal": {
+    "achieved": 0.4,
+    "n_tokens": 155,
+    "verdict": "FAIL",
+    "two_decimals": 0.4
+  },
+  "formal": {
+    "achieved": 0.37037037037037035,
+    "n_tokens": 189,
+    "verdict": "FAIL",
+    "two_decimals": 0.37
+  }
+}
