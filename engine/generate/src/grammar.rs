@@ -64,6 +64,19 @@
 //! unchanged in both cases (D5); the record is formal-only, at the axiom's declaration,
 //! `YES-TOOLING`, confirmed by check T as `s2_template` 0.3.0 reads it (`#print axioms` of the
 //! main declaration lists the axiom's name). `native_decide` stays refused.
+//!
+//! **0.4.0 — FLAW-0010 `a` (D5), as `s2_template` 0.6.0 reads it.** One ring-closed chain step —
+//! drawn on `injector/FLAW-0010/1` when the spec says `auto`; an explicit `site` is such a step's
+//! plan index — has its justification replaced by a fictional reference drawn next on the same
+//! stream from the template's fixed lexicon of obviously fictional tokens (the author, the year,
+//! the venue of the spec's `shape` and the result, in that order): the step becomes `By
+//! <reference>` followed by the bare claim `$e_{k-1} = e_k$.`, and the chain's own justification
+//! (`Expanding the square`, `Rearranging the terms`, …) is recorded as `replaced`. `claim: true`
+//! (gap): the identity is the faithful one. `claim: false` is refused in 0.4.0 — its design is a
+//! reading flagged for Al (packet 11), not a refusal made in advance. The formal file is unchanged
+//! (the class manifests in the informal file), so the target `formal` is refused and a pair's
+//! formal file is the control's; the one record is informal-only, `N/A`, spanning the reference,
+//! confirmed by the FLAW-0010 check as `s2_template` 0.6.0 reads it.
 
 use std::cmp::Reverse;
 use std::collections::{BTreeMap, BTreeSet};
@@ -79,13 +92,13 @@ use crate::plan::{
 };
 use crate::rng::Stream;
 use crate::template::{
-    FlawSpec, Injection, PaddingInsertion, Prepared, Producer, Target, check_spec, exact_keys,
-    parse_spec, unique_span,
+    CITATION_SHAPES, FlawSpec, Injection, PaddingInsertion, Prepared, Producer, Target, check_spec,
+    citation_venues, draw_citation, exact_keys, parse_spec, unique_span,
 };
 
 pub const GENERATOR_ID: &str = "s2_grammar";
 /// The producer version `generate` emits (ADR-0011 D1).
-pub const GENERATOR_VERSION: &str = "0.3.0";
+pub const GENERATOR_VERSION: &str = "0.4.0";
 /// The one grammar of 0.1.0 (ADR-0011 D6).
 pub const RING_CHAIN: &str = "ring_chain";
 /// The main declaration's name (ADR-0011 D2: `syndeom_s2_<producer>_<theorem>`).
@@ -127,16 +140,18 @@ pub enum GrammarVersion {
     V0_1_0,
     V0_2_0,
     V0_3_0,
+    V0_4_0,
 }
 
 impl GrammarVersion {
-    pub const CURRENT: GrammarVersion = GrammarVersion::V0_3_0;
+    pub const CURRENT: GrammarVersion = GrammarVersion::V0_4_0;
 
     pub fn parse(s: &str) -> Option<GrammarVersion> {
         match s {
             "0.1.0" => Some(GrammarVersion::V0_1_0),
             "0.2.0" => Some(GrammarVersion::V0_2_0),
             "0.3.0" => Some(GrammarVersion::V0_3_0),
+            "0.4.0" => Some(GrammarVersion::V0_4_0),
             _ => None,
         }
     }
@@ -146,6 +161,7 @@ impl GrammarVersion {
             GrammarVersion::V0_1_0 => "0.1.0",
             GrammarVersion::V0_2_0 => "0.2.0",
             GrammarVersion::V0_3_0 => "0.3.0",
+            GrammarVersion::V0_4_0 => "0.4.0",
         }
     }
 
@@ -1039,6 +1055,10 @@ pub fn prepare_with(
             let (plan, inj) = smuggle(&d, &faithful, spec, cfg.target, seed_value)?;
             (plan, Some(inj), Vec::new(), Vec::new())
         }
+        Some(spec) if spec.class == "FLAW-0010" => {
+            let (plan, inj) = cite(&d, &faithful, spec, cfg.target, seed_value)?;
+            (plan, Some(inj), Vec::new(), Vec::new())
+        }
         Some(spec) => {
             let (plan, inj) = inject(&d, &faithful, spec, cfg.target, seed_value)?;
             (plan, Some(inj), Vec::new(), Vec::new())
@@ -1874,8 +1894,135 @@ fn smuggle(
     Ok((plan, injection))
 }
 
+// ---- FLAW-0010 `a` (0.4.0) ---------------------------------------------------------------------
+
+/// The injector for FLAW-0010 `a` on `ring_chain` (ADR-0011 D5; 0.4.0, as `s2_template` 0.6.0
+/// reads it). The site is a ring-closed chain step — never a lemma step, and never a lemma-cited
+/// chain step (replacing a citation would leave the informal lemma cited by nothing and strand
+/// the step's premises; listed, not taken — packet 11) — drawn on `injector/FLAW-0010/1` when the
+/// spec says `auto`; an explicit `site` is such a step's plan index. The reference is drawn next
+/// on the same stream from the template's fixed lexicon ([`draw_citation`]: the author, the
+/// year, the venue of the spec's `shape` and the result), and the step becomes `By <reference>`
+/// followed by the bare claim; the chain's own justification is recorded as `replaced`.
+/// `claim: true` is gap; `claim: false` is refused in 0.4.0 (a reading flagged for Al, packet
+/// 11). The formal file is unchanged, so the instance is `N/A` for every target (the target
+/// `formal` is refused by D3) and the one record is informal-only, spanning the reference; its
+/// dials carry `shape`, `claim`, `site`, the four lexicon indices, `reference`, `asserted` (the
+/// bare claim), `justification`, `inserted` (the reference), `replaced` (the justification) and
+/// `original_steps` (the faithful step).
+fn cite(
+    d: &Derivation,
+    faithful: &Plan,
+    spec: &FlawSpec,
+    target: Target,
+    seed: u64,
+) -> Result<(Plan, Injection), String> {
+    check_spec(spec, target)?;
+    exact_keys(&spec.dials, &["shape", "claim"], "FLAW-0010's dials")?;
+    let shape = spec.dials["shape"]
+        .as_str()
+        .filter(|s| citation_venues(s).is_some())
+        .ok_or(format!("FLAW-0010's shape is one of {CITATION_SHAPES:?}"))?;
+    let claim = spec.dials["claim"]
+        .as_bool()
+        .ok_or("FLAW-0010's claim is true or false")?;
+    if !claim {
+        return Err(
+            "FLAW-0010 claim: false is not realized by s2_grammar 0.4.0: its design (the step's identity perturbed as FLAW-0009's false material is, the formal file unchanged) is a reading flagged for Al (packet 11)"
+                .into(),
+        );
+    }
+    if spec.severity != Severity::Gap {
+        return Err(format!(
+            "FLAW-0010 claim: true is Gap (ADR-0011 D5), not {:?}",
+            spec.severity
+        ));
+    }
+    let n = d.n();
+    let m = d.sites.len();
+    let eligible: Vec<usize> = (1..=n).filter(|&c| d.lemma_of(c).is_none()).collect();
+    if eligible.is_empty() {
+        return Err(
+            "no eligible site for FLAW-0010: it needs a ring-closed chain step (every chain step is lemma-cited)"
+                .into(),
+        );
+    }
+    let mut stream = Stream::new(seed, "injector/FLAW-0010/1");
+    let c = match spec.site {
+        None => eligible[stream.below(eligible.len() as u64) as usize],
+        Some(k) => {
+            let c = (k as usize).saturating_sub(m);
+            if !eligible.contains(&c) {
+                return Err(format!(
+                    "site {k} is not an eligible step: FLAW-0010 sits at a ring-closed chain step (plan steps {} to {}, not a lemma-cited one)",
+                    m + 1,
+                    m + n
+                ));
+            }
+            c
+        }
+    };
+    let citation = draw_citation(&mut stream, shape)?;
+    let site = m + c;
+    let faithful_step = &faithful.steps[site - 1];
+    let (a, b) = (&d.e[c - 1], &d.e[c]);
+    let just = justification(c, &SEED_FORMS[d.form], &b.shape);
+    let asserted = format!("${} = {}$.", a.latex, b.latex);
+    if faithful_step.text != format!("{just}, {asserted}") {
+        return Err("the faithful step is its justification, a comma and the bare claim".into());
+    }
+    let text = format!("By {} {asserted}", citation.reference);
+    if unique_span(&text, &citation.reference).is_none() {
+        return Err("the reference occurs exactly once in the site step".into());
+    }
+    let mut plan = faithful.clone();
+    plan.steps[site - 1].text = text;
+    let mut original_steps = Map::new();
+    original_steps.insert(site.to_string(), json!(faithful_step.text));
+    let with = |extra: Vec<(&str, Value)>| {
+        let mut dials = spec.dials.clone();
+        dials.insert("site".into(), json!(site));
+        dials.insert("author".into(), json!(citation.author));
+        dials.insert("year".into(), json!(citation.year));
+        dials.insert("venue".into(), json!(citation.venue));
+        dials.insert("result".into(), json!(citation.result));
+        dials.insert("reference".into(), json!(citation.reference));
+        dials.insert("asserted".into(), json!(asserted));
+        dials.insert("justification".into(), json!(just));
+        for (k, v) in extra {
+            dials.insert(k.into(), v);
+        }
+        Value::Object(dials)
+    };
+    let informal_dials = with(vec![
+        ("inserted", json!(citation.reference)),
+        ("replaced", json!(just)),
+        ("original_steps", Value::Object(original_steps)),
+    ]);
+    // the formal file is unchanged: the site's fragment stands in for itself and no fragment is
+    // recorded as changed (the class has no formal record; `manifests_in`)
+    let formal_dials = with(vec![
+        ("inserted", json!(faithful_step.fragment)),
+        ("replaced", json!(faithful_step.fragment)),
+        ("original_fragments", json!({})),
+    ]);
+    let injection = Injection {
+        instance: 1,
+        class: "FLAW-0010".to_string(),
+        sub_variant: Some("a".to_string()),
+        severity: Severity::Gap,
+        lean_catchable: LeanCatchable::NotApplicable,
+        site,
+        informal_inserted: citation.reference.clone(),
+        informal_dials,
+        formal_inserted: faithful_step.fragment.clone(),
+        formal_dials,
+    };
+    Ok((plan, injection))
+}
+
 /// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0; FLAW-0007
-/// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0.
+/// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0; FLAW-0010 `a` from 0.4.0.
 pub fn realizes(version: GrammarVersion, class: &str) -> bool {
     match version {
         GrammarVersion::V0_1_0 => class == "FLAW-0001",
@@ -1883,6 +2030,10 @@ pub fn realizes(version: GrammarVersion, class: &str) -> bool {
         GrammarVersion::V0_3_0 => {
             matches!(class, "FLAW-0001" | "FLAW-0007" | "FLAW-0009" | "FLAW-0013")
         }
+        GrammarVersion::V0_4_0 => matches!(
+            class,
+            "FLAW-0001" | "FLAW-0007" | "FLAW-0009" | "FLAW-0010" | "FLAW-0013"
+        ),
     }
 }
 
