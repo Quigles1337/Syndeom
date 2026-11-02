@@ -9,7 +9,9 @@
 //! - D6: the `s2_grammar` producer ([`grammar`]) — 0.1.0: the grammar `ring_chain` with its
 //!   control and FLAW-0001; 0.2.0: FLAW-0007 `unused` and FLAW-0013 on it, with material
 //!   generated from the atom library; 0.3.0: FLAW-0009 `axiom` on it (a cited lemma's
-//!   declaration replaced by an axiom of the same identity, or of a false one used ex falso).
+//!   declaration replaced by an axiom of the same identity, or of a false one used ex falso);
+//!   0.4.0: FLAW-0010 `a` on it (a ring-closed step's justification replaced by a fictional
+//!   reference from the template's lexicon, the formal file unchanged).
 //! - D8: the Lean harness ([`harness`]).
 //! - D9, as amended by Al's ruling 5 on PR 26: the running binary's provenance ([`provenance`]).
 //!

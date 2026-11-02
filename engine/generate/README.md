@@ -17,17 +17,20 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   FLAW-0008's statement drift and FLAW-0012's dropped hypothesis), the padding module (D2 `pad`,
   D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks K and T
   (D8, D9);
-- `src/grammar.rs` — the producer `s2_grammar`, in its versions 0.1.0, 0.2.0 and 0.3.0: the
-  grammar `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
+- `src/grammar.rs` — the producer `s2_grammar`, in its versions 0.1.0, 0.2.0, 0.3.0 and
+  0.4.0: the grammar `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
   presentations a chain is built from), the derivation (`grammar/plan`, `grammar/step/<k>`,
   `grammar/lemma/<j>`), the plan with its lemma steps, ground truth by construction with the
   control as the truth's reference (D7), FLAW-0001 `propagated` and `local` with generated
   material (D5), from 0.2.0 FLAW-0007 `unused` (irrelevant identities as lemma steps cited by
   nothing, drawn on `injector/FLAW-0007/1`) and FLAW-0013 (padding paragraphs of generated
-  identities with their unused declarations, drawn on `padding`), and from 0.3.0 FLAW-0009
+  identities with their unused declarations, drawn on `padding`), from 0.3.0 FLAW-0009
   `axiom` (a cited lemma's declaration replaced by an axiom — of the same identity, or of a
-  false one used ex falso at the citing step — drawn on `injector/FLAW-0009/1`); the plan is
-  rendered and measured by the same renderers and the same `assemble` as the template's;
+  false one used ex falso at the citing step — drawn on `injector/FLAW-0009/1`), and from
+  0.4.0 FLAW-0010 `a` (a ring-closed step's justification replaced by a fictional reference
+  from the template's lexicon, drawn on `injector/FLAW-0010/1`; the formal file unchanged); the
+  plan is rendered and measured by the same renderers and the same `assemble` as the
+  template's;
 - `src/lib.rs` — the producer dispatch: `generate` prepares the producer a config names
   (`theorem`: `s2_template`; `grammar`: `s2_grammar`), `regenerate` and `verify` the producer and
   version a manifest names (`Producer`);
@@ -107,20 +110,27 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   lemmas, cited nowhere, one instance each; `length_steps` 1) and FLAW-0013 (`count` 1 to 32
   generated padding paragraphs of the kinds `re-derivation` and `unused-lemma`, each with its
   unused declaration; `padding_ratio` measured) on `ring_chain`; the 0.1.0 bytes unchanged.
-- **`s2_grammar` 0.3.0** (Session 49; the version `generate` emits): FLAW-0009 `axiom` on
+- **`s2_grammar` 0.3.0** (Session 49): FLAW-0009 `axiom` on
   `ring_chain` — a cited lemma's declaration replaced by an `axiom` with no proof: of the same
   identity for `truth: true` (gap), or, for `truth: false` (fatal), of a false identity (the
   lemma's right-hand side perturbed once) used ex falso at the citing step, the axiom's instance
   at a witness point refuted by `norm_num`; the informal file unchanged, the record formal-only
   at the axiom's declaration, check T on the axiom print; `native_decide` refused; the 0.1.0 and
   0.2.0 bytes unchanged.
+- **`s2_grammar` 0.4.0** (Session 50; the version `generate` emits): FLAW-0010 `a` on
+  `ring_chain` — a ring-closed chain step's justification replaced by a fictional reference
+  drawn from `s2_template` 0.6.0's lexicon on `injector/FLAW-0010/1` (the site, then the
+  author, the year, the venue of the `shape` and the result); the step `By <reference>` and the
+  bare claim; `claim: true` (gap) only, `claim: false` refused (a reading flagged for Al); the
+  formal file unchanged, the record informal-only, `N/A`, confirmed by the FLAW-0010 check; the
+  0.1.0, 0.2.0 and 0.3.0 bytes unchanged.
 
-The crate regenerates all ten producer versions (seven of `s2_template`, three of `s2_grammar`):
+The crate regenerates all eleven producer versions (seven of `s2_template`, four of `s2_grammar`):
 the goldens select the producer and version their manifests name, and `regenerate` and `verify`
 accept any of them. Every seed and the grammar's atom library state their `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
-## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0 and 0.3.0)
+## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0, 0.3.0 and 0.4.0)
 
 - **The instance.** A config `{"grammar": "ring_chain", "length": {"n_steps", "n_lemmas"},
   "target", "flaws", "padding_ratio"}` (D3; `n_steps` 1 to 256, `n_lemmas` 0 to 32 and at most
@@ -215,6 +225,27 @@ accept any of them. Every seed and the grammar's atom library state their `sourc
   for `false`, `perturbation`, `monomial` (`replaced`, `inserted`), `counterexample` (`x`, `y`,
   `lhs`, `rhs`: the witness point and the two sides' values) and `use_site` (the citing step's
   plan index). `lean_build` is commanded `pass` and `lean_axioms_standard` `false`.
+- **FLAW-0010 `a` (0.4.0; D5), as `s2_template` 0.6.0 reads it.** The config's dials are
+  `shape` (`journal`, `book` or `preprint`: which venue list the draw uses) and `claim` (`true`,
+  gap; `false` is refused in 0.4.0 — its design, the step's identity perturbed as FLAW-0009's
+  `false` material is with the formal file unchanged, is a reading flagged for Al); the target
+  is `informal` or `pair` (`formal` is refused: the class has no formal manifestation). The
+  site is a ring-closed chain step — never a lemma step, and never a lemma-cited chain step —
+  drawn on `injector/FLAW-0010/1` when the spec's `site` is `auto` (an explicit `site` is such a
+  step's plan index); the reference is drawn next on the same stream from the template's fixed
+  lexicon of obviously fictional tokens (`template::draw_citation`: the author, the year, the
+  venue of the shape's list and the result, in that order), and the step becomes `By [<author>
+  <year>, <venue>, <result>]` followed by the bare claim `$e_{k-1} = e_k$.`; the chain's own
+  justification (`Expanding the square`, `Rearranging the terms`, `Factoring out $x$`, …) is
+  what the reference stands in for. The formal file is unchanged, so a pair's formal file is
+  the formal control's byte for byte and `lean_build` is commanded `pass` with
+  `lean_axioms_standard` `true`. The one record is informal-only, `N/A`, spanning the
+  reference, confirmed by the FLAW-0010 check (the reference rebuilt from the recorded indices,
+  every token in the lexicon, the step `By <reference>` and the bare claim, the faithful step
+  holding the justification once); its dials carry `shape`, `claim`, `site`, the drawn indices
+  (`author`, `year`, `venue`, `result`), `reference`, `asserted` (the bare claim),
+  `justification`, `inserted` (the reference), `replaced` (the justification) and
+  `original_steps` (the faithful step). The counts are the control's.
 
 ## Seeds whose statement is false (0.2.0)
 
@@ -380,9 +411,9 @@ is flagged for Al in ADR-0011 *Amendments*.
   config's value with tolerance `abs 0.05` (`abs 0.0` at ratio 0). A commanded ratio the count
   of paragraphs cannot reach is a FAIL verdict, not a refusal.
 - **Not yet:** the grammars `ineq_chain`, `case_split` and `nat_induction`; on `ring_chain`
-  the grammar's remaining v0.1 classes (FLAW-0003 `cycle`, FLAW-0004, FLAW-0010 `a` and
-  FLAW-0011, D6) and the padding kinds without generated material; padding combined with an
-  injected flaw (also inside a composite),
+  the grammar's remaining v0.1 classes (FLAW-0003 `cycle`, FLAW-0004 and FLAW-0011, D6),
+  FLAW-0010 `claim: false` (a reading flagged for Al) and the padding kinds without generated
+  material; padding combined with an injected flaw (also inside a composite),
   composites of more than one instance, the kinds `unused-lemma` and `verbose-rewrite` (no seed
   carries their material), FLAW-0004 `nontrivial-true` and `false` and FLAW-0010 `claim: false`
   (no seed carries the false-step material), FLAW-0010 `b` and `c` (deferred), FLAW-0003

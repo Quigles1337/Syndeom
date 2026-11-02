@@ -1,9 +1,10 @@
 # Goldens for `s2_template` and `s2_grammar` (ADR-0011 D10)
 
-There are 93 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+There are 97 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
 0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
 and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47), 8 of 0.2.0
-(Session 48) and 6 of 0.3.0 (Session 49). All use seed 7. Each case directory holds:
+(Session 48), 6 of 0.3.0 (Session 49) and 4 of 0.4.0 (Session 50). All use seed 7. Each case
+directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -451,12 +452,53 @@ invalid`, `correct: false`) with `n_flaws_0009` 1, `lean_build` commanded `pass`
   (`flaws_confirmed` 1) and `lean_axioms_standard` is achieved `false` as commanded; the
   used-constants listing names the axiom with no auxiliary constant.
 
+## `s2_grammar` 0.4.0 (Session 50, 2026-11-02)
+
+On `ring_chain` at the short length (`n_steps` 4, `n_lemmas` 0; the seed form `(x - 2 * y) ^ 2`
+at seed 7, the chain the 0.1.0 and 0.2.0 short controls'): the control (informal, formal — so
+that the flawed cases' truth reference, the formal control of the same version, length and seed,
+names a golden; its proof bytes are the 0.2.0 short control's, only the version, the id and the
+manifest differing) and FLAW-0010 `a` with `claim: true` and `shape: journal` (gap; informal,
+pair — the formal target being refused). The site is drawn on `injector/FLAW-0010/1` among the
+four ring-closed steps: step 2 of the plan, `Rearranging the terms, $4 \cdot y \cdot y + x(x -
+4y) = 4y^2 - 4yx + x \cdot x$.`; the reference drawn next on the same stream is `[Fictitious
+19XX, Annals of Imaginary Results, Corollary 1.7]` (the author index 2, the year 0, the venue 1,
+the result 3 — the same four draws as the `s2_template` 0.6.0 golden's at seed 7, each producer
+making exactly one draw on that stream before the citation), so the step becomes `By
+[Fictitious 19XX, Annals of Imaginary Results, Corollary 1.7] $4 \cdot y \cdot y + x(x - 4y) =
+4y^2 - 4yx + x \cdot x$.` and every other step is unchanged. Each flawed case carries one
+record, informal-only at step 2 with span `[3, 64)` (the reference after `By `), `N/A`, gap, so
+the artifact is an invalid proof of a true statement (`proof_status: invalid`, `correct:
+false`) with `n_flaws_0010` 1, `n_steps` 4 and `n_lemmas` 0 (99 informal tokens against the
+control's 93); the pair's formal file is the formal control's byte for byte, `lean_build`
+commanded `pass` and `lean_axioms_standard` `true`.
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ring_chain` | control (informal, formal) | 4 steps, 0 lemmas |
+| `ring_chain` | FLAW-0010 `a`, `claim: true`, `shape: journal`, gap (informal, pair) | 4 steps, 0 lemmas; the reference at plan step 2 |
+
+**Provenance:**
+- The proof text is generated (`src/grammar.rs`: the atom library); the reference is drawn
+  from `s2_template` 0.6.0's fixed lexicon (`src/template.rs`). No Lean probe was needed: the
+  class changes no formal byte, and the pair's formal file is the formal control's, which
+  builds.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `a1d524ae644f44ac9887a8a7f4a2ab11d673e349`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run
+  (`analysis/s2-generate-11/evidence/goldens-production-report.json`).
+- Every case's fidelity verdict is PASS. The formal files build and print `[propext,
+  Quot.sound]`. Each FLAW-0010 case is confirmed by the FLAW-0010 check (the reference rebuilt
+  from the recorded indices, every token in the lexicon, the step `By <reference>` and the bare
+  claim, the faithful step holding the justification exactly once): `flaws_confirmed` 1.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
 `analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md`,
-`analysis/s2-generate-8/README.md`, `analysis/s2-generate-9/README.md` and
-`analysis/s2-generate-10/README.md`.
+`analysis/s2-generate-8/README.md`, `analysis/s2-generate-9/README.md`,
+`analysis/s2-generate-10/README.md` and `analysis/s2-generate-11/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

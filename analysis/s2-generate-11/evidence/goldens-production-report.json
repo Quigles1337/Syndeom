@@ -1,0 +1,493 @@
+{
+ "run_a": "C:/Users/LEET/Codex/Temp/syndeom-s2-grammar-040-20261102T0425Z/goldens-11a",
+ "run_b": "C:/Users/LEET/Codex/Temp/syndeom-s2-grammar-040-20261102T0425Z/goldens-11b",
+ "cases": [
+  {
+   "case": "ring_chain/v0.4.0-control-short-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "6ed4715ee9dac51db3394987f7f60303c45d6f12898bebb670f1690aeffd539a",
+     "bytes": 345,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "3423eaf9447d5f3a31a6b9ac10a48b30d744ee57b0888af46a43892f7bd5b2db",
+     "bytes": 2941,
+     "identical": true
+    }
+   },
+   "engine_commit": "a1d524ae644f44ac9887a8a7f4a2ab11d673e349",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_grammar_ring_chain": [
+      "AddCommGroup.toDivisionAddCommMonoid",
+      "AddCommMonoidWithOne.toAddMonoidWithOne",
+      "AddGroupWithOne.toAddMonoidWithOne",
+      "CommRing.toRing",
+      "CommSemiring.toSemiring",
+      "Distrib.toAdd",
+      "Distrib.toMul",
+      "Eq",
+      "Eq.mpr",
+      "Eq.refl",
+      "Eq.symm",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "HSub.hSub",
+      "Int",
+      "Int.instAdd",
+      "Int.instCommRing",
+      "Int.instCommSemiring",
+      "Int.instMonoid",
+      "Int.instMul",
+      "Int.instRing",
+      "Int.instSub",
+      "Int.negOfNat",
+      "Int.ofNat",
+      "Int.rawCast",
+      "Mathlib.Meta.NormNum.IsInt.of_raw",
+      "Mathlib.Meta.NormNum.IsInt.to_isNat",
+      "Mathlib.Meta.NormNum.IsInt.to_raw_eq",
+      "Mathlib.Meta.NormNum.IsNat.mk",
+      "Mathlib.Meta.NormNum.IsNat.of_raw",
+      "Mathlib.Meta.NormNum.IsNat.to_isInt",
+      "Mathlib.Meta.NormNum.IsNat.to_raw_eq",
+      "Mathlib.Meta.NormNum.instAddMonoidWithOne",
+      "Mathlib.Meta.NormNum.isInt_add",
+      "Mathlib.Meta.NormNum.isInt_mul",
+      "Mathlib.Meta.NormNum.isInt_neg",
+      "Mathlib.Meta.NormNum.isNat_add",
+      "Mathlib.Meta.NormNum.isNat_mul",
+      "Mathlib.Meta.NormNum.isNat_ofNat",
+      "Mathlib.Tactic.Ring.Common.add_congr",
+      "Mathlib.Tactic.Ring.Common.add_mul",
+      "Mathlib.Tactic.Ring.Common.add_overlap_pf",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_gt",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_lt",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_overlap",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_zero",
+      "Mathlib.Tactic.Ring.Common.add_pf_zero_add",
+      "Mathlib.Tactic.Ring.Common.atom_pf",
+      "Mathlib.Tactic.Ring.Common.coeff_one",
+      "Mathlib.Tactic.Ring.Common.mul_add",
+      "Mathlib.Tactic.Ring.Common.mul_congr",
+      "Mathlib.Tactic.Ring.Common.mul_pf_left",
+      "Mathlib.Tactic.Ring.Common.mul_pf_right",
+      "Mathlib.Tactic.Ring.Common.mul_pow_mul",
+      "Mathlib.Tactic.Ring.Common.mul_pp_pf_overlap",
+      "Mathlib.Tactic.Ring.Common.mul_zero",
+      "Mathlib.Tactic.Ring.Common.neg_add",
+      "Mathlib.Tactic.Ring.Common.neg_mul",
+      "Mathlib.Tactic.Ring.Common.neg_zero",
+      "Mathlib.Tactic.Ring.Common.one_pow",
+      "Mathlib.Tactic.Ring.Common.pow_add",
+      "Mathlib.Tactic.Ring.Common.pow_bit0",
+      "Mathlib.Tactic.Ring.Common.pow_congr",
+      "Mathlib.Tactic.Ring.Common.pow_nat",
+      "Mathlib.Tactic.Ring.Common.pow_one",
+      "Mathlib.Tactic.Ring.Common.pow_one_cast_of_isNat",
+      "Mathlib.Tactic.Ring.Common.pow_zero",
+      "Mathlib.Tactic.Ring.Common.single_pow",
+      "Mathlib.Tactic.Ring.Common.sub_congr",
+      "Mathlib.Tactic.Ring.Common.sub_pf",
+      "Mathlib.Tactic.Ring.Common.zero_mul",
+      "Mathlib.Tactic.Ring.cast_pos",
+      "Mathlib.Tactic.Ring.of_eq",
+      "Monoid.toNPow",
+      "MulZeroClass.toZero",
+      "NPow.toPow",
+      "Nat",
+      "Nat.instAddMonoidWithOne",
+      "Nat.instCommSemiring",
+      "Nat.rawCast",
+      "Neg.neg",
+      "NegZeroClass.toNeg",
+      "NonAssocSemiring.toAddCommMonoidWithOne",
+      "OfNat.ofNat",
+      "Ring",
+      "Ring.toAddCommGroup",
+      "Ring.toAddGroupWithOne",
+      "Ring.toSemiring",
+      "Semiring.toMonoid",
+      "Semiring.toNonAssocSemiring",
+      "SubNegZeroMonoid.toNegZeroClass",
+      "SubtractionCommMonoid.toSubtractionMonoid",
+      "SubtractionMonoid.toSubNegZeroMonoid",
+      "Trans.trans",
+      "Zero.toOfNat0",
+      "congrArg",
+      "id",
+      "inferInstance",
+      "instDistribOfSemiring",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instHSub",
+      "instMulZeroClassOfSemiring",
+      "instOfNat",
+      "instOfNatNat",
+      "instTransEq",
+      "rfl"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.4.0-cc0c6a4daf03-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.4.0"
+   },
+   "proof_status": "valid",
+   "correct": true,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.4.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [],
+   "n_flaws_total": {
+    "commanded": 0,
+    "achieved": 0
+   },
+   "flaws_confirmed": 0,
+   "commanded_lean_build": "pass",
+   "lean_axioms_standard": {
+    "commanded": true,
+    "achieved": true
+   },
+   "n_steps": null,
+   "n_lemmas": null,
+   "n_tokens": 119
+  },
+  {
+   "case": "ring_chain/v0.4.0-control-short-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "84f3470f3e1e369d40fc5e9b648cbb85343b525767722bf6d222951aba23ee27",
+     "bytes": 2733,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "5cc08a959a657e381653d77dbb365dc73d653a93f028ca6a375ef9bae27563b6",
+     "bytes": 522,
+     "identical": true
+    }
+   },
+   "engine_commit": "a1d524ae644f44ac9887a8a7f4a2ab11d673e349",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.4.0-82300f31bd83-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.4.0"
+   },
+   "proof_status": "valid",
+   "correct": true,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.4.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [],
+   "n_flaws_total": {
+    "commanded": 0,
+    "achieved": 0
+   },
+   "flaws_confirmed": 0,
+   "commanded_lean_build": null,
+   "lean_axioms_standard": {
+    "commanded": null,
+    "achieved": null
+   },
+   "n_steps": 4,
+   "n_lemmas": 0,
+   "n_tokens": 93
+  },
+  {
+   "case": "ring_chain/v0.4.0-flaw-0010-journal-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "c68daffa5d2de82ff690581307bf2a886a2aae0d91a5433f57a84bfb7b334202",
+     "bytes": 4205,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "dff1ac7721a4b8bd2d5957c75831683bcc6d285d2758d5c586c2e62a3d2c2c96",
+     "bytes": 564,
+     "identical": true
+    }
+   },
+   "engine_commit": "a1d524ae644f44ac9887a8a7f4a2ab11d673e349",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.4.0-1004fe87f5aa-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.4.0"
+   },
+   "proof_status": "invalid",
+   "correct": false,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.4.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0010",
+     "sub_variant": "a",
+     "severity": "gap",
+     "lean_catchable": "N/A",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       3,
+       64
+      ],
+      "step": 2
+     },
+     "shape": "journal",
+     "claim": true,
+     "reference": "[Fictitious 19XX, Annals of Imaginary Results, Corollary 1.7]",
+     "indices": {
+      "author": 2,
+      "year": 0,
+      "venue": 1,
+      "result": 3
+     },
+     "asserted": "$4 \\cdot y \\cdot y + x(x - 4y) = 4y^2 - 4yx + x \\cdot x$.",
+     "justification": "Rearranging the terms"
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1,
+   "commanded_lean_build": null,
+   "lean_axioms_standard": {
+    "commanded": null,
+    "achieved": null
+   },
+   "n_steps": 4,
+   "n_lemmas": 0,
+   "n_tokens": 99
+  },
+  {
+   "case": "ring_chain/v0.4.0-flaw-0010-journal-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "6ed4715ee9dac51db3394987f7f60303c45d6f12898bebb670f1690aeffd539a",
+     "bytes": 345,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "3da67f8163bf7daec6cb638e88aa23566dfd9ff3b1e5b6dbc58d9fe3ef247f76",
+     "bytes": 5189,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "dff1ac7721a4b8bd2d5957c75831683bcc6d285d2758d5c586c2e62a3d2c2c96",
+     "bytes": 564,
+     "identical": true
+    }
+   },
+   "engine_commit": "a1d524ae644f44ac9887a8a7f4a2ab11d673e349",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_grammar_ring_chain": [
+      "AddCommGroup.toDivisionAddCommMonoid",
+      "AddCommMonoidWithOne.toAddMonoidWithOne",
+      "AddGroupWithOne.toAddMonoidWithOne",
+      "CommRing.toRing",
+      "CommSemiring.toSemiring",
+      "Distrib.toAdd",
+      "Distrib.toMul",
+      "Eq",
+      "Eq.mpr",
+      "Eq.refl",
+      "Eq.symm",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "HSub.hSub",
+      "Int",
+      "Int.instAdd",
+      "Int.instCommRing",
+      "Int.instCommSemiring",
+      "Int.instMonoid",
+      "Int.instMul",
+      "Int.instRing",
+      "Int.instSub",
+      "Int.negOfNat",
+      "Int.ofNat",
+      "Int.rawCast",
+      "Mathlib.Meta.NormNum.IsInt.of_raw",
+      "Mathlib.Meta.NormNum.IsInt.to_isNat",
+      "Mathlib.Meta.NormNum.IsInt.to_raw_eq",
+      "Mathlib.Meta.NormNum.IsNat.mk",
+      "Mathlib.Meta.NormNum.IsNat.of_raw",
+      "Mathlib.Meta.NormNum.IsNat.to_isInt",
+      "Mathlib.Meta.NormNum.IsNat.to_raw_eq",
+      "Mathlib.Meta.NormNum.instAddMonoidWithOne",
+      "Mathlib.Meta.NormNum.isInt_add",
+      "Mathlib.Meta.NormNum.isInt_mul",
+      "Mathlib.Meta.NormNum.isInt_neg",
+      "Mathlib.Meta.NormNum.isNat_add",
+      "Mathlib.Meta.NormNum.isNat_mul",
+      "Mathlib.Meta.NormNum.isNat_ofNat",
+      "Mathlib.Tactic.Ring.Common.add_congr",
+      "Mathlib.Tactic.Ring.Common.add_mul",
+      "Mathlib.Tactic.Ring.Common.add_overlap_pf",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_gt",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_lt",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_overlap",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_zero",
+      "Mathlib.Tactic.Ring.Common.add_pf_zero_add",
+      "Mathlib.Tactic.Ring.Common.atom_pf",
+      "Mathlib.Tactic.Ring.Common.coeff_one",
+      "Mathlib.Tactic.Ring.Common.mul_add",
+      "Mathlib.Tactic.Ring.Common.mul_congr",
+      "Mathlib.Tactic.Ring.Common.mul_pf_left",
+      "Mathlib.Tactic.Ring.Common.mul_pf_right",
+      "Mathlib.Tactic.Ring.Common.mul_pow_mul",
+      "Mathlib.Tactic.Ring.Common.mul_pp_pf_overlap",
+      "Mathlib.Tactic.Ring.Common.mul_zero",
+      "Mathlib.Tactic.Ring.Common.neg_add",
+      "Mathlib.Tactic.Ring.Common.neg_mul",
+      "Mathlib.Tactic.Ring.Common.neg_zero",
+      "Mathlib.Tactic.Ring.Common.one_pow",
+      "Mathlib.Tactic.Ring.Common.pow_add",
+      "Mathlib.Tactic.Ring.Common.pow_bit0",
+      "Mathlib.Tactic.Ring.Common.pow_congr",
+      "Mathlib.Tactic.Ring.Common.pow_nat",
+      "Mathlib.Tactic.Ring.Common.pow_one",
+      "Mathlib.Tactic.Ring.Common.pow_one_cast_of_isNat",
+      "Mathlib.Tactic.Ring.Common.pow_zero",
+      "Mathlib.Tactic.Ring.Common.single_pow",
+      "Mathlib.Tactic.Ring.Common.sub_congr",
+      "Mathlib.Tactic.Ring.Common.sub_pf",
+      "Mathlib.Tactic.Ring.Common.zero_mul",
+      "Mathlib.Tactic.Ring.cast_pos",
+      "Mathlib.Tactic.Ring.of_eq",
+      "Monoid.toNPow",
+      "MulZeroClass.toZero",
+      "NPow.toPow",
+      "Nat",
+      "Nat.instAddMonoidWithOne",
+      "Nat.instCommSemiring",
+      "Nat.rawCast",
+      "Neg.neg",
+      "NegZeroClass.toNeg",
+      "NonAssocSemiring.toAddCommMonoidWithOne",
+      "OfNat.ofNat",
+      "Ring",
+      "Ring.toAddCommGroup",
+      "Ring.toAddGroupWithOne",
+      "Ring.toSemiring",
+      "Semiring.toMonoid",
+      "Semiring.toNonAssocSemiring",
+      "SubNegZeroMonoid.toNegZeroClass",
+      "SubtractionCommMonoid.toSubtractionMonoid",
+      "SubtractionMonoid.toSubNegZeroMonoid",
+      "Trans.trans",
+      "Zero.toOfNat0",
+      "congrArg",
+      "id",
+      "inferInstance",
+      "instDistribOfSemiring",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instHSub",
+      "instMulZeroClassOfSemiring",
+      "instOfNat",
+      "instOfNatNat",
+      "instTransEq",
+      "rfl"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.4.0-82f3f674cd2e-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.4.0"
+   },
+   "proof_status": "invalid",
+   "correct": false,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.4.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0010",
+     "sub_variant": "a",
+     "severity": "gap",
+     "lean_catchable": "N/A",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       3,
+       64
+      ],
+      "step": 2
+     },
+     "shape": "journal",
+     "claim": true,
+     "reference": "[Fictitious 19XX, Annals of Imaginary Results, Corollary 1.7]",
+     "indices": {
+      "author": 2,
+      "year": 0,
+      "venue": 1,
+      "result": 3
+     },
+     "asserted": "$4 \\cdot y \\cdot y + x(x - 4y) = 4y^2 - 4yx + x \\cdot x$.",
+     "justification": "Rearranging the terms"
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1,
+   "commanded_lean_build": "pass",
+   "lean_axioms_standard": {
+    "commanded": true,
+    "achieved": true
+   },
+   "n_steps": 4,
+   "n_lemmas": 0,
+   "n_tokens": 99
+  }
+ ],
+ "all_byte_identical": true,
+ "engine_commits": [
+  "a1d524ae644f44ac9887a8a7f4a2ab11d673e349"
+ ]
+}
