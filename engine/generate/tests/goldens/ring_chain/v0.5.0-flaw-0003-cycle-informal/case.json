@@ -1,0 +1,26 @@
+{
+  "config": {
+    "grammar": "ring_chain",
+    "length": {
+      "n_steps": 4,
+      "n_lemmas": 1
+    },
+    "target": "informal",
+    "flaws": [
+      {
+        "class": "FLAW-0003",
+        "sub_variant": "cycle",
+        "severity": "fatal",
+        "site": "auto",
+        "dials": {
+          "cycle_length": 2
+        }
+      }
+    ],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "c6b240942b56fb0b50f5c41a8f838aa77b7ce585",
+  "toolchain": null,
+  "observation": null
+}

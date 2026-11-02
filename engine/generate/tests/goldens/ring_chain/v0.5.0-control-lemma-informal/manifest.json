@@ -1,0 +1,125 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 0
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 1
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 5
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 125
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "4dd2f62b41eccae71e5718c8cc0b44eb9f5871953b7e8bb02400747fb3606864",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 663,
+        "n_lemmas": 1,
+        "n_steps": 5,
+        "n_tokens": 125,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_grammar-v0.5.0-1ef0cde05162-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 5
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [],
+    "grammar": "ring_chain",
+    "length": {
+      "n_lemmas": 1,
+      "n_steps": 4
+    },
+    "padding_ratio": 0,
+    "target": "informal"
+  },
+  "config_hash": "1ef0cde051627639137fb38ccab942524550272ae07741d5c9dd6fe60c8bf002",
+  "engine_commit": "c6b240942b56fb0b50f5c41a8f838aa77b7ce585",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_grammar",
+    "rng": "syndeom-rng/1",
+    "version": "0.5.0"
+  },
+  "ground_truth": {
+    "correct": true,
+    "derivation": "by-construction",
+    "flaws": [],
+    "proof_status": "valid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "s2_grammar-v0.5.0-9ffdfe550dc7-s7:syndeom_s2_grammar_ring_chain",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

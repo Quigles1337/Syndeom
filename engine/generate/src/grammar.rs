@@ -77,6 +77,20 @@
 //! (the class manifests in the informal file), so the target `formal` is refused and a pair's
 //! formal file is the control's; the one record is informal-only, `N/A`, spanning the reference,
 //! confirmed by the FLAW-0010 check as `s2_template` 0.6.0 reads it.
+//!
+//! **0.5.0 — FLAW-0003 `cycle` (D5), as `s2_template` 0.6.0 reads it.** One cited lemma — drawn
+//! on `injector/FLAW-0003/1` when the spec says `auto`; an explicit `site` is a lemma step's plan
+//! index — has its informal closing note (`both sides expand to the same polynomial`) replaced by
+//! a citation of the theorem (`this follows from the theorem`), recorded as the lemma step's one
+//! premise, while the chain step that cites the lemma is unchanged (its premise already names the
+//! lemma): the plan's premise graph then contains the cycle `[…_lemma_<j>, <main declaration>]`
+//! (`cycle_length` 2, fatal). The formal file is unchanged — the lemma is proved by `intro x y;
+//! ring` and cited as a term, as the control has it, because declaration order forbids a formal
+//! cycle — so the instance is `NO` for every target (the target `formal` is refused) and a pair's
+//! formal file is the control's; the one record is informal-only at the lemma step, spanning the
+//! citation phrase, confirmed by the structural check as `s2_template` 0.6.0 reads it (the
+//! premise graph holds the recorded cycle; each citation phrase is at its recorded span).
+//! `direct` needs hand-authored mathematics and stays `s2_template`-only (D6).
 
 use std::cmp::Reverse;
 use std::collections::{BTreeMap, BTreeSet};
@@ -87,8 +101,8 @@ use syndeom_manifest::{
 };
 
 use crate::plan::{
-    LemmaHeader, LemmaKind, PaddingHeader, PaddingKind, Plan, Premise, Step, lemma_lines,
-    padding_lines, render_formal, render_informal,
+    LemmaHeader, LemmaKind, PaddingHeader, PaddingKind, Plan, Premise, Step, THEOREM_PREMISE,
+    lemma_lines, padding_lines, premise_cycle, render_formal, render_informal,
 };
 use crate::rng::Stream;
 use crate::template::{
@@ -98,7 +112,7 @@ use crate::template::{
 
 pub const GENERATOR_ID: &str = "s2_grammar";
 /// The producer version `generate` emits (ADR-0011 D1).
-pub const GENERATOR_VERSION: &str = "0.4.0";
+pub const GENERATOR_VERSION: &str = "0.5.0";
 /// The one grammar of 0.1.0 (ADR-0011 D6).
 pub const RING_CHAIN: &str = "ring_chain";
 /// The main declaration's name (ADR-0011 D2: `syndeom_s2_<producer>_<theorem>`).
@@ -131,6 +145,16 @@ pub const SMUGGLE_MODE: &str = "axiom";
 /// nonzero polynomial in two variables of degree at most 7 in each cannot vanish on an 8 × 8
 /// grid, so the search always succeeds.
 pub const SMUGGLE_WITNESS_BOUND: i64 = 8;
+/// FLAW-0003 `cycle`'s one dial in v0.1 (0.5.0; ADR-0011 D5): the cycle's length, 2 — the lemma
+/// and the theorem citing each other.
+pub const CYCLE_LENGTH: u64 = 2;
+/// The closing note of a faithful lemma step, after the semicolon (D2, `lemma_step`): what a
+/// FLAW-0003 `cycle` citation replaces (0.5.0).
+pub const LEMMA_NOTE: &str = "both sides expand to the same polynomial";
+/// The citation of the theorem that replaces a lemma step's closing note under FLAW-0003 `cycle`
+/// (0.5.0): the step's one premise phrase, occurring exactly once in the step. Its form is a
+/// reading flagged for Al (packet 12).
+pub const CYCLE_PHRASE: &str = "this follows from the theorem";
 /// Where the material comes from (ADR-0011 D6, Al's ruling 1 of 2026-10-27).
 pub const SOURCE: &str = "engine/generate/src/grammar.rs, s2_grammar 0.1.0: the ring_chain atom library (SEED_FORMS and the presentations of `present`), executor-authored synthetic material outside the S1 corpus (ADR-0011 D6)";
 
@@ -141,10 +165,11 @@ pub enum GrammarVersion {
     V0_2_0,
     V0_3_0,
     V0_4_0,
+    V0_5_0,
 }
 
 impl GrammarVersion {
-    pub const CURRENT: GrammarVersion = GrammarVersion::V0_4_0;
+    pub const CURRENT: GrammarVersion = GrammarVersion::V0_5_0;
 
     pub fn parse(s: &str) -> Option<GrammarVersion> {
         match s {
@@ -152,6 +177,7 @@ impl GrammarVersion {
             "0.2.0" => Some(GrammarVersion::V0_2_0),
             "0.3.0" => Some(GrammarVersion::V0_3_0),
             "0.4.0" => Some(GrammarVersion::V0_4_0),
+            "0.5.0" => Some(GrammarVersion::V0_5_0),
             _ => None,
         }
     }
@@ -162,6 +188,7 @@ impl GrammarVersion {
             GrammarVersion::V0_2_0 => "0.2.0",
             GrammarVersion::V0_3_0 => "0.3.0",
             GrammarVersion::V0_4_0 => "0.4.0",
+            GrammarVersion::V0_5_0 => "0.5.0",
         }
     }
 
@@ -781,7 +808,7 @@ fn lemma_step(j: usize, d: &Derivation, c: usize) -> Step {
     let (a, b) = (&d.e[c - 1], &d.e[c]);
     Step {
         text: format!(
-            "Lemma {j}. For all integers $x$ and $y$, ${} = {}$; both sides expand to the same polynomial.",
+            "Lemma {j}. For all integers $x$ and $y$, ${} = {}$; {LEMMA_NOTE}.",
             a.latex, b.latex
         ),
         fragment: vec!["intro x y".to_string(), "ring".to_string()],
@@ -1057,6 +1084,10 @@ pub fn prepare_with(
         }
         Some(spec) if spec.class == "FLAW-0010" => {
             let (plan, inj) = cite(&d, &faithful, spec, cfg.target, seed_value)?;
+            (plan, Some(inj), Vec::new(), Vec::new())
+        }
+        Some(spec) if spec.class == "FLAW-0003" => {
+            let (plan, inj) = circulate(&d, &faithful, spec, cfg.target, seed_value)?;
             (plan, Some(inj), Vec::new(), Vec::new())
         }
         Some(spec) => {
@@ -2021,8 +2052,162 @@ fn cite(
     Ok((plan, injection))
 }
 
+// ---- FLAW-0003 `cycle` (0.5.0) -----------------------------------------------------------------
+
+/// The injector for FLAW-0003 `cycle` on `ring_chain` (ADR-0011 D5; 0.5.0, as `s2_template`
+/// 0.6.0 reads it). The site is a lemma step — drawn on `injector/FLAW-0003/1` among the
+/// `n_lemmas` lemma steps when the spec says `auto`; an explicit `site` is a lemma step's plan
+/// index — whose informal closing note ([`LEMMA_NOTE`]) is replaced by [`CYCLE_PHRASE`], a
+/// citation of the theorem recorded as the step's one premise (`cites: "theorem"`). The chain
+/// step that cites the lemma is unchanged — its premise already names the lemma — so the plan's
+/// premise graph contains the cycle through the lemma and the main declaration (`cycle_length`
+/// 2). The formal file is unchanged (declaration order forbids a formal cycle: the lemma is
+/// proved by `intro x y; ring` and cited as a term, as the control has it), so the instance is
+/// `NO` for every target (the target `formal` is refused by D3) and the one record is
+/// informal-only at the lemma step, spanning the citation phrase; its dials carry
+/// `cycle_length`, `site`, `cycle` (the declarations visited from the lemma), `citations` (the
+/// two premise phrases of the cycle, each at its step and span), `inserted` (the phrase),
+/// `replaced` (the closing note) and `original_steps` (the faithful lemma step). `direct` is
+/// refused: its material is hand-authored and `s2_template`-only (D6).
+fn circulate(
+    d: &Derivation,
+    faithful: &Plan,
+    spec: &FlawSpec,
+    target: Target,
+    seed: u64,
+) -> Result<(Plan, Injection), String> {
+    check_spec(spec, target)?;
+    match spec.sub_variant.as_deref() {
+        Some("cycle") => {}
+        Some("direct") => {
+            return Err(
+                "FLAW-0003 direct needs hand-authored mathematics (the goal or its contrapositive as a lemma proved by the theorem) and is s2_template-only (ADR-0011 D6)"
+                    .into(),
+            );
+        }
+        _ => return Err("FLAW-0003's sub_variant is \"cycle\" in s2_grammar".into()),
+    }
+    if spec.severity != Severity::Fatal {
+        return Err("FLAW-0003 cycle is fatal (ADR-0011 D5)".into());
+    }
+    exact_keys(&spec.dials, &["cycle_length"], "FLAW-0003 cycle's dials")?;
+    if spec.dials["cycle_length"].as_u64() != Some(CYCLE_LENGTH) {
+        return Err(format!(
+            "FLAW-0003 cycle's cycle_length is {CYCLE_LENGTH} in v0.1 (ADR-0011 D5): the lemma and the theorem cite each other"
+        ));
+    }
+    let m = d.sites.len();
+    if m == 0 {
+        return Err(
+            "FLAW-0003 cycle re-justifies a cited lemma by the theorem: length.n_lemmas is at least 1"
+                .into(),
+        );
+    }
+    let mut stream = Stream::new(seed, "injector/FLAW-0003/1");
+    let j = match spec.site {
+        None => 1 + stream.below(m as u64) as usize,
+        Some(k) => {
+            let k = k as usize;
+            if !(1..=m).contains(&k) {
+                return Err(format!(
+                    "site {k} is not a lemma step: FLAW-0003 cycle re-justifies one of the lemma steps (plan steps 1 to {m})"
+                ));
+            }
+            k
+        }
+    };
+    let c = d.sites[j - 1];
+    let faithful_lemma = &faithful.steps[j - 1];
+    let lemma = faithful_lemma
+        .lemma
+        .as_ref()
+        .ok_or("a lemma step carries its header")?;
+    let note = format!("; {LEMMA_NOTE}.");
+    let stem = faithful_lemma
+        .text
+        .strip_suffix(note.as_str())
+        .ok_or("the faithful lemma step ends with its closing note")?;
+    if faithful_lemma.text.matches(LEMMA_NOTE).count() != 1 {
+        return Err("the closing note occurs exactly once in the faithful lemma step".into());
+    }
+    let text = format!("{stem}; {CYCLE_PHRASE}.");
+    if unique_span(&text, CYCLE_PHRASE).is_none() || text.contains(LEMMA_NOTE) {
+        return Err(
+            "the citation phrase occurs exactly once in the lemma step, which no longer holds the note"
+                .into(),
+        );
+    }
+    let mut plan = faithful.clone();
+    plan.steps[j - 1] = Step {
+        text,
+        fragment: faithful_lemma.fragment.clone(),
+        lemma: Some(lemma.clone()),
+        padding: None,
+        premises: vec![Premise {
+            cites: THEOREM_PREMISE.to_string(),
+            phrase: CYCLE_PHRASE.to_string(),
+        }],
+    };
+    // the chain step that cites the lemma is unchanged: its premise already names the lemma, so
+    // the premise graph now runs lemma → theorem → lemma
+    let citing = plan_index(m, c);
+    let cycle = premise_cycle(&plan, &lemma.name, CYCLE_LENGTH as usize)
+        .ok_or("the plan's premise graph contains the cycle through the lemma")?;
+    let mut citations = Vec::new();
+    for k in [j, citing] {
+        let s = &plan.steps[k - 1];
+        for premise in &s.premises {
+            let span = unique_span(&s.text, &premise.phrase)
+                .ok_or("a citation phrase occurs exactly once in its step")?;
+            citations.push(json!({"step": k, "span": span, "phrase": premise.phrase}));
+        }
+    }
+    if citations.len() != CYCLE_LENGTH as usize {
+        return Err("the cycle's two citation phrases are recorded".into());
+    }
+    let mut original_steps = Map::new();
+    original_steps.insert(j.to_string(), json!(faithful_lemma.text));
+    let lines = lemma_lines(faithful_lemma)?;
+    let with = |extra: Vec<(&str, Value)>| {
+        let mut dials = spec.dials.clone();
+        dials.insert("site".into(), json!(j));
+        dials.insert("cycle".into(), json!(cycle));
+        dials.insert("citations".into(), json!(citations));
+        for (k, v) in extra {
+            dials.insert(k.into(), v);
+        }
+        Value::Object(dials)
+    };
+    let informal_dials = with(vec![
+        ("inserted", json!(CYCLE_PHRASE)),
+        ("replaced", json!(LEMMA_NOTE)),
+        ("original_steps", Value::Object(original_steps)),
+    ]);
+    // the formal file is unchanged: the lemma's declaration stands in for itself and no
+    // fragment is recorded as changed (the cyclic form has no formal record; `manifests_in`)
+    let formal_dials = with(vec![
+        ("inserted", json!(lines)),
+        ("replaced", json!(lines)),
+        ("original_fragments", json!({})),
+    ]);
+    let injection = Injection {
+        instance: 1,
+        class: "FLAW-0003".to_string(),
+        sub_variant: Some("cycle".to_string()),
+        severity: Severity::Fatal,
+        lean_catchable: LeanCatchable::No,
+        site: j,
+        informal_inserted: CYCLE_PHRASE.to_string(),
+        informal_dials,
+        formal_inserted: lines,
+        formal_dials,
+    };
+    Ok((plan, injection))
+}
+
 /// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0; FLAW-0007
-/// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0; FLAW-0010 `a` from 0.4.0.
+/// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0; FLAW-0010 `a` from 0.4.0;
+/// FLAW-0003 `cycle` from 0.5.0.
 pub fn realizes(version: GrammarVersion, class: &str) -> bool {
     match version {
         GrammarVersion::V0_1_0 => class == "FLAW-0001",
@@ -2033,6 +2218,10 @@ pub fn realizes(version: GrammarVersion, class: &str) -> bool {
         GrammarVersion::V0_4_0 => matches!(
             class,
             "FLAW-0001" | "FLAW-0007" | "FLAW-0009" | "FLAW-0010" | "FLAW-0013"
+        ),
+        GrammarVersion::V0_5_0 => matches!(
+            class,
+            "FLAW-0001" | "FLAW-0003" | "FLAW-0007" | "FLAW-0009" | "FLAW-0010" | "FLAW-0013"
         ),
     }
 }

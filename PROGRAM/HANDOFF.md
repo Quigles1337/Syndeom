@@ -11894,3 +11894,409 @@ ESCALATIONS (superseding the block's):
 - Unchanged: human-referee participants (SD13).
 STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
 recorded in the pull request and under the external root, not in the tree it certifies.
+
+SESSION: 2026-11-02 UTC (2026-11-02 America/New_York) (Session 51 — a fresh conversation launched
+from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone; SD15 disclosure
+first, by digest (ADR-0005 *Amendments* 1–3), appended at 2026-11-02T06:47:39Z by shell
+redirection, after a first response that a safety classifier stopped before anything was
+appended; not an examination — Gate S2 has nothing to examine; examined fetched `origin/main`
+`602a5962f7379e2a71de022bbd20003ab4e60247`, tree `e3db390983ff9d212f1eaa1310b4bd7dbdcfcd7c`, in
+the original checkout `C:\Users\LEET\Syndeom` on `main`, synchronized; branch
+`claude/s2-grammar-0.5.0`; header completed after ADR-0008 step 5 — it was written provisionally
+with the disclosure, which is unchanged; the session-end SHA is the commit carrying this block,
+recorded in its pull request)
+
+### Entry 1 — SD15 memory disclosure (by digest; ADR-0005 D1–D4 as amended by Amendments 1–3)
+
+**How this entry was made.** Appended by shell append (`cat >> PROGRAM/HANDOFF.md`) without reading
+this file's existing contents, before any other action except reading `PROGRAM/SYNDEOM-PROGRAM.md`
+and `PROGRAM/DECISIONS/ADR-0005.md` in full and reading and hashing the executor memory. The session
+was launched from `C:\Users\LEET` (not inside the work tree) with the §6 Session-N prompt verbatim
+and nothing else: the launching message carried no program state, no gitStatus snapshot was
+attached, and the conversation context built no state under test. No memory was written before this
+append. Whether this session attempts a gate's cold-start test is not known at append time (STATE
+unread); the disclosure is made regardless (SD15 as amended by ADR-0009).
+
+**Prior attempt in this session.** The session's first response, after the constitution and ADR-0005
+had been read in full, was stopped by a safety classifier before this entry was appended. The
+executor cannot see whether any tool call of that response ran; whether anything else reached this
+file is checked in Entry 2, after this append, so that the disclosure stays first. The disclosure
+was then restarted on the by-digest path, with nothing reproduced.
+
+**Method.** Script `sd15_digest.sh` in the session scratchpad (`sha256sum`, `wc`, `od`, `tr`, `awk`).
+The name search is a case-insensitive substring search (awk `tolower` + `index`) over every line of
+the whole index for `syndeom`, `kober` and `friedman`. Only digests, counts and line numbers were
+computed; no memory content was printed or reproduced. Computed at 2026-11-02T06:45:35Z.
+
+**Whole index (`MEMORY.md`), recorded as a fact (Amendment 2).** SHA-256
+`0f7e69abea9a00c4ef63de8ee4748ca2c41c34f2cff0da69f238420083018995`; 15,471 bytes; 110 lines,
+LF-terminated; 0 CR bytes; 337 non-ASCII bytes. This digest is new relative to the Session 37
+baseline (`cd9438…`, 15,420 bytes, 110 lines): an unrelated line changed, with the line count
+unchanged. Per Amendment 2 the whole index's digest does not by itself owe verbatim reproduction.
+
+**Name search (D3), line numbers matched.** `syndeom`: 106, 107. `kober`: 85, 86, 89, 106.
+`friedman`: 88, 89, 106. Union: 85, 86, 88, 89, 106, 107 (6 lines). These are the same numbers as
+the Session 37 baseline: no renumbering.
+
+**Matched index lines (D1(a), by digest).** The 6 matched lines, each with its LF terminator,
+concatenated in index order: 1,198 bytes; 0 CR bytes; 30 non-ASCII bytes; SHA-256
+`0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`. Equal to the baseline digest
+recorded in ADR-0005 Amendment 2, which is the digest of HANDOFF lines 6672–6677, reproduced
+verbatim by Session 35, Entry 1.
+
+**SYNDEOM memory file (D1(b), by digest).** `project_syndeom.md`: SHA-256
+`ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`; 10,957 bytes; 135 lines,
+LF-terminated; 0 CR bytes; 71 non-ASCII bytes. Equal to the baseline digest recorded in ADR-0005
+Amendment 2, which is the digest of HANDOFF lines 6683–6817, reproduced verbatim by Session 35,
+Entry 1. Read in full this session: it holds the repo location, the pointer to the siblings, and
+machine and harness hazards; no phase, gate, claim, flaw, commit, next action or escalation.
+
+**Other recalled memory (D1(c)).** The harness loaded only the index into context; no other memory
+file was loaded. None.
+
+**Withheld (D2).** 104 index lines, at 1–84, 87, 90–105 and 108–110, withheld by count.
+**Check (D3).** Every line the name search matched (85, 86, 88, 89, 106, 107) is among the six lines
+disclosed by digest above; the search covered every line of the index, so no withheld line names
+SYNDEOM, KOBER or FRIEDMAN.
+
+**Citation (Amendment 1).** Both digests equal those of bytes that Session 35, Entry 1 reproduced
+(HANDOFF lines 6672–6677 and 6683–6817, as recorded in the baseline of ADR-0005 Amendment 2). Hash
+verification of the cited lines, against these digests, is in Entry 2, performed after this append.
+
+**Pass criterion (D4).** Evaluated in Entry 2 against the cited reproduction once its bytes are
+verified by hash: the exam counts only if no reproduced memory holds program state. No memory will be
+written in this session if it is an exam session.
+
+### Entry 2 — Citation verified by hash; the append checked
+
+- **The append.** Entry 1 was appended at 2026-11-02T06:47:39Z. HANDOFF's last byte before the
+  append was LF; one blank line and the 62 entry lines (4,429 bytes) were appended, 938,959 →
+  943,389 bytes; 0 CR bytes in the file afterwards. `git diff --numstat` on HANDOFF after the
+  append: 63 added, 0 deleted — exactly this session's block. The stopped first response of this
+  session therefore appended nothing to this file.
+- **Citation verified by hashing the reproduced bytes** (Amendment 1's standard), computed after
+  the append so that the disclosure stayed first: HANDOFF lines 6672–6677 are 1,198 bytes with
+  SHA-256 `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`, equal to the matched
+  index lines' digest in Entry 1; HANDOFF lines 6683–6817 are 10,957 bytes with SHA-256
+  `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`, equal to the digest of
+  `project_syndeom.md` in Entry 1. Session 35, Entry 1 is the entry cited.
+- **D4.** The memory disclosed by citation is byte-identical to the file read in full this session.
+  It holds the repo location, the pointer to the siblings, and machine and harness hazards; no
+  phase, gate, claim, flaw status, commit-as-state, next action or escalation. The disclosure
+  satisfies D1–D4 as amended by Amendments 1–3. Whether this session is an exam session is decided
+  after orientation; no memory has been written.
+
+### Entry 3 — the launch
+
+A fresh conversation from `C:\Users\LEET`, launched with the §6 Session-N resume prompt
+verbatim and alone — compared against the constitution's §6 text and found identical; nothing
+else in the launching message. The harness attached no Git snapshot (`C:\Users\LEET` is not a
+work tree; the environment block read "Is a git repository: false") and loaded the
+`C--Users-LEET` index. Executor model: Claude Fable 5.1 (`claude-fable-5-1`). The local calendar
+date at launch was 2026-11-02 (America/New_York, before two in the morning); the UTC date, which
+the header carries, 2026-11-02.
+
+**The stopped first response.** The session's first response read the constitution and ADR-0005
+in one `cat` (the constitution's output overflowed the tool's display limit and was read in full
+with the Read tool from the harness's persisted copy, as Sessions 44–50 recorded), and was then
+stopped by a safety classifier: the rest of it was withheld and its unfinished tool calls did not
+run; the executor cannot see which, if any, ran. Nothing reached the repository (Entry 2: the
+diff on HANDOFF after the append was this session's block only, 63 lines added, 0 deleted). The
+disclosure was restarted on the by-digest path with a script that printed digests, counts and
+line numbers only, and completed (Entries 1 and 2). ADR-0005 *Amendments* 1 records two such
+stops on 2026-10-27; this is a third, on a by-digest disclosure, recorded here as a fact. No
+constitution or ADR text changes; nothing is escalated on it beyond this record.
+
+**Not an examination.** The launch carried nothing that holds program state and the session
+read nothing of the checkout but the constitution and ADR-0005 before disclosing, so it was
+eligible as cold; but Gate S2 has nothing to examine (its criteria are open), so no gate test
+was attempted and the session certifies nothing.
+
+**The ORIENT gate** was launched detached (a wrapper script started by `Start-Process` of Git
+Bash, its stdout redirected to the session scratchpad and stderr merged into the log by the
+wrapper; both retained under the orientation root as `gate.log` and `gate.err`) after the
+first step-6 reads — STATE's head, tables and NEXT, the Git log, FLAWS' head, CLAIMS, HANDOFF
+Session 50, the gate script, PR 36 on GitHub — and ran concurrently with the reading of
+ADR-0011, the crate sources, the tests, the goldens and packet 11. It reads no program state; it
+was GREEN at `602a596` (2026-11-02T06:51:21Z–06:54:20Z, exit 0; log `gate.log`, SHA-256
+`7caafafeb2022d0509409336e4d351c2513c0dfa396cbd2044103eea2791b7b0`, 17,981 bytes; `gate.err`
+0 bytes, the wrapper having merged stderr into the log): 8,938 Lean jobs; fourteen axiom lines
+within the standard three; fmt, clippy and every test (the generate crate's 50 as they then
+were); every tracked text file LF; the registers and the 65-row freeze register (`Ran 8 tests
+… OK`). Three minutes on a warm disk cache, against Session 50's nine on a cold one. Its end
+was read before the first source edit, and the first Lean process (the goldens' production)
+started at 07:05:22Z. `cargo audit`, which reads the lock file only, ran at 07:07:34Z.
+
+### Entry 4 — `s2_grammar` 0.5.0, built (S2 ordering step 4, continued: FLAW-0003 `cycle` on `ring_chain`, the cited lemma re-justified by the theorem)
+
+All on branch `claude/s2-grammar-0.5.0`, from `main` `602a596`:
+- **No probe.** The class changes no formal byte (STATE's NEXT, step 4): a pair's formal file is
+  the (4, 1) formal control's, whose bytes are the 0.3.0 control's, which built in Session 49
+  and build again in the goldens' production. The design — the site a lemma step, the note
+  replaced by the citation, the premise, the record, the check — was read from `s2_template`
+  0.6.0's FLAW-0003 `cycle` (`check_circularity_material`, the `cycle_extra` of `inject`, the
+  structural branch of `assemble`, the 0.6.0 golden's manifest) and from the grammar's own lemma
+  and chain steps before any code.
+- **Commit 1** `c6b240942b56fb0b50f5c41a8f838aa77b7ce585` (07:05:12Z): `engine/generate/src/grammar.rs` —
+  `circulate` (the site drawn on `injector/FLAW-0003/1` among the lemma steps, or an explicit
+  lemma step's plan index; the closing note `both sides expand to the same polynomial` replaced
+  by `this follows from the theorem`, recorded as the lemma step's one premise; the citing chain
+  step unchanged; the cycle re-derived on the plan's premise graph; the two citation phrases at
+  their spans; the one informal-only record, `NO`, fatal, spanning the phrase; the dials
+  `cycle_length`, `site`, `cycle`, `citations`, `inserted`, `replaced`, `original_steps`; the
+  formal dials carried unused), the constants `CYCLE_LENGTH`, `LEMMA_NOTE` and `CYCLE_PHRASE`
+  (`lemma_step` now names the note through the constant, no byte change),
+  `GrammarVersion::V0_5_0`, `realizes`, the dispatch in `prepare_with`; `src/lib.rs`; the crate
+  README; `tests/grammar.rs` (the FLAW-0003 `cycle` test over six configurations, the
+  `cycle_spec` helper, the version facts — the version-existence assertion moved from `"0.5.0"`
+  to `"0.6.0"` before the first test run, Sessions 49 and 50's confusion applied). `cargo fmt`,
+  `cargo clippy -D warnings` and the 51 tests were clean at the commit, the new test passing on
+  its first run.
+- **Commit 2** `2c3f2b0ed38985a3de1cb27c133d03eced6c810b` (07:08:58Z): the 4 goldens — on
+  `ring_chain` at (`n_steps` 4, `n_lemmas` 1), seed 7: the control (informal, formal; both files
+  the 0.3.0 control's byte for byte) and FLAW-0003 `cycle` (informal, pair) — produced by
+  `generate --dry-run` at commit 1 by two separate runs (run A 2026-11-02T07:05:22Z–07:06:19Z,
+  run B 07:06:19Z–07:07:14Z; `evidence/goldens-run12.py`) compared byte for byte by
+  `evidence/goldens-copy12.py` (every file and observation identical, one engine commit, every
+  verdict PASS; the report `evidence/goldens-production-report.json`, SHA-256
+  `6a4708f3856360267b8d8d9d717f31a9220b6547871c5324403e07d5298fae2a`, 21,035 bytes), the
+  goldens README and the count pinned in `tests/goldens.rs` (101 cases). At seed 7 the site is
+  Lemma 1 (plan step 1) and the citing step plan step 3; the record spans `[97, 126)` of step 1,
+  the citations step 1 `[97, 126)` and step 3 `Lemma 1` at `[3, 10)`; 123 informal tokens against
+  the control's 125.
+- **Commit 3** (this one): the packet `analysis/s2-generate-12/` (README, the production
+  scripts, the run summaries, the report, `cargo-audit.txt`), ADR-0011 *Amendments*, STATE and
+  this close.
+
+The evidence, the security review (no new finding; FINDING-018's scope gains `circulate`'s use
+of the derivation's `sites` and `plan_index`; `cargo-geiger` and `cargo-deny` now installed —
+geiger failing on a stale path and mapping nothing, deny without a `deny.toml` rejecting every
+licence by default, both recorded as facts and the allow-list question noted for Al as
+housekeeping) and readings 138–149 are in the packet's README. Every receipt is under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-050-20261102T0655Z\` (`goldens-12a\` and
+`goldens-12b\`, whose sorted `receipt.json` SHA-256 lists — one per line, LF-terminated — hash
+to `b942bf69230899b422f1f16c58dc58be25819b10f407e6f6fece4e598e9028d2` and
+`c68b1174e382dbc5d5b0515374f0ea47bf0155f516c65813c48e48604c874bc0`), with the commit messages,
+the header script, the STATE edit script, the `cargo geiger` and `cargo deny` outputs and this
+block's files; the orientation receipt, the ORIENT gate wrapper, log and stderr, the disclosure's
+hashing script and the two disclosure entries as appended are under
+`C:\Users\LEET\Codex\Temp\syndeom-orient-20261102T0651Z\`.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN. S2.1–S2.4 are in progress: this is the twelfth
+implementation session (ADR-0011 D11); the grammar carries the length axis for FLAW-0001, the
+declaration-level cosmetic classes (FLAW-0007 `unused`, FLAW-0013), FLAW-0009 `axiom` with both
+truths, FLAW-0010 `a` with `claim: true` and FLAW-0003 `cycle`; the grammar's other v0.1 classes
+(FLAW-0004, FLAW-0011), the other grammars and the sweep remain. Gate S1 is CLOSED (Session 29).
+ORIENT (ADR-0008 D1, steps 1–5 by the preflight; receipt `orient-preflight-1.json` under
+`C:\Users\LEET\Codex\Temp\syndeom-orient-20261102T0651Z\`):
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-11-02T06:48:31Z, exit 0 (half a second).
+- **Snapshot.** `main` at `602a5962f7379e2a71de022bbd20003ab4e60247`, tree
+  `e3db390983ff9d212f1eaa1310b4bd7dbdcfcd7c`, **synchronized**: ahead 0, behind 0. The only
+  change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree.
+- **Step 5.** The constitution (`110f5360…`, 38,958 bytes, ADR-0009's amended digest) and
+  ADR-0005 (`b08e543a…`, 15,291 bytes), as read in step 0, and ADR-0008 (`ccdfa9d7…`), read
+  after disclosing, equal the snapshot's: the checkout is the snapshot, hashed in the call that
+  ran the preflight.
+- **Step 6.** Read in this order: STATE (the Updated bullet of Session 50 and the head of
+  Session 49's, NEXT, the Gate S2, S1 and S0 tables, Blockers, the standing escalations' head,
+  the freeze register, the memory policy, the standing rulings' head), the Git log and status,
+  HANDOFF Session 50 in full (Entries 1–4, the close and the addendum), CLAIMS in full
+  (0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED; unchanged), FLAWS `0.1.0` (the header
+  and FLAW-0003), ADR-0011 (D1–D12 and every amendment) in full; the crate's sources (`grammar`
+  in full, `plan` and `lib` in full, `main`, `template`'s versions, `Producer`,
+  `check_circularity_material`, the spec helpers, `Injection`, `Prepared`, the `cycle_extra` of
+  `inject`, `manifests_in`, `unique_span` and `assemble`'s checks), the grammar tests (the
+  helpers, the version facts, the refusal test's tail, the FLAW-0010 test), the goldens test
+  and READMEs, the 0.6.0 FLAW-0003 `cycle` golden and the 0.3.0 (4, 1) controls, packet 11 with
+  its production scripts, the gate script, Session 50's external root (the header script, the
+  commit messages, the STATE edit script, the pull-request body); PR 36 on GitHub (merged by Al
+  2026-11-02T06:36:41Z with the merge commit `602a596`, parents `3462af3` and `1fdbd1e`; no
+  review, two comments, both the executor's; no open pull request or issue). They agree with one
+  another and with the tree.
+- **ORIENT gate GREEN**, 2026-11-02T06:51:21Z–06:54:20Z (Entry 3): 8,938 Lean jobs; fourteen
+  axiom lines within the standard three; fmt, clippy and every test pass; every tracked text
+  file LF; the registers and the 65-row freeze register pass (HANDOFF's `origin/main` version
+  an exact prefix of the working file with the disclosure appended).
+- **NEXT survived ORIENT.** PR 36 was merged by Al with a merge commit; `a1d524ae…` and
+  `38f1a076…` are ancestors of `main`. Al's rulings on PR 36 were already recorded by
+  `1fdbd1e`, so nothing was recorded before the build.
+ADVANCED:
+- **`s2_grammar` 0.5.0** (S2.1–S2.4 in progress): FLAW-0003 `cycle` on `ring_chain` — a cited
+  lemma's closing note replaced by a citation of the theorem, recorded as the lemma step's
+  premise, the citing chain step unchanged, so the plan's premise graph holds the cycle through
+  the lemma and the main declaration; the formal file unchanged; one informal-only record
+  confirmed by the structural check; `direct` refused as `s2_template`-only, a generated
+  `direct` listed for Al; 4 goldens from two byte-identical runs; 51 tests; clippy and audit
+  clean; the 0.1.0 to 0.4.0 bytes unchanged and their goldens regenerating under their versions.
+BELIEF DELTAS:
+- **The theorem's side of every FLAW-0003 cycle on the grammar already exists in the control.**
+  Session-start me expected to have to change the citing chain step as well as the lemma; the
+  chain step's premise `Lemma j` has been in the plan since 0.1.0 (0.6.0's D2 reading applied
+  retroactively to `chain_step`), so the injection changes one text and the premise graph does
+  the rest. Evidence: `premise_edges` of a control with `m` lemmas has `m` edges; the flawed
+  plan `m + 1` (the test).
+- **A safety classifier can stop a session at the disclosure step even on the by-digest path.**
+  Session-start me took ADR-0005 Amendment 1's two stops as a property of verbatim
+  reproduction; the first response of this session was stopped with nothing reproduced.
+  Hash-only tool output and a minimal written disclosure passed. Evidence: Entries 1–3.
+- **`cargo-geiger` and `cargo-deny` are installed now** (packets 1–11 recorded them absent).
+  Neither produced a usable result here: geiger fails on a stale path in this workspace; deny
+  with no configuration rejects every licence. Evidence: the packet's security review and the
+  outputs under the external root.
+- **The ORIENT gate takes three minutes on a warm disk cache** (nine in Session 50, cold).
+  Evidence: the two logs.
+CONFUSIONS:
+- **A `grep` pattern holding backticks inside double quotes broke the shell** (`unexpected EOF
+  while looking for matching` backtick) and cost one call; the anchors were collected with a
+  script file instead. Fix for a successor: patterns with backticks, backslashes or `$` go in a
+  script file, never inline (the memory file's inline-backslash hazard extends to backticks).
+- **`cargo geiger` must run from the package directory**, not the virtual workspace root (one
+  failed call: "virtual manifest … requires running against an actual package"); from the
+  package directory it compiled and then failed on the stale path, as recorded. Cost: two
+  calls; nothing of the record depends on it.
+- **The STATE edit script's first run aborted on one anchor** (`claim` true` where the file
+  says `claim: true``), writing nothing, as designed; the anchor was corrected from a grep and
+  the second run applied every edit. Cost: one call. Fix: grep every anchor before writing the
+  script, as the others were.
+HONESTY CHECK:
+- No register status changed. The packet's measurements are implementation evidence, not
+  CLAIMS.
+- The citation phrase is the executor's choice and is said so (reading 139), with the
+  template's differing phrase named; the `citations` dial's scope (the cycle's two phrases, not
+  every premise) is said plainly (141); a generated `direct` is listed and not taken (147).
+- The two tool runs that produced nothing usable are recorded with their errors rather than
+  omitted, and the deny result is called what it is — the absence of an allow-list, not a
+  finding.
+- The stopped first response is recorded in the disclosure and here, with what is and is not
+  known about it.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened; no `groundtruth/` item was read
+for design; the citation phrase is executor-authored synthetic text, the lemma and the chain the
+atom library's; no real proof, human or AI-generated, informed any choice. Verdict: no leakage.
+DETERMINISM CHECK:
+- Every golden regenerates byte for byte from its config, seed and recorded observation under
+  the producer and version its manifest names; two productions at one commit (runs A and B)
+  agree file by file and observation by observation; the one draw is on a labelled stream
+  (`injector/FLAW-0003/1`: the site); no floating-point value enters a generation decision; no
+  config text enters a statement or a proof (the phrase is a constant).
+- No wall-clock value enters an artifact; receipts carry durations only.
+- Nothing entered CLAIMS, so there is nothing to quarantine.
+MANIFEST CHECK:
+- Every golden manifest passed `Manifest::check` with its bytes before it was written: `origin`
+  synthetic, `derivation` by-construction; the controls `proof_status: valid`, `correct: true`;
+  every FLAW-0003 artifact `proof_status: invalid`, `correct: false`, one informal-only record
+  at the lemma step; `statement_status` `lean-kernel` with the 0.5.0 formal control at (4, 1) as
+  reference, which names itself.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing.
+DRIFT CHECK:
+- No verdict on any paper (SD3), and no understanding claims (SD17).
+- No detector was chosen or tuned — the structural check is the producer's own confirmation, as
+  `s2_template` 0.6.0 reads it — and there was no referee contact (SD13). Reading 139's note on
+  the fixed phrase as a surface cue is a caution for the calibration ADR, not a detector design.
+- No S3 work, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, with any ruling recorded
+first, `s2_grammar` 0.6.0: FLAW-0004 on `ring_chain`, probes first — the shape of "the aligned
+tactic step omitted" inside a `calc` step measured before any design, and the class refused
+with the probes as the reading if no shape realizes it — then the hedge drawn and prefixed to
+the bare claim at a ring-closed step, goldens at (4, 0) with the new version's controls from
+two byte-identical runs; FLAW-0011 as the composite after it, then the other grammars; the
+sweep (D11) when the grammars realize their v0.1 classes.
+ESCALATIONS:
+- **This pull request:** review and merge with a merge commit, so that `c6b24094…`, the
+  `s2_grammar` 0.5.0 goldens' `engine_commit`, stays a real commit on `main`.
+- **Readings 138–149** in `analysis/s2-generate-12/README.md` (ADR-0011 *Amendments*), in
+  particular 139 (the citation phrase `this follows from the theorem`, a constant; whether a
+  drawn phrase lexicon is wanted), 141 (`citations` the cycle's two phrases only), 147 (a
+  generated FLAW-0003 `direct` listed and not taken; a D6 amendment if wanted) and 145 (four
+  goldens, both control files the 0.3.0 control's bytes); **FINDING-018** (standing, scope
+  extended); FINDING-015 (standing; not extended to the grammar), FINDING-016 and FINDING-017
+  (standing).
+- **Housekeeping, not a finding:** whether a `deny.toml` naming the permitted licences enters
+  the repository, now that `cargo-deny` is installed and rejects every licence without one.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The scope STATE's NEXT named — FLAW-0003 `cycle` on the grammar,
+with its goldens — is built, and the pull request is open for Al's review. Repo green: the gate
+on the committed tree is recorded in the pull request and under the external root, not in the
+tree it certifies.
+**Memory writes:** none. A write would change a memory digest and make the next disclosure owe
+verbatim reproduction.
+
+SESSION 51 ADDENDUM — AL'S RULINGS ON PR 37 (received 2026-11-02 UTC, 2026-11-02
+America/New_York, in this session's conversation after PR #37 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr37.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-050-20261102T0655Z\`, 1,754 bytes, SHA-256
+`61dae199e45b6ceaba677f0f550d67365fec5bebc4b3c8c885598ecb91659a00`):
+
+~~~text
+Rulings on PR #37 / s2_grammar 0.5.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 138 through 149 are accepted as read.
+
+On reading 139, record also: the phrase and its form stand. A drawn phrase lexicon for the citation is wanted for S3’s cells, as a later version after the grammars’ v0.1 classes — one surface-variety version for the grammar covering every fixed phrase S3’s cell design wants varied, not a FLAW-0003 version alone. Until then the fixed phrase is a documented-weak cue, as reading 139 records it.
+
+On reading 147, record also: a generated FLAW-0003 direct on the grammar is not taken now. It is a D6 amendment candidate after the grammars’ v0.1 classes, if S3’s cell design needs a second producer for the kernel-visible FLAW-0003 cell; its shape — the lemma’s forward reference and what the main proof then cites — is settled by probes in that version, not by this reading.
+
+On the tooling, record as housekeeping: cargo-geiger is not adopted; every crate carries #![forbid(unsafe_code)], which is the stronger guarantee. A deny.toml allow-list enters the repository in its own commit in the next version’s pull request, its licence list read from cargo deny list on the current lock with nothing assumed; cargo deny check runs where cargo audit runs, at S2.4 and before the freeze, not in the offline gate.
+
+On PR 36, confirmed: the executor’s reading of “the class sweep is not bumped for a sub-variant” is the intended one — D11’s readiness counts classes, which FLAW-0010 a with claim: true realizes on the grammar.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `602a596` — left there at the close
+so that a successor's preflight finds it synchronized — and was switched back to
+`claude/s2-grammar-0.5.0` at `db6e3fc5…`, clean and in sync with its remote after a fresh fetch
+(`origin/main` still `602a596`); PR 37 had no review and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 138–149 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence) and
+  here. Nothing regenerated.
+- **Reading 139's note** → recorded: the phrase `this follows from the theorem` and its form
+  stand; a drawn phrase lexicon for the citation is wanted for S3's cells as a later version
+  after the grammars' v0.1 classes — one surface-variety version for the grammar covering every
+  fixed phrase S3's cell design wants varied, not a FLAW-0003 version alone; until then the
+  fixed phrase is a documented-weak cue. STATE's NEXT names the surface-variety version among
+  the later ones. No byte changes.
+- **Reading 147's note** → recorded: a generated FLAW-0003 `direct` on the grammar is not taken
+  now; it is a D6 amendment candidate after the grammars' v0.1 classes, if S3's cell design
+  needs a second producer for the kernel-visible FLAW-0003 cell; its shape — the lemma's forward
+  reference and what the main proof then cites — is settled by probes in that version, not by
+  the reading. STATE's NEXT says so.
+- **The tooling, as housekeeping** → recorded in ADR-0011 *Amendments* (D10) and STATE:
+  `cargo-geiger` is not adopted (every crate carries `#![forbid(unsafe_code)]`, the stronger
+  guarantee); a `deny.toml` allow-list enters the repository in its own commit in the next
+  version's pull request (`s2_grammar` 0.6.0), its licence list read from `cargo deny list` on
+  the current lock with nothing assumed; `cargo deny check` runs where `cargo audit` runs, at
+  S2.4 and before the freeze, not in the offline gate. STATE's NEXT gains the step (its step 3,
+  the later steps renumbered). Nothing is added to the repository in this pull request.
+- **PR 36's flagged reading confirmed** → recorded in ADR-0011 *Amendments* and in STATE's
+  0.4.0 escalation entry: "the class sweep is not bumped for a sub-variant" means D11's
+  readiness counts classes, which FLAW-0010 `a` with `claim: true` realizes on the grammar.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+**The memory store is unchanged since the disclosure** — re-hashed with the disclosure's script
+at 2026-11-02T07:24:20Z, after the pull request opened: the whole index `0f7e69ab…8995` (15,471
+bytes, 110 lines), the matched lines 85, 86, 88, 89, 106 and 107 (`0418e621…534c`, 1,198 bytes;
+104 withheld) and `project_syndeom.md` (`ce2ce6de…2cc0`). This session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, no check, no dial and no register status changed; nothing regenerated.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `c6b24094…`, the `s2_grammar` 0.5.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-018** (informational, backlog; scope extended); FINDING-015 (standing; not extended
+  to the grammar), FINDING-016 and FINDING-017 standing.
+- The `deny.toml` allow-list is scheduled, not open: its own commit in the next version's pull
+  request (STATE's NEXT, step 3).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.

@@ -1,10 +1,10 @@
 # Goldens for `s2_template` and `s2_grammar` (ADR-0011 D10)
 
-There are 97 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+There are 101 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
 0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
 and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47), 8 of 0.2.0
-(Session 48), 6 of 0.3.0 (Session 49) and 4 of 0.4.0 (Session 50). All use seed 7. Each case
-directory holds:
+(Session 48), 6 of 0.3.0 (Session 49), 4 of 0.4.0 (Session 50) and 4 of 0.5.0 (Session 51). All
+use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -493,12 +493,56 @@ commanded `pass` and `lean_axioms_standard` `true`.
   from the recorded indices, every token in the lexicon, the step `By <reference>` and the bare
   claim, the faithful step holding the justification exactly once): `flaws_confirmed` 1.
 
+## `s2_grammar` 0.5.0 (Session 51, 2026-11-02)
+
+On `ring_chain` at the short length with one lemma (`n_steps` 4, `n_lemmas` 1; the seed form
+`(x - 2 * y) ^ 2` at seed 7, the chain the 0.1.0 short control's with its second step stated as
+Lemma 1 and cited at step 3 of the plan, as in 0.3.0): the control (informal, formal — so that
+the flawed cases' truth reference, the formal control of the same version, length and seed,
+names a golden; both files are the 0.3.0 control's byte for byte, only the version, the id and
+the manifest differing) and FLAW-0003 `cycle` with `cycle_length` 2 (fatal; informal, pair —
+the formal target being refused: declaration order forbids a formal cycle). The lemma is drawn
+on `injector/FLAW-0003/1`; with one lemma it is Lemma 1, plan step 1. Its closing note `both
+sides expand to the same polynomial` is replaced by the citation `this follows from the
+theorem`, so step 1 reads `Lemma 1. For all integers $x$ and $y$, $4 \cdot y \cdot y + x(x - 4y)
+= 4y^2 - 4yx + x \cdot x$; this follows from the theorem.`, recorded as the step's premise of
+the theorem; step 3 (`By Lemma 1, …`) is unchanged and already names the lemma, so the plan's
+premise graph holds the cycle `[syndeom_s2_grammar_ring_chain_lemma_1,
+syndeom_s2_grammar_ring_chain]`. Each flawed case carries one record, informal-only at step 1
+with span `[97, 126)` (the citation phrase), `NO`, fatal, whose dials carry the cycle and the
+two citation phrases at their spans (step 1 `[97, 126)`; step 3 `Lemma 1` at `[3, 10)`), so the
+artifact is an invalid proof of a true statement (`proof_status: invalid`, `correct: false`)
+with `n_flaws_0003` 1, `n_steps` 5 and `n_lemmas` 1 (123 informal tokens against the control's
+125: the citation is two tokens shorter than the note); the pair's formal file is the formal
+control's byte for byte, `lean_build` commanded `pass` and `lean_axioms_standard` `true`.
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ring_chain` | control (informal, formal) | 4 steps, 1 lemma (Lemma 1 states step 2 of the chain) |
+| `ring_chain` | FLAW-0003 `cycle`, `cycle_length` 2, fatal (informal, pair) | 4 steps, 1 lemma; the citation at plan step 1, the cycle through step 3 |
+
+**Provenance:**
+- The proof text is generated (`src/grammar.rs`: the atom library; the citation phrase is a
+  constant of the producer). No Lean probe was needed: the class changes no formal byte, and
+  the pair's formal file is the formal control's, which builds.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `c6b240942b56fb0b50f5c41a8f838aa77b7ce585`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run
+  (`analysis/s2-generate-12/evidence/goldens-production-report.json`).
+- Every case's fidelity verdict is PASS. The formal files build and print `[propext,
+  Quot.sound]`, the main declaration using Lemma 1. Each FLAW-0003 case is confirmed by the
+  structural check (the plan's premise graph contains the recorded cycle through the lemma at
+  the site; each citation phrase is at its recorded span in the rendered step):
+  `flaws_confirmed` 1.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
 `analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md`,
 `analysis/s2-generate-8/README.md`, `analysis/s2-generate-9/README.md`,
-`analysis/s2-generate-10/README.md` and `analysis/s2-generate-11/README.md`.
+`analysis/s2-generate-10/README.md`, `analysis/s2-generate-11/README.md` and
+`analysis/s2-generate-12/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps
