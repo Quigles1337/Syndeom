@@ -1,0 +1,30 @@
+=== s2i_ic_atoms start 2026-11-02T21:50:32Z
+=== s2i_ic_atoms end 2026-11-02T21:50:41Z exit=1
+=== s2i_ic_control_256 start 2026-11-02T21:50:41Z
+=== s2i_ic_control_256 end 2026-11-02T21:51:24Z exit=0
+=== s2i_ic_control_64 start 2026-11-02T21:51:24Z
+=== s2i_ic_control_64 end 2026-11-02T21:51:35Z exit=0
+=== s2i_ic_imports_linarith_only start 2026-11-02T21:51:35Z
+=== s2i_ic_imports_linarith_only end 2026-11-02T21:51:43Z exit=1
+=== s2i_ic_imports_real_only start 2026-11-02T21:51:43Z
+=== s2i_ic_imports_real_only end 2026-11-02T21:51:50Z exit=1
+=== s2i_ic_local_coefficient start 2026-11-02T21:51:50Z
+=== s2i_ic_local_coefficient end 2026-11-02T21:51:59Z exit=1
+=== s2i_ic_local_constant_true start 2026-11-02T21:51:59Z
+=== s2i_ic_local_constant_true end 2026-11-02T21:52:07Z exit=1
+=== s2i_ic_local_sign start 2026-11-02T21:52:07Z
+=== s2i_ic_local_sign end 2026-11-02T21:52:15Z exit=1
+=== s2i_ic_local_sign_abs start 2026-11-02T21:52:15Z
+=== s2i_ic_local_sign_abs end 2026-11-02T21:52:23Z exit=1
+=== s2i_ic_long start 2026-11-02T21:52:23Z
+=== s2i_ic_long end 2026-11-02T21:52:32Z exit=0
+=== s2i_ic_positivity start 2026-11-02T21:52:32Z
+=== s2i_ic_positivity end 2026-11-02T21:52:40Z exit=1
+=== s2i_ic_propagated_exponent_last start 2026-11-02T21:52:40Z
+=== s2i_ic_propagated_exponent_last end 2026-11-02T21:52:48Z exit=1
+=== s2i_ic_propagated_sign start 2026-11-02T21:52:48Z
+=== s2i_ic_propagated_sign end 2026-11-02T21:52:57Z exit=1
+=== s2i_ic_short start 2026-11-02T21:52:57Z
+=== s2i_ic_short end 2026-11-02T21:53:05Z exit=0
+=== PROBES end
+run.sh rc=0

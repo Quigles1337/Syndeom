@@ -1,0 +1,25 @@
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_atoms.lean:1:0: warning: 
+'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_atoms.lean:14:11: warning: Variable name `y` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _y
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_atoms.lean:20:52: error: linarith failed to find a contradiction
+x y : ℝ
+a✝ : x ^ 2 + y ^ 2 < 2 * x * y
+⊢ False
+failed
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_atoms.lean:22:52: error: linarith failed to find a contradiction
+x y : ℝ
+a✝ : x ^ 2 + y ^ 2 < 2 * x * y
+⊢ False
+failed
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_atoms.lean:24:76: error: linarith failed to find a contradiction
+x y : ℝ
+a✝ : x ^ 2 + |x| + |y| + |x + y| < x ^ 2 + 2 * |x + y|
+⊢ False
+failed

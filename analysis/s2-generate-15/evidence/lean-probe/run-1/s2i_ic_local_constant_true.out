@@ -1,0 +1,9 @@
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_local_constant_true.lean:1:0: warning: 
+'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_local_constant_true.lean:8:60: error: linarith failed to find a contradiction
+x y : ℝ
+a✝ : 3 * x ^ 2 + 2 * y ^ 2 - 2 * x + 1 + |x| + |y| < 2 * x ^ 2 + 2 * x * y + y ^ 2 - 2 * x + 2 + |x| + |y|
+⊢ False
+failed

@@ -1,0 +1,4 @@
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_real_only.lean:3:85: error: unknown tactic
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_real_only.lean:3:81: error: unsolved goals
+x y : ℝ
+⊢ 4 * x * y + |x + y| ≤ x ^ 2 + 2 * x * y + y ^ 2 + |x + y|

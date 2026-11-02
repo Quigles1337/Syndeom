@@ -1,0 +1,5 @@
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_short.lean:1:0: warning: 
+'Mathlib.Data.Real.Basic' has been deprecated: please replace this import by
+
+import Mathlib.Basic.Real.Basic
+'syndeom_s2_grammar_ineq_chain' depends on axioms: [propext, Classical.choice, Quot.sound]

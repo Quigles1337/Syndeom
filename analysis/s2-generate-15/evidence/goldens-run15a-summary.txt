@@ -1,0 +1,51 @@
+ineq_chain/v0.8.0-control-short-informal exit=0 start=2026-11-02T22:05:29.740Z end=2026-11-02T22:05:37.513Z
+s2_grammar-v0.8.0-f539c4579bbc-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-control-short-formal exit=0 start=2026-11-02T22:05:37.514Z end=2026-11-02T22:06:01.198Z
+s2_grammar-v0.8.0-32dcf77f7873-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-control-long-informal exit=0 start=2026-11-02T22:06:01.199Z end=2026-11-02T22:06:08.765Z
+s2_grammar-v0.8.0-a54a1ff89bfd-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-control-long-formal exit=0 start=2026-11-02T22:06:08.767Z end=2026-11-02T22:06:33.530Z
+s2_grammar-v0.8.0-5863c0b40ac8-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-flaw-0001-propagated-informal exit=0 start=2026-11-02T22:06:33.532Z end=2026-11-02T22:06:40.974Z
+s2_grammar-v0.8.0-5b011e904f8e-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-flaw-0001-propagated-formal exit=0 start=2026-11-02T22:06:40.976Z end=2026-11-02T22:06:56.561Z
+s2_grammar-v0.8.0-dcae41107195-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-flaw-0001-propagated-pair exit=0 start=2026-11-02T22:06:56.564Z end=2026-11-02T22:07:12.588Z
+s2_grammar-v0.8.0-08aea335a7bc-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-flaw-0001-local-informal exit=0 start=2026-11-02T22:07:12.589Z end=2026-11-02T22:07:20.475Z
+s2_grammar-v0.8.0-fdf47e446e6f-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-flaw-0001-local-formal exit=0 start=2026-11-02T22:07:20.476Z end=2026-11-02T22:07:37.678Z
+s2_grammar-v0.8.0-68ede8a10a36-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-flaw-0001-local-pair exit=0 start=2026-11-02T22:07:37.679Z end=2026-11-02T22:07:56.623Z
+s2_grammar-v0.8.0-5ef7b70d1089-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end

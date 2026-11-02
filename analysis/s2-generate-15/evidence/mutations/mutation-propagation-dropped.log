@@ -1,0 +1,27 @@
+mutation: propagation-dropped
+breaks: propagated stops carrying the perturbation forward
+replaced: flawed.e[k] = add(&flawed.e[k - 1], ATOMS[d.atoms[k - 1]].increment);
+with: flawed.e[k] = d.e[k].clone();
+cargo test exit: 101
+source restored: 430d339eeae244a727da0660505d5b1d84a49dbef6011b99d4843dc7e79f57e7
+
+
+running 12 tests
+.. 2/12
+d5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there --- FAILED
+.........
+failures:
+
+---- d5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there stdout ----
+
+thread 'd5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there' (13808) panicked at generate\tests\ineq.rs:728:29:
+step 3 re-derived
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    d5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there
+
+test result: FAILED. 11 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.35s
+
+error: test failed, to rerun pass `-p syndeom-generate --test ineq`
