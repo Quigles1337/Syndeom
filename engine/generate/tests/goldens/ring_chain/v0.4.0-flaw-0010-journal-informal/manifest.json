@@ -1,0 +1,181 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0010": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 4
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 99
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "dff1ac7721a4b8bd2d5957c75831683bcc6d285d2758d5c586c2e62a3d2c2c96",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 564,
+        "n_lemmas": 0,
+        "n_steps": 4,
+        "n_tokens": 99,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_grammar-v0.4.0-1004fe87f5aa-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0010": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 4
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0010",
+        "dials": {
+          "claim": true,
+          "shape": "journal"
+        },
+        "severity": "gap",
+        "site": "auto",
+        "sub_variant": "a"
+      }
+    ],
+    "grammar": "ring_chain",
+    "length": {
+      "n_lemmas": 0,
+      "n_steps": 4
+    },
+    "padding_ratio": 0,
+    "target": "informal"
+  },
+  "config_hash": "1004fe87f5aa3adf2462b7cb28bf51db9e5018cc2c4db94111b5ba4f0487d981",
+  "engine_commit": "a1d524ae644f44ac9887a8a7f4a2ab11d673e349",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0010": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_grammar",
+    "rng": "syndeom-rng/1",
+    "version": "0.4.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0010",
+        "dials": {
+          "asserted": "$4 \\cdot y \\cdot y + x(x - 4y) = 4y^2 - 4yx + x \\cdot x$.",
+          "author": 2,
+          "claim": true,
+          "inserted": "[Fictitious 19XX, Annals of Imaginary Results, Corollary 1.7]",
+          "justification": "Rearranging the terms",
+          "original_steps": {
+            "2": "Rearranging the terms, $4 \\cdot y \\cdot y + x(x - 4y) = 4y^2 - 4yx + x \\cdot x$."
+          },
+          "reference": "[Fictitious 19XX, Annals of Imaginary Results, Corollary 1.7]",
+          "replaced": "Rearranging the terms",
+          "result": 3,
+          "shape": "journal",
+          "site": 2,
+          "venue": 1,
+          "year": 0
+        },
+        "instance": 1,
+        "lean_catchable": "N/A",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            3,
+            64
+          ],
+          "step": 2
+        },
+        "severity": "gap",
+        "sub_variant": "a"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "s2_grammar-v0.4.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}
