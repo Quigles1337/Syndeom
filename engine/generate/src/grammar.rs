@@ -49,6 +49,21 @@
 //! the instance does not use to a drawn presentation of its expansion (`restated-definition` and
 //! `verbose-rewrite` have no generated material and are refused); the positions follow
 //! `placement`, and `padding_ratio` is measured as 0.4.0 measures it.
+//!
+//! **0.3.0 — FLAW-0009 `axiom` (D5), with generated material.** One cited lemma's declaration —
+//! the lemma drawn on `injector/FLAW-0009/1` when the spec says `auto`; an explicit `site` is a
+//! lemma step's plan index — is replaced by an `axiom` with no proof. For `truth: true` (gap) it
+//! is an axiom of the same identity and nothing else changes. For `truth: false` (fatal) it is
+//! an axiom of a false identity — the lemma's right-hand side perturbed once as FLAW-0001
+//! perturbs a step, the kind and the monomial drawn on the same stream — used **ex falso** at
+//! the chain step that cites the lemma: the axiom's instance at a witness point, found by a
+//! fixed grid search, is refuted by `norm_num`, so every identity of the chain stays the
+//! faithful one and the main theorem still follows (Al's ruling of 2026-11-01 on PR 34: the
+//! second of the two candidate shapes; the first, a false intermediate presentation undone by a
+//! second use of the axiom, was probed and not taken — packet 10). The informal file is
+//! unchanged in both cases (D5); the record is formal-only, at the axiom's declaration,
+//! `YES-TOOLING`, confirmed by check T as `s2_template` 0.3.0 reads it (`#print axioms` of the
+//! main declaration lists the axiom's name). `native_decide` stays refused.
 
 use std::cmp::Reverse;
 use std::collections::{BTreeMap, BTreeSet};
@@ -70,7 +85,7 @@ use crate::template::{
 
 pub const GENERATOR_ID: &str = "s2_grammar";
 /// The producer version `generate` emits (ADR-0011 D1).
-pub const GENERATOR_VERSION: &str = "0.2.0";
+pub const GENERATOR_VERSION: &str = "0.3.0";
 /// The one grammar of 0.1.0 (ADR-0011 D6).
 pub const RING_CHAIN: &str = "ring_chain";
 /// The main declaration's name (ADR-0011 D2: `syndeom_s2_<producer>_<theorem>`).
@@ -93,6 +108,16 @@ pub const PADDING_COUNT_RANGE: (u64, u64) = (1, 32);
 /// polynomial presented again is a `re-derivation`; an identity of a seed form the instance
 /// does not use is an `unused-lemma`. The other two kinds have no generated material.
 pub const PADDING_KINDS: &[PaddingKind] = &[PaddingKind::ReDerivation, PaddingKind::UnusedLemma];
+/// FLAW-0009's `mode` in `s2_grammar` 0.3.0 (ADR-0011 D5): `axiom` only; `native_decide` stays
+/// refused (STATE's NEXT: the chain has no decidable goal to close that way).
+pub const SMUGGLE_MODE: &str = "axiom";
+/// The witness point of a FLAW-0009 `truth: false` axiom (0.3.0) is the first pair `(x, y)` with
+/// `1 ≤ x, y ≤ SMUGGLE_WITNESS_BOUND`, in order of `x + y` and then `x`, at which the false
+/// identity's two sides differ. The two sides are distinct polynomials of total degree at most
+/// 5 (the atom library's expansions have degree at most 4; a raised exponent adds one), and a
+/// nonzero polynomial in two variables of degree at most 7 in each cannot vanish on an 8 × 8
+/// grid, so the search always succeeds.
+pub const SMUGGLE_WITNESS_BOUND: i64 = 8;
 /// Where the material comes from (ADR-0011 D6, Al's ruling 1 of 2026-10-27).
 pub const SOURCE: &str = "engine/generate/src/grammar.rs, s2_grammar 0.1.0: the ring_chain atom library (SEED_FORMS and the presentations of `present`), executor-authored synthetic material outside the S1 corpus (ADR-0011 D6)";
 
@@ -101,15 +126,17 @@ pub const SOURCE: &str = "engine/generate/src/grammar.rs, s2_grammar 0.1.0: the 
 pub enum GrammarVersion {
     V0_1_0,
     V0_2_0,
+    V0_3_0,
 }
 
 impl GrammarVersion {
-    pub const CURRENT: GrammarVersion = GrammarVersion::V0_2_0;
+    pub const CURRENT: GrammarVersion = GrammarVersion::V0_3_0;
 
     pub fn parse(s: &str) -> Option<GrammarVersion> {
         match s {
             "0.1.0" => Some(GrammarVersion::V0_1_0),
             "0.2.0" => Some(GrammarVersion::V0_2_0),
+            "0.3.0" => Some(GrammarVersion::V0_3_0),
             _ => None,
         }
     }
@@ -118,6 +145,7 @@ impl GrammarVersion {
         match self {
             GrammarVersion::V0_1_0 => "0.1.0",
             GrammarVersion::V0_2_0 => "0.2.0",
+            GrammarVersion::V0_3_0 => "0.3.0",
         }
     }
 
@@ -751,6 +779,15 @@ fn lemma_step(j: usize, d: &Derivation, c: usize) -> Step {
     }
 }
 
+/// The `calc` line of chain step `c` — the first opens the block — with its proof term.
+fn chain_line(c: usize, a: &Rendered, b: &Rendered, proof: &str) -> String {
+    if c == 1 {
+        format!("calc {} = {} := {proof}", a.lean, b.lean)
+    } else {
+        format!("  _ = {} := {proof}", b.lean)
+    }
+}
+
 /// Chain step `c` of the main proof: one `calc` line — the first opens the block — closed by
 /// `ring`, or by the lemma that states it, which it cites.
 fn chain_step(d: &Derivation, c: usize) -> Step {
@@ -770,11 +807,7 @@ fn chain_step(d: &Derivation, c: usize) -> Step {
             Vec::new(),
         ),
     };
-    let line = if c == 1 {
-        format!("calc {} = {} := {proof}", a.lean, b.lean)
-    } else {
-        format!("  _ = {} := {proof}", b.lean)
-    };
+    let line = chain_line(c, a, b, &proof);
     Step {
         text: format!("{justification}, ${} = {}$.", a.latex, b.latex),
         fragment: vec![line],
@@ -1001,6 +1034,10 @@ pub fn prepare_with(
                 seed_value,
             )?;
             (plan, None, Vec::new(), paragraphs)
+        }
+        Some(spec) if spec.class == "FLAW-0009" => {
+            let (plan, inj) = smuggle(&d, &faithful, spec, cfg.target, seed_value)?;
+            (plan, Some(inj), Vec::new(), Vec::new())
         }
         Some(spec) => {
             let (plan, inj) = inject(&d, &faithful, spec, cfg.target, seed_value)?;
@@ -1625,12 +1662,227 @@ fn pad(
     Ok((plan, out))
 }
 
+// ---- FLAW-0009 `axiom` (0.3.0) -----------------------------------------------------------------
+
+/// A polynomial's value at integer `x` and `y`.
+pub fn eval(terms: &[Term], x: i64, y: i64) -> i64 {
+    terms.iter().map(|t| t.c * x.pow(t.i) * y.pow(t.j)).sum()
+}
+
+/// The witness point of a false identity `a = b` (0.3.0, FLAW-0009 `truth: false`): the first
+/// `(x, y)` with `1 ≤ x, y ≤ SMUGGLE_WITNESS_BOUND`, in order of `x + y` and then `x`, at which
+/// the two polynomials' values differ; `None` when they agree on the whole grid, which two
+/// distinct polynomials of the atom library's degrees never do.
+pub fn witness_point(a: &[Term], b: &[Term]) -> Option<(i64, i64)> {
+    let n = SMUGGLE_WITNESS_BOUND;
+    for s in 2..=2 * n {
+        for x in 1..=n {
+            let y = s - x;
+            if (1..=n).contains(&y) && eval(a, x, y) != eval(b, x, y) {
+                return Some((x, y));
+            }
+        }
+    }
+    None
+}
+
+/// The injector for FLAW-0009 `axiom` on `ring_chain` (ADR-0011 D5; 0.3.0). The cited lemma —
+/// drawn on `injector/FLAW-0009/1` among the `n_lemmas` lemma steps when the spec says `auto`;
+/// an explicit `site` is a lemma step's plan index — has its declaration replaced by an `axiom`
+/// with no proof. `truth: true` (gap): an axiom of the same identity; nothing else changes.
+/// `truth: false` (fatal): an axiom of a false identity — the lemma's right-hand side perturbed
+/// once as FLAW-0001 perturbs a step (the kind: the first of D5's four, from a start drawn on
+/// the same stream, with an eligible target; then the target, drawn), re-rendered under the
+/// step's own presentation — and the chain step that cites the lemma justified ex falso: the
+/// axiom's instance at the witness point ([`witness_point`]) refuted by `norm_num`, so that
+/// every identity of the chain is the faithful one and the main theorem still follows (Al's
+/// ruling of 2026-11-01 on PR 34). The informal file is unchanged in both cases (D5). The record
+/// is formal-only, at the axiom's declaration, `YES-TOOLING`, confirmed by check T (`#print
+/// axioms` lists the axiom's name); its dials carry `mode`, `truth`, the site, the declaration,
+/// the axiom line inserted, the faithful lemma's lines replaced, every fragment the variant
+/// changed and, for `false`, the perturbation, the monomial, the witness point with the two
+/// sides' values and the citing step (`use_site`).
+fn smuggle(
+    d: &Derivation,
+    faithful: &Plan,
+    spec: &FlawSpec,
+    target: Target,
+    seed: u64,
+) -> Result<(Plan, Injection), String> {
+    check_spec(spec, target)?;
+    if spec.sub_variant.is_some() {
+        return Err("FLAW-0009 has no sub-variant".into());
+    }
+    exact_keys(&spec.dials, &["mode", "truth"], "FLAW-0009's dials")?;
+    match spec.dials["mode"].as_str() {
+        Some(SMUGGLE_MODE) => {}
+        Some("native_decide") => {
+            return Err(
+                "FLAW-0009 native_decide is refused in s2_grammar: the chain has no decidable goal to close that way (STATE's NEXT)"
+                    .into(),
+            );
+        }
+        _ => {
+            return Err(format!(
+                "FLAW-0009's mode is {SMUGGLE_MODE:?} in s2_grammar"
+            ));
+        }
+    }
+    let truth = spec.dials["truth"]
+        .as_bool()
+        .ok_or("FLAW-0009's truth is true or false")?;
+    let expected = if truth {
+        Severity::Gap
+    } else {
+        Severity::Fatal
+    };
+    if spec.severity != expected {
+        return Err(format!(
+            "FLAW-0009 truth: {truth} is {expected:?} (ADR-0011 D5), not {:?}",
+            spec.severity
+        ));
+    }
+    let m = d.sites.len();
+    if m == 0 {
+        return Err(
+            "FLAW-0009 axiom replaces a cited lemma's declaration: length.n_lemmas is at least 1"
+                .into(),
+        );
+    }
+    let mut stream = Stream::new(seed, "injector/FLAW-0009/1");
+    let j = match spec.site {
+        None => 1 + stream.below(m as u64) as usize,
+        Some(k) => {
+            let k = k as usize;
+            if !(1..=m).contains(&k) {
+                return Err(format!(
+                    "site {k} is not a lemma step: FLAW-0009 axiom replaces one of the lemma steps (plan steps 1 to {m})"
+                ));
+            }
+            k
+        }
+    };
+    let c = d.sites[j - 1];
+    let faithful_lemma = &faithful.steps[j - 1];
+    let header = faithful_lemma
+        .lemma
+        .as_ref()
+        .ok_or("a lemma step carries its header")?;
+    let mut plan = faithful.clone();
+    let mut extra: Vec<(&str, Value)> = Vec::new();
+    let claim = if truth {
+        header.claim.clone()
+    } else {
+        // the false identity: the lemma's right-hand side perturbed once, under the step's own
+        // presentation
+        let site_terms = &d.e[c].ordered;
+        let start = stream.below(PERTURBATIONS.len() as u64) as usize;
+        let (kind, candidates) = (0..PERTURBATIONS.len())
+            .find_map(|off| {
+                let kind = PERTURBATIONS[(start + off) % PERTURBATIONS.len()];
+                let cands = targets(kind, site_terms);
+                (!cands.is_empty()).then_some((kind, cands))
+            })
+            .ok_or("no eligible perturbation at the lemma's right-hand side")?;
+        let chosen = candidates[stream.below(candidates.len() as u64) as usize];
+        let (perturbed_terms, mono_replaced, mono_inserted) = apply(chosen, site_terms);
+        let perturbed_poly = normalize(&perturbed_terms);
+        if perturbed_poly == d.poly {
+            return Err("a perturbation changes the polynomial".into());
+        }
+        let pres = &d.presentations[c - 1];
+        let mut styles = pres.styles.clone();
+        styles.resize(perturbed_terms.len(), Style::default());
+        let f = render_ordered(&pres.shape, &styles, &perturbed_terms);
+        let (x, y) = witness_point(&d.poly, &perturbed_poly).ok_or(
+            "a false identity differs from the true one at some point of the witness grid",
+        )?;
+        let (lhs, rhs) = (eval(&d.poly, x, y), eval(&perturbed_poly, x, y));
+        // the citing step, ex falso: the axiom's instance at the witness point, refuted
+        plan.steps[m + c - 1].fragment = vec![chain_line(
+            c,
+            &d.e[c - 1],
+            &d.e[c],
+            &format!("absurd ({} {x} {y}) (by norm_num)", lemma_name(j)),
+        )];
+        extra.push(("perturbation", json!(kind)));
+        extra.push((
+            "monomial",
+            json!({"replaced": mono_replaced, "inserted": mono_inserted}),
+        ));
+        extra.push((
+            "counterexample",
+            json!({"x": x, "y": y, "lhs": lhs, "rhs": rhs}),
+        ));
+        extra.push(("use_site", json!(m + c)));
+        format!("∀ x y : ℤ, {} = {}", d.e[c - 1].lean, f.lean)
+    };
+    plan.steps[j - 1] = Step {
+        text: faithful_lemma.text.clone(),
+        fragment: Vec::new(),
+        lemma: Some(LemmaHeader {
+            kind: LemmaKind::Axiom,
+            name: header.name.clone(),
+            claim,
+        }),
+        padding: None,
+        premises: Vec::new(),
+    };
+    let inserted = lemma_lines(&plan.steps[j - 1])?;
+    let replaced = lemma_lines(faithful_lemma)?;
+    let mut original_fragments = Map::new();
+    for (k, (f, s)) in faithful.steps.iter().zip(&plan.steps).enumerate() {
+        if s.fragment != f.fragment || s.lemma != f.lemma {
+            let lines = match &f.lemma {
+                Some(_) => lemma_lines(f)?,
+                None => f.fragment.clone(),
+            };
+            original_fragments.insert((k + 1).to_string(), json!(lines));
+        }
+    }
+    let with = |more: Vec<(&str, Value)>| {
+        let mut dials = spec.dials.clone();
+        dials.insert("site".into(), json!(j));
+        for (k, v) in extra.iter().chain(more.iter()) {
+            dials.insert((*k).to_string(), v.clone());
+        }
+        Value::Object(dials)
+    };
+    let informal_dials = with(vec![
+        ("inserted", json!(faithful_lemma.text)),
+        ("replaced", Value::Null),
+        ("original_steps", json!({})),
+    ]);
+    let formal_dials = with(vec![
+        ("inserted", json!(inserted)),
+        ("replaced", json!(replaced)),
+        ("original_fragments", Value::Object(original_fragments)),
+        ("declaration", json!(header.name)),
+    ]);
+    let injection = Injection {
+        instance: 1,
+        class: "FLAW-0009".to_string(),
+        sub_variant: None,
+        severity: spec.severity,
+        lean_catchable: LeanCatchable::YesTooling,
+        site: j,
+        informal_inserted: faithful_lemma.text.clone(),
+        informal_dials,
+        formal_inserted: inserted,
+        formal_dials,
+    };
+    Ok((plan, injection))
+}
+
 /// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0; FLAW-0007
-/// `unused` and FLAW-0013 from 0.2.0.
+/// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0.
 pub fn realizes(version: GrammarVersion, class: &str) -> bool {
     match version {
         GrammarVersion::V0_1_0 => class == "FLAW-0001",
         GrammarVersion::V0_2_0 => matches!(class, "FLAW-0001" | "FLAW-0007" | "FLAW-0013"),
+        GrammarVersion::V0_3_0 => {
+            matches!(class, "FLAW-0001" | "FLAW-0007" | "FLAW-0009" | "FLAW-0013")
+        }
     }
 }
 

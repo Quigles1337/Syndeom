@@ -4,18 +4,23 @@
 //! determinism (D9), FLAW-0001 `propagated` and `local` with their records and check K (D5),
 //! and the refusals (D3, D6) — and, from 0.2.0, FLAW-0007 `unused` (irrelevant lemmas generated
 //! from the atom library, cited by nowhere, each its own instance, check T) and FLAW-0013
-//! (generated padding paragraphs with their unused declarations, `padding_ratio` measured).
+//! (generated padding paragraphs with their unused declarations, `padding_ratio` measured) —
+//! and, from 0.3.0, FLAW-0009 `axiom` (a cited lemma's declaration replaced by an axiom of the
+//! same identity, or of a false one used ex falso at the citing step; check T on the axiom print).
 
 use std::collections::{BTreeMap, BTreeSet};
 
 use serde_json::{Value, json};
 use syndeom_generate::grammar::{
     self, GrammarVersion, MAIN_DECLARATION, PERTURBATIONS, Perturbation, SEED_FORMS, Shape, Style,
-    Term, apply, control_reference, derive, mono_latex, mono_lean, normalize, render_ordered,
-    targets,
+    Term, apply, control_reference, derive, eval, mono_latex, mono_lean, normalize, render_ordered,
+    targets, witness_point,
 };
 use syndeom_generate::harness::Observation;
-use syndeom_generate::plan::{PaddingKind, lemma_lines, own_declarations, padding_lines};
+use syndeom_generate::plan::{
+    LemmaKind, PaddingKind, lemma_lines, own_declarations, padding_lines,
+};
+use syndeom_generate::rng::Stream;
 use syndeom_generate::template::{Injection, Prepared, Producer, assemble};
 use syndeom_generate::{prepare_any, prepare_for};
 use syndeom_manifest::{
@@ -97,10 +102,21 @@ fn padded(n: u64, m: u64, target: &str, kinds: Value, count: u64, placement: &st
     c
 }
 
+/// A FLAW-0009 `axiom` spec (0.3.0): the cited lemma's declaration replaced by an axiom of the
+/// same identity (`truth: true`, gap) or of a false one used ex falso (`truth: false`, fatal).
+fn axiom_spec(truth: bool, site: Value) -> Value {
+    json!([{
+        "class": "FLAW-0009", "sub_variant": null,
+        "severity": if truth { "gap" } else { "fatal" }, "site": site,
+        "dials": {"mode": "axiom", "truth": truth}
+    }])
+}
+
 /// The observation D5 predicts: a FLAW-0001 instance fails at the site's `calc` line (check K);
-/// everything else builds with standard axioms, every own declaration using nothing of the
-/// file's own, and the main declaration using every cited lemma — never an unused lemma (0.2.0,
-/// FLAW-0007) or a padding declaration (0.2.0, FLAW-0013), which check T reads.
+/// everything else builds with standard axioms — plus a FLAW-0009 axiom's name, which the print
+/// lists (0.3.0) — every own declaration using nothing of the file's own, and the main
+/// declaration using every cited lemma — never an unused lemma (0.2.0, FLAW-0007) or a padding
+/// declaration (0.2.0, FLAW-0013), which check T reads.
 fn predicted(p: &Prepared) -> Option<Observation> {
     let f = p.formal.as_ref()?;
     Some(match &p.injection {
@@ -134,10 +150,18 @@ fn predicted(p: &Prepared) -> Option<Observation> {
                 .collect();
             uses.sort();
             map.insert(p.plan.main_declaration.clone(), uses);
+            let mut axioms = vec!["propext".to_string()];
+            axioms.extend(
+                p.injection
+                    .iter()
+                    .filter(|i| i.class == "FLAW-0009")
+                    .filter_map(|i| i.formal_dials["declaration"].as_str().map(str::to_string)),
+            );
+            axioms.push("Quot.sound".to_string());
             Observation {
                 exit_code: 0,
                 first_error_line: None,
-                axioms: Some(vec!["propext".to_string(), "Quot.sound".to_string()]),
+                axioms: Some(axioms),
                 used_constants: Some(map),
             }
         }
@@ -332,11 +356,11 @@ fn d6_every_step_presents_the_polynomial_and_differs_from_the_step_before() {
 fn d2_the_plan_renders_the_lemmas_then_a_calc_chain_closed_by_ring_or_a_cited_lemma() {
     let c = config(6, 2, "pair", json!([]));
     let (p, m) = build(&c, 7);
-    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_2_0));
+    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_3_0));
     assert_eq!(m.generator.id, "s2_grammar");
-    assert_eq!(m.generator.version, "0.2.0");
+    assert_eq!(m.generator.version, "0.3.0");
     assert_eq!(m.generator.rng, "syndeom-rng/1");
-    assert!(m.artifact_id.starts_with("s2_grammar-v0.2.0-"));
+    assert!(m.artifact_id.starts_with("s2_grammar-v0.3.0-"));
     assert!(m.artifact_id.ends_with("-s7"));
     let plan = &p.plan;
     assert_eq!(plan.steps.len(), 8);
@@ -502,7 +526,7 @@ fn d9_determinism_and_idempotence() {
     );
     // generate's dispatch: a grammar config is an s2_grammar config
     let any = prepare_any(&c, 7).unwrap();
-    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_2_0));
+    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_3_0));
     assert!(prepare_any(&json!({"theorem": "nat_le_sq", "grammar": "ring_chain"}), 7).is_err());
     assert!(prepare_any(&json!({"length": {"n_steps": 1, "n_lemmas": 0}}), 7).is_err());
     assert_eq!(
@@ -513,17 +537,26 @@ fn d9_determinism_and_idempotence() {
         Producer::parse("s2_grammar", "0.2.0"),
         Some(Producer::Grammar(GrammarVersion::V0_2_0))
     );
-    assert_eq!(Producer::parse("s2_grammar", "0.3.0"), None);
+    assert_eq!(
+        Producer::parse("s2_grammar", "0.3.0"),
+        Some(Producer::Grammar(GrammarVersion::V0_3_0))
+    );
+    assert_eq!(Producer::parse("s2_grammar", "0.4.0"), None);
     assert_eq!(Producer::parse("s2_grammars", "0.1.0"), None);
-    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.2.0");
+    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.3.0");
     assert!(grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0001"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0007"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0013"));
     assert!(grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0001"));
     assert!(grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0007"));
     assert!(grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0013"));
+    assert!(!grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0009"));
     assert!(!grammar::realizes(GrammarVersion::V0_2_0, "FLAW-0004"));
-    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.2.0: only the version,
+    for class in ["FLAW-0001", "FLAW-0007", "FLAW-0009", "FLAW-0013"] {
+        assert!(grammar::realizes(GrammarVersion::V0_3_0, class), "{class}");
+    }
+    assert!(!grammar::realizes(GrammarVersion::V0_3_0, "FLAW-0004"));
+    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.3.0: only the version,
     // and with it the id and the manifest, differ
     let old = prepare_for(Producer::Grammar(GrammarVersion::V0_1_0), &c, 7).unwrap();
     assert_eq!(old.informal, p1.informal);
@@ -983,7 +1016,7 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     c["target"] = json!("both");
     assert!(refused(&c));
     // the version a manifest names must exist
-    assert!(GrammarVersion::parse("0.3.0").is_none());
+    assert!(GrammarVersion::parse("0.4.0").is_none());
 }
 
 #[test]
@@ -1612,4 +1645,467 @@ fn d5_flaw_0013_pads_with_generated_identities_and_their_unused_declarations() {
         )
         .is_err()
     );
+}
+
+#[test]
+fn d5_flaw_0009_axiom_replaces_a_cited_lemma_and_the_axiom_print_lists_it() {
+    for (n, m, truth) in [
+        (4u64, 1u64, true),
+        (4, 1, false),
+        (6, 2, true),
+        (6, 2, false),
+        (3, 3, true),
+        (3, 3, false),
+        (24, 2, false),
+        (1, 1, false),
+    ] {
+        let control = grammar::prepare(&config(n, m, "pair", json!([])), 7).unwrap();
+        let c = config(n, m, "pair", axiom_spec(truth, json!("auto")));
+        let (p, manifest) = build(&c, 7);
+        let (n, m) = (n as usize, m as usize);
+        let d = derive(n, m, 7);
+        let inj = p.injection.as_ref().expect("one instance");
+        assert!(p.further.is_empty() && p.padding.is_empty());
+        assert!(p.composite.is_none() && p.false_theorem.is_none());
+        assert_eq!(inj.instance, 1);
+        assert_eq!(inj.class, "FLAW-0009");
+        assert_eq!(inj.sub_variant, None);
+        let severity = if truth {
+            Severity::Gap
+        } else {
+            Severity::Fatal
+        };
+        assert_eq!(inj.severity, severity);
+        assert_eq!(inj.lean_catchable, LeanCatchable::YesTooling);
+        // the site is a lemma step, drawn on the stream: lemma j states chain step c
+        let j = inj.site;
+        assert!((1..=m).contains(&j));
+        let mut stream = Stream::new(7, "injector/FLAW-0009/1");
+        assert_eq!(j, 1 + stream.below(m as u64) as usize);
+        let chain = d.sites[j - 1];
+        let name = format!("{MAIN_DECLARATION}_lemma_{j}");
+        // the plan: every step the control's, except the lemma's declaration — an axiom with
+        // no proof — and, under `false`, the citing step's justification; step 0 and every
+        // informal text untouched
+        assert_eq!(p.plan.steps.len(), n + m);
+        assert_eq!(p.plan.claim, control.plan.claim);
+        assert_eq!(p.plan.statement, control.plan.statement);
+        assert_eq!(
+            p.informal, control.informal,
+            "the informal file is unchanged"
+        );
+        let axiom = &p.plan.steps[j - 1];
+        let faithful_lemma = &control.plan.steps[j - 1];
+        for k in 0..n + m {
+            let (s, f) = (&p.plan.steps[k], &control.plan.steps[k]);
+            assert_eq!(s.text, f.text);
+            assert_eq!(s.premises, f.premises);
+            assert!(s.padding.is_none());
+            if k == j - 1 || (!truth && k == m + chain - 1) {
+                continue;
+            }
+            assert_eq!(s, f);
+        }
+        let l = axiom.lemma.as_ref().unwrap();
+        let fl = faithful_lemma.lemma.as_ref().unwrap();
+        assert_eq!(l.kind, LemmaKind::Axiom);
+        assert_eq!(fl.kind, LemmaKind::Theorem);
+        assert_eq!(l.name, name);
+        assert_eq!(fl.name, name);
+        assert!(axiom.fragment.is_empty(), "an axiom has no proof lines");
+        let axiom_line = format!("axiom {name} : {}", l.claim);
+        assert_eq!(lemma_lines(axiom).unwrap(), vec![axiom_line.clone()]);
+        let (lhs, rhs) = l
+            .claim
+            .strip_prefix("∀ x y : ℤ, ")
+            .unwrap()
+            .split_once(" = ")
+            .unwrap();
+        assert_eq!(
+            lhs,
+            d.e[chain - 1].lean,
+            "the left-hand side is the lemma's"
+        );
+        let citing = &p.plan.steps[m + chain - 1];
+        let faithful_citing = &control.plan.steps[m + chain - 1];
+        if truth {
+            assert_eq!(l.claim, fl.claim, "an axiom of the same identity");
+            assert_eq!(citing, faithful_citing);
+        } else {
+            // the false identity: the lemma's right-hand side perturbed once — the kind the
+            // first of D5's four, from a drawn start, with an eligible target; the target
+            // drawn next — rendered under the step's own presentation (the draws, in this
+            // order, after the site's: D4)
+            let site_terms = &d.e[chain].ordered;
+            let start = stream.below(PERTURBATIONS.len() as u64) as usize;
+            let (kind, candidates) = (0..PERTURBATIONS.len())
+                .find_map(|off| {
+                    let kind = PERTURBATIONS[(start + off) % PERTURBATIONS.len()];
+                    let cands = targets(kind, site_terms);
+                    (!cands.is_empty()).then_some((kind, cands))
+                })
+                .unwrap();
+            let chosen = candidates[stream.below(candidates.len() as u64) as usize];
+            let (perturbed, mono_replaced, mono_inserted) = apply(chosen, site_terms);
+            let pres = &d.presentations[chain - 1];
+            let mut styles = pres.styles.clone();
+            styles.resize(perturbed.len(), Style::default());
+            let f = render_ordered(&pres.shape, &styles, &perturbed);
+            assert_eq!(rhs, f.lean);
+            assert_ne!(rhs, d.e[chain].lean);
+            let perturbed_poly = normalize(&perturbed);
+            assert_ne!(perturbed_poly, d.poly, "the identity is false");
+            // the witness point: the first grid point, by x + y and then x, where the two
+            // sides differ
+            let (x, y) = witness_point(&d.poly, &perturbed_poly).unwrap();
+            assert!((1..=8).contains(&x) && (1..=8).contains(&y));
+            let (lhs_value, rhs_value) = (eval(&d.poly, x, y), eval(&perturbed_poly, x, y));
+            assert_ne!(lhs_value, rhs_value);
+            let earlier = |x2: i64, y2: i64| (x2 + y2, x2) < (x + y, x);
+            for x2 in 1..=8 {
+                for y2 in 1..=8 {
+                    if earlier(x2, y2) {
+                        assert_eq!(eval(&d.poly, x2, y2), eval(&perturbed_poly, x2, y2));
+                    }
+                }
+            }
+            // the citing step: the faithful identity, justified ex falso by the axiom's
+            // instance at the witness point, refuted by norm_num
+            assert_eq!(citing.text, faithful_citing.text);
+            assert_eq!(citing.lemma, None);
+            assert_eq!(citing.premises, faithful_citing.premises);
+            let proof = format!("absurd ({name} {x} {y}) (by norm_num)");
+            let faithful_line = &faithful_citing.fragment[0];
+            let (identity, faithful_proof) = faithful_line.rsplit_once(" := ").unwrap();
+            assert_eq!(faithful_proof, format!("{name} x y"));
+            assert_eq!(citing.fragment, vec![format!("{identity} := {proof}")]);
+            let df = &inj.formal_dials;
+            assert_eq!(df["perturbation"], json!(kind));
+            assert_eq!(
+                df["monomial"],
+                json!({"replaced": mono_replaced, "inserted": mono_inserted})
+            );
+            assert_eq!(
+                df["counterexample"],
+                json!({"x": x, "y": y, "lhs": lhs_value, "rhs": rhs_value})
+            );
+            assert_eq!(df["use_site"], json!(m + chain));
+        }
+        // the dials
+        let df = &inj.formal_dials;
+        assert_eq!(df["mode"], json!("axiom"));
+        assert_eq!(df["truth"], json!(truth));
+        assert_eq!(df["site"], json!(j));
+        assert_eq!(df["declaration"], json!(name));
+        assert_eq!(df["inserted"], json!([axiom_line]));
+        assert_eq!(df["replaced"], json!(lemma_lines(faithful_lemma).unwrap()));
+        let originals = grammar::originals(df, "original_fragments");
+        let mut expected: BTreeMap<usize, Value> = BTreeMap::new();
+        expected.insert(j, json!(lemma_lines(faithful_lemma).unwrap()));
+        if !truth {
+            expected.insert(m + chain, json!(faithful_citing.fragment));
+        }
+        assert_eq!(originals, expected);
+        if truth {
+            for key in ["perturbation", "monomial", "counterexample", "use_site"] {
+                assert!(df.get(key).is_none(), "{key}");
+            }
+        }
+        // the record: formal-only, at the axiom's declaration; an invalid proof of a true
+        // statement whose reference is the formal control
+        let gt = manifest.ground_truth.as_ref().unwrap();
+        assert_eq!(
+            gt.flaws.len(),
+            1,
+            "FLAW-0009 manifests in the formal file only"
+        );
+        let r = &gt.flaws[0];
+        assert_eq!(r.instance, 1);
+        assert_eq!(r.class, "FLAW-0009");
+        assert_eq!(r.sub_variant, None);
+        assert_eq!(r.severity, severity);
+        assert_eq!(r.lean_catchable, LeanCatchable::YesTooling);
+        let formal = p.formal.as_ref().unwrap();
+        match &r.location {
+            Location::Formal(l) => {
+                assert_eq!(l.declaration, name);
+                assert_eq!(formal.fragment_lines[j - 1].unwrap(), [l.line, l.line]);
+            }
+            other => panic!("{other:?}"),
+        }
+        assert_eq!(r.dials, *df);
+        assert_eq!(gt.proof_status, ProofStatus::Invalid);
+        assert!(!gt.correct);
+        assert_eq!(gt.statement_status.value, Some(true));
+        assert_eq!(
+            gt.statement_status.reference,
+            control_reference(GrammarVersion::CURRENT, "ring_chain", n as u64, m as u64, 7)
+                .unwrap()
+        );
+        // commanded and achieved (D8): the counts the control's, the build passing, the
+        // axioms not standard; confirmed under the predicted print
+        assert_eq!(manifest.commanded["n_steps"].value, json!(n + m));
+        assert_eq!(manifest.commanded["n_lemmas"].value, json!(m));
+        assert_eq!(manifest.commanded["n_flaws_total"].value, json!(1));
+        assert_eq!(manifest.commanded["n_flaws_0009"].value, json!(1));
+        assert_eq!(manifest.commanded["lean_build"].value, json!("pass"));
+        assert_eq!(
+            manifest.commanded["lean_axioms_standard"].value,
+            json!(false)
+        );
+        assert_eq!(manifest.achieved["flaws_confirmed"].value, Some(json!(1)));
+        assert_eq!(
+            manifest.achieved["lean_axioms_standard"].value,
+            Some(json!(false))
+        );
+        assert_eq!(manifest.achieved["n_lemmas"].value, Some(json!(m)));
+        assert_eq!(verdict(&manifest), json!("PASS"));
+        // the formal file: the axiom where the theorem was, nothing else moved
+        let text = String::from_utf8(formal.bytes.clone()).unwrap();
+        let faithful_text =
+            String::from_utf8(control.formal.as_ref().unwrap().bytes.clone()).unwrap();
+        assert!(text.contains(&format!("\n{axiom_line}\n\n")));
+        assert!(!text.contains(&format!("theorem {name} ")));
+        assert!(faithful_text.contains(&format!("theorem {name} :")));
+        assert_eq!(
+            parse_lean(&formal.bytes).unwrap().n_declarations as usize,
+            1 + m
+        );
+        if truth {
+            // the faithful file with the lemma's declaration replaced is this file
+            let replaced = lemma_lines(faithful_lemma).unwrap().join("\n");
+            assert_eq!(faithful_text.replacen(&replaced, &axiom_line, 1), text);
+        }
+        // check T refuses confirmation when the print omits the axiom, or when there is no
+        // print; the verdict is then FAIL, not a refusal
+        let mut obs = predicted(&p).unwrap();
+        obs.axioms = Some(vec!["propext".to_string(), "Quot.sound".to_string()]);
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(
+            bad.achieved["lean_axioms_standard"].value,
+            Some(json!(true))
+        );
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        let mut obs = predicted(&p).unwrap();
+        obs.axioms = None;
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&obs)).unwrap();
+        assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        // the formal-only target carries the same one record and the same bytes; informal is
+        // refused (D3)
+        let (pf, mf) = build(
+            &config(
+                n as u64,
+                m as u64,
+                "formal",
+                axiom_spec(truth, json!("auto")),
+            ),
+            7,
+        );
+        assert_eq!(pf.formal.as_ref().map(|f| &f.bytes), Some(&formal.bytes));
+        assert_eq!(mf.ground_truth.as_ref().unwrap().flaws.len(), 1);
+        assert!(!mf.commanded.contains_key("n_steps"));
+        assert_eq!(mf.commanded["lean_axioms_standard"].value, json!(false));
+        assert_eq!(verdict(&mf), json!("PASS"));
+        assert!(
+            grammar::prepare(
+                &config(
+                    n as u64,
+                    m as u64,
+                    "informal",
+                    axiom_spec(truth, json!("auto"))
+                ),
+                7
+            )
+            .is_err()
+        );
+    }
+    // determinism: two preparations agree; another seed draws another instance
+    let c = config(6, 2, "pair", axiom_spec(false, json!("auto")));
+    let (p1, m1) = build(&c, 7);
+    let (p2, m2) = build(&c, 7);
+    assert_eq!(p1, p2);
+    assert_eq!(m1, m2);
+    let (p3, _) = build(&c, 8);
+    assert_ne!(p3.plan.steps, p1.plan.steps);
+    // an explicit site is a lemma step's plan index and skips the site draw
+    for site in 1..=2usize {
+        let (p, m) = build(&config(6, 2, "pair", axiom_spec(true, json!(site))), 7);
+        assert_eq!(p.injection.as_ref().unwrap().site, site);
+        let l = p.plan.steps[site - 1].lemma.as_ref().unwrap();
+        assert_eq!(l.kind, LemmaKind::Axiom);
+        assert_eq!(l.name, format!("{MAIN_DECLARATION}_lemma_{site}"));
+        assert_eq!(verdict(&m), json!("PASS"));
+    }
+    // the refusals
+    let refused = |n: u64, m: u64, target: &str, flaws: Value| {
+        grammar::prepare(&config(n, m, target, flaws), 7).is_err()
+    };
+    let spec = |sub: Value, severity: &str, site: Value, dials: Value| {
+        json!([{
+            "class": "FLAW-0009", "sub_variant": sub, "severity": severity, "site": site,
+            "dials": dials
+        }])
+    };
+    let axiom = |truth: bool| json!({"mode": "axiom", "truth": truth});
+    assert!(
+        refused(4, 0, "pair", axiom_spec(true, json!("auto"))),
+        "a lemma to replace"
+    );
+    assert!(
+        refused(4, 1, "informal", axiom_spec(true, json!("auto"))),
+        "formal or pair"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(json!(null), "fatal", json!("auto"), axiom(true))
+        ),
+        "true is gap"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(json!(null), "gap", json!("auto"), axiom(false))
+        ),
+        "false is fatal"
+    );
+    assert!(refused(
+        4,
+        1,
+        "pair",
+        spec(json!(null), "cosmetic", json!("auto"), axiom(true))
+    ));
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(json!("x"), "gap", json!("auto"), axiom(true))
+        ),
+        "no sub-variant"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(
+                json!(null),
+                "gap",
+                json!("auto"),
+                json!({"mode": "native_decide", "truth": true})
+            )
+        ),
+        "native_decide stays refused"
+    );
+    assert!(refused(
+        4,
+        1,
+        "pair",
+        spec(
+            json!(null),
+            "gap",
+            json!("auto"),
+            json!({"mode": "sorry", "truth": true})
+        )
+    ));
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(
+                json!(null),
+                "gap",
+                json!("auto"),
+                json!({"mode": "axiom", "truth": "true"})
+            )
+        ),
+        "truth is a boolean"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(json!(null), "gap", json!("auto"), json!({"mode": "axiom"}))
+        ),
+        "both dials"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(
+                json!(null),
+                "gap",
+                json!("auto"),
+                json!({"mode": "axiom", "truth": true, "perturbation": "sign"})
+            )
+        ),
+        "no extra dial"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(
+                json!(null),
+                "gap",
+                json!("auto"),
+                json!({"mode": "axiom", "truth": true, "declaration": "x"})
+            )
+        ),
+        "a reserved dial"
+    );
+    assert!(
+        refused(4, 1, "pair", axiom_spec(true, json!(2))),
+        "site 2 is a chain step"
+    );
+    assert!(refused(4, 1, "pair", axiom_spec(true, json!(0))));
+    assert!(refused(4, 2, "pair", axiom_spec(true, json!(3))));
+    let two = json!([axiom_spec(true, json!("auto"))[0], unused_spec(1)[0]]);
+    assert!(refused(4, 1, "pair", two), "one spec per artifact");
+    // 0.1.0 and 0.2.0 never realized the class: their goldens regenerate under the versions
+    // they name
+    for v in [GrammarVersion::V0_1_0, GrammarVersion::V0_2_0] {
+        assert!(
+            prepare_for(
+                Producer::Grammar(v),
+                &config(4, 1, "pair", axiom_spec(true, json!("auto"))),
+                7
+            )
+            .is_err()
+        );
+    }
+    // the 0.2.0 bytes of a FLAW-0007 artifact and of a padded one are unchanged by 0.3.0: only
+    // the version, and with it the id and the manifest, differ
+    for c in [
+        config(4, 0, "pair", unused_spec(2)),
+        padded(
+            4,
+            0,
+            "pair",
+            json!(["re-derivation", "unused-lemma"]),
+            2,
+            "drawn",
+        ),
+    ] {
+        let now = grammar::prepare(&c, 7).unwrap();
+        let old = prepare_for(Producer::Grammar(GrammarVersion::V0_2_0), &c, 7).unwrap();
+        assert_eq!(old.informal, now.informal);
+        assert_eq!(
+            old.formal.as_ref().map(|f| &f.bytes),
+            now.formal.as_ref().map(|f| &f.bytes)
+        );
+        assert_ne!(old.artifact_id(), now.artifact_id());
+    }
 }

@@ -1,9 +1,9 @@
 # Goldens for `s2_template` and `s2_grammar` (ADR-0011 D10)
 
-There are 87 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+There are 93 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
 0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
-and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47) and 8 of 0.2.0
-(Session 48). All use seed 7. Each case directory holds:
+and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47), 8 of 0.2.0
+(Session 48) and 6 of 0.3.0 (Session 49). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -404,11 +404,59 @@ theirs (ADR-0011 D4; `analysis/s2-generate-9/evidence/ratios.json`).
   holding exactly the paragraph's text; the achieved ratios lie within `abs 0.05` of the
   commanded ones.
 
+## `s2_grammar` 0.3.0 (Session 49, 2026-11-01)
+
+On `ring_chain` at the short length with one lemma (`n_steps` 4, `n_lemmas` 1; the seed form
+`(x - 2 * y) ^ 2` at seed 7, the chain the 0.1.0 short control's, with its second step —
+`4 * y * y + x * (x - 4 * y) = 4 * y ^ 2 - 4 * y * x + x * x` — stated as Lemma 1 and cited at
+step 3 of the plan): the control (informal, formal — so that the flawed cases' truth reference,
+the formal control of the same version, length and seed, names a golden), FLAW-0009 `axiom`
+with `truth: true` (gap; formal, pair) and with `truth: false` (fatal; formal, pair). The lemma
+is drawn on `injector/FLAW-0009/1`; with one lemma it is Lemma 1. Under `truth: true` its
+declaration becomes `axiom …_lemma_1 : ∀ x y : ℤ, 4 * y * y + x * (x - 4 * y) = 4 * y ^ 2 - 4 *
+y * x + x * x` (line 3) and nothing else changes. Under `truth: false` the axiom states the
+false identity `4 * y * y + x * (x - 4 * y) = 4 * y ^ 2 - 4 * y ^ 2 * x + x * x` — the
+`exponent` perturbation drawn on the same stream, `-4 * x * y` raised to `-4 * x * y ^ 2`,
+rendered under the step's own presentation — and the citing step is justified ex falso, `_ = 4
+* y ^ 2 - 4 * y * x + x * x := absurd (…_lemma_1 1 2) (by norm_num)`: at the witness point
+(1, 2), the first grid point by `x + y` and then `x` where the two sides differ (they agree at
+(1, 1)), the sides are 9 and 1. The informal file of a pair is the informal control's byte for
+byte. Each flawed case carries one record, formal-only, at the axiom's declaration (line 3),
+`YES-TOOLING`, so the artifact is an invalid proof of a true statement (`proof_status:
+invalid`, `correct: false`) with `n_flaws_0009` 1, `lean_build` commanded `pass` and
+`lean_axioms_standard` commanded `false`; the pairs command `n_steps` 5 and `n_lemmas` 1.
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ring_chain` | control (informal, formal) | 4 steps, 1 lemma (Lemma 1 states step 2 of the chain) |
+| `ring_chain` | FLAW-0009 `axiom`, `truth: true`, gap (formal, pair) | 4 steps, 1 lemma; the axiom at line 3 |
+| `ring_chain` | FLAW-0009 `axiom`, `truth: false`, fatal (formal, pair) | 4 steps, 1 lemma; the axiom at line 3, ex falso at plan step 3 |
+
+**Provenance:**
+- The proof text is generated (`src/grammar.rs`: the atom library; the false identity is the
+  lemma's expansion perturbed once, as FLAW-0001 perturbs a step). The shapes — an axiom of the
+  lemma's own identity cited as before; an axiom of a false identity used ex falso at the
+  citing step with `norm_num`, and with `decide`; and the false-intermediate shape that was not
+  taken — were first compiled as hand-written Lean probes, one process at a time, before the
+  module was written (`analysis/s2-generate-10/evidence/lean-probe/`): every one builds and
+  prints `[propext, syndeom_s2_grammar_ring_chain_lemma_1, Quot.sound]`.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `d3c3851bb992bb7376631b1868db8d0c06d001d5`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run
+  (`analysis/s2-generate-10/evidence/goldens-production-report.json`).
+- Every case's fidelity verdict is PASS. The controls build and print `[propext, Quot.sound]`.
+  Every FLAW-0009 case builds (exit 0) and prints `[propext,
+  syndeom_s2_grammar_ring_chain_lemma_1, Quot.sound]`, so check T confirms the instance
+  (`flaws_confirmed` 1) and `lean_axioms_standard` is achieved `false` as commanded; the
+  used-constants listing names the axiom with no auxiliary constant.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
 `analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md`,
-`analysis/s2-generate-8/README.md` and `analysis/s2-generate-9/README.md`.
+`analysis/s2-generate-8/README.md`, `analysis/s2-generate-9/README.md` and
+`analysis/s2-generate-10/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

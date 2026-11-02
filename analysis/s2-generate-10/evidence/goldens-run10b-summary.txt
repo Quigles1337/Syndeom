@@ -1,0 +1,31 @@
+ring_chain/v0.3.0-control-lemma-informal exit=0 start=2026-11-01T19:21:06.677Z end=2026-11-01T19:21:12.939Z
+s2_grammar-v0.3.0-1ef0cde05162-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.3.0-control-lemma-formal exit=0 start=2026-11-01T19:21:12.940Z end=2026-11-01T19:21:31.941Z
+s2_grammar-v0.3.0-9ffdfe550dc7-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.3.0-flaw-0009-gap-formal exit=0 start=2026-11-01T19:21:31.943Z end=2026-11-01T19:21:51.149Z
+s2_grammar-v0.3.0-3df844943ca3-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.3.0-flaw-0009-gap-pair exit=0 start=2026-11-01T19:21:51.150Z end=2026-11-01T19:22:10.222Z
+s2_grammar-v0.3.0-988979be1294-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.3.0-flaw-0009-fatal-formal exit=0 start=2026-11-01T19:22:10.223Z end=2026-11-01T19:22:29.421Z
+s2_grammar-v0.3.0-6a92e3614dbc-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.3.0-flaw-0009-fatal-pair exit=0 start=2026-11-01T19:22:29.421Z end=2026-11-01T19:22:48.560Z
+s2_grammar-v0.3.0-c448f9add59d-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end
