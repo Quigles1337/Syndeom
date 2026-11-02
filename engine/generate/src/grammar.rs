@@ -91,6 +91,19 @@
 //! citation phrase, confirmed by the structural check as `s2_template` 0.6.0 reads it (the
 //! premise graph holds the recorded cycle; each citation phrase is at its recorded span).
 //! `direct` needs hand-authored mathematics and stays `s2_template`-only (D6).
+//!
+//! **0.6.0 — FLAW-0004 (D5), as `s2_template` 0.5.0 reads it.** One ring-closed chain step —
+//! drawn on `injector/FLAW-0004/1` when the spec says `auto`; an explicit `site` is such a step's
+//! plan index — has its justification deleted and a hedge, drawn next on the same stream from the
+//! template's fixed lexicon, prefixed to the bare claim `$e_{k-1} = e_k$.`; the aligned `calc`
+//! line loses its tactic step, `_ = e_k := by ring` becoming `_ = e_k := by` — the `by` kept as
+//! the template keeps its `have` header, never `sorry` — so that Lean reports one `unsolved
+//! goals` error at that line and nothing else (check K at the site; the probes of packet 13).
+//! The one `hidden_step` with material is `routine-true` (cosmetic: every step of the chain is
+//! a `ring` identity); `nontrivial-true` and `false` are refused for lack of material. A pair
+//! carries a record in each file, `YES-KERNEL`, and commands `lean_build` `fail`; an
+//! informal-only artifact's record is `N/A`; the target `formal` is refused (D3). The RNG label
+//! `injector/FLAW-0004/1` (the site, then the hedge) is new in 0.6.0.
 
 use std::cmp::Reverse;
 use std::collections::{BTreeMap, BTreeSet};
@@ -106,13 +119,13 @@ use crate::plan::{
 };
 use crate::rng::Stream;
 use crate::template::{
-    CITATION_SHAPES, FlawSpec, Injection, PaddingInsertion, Prepared, Producer, Target, check_spec,
-    citation_venues, draw_citation, exact_keys, parse_spec, unique_span,
+    CITATION_SHAPES, FlawSpec, HEDGES, Injection, PaddingInsertion, Prepared, Producer, Target,
+    check_spec, citation_venues, draw_citation, exact_keys, parse_spec, unique_span,
 };
 
 pub const GENERATOR_ID: &str = "s2_grammar";
 /// The producer version `generate` emits (ADR-0011 D1).
-pub const GENERATOR_VERSION: &str = "0.5.0";
+pub const GENERATOR_VERSION: &str = "0.6.0";
 /// The one grammar of 0.1.0 (ADR-0011 D6).
 pub const RING_CHAIN: &str = "ring_chain";
 /// The main declaration's name (ADR-0011 D2: `syndeom_s2_<producer>_<theorem>`).
@@ -155,6 +168,14 @@ pub const LEMMA_NOTE: &str = "both sides expand to the same polynomial";
 /// (0.5.0): the step's one premise phrase, occurring exactly once in the step. Its form is a
 /// reading flagged for Al (packet 12).
 pub const CYCLE_PHRASE: &str = "this follows from the theorem";
+/// FLAW-0004's one `hidden_step` with material on `ring_chain` (0.6.0; ADR-0011 D5): every step
+/// of the chain is a `ring` identity, which is routine, so the hedge hides a routine true step
+/// and the instance is cosmetic. `nontrivial-true` (no step is non-trivially true) and `false`
+/// (no false-step material) are refused.
+pub const HIDDEN_STEP: &str = "routine-true";
+/// The tactic step FLAW-0004 omits from a ring-closed `calc` line (0.6.0): `_ = e_k := by ring`
+/// becomes `_ = e_k := by`, the `by` kept, so that Lean reports an unsolved goal at that line.
+pub const OMITTED_TACTIC: &str = "ring";
 /// Where the material comes from (ADR-0011 D6, Al's ruling 1 of 2026-10-27).
 pub const SOURCE: &str = "engine/generate/src/grammar.rs, s2_grammar 0.1.0: the ring_chain atom library (SEED_FORMS and the presentations of `present`), executor-authored synthetic material outside the S1 corpus (ADR-0011 D6)";
 
@@ -166,10 +187,11 @@ pub enum GrammarVersion {
     V0_3_0,
     V0_4_0,
     V0_5_0,
+    V0_6_0,
 }
 
 impl GrammarVersion {
-    pub const CURRENT: GrammarVersion = GrammarVersion::V0_5_0;
+    pub const CURRENT: GrammarVersion = GrammarVersion::V0_6_0;
 
     pub fn parse(s: &str) -> Option<GrammarVersion> {
         match s {
@@ -178,6 +200,7 @@ impl GrammarVersion {
             "0.3.0" => Some(GrammarVersion::V0_3_0),
             "0.4.0" => Some(GrammarVersion::V0_4_0),
             "0.5.0" => Some(GrammarVersion::V0_5_0),
+            "0.6.0" => Some(GrammarVersion::V0_6_0),
             _ => None,
         }
     }
@@ -189,6 +212,7 @@ impl GrammarVersion {
             GrammarVersion::V0_3_0 => "0.3.0",
             GrammarVersion::V0_4_0 => "0.4.0",
             GrammarVersion::V0_5_0 => "0.5.0",
+            GrammarVersion::V0_6_0 => "0.6.0",
         }
     }
 
@@ -1088,6 +1112,10 @@ pub fn prepare_with(
         }
         Some(spec) if spec.class == "FLAW-0003" => {
             let (plan, inj) = circulate(&d, &faithful, spec, cfg.target, seed_value)?;
+            (plan, Some(inj), Vec::new(), Vec::new())
+        }
+        Some(spec) if spec.class == "FLAW-0004" => {
+            let (plan, inj) = hedge(&d, &faithful, spec, cfg.target, seed_value)?;
             (plan, Some(inj), Vec::new(), Vec::new())
         }
         Some(spec) => {
@@ -2205,9 +2233,166 @@ fn circulate(
     Ok((plan, injection))
 }
 
+// ---- FLAW-0004 (0.6.0) -------------------------------------------------------------------------
+
+/// The injector for FLAW-0004 on `ring_chain` (ADR-0011 D5; 0.6.0, as `s2_template` 0.5.0 reads
+/// it). The site is a ring-closed chain step — never a lemma step, and never a lemma-cited chain
+/// step (reading 127's rule: a hedge in place of a citation would strand the step's premise) —
+/// drawn on `injector/FLAW-0004/1` when the spec says `auto`; an explicit `site` is such a step's
+/// plan index. The hedge is drawn next on the same stream from the template's fixed lexicon
+/// ([`HEDGES`]) and prefixed to the bare claim `$e_{k-1} = e_k$.`, the chain's own justification
+/// (`Rearranging the terms`, …) deleted and recorded; the aligned fragment — the one `calc` line
+/// `_ = e_k := by ring` — loses its tactic step and becomes `_ = e_k := by`, the `by` kept as the
+/// template keeps its `have` header and never `sorry`, so that Lean reports one `unsolved goals`
+/// error at that line and nothing else (the probes of packet 13; check K at the site). The one
+/// `hidden_step` with material is [`HIDDEN_STEP`] (cosmetic: every step of the chain is a `ring`
+/// identity); `nontrivial-true` and `false` are refused for lack of material. A pair carries a
+/// record in each file, `YES-KERNEL`, and commands `lean_build` `fail`; an informal-only
+/// artifact's record is `N/A`; the target `formal` is refused (D3). The dials carry
+/// `hidden_step`, `site`, `hedge` (the index) and `hedge_text`, and, in the informal file, the
+/// `justification` and the `claim` with `inserted` (the hedged step) and `replaced` (the faithful
+/// step), or, in the formal file, the `omitted` tactic with `inserted` and `replaced` (the two
+/// `calc` lines), and the originals.
+fn hedge(
+    d: &Derivation,
+    faithful: &Plan,
+    spec: &FlawSpec,
+    target: Target,
+    seed: u64,
+) -> Result<(Plan, Injection), String> {
+    check_spec(spec, target)?;
+    if spec.sub_variant.is_some() {
+        return Err("FLAW-0004 has no sub-variant".into());
+    }
+    exact_keys(&spec.dials, &["hidden_step"], "FLAW-0004's dials")?;
+    match spec.dials["hidden_step"].as_str() {
+        Some(HIDDEN_STEP) => {}
+        Some(other @ ("nontrivial-true" | "false")) => {
+            return Err(format!(
+                "FLAW-0004 {other} has no material on ring_chain: every step of the chain is a routine ring identity, and the grammar has no false-step material (ADR-0011 D6)"
+            ));
+        }
+        _ => {
+            return Err(
+                "FLAW-0004's hidden_step is \"routine-true\", \"nontrivial-true\" or \"false\""
+                    .into(),
+            );
+        }
+    }
+    if spec.severity != Severity::Cosmetic {
+        return Err(format!(
+            "FLAW-0004 {HIDDEN_STEP} is Cosmetic (ADR-0011 D5), not {:?}",
+            spec.severity
+        ));
+    }
+    let n = d.n();
+    let m = d.sites.len();
+    let eligible: Vec<usize> = (1..=n).filter(|&c| d.lemma_of(c).is_none()).collect();
+    if eligible.is_empty() {
+        return Err(
+            "no eligible site for FLAW-0004: it needs a ring-closed chain step (every chain step is lemma-cited)"
+                .into(),
+        );
+    }
+    let mut stream = Stream::new(seed, "injector/FLAW-0004/1");
+    let c = match spec.site {
+        None => eligible[stream.below(eligible.len() as u64) as usize],
+        Some(k) => {
+            let c = (k as usize).saturating_sub(m);
+            if !eligible.contains(&c) {
+                return Err(format!(
+                    "site {k} is not an eligible step: FLAW-0004 sits at a ring-closed chain step (plan steps {} to {}, not a lemma-cited one)",
+                    m + 1,
+                    m + n
+                ));
+            }
+            c
+        }
+    };
+    let hedge = stream.below(HEDGES.len() as u64) as usize;
+    let site = plan_index(m, c);
+    let faithful_step = &faithful.steps[site - 1];
+    let (a, b) = (&d.e[c - 1], &d.e[c]);
+    let just = justification(c, &SEED_FORMS[d.form], &b.shape);
+    let claim = format!("${} = {}$.", a.latex, b.latex);
+    if faithful_step.text != format!("{just}, {claim}") {
+        return Err("the faithful step is its justification, a comma and the bare claim".into());
+    }
+    if just.is_empty()
+        || faithful_step.text.matches(just.as_str()).count() != 1
+        || claim.contains(just.as_str())
+    {
+        return Err(
+            "the faithful step holds its justification exactly once, outside the claim".into(),
+        );
+    }
+    let text = format!("{} {claim}", HEDGES[hedge]);
+    if text.contains(just.as_str()) {
+        return Err("the hedged step does not hold the justification".into());
+    }
+    // the aligned fragment: the one calc line, its tactic step omitted, the `by` kept
+    let faithful_line = chain_line(c, a, b, &format!("by {OMITTED_TACTIC}"));
+    let flawed_line = chain_line(c, a, b, "by");
+    if faithful_step.fragment != vec![faithful_line.clone()]
+        || format!("{flawed_line} {OMITTED_TACTIC}") != faithful_line
+    {
+        return Err("the faithful fragment is the one calc line closed by ring".into());
+    }
+    let mut plan = faithful.clone();
+    plan.steps[site - 1].text = text.clone();
+    plan.steps[site - 1].fragment = vec![flawed_line.clone()];
+    let mut original_steps = Map::new();
+    original_steps.insert(site.to_string(), json!(faithful_step.text));
+    let mut original_fragments = Map::new();
+    original_fragments.insert(site.to_string(), json!(faithful_step.fragment));
+    let with = |extra: Vec<(&str, Value)>| {
+        let mut dials = spec.dials.clone();
+        dials.insert("site".into(), json!(site));
+        dials.insert("hedge".into(), json!(hedge));
+        dials.insert("hedge_text".into(), json!(HEDGES[hedge]));
+        for (k, v) in extra {
+            dials.insert(k.into(), v);
+        }
+        Value::Object(dials)
+    };
+    let informal_dials = with(vec![
+        ("justification", json!(just)),
+        ("claim", json!(claim)),
+        ("inserted", json!(text)),
+        ("replaced", json!(faithful_step.text)),
+        ("original_steps", Value::Object(original_steps)),
+    ]);
+    let formal_dials = with(vec![
+        ("omitted", json!([OMITTED_TACTIC])),
+        ("inserted", json!([flawed_line.clone()])),
+        ("replaced", json!(faithful_step.fragment)),
+        ("original_fragments", Value::Object(original_fragments)),
+    ]);
+    // an informal-only artifact has no formal manifestation, so the instance is N/A there (D5,
+    // as s2_template 0.5.0 reads it); a pair's instance is YES-KERNEL in both files
+    let lean_catchable = if target.formal() {
+        LeanCatchable::YesKernel
+    } else {
+        LeanCatchable::NotApplicable
+    };
+    let injection = Injection {
+        instance: 1,
+        class: "FLAW-0004".to_string(),
+        sub_variant: None,
+        severity: Severity::Cosmetic,
+        lean_catchable,
+        site,
+        informal_inserted: text,
+        informal_dials,
+        formal_inserted: vec![flawed_line],
+        formal_dials,
+    };
+    Ok((plan, injection))
+}
+
 /// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0; FLAW-0007
 /// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0; FLAW-0010 `a` from 0.4.0;
-/// FLAW-0003 `cycle` from 0.5.0.
+/// FLAW-0003 `cycle` from 0.5.0; FLAW-0004 from 0.6.0.
 pub fn realizes(version: GrammarVersion, class: &str) -> bool {
     match version {
         GrammarVersion::V0_1_0 => class == "FLAW-0001",
@@ -2222,6 +2407,16 @@ pub fn realizes(version: GrammarVersion, class: &str) -> bool {
         GrammarVersion::V0_5_0 => matches!(
             class,
             "FLAW-0001" | "FLAW-0003" | "FLAW-0007" | "FLAW-0009" | "FLAW-0010" | "FLAW-0013"
+        ),
+        GrammarVersion::V0_6_0 => matches!(
+            class,
+            "FLAW-0001"
+                | "FLAW-0003"
+                | "FLAW-0004"
+                | "FLAW-0007"
+                | "FLAW-0009"
+                | "FLAW-0010"
+                | "FLAW-0013"
         ),
     }
 }
