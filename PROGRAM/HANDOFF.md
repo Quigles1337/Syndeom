@@ -11832,3 +11832,65 @@ request is open for Al's review. Repo green: the gate on the committed tree is r
 pull request and under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 50 ADDENDUM — AL'S RULINGS ON PR 36 (received 2026-11-02 UTC, 2026-11-02
+America/New_York, in this session's conversation after PR #36 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr36.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-040-20261102T0425Z\`, 1,214 bytes, SHA-256
+`b5b56b8415ca9d07a22d606f310e41aa39500f9507a962a156c3bda11aaa8218`):
+
+~~~text
+Rulings on PR #36 / s2_grammar 0.4.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 127 through 137 are accepted as read.
+
+On reading 131, record also: the refusal stands, and claim: false remains without material on the grammar as on the template; the class sweep is not bumped for a sub-variant. If S3’s cell design asks for a fatal FLAW-0010 cell, it is realized in its own version as the composite the reading describes, in the local shape only — the step’s identity perturbed once and justified by the fictional reference, the next step asserting the correct consequence, the formal file unchanged — recorded as the FLAW-0010 a fatal instance at the reference beside a FLAW-0001 local instance at the step, both informal-only and N/A, since the faithful formal file is what keeps the kernel from seeing it. propagated is not taken: an informal chain that never reaches the claim of record is a third defect beyond the class. The propagated / local dial stays FLAW-0001’s; FLAW-0010’s dials remain as D5 lists them.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `3462af3` — left there at the close
+so that a successor's preflight finds it synchronized — and was switched back to
+`claude/s2-grammar-0.4.0` at `11f2fc9c…`, clean and in sync with its remote after a fresh fetch;
+PR 36 had no review and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 127–137 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence) and
+  here. Nothing regenerated.
+- **Reading 131's note** → recorded: the refusal stands; `claim: false` remains without material
+  on the grammar as on the template; the class sweep is not bumped for a sub-variant (read by
+  the executor as: the sweep's readiness under D11 counts the class, which `a` with `claim:
+  true` realizes, not its sub-variants — flagged in ADR-0011's amendment); a fatal FLAW-0010
+  cell, if S3's cell design asks for one, is its own version as the composite in the `local`
+  shape only (the step's identity perturbed once and justified by the fictional reference, the
+  next step asserting the correct consequence, the formal file unchanged; recorded as the
+  FLAW-0010 `a` fatal instance at the reference beside a FLAW-0001 `local` instance at the
+  step, both informal-only and `N/A`, since the faithful formal file is what keeps the kernel
+  from seeing it); `propagated` not taken (an informal chain that never reaches the claim of
+  record is a third defect beyond the class); the `propagated` / `local` dial stays FLAW-0001's
+  and FLAW-0010's dials remain `shape` and `claim`. No byte changes: 0.4.0 refuses `claim:
+  false` as recorded. STATE's NEXT now says so.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+**The memory store is unchanged since the disclosure** — re-hashed with the disclosure's script
+at 2026-11-02T06:14Z: the whole index `0f7e69ab…8995` (15,471 bytes, 110 lines), the matched
+lines 85, 86, 88, 89, 106 and 107 (`0418e621…534c`, 1,198 bytes; 104 withheld) and
+`project_syndeom.md` (`ce2ce6de…2cc0`). This session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, no check, no dial and no register status changed; nothing regenerated.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `a1d524ae…`, the `s2_grammar`
+  0.4.0 goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-018** (informational, backlog; scope extended); FINDING-015 (standing; not extended
+  to the grammar), FINDING-016 and FINDING-017 standing.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
