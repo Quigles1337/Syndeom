@@ -18,7 +18,7 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks K and T
   (D8, D9);
 - `src/grammar.rs` — the producer `s2_grammar`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0,
-  0.5.0 and 0.6.0: the grammar `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
+  0.5.0, 0.6.0 and 0.7.0: the grammar `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
   presentations a chain is built from), the derivation (`grammar/plan`, `grammar/step/<k>`,
   `grammar/lemma/<j>`), the plan with its lemma steps, ground truth by construction with the
   control as the truth's reference (D7), FLAW-0001 `propagated` and `local` with generated
@@ -34,7 +34,9 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   so the plan's premise graph holds the cycle; the formal file unchanged), and from 0.6.0
   FLAW-0004 (a ring-closed step's justification replaced by a hedge drawn from the template's
   lexicon on `injector/FLAW-0004/1` and prefixed to the bare claim, the `calc` line's tactic
-  omitted so that the kernel reports an unsolved goal at that line); the plan is rendered
+  omitted so that the kernel reports an unsolved goal at that line), and from 0.7.0 FLAW-0011,
+  the composite (one embedded gap-or-fatal instance of a class the grammar realizes, applied by
+  that class's own injector, the composite's records at the statement); the plan is rendered
   and measured by the same renderers and the same `assemble` as the template's;
 - `src/lib.rs` — the producer dispatch: `generate` prepares the producer a config names
   (`theorem`: `s2_template`; `grammar`: `s2_grammar`), `regenerate` and `verify` the producer and
@@ -138,7 +140,7 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   (`cycle_length` 2, fatal); the formal file unchanged, the record informal-only, `NO`, at the
   lemma step spanning the citation phrase, confirmed by the structural check; `direct` refused
   (`s2_template`-only); the 0.1.0 to 0.4.0 bytes unchanged.
-- **`s2_grammar` 0.6.0** (Session 52; the version `generate` emits): FLAW-0004 on
+- **`s2_grammar` 0.6.0** (Session 52): FLAW-0004 on
   `ring_chain` — a ring-closed chain step, drawn on `injector/FLAW-0004/1`, has its
   justification deleted and a hedge, drawn next on the same stream from the template's fixed
   lexicon, prefixed to the bare claim; the aligned `calc` line loses its tactic step (`_ = e_k
@@ -147,13 +149,22 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   (cosmetic; `nontrivial-true` and `false` refused for lack of material); a pair's instance
   `YES-KERNEL` in both files with `lean_build` commanded `fail`, an informal-only artifact's
   `N/A`; the target `formal` refused; the 0.1.0 to 0.5.0 bytes unchanged.
+- **`s2_grammar` 0.7.0** (Session 53; the version `generate` emits): FLAW-0011, the composite, on
+  `ring_chain` — the one dial `embedded` lists exactly one FlawSpec of a class FLAW-0001 through
+  FLAW-0010 that the grammar realizes, of severity gap or fatal (FLAW-0001 `propagated`,
+  FLAW-0003 `cycle`, FLAW-0009 `axiom` with either truth, FLAW-0010 `a` with `claim: true`), the
+  composite's severity equal to it; the embedded spec applied by its class's own injector as
+  instance 1, unchanged (its site, draws, dials and target rule; the proof files the embedded
+  artifact's byte for byte), and the composite as instance 2, its records at the statement in
+  each file the artifact has, `lean_catchable` inherited; every composite an invalid proof of a
+  true statement; no new RNG label; the 0.1.0 to 0.6.0 bytes unchanged.
 
-The crate regenerates all thirteen producer versions (seven of `s2_template`, six of `s2_grammar`):
+The crate regenerates all fourteen producer versions (seven of `s2_template`, seven of `s2_grammar`):
 the goldens select the producer and version their manifests name, and `regenerate` and `verify`
 accept any of them. Every seed and the grammar's atom library state their `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
-## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0, 0.3.0, 0.4.0, 0.5.0 and 0.6.0)
+## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0, 0.3.0, 0.4.0, 0.5.0, 0.6.0 and 0.7.0)
 
 - **The instance.** A config `{"grammar": "ring_chain", "length": {"n_steps", "n_lemmas"},
   "target", "flaws", "padding_ratio"}` (D3; `n_steps` 1 to 256, `n_lemmas` 0 to 32 and at most
@@ -317,6 +328,31 @@ accept any of them. Every seed and the grammar's atom library state their `sourc
   (the flawed and the faithful `calc` line) and `original_fragments`. A hedged artifact is a
   valid proof of a true statement (`proof_status: valid`, `correct: true`: the instance is
   cosmetic, D7); the counts are the control's.
+- **FLAW-0011, the composite (0.7.0; D5), as `s2_template` 0.5.0 reads it with Al's rulings 2
+  and 3 on PR 30.** The config's one dial is `embedded`, a list of exactly one FlawSpec (the
+  grammar takes one spec per artifact); there is no sub-variant; the site is `auto` (the
+  composite addresses the statement); the severity is the embedded instance's. The embedded
+  spec must be of a class FLAW-0001 through FLAW-0010 that the grammar realizes, of severity
+  gap or fatal: on `ring_chain`, FLAW-0001 `propagated` (fatal), FLAW-0003 `cycle` (fatal),
+  FLAW-0009 `axiom` with `truth` true (gap) or false (fatal) and FLAW-0010 `a` with `claim:
+  true` (gap). FLAW-0001 `local` (repairable), FLAW-0004 `routine-true` and FLAW-0007
+  `unused` (cosmetic) are refused, because a composite whose embedded instance is not gap or
+  fatal is not an invalid proof; every class the grammar does not realize is refused, and so
+  are FLAW-0011 to FLAW-0014. The embedded spec is applied by its class's own injector —
+  its site (an explicit one included), its draws on its own label, its dials, its target rule
+  (a FLAW-0009 composite is formal or pair, a FLAW-0003 `cycle` or FLAW-0010 one informal or
+  pair) and its refusals all unchanged — as instance 1, so the proof files are the embedded
+  artifact's byte for byte and its records are that artifact's records. The composite is
+  instance 2, with a record in each file the artifact has: step 0 spanning the statement in the
+  informal file, the main declaration at its header line in the formal file, its severity and
+  `lean_catchable` the embedded instance's, its dials `embedded` (as the config gave it),
+  `site` 0, `embedded_instances` `[1]`, `inserted` (the statement, or the header line) and
+  `replaced` null. It is confirmed when every record of the embedded instance passes its check
+  and the statement's truth is kernel-checked by construction (D7: the formal control the
+  reference names). Every composite is an invalid proof of a true statement (`proof_status:
+  invalid`, `correct: false`); `n_flaws_total` is 2, one per class; every other statistic,
+  `lean_build` and `lean_axioms_standard` included, is the embedded artifact's. Padding with a
+  composite is refused by the one-spec rule.
 
 ## Seeds whose statement is false (0.2.0)
 
@@ -457,9 +493,10 @@ is flagged for Al in ADR-0011 *Amendments*.
     auxiliary `_proof_N` constants included); FLAW-0009: `#print axioms` of the main declaration
     lists the axiom.
 
-  - a FLAW-0011 record (0.5.0): the statement's truth is by a kernel-checked witness or Mathlib
-    (D7; the witness is a library module the gate builds) and every record of every embedded
-    instance passes its check;
+  - a FLAW-0011 record (0.5.0; the grammar's from `s2_grammar` 0.7.0): the statement's truth
+    is by a kernel-checked witness or Mathlib (D7; for a seed the witness is a library module
+    the gate builds, for a grammar instance the formal control the reference names) and every
+    record of every embedded instance passes its check;
   - a FLAW-0010 record (0.6.0): the span equals the reference the recorded lexicon indices
     name, every token of it is in the lexicon, the step is `By <reference>` followed by the
     bare claim, and the faithful step held the justification exactly once;
@@ -481,10 +518,11 @@ is flagged for Al in ADR-0011 *Amendments*.
   else the padding declarations' lines of the formal file — in binary64; commanded as the
   config's value with tolerance `abs 0.05` (`abs 0.0` at ratio 0). A commanded ratio the count
   of paragraphs cannot reach is a FAIL verdict, not a refusal.
-- **Not yet:** the grammars `ineq_chain`, `case_split` and `nat_induction`; on `ring_chain`
-  the grammar's remaining v0.1 classes (FLAW-0004 and FLAW-0011, D6), FLAW-0010 `claim: false`
-  (without material, by Al's rulings on PR 36) and the padding kinds without generated
-  material; padding combined with an injected flaw (also inside a composite),
+- **Not yet:** the grammars `ineq_chain`, `case_split` and `nat_induction`; on `ring_chain`,
+  whose v0.1 classes are all realized from `s2_grammar` 0.7.0 (D6), FLAW-0010 `claim: false`
+  (without material, by Al's rulings on PR 36), FLAW-0004 `nontrivial-true` and `false`
+  (without material; a `false` cell as Al's rulings on PR 38 describe it) and the padding kinds
+  without generated material; padding combined with an injected flaw (also inside a composite),
   composites of more than one instance, the kinds `unused-lemma` and `verbose-rewrite` (no seed
   carries their material), FLAW-0004 `nontrivial-true` and `false` and FLAW-0010 `claim: false`
   (no seed carries the false-step material), FLAW-0010 `b` and `c` (deferred), FLAW-0003
