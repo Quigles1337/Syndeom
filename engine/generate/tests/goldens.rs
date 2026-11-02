@@ -2,8 +2,8 @@
 //! FLAWS.md example's flawed artifact, informal and formal, and from the 0.2.0 seeds the pair too;
 //! for the grammar `ring_chain` (`s2_grammar` 0.1.0), the controls at two lengths and FLAW-0001,
 //! (0.2.0) the short control, FLAW-0007 `unused` and FLAW-0013, (0.3.0) the control with one
-//! lemma and FLAW-0009 `axiom` with `truth` true and false, and (0.4.0) the short control and
-//! FLAW-0010 `a` with `claim` true.
+//! lemma and FLAW-0009 `axiom` with `truth` true and false, (0.4.0) the short control and
+//! FLAW-0010 `a` with `claim` true, and (0.5.0) the control with one lemma and FLAW-0003 `cycle`.
 //! Each case directory holds `case.json` (the config, the seed, the engine commit, the toolchain
 //! and the harness observation measured at implementation) and the exact bytes: `proof.md` or
 //! `Proof.lean`, and `manifest.json`. The test regenerates every case without Lean, from the
@@ -82,6 +82,14 @@ const GOLDENS_GRAMMAR_0_3_0: u64 = 6;
 /// from the template's lexicon; informal and pair, the formal target being refused), produced
 /// at the implementation commit `a1d524ae…` from two byte-identical runs.
 const GOLDENS_GRAMMAR_0_4_0: u64 = 4;
+/// The `s2_grammar` 0.5.0 goldens (Session 51): on `ring_chain` at the short length with one
+/// lemma (`n_steps` 4, `n_lemmas` 1), the control (informal, formal — the flawed cases' truth
+/// reference names the formal one; the bytes the 0.3.0 control's) and FLAW-0003 `cycle` with
+/// `cycle_length` 2 (fatal: the cited lemma's closing note replaced by a citation of the
+/// theorem, the chain step citing the lemma unchanged; informal and pair, the formal target
+/// being refused), produced at the implementation commit `c6b24094…` from two byte-identical
+/// runs.
+const GOLDENS_GRAMMAR_0_5_0: u64 = 4;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -205,5 +213,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         count("s2_grammar 0.4.0"),
         GOLDENS_GRAMMAR_0_4_0,
         "the s2_grammar 0.4.0 goldens"
+    );
+    assert_eq!(
+        count("s2_grammar 0.5.0"),
+        GOLDENS_GRAMMAR_0_5_0,
+        "the s2_grammar 0.5.0 goldens"
     );
 }
