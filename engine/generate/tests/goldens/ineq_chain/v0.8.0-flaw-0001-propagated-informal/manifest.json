@@ -1,0 +1,185 @@
+{
+  "achieved": {
+    "flaws_confirmed": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_0001": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_flaws_total": {
+      "ci95": null,
+      "estimator": "injected_instances_confirmed",
+      "value": 1
+    },
+    "n_lemmas": {
+      "ci95": null,
+      "estimator": "informal_md_1_lemma_count",
+      "value": 0
+    },
+    "n_steps": {
+      "ci95": null,
+      "estimator": "informal_md_1_step_count",
+      "value": 4
+    },
+    "n_tokens": {
+      "ci95": null,
+      "estimator": "informal_md_1_token_count",
+      "value": 114
+    },
+    "padding_ratio": {
+      "ci95": null,
+      "estimator": "flaw_0013_span_tokens_over_n_tokens",
+      "value": 0.0
+    }
+  },
+  "artifact": {
+    "files": {
+      "informal": {
+        "content_hash": "c409d0e549c20e474467d02af1748160b72ffead6ea54aa885054c9fbbf93ca9",
+        "file": "proof.md",
+        "format": "syndeom-informal-md/1",
+        "n_bytes": 586,
+        "n_lemmas": 0,
+        "n_steps": 4,
+        "n_tokens": 114,
+        "storage": "regenerable"
+      }
+    },
+    "kind": "informal"
+  },
+  "artifact_id": "s2_grammar-v0.8.0-5b011e904f8e-s7",
+  "commanded": {
+    "flaws_confirmed": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_0001": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_flaws_total": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 1
+    },
+    "n_lemmas": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 0
+    },
+    "n_steps": {
+      "tolerance": {
+        "exact": true
+      },
+      "value": 4
+    },
+    "padding_ratio": {
+      "tolerance": {
+        "abs": 0.0
+      },
+      "value": 0.0
+    }
+  },
+  "config": {
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "perturbation": "sign"
+        },
+        "severity": "fatal",
+        "site": "auto",
+        "sub_variant": "propagated"
+      }
+    ],
+    "grammar": "ineq_chain",
+    "length": {
+      "n_lemmas": 0,
+      "n_steps": 4
+    },
+    "padding_ratio": 0,
+    "target": "informal"
+  },
+  "config_hash": "5b011e904f8e27449e4c016cfbb09efa77adaf3e2f0a67d930b731b1cf4c071d",
+  "engine_commit": "677c8165fa94260d1ac2842c2db2be57be5a6daa",
+  "fidelity": {
+    "per_statistic": {
+      "flaws_confirmed": "PASS",
+      "n_flaws_0001": "PASS",
+      "n_flaws_total": "PASS",
+      "n_lemmas": "PASS",
+      "n_steps": "PASS",
+      "padding_ratio": "PASS"
+    },
+    "verdict": "PASS"
+  },
+  "generator": {
+    "id": "s2_grammar",
+    "rng": "syndeom-rng/1",
+    "version": "0.8.0"
+  },
+  "ground_truth": {
+    "correct": false,
+    "derivation": "by-construction",
+    "flaws": [
+      {
+        "class": "FLAW-0001",
+        "dials": {
+          "inserted": "y^2 + 2y - 1",
+          "monomial": {
+            "inserted": "-1",
+            "replaced": "1"
+          },
+          "original_steps": {
+            "1": "Since squares are non-negative, $(y + 1)^2 \\ge 0$, so $0 \\le y^2 + 2y + 1$.",
+            "2": "Since squares are non-negative, $(x - 1)^2 \\ge 0$, so $y^2 + 2y + 1 \\le x^2 + y^2 - 2x + 2y + 2$.",
+            "3": "Since squares are non-negative, $(x + y)^2 \\ge 0$, so $x^2 + y^2 - 2x + 2y + 2 \\le 2x^2 + 2xy + 2y^2 - 2x + 2y + 2$.",
+            "4": "Since squares are non-negative, $(y - 1)^2 \\ge 0$, so $2x^2 + 2xy + 2y^2 - 2x + 2y + 2 \\le 2x^2 + 2xy + 3y^2 - 2x + 3$."
+          },
+          "perturbation": "sign",
+          "replaced": "y^2 + 2y + 1",
+          "site": 1,
+          "witness": {
+            "left": "0",
+            "right": "-1",
+            "x": "0",
+            "y": "0"
+          }
+        },
+        "instance": 1,
+        "lean_catchable": "YES-KERNEL",
+        "location": {
+          "artifact": "informal",
+          "span": [
+            61,
+            73
+          ],
+          "step": 1
+        },
+        "severity": "fatal",
+        "sub_variant": "propagated"
+      }
+    ],
+    "proof_status": "invalid",
+    "statement_status": {
+      "method": "lean-kernel",
+      "reference": "s2_grammar-v0.8.0-32dcf77f7873-s7:syndeom_s2_grammar_ineq_chain",
+      "value": true
+    },
+    "taxonomy_version": "0.1.0"
+  },
+  "manifest_schema": "syndeom-manifest/2",
+  "origin": "synthetic",
+  "seed": 7,
+  "toolchain": null
+}

@@ -1,0 +1,1 @@
+'syndeom_s2_grammar_ineq_chain' depends on axioms: [propext, Classical.choice, Quot.sound]

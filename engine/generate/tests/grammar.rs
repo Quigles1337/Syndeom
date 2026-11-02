@@ -17,6 +17,8 @@
 //! at the site and the FLAW-0004 informal check) — and, from 0.7.0, FLAW-0011, the composite (one
 //! embedded gap-or-fatal instance applied by its class's own injector, the bytes the embedded
 //! artifact's, the composite's records at the statement and confirmed with the embedded one).
+//! 0.8.0 changes nothing on `ring_chain` but the version; its second grammar, `ineq_chain`, is
+//! tested in `tests/ineq.rs`.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -408,11 +410,11 @@ fn d6_every_step_presents_the_polynomial_and_differs_from_the_step_before() {
 fn d2_the_plan_renders_the_lemmas_then_a_calc_chain_closed_by_ring_or_a_cited_lemma() {
     let c = config(6, 2, "pair", json!([]));
     let (p, m) = build(&c, 7);
-    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_7_0));
+    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_8_0));
     assert_eq!(m.generator.id, "s2_grammar");
-    assert_eq!(m.generator.version, "0.7.0");
+    assert_eq!(m.generator.version, "0.8.0");
     assert_eq!(m.generator.rng, "syndeom-rng/1");
-    assert!(m.artifact_id.starts_with("s2_grammar-v0.7.0-"));
+    assert!(m.artifact_id.starts_with("s2_grammar-v0.8.0-"));
     assert!(m.artifact_id.ends_with("-s7"));
     let plan = &p.plan;
     assert_eq!(plan.steps.len(), 8);
@@ -578,7 +580,7 @@ fn d9_determinism_and_idempotence() {
     );
     // generate's dispatch: a grammar config is an s2_grammar config
     let any = prepare_any(&c, 7).unwrap();
-    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_7_0));
+    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_8_0));
     assert!(prepare_any(&json!({"theorem": "nat_le_sq", "grammar": "ring_chain"}), 7).is_err());
     assert!(prepare_any(&json!({"length": {"n_steps": 1, "n_lemmas": 0}}), 7).is_err());
     assert_eq!(
@@ -609,9 +611,13 @@ fn d9_determinism_and_idempotence() {
         Producer::parse("s2_grammar", "0.7.0"),
         Some(Producer::Grammar(GrammarVersion::V0_7_0))
     );
-    assert_eq!(Producer::parse("s2_grammar", "0.8.0"), None);
+    assert_eq!(
+        Producer::parse("s2_grammar", "0.8.0"),
+        Some(Producer::Grammar(GrammarVersion::V0_8_0))
+    );
+    assert_eq!(Producer::parse("s2_grammar", "0.9.0"), None);
     assert_eq!(Producer::parse("s2_grammars", "0.1.0"), None);
-    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.7.0");
+    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.8.0");
     assert!(grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0001"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0007"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0013"));
@@ -683,7 +689,40 @@ fn d9_determinism_and_idempotence() {
     ] {
         assert!(!grammar::realizes(GrammarVersion::V0_7_0, class), "{class}");
     }
-    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.7.0: only the version,
+    // 0.8.0 adds the grammar ineq_chain with FLAW-0001 alone, and no class on ring_chain
+    for class in (1..=14).map(|k| format!("FLAW-{k:04}")) {
+        assert_eq!(
+            grammar::realizes(GrammarVersion::V0_8_0, &class),
+            grammar::realizes(GrammarVersion::V0_7_0, &class),
+            "{class}"
+        );
+        assert_eq!(
+            grammar::realizes_on(GrammarVersion::V0_8_0, "ring_chain", &class),
+            grammar::realizes(GrammarVersion::V0_8_0, &class),
+            "{class}"
+        );
+        assert_eq!(
+            grammar::realizes_on(GrammarVersion::V0_8_0, "ineq_chain", &class),
+            class == "FLAW-0001",
+            "{class}"
+        );
+        assert!(!grammar::realizes_on(
+            GrammarVersion::V0_7_0,
+            "ineq_chain",
+            &class
+        ));
+        assert!(!grammar::realizes_on(
+            GrammarVersion::V0_8_0,
+            "case_split",
+            &class
+        ));
+    }
+    assert_eq!(grammar::grammars(GrammarVersion::V0_7_0), ["ring_chain"]);
+    assert_eq!(
+        grammar::grammars(GrammarVersion::V0_8_0),
+        ["ring_chain", "ineq_chain"]
+    );
+    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.8.0: only the version,
     // and with it the id and the manifest, differ
     let old = prepare_for(Producer::Grammar(GrammarVersion::V0_1_0), &c, 7).unwrap();
     assert_eq!(old.informal, p1.informal);
@@ -994,8 +1033,13 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     );
     assert!(ok(&config(2, 2, "informal", json!([]))));
     let mut c = config(4, 0, "informal", json!([]));
-    c["grammar"] = json!("ineq_chain");
+    c["grammar"] = json!("case_split");
     assert!(refused(&c), "a grammar of a later version");
+    c["grammar"] = json!("ineq_chain");
+    assert!(
+        prepare_for(Producer::Grammar(GrammarVersion::V0_7_0), &c, 7).is_err(),
+        "ineq_chain arrives in 0.8.0"
+    );
     let mut c = config(4, 0, "informal", json!([]));
     c["padding_ratio"] = json!(0.2);
     assert!(refused(&c), "a ratio without the FLAW-0013 spec");
@@ -1143,7 +1187,7 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     c["target"] = json!("both");
     assert!(refused(&c));
     // the version a manifest names must exist
-    assert!(GrammarVersion::parse("0.8.0").is_none());
+    assert!(GrammarVersion::parse("0.9.0").is_none());
 }
 
 #[test]
@@ -4101,8 +4145,8 @@ fn d5_flaw_0011_composes_one_gap_or_fatal_instance_recorded_at_the_statement() {
         );
     }
     // the 0.6.0 bytes of an artifact of every class it realizes but FLAW-0013, and of the
-    // (4, 0) and (4, 1) controls, are unchanged by 0.7.0: only the version, and with it the id
-    // and the manifest, differ
+    // (4, 0) and (4, 1) controls, are unchanged by 0.7.0 and 0.8.0: only the version, and with
+    // it the id and the manifest, differ
     for c in [
         config(4, 0, "pair", propagated("sign")),
         config(4, 1, "pair", cycle_spec(json!("auto"))),

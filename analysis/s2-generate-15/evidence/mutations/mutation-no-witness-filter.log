@@ -1,0 +1,44 @@
+mutation: no-witness-filter
+breaks: a perturbation that leaves the step true is admitted
+replaced: let witness = witness(left, &terms)?;
+with: let witness = witness(left, &terms).unwrap_or(Witness { x: String::new(), y: String::new(), left: String::new(), right: String::new() });
+cargo test exit: 101
+source restored: 430d339eeae244a727da0660505d5b1d84a49dbef6011b99d4843dc7e79f57e7
+
+
+running 12 tests
+.. 2/12
+d5_the_admitted_perturbations_are_exactly_those_a_grid_point_falsifies --- FAILED
+..... 8/12
+d3_unsupported_configs_and_specs_are_refused_on_ineq_chain --- FAILED
+d5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there --- FAILED
+..
+failures:
+
+---- d5_the_admitted_perturbations_are_exactly_those_a_grid_point_falsifies stdout ----
+
+thread 'd5_the_admitted_perturbations_are_exactly_those_a_grid_point_falsifies' (38520) panicked at generate\tests\ineq.rs:579:25:
+coefficient Coefficient(0): a true step is no flaw
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- d3_unsupported_configs_and_specs_are_refused_on_ineq_chain stdout ----
+
+thread 'd3_unsupported_configs_and_specs_are_refused_on_ineq_chain' (37016) panicked at generate\tests\ineq.rs:937:87:
+called `Result::unwrap_err()` on an `Ok` value: Prepared { producer: Grammar(V0_8_0), config: Object {"flaws": Array [Object {"class": String("FLAW-0001"), "dials": Object {"perturbation": String("constant")}, "severity": String("fatal"), "site": String("auto"), "sub_variant": String("propagated")}], "grammar": String("ineq_chain"), "length": Object {"n_lemmas": Number(0), "n_steps": Number(1)}, "padding_ratio": Number(0), "target": String("pair")}, config_hash: "decbbadbff613d139e5dc1d2bdeed36650936a27d393b08d2b0d23110a6a01ba", seed: 0, target: Pair, plan: Plan { title: "An inequality in two real variables", statement: "For all real numbers $x$ and $y$, $0 \\le x^2 + 2x + 1$.", imports: ["Mathlib.Basic.Real.Basic", "Mathlib.Tactic.Linarith"], doc: None, main_declaration: "syndeom_s2_grammar_ineq_chain", binders: "(x y : ℝ)", claim: "0 ≤ x ^ 2 + 2 * x + 1", truth: StatementStatus { value: Some(true), method: LeanKernel, reference: "s2_grammar-v0.8.0-8366619e79c2-s0:syndeom_s2_grammar_ineq_chain" }, steps: [Step { text: "Since squares are non-negative, $(x + 1)^2 \\ge 0$, so $0 \\le x^2 + 2x + 2$.", fragment: ["calc 0 ≤ x ^ 2 + 2 * x + 2 := by linarith [sq_nonneg (x + 1)]"], lemma: None, padding: None, premises: [] }] }, informal: Some([35, 32, 65, 110, 32, 105, 110, 101, 113, 117, 97, 108, 105, 116, 121, 32, 105, 110, 32, 116, 119, 111, 32, 114, 101, 97, 108, 32, 118, 97, 114, 105, 97, 98, 108, 101, 115, 10, 10, 42, 42, 84, 104, 101, 111, 114, 101, 109, 46, 42, 42, 32, 70, 111, 114, 32, 97, 108, 108, 32, 114, 101, 97, 108, 32, 110, 117, 109, 98, 101, 114, 115, 32, 36, 120, 36, 32, 97, 110, 100, 32, 36, 121, 36, 44, 32, 36, 48, 32, 92, 108, 101, 32, 120, 94, 50, 32, 43, 32, 50, 120, 32, 43, 32, 49, 36, 46, 10, 10, 42, 42, 80, 114, 111, 111, 102, 46, 42, 42, 10, 10, 42, 42, 83, 116, 101, 112, 32, 49, 46, 42, 42, 32, 83, 105, 110, 99, 101, 32, 115, 113, 117, 97, 114, 101, 115, 32, 97, 114, 101, 32, 110, 111, 110, 45, 110, 101, 103, 97, 116, 105, 118, 101, 44, 32, 36, 40, 120, 32, 43, 32, 49, 41, 94, 50, 32, 92, 103, 101, 32, 48, 36, 44, 32, 115, 111, 32, 36, 48, 32, 92, 108, 101, 32, 120, 94, 50, 32, 43, 32, 50, 120, 32, 43, 32, 50, 36, 46, 10, 10, 226, 136, 142, 10]), formal: Some(FormalRendering { bytes: [105, 109, 112, 111, 114, 116, 32, 77, 97, 116, 104, 108, 105, 98, 46, 66, 97, 115, 105, 99, 46, 82, 101, 97, 108, 46, 66, 97, 115, 105, 99, 10, 105, 109, 112, 111, 114, 116, 32, 77, 97, 116, 104, 108, 105, 98, 46, 84, 97, 99, 116, 105, 99, 46, 76, 105, 110, 97, 114, 105, 116, 104, 10, 10, 116, 104, 101, 111, 114, 101, 109, 32, 115, 121, 110, 100, 101, 111, 109, 95, 115, 50, 95, 103, 114, 97, 109, 109, 97, 114, 95, 105, 110, 101, 113, 95, 99, 104, 97, 105, 110, 32, 40, 120, 32, 121, 32, 58, 32, 226, 132, 157, 41, 32, 58, 32, 48, 32, 226, 137, 164, 32, 120, 32, 94, 32, 50, 32, 43, 32, 50, 32, 42, 32, 120, 32, 43, 32, 49, 32, 58, 61, 32, 98, 121, 10, 32, 32, 99, 97, 108, 99, 32, 48, 32, 226, 137, 164, 32, 120, 32, 94, 32, 50, 32, 43, 32, 50, 32, 42, 32, 120, 32, 43, 32, 50, 32, 58, 61, 32, 98, 121, 32, 108, 105, 110, 97, 114, 105, 116, 104, 32, 91, 115, 113, 95, 110, 111, 110, 110, 101, 103, 32, 40, 120, 32, 43, 32, 49, 41, 93, 10], fragment_lines: [Some([5, 5])], declarations: ["syndeom_s2_grammar_ineq_chain"], main_line: 4 }), injection: Some(Injection { instance: 1, class: "FLAW-0001", sub_variant: Some("propagated"), severity: Fatal, lean_catchable: YesKernel, site: 1, informal_inserted: "x^2 + 2x + 2", informal_dials: Object {"inserted": String("x^2 + 2x + 2"), "monomial": Object {"inserted": String("2"), "replaced": String("1")}, "original_steps": Object {"1": String("Since squares are non-negative, $(x + 1)^2 \\ge 0$, so $0 \\le x^2 + 2x + 1$.")}, "perturbation": String("constant"), "replaced": String("x^2 + 2x + 1"), "site": Number(1), "witness": Object {"left": String(""), "right": String(""), "x": String(""), "y": String("")}}, formal_inserted: ["calc 0 ≤ x ^ 2 + 2 * x + 2 := by linarith [sq_nonneg (x + 1)]"], formal_dials: Object {"inserted": Array [String("calc 0 ≤ x ^ 2 + 2 * x + 2 := by linarith [sq_nonneg (x + 1)]")], "monomial": Object {"inserted": String("2"), "replaced": String("1")}, "original_fragments": Object {"1": Array [String("calc 0 ≤ x ^ 2 + 2 * x + 1 := by linarith [sq_nonneg (x + 1)]")]}, "perturbation": String("constant"), "replaced": Array [String("calc 0 ≤ x ^ 2 + 2 * x + 1 := by linarith [sq_nonneg (x + 1)]")], "site": Number(1), "witness": Object {"left": String(""), "right": String(""), "x": String(""), "y": String("")}} }), further: [], padding: [], composite: None, false_theorem: None }
+
+---- d5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there stdout ----
+
+thread 'd5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there' (37260) panicked at generate\tests\ineq.rs:663:21:
+assertion `left != right` failed: the constant kind is never admitted
+  left: "constant"
+ right: "constant"
+
+
+failures:
+    d3_unsupported_configs_and_specs_are_refused_on_ineq_chain
+    d5_flaw_0001_perturbs_one_term_so_the_step_is_false_and_the_calc_line_fails_there
+    d5_the_admitted_perturbations_are_exactly_those_a_grid_point_falsifies
+
+test result: FAILED. 9 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.35s
+
+error: test failed, to rerun pass `-p syndeom-generate --test ineq`

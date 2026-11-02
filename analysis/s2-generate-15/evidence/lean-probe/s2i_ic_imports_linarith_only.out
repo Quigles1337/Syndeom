@@ -1,0 +1,28 @@
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_linarith_only.lean:3:33: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HAdd ℝ ℝ ?m.9
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_linarith_only.lean:3:71: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HAdd ℝ ℝ ?m.22
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_linarith_only.lean:3:20: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HMul ℕ ℝ ?m.28
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_linarith_only.lean:3:42: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HPow ℝ ℕ ℝ
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_linarith_only.lean:3:50: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HMul ℕ ℝ ?m.44
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_linarith_only.lean:3:62: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  HPow ℝ ℕ ℝ
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+C:/Users/LEET/Syndeom/analysis/s2-generate-15/evidence/lean-probe/s2i_ic_imports_linarith_only.lean:3:94: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+  CommSemiring ℝ
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.

@@ -1,0 +1,35 @@
+ineq_chain/v0.8.0-control-short-informal exit=0 start=2026-11-02T22:07:56.757Z end=2026-11-02T22:08:05.419Z
+s2_grammar-v0.8.0-f539c4579bbc-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-control-short-formal exit=0 start=2026-11-02T22:08:05.421Z end=2026-11-02T22:08:31.049Z
+s2_grammar-v0.8.0-32dcf77f7873-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ineq_chain/v0.8.0-control-long-informal exit=2 start=2026-11-02T22:08:31.051Z end=2026-11-02T22:08:31.675Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+ineq_chain/v0.8.0-control-long-formal exit=2 start=2026-11-02T22:08:31.678Z end=2026-11-02T22:08:32.273Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+ineq_chain/v0.8.0-flaw-0001-propagated-informal exit=2 start=2026-11-02T22:08:32.277Z end=2026-11-02T22:08:32.860Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+ineq_chain/v0.8.0-flaw-0001-propagated-formal exit=2 start=2026-11-02T22:08:32.861Z end=2026-11-02T22:08:33.454Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+ineq_chain/v0.8.0-flaw-0001-propagated-pair exit=2 start=2026-11-02T22:08:33.455Z end=2026-11-02T22:08:34.061Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+ineq_chain/v0.8.0-flaw-0001-local-informal exit=2 start=2026-11-02T22:08:34.063Z end=2026-11-02T22:08:34.648Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+ineq_chain/v0.8.0-flaw-0001-local-formal exit=2 start=2026-11-02T22:08:34.650Z end=2026-11-02T22:08:35.247Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+ineq_chain/v0.8.0-flaw-0001-local-pair exit=2 start=2026-11-02T22:08:35.248Z end=2026-11-02T22:08:35.837Z
+engine_commit does not identify the checked-out producer input engine/generate/tests/goldens.rs
+
+=== GOLDENS end

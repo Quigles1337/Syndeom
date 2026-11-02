@@ -1,10 +1,11 @@
 # Goldens for `s2_template` and `s2_grammar` (ADR-0011 D10)
 
-There are 110 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+There are 120 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
 0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
 and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47), 8 of 0.2.0
 (Session 48), 6 of 0.3.0 (Session 49), 4 of 0.4.0 (Session 50), 4 of 0.5.0 (Session 51), 4 of
-0.6.0 (Session 52) and 5 of 0.7.0 (Session 53). All use seed 7. Each case directory holds:
+0.6.0 (Session 52), 5 of 0.7.0 (Session 53) and 10 of 0.8.0 (Session 54; the grammar
+`ineq_chain`, under `ineq_chain/`). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -623,14 +624,55 @@ confirmed; `n_steps` 4, `n_lemmas` 0 and 93 informal tokens, the embedded artifa
   informal record by its span, the formal record by check K) and by the statement's truth by
   construction (D7: the formal control the reference names): `flaws_confirmed` 2.
 
+## `s2_grammar` 0.8.0 (Session 54, 2026-11-02)
+
+On the second grammar, `ineq_chain` (under `ineq_chain/`), at seed 7: the control at the short
+length (`n_steps` 4, `n_lemmas` 0) and at a long one (24, 2), informal and formal — so that each
+case's truth reference, the formal control of its length, names a golden — and FLAW-0001
+`propagated` and `local` with the `sign` perturbation at the short length, informal, formal and
+pair. At seed 7 the short chain adds four squares, `(y + 1)^2`, `(x - 1)^2`, `(x + y)^2` and
+`(y - 1)^2`, so the statement is `0 \le 2x^2 + 2xy + 3y^2 - 2x + 3`. Both FLAW-0001 cases sit at
+step 1, the first `calc` line, with the sign of its constant flipped (`1` to `-1`; the informal
+span `[61, 73)`, the formal line 5). The `witness` is `(x, y) = (0, 0)`, where the left side `0`
+exceeds the perturbed right side `-1`. Under `propagated` the later steps carry the change and the
+chain ends at `2x^2 + 2xy + 3y^2 - 2x + 1`, away from the claim. Under `local` the next step asserts
+the faithful consequence.
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ineq_chain` | control (informal, formal) | 4 steps, 0 lemmas |
+| `ineq_chain` | control (informal, formal) | 24 steps, 2 lemmas |
+| `ineq_chain` | FLAW-0001 `propagated` fatal `sign` (informal, formal, pair) | 4 steps, 0 lemmas; the site step 1 |
+| `ineq_chain` | FLAW-0001 `local` repairable `sign` (informal, formal, pair) | 4 steps, 0 lemmas; the site step 1 |
+
+**Provenance:**
+- The proof text is generated (`src/ineq.rs`: the atom library, and the FLAW-0001 material at
+  the site). The shapes were compiled as Lean probes first
+  (`analysis/s2-generate-15/evidence/lean-probe/`).
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `677c8165fa94260d1ac2842c2db2be57be5a6daa`, by two separate runs compared byte for byte (every
+  `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal). The running
+  binary's compiled input hashes were verified against the commit before each case
+  (`analysis/s2-generate-15/evidence/goldens-production-report.json`). A first attempt at the
+  second run was refused from its third case by that verification, because a producer input had
+  been edited while it ran. It was repeated into a new directory on the restored tree (packet
+  15).
+- Every case's fidelity verdict is PASS. The controls build and print `[propext,
+  Classical.choice, Quot.sound]`. The FLAW-0001 formal and pair files fail to build (exit 1),
+  with the first error at line 5, the site's `calc` line (check K). Under `propagated` the
+  theorem-level goal follows at line 4. Under `local` nothing follows, because the next step is
+  true and its hint proves it. `lean_build` is commanded and achieved `fail`, with no axiom
+  print, and `flaws_confirmed` is 1. The controls have 122 informal tokens (short) and 1,190
+  (long); the `propagated` cases 114, because the constant term cancels in the later steps.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
 `analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md`,
 `analysis/s2-generate-8/README.md`, `analysis/s2-generate-9/README.md`,
 `analysis/s2-generate-10/README.md`, `analysis/s2-generate-11/README.md`,
-`analysis/s2-generate-12/README.md`, `analysis/s2-generate-13/README.md` and
-`analysis/s2-generate-14/README.md`.
+`analysis/s2-generate-12/README.md`, `analysis/s2-generate-13/README.md`,
+`analysis/s2-generate-14/README.md` and `analysis/s2-generate-15/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps

@@ -5,7 +5,9 @@
 //! lemma and FLAW-0009 `axiom` with `truth` true and false, (0.4.0) the short control and
 //! FLAW-0010 `a` with `claim` true, (0.5.0) the control with one lemma and FLAW-0003 `cycle`,
 //! (0.6.0) the short control and FLAW-0004 `routine-true`, and (0.7.0) the short control and
-//! FLAW-0011, the composite of one FLAW-0001 `propagated` `sign` instance.
+//! FLAW-0011, the composite of one FLAW-0001 `propagated` `sign` instance; for the grammar
+//! `ineq_chain` (`s2_grammar` 0.8.0), the controls at two lengths and FLAW-0001 `propagated` and
+//! `local` with the `sign` perturbation.
 //! Each case directory holds `case.json` (the config, the seed, the engine commit, the toolchain
 //! and the harness observation measured at implementation) and the exact bytes: `proof.md` or
 //! `Proof.lean`, and `manifest.json`. The test regenerates every case without Lean, from the
@@ -106,6 +108,12 @@ const GOLDENS_GRAMMAR_0_6_0: u64 = 4;
 /// `propagated` golden's, the composite's records at the statement; informal, formal, pair),
 /// produced at the implementation commit `97c6cc6c…` from two byte-identical runs.
 const GOLDENS_GRAMMAR_0_7_0: u64 = 5;
+/// The `s2_grammar` 0.8.0 goldens (Session 54): on the second grammar, `ineq_chain`, the control
+/// at the short length (`n_steps` 4, `n_lemmas` 0) and at a long one (24, 2), informal and formal
+/// (the flawed cases' truth reference names the short formal control), and FLAW-0001
+/// `propagated` and `local` with the `sign` perturbation at the short length, informal, formal and
+/// pair, produced at the implementation commit `677c8165…` from two byte-identical runs.
+const GOLDENS_GRAMMAR_0_8_0: u64 = 10;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -244,5 +252,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         count("s2_grammar 0.7.0"),
         GOLDENS_GRAMMAR_0_7_0,
         "the s2_grammar 0.7.0 goldens"
+    );
+    assert_eq!(
+        count("s2_grammar 0.8.0"),
+        GOLDENS_GRAMMAR_0_8_0,
+        "the s2_grammar 0.8.0 goldens"
     );
 }

@@ -13224,3 +13224,467 @@ ESCALATIONS (superseding the block's):
 - Unchanged: human-referee participants (SD13).
 STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
 recorded in the pull request and under the external root, not in the tree it certifies.
+
+SESSION: 2026-11-02 UTC (2026-11-02 America/New_York) (Session 54 — a fresh conversation launched
+from `C:\Users\LEET` with the §6 Session-N resume prompt alone (Entry 3); SD15 disclosure first, by
+digest (ADR-0005 *Amendments* 1–3), appended at 2026-11-02T21:31:50Z by shell append; not an
+examination — Gate S2 has nothing to examine; examined fetched `origin/main`
+`009bb85e6dad266b47257b7a36d688a35ced5f52`, tree `603b59ddbaad50b3cdd7132dcabd8644f2ddd0b1`, in the
+original checkout `C:\Users\LEET\Syndeom` on `main`, synchronized; branch
+`claude/s2-grammar-0.8.0`; header completed after ADR-0008 step 5 — it was written provisionally
+with the disclosure, which is unchanged; the session-end SHA is the commit carrying this block,
+recorded in its pull request)
+
+### Entry 1 — SD15 memory disclosure, by digest (ADR-0005 D1–D4 and Amendments 1–3)
+
+**Order of actions.** Before this append the session did only what SD15 allows. It read
+`PROGRAM/SYNDEOM-PROGRAM.md` and `PROGRAM/DECISIONS/ADR-0005.md` in full, read the two memory
+files below, and hashed and searched them (Git Bash `sha256sum` and awk, cross-checked with
+PowerShell `Get-FileHash` and `Select-String`). It also re-read the constitution's §6 block to
+compare it with the launching message. It read no other repository file, listed no directory of
+the checkout, ran no git command and ran no build. HANDOFF's existing contents were not read:
+this entry is a shell append of a file written in the session scratchpad.
+
+**Launch.** The launching message is the §6 Session-N resume prompt and nothing else. Its 13
+lines are byte-identical to the constitution's §6 block (`cmp`; SHA-256
+`0015172624685c5025a9d2a76e19e6f4a4b7093e64d085f9d505f3bff6f23dd3` for both). Before it, the
+local `/effort` command was run (effort set to max); it carries no program state. The working
+directory is `C:\Users\LEET`, which is not a git work tree, so no gitStatus snapshot was attached
+and the harness loaded the `C--Users-LEET` memory index. Executor: Claude Code on Opus 5.5
+(`claude-opus-5-5`). Whether this session attempts a gate's cold-start test is decided after
+orientation; the disclosure is made either way (ADR-0009).
+
+**Memory loaded and read.** The harness loaded one memory, the index `MEMORY.md`; no other memory
+was recalled (D1(c): none). For this disclosure the session read `MEMORY.md` and
+`project_syndeom.md` from disk at 2026-11-02T21:29Z, and no other memory file.
+
+- **The whole index, as a fact.** SHA-256
+  `0f7e69abea9a00c4ef63de8ee4748ca2c41c34f2cff0da69f238420083018995`; 15,471 bytes; 110 lines,
+  each LF-terminated; 0 CR; no BOM; 337 non-ASCII bytes. This digest is new against Amendment 2's
+  baseline (`cd9438425b3bcc6b81967543e1b9c5387ca1ebdd14a6ba0082a7af398b8ffc69`, 15,420 bytes,
+  110 lines). Under Amendment 2 that alone does not require reproduction.
+- **D3, the name search.** A case-insensitive search of all 110 index lines for `syndeom`,
+  `kober` and `friedman` matched lines 85, 86, 88, 89, 106 and 107. By name: `syndeom` 106, 107;
+  `kober` 85, 86, 89, 106; `friedman` 88, 89, 106. A supplementary search for `fr13dman`, the
+  sibling's repository name, matched 88, 89 and 107, all among the matched lines. Canary: `darq`
+  matched 41 lines, so the search was live.
+- **D1(a), the matched index lines.** Lines 85, 86, 88, 89, 106 and 107, the same numbers as in
+  Amendment 2's baseline: 6 lines, 1,198 bytes, 0 CR, 30 non-ASCII bytes. They are the same six
+  lines as in the copy the harness loaded. SHA-256 of the lines, each with its LF terminator,
+  concatenated in index order: `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`.
+- **D1(b), `project_syndeom.md`, in full.** SHA-256
+  `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`; 10,957 bytes; 135 lines,
+  each LF-terminated; 0 CR; no BOM; 71 non-ASCII bytes.
+- **D2, withheld by count.** 104 index lines: 1–84, 87, 90–105 and 108–110. By D3, none of them
+  names SYNDEOM, KOBER or FRIEDMAN.
+- **By digest.** Both compared digests equal Amendment 2's baseline, which records them as the
+  digests of HANDOFF lines 6672–6677 and 6683–6817, reproduced by Session 35's Entry 1. The bytes
+  are therefore not reproduced again. Entry 2, written after this append, verifies the citation
+  by hashing those HANDOFF lines.
+- **D4.** The cited memory holds the repo location and environment and tooling hazards only. It
+  holds no phase, gate status, CLAIM or FLAW status, file contents, commit SHA as a state marker,
+  next action or escalation. No memory will be written in this session.
+
+### Entry 2 — the disclosure's citation, verified after the append; the header completed
+
+Located after Entry 1 so that the disclosure stays first. HANDOFF was first read after Entry 1 was
+appended, and after ADR-0008 was read and its step 5 completed. Under the standing rule (Al's
+rulings on PR 39), the citation check printed digests, byte counts, `cmp` exit codes, HANDOFF's
+line and byte counts and line numbers, and no HANDOFF text:
+- `sed -n '6672,6677p' PROGRAM/HANDOFF.md`: 1,198 bytes, SHA-256
+  `0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`, byte-identical (`cmp`
+  exit 0) to the matched index lines 85, 86, 88, 89, 106 and 107 as this session read them;
+- `sed -n '6683,6817p' PROGRAM/HANDOFF.md`: 10,957 bytes, SHA-256
+  `ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`, byte-identical (`cmp`
+  exit 0) to `project_syndeom.md`;
+- the enclosing block's `SESSION:` line is 6654 and names Session 35, and the enclosing entry
+  heading is line 6664, Entry 1, the SD15 memory disclosure; no block or entry heading lies
+  inside the cited ranges (an awk test that printed line numbers and yes or no only).
+
+Entry 1's citation therefore holds by reproduced bytes, not only by stated digests.
+
+Entry 1's appended bytes were verified at the append (2026-11-02T21:31:50Z): 3,908 bytes, 52
+lines, SHA-256 `c5653dc2ea8ae729bef3d41ba8bb78b38ecfaf79cb2d19a6056dcb31eb12d122`, equal to
+HANDOFF's last 3,908 bytes after the append and to the source file the shell appended. The entry
+file had 0 CR bytes and began with one LF, so a blank line separates the block from Session 53's.
+`git diff --numstat` then read 52 added, 0 removed.
+
+The provisional header was the one line `## Session — 2026-11-02 UTC (provisional header,
+completed after orientation)`, at line 13228. It carried the UTC date of the append and was
+marked provisional, which is the whole rule (ADR-0005 Amendment 3; Al's rulings on PR 39). After
+step 5, and after the ORIENT gate had ended, a script (`complete_header.py` under the orientation
+root) replaced that one line with the completed header (774 bytes, 9 lines) and asserted Entry 1
+unchanged: from its heading to its last line, 3,826 bytes, SHA-256
+`3a952750c3aa0cc62ae95bca80c22ff9d0a0c253c2682aa673df125dfee1428d`, before and after.
+`origin/main`'s HANDOFF (1,040,006 bytes) is an exact byte prefix of the working file, which has
+0 CR bytes; `git diff --numstat` then read 60 added, 0 removed.
+
+### Entry 3 — the launch, the orientation and the ORIENT gate
+
+**The launch.**
+- **The prompt.** A fresh conversation from `C:\Users\LEET`, launched with the §6 Session-N resume
+  prompt and nothing else, delivered as pasted text with no owner note. Before it the local
+  `/effort` command ran (effort set to max); it carries no program state. The prompt's 13 lines,
+  transcribed from the message as rendered to the executor, are byte-identical to the
+  constitution's §6 block (`cmp` exit 0; 1,141 bytes; SHA-256
+  `0015172624685c5025a9d2a76e19e6f4a4b7093e64d085f9d505f3bff6f23dd3`). Its apostrophes rendered
+  as ASCII, where Session 53's rendered as U+2019. One correction to Entry 1, which is
+  append-only: its "byte-identical" holds for the message as rendered, the only form the
+  executor sees, not for bytes it cannot inspect.
+- **The harness.** It attached no Git snapshot (`C:\Users\LEET` is not a work tree; the
+  environment block read "Is a git repository: false") and loaded the `C--Users-LEET` index.
+- **Model and dates.** The executor model was Claude Opus 5.5 (`claude-opus-5-5`) throughout. The
+  local date was 2026-11-02 (America/New_York, afternoon); the UTC date, which the header
+  carries, was 2026-11-02.
+- **The two documents** were read in full before the disclosure, each in one display.
+
+**Not an examination.** The session was eligible as cold. The launch carried nothing that holds
+program state. Nothing of the checkout but the constitution and ADR-0005 was read before
+disclosing (the constitution's §6 block was re-read to compare the launch). But Gate S2 has
+nothing to examine (its criteria are open), so no gate test was attempted and the session
+certifies nothing.
+
+**The order after the disclosure.** ADR-0008 was read in full, then the preflight ran (steps 1–5),
+then step 5's byte confirmation, then step 6. Entry 2's citation check ran within step 6, after
+STATE's NEXT and its Updated bullet had been read. It printed digests, byte counts, `cmp` exit
+codes, HANDOFF's line and byte counts and line numbers only. A separate awk that located the
+enclosing block printed line numbers and yes or no only. HANDOFF's text was first read after
+that, as step 6's read of HANDOFF's last entry.
+
+**ORIENT (ADR-0008 D1, steps 1–5, by the preflight).** The receipt is `orient-1.json` under
+`C:\Users\LEET\Codex\Temp\syndeom-orient-20261102T2133Z\`. The directory's name says 2133Z; it
+was created at 21:32:10Z.
+- **Identity.** `C:/Users/LEET/Syndeom`; remote `https://github.com/Quigles1337/Syndeom.git`;
+  default branch `main`, from `git ls-remote --symref`.
+- **Fetch.** 2026-11-02T21:32:10.996Z–21:32:11.492Z, exit 0.
+- **Snapshot.** `main` at `009bb85e6dad266b47257b7a36d688a35ced5f52`, tree
+  `603b59ddbaad50b3cdd7132dcabd8644f2ddd0b1`, **synchronized**: ahead 0, behind 0. The only
+  change was the disclosure append (`allowed_present`; `unrelated: []`). No worktree.
+- **Step 5.** Each file read before or right after disclosing equals the snapshot's blob, so the
+  checkout is the snapshot:
+  - the constitution (`110f5360…`, 38,958 bytes), read in step 0;
+  - ADR-0005 (`b08e543a…`, 15,291 bytes), read in step 0;
+  - ADR-0008 (`ccdfa9d7…`, 18,589 bytes), read after disclosing.
+
+**Step 6, the reads in order:**
+1. STATE's size and headings, then its NEXT, its Updated bullet (Session 53), Session 52's, and
+   the head of Session 51's.
+2. Entry 2's citation check.
+3. HANDOFF's block and entry headings from line 12000 on, then Session 53's block in full
+   (Entries 1–4, the close, both addenda).
+4. The Git log and branches, and on GitHub PR 39 and the open pull requests and issues. PR 39 was
+   merged by Al at 2026-11-02T21:04:47Z with the merge commit `009bb85` (parents `22aac6e` and
+   `ce93751`), and `97c6cc6c…` is an ancestor of `main`. It has no review and two comments, both
+   the executor's (the green gates and the rulings commit); there is no open pull request or
+   issue.
+5. STATE's Gate S2, S1 and S0 tables, its Blockers, and the head of its standing escalations.
+6. The previous orientation root's gate wrapper, and the gate script. **The ORIENT gate was
+   launched here.**
+7. CLAIMS (0001–0005 VERIFIED, 0006 CONDITIONAL, 0007 VERIFIED; unchanged), and FLAWS `0.1.0`
+   (its header and FLAW-0001).
+8. ADR-0011: D1–D12 in full, the `s2_grammar` 0.1.0 amendment and Al's rulings on PR 33; later,
+   for their form, the 0.7.0 amendment and Al's rulings on PR 39.
+9. The crate:
+   - `grammar.rs` (the module docs, the polynomials, the presentations, the derivation, the plan,
+     the config, `prepare_with`, `inject`, `compose`, `realizes`);
+   - `plan.rs` and `lib.rs`;
+   - `template.rs`'s `Producer`, `Target`, `FlawSpec`, `exact_keys`, `parse_spec`, `check_spec`,
+     `Injection`, `Prepared`, `RESERVED_DIALS` and `assemble`;
+   - `harness.rs`, `build.rs`, `input-set.txt`;
+   - the grammar tests' helpers, the version facts and the FLAW-0001 test;
+   - the goldens test and both READMEs' heads;
+   - packet 8's probes and packet 14's README and production scripts.
+
+They agree with one another and with the tree, apart from two statements that an event after
+STATE was written made stale: PR 39's merge left the 0.7.0 escalation "awaiting the merge" and
+the Gate S2 table's S2.1 row "PR pending". Both are corrected in this revision.
+
+**ORIENT gate GREEN**, 2026-11-02T21:34:13Z–21:35:03Z, at `009bb85` with the declared append:
+- **The launch:** detached, through the wrapper script Session 53 used (copied into this
+  session's orientation root), started by `Start-Process` of Git Bash, stdout redirected to
+  `gate.log`; `gate.err` 0 bytes.
+- **The result:** exit 0; 8,938 Lean jobs; fourteen axiom lines for fourteen audited declarations,
+  each within the standard three; fmt, clippy and every test (151 across the workspace, the
+  generate crate's 53 among them); every tracked text file LF; the register cross-reference
+  check (CLAIM 7, FLAW 14, S- 81, none undefined) and the 65-row freeze register (`Ran 8 tests …
+  OK`).
+- **The log:** `gate.log`, SHA-256
+  `9272159f4f7c9d88e25810c9cfd075765e52e88648c4a400003c1d330c910dfc`, 18,032 bytes.
+- **Timing:** 50 seconds on a warm disk cache. It ran while items 7–9 were being read and had
+  ended before any source was edited and before any Lean process of the session started (the
+  probes began at 21:46:32Z).
+
+**NEXT survived ORIENT.** PR 39 was merged with a merge commit, and no later ruling exists, so
+nothing was recorded before the build. NEXT's step 3 asked for probes first; they ran before any
+design in the crate.
+
+### Entry 4 — `s2_grammar` 0.8.0, built (S2 ordering step 4, continued: the second grammar, `ineq_chain`, with its control and FLAW-0001, probes first)
+
+All on branch `claude/s2-grammar-0.8.0`, from `main` `009bb85`:
+- **The probes** (`analysis/s2-generate-15/evidence/lean-probe/`). They were hand-written, with an
+  authoring aid that computes the normal forms, and compiled one Lean process at a time from
+  `lean/`.
+  - Run 1 (21:46:32Z–21:48:08Z, 13 probes) found `Mathlib.Data.Real.Basic` deprecated at the pin.
+  - Run 2 (21:50:32Z–21:53:05Z, 15 probes) imports `Mathlib.Basic.Real.Basic`.
+  - Each atom closes a merged step by `linarith` with its lemma. A falsified step fails first at
+    its own `calc` line. A step left true by its perturbation builds, and moves the first error
+    to the next line. A local perturbation drew a second error even where the next step was
+    true. A 256-step control builds in 43 s.
+- **Commit 1** `677c8165fa94260d1ac2842c2db2be57be5a6daa` (22:04:54Z), the producer:
+  - `engine/generate/src/ineq.rs` (new): the atom library (ten atoms of three families), the
+    merged normal forms, the derivation on `grammar/ineq_chain/step/<k>` and
+    `grammar/ineq_chain/lemma/<j>`, the plan, ground truth by construction, and FLAW-0001
+    `propagated` and `local` read for inequalities. A target is admitted only when a grid point
+    falsifies its step and its expression is unique in the site's text, and the point is
+    recorded as the `witness` dial;
+  - `src/grammar.rs`: `GrammarVersion::V0_8_0`, `grammars`, `realizes_on`, the dispatch,
+    `sum_join` crate-visible, `control_reference` by grammar;
+  - `src/lib.rs`, the crate README, `tests/ineq.rs` (new, 12 tests), and `tests/grammar.rs`
+    (the version facts at 0.8.0, the existence assertion at `"0.9.0"`, `ineq_chain` refused under
+    0.7.0).
+
+  `cargo fmt`, `cargo clippy -D warnings` and the crate's 65 tests were clean at the commit. The
+  new tests passed on their first run, so three mutations of `ineq.rs` were run, each restored
+  byte for byte (SHA-256 `430d339e…`); each failed the new tests (`evidence/mutations/`).
+- **Commit 2** `d40788c7c5e747af8c7cc7acea3f13936b02e7ca` (22:12:48Z), the 10 goldens:
+  - **The cases**, on `ineq_chain` at seed 7: the controls at (4, 0) and (24, 2), informal and
+    formal; FLAW-0001 `propagated` and `local` `sign` at (4, 0), informal, formal and pair.
+  - **Production.** `generate --dry-run` at commit 1 (`evidence/goldens-run15.py`):
+    - run A, 22:05:29Z–22:07:56Z, all 10 cases;
+    - run B, refused from its third case (exit 2: "engine_commit does not identify the
+      checked-out producer input engine/generate/tests/goldens.rs"), because that file had been
+      edited during the run (CONFUSIONS);
+    - run B2, 22:09:07Z–22:11:35Z, on the restored tree, all 10 cases.
+
+    `evidence/goldens-copy15.py` compared A and B2 byte for byte: every file and observation
+    identical, one engine commit, every verdict PASS. Its report is
+    `evidence/goldens-production-report.json` (SHA-256
+    `5bf425fe2e6b0a9d884197954685b887571389462f3220d670d619c4f14f235f`, 40,944 bytes).
+  - **What they hold.** Seed 7's short chain is four squares, so the statement is `0 \le 2x^2 +
+    2xy + 3y^2 - 2x + 3`. Both FLAW-0001 cases sit at step 1 with the constant's sign flipped
+    (`1` to `-1`; span `[61, 73)`, line 5), witnessed at `(0, 0)`. The formal builds fail first
+    at line 5 (check K): `propagated` then at line 4 (`calc.step`), `local` nowhere else —
+    its next step is true and its hint proves it. The controls build with `[propext,
+    Classical.choice, Quot.sound]`.
+  - The commit also carries the goldens README (120 cases, a 0.8.0 section) and the count pinned
+    in `tests/goldens.rs`.
+- **Commit 3** (this one): the packet `analysis/s2-generate-15/`, ADR-0011 *Amendments*, STATE
+  and this block. The packet holds the README, the probes with both runs, the production
+  scripts, the three run summaries, the report, `cargo-audit.txt`, `cargo-deny-check.txt`, and
+  the mutation script with its logs.
+
+**Checks and where the evidence lives.**
+- `cargo audit` (0.22.2, 22:07:48Z; advisory-db `263a4d951a0867d4bddc29dddd6d59427c78f9a7`,
+  1,402 advisories; 35 crate dependencies; `Cargo.lock` unchanged) reported no vulnerability.
+  `cargo deny check` (0.20.2, 22:07:50Z) reported advisories, bans, licenses and sources ok.
+- **The security review** (the `rust-security-audit` skill, applied to commit 1's diff; packet
+  15) records no new finding:
+  - no `unwrap`, `expect`, `panic!` or `unsafe` in the new module, and every index guarded by a
+    validated invariant;
+  - exact integer evaluation, no floating point in a decision;
+  - FINDING-018's scope gains the new module's helpers;
+  - `clippy::pedantic`, read as information, puts 43 style warnings on `ineq.rs` and nothing
+    behavioral.
+- **The external root** `C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-080-20261102T2204Z\` holds
+  the three production directories (every receipt, including run B's refusals), the commit
+  messages, the ADR amendment's source, the NEXT section's source and its replacement script,
+  and the set-aside edit of `tests/goldens.rs` (SHA-256 `a699a745…`).
+- **The orientation root** `C:\Users\LEET\Codex\Temp\syndeom-orient-20261102T2133Z\` holds the
+  orientation receipt, the gate wrapper, log and stderr, the disclosure's scripts and entries as
+  appended, the header-completion script, and the two probe logs.
+
+PHASE / GATE: S2 — GENERATOR / Gate S2 OPEN. S2.1–S2.4 are in progress: this is the fifteenth
+implementation session (ADR-0011 D11). `ring_chain` realizes every v0.1 class D6 assigns a grammar
+for which it has material, and the second grammar, `ineq_chain`, opens with its control and
+FLAW-0001. `ineq_chain`'s FLAW-0005 (next) and its other v0.1 classes, the grammars `case_split`
+and `nat_induction`, and the sweep remain. Gate S1 is CLOSED (Session 29).
+ORIENT: Entry 3. ADR-0008 D1 steps 1–5 by the preflight, synchronized at fetched `origin/main`
+`009bb85e6dad266b47257b7a36d688a35ced5f52`, tree `603b59dd…`; step 6's reads; the ORIENT gate
+GREEN 21:34:13Z–21:35:03Z; NEXT survived.
+ADVANCED:
+- **`s2_grammar` 0.8.0** (S2.1–S2.4 in progress): the second grammar, `ineq_chain`, with its
+  control and FLAW-0001 `propagated` and `local`, built probes first.
+  - Ten true atoms of three families; each step adds one atom to a merged normal form and is
+    closed by `linarith` with the atom's lemma.
+  - FLAW-0001 is read for inequalities: a target is admitted only when a recorded grid point
+    falsifies its step. `constant` is never admitted and is refused.
+  - 10 goldens from two byte-identical runs; 65 tests; three mutations caught; clippy, audit and
+    deny clean.
+  - `ring_chain`'s bytes are unchanged, and the 110 earlier goldens regenerate.
+- **Reconciliations**: STATE's 0.7.0 escalation and its S2.1 row, brought to PR 39's merge.
+BELIEF DELTAS:
+- **An inequality chain can keep its lines short.** Each step adds one atom to a merged normal
+  form, so the file grows linearly. Session-start me pictured a sum of summands rewritten term by
+  term, which grows quadratically. Evidence: the 256-step probe (longest line 175 characters,
+  43 s).
+- **`linarith` with the atom's lemma closes every step.** `nlinarith` adds nothing and fails
+  without a hint, and `positivity` takes no step `a ≤ b`. Session-start me expected `nlinarith`
+  for the squares. Evidence: `s2i_ic_atoms`, `s2i_ic_positivity`.
+- **The pinned Mathlib deprecates `Mathlib.Data.Real.Basic`** (since 2026-08-27) for
+  `Mathlib.Basic.Real.Basic`. Evidence: probe run 1's warning and the module's own text.
+- **FLAW-0001's operations do not all make an inequality false.** On this grammar `constant` never
+  does, because every constant is positive. Session-start me assumed `ring_chain`'s kinds carry
+  over unchanged. Evidence: `s2i_ic_local_constant_true` (the error moved), the derivation test,
+  the refusal test.
+- **Under `local`, a second kernel error depends on the next step's certificate, not on its
+  truth.** A true next step still failed in the probe; seed 7's golden shows no second error.
+  Session-start me expected two errors, as on `ring_chain` (reading 94). Evidence:
+  `s2i_ic_local_sign_abs`; the golden's build log.
+- **The provenance check refuses a production the moment any producer input differs from the
+  named commit, a test file included.** Evidence: run B's refusals.
+CONFUSIONS:
+- **I edited `engine/generate/tests/goldens.rs` while golden run B was running.** The provenance
+  check refused the run from its third case. Cost: one repeated run (about 2.5 minutes), and the
+  edit set aside and restored. Fix for a successor: edit nothing under `engine/generate/` —
+  tests and READMEs included, since the input set is the whole directory — while a production
+  runs; make the count and README edits after both runs end. NEXT's step 5 says so.
+- **Probe run 1 imported the deprecated `Mathlib.Data.Real.Basic`.** I took the path from habit,
+  not from the pinned tree (SD7). Cost: one extra probe run; nothing was built on it. Fix: read
+  the pinned Mathlib's module for any import before writing it; NEXT's step 3 names the import.
+- **Entry 1 called the launch "byte-identical" without the qualifier "as rendered".** Entry 3
+  corrects it. Fix: say "as rendered to the executor" in the disclosure.
+HONESTY CHECK:
+- No register status changed. The packet's measurements are implementation evidence, not CLAIMS.
+- Two statements that PR 39's merge left stale were corrected plainly: the 0.7.0 escalation and
+  the S2.1 row.
+- FLAW-0001 read for inequalities (readings 179–184) is flagged as readings, not settled.
+  Reading 181 qualifies Al's ruling on reading 94 for this grammar; it does not restate it.
+- The refused production run is recorded, not hidden; no golden depends on it.
+- The tests passed on their first run, so three mutations were run to show they can fail.
+LEAKAGE CHECK: checked, not assumed. `contact/` was not opened, and no `groundtruth/` item was
+read. The atom library is executor-authored: squares, two-term AM-GM and the triangle inequality,
+as Mathlib states them. No real proof, human or AI-generated, informed any choice. Verdict: no
+leakage.
+DETERMINISM CHECK:
+- Every golden regenerates byte for byte from its config, seed and recorded observation under the
+  producer and version its manifest names. Runs A and B2 at one commit agree file by file and
+  observation by observation.
+- 0.8.0's new labels are named and fixed; FLAW-0001 draws on `injector/FLAW-0001/1`. The witness
+  search is exact integer arithmetic over a fixed grid in a fixed order. No floating-point value
+  enters a generation decision.
+- No wall-clock value enters an artifact; receipts carry durations only.
+- Nothing entered CLAIMS, so there is nothing to quarantine.
+MANIFEST CHECK:
+- Every golden manifest passed `Manifest::check` with its bytes before it was written: `origin`
+  synthetic, `derivation` by-construction, `taxonomy_version` 0.1.0.
+  - The controls are `proof_status: valid`, `correct: true`.
+  - Every FLAW-0001 case is `proof_status: invalid`, `correct: false`, one instance,
+    `YES-KERNEL`: `propagated` fatal, `local` repairable.
+  - `statement_status` is `lean-kernel`, the formal control of the case's length as reference;
+    the formal controls name themselves.
+- Nothing synthetic is labeled real.
+- "Proven" was applied to nothing.
+DRIFT CHECK:
+- No verdict on any paper (SD3), and no understanding claims (SD17).
+- No detector was chosen or tuned. The witness is the generator's own check that its flaw is a
+  flaw, not a detector. There was no referee contact (SD13).
+- No S3 work, and the SD8 quarantine is untouched.
+NEXT-SINGLE-ACTION: STATE's NEXT. After this pull request merges, with any ruling recorded first:
+`s2_grammar` 0.9.0, FLAW-0005 `unshown` on `ineq_chain` (D5, D6), probes first. It needs atoms
+that need a hypothesis (D6's example: a non-zero divisor), the hypothesis derived in a step of its
+own, and that step removed. Its goldens come from two byte-identical runs, with no producer input
+edited during production. Then `ineq_chain`'s other v0.1 classes, `case_split` and
+`nat_induction`; the sweep (D11) when the grammars realize their v0.1 classes.
+ESCALATIONS:
+- **This pull request:** review and merge with a merge commit, so that `677c8165…`, the
+  `s2_grammar` 0.8.0 goldens' `engine_commit`, stays a real commit on `main`.
+- **Readings 174–188** in `analysis/s2-generate-15/README.md` (ADR-0011 *Amendments*), in
+  particular:
+  - 174: the chain adding one atom to a merged normal form;
+  - 179, 183, 184: FLAW-0001 read for inequalities, a target admitted only when a recorded grid
+    point falsifies its step;
+  - 180: `constant` never admitted on `ineq_chain`;
+  - 181: `local`'s second kernel error likely, not necessary.
+- **Findings:** FINDING-018 (informational, backlog; scope extended to the new module);
+  FINDING-015 (standing; not extended to the grammar); FINDING-016 and FINDING-017 (standing).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: natural boundary. The scope STATE's NEXT named — `ineq_chain` with its control and
+FLAW-0001, probes first, with its goldens — is built, and the pull request is open for Al's
+review. Repo green: the gate on the committed tree is recorded in the pull request and under the
+external root, not in the tree it certifies.
+**Memory writes:** none. The session is not an examination, so a hazard could have been written
+(the deprecated Real import; the refusal of a production whose inputs were edited). Each is
+recorded in the repository instead — NEXT's steps 3 and 5, this block — and a write would
+change a memory digest and make the next disclosure owe verbatim reproduction.
+
+SESSION 54 ADDENDUM — AL'S RULINGS ON PR 40. Received 2026-11-02 UTC (2026-11-02
+America/New_York), in this session's conversation after PR #40 opened. Recorded in a new commit on
+the same branch, with no force-push. Transcribed verbatim from Al's message as rendered to the
+executor; the message's first line is its header. The copy is `owner-rulings-pr40.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-080-20261102T2204Z\` (1,965 bytes, SHA-256
+`2c1c4d771ad163d9f02fa5a6fec7f97692bcc3b09684a3459ce0fe6beb7f4c73`):
+
+~~~text
+Rulings on PR #40 / s2_grammar 0.8.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 174 through 188 are accepted as read.
+
+On reading 181, record also: the ruling on reading 94 is narrowed to chains of identities, where a local perturbation necessarily produces a second kernel error at the following step. On a chain of inequalities the following step fails exactly when its own tactic does not certify it from the perturbed expression, which can happen whether that step is true or false, so a local instance shows one kernel error or two. The instance is one either way and its site is the first error; S3 reads a count of errors as a count of lines whose tactic failed — not of instances, and not of false steps.
+
+On reading 180, record also: the refusal of constant stands for 0.8.0. If the constant kind is taken up on inequalities, it is the lowering of a constant — FLAWS.md’s off-by-one bound — admitted where the witness grid shows the step false, as every kind is; not atoms that carry negative constants. It comes in its own version after the grammars’ v0.1 classes, if S3’s cells ask for it.
+
+On FLAW-0001 propagated on inequalities, record also: a propagated instance’s changed conclusion can imply the claim — as at seed 7, where the chain ends at a right side lowered by 2 — or fail to; the theorem-level calc.step goal is then a true inequality left unproven or a false one, and the fatal defect is the false step either way. Whether S3’s cells stratify by this relation is for the cell-design ADR; if they do, the record gains it in a later version.
+
+Standing, after Sessions 46 and 54: no producer input — anything under engine/generate/ — is edited while a production run is in flight; the provenance check is the backstop, not the guard.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `009bb85`, left there at the close so
+that a successor's preflight would find it synchronized. It was switched back to
+`claude/s2-grammar-0.8.0` at `ace6305…`, clean and in sync with its remote, after a fresh fetch at
+2026-11-02T22:39:18Z (`origin/main` still `009bb85`). PR 40 had no review and no comment but the
+executor's own.
+
+How each ruling is applied:
+- **Readings 174–188 accepted as read.** Recorded in ADR-0011 *Amendments*; in STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence); and
+  here. Nothing regenerated.
+- **The note on reading 181.** Recorded in ADR-0011 *Amendments* and in STATE. The ruling on
+  reading 94 is narrowed to chains of identities. On inequalities a local instance shows one kernel
+  error or two: the following step fails exactly when its own tactic does not certify it from the
+  perturbed expression, whether that step is true or false. S3 reads a count of errors as a count
+  of lines whose tactic failed — not of instances, and not of false steps. 0.8.0 already records
+  the `local` instance so (one instance, its site the first error, confirmed by check K), so no
+  byte changes. It confirms this block's BELIEF DELTAS item on `local`: the second error depends
+  on the next step's certificate, as the probes and seed 7's golden showed.
+- **The note on reading 180.** Recorded in ADR-0011 *Amendments*, in STATE and in NEXT's carried
+  items. The refusal of `constant` stands for 0.8.0. If the kind is taken up on inequalities it is
+  the lowering of a constant — FLAWS.md's off-by-one bound — admitted where the witness grid shows
+  the step false, in its own version after the grammars' v0.1 classes if S3's cells ask for it;
+  not atoms that carry negative constants.
+- **The note on FLAW-0001 `propagated`.** Recorded likewise. A propagated instance's changed
+  conclusion can imply the claim (seed 7's chain ends at a right side lowered by 2) or fail to;
+  the theorem-level `calc.step` goal is then a true inequality left unproven or a false one, and
+  the fatal defect is the false step either way. Whether S3's cells stratify by this relation is
+  for the cell-design ADR; the record gains it in a later version only if they do.
+- **The standing rule.** No producer input — anything under `engine/generate/` — is edited while a
+  production run is in flight; the provenance check is the backstop, not the guard. Recorded in
+  STATE's *Standing rulings* and in NEXT's step 5. It answers this block's first CONFUSIONS item.
+- **This session's executor model, under the standing rule of Al's rulings on PR 39.** Claude Opus
+  5.5 (`claude-opus-5-5`) from the launch through this addendum, with no change within Session 54.
+- **The record commit** (this one) holds ADR-0011 *Amendments*, STATE and this addendum. The gate
+  on the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+**The memory store is unchanged since the disclosure**, re-hashed at 2026-11-02T22:40:22Z after
+the rulings arrived:
+- the whole index, `0f7e69ab…8995` (15,471 bytes, 110 lines);
+- the matched lines 85, 86, 88, 89, 106 and 107, `0418e621…534c` (1,198 bytes; 104 withheld);
+- `project_syndeom.md`, `ce2ce6de…2cc0` (10,957 bytes).
+
+This session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, check, dial or register status changed; nothing was regenerated.
+- Determinism: unchanged, since nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `677c8165…`, the `s2_grammar` 0.8.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **Findings:** FINDING-018 (informational, backlog; scope extended to the new module);
+  FINDING-015 (standing; not extended to the grammar); FINDING-016 and FINDING-017 (standing).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
