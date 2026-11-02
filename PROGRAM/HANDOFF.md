@@ -13138,3 +13138,89 @@ CONFUSIONS (added):
 
 STOP-REASON (unchanged): natural boundary, after the gate on the fixed commit, the recheck and the
 pull request.
+
+SESSION 53 ADDENDUM 2 — AL'S RULINGS ON PR 39. Received 2026-11-02 UTC (2026-11-02
+America/New_York), in this session's conversation after PR #39 opened. Recorded in a new commit on
+the same branch, with no force-push. Transcribed verbatim from Al's message as rendered to the
+executor; the message carried no header line. The copy is `owner-rulings-pr39.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-070-20261102T1950Z\` (2,142 bytes, SHA-256
+`fd7f01313dbce6c4eadb06b99f9f4b5040e3bd88286633b6764e472a4bd97195`):
+
+~~~text
+Readings 164 through 173 are accepted as read.
+
+On readings 168 and 172, record also: a FLAW-0011 composite’s records label the artifact — its statement true, its proof invalid — and do not locate defective bytes; the embedded instance’s records locate the defect, so a composite’s formal record on a file whose bytes are the control’s is consistent. On a producer whose composite shares its files and its ground truth with its embedded class’s cell, the two cells are one distribution of artifacts under two labels: S3 does not treat them as separate conditions or count agreement between them as evidence. What the FLAW-0011 cell measures comes from its contrast with a false-statement cell of matched surface, which S3’s cell-design ADR defines.
+
+On NEXT: the ineq_chain opening stands as written — its control and FLAW-0001, probes first; FLAW-0005 follows in its own version.
+
+On the provisional header (CONFUSIONS, Sessions 52 and 53): no amendment. ADR-0005 Amendment 3’s two requirements — the UTC date of the append, marked provisional — are the whole rule; the completion script replaces the line the session itself wrote and asserts the disclosure unchanged. Session 52’s request for an exact form is withdrawn.
+
+On Session 52’s read-order deviation: audited, no consequence; Session 52 was not an examination and read nothing of STATE or the tree early. Standing: the disclosure’s citation check prints digests and line numbers only, never HANDOFF text.
+
+On PR 38, record also: Session 52’s executor changed from Claude Fable 5.1 to Claude Opus 5.5 after the rulings commit 7bec1c4; the gate reading on 7bec1c4, the step-7 recheck, the push and the pull-request comment ran on Opus 5.5, and Session 52’s HANDOFF block, which names Fable 5.1, is completed by this note. Standing: a change of executor model within a session is recorded in the tree — in that session’s HANDOFF block or, when it comes after the session’s last commit, in the next records commit — as ADR-0005 Amendment 1 recorded one.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `22aac6e`, left there at the close so
+that a successor's preflight would find it synchronized. It was switched back to
+`claude/s2-grammar-0.7.0` at `c2e7b5c…`, clean and in sync with its remote after a fresh fetch at
+2026-11-02T20:37:04Z (`origin/main` still `22aac6e`). PR 39 had no review and no comment but the
+executor's own.
+
+How each ruling is applied:
+- **Readings 164–173 accepted as read.** Recorded in ADR-0011 *Amendments*; in STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence); and
+  here. Nothing regenerated.
+- **The note on readings 168 and 172.** Recorded in ADR-0011 *Amendments* and in STATE:
+  - a composite's records label the artifact and do not locate defective bytes, so its formal
+    record on a file whose bytes are the control's is consistent;
+  - a composite cell that shares its files and ground truth with its embedded class's cell is one
+    distribution under two labels. S3 does not treat them as separate conditions or count
+    agreement between them as evidence;
+  - the FLAW-0011 cell's measure comes from its contrast with a false-statement cell of matched
+    surface, which S3's cell-design ADR defines.
+
+  No byte changes.
+- **NEXT.** STATE's NEXT now says the `ineq_chain` opening stands as written (its control and
+  FLAW-0001, probes first) and that FLAW-0005 follows in its own version. The escalation is
+  closed.
+- **The provisional header.** No amendment: ADR-0005 Amendment 3's two requirements are the whole
+  rule. Session 52's request for an exact form is withdrawn. This session's CONFUSIONS item is
+  answered, and the escalation in STATE is closed.
+- **Session 52's read-order deviation.** Audited, no consequence; STATE's escalation is marked
+  so. The standing rule — the disclosure's citation check prints digests and line numbers only,
+  never HANDOFF text — is recorded in STATE's *Standing rulings* and in NEXT's step 1.
+- **PR 38's executor model.** Recorded: Session 52's executor changed from Claude Fable 5.1 to
+  Claude Opus 5.5 after the rulings commit `7bec1c4`. The gate reading on `7bec1c4`, the step-7
+  recheck, the push and the pull-request comment ran on Opus 5.5. **Session 52's HANDOFF block,
+  which names Fable 5.1, is completed by this note.** The standing rule — a change of executor
+  model within a session is recorded in the tree — is recorded in STATE's *Standing rulings* and
+  in NEXT's step 1.
+- **This session's executor model, under that rule.** Claude Opus 5.5 (`claude-opus-5-5`) from
+  the launch through this addendum, with no change within Session 53.
+- **The record commit** (this one) holds ADR-0011 *Amendments*, STATE and this addendum. The gate
+  on the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+**The memory store is unchanged since the disclosure**, re-hashed at 2026-11-02T20:40:46Z after
+the rulings arrived:
+- the whole index, `0f7e69ab…8995` (15,471 bytes, 110 lines);
+- the matched lines 85, 86, 88, 89, 106 and 107, `0418e621…534c` (1,198 bytes; 104 withheld);
+- `project_syndeom.md`, `ce2ce6de…2cc0` (10,957 bytes).
+
+This session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, check, dial or register status changed; nothing was regenerated.
+- Determinism: unchanged, since nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `97c6cc6c…`, the `s2_grammar` 0.7.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **Findings:** FINDING-018 (informational, backlog; scope not extended); FINDING-015
+  (standing; not extended to the grammar); FINDING-016 and FINDING-017 (standing).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
