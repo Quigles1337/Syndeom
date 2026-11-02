@@ -120,6 +120,14 @@
 //! confirmed by `assemble` as for the template (every record of the embedded instance passes;
 //! the statement's truth is kernel-checked by construction, D7). Every composite is therefore an
 //! invalid proof of a true statement. 0.7.0 draws on no new RNG label.
+//!
+//! **0.8.0 — the second grammar, `ineq_chain` (D6), with its control and FLAW-0001** (Al's rulings
+//! on PR 39: the opening stands as written; FLAW-0005 follows in its own version). The grammar
+//! lives in [`crate::ineq`]; this module parses its config with the shared checks, refuses every
+//! class but FLAW-0001 on it ([`realizes_on`]) and hands it over. A config's `grammar` names
+//! `ring_chain` or, from 0.8.0, `ineq_chain` ([`grammars`]). `ring_chain`'s bytes and draws under
+//! 0.8.0 are its 0.7.0 ones: only the version, and with it the id and the manifest, differ. The
+//! truth reference names each grammar's own main declaration, `syndeom_s2_grammar_<grammar>`.
 
 use std::cmp::Reverse;
 use std::collections::{BTreeMap, BTreeSet};
@@ -141,7 +149,7 @@ use crate::template::{
 
 pub const GENERATOR_ID: &str = "s2_grammar";
 /// The producer version `generate` emits (ADR-0011 D1).
-pub const GENERATOR_VERSION: &str = "0.7.0";
+pub const GENERATOR_VERSION: &str = "0.8.0";
 /// The one grammar of 0.1.0 (ADR-0011 D6).
 pub const RING_CHAIN: &str = "ring_chain";
 /// The main declaration's name (ADR-0011 D2: `syndeom_s2_<producer>_<theorem>`).
@@ -205,10 +213,11 @@ pub enum GrammarVersion {
     V0_5_0,
     V0_6_0,
     V0_7_0,
+    V0_8_0,
 }
 
 impl GrammarVersion {
-    pub const CURRENT: GrammarVersion = GrammarVersion::V0_7_0;
+    pub const CURRENT: GrammarVersion = GrammarVersion::V0_8_0;
 
     pub fn parse(s: &str) -> Option<GrammarVersion> {
         match s {
@@ -219,6 +228,7 @@ impl GrammarVersion {
             "0.5.0" => Some(GrammarVersion::V0_5_0),
             "0.6.0" => Some(GrammarVersion::V0_6_0),
             "0.7.0" => Some(GrammarVersion::V0_7_0),
+            "0.8.0" => Some(GrammarVersion::V0_8_0),
             _ => None,
         }
     }
@@ -232,6 +242,7 @@ impl GrammarVersion {
             GrammarVersion::V0_5_0 => "0.5.0",
             GrammarVersion::V0_6_0 => "0.6.0",
             GrammarVersion::V0_7_0 => "0.7.0",
+            GrammarVersion::V0_8_0 => "0.8.0",
         }
     }
 
@@ -509,7 +520,7 @@ pub fn mono_latex(u: Term, s: Style) -> String {
 }
 
 /// A sum of signed parts: `a + b - c`, with a leading `-` for a negative first part.
-fn sum_join(parts: &[(bool, String)]) -> String {
+pub(crate) fn sum_join(parts: &[(bool, String)]) -> String {
     let mut out = String::new();
     for (k, (neg, s)) in parts.iter().enumerate() {
         if k == 0 {
@@ -931,7 +942,8 @@ pub fn plan_of(d: &Derivation, truth: StatementStatus) -> Plan {
 
 /// D7: the reference of a grammar instance's `statement_status` — the artifact id of the
 /// instance's control with target `formal` (the same grammar, length and seed; no flaw, no
-/// padding) and the main declaration.
+/// padding) and the grammar's main declaration, `syndeom_s2_grammar_<grammar>` (D2; for
+/// `ring_chain` [`MAIN_DECLARATION`], so its references are unchanged by 0.8.0).
 pub fn control_reference(
     version: GrammarVersion,
     grammar: &str,
@@ -948,7 +960,7 @@ pub fn control_reference(
     });
     let hash = config_hash(&control).map_err(|e| format!("the control config: {e}"))?;
     Ok(format!(
-        "{}:{MAIN_DECLARATION}",
+        "{}:syndeom_s2_grammar_{grammar}",
         artifact_id(GENERATOR_ID, version.as_str(), &hash, Some(seed))
     ))
 }
@@ -1031,7 +1043,7 @@ pub fn prepare_with(
     let cfg = parse_config(config)?;
     let hash =
         config_hash(config).map_err(|e| format!("the config cannot be canonicalized: {e}"))?;
-    if cfg.grammar != RING_CHAIN {
+    if !grammars(version).contains(&cfg.grammar.as_str()) {
         return Err(format!(
             "no grammar {:?} in s2_grammar {}",
             cfg.grammar,
@@ -1082,13 +1094,25 @@ pub fn prepare_with(
         ));
     }
     if let Some(spec) = cfg.flaws.first()
-        && !realizes(version, &spec.class)
+        && !realizes_on(version, &cfg.grammar, &spec.class)
     {
-        return Err(format!(
-            "{} is not realized by s2_grammar {}",
-            spec.class,
-            version.as_str()
-        ));
+        return Err(if cfg.grammar == RING_CHAIN {
+            format!(
+                "{} is not realized by s2_grammar {}",
+                spec.class,
+                version.as_str()
+            )
+        } else {
+            format!(
+                "{} is not realized on {} by s2_grammar {}",
+                spec.class,
+                cfg.grammar,
+                version.as_str()
+            )
+        });
+    }
+    if cfg.grammar == crate::ineq::INEQ_CHAIN {
+        return crate::ineq::prepare(version, &cfg, config, hash, seed_value);
     }
     let n = cfg.n_steps as usize;
     let m = cfg.n_lemmas as usize;
@@ -2520,9 +2544,30 @@ fn compose(
     Ok((plan, inj, composite))
 }
 
-/// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0; FLAW-0007
-/// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0; FLAW-0010 `a` from 0.4.0;
-/// FLAW-0003 `cycle` from 0.5.0; FLAW-0004 from 0.6.0; FLAW-0011, the composite, from 0.7.0.
+/// The grammars `s2_grammar` carries, by version (ADR-0011 D6): `ring_chain` from 0.1.0;
+/// `ineq_chain` from 0.8.0.
+pub fn grammars(version: GrammarVersion) -> &'static [&'static str] {
+    if version >= GrammarVersion::V0_8_0 {
+        &[RING_CHAIN, crate::ineq::INEQ_CHAIN]
+    } else {
+        &[RING_CHAIN]
+    }
+}
+
+/// The classes a grammar realizes, by version: `ring_chain`'s are [`realizes`]'s; `ineq_chain`
+/// realizes FLAW-0001 from 0.8.0 (its opening: its control and FLAW-0001, Al's rulings on PR 39).
+pub fn realizes_on(version: GrammarVersion, grammar: &str, class: &str) -> bool {
+    match grammar {
+        RING_CHAIN => realizes(version, class),
+        crate::ineq::INEQ_CHAIN => version >= GrammarVersion::V0_8_0 && class == "FLAW-0001",
+        _ => false,
+    }
+}
+
+/// The classes `s2_grammar` realizes on `ring_chain`, by version (ADR-0011 D6): FLAW-0001 in
+/// 0.1.0; FLAW-0007 `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0; FLAW-0010 `a`
+/// from 0.4.0; FLAW-0003 `cycle` from 0.5.0; FLAW-0004 from 0.6.0; FLAW-0011, the composite, from
+/// 0.7.0; 0.8.0 adds no class on `ring_chain`.
 pub fn realizes(version: GrammarVersion, class: &str) -> bool {
     match version {
         GrammarVersion::V0_1_0 => class == "FLAW-0001",
@@ -2548,7 +2593,7 @@ pub fn realizes(version: GrammarVersion, class: &str) -> bool {
                 | "FLAW-0010"
                 | "FLAW-0013"
         ),
-        GrammarVersion::V0_7_0 => matches!(
+        GrammarVersion::V0_7_0 | GrammarVersion::V0_8_0 => matches!(
             class,
             "FLAW-0001"
                 | "FLAW-0003"

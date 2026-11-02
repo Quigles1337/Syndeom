@@ -18,7 +18,10 @@
 //!   replaced by a drawn hedge before the bare claim, the `calc` line's tactic omitted so that
 //!   the kernel reports an unsolved goal at that line); 0.7.0: FLAW-0011, the composite, on it
 //!   (one embedded gap-or-fatal instance applied by its class's own injector, the composite's
-//!   records at the statement).
+//!   records at the statement); 0.8.0: the second grammar, `ineq_chain` ([`ineq`]), with its
+//!   control and FLAW-0001 (inequalities over ℝ chained from a fixed library of true atoms, each
+//!   step closed by `linarith` with its atom's lemma; a perturbation admitted only when a recorded
+//!   grid point shows the perturbed step false).
 //! - D8: the Lean harness ([`harness`]).
 //! - D9, as amended by Al's ruling 5 on PR 26: the running binary's provenance ([`provenance`]).
 //!
@@ -29,6 +32,7 @@
 
 pub mod grammar;
 pub mod harness;
+pub mod ineq;
 pub mod plan;
 pub mod provenance;
 pub mod rng;

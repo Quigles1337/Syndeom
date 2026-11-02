@@ -18,7 +18,9 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks K and T
   (D8, D9);
 - `src/grammar.rs` — the producer `s2_grammar`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0,
-  0.5.0, 0.6.0 and 0.7.0: the grammar `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
+  0.5.0, 0.6.0, 0.7.0 and 0.8.0: the shared config and its checks, the grammars each version
+  carries (`grammars`) and the classes each realizes (`realizes_on`), and the grammar
+  `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
   presentations a chain is built from), the derivation (`grammar/plan`, `grammar/step/<k>`,
   `grammar/lemma/<j>`), the plan with its lemma steps, ground truth by construction with the
   control as the truth's reference (D7), FLAW-0001 `propagated` and `local` with generated
@@ -38,6 +40,13 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   the composite (one embedded gap-or-fatal instance of a class the grammar realizes, applied by
   that class's own injector, the composite's records at the statement); the plan is rendered
   and measured by the same renderers and the same `assemble` as the template's;
+- `src/ineq.rs` — from `s2_grammar` 0.8.0, the second grammar, `ineq_chain` (D6): its atom
+  library (three families of true atoms over ℝ), the expressions in merged normal form, the
+  derivation (`grammar/ineq_chain/step/<k>`, `grammar/ineq_chain/lemma/<j>`), the plan with its
+  lemma steps, ground truth by construction with the formal control as the truth's reference
+  (D7), and FLAW-0001 `propagated` and `local` read for inequalities (a perturbation admitted
+  only when a recorded grid point shows the perturbed step false; drawn on
+  `injector/FLAW-0001/1`); rendered and measured by the same renderers and `assemble`;
 - `src/lib.rs` — the producer dispatch: `generate` prepares the producer a config names
   (`theorem`: `s2_template`; `grammar`: `s2_grammar`), `regenerate` and `verify` the producer and
   version a manifest names (`Producer`);
@@ -149,7 +158,7 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   (cosmetic; `nontrivial-true` and `false` refused for lack of material); a pair's instance
   `YES-KERNEL` in both files with `lean_build` commanded `fail`, an informal-only artifact's
   `N/A`; the target `formal` refused; the 0.1.0 to 0.5.0 bytes unchanged.
-- **`s2_grammar` 0.7.0** (Session 53; the version `generate` emits): FLAW-0011, the composite, on
+- **`s2_grammar` 0.7.0** (Session 53): FLAW-0011, the composite, on
   `ring_chain` — the one dial `embedded` lists exactly one FlawSpec of a class FLAW-0001 through
   FLAW-0010 that the grammar realizes, of severity gap or fatal (FLAW-0001 `propagated`,
   FLAW-0003 `cycle`, FLAW-0009 `axiom` with either truth, FLAW-0010 `a` with `claim: true`), the
@@ -158,13 +167,17 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   artifact's byte for byte), and the composite as instance 2, its records at the statement in
   each file the artifact has, `lean_catchable` inherited; every composite an invalid proof of a
   true statement; no new RNG label; the 0.1.0 to 0.6.0 bytes unchanged.
+- **`s2_grammar` 0.8.0** (Session 54; the version `generate` emits): the second grammar,
+  `ineq_chain`, with its control and FLAW-0001 `propagated` and `local` — see *The grammar
+  `ineq_chain`* below; every other class refused on it; `ring_chain` unchanged (its 0.7.0 bytes
+  and draws; only the version, the id and the manifest differ).
 
-The crate regenerates all fourteen producer versions (seven of `s2_template`, seven of `s2_grammar`):
+The crate regenerates all fifteen producer versions (seven of `s2_template`, eight of `s2_grammar`):
 the goldens select the producer and version their manifests name, and `regenerate` and `verify`
-accept any of them. Every seed and the grammar's atom library state their `source`, never under
+accept any of them. Every seed and each grammar's atom library state their `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
-## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0, 0.3.0, 0.4.0, 0.5.0, 0.6.0 and 0.7.0)
+## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0, 0.3.0, 0.4.0, 0.5.0, 0.6.0, 0.7.0 and 0.8.0)
 
 - **The instance.** A config `{"grammar": "ring_chain", "length": {"n_steps", "n_lemmas"},
   "target", "flaws", "padding_ratio"}` (D3; `n_steps` 1 to 256, `n_lemmas` 0 to 32 and at most
@@ -353,6 +366,53 @@ accept any of them. Every seed and the grammar's atom library state their `sourc
   invalid`, `correct: false`); `n_flaws_total` is 2, one per class; every other statistic,
   `lean_build` and `lean_axioms_standard` included, is the embedded artifact's. Padding with a
   composite is refused by the one-spec rule.
+
+## The grammar `ineq_chain` (`s2_grammar` 0.8.0)
+
+Built probes first (`analysis/s2-generate-15/evidence/lean-probe/`).
+
+- **The instance.** A config `{"grammar": "ineq_chain", "length": {"n_steps", "n_lemmas"},
+  "target", "flaws", "padding_ratio"}` (the ranges `ring_chain`'s; `padding_ratio` 0) names an
+  inequality `e_0 ≤ e_n` for all real `x`, `y`, proved as a `calc` chain whose step `k` is
+  `e_{k-1} ≤ e_k`. Step `k` adds one atom, drawn from the stream `grammar/ineq_chain/step/<k>`:
+  `e_k = e_{k-1} + increment`, so every step is true by construction.
+- **The atom library** (`ATOMS`; its `source` the module): the squares `(x - y)^2`,
+  `(x + y)^2`, `(x - 1)^2`, `(y - 1)^2`, `(x + 1)^2`, `(y + 1)^2` (`sq_nonneg`); the two-term
+  AM-GM inequality `2xy ≤ x^2 + y^2`, `2x ≤ x^2 + 1`, `2y ≤ y^2 + 1` (`two_mul_le_add_sq`); the
+  triangle inequality `|x + y| ≤ |x| + |y|` (`abs_add_le`). An AM-GM or triangle step consumes
+  its smaller side, which the statement's left side `e_0` carries: `e_0` is the sum of every
+  step's source (`2xy`, `2x`, `2y`, `|x + y|`; nothing for a square).
+- **Expressions** are merged normal forms — monomials by total degree, then by the exponent of
+  `x`, both descending; then `|x|`, `|y|`, `|x + y|` — so a line never grows with the chain
+  (a 256-step chain's longest line was 175 characters in the probes).
+- **The proof.** Each chain step is `_ ≤ e_k := by linarith [<the atom's lemma>]`, or cites the
+  lemma step that states it (`n_lemmas` of the steps, drawn from `grammar/ineq_chain/lemma/<j>`,
+  each a `theorem … : ∀ x y : ℝ, e_{k-1} ≤ e_k := by intro x y; linarith […]`). The imports are
+  `Mathlib.Basic.Real.Basic` (the pinned Mathlib deprecates `Mathlib.Data.Real.Basic` for it)
+  and `Mathlib.Tactic.Linarith`. A control builds with `[propext, Classical.choice,
+  Quot.sound]`.
+- **Ground truth (D7)**: `value: true`, `method: lean-kernel`, `reference: <artifact_id of the
+  formal control of the same length and seed>:syndeom_s2_grammar_ineq_chain`.
+- **FLAW-0001 `propagated` and `local` (D5), read for inequalities.** The four kinds are
+  `ring_chain`'s operations on the site's right side: `sign`, `coefficient` (an absolute-value
+  term counts as non-constant), `constant` (raise the constant's magnitude, or add `+ 1`),
+  `exponent` (a monomial's `x` or `y` raised where the result is no other term's). A target is
+  admitted only when the perturbed step is false at a point of the witness grid (`x`, `y` in
+  steps of 1/2 from -2 to 2), and its expression occurs once in the site's text; the point and
+  the two sides' values are the record's `witness`. Every constant of a chain is positive, so
+  `constant` is never admitted and is refused. The site — a `linarith`-closed chain step that
+  admits the kind (for `local`, not the last) — then the target are drawn on
+  `injector/FLAW-0001/1`; the term is perturbed in place. `propagated` (fatal) adds every later
+  step's increment to the perturbed expression (restating the lemmas those steps cite), so the
+  chain ends away from the claim of record; `local` (repairable) changes the site alone. Lean
+  reports `linarith`'s failure at the site first (check K), then, for `propagated`, the
+  theorem-level `calc.step` goal; under `local` the next step usually fails too, because its
+  hint certifies only the faithful increment. The records' dials carry `perturbation`, `site`,
+  `monomial` (the term replaced and inserted), `witness`, `inserted`, `replaced` and
+  `original_steps` / `original_fragments`.
+- **Refusals**: every class but FLAW-0001 (later versions; FLAW-0005, the grammar's own class,
+  next), padding, two specs, the `constant` kind, an explicit site that is not an admitting chain
+  step, and `ineq_chain` under a version before 0.8.0.
 
 ## Seeds whose statement is false (0.2.0)
 
