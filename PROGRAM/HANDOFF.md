@@ -12656,3 +12656,56 @@ Al's review. Repo green: the gate on the committed tree is recorded in the pull 
 under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 52 ADDENDUM — AL'S RULINGS ON PR 38 (received 2026-11-02 UTC, 2026-11-02
+America/New_York, in this session's conversation after PR #38 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr38.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-060-20261102T1840Z\`, 1,014 bytes, SHA-256
+`4b40cc327b3685e5f0e7f91c9e7f78f744520c2e63dfd30f60925df08b7e719e`):
+
+~~~text
+Rulings on PR #38 / s2_grammar 0.6.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 150 through 163 are accepted as read.
+
+On reading 153, record also: a false FLAW-0004 on the grammar is not taken now. If S3’s cell design asks for a fatal FLAW-0004 cell, it is realized in its own version after the grammars’ v0.1 classes, as the composite the reading describes — the step’s identity perturbed once, the hedge in place of the justification, the formal line’s tactic omitted — recorded as the FLAW-0004 false instance beside a FLAW-0001 instance at the step, both YES-KERNEL at the site in a pair and N/A in an informal-only artifact, with the fact that the kernel’s message, unsolved goals, does not distinguish the unprovable goal from the merely unproven one. nontrivial-true stays without material on the grammar.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `1344357` — left there at the close
+so that a successor's preflight finds it synchronized — and was switched back to
+`claude/s2-grammar-0.6.0` at `5507bc35…`, clean and in sync with its remote after a fresh fetch
+(`origin/main` still `1344357`); PR 38 had no review and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 150–163 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence) and
+  here. Nothing regenerated.
+- **Reading 153's note** → recorded: a `false` FLAW-0004 on the grammar is not taken now; if S3's cell design asks for a fatal FLAW-0004 cell, it is realized in its own version after the grammars' v0.1 classes, as the composite reading 153 describes — the step's identity perturbed once, the hedge in place of the justification, the formal line's tactic omitted — recorded as the FLAW-0004 `false` instance beside a FLAW-0001 instance at the step, both `YES-KERNEL` at the site in a pair and `N/A` in an informal-only artifact, with the fact that the kernel's message, `unsolved goals`, does not distinguish the unprovable goal from the merely unproven one; `nontrivial-true` stays without material on the grammar. 0.6.0 already refuses both; STATE's NEXT says so.
+  No byte changes.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and under
+  the external root.
+
+**The memory store is unchanged since the disclosure** — re-hashed at 2026-11-02T19:13:45Z, after the rulings
+arrived: the whole index `0f7e69ab…8995` (15,471 bytes, 110 lines), the matched lines
+85, 86, 88, 89, 106 and 107 (`0418e621…534c`, 1,198 bytes; 104 withheld) and
+`project_syndeom.md` (`ce2ce6de…2cc0`, 10,957 bytes). This session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, no check, no dial and no register status changed; nothing regenerated.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `bc093c4b…`, the `s2_grammar` 0.6.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-018** (informational, backlog; scope extended); FINDING-015 (standing; not extended
+  to the grammar), FINDING-016 and FINDING-017 standing.
+- **The post-disclosure read deviation** (Entry 3; CONFUSIONS) stays for Al's audit of the
+  order; the rulings did not mention it.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
