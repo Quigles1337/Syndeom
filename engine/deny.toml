@@ -1,0 +1,20 @@
+# cargo-deny configuration for the `engine/` workspace (ADR-0011 D10, as Al ruled on PR 37:
+# housekeeping). The licence allow-list below was read from `cargo deny list` on the current
+# `Cargo.lock` (Session 52, 2026-11-02: 35 packages, the five workspace crates and 30 external),
+# with nothing assumed — every licence identifier that listing prints, and no other.
+# `cargo deny check` runs where `cargo audit` runs, at S2.4 and before the freeze, never in the
+# offline gate (`scripts/check.sh`): its advisories check fetches a database. A new dependency
+# whose licence lies outside this list fails the check and is recorded as a finding or an
+# escalation (SD16), never added here silently.
+
+[licenses]
+allow = [
+    "0BSD",
+    "Apache-2.0",
+    "BSL-1.0",
+    "MIT",
+    "PolyForm-Noncommercial-1.0.0",
+    "Unicode-3.0",
+    "Unlicense",
+    "Zlib",
+]
