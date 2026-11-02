@@ -11419,3 +11419,62 @@ for Al's review. Repo green: the gate on the committed tree is recorded in the p
 under the external root, not in the tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 49 ADDENDUM — AL'S RULINGS ON PR 35 (received 2026-11-02 UTC, 2026-11-01
+America/New_York, in this session's conversation after PR #35 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr35.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-030-20261101T1919Z\`, 837 bytes, SHA-256
+`684ce584ec4e1265a88589898c81086aa2a34c52d53c3d183589278ed5490224`):
+
+~~~text
+Rulings on PR #35 / s2_grammar 0.3.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 113 through 126 are accepted as read.
+
+On reading 115, record also: the ex falso justification is visible in the formal text — the citing step refutes, at the witness point, the axiom it cites — so the grammar’s truth: false cell is documented-easy for a reader of the formal file; it measures the axiom audit, not concealment. The template’s truth: false is the concealed-surface counterpart, and the false-intermediate shape is the grammar’s concealed-surface variant: a later version’s composite in FLAW-0012’s sense, if S3’s cell design asks for one.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `5909e44` — left there at the close
+so that a successor's preflight finds it synchronized — and was switched back to
+`claude/s2-grammar-0.3.0` at `a20cc2b2…`, clean and in sync with its remote; PR 35 had no review
+and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 113–126 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence) and
+  here. Nothing regenerated.
+- **Reading 115's note** → recorded: the ex falso justification is visible in the formal text — the citing step refutes, at the witness point, the axiom it cites — so the grammar's `truth: false` cell is documented-easy for a reader of the formal file; it measures the axiom audit, not concealment. The template's `truth: false` is the concealed-surface counterpart, and the false-intermediate shape is the grammar's concealed-surface variant: a later version's composite in FLAW-0012's sense, if S3's cell design asks for one. No byte changes: 0.3.0 realizes the ex falso shape
+  as recorded, and the false-intermediate probe stays in the packet as the record of the
+  concealed-surface variant.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and under
+  the external root.
+
+**The memory index changed on disk after the disclosure** — a fact for the next disclosure, not a
+write of this session. Between the disclosure (2026-11-01T18:57:01Z) and this addendum, another
+program's session edited two unrelated index lines (101 and 110). Re-hashed with the disclosure's
+script: the whole index is now SHA-256
+`0f7e69abea9a00c4ef63de8ee4748ca2c41c34f2cff0da69f238420083018995`, 15,471 bytes, 110 lines, 0
+CR, 337 non-ASCII bytes (it was `cd943842…`, 15,420 bytes); the matched lines 85, 86, 88, 89, 106
+and 107 keep their bytes and their numbers (`0418e62182f345e565cee9465dd61ce41685c4b15799e52cfcf966ca7b87534c`,
+1,198 bytes; 104 withheld), and `project_syndeom.md` is unchanged
+(`ce2ce6deeb3db123c7110a4ac0fc8ac5ccc33c8b528a1b4511acc950ff7a2cc0`). Under ADR-0005 Amendment 2
+nothing is owed verbatim; the next disclosure records the new whole-index digest as a fact. This
+session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, no check, no dial and no register status changed; nothing regenerated.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `d3c3851b…`, the `s2_grammar`
+  0.3.0 goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-018** (informational, backlog; scope extended); FINDING-015 (standing; not extended
+  to the grammar), FINDING-016 and FINDING-017 standing.
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
