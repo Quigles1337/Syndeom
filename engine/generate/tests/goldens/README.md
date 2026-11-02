@@ -536,13 +536,58 @@ control's byte for byte, `lean_build` commanded `pass` and `lean_axioms_standard
   the site; each citation phrase is at its recorded span in the rendered step):
   `flaws_confirmed` 1.
 
+## `s2_grammar` 0.6.0 (Session 52, 2026-11-02)
+
+On `ring_chain` at the short length (`n_steps` 4, `n_lemmas` 0; the seed form `(x - 2 * y) ^ 2`
+at seed 7, the chain the 0.1.0 short control's): the control (informal, formal — so that the
+flawed cases' truth reference, the formal control of the same version, length and seed, names a
+golden; both files are the 0.1.0 short control's byte for byte, only the version, the id and the
+manifest differing) and FLAW-0004 `routine-true` (cosmetic; informal, pair — the formal target
+being refused: the class manifests in the informal file). The site is drawn on
+`injector/FLAW-0004/1` among the ring-closed chain steps (every step, there being no lemma) and
+the hedge next on the same stream: at seed 7 the site is chain step 3 (plan step 3) and the hedge
+index 1, `It is easy to see that`, so step 3 reads `It is easy to see that $4y^2 - 4yx + x \cdot
+x = x^2 - 4yx + 4 \cdot y \cdot y$.` in place of `Rearranging the terms, $4y^2 - 4yx + x \cdot x
+= x^2 - 4yx + 4 \cdot y \cdot y$.`, and the `calc` line `_ = x ^ 2 - 4 * y * x + 4 * y * y := by
+ring` loses its tactic: `_ = x ^ 2 - 4 * y * x + 4 * y * y := by`. Each flawed case carries one
+instance — the informal record over the whole hedged step (step 3, span `[0, 80)`) and, in the
+pair, the formal record at line 6 of the main declaration, `YES-KERNEL` in both files (`N/A` in
+the informal-only artifact), cosmetic — so the artifact is a valid proof of a true statement
+(`proof_status: valid`, `correct: true`) with `n_flaws_0004` 1, `n_steps` 4 and `n_lemmas` 0
+(96 informal tokens against the control's 93: the hedge is three tokens longer than the
+justification); the pair's build fails with its one `unsolved goals` error at line 6 (check K),
+`lean_build` commanded and achieved `fail`, and no axiom print exists.
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ring_chain` | control (informal, formal) | 4 steps, 0 lemmas |
+| `ring_chain` | FLAW-0004 `routine-true`, cosmetic (informal, pair) | 4 steps, 0 lemmas; the hedge at plan step 3, the tactic omitted at line 6 |
+
+**Provenance:**
+- The proof text is generated (`src/grammar.rs`: the atom library; the hedge is drawn from the
+  template's lexicon). Six Lean probes were compiled one process at a time before the injector
+  was written (`analysis/s2-generate-13/`): the `calc` line with `ring` omitted and the `by` kept
+  fails with one `unsolved goals` error at that line and no cascade, at the first, a middle and
+  the last step; `by skip` fails the same way but is a visible placeholder tactic; a term-level
+  hole `_` fails at the line and cascades to the theorem's; `?_` fails at the theorem's line only.
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `bc093c4be3b76c0bb520e8b56778b86abdc0792c`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run
+  (`analysis/s2-generate-13/evidence/goldens-production-report.json`).
+- Every case's fidelity verdict is PASS. The controls build and print `[propext,
+  Quot.sound]`. Each FLAW-0004 case is confirmed by the FLAW-0004 check (the step is the hedge
+  entry, a space and the recorded claim; the faithful step held the justification exactly once;
+  the step does not) and, in the pair, by check K (the build's first error at the recorded
+  line): `flaws_confirmed` 1.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
 `analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md`,
 `analysis/s2-generate-8/README.md`, `analysis/s2-generate-9/README.md`,
-`analysis/s2-generate-10/README.md`, `analysis/s2-generate-11/README.md` and
-`analysis/s2-generate-12/README.md`.
+`analysis/s2-generate-10/README.md`, `analysis/s2-generate-11/README.md`,
+`analysis/s2-generate-12/README.md` and `analysis/s2-generate-13/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps
