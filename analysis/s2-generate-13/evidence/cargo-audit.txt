@@ -1,0 +1,6 @@
+=== cargo audit 2026-11-02T18:44:29Z (cargo-audit-audit 0.22.2)
+    Fetching advisory database from `https://github.com/RustSec/advisory-db.git`
+      Loaded 1402 security advisories (from C:\Users\LEET\.cargo\advisory-db)
+    Updating crates.io index
+    Scanning engine/Cargo.lock for vulnerabilities (35 crate dependencies)
+rc=0 end=2026-11-02T18:44:33Z

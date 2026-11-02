@@ -1,0 +1,21 @@
+ring_chain/v0.6.0-control-short-informal exit=0 start=2026-11-02T18:43:40.867Z end=2026-11-02T18:43:47.896Z
+s2_grammar-v0.6.0-82300f31bd83-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.6.0-control-short-formal exit=0 start=2026-11-02T18:43:47.897Z end=2026-11-02T18:44:08.103Z
+s2_grammar-v0.6.0-cc0c6a4daf03-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.6.0-flaw-0004-routine-true-informal exit=0 start=2026-11-02T18:44:08.104Z end=2026-11-02T18:44:15.288Z
+s2_grammar-v0.6.0-c42a470c2f7c-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+ring_chain/v0.6.0-flaw-0004-routine-true-pair exit=0 start=2026-11-02T18:44:15.290Z end=2026-11-02T18:44:28.686Z
+s2_grammar-v0.6.0-2e435c3a4306-s7
+fidelity: Pass
+dry run: nothing written under corpora/; the outputs are in the receipt directory
+
+=== GOLDENS end

@@ -1,0 +1,3 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-grammar-060-20261102T1840Z/probes/p3-last-by-omitted.lean:7:41: error: unsolved goals
+x y : ℤ
+⊢ x ^ 2 - 4 * y * x + 4 * y * y = x ^ 2 - 4 * y * x + 4 * y ^ 2

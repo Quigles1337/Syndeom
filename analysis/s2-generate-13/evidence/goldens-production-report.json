@@ -1,0 +1,401 @@
+{
+ "run_a": "C:/Users/LEET/Codex/Temp/syndeom-s2-grammar-060-20261102T1840Z/goldens-13a",
+ "run_b": "C:/Users/LEET/Codex/Temp/syndeom-s2-grammar-060-20261102T1840Z/goldens-13b",
+ "cases": [
+  {
+   "case": "ring_chain/v0.6.0-control-short-formal",
+   "files": {
+    "Proof.lean": {
+     "sha256": "6ed4715ee9dac51db3394987f7f60303c45d6f12898bebb670f1690aeffd539a",
+     "bytes": 345,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "e389287dd538c1b20f2629938e10e4e0d8c6020a04749ae5d0b8bd8b998c4697",
+     "bytes": 2941,
+     "identical": true
+    }
+   },
+   "engine_commit": "bc093c4be3b76c0bb520e8b56778b86abdc0792c",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": [
+     "propext",
+     "Quot.sound"
+    ],
+    "exit_code": 0,
+    "first_error_line": null,
+    "used_constants": {
+     "syndeom_s2_grammar_ring_chain": [
+      "AddCommGroup.toDivisionAddCommMonoid",
+      "AddCommMonoidWithOne.toAddMonoidWithOne",
+      "AddGroupWithOne.toAddMonoidWithOne",
+      "CommRing.toRing",
+      "CommSemiring.toSemiring",
+      "Distrib.toAdd",
+      "Distrib.toMul",
+      "Eq",
+      "Eq.mpr",
+      "Eq.refl",
+      "Eq.symm",
+      "HAdd.hAdd",
+      "HMul.hMul",
+      "HPow.hPow",
+      "HSub.hSub",
+      "Int",
+      "Int.instAdd",
+      "Int.instCommRing",
+      "Int.instCommSemiring",
+      "Int.instMonoid",
+      "Int.instMul",
+      "Int.instRing",
+      "Int.instSub",
+      "Int.negOfNat",
+      "Int.ofNat",
+      "Int.rawCast",
+      "Mathlib.Meta.NormNum.IsInt.of_raw",
+      "Mathlib.Meta.NormNum.IsInt.to_isNat",
+      "Mathlib.Meta.NormNum.IsInt.to_raw_eq",
+      "Mathlib.Meta.NormNum.IsNat.mk",
+      "Mathlib.Meta.NormNum.IsNat.of_raw",
+      "Mathlib.Meta.NormNum.IsNat.to_isInt",
+      "Mathlib.Meta.NormNum.IsNat.to_raw_eq",
+      "Mathlib.Meta.NormNum.instAddMonoidWithOne",
+      "Mathlib.Meta.NormNum.isInt_add",
+      "Mathlib.Meta.NormNum.isInt_mul",
+      "Mathlib.Meta.NormNum.isInt_neg",
+      "Mathlib.Meta.NormNum.isNat_add",
+      "Mathlib.Meta.NormNum.isNat_mul",
+      "Mathlib.Meta.NormNum.isNat_ofNat",
+      "Mathlib.Tactic.Ring.Common.add_congr",
+      "Mathlib.Tactic.Ring.Common.add_mul",
+      "Mathlib.Tactic.Ring.Common.add_overlap_pf",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_gt",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_lt",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_overlap",
+      "Mathlib.Tactic.Ring.Common.add_pf_add_zero",
+      "Mathlib.Tactic.Ring.Common.add_pf_zero_add",
+      "Mathlib.Tactic.Ring.Common.atom_pf",
+      "Mathlib.Tactic.Ring.Common.coeff_one",
+      "Mathlib.Tactic.Ring.Common.mul_add",
+      "Mathlib.Tactic.Ring.Common.mul_congr",
+      "Mathlib.Tactic.Ring.Common.mul_pf_left",
+      "Mathlib.Tactic.Ring.Common.mul_pf_right",
+      "Mathlib.Tactic.Ring.Common.mul_pow_mul",
+      "Mathlib.Tactic.Ring.Common.mul_pp_pf_overlap",
+      "Mathlib.Tactic.Ring.Common.mul_zero",
+      "Mathlib.Tactic.Ring.Common.neg_add",
+      "Mathlib.Tactic.Ring.Common.neg_mul",
+      "Mathlib.Tactic.Ring.Common.neg_zero",
+      "Mathlib.Tactic.Ring.Common.one_pow",
+      "Mathlib.Tactic.Ring.Common.pow_add",
+      "Mathlib.Tactic.Ring.Common.pow_bit0",
+      "Mathlib.Tactic.Ring.Common.pow_congr",
+      "Mathlib.Tactic.Ring.Common.pow_nat",
+      "Mathlib.Tactic.Ring.Common.pow_one",
+      "Mathlib.Tactic.Ring.Common.pow_one_cast_of_isNat",
+      "Mathlib.Tactic.Ring.Common.pow_zero",
+      "Mathlib.Tactic.Ring.Common.single_pow",
+      "Mathlib.Tactic.Ring.Common.sub_congr",
+      "Mathlib.Tactic.Ring.Common.sub_pf",
+      "Mathlib.Tactic.Ring.Common.zero_mul",
+      "Mathlib.Tactic.Ring.cast_pos",
+      "Mathlib.Tactic.Ring.of_eq",
+      "Monoid.toNPow",
+      "MulZeroClass.toZero",
+      "NPow.toPow",
+      "Nat",
+      "Nat.instAddMonoidWithOne",
+      "Nat.instCommSemiring",
+      "Nat.rawCast",
+      "Neg.neg",
+      "NegZeroClass.toNeg",
+      "NonAssocSemiring.toAddCommMonoidWithOne",
+      "OfNat.ofNat",
+      "Ring",
+      "Ring.toAddCommGroup",
+      "Ring.toAddGroupWithOne",
+      "Ring.toSemiring",
+      "Semiring.toMonoid",
+      "Semiring.toNonAssocSemiring",
+      "SubNegZeroMonoid.toNegZeroClass",
+      "SubtractionCommMonoid.toSubtractionMonoid",
+      "SubtractionMonoid.toSubNegZeroMonoid",
+      "Trans.trans",
+      "Zero.toOfNat0",
+      "congrArg",
+      "id",
+      "inferInstance",
+      "instDistribOfSemiring",
+      "instHAdd",
+      "instHMul",
+      "instHPow",
+      "instHSub",
+      "instMulZeroClassOfSemiring",
+      "instOfNat",
+      "instOfNatNat",
+      "instTransEq",
+      "rfl"
+     ]
+    }
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.6.0-cc0c6a4daf03-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.6.0"
+   },
+   "proof_status": "valid",
+   "correct": true,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.6.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [],
+   "n_flaws_total": {
+    "commanded": 0,
+    "achieved": 0
+   },
+   "flaws_confirmed": 0,
+   "commanded_lean_build": "pass",
+   "achieved_lean_build": "pass",
+   "lean_axioms_standard": {
+    "commanded": true,
+    "achieved": true
+   },
+   "n_steps": null,
+   "n_lemmas": null,
+   "n_tokens": 119
+  },
+  {
+   "case": "ring_chain/v0.6.0-control-short-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "8d65d56c6305969f3d0e2d9fe10f4c6b52f5c33be3700e864506d2fb31d458a7",
+     "bytes": 2733,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "5cc08a959a657e381653d77dbb365dc73d653a93f028ca6a375ef9bae27563b6",
+     "bytes": 522,
+     "identical": true
+    }
+   },
+   "engine_commit": "bc093c4be3b76c0bb520e8b56778b86abdc0792c",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.6.0-82300f31bd83-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.6.0"
+   },
+   "proof_status": "valid",
+   "correct": true,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.6.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [],
+   "n_flaws_total": {
+    "commanded": 0,
+    "achieved": 0
+   },
+   "flaws_confirmed": 0,
+   "commanded_lean_build": null,
+   "achieved_lean_build": null,
+   "lean_axioms_standard": {
+    "commanded": null,
+    "achieved": null
+   },
+   "n_steps": 4,
+   "n_lemmas": 0,
+   "n_tokens": 93
+  },
+  {
+   "case": "ring_chain/v0.6.0-flaw-0004-routine-true-informal",
+   "files": {
+    "manifest.json": {
+     "sha256": "f428fe6252d3b32ad57956a6c23e27ec84f9b8286eeea2764fd9c0b079a39afc",
+     "bytes": 4162,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "44305b2b86d2ae3c5db97d12b27ed799ccb3ff6c9a4af5e0bfc7475adfe6689e",
+     "bytes": 522,
+     "identical": true
+    }
+   },
+   "engine_commit": "bc093c4be3b76c0bb520e8b56778b86abdc0792c",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": null,
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.6.0-c42a470c2f7c-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.6.0"
+   },
+   "proof_status": "valid",
+   "correct": true,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.6.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "sub_variant": null,
+     "severity": "cosmetic",
+     "lean_catchable": "N/A",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       80
+      ],
+      "step": 3
+     },
+     "hidden_step": "routine-true",
+     "hedge": 1,
+     "hedge_text": "It is easy to see that",
+     "justification": "Rearranging the terms",
+     "claim": "$4y^2 - 4yx + x \\cdot x = x^2 - 4yx + 4 \\cdot y \\cdot y$.",
+     "omitted": null,
+     "inserted": "It is easy to see that $4y^2 - 4yx + x \\cdot x = x^2 - 4yx + 4 \\cdot y \\cdot y$.",
+     "replaced": "Rearranging the terms, $4y^2 - 4yx + x \\cdot x = x^2 - 4yx + 4 \\cdot y \\cdot y$."
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1,
+   "commanded_lean_build": null,
+   "achieved_lean_build": null,
+   "lean_axioms_standard": {
+    "commanded": null,
+    "achieved": null
+   },
+   "n_steps": 4,
+   "n_lemmas": 0,
+   "n_tokens": 96
+  },
+  {
+   "case": "ring_chain/v0.6.0-flaw-0004-routine-true-pair",
+   "files": {
+    "Proof.lean": {
+     "sha256": "7a3e785a8c2a23b68dc1394c59156d804f0fb43803d442a51c2be7f5634093da",
+     "bytes": 340,
+     "identical": true
+    },
+    "manifest.json": {
+     "sha256": "29125f225bd432a234f5d90ce59f9ee7b0716c86907505f08232d201cac8b222",
+     "bytes": 5946,
+     "identical": true
+    },
+    "proof.md": {
+     "sha256": "44305b2b86d2ae3c5db97d12b27ed799ccb3ff6c9a4af5e0bfc7475adfe6689e",
+     "bytes": 522,
+     "identical": true
+    }
+   },
+   "engine_commit": "bc093c4be3b76c0bb520e8b56778b86abdc0792c",
+   "same_engine_commit": true,
+   "same_observation": true,
+   "observation": {
+    "axioms": null,
+    "exit_code": 1,
+    "first_error_line": 6
+   },
+   "verdict": "PASS",
+   "artifact_id": "s2_grammar-v0.6.0-2e435c3a4306-s7",
+   "producer": {
+    "id": "s2_grammar",
+    "version": "0.6.0"
+   },
+   "proof_status": "valid",
+   "correct": true,
+   "statement_status": {
+    "method": "lean-kernel",
+    "reference": "s2_grammar-v0.6.0-cc0c6a4daf03-s7:syndeom_s2_grammar_ring_chain",
+    "value": true
+   },
+   "records": [
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "sub_variant": null,
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "informal",
+      "span": [
+       0,
+       80
+      ],
+      "step": 3
+     },
+     "hidden_step": "routine-true",
+     "hedge": 1,
+     "hedge_text": "It is easy to see that",
+     "justification": "Rearranging the terms",
+     "claim": "$4y^2 - 4yx + x \\cdot x = x^2 - 4yx + 4 \\cdot y \\cdot y$.",
+     "omitted": null,
+     "inserted": "It is easy to see that $4y^2 - 4yx + x \\cdot x = x^2 - 4yx + 4 \\cdot y \\cdot y$.",
+     "replaced": "Rearranging the terms, $4y^2 - 4yx + x \\cdot x = x^2 - 4yx + 4 \\cdot y \\cdot y$."
+    },
+    {
+     "instance": 1,
+     "class": "FLAW-0004",
+     "sub_variant": null,
+     "severity": "cosmetic",
+     "lean_catchable": "YES-KERNEL",
+     "location": {
+      "artifact": "formal",
+      "declaration": "syndeom_s2_grammar_ring_chain",
+      "line": 6
+     },
+     "hidden_step": "routine-true",
+     "hedge": 1,
+     "hedge_text": "It is easy to see that",
+     "justification": null,
+     "claim": null,
+     "omitted": [
+      "ring"
+     ],
+     "inserted": [
+      "  _ = x ^ 2 - 4 * y * x + 4 * y * y := by"
+     ],
+     "replaced": [
+      "  _ = x ^ 2 - 4 * y * x + 4 * y * y := by ring"
+     ]
+    }
+   ],
+   "n_flaws_total": {
+    "commanded": 1,
+    "achieved": 1
+   },
+   "flaws_confirmed": 1,
+   "commanded_lean_build": "fail",
+   "achieved_lean_build": "fail",
+   "lean_axioms_standard": {
+    "commanded": null,
+    "achieved": null
+   },
+   "n_steps": 4,
+   "n_lemmas": 0,
+   "n_tokens": 96
+  }
+ ],
+ "all_byte_identical": true,
+ "engine_commits": [
+  "bc093c4be3b76c0bb520e8b56778b86abdc0792c"
+ ]
+}

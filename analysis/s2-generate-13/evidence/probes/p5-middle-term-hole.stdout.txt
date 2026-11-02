@@ -1,0 +1,7 @@
+C:/Users/LEET/Codex/Temp/syndeom-s2-grammar-060-20261102T1840Z/probes/p5-middle-term-hole.lean:5:41: error: don't know how to synthesize placeholder
+context:
+x y : ℤ
+⊢ 4 * y * y + x * (x - 4 * y) = 4 * y ^ 2 - 4 * y * x + x * x
+C:/Users/LEET/Codex/Temp/syndeom-s2-grammar-060-20261102T1840Z/probes/p5-middle-term-hole.lean:3:101: error: unsolved goals
+x y : ℤ
+⊢ (x - 2 * y) ^ 2 = x ^ 2 - 4 * y * x + 4 * y ^ 2
