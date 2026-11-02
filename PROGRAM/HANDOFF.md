@@ -12222,3 +12222,81 @@ on the committed tree is recorded in the pull request and under the external roo
 tree it certifies.
 **Memory writes:** none. A write would change a memory digest and make the next disclosure owe
 verbatim reproduction.
+
+SESSION 51 ADDENDUM — AL'S RULINGS ON PR 37 (received 2026-11-02 UTC, 2026-11-02
+America/New_York, in this session's conversation after PR #37 opened; recorded at Al's direction
+in a new commit on the same branch, no force-push; transcribed verbatim from Al's message as
+rendered to the executor; copy `owner-rulings-pr37.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-050-20261102T0655Z\`, 1,754 bytes, SHA-256
+`61dae199e45b6ceaba677f0f550d67365fec5bebc4b3c8c885598ecb91659a00`):
+
+~~~text
+Rulings on PR #37 / s2_grammar 0.5.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 138 through 149 are accepted as read.
+
+On reading 139, record also: the phrase and its form stand. A drawn phrase lexicon for the citation is wanted for S3’s cells, as a later version after the grammars’ v0.1 classes — one surface-variety version for the grammar covering every fixed phrase S3’s cell design wants varied, not a FLAW-0003 version alone. Until then the fixed phrase is a documented-weak cue, as reading 139 records it.
+
+On reading 147, record also: a generated FLAW-0003 direct on the grammar is not taken now. It is a D6 amendment candidate after the grammars’ v0.1 classes, if S3’s cell design needs a second producer for the kernel-visible FLAW-0003 cell; its shape — the lemma’s forward reference and what the main proof then cites — is settled by probes in that version, not by this reading.
+
+On the tooling, record as housekeeping: cargo-geiger is not adopted; every crate carries #![forbid(unsafe_code)], which is the stronger guarantee. A deny.toml allow-list enters the repository in its own commit in the next version’s pull request, its licence list read from cargo deny list on the current lock with nothing assumed; cargo deny check runs where cargo audit runs, at S2.4 and before the freeze, not in the offline gate.
+
+On PR 36, confirmed: the executor’s reading of “the class sweep is not bumped for a sub-variant” is the intended one — D11’s readiness counts classes, which FLAW-0010 a with claim: true realizes on the grammar.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `602a596` — left there at the close
+so that a successor's preflight finds it synchronized — and was switched back to
+`claude/s2-grammar-0.5.0` at `db6e3fc5…`, clean and in sync with its remote after a fresh fetch
+(`origin/main` still `602a596`); PR 37 had no review and no comment but the executor's own.
+
+How each ruling is applied:
+- **Readings 138–149 accepted as read** → recorded in ADR-0011 *Amendments*, STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence) and
+  here. Nothing regenerated.
+- **Reading 139's note** → recorded: the phrase `this follows from the theorem` and its form
+  stand; a drawn phrase lexicon for the citation is wanted for S3's cells as a later version
+  after the grammars' v0.1 classes — one surface-variety version for the grammar covering every
+  fixed phrase S3's cell design wants varied, not a FLAW-0003 version alone; until then the
+  fixed phrase is a documented-weak cue. STATE's NEXT names the surface-variety version among
+  the later ones. No byte changes.
+- **Reading 147's note** → recorded: a generated FLAW-0003 `direct` on the grammar is not taken
+  now; it is a D6 amendment candidate after the grammars' v0.1 classes, if S3's cell design
+  needs a second producer for the kernel-visible FLAW-0003 cell; its shape — the lemma's forward
+  reference and what the main proof then cites — is settled by probes in that version, not by
+  the reading. STATE's NEXT says so.
+- **The tooling, as housekeeping** → recorded in ADR-0011 *Amendments* (D10) and STATE:
+  `cargo-geiger` is not adopted (every crate carries `#![forbid(unsafe_code)]`, the stronger
+  guarantee); a `deny.toml` allow-list enters the repository in its own commit in the next
+  version's pull request (`s2_grammar` 0.6.0), its licence list read from `cargo deny list` on
+  the current lock with nothing assumed; `cargo deny check` runs where `cargo audit` runs, at
+  S2.4 and before the freeze, not in the offline gate. STATE's NEXT gains the step (its step 3,
+  the later steps renumbered). Nothing is added to the repository in this pull request.
+- **PR 36's flagged reading confirmed** → recorded in ADR-0011 *Amendments* and in STATE's
+  0.4.0 escalation entry: "the class sweep is not bumped for a sub-variant" means D11's
+  readiness counts classes, which FLAW-0010 `a` with `claim: true` realizes on the grammar.
+- **The record commit** (this one): ADR-0011 *Amendments*, STATE and this addendum. The gate on
+  the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+**The memory store is unchanged since the disclosure** — re-hashed with the disclosure's script
+at 2026-11-02T07:24:20Z, after the pull request opened: the whole index `0f7e69ab…8995` (15,471
+bytes, 110 lines), the matched lines 85, 86, 88, 89, 106 and 107 (`0418e621…534c`, 1,198 bytes;
+104 withheld) and `project_syndeom.md` (`ce2ce6de…2cc0`). This session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, no check, no dial and no register status changed; nothing regenerated.
+- Determinism: unchanged — nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `c6b24094…`, the `s2_grammar` 0.5.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **FINDING-018** (informational, backlog; scope extended); FINDING-015 (standing; not extended
+  to the grammar), FINDING-016 and FINDING-017 standing.
+- The `deny.toml` allow-list is scheduled, not open: its own commit in the next version's pull
+  request (STATE's NEXT, step 3).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
