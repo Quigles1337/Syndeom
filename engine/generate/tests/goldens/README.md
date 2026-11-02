@@ -1,10 +1,10 @@
 # Goldens for `s2_template` and `s2_grammar` (ADR-0011 D10)
 
-There are 101 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
+There are 110 cases: 12 of `s2_template` 0.1.0 (Session 40), 14 of 0.2.0 (Session 41), 9 of
 0.3.0 (Session 42), 8 of 0.4.0 (Session 43), 4 of 0.5.0 (Session 44), 12 of 0.6.0 (Session 45)
 and 10 of 0.7.0 (Session 46); and 10 of `s2_grammar` 0.1.0 (Session 47), 8 of 0.2.0
-(Session 48), 6 of 0.3.0 (Session 49), 4 of 0.4.0 (Session 50) and 4 of 0.5.0 (Session 51). All
-use seed 7. Each case directory holds:
+(Session 48), 6 of 0.3.0 (Session 49), 4 of 0.4.0 (Session 50), 4 of 0.5.0 (Session 51), 4 of
+0.6.0 (Session 52) and 5 of 0.7.0 (Session 53). All use seed 7. Each case directory holds:
 - `case.json`: the config, the seed, the engine commit, the toolchain, and the harness
   observation;
 - the exact bytes: `proof.md` or `Proof.lean` (both for a pair), and `manifest.json`.
@@ -581,13 +581,56 @@ justification); the pair's build fails with its one `unsolved goals` error at li
   the step does not) and, in the pair, by check K (the build's first error at the recorded
   line): `flaws_confirmed` 1.
 
+## `s2_grammar` 0.7.0 (Session 53, 2026-11-02)
+
+On `ring_chain` at the short length (`n_steps` 4, `n_lemmas` 0; the seed form `(x - 2 * y) ^ 2`
+at seed 7, the chain the 0.1.0 short control's): the control (informal, formal — so that the
+composite's truth reference, the formal control of the same version, length and seed, names a
+golden; both files are the 0.1.0 short control's byte for byte, only the version, the id and the
+manifest differing) and FLAW-0011, the composite embedding one FLAW-0001 `propagated` instance
+with the `sign` perturbation (fatal; informal, formal, pair). The embedded spec is applied by
+FLAW-0001's own injector, unchanged, so each composite's proof files are the 0.1.0 FLAW-0001
+`propagated` golden's byte for byte — step 1, the first `calc` line, perturbed (the sign of
+`4 * y ^ 2` flipped) and steps 2–4 re-derived, so the chain ends at `x ^ 2 - 4 * y * x - 4 *
+y ^ 2`, away from the claim — and its embedded records are that golden's records (instance 1,
+fatal, `YES-KERNEL`, step 1 span `[58, 88)` and line 4). The composite is instance 2, fatal and
+`YES-KERNEL` by inheritance, with a record in each file the artifact has, at the statement: step
+0, span `[0, 62)`, the whole statement `For all integers $x$ and $y$, $(x - 2y)^2 = x^2 - 4yx +
+4y^2$.`, and the main declaration at its header line 3; its dials are `embedded` (the config's
+list), `site` 0, `embedded_instances` `[1]`, `inserted` (the statement, or the header line) and
+`replaced` null. Every composite is an invalid proof of a true statement (`proof_status:
+invalid`, `correct: false`) with `n_flaws_total` 2, `n_flaws_0001` 1 and `n_flaws_0011` 1, both
+confirmed; `n_steps` 4, `n_lemmas` 0 and 93 informal tokens, the embedded artifact's.
+
+| Grammar | Cases | Length |
+|---|---|---|
+| `ring_chain` | control (informal, formal) | 4 steps, 0 lemmas |
+| `ring_chain` | FLAW-0011, the composite of FLAW-0001 `propagated` fatal `sign` (informal, formal, pair) | 4 steps, 0 lemmas; the embedded site step 1, the composite at step 0 and line 3 |
+
+**Provenance:**
+- The proof text is generated (`src/grammar.rs`: the atom library; the FLAW-0001 material at
+  the site). No Lean probe was needed: the composite changes no byte beyond its embedded
+  instance's, whose shapes 0.1.0's probes fixed (`analysis/s2-generate-8/`).
+- The files and manifests were produced by `syndeom-generate generate --dry-run` at engine commit
+  `97c6cc6c4a65679e4cea62c3c0c778027b00d747`, by two separate runs compared byte for byte
+  (every `proof.md`, `Proof.lean` and `manifest.json` identical, every observation equal), with
+  the running binary's compiled input hashes verified against the commit before each run
+  (`analysis/s2-generate-14/evidence/goldens-production-report.json`).
+- Every case's fidelity verdict is PASS. The controls build and print `[propext,
+  Quot.sound]`. The composite's formal and pair files fail to build (exit 1) with the first
+  error at line 4, the embedded site's `calc` line (check K), `lean_build` commanded and
+  achieved `fail`, no axiom print. Each composite is confirmed with its embedded instance (the
+  informal record by its span, the formal record by check K) and by the statement's truth by
+  construction (D7: the formal control the reference names): `flaws_confirmed` 2.
+
 The receipts are under the sessions' external evidence roots. Their digests and the runs are
 recorded in `analysis/s2-generate-2/README.md`, `analysis/s2-generate-3/README.md`,
 `analysis/s2-generate-4/README.md`, `analysis/s2-generate-5/README.md`,
 `analysis/s2-generate-6/README.md`, `analysis/s2-generate-7/README.md`,
 `analysis/s2-generate-8/README.md`, `analysis/s2-generate-9/README.md`,
 `analysis/s2-generate-10/README.md`, `analysis/s2-generate-11/README.md`,
-`analysis/s2-generate-12/README.md` and `analysis/s2-generate-13/README.md`.
+`analysis/s2-generate-12/README.md`, `analysis/s2-generate-13/README.md` and
+`analysis/s2-generate-14/README.md`.
 
 The `engine_commit` in these manifests is the commit the producer ran from, and it is a fixed
 input of the test. A later commit that changes the emitted bytes for some (config, seed) bumps
