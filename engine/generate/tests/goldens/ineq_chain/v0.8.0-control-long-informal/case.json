@@ -1,0 +1,16 @@
+{
+  "config": {
+    "grammar": "ineq_chain",
+    "length": {
+      "n_steps": 24,
+      "n_lemmas": 2
+    },
+    "target": "informal",
+    "flaws": [],
+    "padding_ratio": 0
+  },
+  "seed": 7,
+  "engine_commit": "677c8165fa94260d1ac2842c2db2be57be5a6daa",
+  "toolchain": null,
+  "observation": null
+}
