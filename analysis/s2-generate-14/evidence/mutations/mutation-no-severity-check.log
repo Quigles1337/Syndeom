@@ -1,0 +1,22 @@
+
+running 1 test
+test d5_flaw_0011_composes_one_gap_or_fatal_instance_recorded_at_the_statement ... FAILED
+
+failures:
+
+---- d5_flaw_0011_composes_one_gap_or_fatal_instance_recorded_at_the_statement stdout ----
+
+thread 'd5_flaw_0011_composes_one_gap_or_fatal_instance_recorded_at_the_statement' (36624) panicked at generate\tests\grammar.rs:3832:5:
+FLAW-0004 routine-true is cosmetic
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    d5_flaw_0011_composes_one_gap_or_fatal_instance_recorded_at_the_statement
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 17 filtered out; finished in 0.04s
+
+   Compiling syndeom-generate v0.1.0 (C:\Users\LEET\Syndeom\engine\generate)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.75s
+     Running tests\grammar.rs (target\debug\deps\grammar-955b07884581086f.exe)
+error: test failed, to rerun pass `-p syndeom-generate --test grammar`
