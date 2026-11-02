@@ -14,7 +14,9 @@
 //!   reference from the template's lexicon, the formal file unchanged); 0.5.0: FLAW-0003
 //!   `cycle` on it (a cited lemma's closing note replaced by a citation of the theorem, the
 //!   chain step citing the lemma unchanged, so the plan's premise graph holds the cycle; the
-//!   formal file unchanged).
+//!   formal file unchanged); 0.6.0: FLAW-0004 on it (a ring-closed step's justification
+//!   replaced by a drawn hedge before the bare claim, the `calc` line's tactic omitted so that
+//!   the kernel reports an unsolved goal at that line).
 //! - D8: the Lean harness ([`harness`]).
 //! - D9, as amended by Al's ruling 5 on PR 26: the running binary's provenance ([`provenance`]).
 //!

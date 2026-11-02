@@ -11,15 +11,19 @@
 //! reference from the template's lexicon; the formal file unchanged; the FLAW-0010 check) — and,
 //! from 0.5.0, FLAW-0003 `cycle` (a cited lemma's closing note replaced by a citation of the
 //! theorem, the citing chain step unchanged, the cycle on the plan's premise graph; the formal
-//! file unchanged; the structural check).
+//! file unchanged; the structural check) — and, from 0.6.0, FLAW-0004 (a ring-closed step's
+//! justification replaced by a drawn hedge before the bare claim, the `calc` line's tactic
+//! omitted with the `by` kept, so that the kernel reports an unsolved goal at that line; check K
+//! at the site and the FLAW-0004 informal check).
 
 use std::collections::{BTreeMap, BTreeSet};
 
 use serde_json::{Value, json};
 use syndeom_generate::grammar::{
-    self, CYCLE_LENGTH, CYCLE_PHRASE, GrammarVersion, LEMMA_NOTE, MAIN_DECLARATION, PERTURBATIONS,
-    Perturbation, SEED_FORMS, Shape, Style, Term, apply, control_reference, derive, eval,
-    mono_latex, mono_lean, normalize, render_ordered, targets, witness_point,
+    self, CYCLE_LENGTH, CYCLE_PHRASE, GrammarVersion, HIDDEN_STEP, LEMMA_NOTE, MAIN_DECLARATION,
+    OMITTED_TACTIC, PERTURBATIONS, Perturbation, SEED_FORMS, Shape, Style, Term, apply,
+    control_reference, derive, eval, mono_latex, mono_lean, normalize, render_ordered, targets,
+    witness_point,
 };
 use syndeom_generate::harness::Observation;
 use syndeom_generate::plan::{
@@ -28,8 +32,8 @@ use syndeom_generate::plan::{
 };
 use syndeom_generate::rng::Stream;
 use syndeom_generate::template::{
-    CITATION_AUTHORS, CITATION_RESULTS, CITATION_YEARS, Injection, Prepared, Producer, assemble,
-    citation_reference, citation_tokens_in_lexicon, citation_venues,
+    CITATION_AUTHORS, CITATION_RESULTS, CITATION_YEARS, HEDGES, Injection, Prepared, Producer,
+    assemble, citation_reference, citation_tokens_in_lexicon, citation_venues,
 };
 use syndeom_generate::{prepare_any, prepare_for};
 use syndeom_manifest::{
@@ -137,6 +141,15 @@ fn cycle_spec(site: Value) -> Value {
     json!([{
         "class": "FLAW-0003", "sub_variant": "cycle", "severity": "fatal", "site": site,
         "dials": {"cycle_length": CYCLE_LENGTH}
+    }])
+}
+
+/// A FLAW-0004 spec (0.6.0): a ring-closed step's justification deleted and a drawn hedge
+/// prefixed to the bare claim, the `calc` line's tactic omitted; `routine-true` is cosmetic.
+fn hedge_spec(hidden_step: &str, severity: &str, site: Value) -> Value {
+    json!([{
+        "class": "FLAW-0004", "sub_variant": null, "severity": severity, "site": site,
+        "dials": {"hidden_step": hidden_step}
     }])
 }
 
@@ -384,11 +397,11 @@ fn d6_every_step_presents_the_polynomial_and_differs_from_the_step_before() {
 fn d2_the_plan_renders_the_lemmas_then_a_calc_chain_closed_by_ring_or_a_cited_lemma() {
     let c = config(6, 2, "pair", json!([]));
     let (p, m) = build(&c, 7);
-    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_5_0));
+    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_6_0));
     assert_eq!(m.generator.id, "s2_grammar");
-    assert_eq!(m.generator.version, "0.5.0");
+    assert_eq!(m.generator.version, "0.6.0");
     assert_eq!(m.generator.rng, "syndeom-rng/1");
-    assert!(m.artifact_id.starts_with("s2_grammar-v0.5.0-"));
+    assert!(m.artifact_id.starts_with("s2_grammar-v0.6.0-"));
     assert!(m.artifact_id.ends_with("-s7"));
     let plan = &p.plan;
     assert_eq!(plan.steps.len(), 8);
@@ -554,7 +567,7 @@ fn d9_determinism_and_idempotence() {
     );
     // generate's dispatch: a grammar config is an s2_grammar config
     let any = prepare_any(&c, 7).unwrap();
-    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_5_0));
+    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_6_0));
     assert!(prepare_any(&json!({"theorem": "nat_le_sq", "grammar": "ring_chain"}), 7).is_err());
     assert!(prepare_any(&json!({"length": {"n_steps": 1, "n_lemmas": 0}}), 7).is_err());
     assert_eq!(
@@ -577,9 +590,13 @@ fn d9_determinism_and_idempotence() {
         Producer::parse("s2_grammar", "0.5.0"),
         Some(Producer::Grammar(GrammarVersion::V0_5_0))
     );
-    assert_eq!(Producer::parse("s2_grammar", "0.6.0"), None);
+    assert_eq!(
+        Producer::parse("s2_grammar", "0.6.0"),
+        Some(Producer::Grammar(GrammarVersion::V0_6_0))
+    );
+    assert_eq!(Producer::parse("s2_grammar", "0.7.0"), None);
     assert_eq!(Producer::parse("s2_grammars", "0.1.0"), None);
-    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.5.0");
+    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.6.0");
     assert!(grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0001"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0007"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0013"));
@@ -616,7 +633,20 @@ fn d9_determinism_and_idempotence() {
     }
     assert!(!grammar::realizes(GrammarVersion::V0_5_0, "FLAW-0004"));
     assert!(!grammar::realizes(GrammarVersion::V0_5_0, "FLAW-0011"));
-    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.5.0: only the version,
+    for class in [
+        "FLAW-0001",
+        "FLAW-0003",
+        "FLAW-0004",
+        "FLAW-0007",
+        "FLAW-0009",
+        "FLAW-0010",
+        "FLAW-0013",
+    ] {
+        assert!(grammar::realizes(GrammarVersion::V0_6_0, class), "{class}");
+    }
+    assert!(!grammar::realizes(GrammarVersion::V0_6_0, "FLAW-0011"));
+    assert!(!grammar::realizes(GrammarVersion::V0_6_0, "FLAW-0002"));
+    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.6.0: only the version,
     // and with it the id and the manifest, differ
     let old = prepare_for(Producer::Grammar(GrammarVersion::V0_1_0), &c, 7).unwrap();
     assert_eq!(old.informal, p1.informal);
@@ -1076,7 +1106,7 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     c["target"] = json!("both");
     assert!(refused(&c));
     // the version a manifest names must exist
-    assert!(GrammarVersion::parse("0.6.0").is_none());
+    assert!(GrammarVersion::parse("0.7.0").is_none());
 }
 
 #[test]
@@ -2571,8 +2601,8 @@ fn d5_flaw_0010_a_replaces_a_steps_justification_by_a_fictional_reference() {
             .is_err()
         );
     }
-    // the 0.3.0 bytes of a FLAW-0009 artifact and of a FLAW-0001 one are unchanged by 0.4.0 and 0.5.0:
-    // only the version, and with it the id and the manifest, differ
+    // the 0.3.0 bytes of a FLAW-0009 artifact and of a FLAW-0001 one are unchanged by 0.4.0,
+    // 0.5.0 and 0.6.0: only the version, and with it the id and the manifest, differ
     for c in [
         config(4, 1, "pair", axiom_spec(false, json!("auto"))),
         config(4, 0, "pair", local("sign")),
@@ -2981,7 +3011,7 @@ fn d5_flaw_0003_cycle_rejustifies_a_cited_lemma_by_the_theorem() {
         );
     }
     // the 0.4.0 bytes of a FLAW-0010 artifact, of a FLAW-0009 one and of the (4, 1) control are
-    // unchanged by 0.5.0: only the version, and with it the id and the manifest, differ
+    // unchanged by 0.5.0 and 0.6.0: only the version, and with it the id and the manifest, differ
     for c in [
         config(4, 0, "pair", cite_spec("journal", true, json!("auto"))),
         config(4, 1, "pair", axiom_spec(false, json!("auto"))),
@@ -2989,6 +3019,459 @@ fn d5_flaw_0003_cycle_rejustifies_a_cited_lemma_by_the_theorem() {
     ] {
         let now = grammar::prepare(&c, 7).unwrap();
         let old = prepare_for(Producer::Grammar(GrammarVersion::V0_4_0), &c, 7).unwrap();
+        assert_eq!(old.informal, now.informal);
+        assert_eq!(
+            old.formal.as_ref().map(|f| &f.bytes),
+            now.formal.as_ref().map(|f| &f.bytes)
+        );
+        assert_ne!(old.artifact_id(), now.artifact_id());
+    }
+}
+
+#[test]
+fn d5_flaw_0004_hedges_a_ring_closed_step_and_omits_its_tactic() {
+    for (n, m) in [(4u64, 0u64), (6, 2), (1, 0), (24, 2), (12, 5), (8, 1)] {
+        let control = grammar::prepare(&config(n, m, "pair", json!([])), 7).unwrap();
+        let c = config(
+            n,
+            m,
+            "pair",
+            hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto")),
+        );
+        let (p, manifest) = build(&c, 7);
+        let (n, m) = (n as usize, m as usize);
+        let d = derive(n, m, 7);
+        let inj = p.injection.as_ref().expect("one instance");
+        assert!(p.further.is_empty() && p.padding.is_empty());
+        assert!(p.composite.is_none() && p.false_theorem.is_none());
+        assert_eq!(inj.instance, 1);
+        assert_eq!(inj.class, "FLAW-0004");
+        assert_eq!(inj.sub_variant, None);
+        assert_eq!(inj.severity, Severity::Cosmetic);
+        assert_eq!(inj.lean_catchable, LeanCatchable::YesKernel);
+        // the site: a ring-closed chain step (never lemma-cited; the last is eligible) drawn on
+        // the stream, then the hedge on the same stream (D4: the two draws, in this order)
+        let eligible: Vec<usize> = (1..=n).filter(|&k| d.lemma_of(k).is_none()).collect();
+        let mut stream = Stream::new(7, "injector/FLAW-0004/1");
+        let chain = eligible[stream.below(eligible.len() as u64) as usize];
+        let hedge = stream.below(HEDGES.len() as u64) as usize;
+        let site = m + chain;
+        assert_eq!(inj.site, site);
+        assert!(d.lemma_of(chain).is_none());
+        // the plan: every step the control's but the site's text and fragment; step 0 untouched
+        assert_eq!(p.plan.steps.len(), n + m);
+        assert_eq!(p.plan.claim, control.plan.claim);
+        assert_eq!(p.plan.statement, control.plan.statement);
+        let site_step = &p.plan.steps[site - 1];
+        let faithful_step = &control.plan.steps[site - 1];
+        for k in 0..n + m {
+            let (s, f) = (&p.plan.steps[k], &control.plan.steps[k]);
+            if k == site - 1 {
+                assert!(s.lemma.is_none() && s.padding.is_none() && s.premises.is_empty());
+                assert_ne!(s.text, f.text);
+                assert_ne!(s.fragment, f.fragment);
+            } else {
+                assert_eq!(s, f);
+            }
+        }
+        // the text: the drawn hedge, a space and the bare claim; the faithful step was its
+        // justification, a comma and the claim, and held the justification exactly once
+        let claim = format!("${} = {}$.", d.e[chain - 1].latex, d.e[chain].latex);
+        assert_eq!(site_step.text, format!("{} {claim}", HEDGES[hedge]));
+        let just = faithful_step
+            .text
+            .strip_suffix(&format!(", {claim}"))
+            .unwrap()
+            .to_string();
+        assert!(!just.is_empty());
+        assert_eq!(faithful_step.text.matches(just.as_str()).count(), 1);
+        assert!(!site_step.text.contains(just.as_str()));
+        assert!(!claim.contains(just.as_str()));
+        // the fragment: the one calc line with its tactic omitted, the `by` kept, never `sorry`
+        assert_eq!(faithful_step.fragment.len(), 1);
+        let faithful_line = faithful_step.fragment[0].clone();
+        assert!(faithful_line.ends_with(&format!(" := by {OMITTED_TACTIC}")));
+        let flawed_line = faithful_line
+            .strip_suffix(&format!(" {OMITTED_TACTIC}"))
+            .unwrap()
+            .to_string();
+        assert!(flawed_line.ends_with(" := by"));
+        assert!(!flawed_line.contains("sorry"));
+        assert_eq!(site_step.fragment, vec![flawed_line.clone()]);
+        assert_eq!(inj.formal_inserted, site_step.fragment);
+        // the formal file: the control's but for that one line, at the site's line
+        let f = p.formal.as_ref().unwrap();
+        let cf = control.formal.as_ref().unwrap();
+        let lines: Vec<&str> = std::str::from_utf8(&f.bytes).unwrap().lines().collect();
+        let control_lines: Vec<&str> = std::str::from_utf8(&cf.bytes).unwrap().lines().collect();
+        assert_eq!(lines.len(), control_lines.len());
+        let site_line = f.fragment_lines[site - 1].unwrap();
+        assert_eq!(site_line[0], site_line[1]);
+        let differing: Vec<usize> = (0..lines.len())
+            .filter(|&i| lines[i] != control_lines[i])
+            .collect();
+        assert_eq!(differing, vec![site_line[0] as usize - 1]);
+        assert_eq!(
+            lines[site_line[0] as usize - 1].trim_start(),
+            flawed_line.trim_start()
+        );
+        assert_eq!(f.fragment_lines, cf.fragment_lines);
+        assert_eq!(f.declarations[site - 1], MAIN_DECLARATION);
+        assert_ne!(p.informal, control.informal);
+        // the dials: the spec's, the site, the hedge and its text; the justification and the
+        // claim with the hedged step inserted for the faithful one (informal); the omitted
+        // tactic with the flawed calc line inserted for the faithful one (formal)
+        let di = &inj.informal_dials;
+        assert_eq!(di["hidden_step"], json!(HIDDEN_STEP));
+        assert_eq!(di["site"], json!(site));
+        assert_eq!(di["hedge"], json!(hedge));
+        assert_eq!(di["hedge_text"], json!(HEDGES[hedge]));
+        assert_eq!(di["justification"], json!(just));
+        assert_eq!(di["claim"], json!(claim));
+        assert_eq!(di["inserted"], json!(site_step.text));
+        assert_eq!(di["replaced"], json!(faithful_step.text));
+        assert_eq!(
+            grammar::originals(di, "original_steps"),
+            BTreeMap::from([(site, json!(faithful_step.text))])
+        );
+        assert!(di.get("omitted").is_none());
+        let df = &inj.formal_dials;
+        assert_eq!(df["hidden_step"], json!(HIDDEN_STEP));
+        assert_eq!(df["site"], json!(site));
+        assert_eq!(df["hedge"], json!(hedge));
+        assert_eq!(df["hedge_text"], json!(HEDGES[hedge]));
+        assert_eq!(df["omitted"], json!([OMITTED_TACTIC]));
+        assert_eq!(df["inserted"], json!([flawed_line]));
+        assert_eq!(df["replaced"], json!([faithful_line]));
+        assert_eq!(
+            grammar::originals(df, "original_fragments"),
+            BTreeMap::from([(site, json!([faithful_line]))])
+        );
+        assert!(df.get("declaration").is_none());
+        assert!(df.get("claim").is_none() && df.get("justification").is_none());
+        // the records: one instance, two records — the informal one over the whole hedged
+        // step, the formal one at the calc line of the main declaration — YES-KERNEL,
+        // cosmetic: a valid proof of a true statement whose reference is the formal control
+        let gt = manifest.ground_truth.as_ref().unwrap();
+        assert_eq!(gt.flaws.len(), 2, "a pair carries a record in each file");
+        for r in &gt.flaws {
+            assert_eq!(r.instance, 1);
+            assert_eq!(r.class, "FLAW-0004");
+            assert_eq!(r.sub_variant, None);
+            assert_eq!(r.severity, Severity::Cosmetic);
+            assert_eq!(r.lean_catchable, LeanCatchable::YesKernel);
+        }
+        match &gt.flaws[0].location {
+            Location::Informal(l) => {
+                assert_eq!(l.step, site as u64);
+                assert_eq!(l.span, [0, site_step.text.chars().count() as u64]);
+            }
+            other => panic!("{other:?}"),
+        }
+        assert_eq!(gt.flaws[0].dials, *di);
+        match &gt.flaws[1].location {
+            Location::Formal(l) => {
+                assert_eq!(l.declaration, MAIN_DECLARATION);
+                assert_eq!(l.line, site_line[0]);
+            }
+            other => panic!("{other:?}"),
+        }
+        assert_eq!(gt.flaws[1].dials, *df);
+        assert_eq!(gt.proof_status, ProofStatus::Valid);
+        assert!(gt.correct);
+        assert_eq!(gt.statement_status.value, Some(true));
+        assert_eq!(
+            gt.statement_status.reference,
+            control_reference(GrammarVersion::CURRENT, "ring_chain", n as u64, m as u64, 7)
+                .unwrap()
+        );
+        // commanded and achieved (D8): the counts the control's; the pair's build failing at
+        // the site (check K); no axiom print; the instance confirmed in both files
+        assert_eq!(manifest.commanded["n_steps"].value, json!(n + m));
+        assert_eq!(manifest.commanded["n_lemmas"].value, json!(m));
+        assert_eq!(manifest.commanded["n_flaws_total"].value, json!(1));
+        assert_eq!(manifest.commanded["n_flaws_0004"].value, json!(1));
+        assert_eq!(manifest.commanded["lean_build"].value, json!("fail"));
+        assert!(!manifest.commanded.contains_key("lean_axioms_standard"));
+        assert_eq!(manifest.achieved["lean_build"].value, Some(json!("fail")));
+        assert_eq!(manifest.achieved["flaws_confirmed"].value, Some(json!(1)));
+        assert_eq!(manifest.achieved["n_flaws_0004"].value, Some(json!(1)));
+        assert_eq!(manifest.achieved["n_steps"].value, Some(json!(n + m)));
+        assert_eq!(manifest.achieved["n_lemmas"].value, Some(json!(m)));
+        assert_eq!(verdict(&manifest), json!("PASS"));
+        // the rendered informal file: the hedged step as planned, every other the control's
+        let informal = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+        let faithful = parse_informal_md(control.informal.as_ref().unwrap()).unwrap();
+        assert_eq!(informal.steps[site], site_step.text);
+        for k in 1..=n + m {
+            if k != site {
+                assert_eq!(informal.steps[k], faithful.steps[k]);
+            }
+        }
+        // check K refuses confirmation when the first error is not at the site, or when the
+        // file builds; the verdict is then FAIL, not a refusal
+        let mut elsewhere = predicted(&p).unwrap();
+        elsewhere.first_error_line = Some(site_line[0] + 1);
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&elsewhere)).unwrap();
+        assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        let passing = Observation {
+            exit_code: 0,
+            first_error_line: None,
+            axioms: Some(vec!["propext".into(), "Quot.sound".into()]),
+            used_constants: None,
+        };
+        let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&passing)).unwrap();
+        assert_eq!(bad.achieved["lean_build"].value, Some(json!("pass")));
+        assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        // the informal-only target: the same informal bytes and dials, one record, N/A (D5: no
+        // formal manifestation); the formal target is refused (FLAWS.md: manifests in informal)
+        let (pi, mi) = build(
+            &config(
+                n as u64,
+                m as u64,
+                "informal",
+                hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto")),
+            ),
+            7,
+        );
+        assert_eq!(pi.informal, p.informal);
+        assert!(pi.formal.is_none());
+        let ii = pi.injection.as_ref().unwrap();
+        assert_eq!(ii.site, site);
+        assert_eq!(ii.lean_catchable, LeanCatchable::NotApplicable);
+        assert_eq!(ii.informal_dials, *di);
+        let gi = mi.ground_truth.as_ref().unwrap();
+        assert_eq!(gi.flaws.len(), 1);
+        assert_eq!(gi.flaws[0].lean_catchable, LeanCatchable::NotApplicable);
+        assert_eq!(gi.flaws[0].dials, *di);
+        assert_eq!(gi.proof_status, ProofStatus::Valid);
+        assert!(gi.correct);
+        assert!(!mi.commanded.contains_key("lean_build"));
+        assert_eq!(mi.achieved["flaws_confirmed"].value, Some(json!(1)));
+        assert_eq!(verdict(&mi), json!("PASS"));
+        assert!(
+            grammar::prepare(
+                &config(
+                    n as u64,
+                    m as u64,
+                    "formal",
+                    hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto"))
+                ),
+                7
+            )
+            .is_err()
+        );
+    }
+    // determinism: two preparations agree; another seed draws another instance
+    let c = config(
+        6,
+        2,
+        "pair",
+        hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto")),
+    );
+    let (p1, m1) = build(&c, 7);
+    let (p2, m2) = build(&c, 7);
+    assert_eq!(p1, p2);
+    assert_eq!(m1, m2);
+    let (p3, _) = build(&c, 8);
+    assert_ne!(p3.plan.steps, p1.plan.steps);
+    // an explicit site is a ring-closed chain step's plan index and skips the site draw, the
+    // hedge still drawn first on the stream; a lemma step, a lemma-cited chain step, 0 and a
+    // step past the plan are refused
+    let d = derive(6, 2, 7);
+    for chain in 1..=6usize {
+        let site = 2 + chain;
+        let c = config(
+            6,
+            2,
+            "pair",
+            hedge_spec(HIDDEN_STEP, "cosmetic", json!(site)),
+        );
+        if d.lemma_of(chain).is_some() {
+            assert!(
+                grammar::prepare(&c, 7).is_err(),
+                "site {site} is lemma-cited"
+            );
+            continue;
+        }
+        let (p, m) = build(&c, 7);
+        let inj = p.injection.as_ref().unwrap();
+        assert_eq!(inj.site, site);
+        let mut stream = Stream::new(7, "injector/FLAW-0004/1");
+        let hedge = stream.below(HEDGES.len() as u64) as usize;
+        assert_eq!(inj.informal_dials["hedge"], json!(hedge));
+        assert!(
+            p.plan.steps[site - 1]
+                .text
+                .starts_with(&format!("{} $", HEDGES[hedge]))
+        );
+        assert!(p.plan.steps[site - 1].fragment[0].ends_with(" := by"));
+        assert_eq!(verdict(&m), json!("PASS"));
+    }
+    for site in [0u64, 1, 2, 9, 10] {
+        assert!(
+            grammar::prepare(
+                &config(
+                    6,
+                    2,
+                    "pair",
+                    hedge_spec(HIDDEN_STEP, "cosmetic", json!(site))
+                ),
+                7
+            )
+            .is_err(),
+            "site {site}"
+        );
+    }
+    // the refusals
+    let refused = |n: u64, m: u64, target: &str, flaws: Value| {
+        grammar::prepare(&config(n, m, target, flaws), 7).is_err()
+    };
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            hedge_spec("nontrivial-true", "gap", json!("auto"))
+        ),
+        "no non-trivially true step on a chain"
+    );
+    assert!(
+        refused(4, 0, "pair", hedge_spec("false", "fatal", json!("auto"))),
+        "no false-step material"
+    );
+    assert!(refused(
+        4,
+        0,
+        "pair",
+        hedge_spec("routine", "cosmetic", json!("auto"))
+    ));
+    for severity in ["repairable", "gap", "fatal"] {
+        assert!(
+            refused(
+                4,
+                0,
+                "pair",
+                hedge_spec(HIDDEN_STEP, severity, json!("auto"))
+            ),
+            "routine-true is cosmetic"
+        );
+    }
+    let spec = |sub: Value, severity: &str, dials: Value| {
+        json!([{
+            "class": "FLAW-0004", "sub_variant": sub, "severity": severity, "site": "auto",
+            "dials": dials
+        }])
+    };
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            spec(
+                json!("hedged"),
+                "cosmetic",
+                json!({"hidden_step": HIDDEN_STEP})
+            )
+        ),
+        "no sub-variant"
+    );
+    assert!(
+        refused(4, 0, "pair", spec(json!(null), "cosmetic", json!({}))),
+        "the dial is named"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            spec(
+                json!(null),
+                "cosmetic",
+                json!({"hidden_step": HIDDEN_STEP, "shape": "journal"})
+            )
+        ),
+        "no extra dial"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            spec(
+                json!(null),
+                "cosmetic",
+                json!({"hidden_step": HIDDEN_STEP, "hedge": 0})
+            )
+        ),
+        "a reserved dial"
+    );
+    assert!(refused(
+        4,
+        0,
+        "pair",
+        spec(json!(null), "cosmetic", json!({"hidden_step": 1}))
+    ));
+    assert!(
+        refused(
+            4,
+            0,
+            "formal",
+            hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto"))
+        ),
+        "informal or pair"
+    );
+    assert!(
+        refused(
+            3,
+            3,
+            "pair",
+            hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto"))
+        ),
+        "every chain step is lemma-cited"
+    );
+    let two = json!([
+        hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto"))[0],
+        unused_spec(1)[0]
+    ]);
+    assert!(refused(4, 0, "pair", two), "one spec per artifact");
+    // 0.1.0 to 0.5.0 never realized the class: their goldens regenerate under the versions
+    // they name
+    for v in [
+        GrammarVersion::V0_1_0,
+        GrammarVersion::V0_2_0,
+        GrammarVersion::V0_3_0,
+        GrammarVersion::V0_4_0,
+        GrammarVersion::V0_5_0,
+    ] {
+        assert!(
+            prepare_for(
+                Producer::Grammar(v),
+                &config(
+                    4,
+                    0,
+                    "pair",
+                    hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto"))
+                ),
+                7
+            )
+            .is_err()
+        );
+    }
+    // the 0.5.0 bytes of a FLAW-0003 artifact, a FLAW-0010 one, a FLAW-0009 one and the
+    // (4, 0) and (4, 1) controls are unchanged by 0.6.0: only the version, and with it the id
+    // and the manifest, differ
+    for c in [
+        config(4, 1, "pair", cycle_spec(json!("auto"))),
+        config(4, 0, "pair", cite_spec("journal", true, json!("auto"))),
+        config(4, 1, "pair", axiom_spec(false, json!("auto"))),
+        config(4, 0, "pair", json!([])),
+        config(4, 1, "pair", json!([])),
+    ] {
+        let now = grammar::prepare(&c, 7).unwrap();
+        let old = prepare_for(Producer::Grammar(GrammarVersion::V0_5_0), &c, 7).unwrap();
         assert_eq!(old.informal, now.informal);
         assert_eq!(
             old.formal.as_ref().map(|f| &f.bytes),

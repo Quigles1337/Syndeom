@@ -1,6 +1,109 @@
 # STATE
 
-- **Updated:** 2026-11-02 UTC (2026-11-02 America/New_York). This was Session 51:
+- **Updated:** 2026-11-02 UTC (2026-11-02 America/New_York). This was Session 52:
+  - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
+    fresh conversation;
+  - SD15 disclosure first, **by digest** (ADR-0005 *Amendments* 1–3). The matched index lines
+    (85, 86, 88, 89, 106, 107; `0418e621…534c`; 104 withheld) and the SYNDEOM memory file
+    (`ce2ce6de…2cc0`) are the bytes Session 35's Entry 1 reproduced, verified by hashing
+    HANDOFF's lines in HANDOFF Session 52, Entry 2; the whole index's digest is the one Sessions
+    50 and 51 recorded (`0f7e69ab…8995`, 15,471 bytes), recorded as a fact;
+  - **not an examination**: Gate S2 has nothing to examine. The session certifies nothing. The
+    ORIENT order of ADR-0008 D1 step 0 was kept in substance — after disclosing, ADR-0008, then
+    the preflight, then the rest — with one deviation recorded in HANDOFF Session 52
+    (CONFUSIONS): the citation check of Entry 2 printed a dozen lines of context around the
+    cited HANDOFF ranges and the earlier blocks' header lines before ADR-0008 was read; the
+    ORIENT gate was launched after the first step-6 reads (STATE, the Git log, FLAWS' and
+    CLAIMS' heads, HANDOFF Session 51, the gate script, ADR-0011's decision) and ran
+    concurrently with the reading of ADR-0011's amendments and the crate sources (HANDOFF
+    Session 52, Entry 3); no source was edited and no Lean process started until it had ended.
+
+  **`s2_grammar` 0.6.0 is built** (STATE's NEXT as it stood: S2 ordering step 4, continued —
+  FLAW-0004 on `ring_chain`, probes first) on branch `claude/s2-grammar-0.6.0`, in four
+  commits, for Al's review, with the `deny.toml` allow-list Al's rulings on PR 37 ordered as
+  the first of them. `main` is unchanged until Al merges. The grammar now carries FLAW-0004: a
+  ring-closed chain step's justification deleted and a drawn hedge prefixed to the bare claim,
+  the aligned `calc` line's tactic omitted with the `by` kept, so that Lean reports one
+  `unsolved goals` error at that line (the shape six Lean probes chose); `routine-true` only;
+  the 0.1.0 to 0.5.0 bytes are unchanged.
+  - **Orientation.** The ADR-0008 preflight found `C:\Users\LEET\Syndeom` on `main`
+    **synchronized** with fetched `origin/main` `1344357bc59a5219c564069259bc3e68b8a3b930`, tree
+    `9586fbb5f5cad1f2360c720e9c2ef520ad7af0a8`, with the disclosure append the only change.
+    - That is **PR 37's merge** (by Al, 2026-11-02T07:52:47Z; parents `602a596` and `33276ee`),
+      so `c6b24094…` and `2c3f2b0e…` are real commits on `main`. No later ruling on PR 37 exists
+      (no review, no comment but the executor's own two; no open pull request or issue); Al's
+      rulings of 2026-11-02 were already recorded by `33276ee`.
+    - The receipt is `orient-preflight-1.json` under
+      `C:\Users\LEET\Codex\Temp\syndeom-orient-20261102T1819Z\`.
+    - The ORIENT gate was GREEN at `1344357` (2026-11-02T18:21:15Z–18:31:03Z: 8,938 Lean jobs,
+      fourteen axiom lines within the standard three, fmt, clippy and every test, LF, the
+      registers and the 65-row freeze register; ten minutes on a cold disk cache).
+  - **Commits:**
+    - `5036342f88c6309155facaad2900cea3298a6129` `engine/deny.toml` — the licence allow-list,
+      the eight identifiers `cargo deny list` prints on the current lock (`0BSD`, `Apache-2.0`,
+      `BSL-1.0`, `MIT`, `PolyForm-Noncommercial-1.0.0`, `Unicode-3.0`, `Unlicense`, `Zlib`),
+      nothing assumed; `cargo deny check` clean (advisories, bans, licenses, sources);
+    - `bc093c4be3b76c0bb520e8b56778b86abdc0792c` the 0.6.0 producer: `src/grammar.rs` —
+      `hedge` (D5, as `s2_template` 0.5.0 reads it: the site a ring-closed chain step drawn on
+      `injector/FLAW-0004/1`, or an explicit such step's plan index; the hedge drawn next on the
+      same stream from the template's lexicon and prefixed to the bare claim `$e_{k-1} =
+      e_k$.`, the chain's justification deleted and recorded; the `calc` line `_ = e_k := by
+      ring` becoming `_ = e_k := by`; `hidden_step` `routine-true` only, cosmetic;
+      `YES-KERNEL` in both records of a pair with `lean_build` commanded `fail`, `N/A` for an
+      informal-only artifact, the target `formal` refused; the dials `hidden_step`, `site`,
+      `hedge`, `hedge_text`, `justification`, `claim`, `inserted`, `replaced`,
+      `original_steps` and, formal, `omitted`, `inserted`, `replaced`, `original_fragments`),
+      the constants `HIDDEN_STEP` and `OMITTED_TACTIC`, `GrammarVersion::V0_6_0`, `realizes`;
+      `src/lib.rs`; `tests/grammar.rs` (FLAW-0004 over six configurations and the version
+      facts); the crate README;
+    - `f5fd3e439d5107cb50537ae6a5d869bb7f2254e5` the 4 goldens of `s2_grammar` 0.6.0 — at
+      (`n_steps` 4, `n_lemmas` 0), seed 7: the control (informal, formal; both files the 0.1.0
+      short control's bytes) and FLAW-0004 `routine-true` (informal, pair) — produced at
+      `bc093c4b…` by two byte-identical runs, and the goldens README (105 cases);
+    - the record commit: `analysis/s2-generate-13/`, ADR-0011 *Amendments*, this file and
+      HANDOFF.
+  - **Measured at implementation** (`analysis/s2-generate-13/README.md`):
+    - six Lean probes, one process at a time, before any design (NEXT's step 4): the `calc`
+      line with `ring` omitted and the `by` kept fails with one `unsolved goals` error at that
+      line and no cascade, at the first, a middle and the last step (shape (i), chosen); `by
+      skip` fails the same way but is a visible placeholder (shape (ii), refused on the
+      record); a term-level hole `_` fails at the line and cascades to the theorem's line, and
+      `?_` is reported at the theorem's line only (shape (iii), not an omitted tactic step);
+    - the 101 earlier goldens regenerate byte for byte; the 4 of `s2_grammar` 0.6.0 pass
+      fidelity: the controls build and print `[propext, Quot.sound]`; each FLAW-0004 case is
+      confirmed by the FLAW-0004 check and, in the pair, by check K (the build's one error at
+      line 6); at seed 7 the site is plan step 3 and the hedge index 1, `It is easy to see
+      that` (the informal record's span `[0, 80)`); 96 informal tokens against the control's 93;
+    - `cargo audit` clean (advisory-db `263a4d95…`, 1,402 advisories; `Cargo.lock` unchanged);
+      `cargo deny check` clean with the allow-list; the security review records no new
+      finding; FINDING-018's scope gains `hedge`'s use of the derivation's `sites`, `e` and
+      `plan_index`.
+  - **Readings flagged for Al** (packet readings 150–163): the site a ring-closed chain step
+    only, the last eligible (150); **the formal shape — the tactic omitted with the `by` kept,
+    chosen by the probes against a placeholder tactic and term-level holes (151)**;
+    **`omitted` the tactic text `["ring"]` rather than whole lines (152)**; **`routine-true`
+    the one `hidden_step` with material, `nontrivial-true` and `false` refused, a `false`
+    design in FLAW-0012's sense listed and not taken (153)**; the draw order and the same-seed
+    hedge coincidence with the template (154); the claim's period and the chain's own
+    justification (155); the record over the whole hedged step (156); `lean_catchable` by
+    target (157); the counts the control's, `n_tokens` 96 against 93 (158); four goldens as
+    NEXT named (159); **a hedged pair valid and correct while its formal file does not build,
+    as the template's since 0.5.0 (160)**; the checks unchanged, tampering a FAIL (161); the
+    omission visible in the formal text, a note for S3's cell design (162); the allow-list as
+    identifiers, not expressions (163).
+  - **Not yet built:** the grammars `ineq_chain`, `case_split` and `nat_induction`; on
+    `ring_chain` FLAW-0011 (the composite, the grammar's last v0.1 class); FLAW-0010 `claim:
+    false` (without material, Al's rulings on PR 36); the `s2_template` sub-variants without
+    material; the sweep (ADR-0011 D11).
+  - **Unchanged:** registers' statuses, the manifests under `groundtruth/`, frozen packets, the
+    Gate S1 table, the constitution, the licence, the tag, `corpora/` (no artifact written),
+    every `s2_template` seed, dial, check and golden, every `s2_grammar` 0.1.0 to 0.5.0 golden,
+    the gate (`scripts/check.sh` does not run `cargo deny`). **NEXT** waits on this pull
+    request's merge.
+  - **Al's rulings of 2026-11-02 on PR 38** (verbatim under *Standing rulings*; ADR-0011
+    *Amendments*; HANDOFF Session 52's addendum), recorded on the same branch: readings
+    150–163 accepted as read; reading 153 recorded with Al's note (a `false` FLAW-0004 on the grammar is not taken now; if S3's cell design asks for a fatal FLAW-0004 cell, it is realized in its own version after the grammars' v0.1 classes, as the composite reading 153 describes — the step's identity perturbed once, the hedge in place of the justification, the formal line's tactic omitted — recorded as the FLAW-0004 `false` instance beside a FLAW-0001 instance at the step, both `YES-KERNEL` at the site in a pair and `N/A` in an informal-only artifact, with the fact that the kernel's message, `unsolved goals`, does not distinguish the unprovable goal from the merely unproven one; `nontrivial-true` stays without material on the grammar). No code, golden or check changed; the version stays 0.6.0.
+- **Previous update (Session 51):** 2026-11-02 UTC (2026-11-02 America/New_York). This was Session 51:
   - launched from `C:\Users\LEET` with the §6 Session-N resume prompt verbatim and alone, in a
     fresh conversation; its first response was stopped by a safety classifier after the
     constitution and ADR-0005 had been read and before anything was appended (verified after
@@ -2737,6 +2840,24 @@ On PR 36, confirmed: the executor’s reading of “the class sweep is not bumpe
 Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
 ~~~
 
+- **Al's rulings of 2026-11-02 on PR 38 (`s2_grammar` 0.6.0) — verbatim.** Received in
+  Session 52's conversation after PR 38 opened (2026-11-02 UTC, 2026-11-02 America/New_York).
+  The copy is `owner-rulings-pr38.txt` under
+  `C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-060-20261102T1840Z\` (1,014 bytes, SHA-256
+  `4b40cc327b3685e5f0e7f91c9e7f78f744520c2e63dfd30f60925df08b7e719e`), transcribed from the message as rendered to the
+  executor. The rulings are also in ADR-0011 *Amendments* and in HANDOFF Session 52's addendum.
+  Their effect is under *Standing escalations*, in the Updated bullet and in NEXT.
+
+~~~text
+Rulings on PR #38 / s2_grammar 0.6.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 150 through 163 are accepted as read.
+
+On reading 153, record also: a false FLAW-0004 on the grammar is not taken now. If S3’s cell design asks for a fatal FLAW-0004 cell, it is realized in its own version after the grammars’ v0.1 classes, as the composite the reading describes — the step’s identity perturbed once, the hedge in place of the justification, the formal line’s tactic omitted — recorded as the FLAW-0004 false instance beside a FLAW-0001 instance at the step, both YES-KERNEL at the site in a pair and N/A in an informal-only artifact, with the fact that the kernel’s message, unsolved goals, does not distinguish the unprovable goal from the merely unproven one. nontrivial-true stays without material on the grammar.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
 ## Carried from S0 (notes, not actions)
 
 - **Sweep runners-up unretrieved:** IMProofBench, Open Proof Corpus, FormalAlign, Beyond
@@ -2749,10 +2870,10 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 | Criterion | Status | Evidence |
 |---|---|---|
-| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code. Session 40 (merged as PR 26): the crate `engine/generate/` — the plan, both renderers, the injector, `syndeom-rng/1`, the Lean harness and `s2_template` 0.1.0 with three seeds. Session 41 (merged as PR 27): `s2_template` 0.2.0 — four more seeds from the FLAWS.md examples (FLAW-0002 gap, FLAW-0005 violated, FLAW-0006 and FLAW-0014 fatal), three of them seeds whose statement is false (no control, intrinsic material, negation witnesses). Session 42 (merged as PR 28): `s2_template` 0.3.0 — lemma steps in the plan and the seed `n_lt_two_pow` (FLAW-0009 `axiom` gap and fatal, FLAW-0007 `unused` cosmetic). Session 43 (merged as PR 29): `s2_template` 0.4.0 — the padding module (FLAW-0013: whole paragraphs of true irrelevant material with matching unused declarations; dials `kinds`, `count`, `placement`; one instance per paragraph) and the seed `sqrt2_irrational` with seven padding paragraphs. Session 44 (merged as PR 30): `s2_template` 0.5.0 — FLAW-0004 (the hedge drawn from the fixed lexicon, the justification deleted, the aligned proof block omitted; `hidden_step`) on `sqrt2_irrational` and FLAW-0011 as a commanded composite (`embedded`, one instance of severity gap or fatal of FLAW-0001 through FLAW-0010, Al's rulings 2 and 3 on PR 30; its record at the statement). Session 45 (merged as PR 31): `s2_template` 0.6.0 — FLAW-0010 `a` (the fictional reference drawn from the fixed lexicon and prefixed to the bare claim; `shape`, `claim`; the formal file unchanged, `N/A`) on `sqrt2_irrational` and FLAW-0003 on the new seed `bounded_monotone_converges` (`direct`: the goal or its contrapositive as Lemma 1 proved by a forward reference to the theorem, check K; `cycle`: Lemma 1 and the theorem citing each other, informal-only, checked on the plan's premise graph — the plan gains `premises`, D2). Session 46 (merged as PR 32): `s2_template` 0.7.0 — FLAW-0008 on the new seed `bolzano_weierstrass` (the formal statement drifts by exactly one recorded edit for each of D5's five transformations while the informal file stays faithful; the drifted file builds with its own proof, `NO`; the record formal-only at the main declaration's header line) and FLAW-0012 on the new seed `bounded_continuous_sup` (a false statement's convincing argument, the true-case proof transplanted; the FLAW-0005 `violated` instance at the hidden use site, check K, and the class's own instance at the statement); every FLAWS.md 0.1.0 class is now realizable by `s2_template`. Session 47 (merged as PR 33): `s2_grammar` 0.1.0 — the family's second producer: the grammar `ring_chain` (a polynomial identity over ℤ in `x` and `y`, a seed form drawn from a fixed table and `n_steps` presentations of its expansion, proved as a `calc` chain closed by `ring`, with `n_lemmas` steps stated as lemma steps and cited; the truth's reference the formal control's artifact id) with its control and FLAW-0001 `propagated` and `local` (generated material: one perturbed monomial at a drawn ring-closed step, the site re-rendered under its own presentation), and the producer dispatch (`generate` by the config's `theorem`/`grammar` key; one `assemble` for both producers). Session 48 (merged as PR 34): `s2_grammar` 0.2.0 — FLAW-0007 `unused` (`count` 1–13 true irrelevant identities, each a seed form the instance does not use drawn without replacement on `injector/FLAW-0007/1`, as lemma steps after the cited lemmas, cited nowhere, each its own instance, cosmetic, `YES-TOOLING`, check T) and FLAW-0013 (`count` 1–32 generated padding paragraphs of the kinds `re-derivation` — the instance's own polynomial in two drawn presentations — and `unused-lemma` — an identity of a seed form the instance does not use —, each with its unused declaration, drawn on `padding` under `placement`; `padding_ratio` measured as 0.4.0 measures it; `restated-definition` and `verbose-rewrite` refused for lack of material) on `ring_chain`, the 0.1.0 bytes unchanged. Session 49 (merged as PR 35): `s2_grammar` 0.3.0 — FLAW-0009 `axiom` on `ring_chain` (the cited lemma, drawn on `injector/FLAW-0009/1` or an explicit lemma-step site, has its declaration replaced by an `axiom` with no proof: `truth: true` the lemma's own identity, gap; `truth: false` a false identity — the lemma's right-hand side perturbed once — used ex falso at the citing step, the axiom's instance at a witness point refuted by `norm_num`, fatal, the ex falso shape of Al's ruling of 2026-11-01; the informal file unchanged; one formal-only record at the axiom's declaration, `YES-TOOLING`, check T on the axiom print; `native_decide` refused), the 0.1.0 and 0.2.0 bytes unchanged. Session 50 (merged as PR 36): `s2_grammar` 0.4.0 — FLAW-0010 `a` on `ring_chain` (a ring-closed chain step, drawn on `injector/FLAW-0010/1` or explicit, has its justification replaced by a fictional reference drawn next on the same stream from `s2_template` 0.6.0's lexicon — `shape`; `claim: true` gap; `claim: false` refused, its design a reading for Al — the step `By <reference>` and the bare claim; the formal file unchanged, the target `formal` refused; one informal-only record spanning the reference, `N/A`, the 0.6.0 FLAW-0010 check), the 0.1.0, 0.2.0 and 0.3.0 bytes unchanged. Session 51 (PR pending): `s2_grammar` 0.5.0 — FLAW-0003 `cycle` on `ring_chain` (a cited lemma, drawn on `injector/FLAW-0003/1` or explicit, has its closing note replaced by a citation of the theorem, `this follows from the theorem`, recorded as the lemma step's premise; the chain step that cites the lemma is unchanged, so the plan's premise graph holds the cycle through the lemma and the main declaration; `cycle_length` 2, fatal; the formal file unchanged, the target `formal` refused; one informal-only record at the lemma step spanning the citation phrase, `NO`, the 0.6.0 structural check; `direct` refused, `s2_template`-only), the 0.1.0 to 0.4.0 bytes unchanged; the grammars `ineq_chain`, `case_split` and `nat_induction`, the grammar's other v0.1 classes (FLAW-0004, FLAW-0011) and FLAW-0010 `claim: false` (without material, Al's rulings on PR 36) are later versions** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*); `engine/generate/`; `analysis/s2-generate-1/README.md`; `analysis/s2-generate-2/README.md`; `analysis/s2-generate-3/README.md`; `analysis/s2-generate-4/README.md`; `analysis/s2-generate-5/README.md`; `analysis/s2-generate-6/README.md`; `analysis/s2-generate-7/README.md`; `analysis/s2-generate-8/README.md`; `analysis/s2-generate-9/README.md`; `analysis/s2-generate-10/README.md`; `analysis/s2-generate-11/README.md`; `analysis/s2-generate-12/README.md` |
-| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress: implemented for `s2_template` 0.1.0 (Session 40, PR 26), 0.2.0 (Session 41, PR 27), 0.3.0 (Session 42, PR 28), 0.4.0 (Session 43, PR 29), 0.5.0 (Session 44, PR 30), 0.6.0 (Session 45, PR 31) and 0.7.0 (Session 46, PR 32), and for `s2_grammar` 0.1.0 (Session 47, PR 33), 0.2.0 (Session 48, PR 34), 0.3.0 (Session 49, PR 35), 0.4.0 (Session 50, PR 36) and 0.5.0 (Session 51, PR pending) — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; from 0.2.0 the counts are per instance and a pair's instance is confirmed only when both of its records pass (ruling 3 on PR 26; Al's owner note of 2026-10-28); from 0.3.0 check T for formal `YES-TOOLING` records (FLAW-0007 `unused` by the used-constants closure over the file's own constants, FLAW-0009 by `#print axioms`) and records only in the files a class manifests in; from 0.4.0 check T for FLAW-0013's padding declarations and `padding_ratio` measured as the FLAW-0013 span tokens over `n_tokens` (commanded at `abs 0.05`; a ratio the paragraph count cannot reach is a FAIL verdict); from 0.5.0 the FLAW-0004 informal check (the step is the hedge entry, a space and the bare claim; the faithful text held the justification exactly once) and the composite's check (the truth witness by construction, every embedded instance's records passing); from 0.6.0 the FLAW-0010 check (the span is the reference rebuilt from the recorded lexicon indices, every token in the lexicon, the step `By <reference>` and the bare claim, the faithful step holding the justification once) and the FLAW-0003 `cycle` check (the plan's premise graph contains the recorded cycle through the inserted lemma; each citation phrase at its recorded span), `direct` by check K; from 0.7.0 the FLAW-0008 check (the drifted file builds, the faithful statement has its kernel-checked witness, the recorded faithful and drifted statements differ by exactly the transformation's edit under one textual rule per transformation, the plan states the drifted one) and the FLAW-0012 check (every record of the use-site instance passes — K at the hidden use site — and the seed's negation witness is kernel-checked); for `s2_grammar` 0.1.0, `n_steps` commanded `exact` as the plan's step count (`length.n_steps + length.n_lemmas`) and `n_lemmas` as `length.n_lemmas`, `n_tokens` achieved only, and FLAW-0001 confirmed by check K at the site's `calc` line; for `s2_grammar` 0.2.0, commanded `n_lemmas` counts the unused lemmas and `n_steps` the unused lemmas and the padding paragraphs, FLAW-0007 `unused` confirmed by check T at each inserted declaration (the informal record by its span), FLAW-0013 by the step check and check T, `padding_ratio` measured as 0.4.0 measures it; for `s2_grammar` 0.3.0, FLAW-0009 `axiom` confirmed by check T at the axiom's declaration (`#print axioms` of the main declaration lists it), `lean_axioms_standard` commanded `false`, the counts the control's; for `s2_grammar` 0.4.0, FLAW-0010 `a` confirmed by the 0.6.0 FLAW-0010 check at the informal site (the reference rebuilt from the recorded indices, every token in the lexicon, the step `By <reference>` and the bare claim, the faithful step holding the justification once), the counts the control's, a pair's `lean_build` commanded `pass`; for `s2_grammar` 0.5.0, FLAW-0003 `cycle` confirmed by the 0.6.0 structural check at the lemma step (the plan's premise graph contains the recorded cycle through the lemma; the two citation phrases of the cycle at their recorded spans), the counts the control's, a pair's `lean_build` commanded `pass`** | `engine/generate/src/template.rs`; `engine/generate/src/grammar.rs`; `analysis/s2-generate-3/README.md` (readings 21–28 accepted by Al's rulings on PR 28); `analysis/s2-generate-4/README.md` (readings 29–38 accepted by Al's rulings on PR 29); `analysis/s2-generate-5/README.md` (readings 39–51 ruled by Al's rulings on PR 30: 43 and 46 replaced, the rest accepted); `analysis/s2-generate-6/README.md` (readings 52–65 accepted by Al's rulings on PR 31); `analysis/s2-generate-7/README.md` (readings 66–84 accepted by Al's rulings on PR 32); `analysis/s2-generate-8/README.md` (readings 85–99 accepted by Al's rulings on PR 33); `analysis/s2-generate-9/README.md` (readings 100–112 accepted by Al's rulings on PR 34); `analysis/s2-generate-10/README.md` (readings 113–126 accepted by Al's rulings on PR 35); `analysis/s2-generate-11/README.md` (readings 127–137 accepted by Al's rulings on PR 36); `analysis/s2-generate-12/README.md` (readings 138–149 accepted by Al's rulings on PR 37) |
+| S2.1 Modules behind one shared interface: informal generator, Lean 4 formal-variant generator, flaw injector (every FLAWS.md recipe as a dial: presence, location, severity), padding module (FLAW-0013); first family deterministic (standing ruling) | **ADR-0011 written (Session 34, 2026-10-27; decision only, no code) and accepted by Al's rulings 1–4 of 2026-10-27 on PR 20, in effect at the merge; D6's S1-corpus independence rule binds every seed; the byte-check narrowing precedes any S2 code. Session 40 (merged as PR 26): the crate `engine/generate/` — the plan, both renderers, the injector, `syndeom-rng/1`, the Lean harness and `s2_template` 0.1.0 with three seeds. Session 41 (merged as PR 27): `s2_template` 0.2.0 — four more seeds from the FLAWS.md examples (FLAW-0002 gap, FLAW-0005 violated, FLAW-0006 and FLAW-0014 fatal), three of them seeds whose statement is false (no control, intrinsic material, negation witnesses). Session 42 (merged as PR 28): `s2_template` 0.3.0 — lemma steps in the plan and the seed `n_lt_two_pow` (FLAW-0009 `axiom` gap and fatal, FLAW-0007 `unused` cosmetic). Session 43 (merged as PR 29): `s2_template` 0.4.0 — the padding module (FLAW-0013: whole paragraphs of true irrelevant material with matching unused declarations; dials `kinds`, `count`, `placement`; one instance per paragraph) and the seed `sqrt2_irrational` with seven padding paragraphs. Session 44 (merged as PR 30): `s2_template` 0.5.0 — FLAW-0004 (the hedge drawn from the fixed lexicon, the justification deleted, the aligned proof block omitted; `hidden_step`) on `sqrt2_irrational` and FLAW-0011 as a commanded composite (`embedded`, one instance of severity gap or fatal of FLAW-0001 through FLAW-0010, Al's rulings 2 and 3 on PR 30; its record at the statement). Session 45 (merged as PR 31): `s2_template` 0.6.0 — FLAW-0010 `a` (the fictional reference drawn from the fixed lexicon and prefixed to the bare claim; `shape`, `claim`; the formal file unchanged, `N/A`) on `sqrt2_irrational` and FLAW-0003 on the new seed `bounded_monotone_converges` (`direct`: the goal or its contrapositive as Lemma 1 proved by a forward reference to the theorem, check K; `cycle`: Lemma 1 and the theorem citing each other, informal-only, checked on the plan's premise graph — the plan gains `premises`, D2). Session 46 (merged as PR 32): `s2_template` 0.7.0 — FLAW-0008 on the new seed `bolzano_weierstrass` (the formal statement drifts by exactly one recorded edit for each of D5's five transformations while the informal file stays faithful; the drifted file builds with its own proof, `NO`; the record formal-only at the main declaration's header line) and FLAW-0012 on the new seed `bounded_continuous_sup` (a false statement's convincing argument, the true-case proof transplanted; the FLAW-0005 `violated` instance at the hidden use site, check K, and the class's own instance at the statement); every FLAWS.md 0.1.0 class is now realizable by `s2_template`. Session 47 (merged as PR 33): `s2_grammar` 0.1.0 — the family's second producer: the grammar `ring_chain` (a polynomial identity over ℤ in `x` and `y`, a seed form drawn from a fixed table and `n_steps` presentations of its expansion, proved as a `calc` chain closed by `ring`, with `n_lemmas` steps stated as lemma steps and cited; the truth's reference the formal control's artifact id) with its control and FLAW-0001 `propagated` and `local` (generated material: one perturbed monomial at a drawn ring-closed step, the site re-rendered under its own presentation), and the producer dispatch (`generate` by the config's `theorem`/`grammar` key; one `assemble` for both producers). Session 48 (merged as PR 34): `s2_grammar` 0.2.0 — FLAW-0007 `unused` (`count` 1–13 true irrelevant identities, each a seed form the instance does not use drawn without replacement on `injector/FLAW-0007/1`, as lemma steps after the cited lemmas, cited nowhere, each its own instance, cosmetic, `YES-TOOLING`, check T) and FLAW-0013 (`count` 1–32 generated padding paragraphs of the kinds `re-derivation` — the instance's own polynomial in two drawn presentations — and `unused-lemma` — an identity of a seed form the instance does not use —, each with its unused declaration, drawn on `padding` under `placement`; `padding_ratio` measured as 0.4.0 measures it; `restated-definition` and `verbose-rewrite` refused for lack of material) on `ring_chain`, the 0.1.0 bytes unchanged. Session 49 (merged as PR 35): `s2_grammar` 0.3.0 — FLAW-0009 `axiom` on `ring_chain` (the cited lemma, drawn on `injector/FLAW-0009/1` or an explicit lemma-step site, has its declaration replaced by an `axiom` with no proof: `truth: true` the lemma's own identity, gap; `truth: false` a false identity — the lemma's right-hand side perturbed once — used ex falso at the citing step, the axiom's instance at a witness point refuted by `norm_num`, fatal, the ex falso shape of Al's ruling of 2026-11-01; the informal file unchanged; one formal-only record at the axiom's declaration, `YES-TOOLING`, check T on the axiom print; `native_decide` refused), the 0.1.0 and 0.2.0 bytes unchanged. Session 50 (merged as PR 36): `s2_grammar` 0.4.0 — FLAW-0010 `a` on `ring_chain` (a ring-closed chain step, drawn on `injector/FLAW-0010/1` or explicit, has its justification replaced by a fictional reference drawn next on the same stream from `s2_template` 0.6.0's lexicon — `shape`; `claim: true` gap; `claim: false` refused, its design a reading for Al — the step `By <reference>` and the bare claim; the formal file unchanged, the target `formal` refused; one informal-only record spanning the reference, `N/A`, the 0.6.0 FLAW-0010 check), the 0.1.0, 0.2.0 and 0.3.0 bytes unchanged. Session 51 (merged as PR 37): `s2_grammar` 0.5.0 — FLAW-0003 `cycle` on `ring_chain` (a cited lemma, drawn on `injector/FLAW-0003/1` or explicit, has its closing note replaced by a citation of the theorem, `this follows from the theorem`, recorded as the lemma step's premise; the chain step that cites the lemma is unchanged, so the plan's premise graph holds the cycle through the lemma and the main declaration; `cycle_length` 2, fatal; the formal file unchanged, the target `formal` refused; one informal-only record at the lemma step spanning the citation phrase, `NO`, the 0.6.0 structural check; `direct` refused, `s2_template`-only), the 0.1.0 to 0.4.0 bytes unchanged. Session 52 (PR pending): `s2_grammar` 0.6.0 — FLAW-0004 on `ring_chain` (a ring-closed chain step, drawn on `injector/FLAW-0004/1` or explicit, has its justification deleted and a hedge, drawn next on the same stream from the template's lexicon, prefixed to the bare claim; the aligned `calc` line's tactic omitted with the `by` kept, so that Lean reports one `unsolved goals` error at that line — the shape six probes chose; `hidden_step` `routine-true` only, cosmetic, `nontrivial-true` and `false` refused for lack of material; a pair's instance `YES-KERNEL` in both files with `lean_build` commanded `fail`, an informal-only artifact's `N/A`; the target `formal` refused), the 0.1.0 to 0.5.0 bytes unchanged; the grammars `ineq_chain`, `case_split` and `nat_induction`, the grammar's last v0.1 class (FLAW-0011, the composite) and FLAW-0010 `claim: false` (without material, Al's rulings on PR 36) are later versions** | `PROGRAM/DECISIONS/ADR-0011.md` (D1–D12, *Amendments*); `engine/generate/`; `analysis/s2-generate-1/README.md`; `analysis/s2-generate-2/README.md`; `analysis/s2-generate-3/README.md`; `analysis/s2-generate-4/README.md`; `analysis/s2-generate-5/README.md`; `analysis/s2-generate-6/README.md`; `analysis/s2-generate-7/README.md`; `analysis/s2-generate-8/README.md`; `analysis/s2-generate-9/README.md`; `analysis/s2-generate-10/README.md`; `analysis/s2-generate-11/README.md`; `analysis/s2-generate-12/README.md`; `analysis/s2-generate-13/README.md` |
+| S2.2 Commanded and achieved statistics (tokens, steps, lemmas, flaws per class, severity, padding ratio); per-artifact fidelity verdict | **in progress: implemented for `s2_template` 0.1.0 (Session 40, PR 26), 0.2.0 (Session 41, PR 27), 0.3.0 (Session 42, PR 28), 0.4.0 (Session 43, PR 29), 0.5.0 (Session 44, PR 30), 0.6.0 (Session 45, PR 31) and 0.7.0 (Session 46, PR 32), and for `s2_grammar` 0.1.0 (Session 47, PR 33), 0.2.0 (Session 48, PR 34), 0.3.0 (Session 49, PR 35), 0.4.0 (Session 50, PR 36), 0.5.0 (Session 51, PR 37) and 0.6.0 (Session 52, PR pending) — commanded/achieved per ADR-0011 D8, check K for formal `YES-KERNEL` records, the structural check for informal records; from 0.2.0 the counts are per instance and a pair's instance is confirmed only when both of its records pass (ruling 3 on PR 26; Al's owner note of 2026-10-28); from 0.3.0 check T for formal `YES-TOOLING` records (FLAW-0007 `unused` by the used-constants closure over the file's own constants, FLAW-0009 by `#print axioms`) and records only in the files a class manifests in; from 0.4.0 check T for FLAW-0013's padding declarations and `padding_ratio` measured as the FLAW-0013 span tokens over `n_tokens` (commanded at `abs 0.05`; a ratio the paragraph count cannot reach is a FAIL verdict); from 0.5.0 the FLAW-0004 informal check (the step is the hedge entry, a space and the bare claim; the faithful text held the justification exactly once) and the composite's check (the truth witness by construction, every embedded instance's records passing); from 0.6.0 the FLAW-0010 check (the span is the reference rebuilt from the recorded lexicon indices, every token in the lexicon, the step `By <reference>` and the bare claim, the faithful step holding the justification once) and the FLAW-0003 `cycle` check (the plan's premise graph contains the recorded cycle through the inserted lemma; each citation phrase at its recorded span), `direct` by check K; from 0.7.0 the FLAW-0008 check (the drifted file builds, the faithful statement has its kernel-checked witness, the recorded faithful and drifted statements differ by exactly the transformation's edit under one textual rule per transformation, the plan states the drifted one) and the FLAW-0012 check (every record of the use-site instance passes — K at the hidden use site — and the seed's negation witness is kernel-checked); for `s2_grammar` 0.1.0, `n_steps` commanded `exact` as the plan's step count (`length.n_steps + length.n_lemmas`) and `n_lemmas` as `length.n_lemmas`, `n_tokens` achieved only, and FLAW-0001 confirmed by check K at the site's `calc` line; for `s2_grammar` 0.2.0, commanded `n_lemmas` counts the unused lemmas and `n_steps` the unused lemmas and the padding paragraphs, FLAW-0007 `unused` confirmed by check T at each inserted declaration (the informal record by its span), FLAW-0013 by the step check and check T, `padding_ratio` measured as 0.4.0 measures it; for `s2_grammar` 0.3.0, FLAW-0009 `axiom` confirmed by check T at the axiom's declaration (`#print axioms` of the main declaration lists it), `lean_axioms_standard` commanded `false`, the counts the control's; for `s2_grammar` 0.4.0, FLAW-0010 `a` confirmed by the 0.6.0 FLAW-0010 check at the informal site (the reference rebuilt from the recorded indices, every token in the lexicon, the step `By <reference>` and the bare claim, the faithful step holding the justification once), the counts the control's, a pair's `lean_build` commanded `pass`; for `s2_grammar` 0.5.0, FLAW-0003 `cycle` confirmed by the 0.6.0 structural check at the lemma step (the plan's premise graph contains the recorded cycle through the lemma; the two citation phrases of the cycle at their recorded spans), the counts the control's, a pair's `lean_build` commanded `pass`; for `s2_grammar` 0.6.0, FLAW-0004 confirmed by the 0.5.0 FLAW-0004 check at the hedged step (the step the hedge entry, a space and the recorded claim; the faithful step holding the justification exactly once) and, in a pair, by check K at the `calc` line whose tactic was omitted, the counts the control's, a pair's `lean_build` commanded `fail`** | `engine/generate/src/template.rs`; `engine/generate/src/grammar.rs`; `analysis/s2-generate-3/README.md` (readings 21–28 accepted by Al's rulings on PR 28); `analysis/s2-generate-4/README.md` (readings 29–38 accepted by Al's rulings on PR 29); `analysis/s2-generate-5/README.md` (readings 39–51 ruled by Al's rulings on PR 30: 43 and 46 replaced, the rest accepted); `analysis/s2-generate-6/README.md` (readings 52–65 accepted by Al's rulings on PR 31); `analysis/s2-generate-7/README.md` (readings 66–84 accepted by Al's rulings on PR 32); `analysis/s2-generate-8/README.md` (readings 85–99 accepted by Al's rulings on PR 33); `analysis/s2-generate-9/README.md` (readings 100–112 accepted by Al's rulings on PR 34); `analysis/s2-generate-10/README.md` (readings 113–126 accepted by Al's rulings on PR 35); `analysis/s2-generate-11/README.md` (readings 127–137 accepted by Al's rulings on PR 36); `analysis/s2-generate-12/README.md` (readings 138–149 accepted by Al's rulings on PR 37); `analysis/s2-generate-13/README.md` (readings 150–163 accepted by Al's rulings on PR 38) |
 | S2.3 Manifests and determinism for every artifact (SD1, SD6); `corpus_id` invariant tested | **in progress: every manifest self-checked before writing; determinism and id tests; `regenerate` reproduces `content_hash`; from 0.2.0 the running binary's compiled input hashes, the engine commit's blobs and the checkout must agree on every input (FINDING-005 closed, Session 41); 97 goldens regenerate under the producer and version their manifests name; `verify` refuses a manifest whose `main_declaration` is not the producer's (FINDING-011, Session 42)** | `engine/generate/tests/properties.rs`, `tests/goldens.rs`, `tests/provenance.rs`; `engine/generate/src/provenance.rs`, `build.rs`, `input-set.txt` |
-| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **in progress: property and refusal tests; Golden A/B writer test; 101 goldens — 69 for twelve seeds (12 of 0.1.0, 14 of 0.2.0, 9 of 0.3.0, 8 of 0.4.0, 4 of 0.5.0, 12 of 0.6.0, 10 of 0.7.0, each pair counted once) and 32 for the grammar `ring_chain` (`s2_grammar` 0.1.0: the controls at two lengths and FLAW-0001; 0.2.0: the short control, FLAW-0007 `unused` and FLAW-0013; 0.3.0: the control with one lemma and FLAW-0009 `axiom` with both truths; 0.4.0: the short control and FLAW-0010 `a` with `claim: true`; 0.5.0: the control with one lemma and FLAW-0003 `cycle`); clippy clean; `cargo audit` clean (advisory-db `40f5be6f…`, Sessions 40–47; `2295466c…`, Sessions 48–51); `cargo deny check` to run where `cargo audit` runs from the next version, with a `deny.toml` allow-list read from `cargo deny list` (Al's rulings on PR 37); security reviews recorded (packets 1–12); the RNG verified against published reference vectors (S-0081; ruling 4)** | `engine/generate/tests/`; `analysis/s2-generate-1/`; `analysis/s2-generate-2/`; `analysis/s2-generate-3/`; `analysis/s2-generate-4/`; `analysis/s2-generate-5/`; `analysis/s2-generate-6/`; `analysis/s2-generate-7/`; `analysis/s2-generate-8/`; `analysis/s2-generate-9/`; `analysis/s2-generate-10/`; `analysis/s2-generate-11/`; `analysis/s2-generate-12/` |
+| S2.4 Verification: property tests; goldens against the FLAWS.md examples; `cargo clippy` deny-warnings; `cargo audit` | **in progress: property and refusal tests; Golden A/B writer test; 105 goldens — 69 for twelve seeds (12 of 0.1.0, 14 of 0.2.0, 9 of 0.3.0, 8 of 0.4.0, 4 of 0.5.0, 12 of 0.6.0, 10 of 0.7.0, each pair counted once) and 36 for the grammar `ring_chain` (`s2_grammar` 0.1.0: the controls at two lengths and FLAW-0001; 0.2.0: the short control, FLAW-0007 `unused` and FLAW-0013; 0.3.0: the control with one lemma and FLAW-0009 `axiom` with both truths; 0.4.0: the short control and FLAW-0010 `a` with `claim: true`; 0.5.0: the control with one lemma and FLAW-0003 `cycle`; 0.6.0: the short control and FLAW-0004 `routine-true`); clippy clean; `cargo audit` clean (advisory-db `40f5be6f…`, Sessions 40–47; `2295466c…`, Sessions 48–51; `263a4d95…`, Session 52); `cargo deny check` clean where `cargo audit` runs, with the `deny.toml` allow-list read from `cargo deny list` (Al's rulings on PR 37; `engine/deny.toml`, Session 52), never in the gate; security reviews recorded (packets 1–13); the RNG verified against published reference vectors (S-0081; ruling 4)** | `engine/generate/tests/`; `analysis/s2-generate-1/`; `analysis/s2-generate-2/`; `analysis/s2-generate-3/`; `analysis/s2-generate-4/`; `analysis/s2-generate-5/`; `analysis/s2-generate-6/`; `analysis/s2-generate-7/`; `analysis/s2-generate-8/`; `analysis/s2-generate-9/`; `analysis/s2-generate-10/`; `analysis/s2-generate-11/`; `analysis/s2-generate-12/`; `analysis/s2-generate-13/` |
 | Fidelity sweep report (commanded vs achieved flaw presence across the parameter grid, tolerances stated) | **open** | — |
 | Goldens green; lint and audit clean | **open** | — |
 | Cold-start test (§2, SD15) | **open** | — |
@@ -2811,8 +2932,53 @@ Run the gate on the committed tree, fetch fresh before pushing, and stop for my 
 
 ## Standing escalations and dispositions
 
+- **`s2_grammar` 0.6.0 — RULED by Al on 2026-11-02 (rulings on PR 38, verbatim under
+  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 52; branch `claude/s2-grammar-0.6.0`;
+  `analysis/s2-generate-13/README.md`). Merge with a merge commit, so that
+  `bc093c4be3b76c0bb520e8b56778b86abdc0792c`, the goldens' `engine_commit`, stays a real commit
+  on `main`.
+  - Readings 150–163 are accepted as read. Reading 153 carries Al's recorded note: a `false` FLAW-0004 on the grammar is not taken now; if S3's cell design asks for a fatal FLAW-0004 cell, it is realized in its own version after the grammars' v0.1 classes, as the composite reading 153 describes — the step's identity perturbed once, the hedge in place of the justification, the formal line's tactic omitted — recorded as the FLAW-0004 `false` instance beside a FLAW-0001 instance at the step, both `YES-KERNEL` at the site in a pair and `N/A` in an informal-only artifact, with the fact that the kernel's message, `unsolved goals`, does not distinguish the unprovable goal from the merely unproven one; `nontrivial-true` stays without material on the grammar.
+    Nothing regenerated; the version stays 0.6.0. Nothing else is awaited on the readings.
+  - **The readings as flagged** (packet readings 150–163; ADR-0011 *Amendments*): the site a ring-closed chain
+    step only — never a lemma step, never a lemma-cited step — the last step eligible (150);
+    **the formal shape: the tactic omitted with the `by` kept, `_ = e_k := by`, chosen by six
+    probes — one `unsolved goals` error at that line and no cascade at the first, a middle and
+    the last step; `by skip` the same message but a visible placeholder, refused on the record;
+    a term-level hole `_` cascading to the theorem's line and `?_` reported there only, neither
+    an omitted tactic step (151)**; **`omitted` the tactic text `["ring"]`, not whole lines: the
+    chain's fragment is one line and the omission is inside it, `replaced` equal to `inserted`
+    followed by the tactic (152)**; **`routine-true` the one `hidden_step` with material —
+    every chain step a routine `ring` identity — `nontrivial-true` and `false` refused for lack
+    of it; a `false` design (the step's identity perturbed as FLAW-0009's `false` material is,
+    hedged, the tactic omitted) listed as a design in FLAW-0012's sense and not taken; whether
+    S3's cell design wants a fatal FLAW-0004 cell on the grammar is Al's, as its own version
+    (153)**; the draw order on `injector/FLAW-0004/1` — the site, then the hedge, drawn even for
+    an explicit site — and the same-seed hedge coincidence with the template (both second draws
+    on the label; at seed 7 `It is easy to see that`) (154); the bare claim with its period, the
+    justification the chain's own phrase (155); the record over the whole hedged step, `[0,
+    len)`, as the template's (156); `lean_catchable` by target — `YES-KERNEL` in both records of
+    a pair, `N/A` informal-only, `formal` refused (157); the counts the control's, `n_tokens` 96
+    against 93, the hedge's length varying with the draw (158); four goldens as NEXT's step 6
+    named, the controls the 0.1.0 short control's bytes (159); **a hedged pair `valid` and
+    `correct` while its formal file does not build — D7's rule, the template's since 0.5.0 —
+    recorded as a consistency fact (160)**; the checks the existing ones, tampering a FAIL
+    (161); the omission visible in the formal text, so the cell measures whether a detector
+    reads the formal file — a note for S3's cell design (162); the allow-list as the eight
+    identifiers `cargo deny list` prints, not expressions (163).
+  - **No new finding**; FINDING-018 (informational, backlog) standing with `hedge`'s use of
+    the derivation's `sites`, `e` and `plan_index` added to its scope; FINDING-015 not
+    extended to the grammar; FINDING-016 and FINDING-017 standing. `cargo deny check` with
+    `engine/deny.toml`: advisories ok, bans ok, licenses ok, sources ok (Session 52); the
+    housekeeping Al ruled on PR 37 is done (the allow-list in its own commit; `cargo-geiger`
+    not adopted).
+  - **For Al's audit (HANDOFF Session 52, CONFUSIONS):** after disclosing and before reading
+    ADR-0008, the citation check printed a dozen context lines around the cited HANDOFF
+    ranges and the earlier blocks' `SESSION:` header lines — reads ADR-0008 D1 step 0 does not
+    list among those permitted before step 5. The session is not an examination (Gate S2 has
+    nothing to examine), and nothing of STATE, the registers or the tree was read before step
+    5; recorded plainly, with the fix for a successor.
 - **`s2_grammar` 0.5.0 — RULED by Al on 2026-11-02 (rulings on PR 37, verbatim under
-  *Standing rulings* and in ADR-0011 *Amendments*); awaiting the merge** (Session 51; branch `claude/s2-grammar-0.5.0`;
+  *Standing rulings* and in ADR-0011 *Amendments*); merged as PR 37 by Al on 2026-11-02** (Session 51; branch `claude/s2-grammar-0.5.0`;
   `analysis/s2-generate-12/README.md`). Merge with a merge commit, so that
   `c6b240942b56fb0b50f5c41a8f838aa77b7ce585`, the goldens' `engine_commit`, stays a real commit
   on `main`.
@@ -3601,79 +3767,75 @@ ingested. Run the gate detached with a log before the commit (expect `GATE: GREE
 
 ## NEXT-SINGLE-ACTION
 
-**S2 ordering step 4, continued: `s2_grammar` 0.6.0 — FLAW-0004 on `ring_chain`, probes first —
-after the 0.5.0 pull request (branch `claude/s2-grammar-0.5.0`) merges.** Any ruling on readings
-138–149 is recorded first. The grammar now carries the length axis for FLAW-0001, the
-declaration-level cosmetic classes (FLAW-0007 `unused`, FLAW-0013), FLAW-0009 `axiom` with both
-truths, FLAW-0010 `a` with `claim: true` and FLAW-0003 `cycle`; D6's remaining v0.1 classes on a
-grammar (FLAW-0004, FLAW-0011) come version by version — FLAW-0004 next, whose formal action,
-"the aligned tactic step omitted", has no evident shape inside a `calc` step and needs probes
-before a design — then FLAW-0011 as the composite (D5, as `s2_template` 0.5.0 reads it, embedding
-one gap-or-fatal instance of a class the grammar realizes), then the grammars `ineq_chain`,
+**S2 ordering step 4, continued: `s2_grammar` 0.7.0 — FLAW-0011 as the composite on
+`ring_chain` — after the 0.6.0 pull request (branch `claude/s2-grammar-0.6.0`) merges.** Any
+ruling on readings 150–163 is recorded first. The grammar now carries the length axis for
+FLAW-0001, the declaration-level cosmetic classes (FLAW-0007 `unused`, FLAW-0013), FLAW-0009
+`axiom` with both truths, FLAW-0010 `a` with `claim: true`, FLAW-0003 `cycle` and FLAW-0004
+`routine-true`; D6's last v0.1 class on a grammar is FLAW-0011, the composite (D5, as
+`s2_template` 0.5.0 reads it and as Al's rulings 2 and 3 on PR 30 bind it: `embedded` a list of
+one FlawSpec of a class FLAW-0001 through FLAW-0010 that the grammar realizes, of severity gap
+or fatal — so FLAW-0001 `propagated`, FLAW-0003 `cycle`, FLAW-0009 `axiom` with either truth,
+FLAW-0010 `a`; FLAW-0001 `local` (repairable) and FLAW-0004 `routine-true` (cosmetic) refused —
+the embedded spec injected as instance 1 and the composite as instance 2 with a record in each
+file the artifact has: step 0 with span `[0, len)` in the informal file, the main declaration
+at its header line in the formal file, `lean_catchable` inherited, dials `embedded`,
+`embedded_instances`, `site: 0`, `inserted` and `replaced: null`; the statement's truth by
+construction, its reference the formal control; `n_flaws_total` 2, one per class; `lean_build`
+commanded as the embedded instance commands it). After it come the grammars `ineq_chain`,
 `case_split` and `nat_induction`; the sweep (D11) runs when the grammars realize their v0.1
-classes. FLAW-0010 `claim: false` on the grammar stays without material (Al's rulings on PR 36);
-a generated FLAW-0003 `direct` is not taken now — a D6 amendment candidate after the grammars'
-v0.1 classes if S3's cell design needs a second producer for the kernel-visible FLAW-0003 cell,
-its shape settled by probes in that version (Al's rulings on PR 37). A drawn phrase lexicon for
-the citation is one surface-variety version for the grammar after the grammars' v0.1 classes,
-covering every fixed phrase S3's cell design wants varied, not a FLAW-0003 version alone; until
-then the fixed phrase is a documented-weak cue (the same rulings).
-The `s2_template` sub-variants still without material (FLAW-0004 `nontrivial-true` and `false`,
-FLAW-0010 `claim: false`, FLAW-0007 `vacuous`, FLAW-0009 `native_decide`, the padding kinds
-`unused-lemma` and `verbose-rewrite` on a seed, padding combined with an injected flaw) are later
-template versions, after the grammars.
+classes. FLAW-0010 `claim: false` on the grammar stays without material (Al's rulings on PR
+36); a generated FLAW-0003 `direct` is a D6 amendment candidate after the grammars' v0.1 classes
+(Al's rulings on PR 37); a `false` FLAW-0004 on the grammar is not taken now — if S3's cell
+design asks for a fatal FLAW-0004 cell, its own version after the grammars' v0.1 classes, as
+the composite reading 153 describes (the step's identity perturbed once, the hedge in place of
+the justification, the formal line's tactic omitted; the FLAW-0004 `false` instance beside a
+FLAW-0001 instance at the step, both `YES-KERNEL` at the site in a pair and `N/A` in an
+informal-only artifact; the kernel's `unsolved goals` not distinguishing the unprovable goal
+from the merely unproven one), `nontrivial-true` staying without material on the grammar (Al's
+rulings on PR 38); the surface-variety version (a drawn phrase lexicon for every
+fixed phrase S3's cell design wants varied) is a later version after the grammars' v0.1 classes
+(the same rulings). The `s2_template` sub-variants still without material (FLAW-0004
+`nontrivial-true` and `false`, FLAW-0010 `claim: false`, FLAW-0007 `vacuous`, FLAW-0009
+`native_decide`, the padding kinds `unused-lemma` and `verbose-rewrite` on a seed, padding
+combined with an injected flaw) are later template versions, after the grammars.
 
 Executable cold:
 1. Open per ADR-0008 D1. If the session was launched with the §6 prompt, the SD15 disclosure comes
    first, by digest where ADR-0005 *Amendments* 1–3 allow it.
-2. Confirm that the 0.5.0 pull request is merged, with a merge commit on fetched `origin/main`,
-   and that `c6b240942b56fb0b50f5c41a8f838aa77b7ce585` (the `s2_grammar` 0.5.0 goldens'
+2. Confirm that the 0.6.0 pull request is merged, with a merge commit on fetched `origin/main`,
+   and that `bc093c4be3b76c0bb520e8b56778b86abdc0792c` (the `s2_grammar` 0.6.0 goldens'
    `engine_commit`) is an ancestor of `main`. **If either fails, record that and stop.** Any
-   later ruling — on readings 138–149, on FINDING-018, or on FINDING-015, FINDING-016 or
+   later ruling — on readings 150–163, on FINDING-018, or on FINDING-015, FINDING-016 or
    FINDING-017 — is recorded verbatim, in STATE, HANDOFF and, where it amends the design,
    ADR-0011 *Amendments*, before anything else; a ruling that changes the grammar, a dial or a
    check bumps the producer again, and no golden is rewritten.
-3. **The `deny.toml` allow-list, in its own commit in this pull request** (Al's rulings on PR
-   37, housekeeping): its licence list read from `cargo deny list` on the current
-   `engine/Cargo.lock` with nothing assumed, placed where `cargo deny` finds it for the
-   workspace; then `cargo deny check` runs where `cargo audit` runs — at S2.4 and before the
-   freeze, never in the offline gate — and its result is recorded in the packet beside `cargo
-   audit`'s. `cargo-geiger` is not adopted: `#![forbid(unsafe_code)]` in every crate is the
-   stronger guarantee.
-4. **Probes first, one Lean process at a time, before any design** (the rule for a class that
-   changes a formal byte). FLAW-0004's formal action is "the aligned tactic step omitted (never
-   `sorry`), leaving an unsolved goal" (D5); the template omits the whole proof block of the
-   aligned `have`, keeping its header, so the kernel reports `unsolved goals` at the site
-   (0.5.0). On a `calc` chain the aligned fragment of a ring-closed step is the one line
-   `_ = e_k := by ring`. Probe at least: (i) that line with `ring` omitted — `_ = e_k := by`
-   ending the line, the next step following — and whether Lean reports an unsolved goal at that
-   line, a parse error, or an error at the following step; (ii) the step closed by a tactic
-   block that leaves the goal open without naming the omission, measured so that it can be
-   refused on the record (a visible placeholder tactic is not an omission); (iii) the step's
-   justification replaced by a term-level hole the kernel rejects at that line. Record each
-   probe's first error line and message, and which shape realizes "the aligned tactic step
-   omitted" with check K at the site — or that none does, in which case FLAW-0004 on
-   `ring_chain` is refused with the probes as the reading, as 0.3.0's `truth: false` was
-   decided by its probes.
-5. **`s2_grammar` 0.6.0, FLAW-0004 on `ring_chain`** (ADR-0011 D5 as `s2_template` 0.5.0 reads
-   it): the site a ring-closed chain step (never a lemma step, never a lemma-cited chain step —
-   reading 127's rule), drawn on `injector/FLAW-0004/1` when `auto`; the hedge drawn next on the
-   same stream from the fixed lexicon and prefixed to the bare claim `$e_{k-1} = e_k$.`, the
-   chain's own justification deleted (recorded as `justification`, the claim as `claim`); the
-   formal fragment the shape step 4 found; `hidden_step` `routine-true` (cosmetic — a `ring`
-   identity is routine), `nontrivial-true` and `false` refused for lack of material on a chain
-   unless the probes and a reading say otherwise; `YES-KERNEL` with a record in each file of a
-   pair and `N/A` for an informal-only artifact, the target `formal` refused (D3); the informal
-   check as 0.5.0 reads it; `lean_build` commanded `fail` for a pair.
-6. The goldens: FLAW-0004 `routine-true` at (4, 0), seed 7 (informal, pair), from two production
-   runs compared byte for byte; the (4, 0) controls of the new version so that the truth
-   reference names a golden; the earlier goldens stay regenerable under the producers and
-   versions they name.
-7. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`,
+3. **No probe is expected**: the composite changes no formal byte beyond its embedded
+   instance's, whose shapes 0.1.0, 0.3.0, 0.4.0 and 0.5.0 fixed by their own probes. If the
+   design needs a formal byte no earlier version emitted, probe it first, one Lean process at a
+   time, before any design.
+4. **`s2_grammar` 0.7.0, FLAW-0011 on `ring_chain`** (ADR-0011 D5 as `s2_template` 0.5.0 reads
+   it, with Al's rulings 2 and 3 on PR 30): the embedded spec applied by the grammar's own
+   injector for its class (its site, draws and dials as that class records them), then the
+   composite record at the statement; a config commanding FLAW-0011 with an `embedded` list of
+   other than one spec, of a class the grammar does not realize, of severity cosmetic or
+   repairable, or of FLAW-0011 to FLAW-0014, is refused; padding with a composite is refused by
+   the one-spec rule; the target follows the embedded class's (a FLAW-0009 composite is formal
+   or pair; a FLAW-0003 `cycle` or FLAW-0010 composite informal or pair); `proof_status`
+   `invalid` and `correct` false (every composite embeds a gap-or-fatal instance); `n_flaws_total`
+   2 with `n_flaws_0011` 1 and the embedded class's count 1; `lean_build` and
+   `lean_axioms_standard` commanded as the embedded instance commands them.
+5. The goldens: the composite embedding FLAW-0001 `propagated` `sign` (fatal) at (4, 0), seed 7
+   (informal, formal, pair), from two production runs compared byte for byte; the (4, 0)
+   controls of the new version so that the truth reference names a golden; the earlier goldens
+   stay regenerable under the producers and versions they name.
+6. Never change the pinned tools (`s1_effective_inventory`, `s1_4_coverage`,
    `s1_later_prefix`), their packets, the Gate S1 table or the frozen S1.4 packet; never change
-   an `s2_template` seed, dial, check or golden, nor an `s2_grammar` 0.1.0 to 0.5.0 golden, in
-   this revision.
-8. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,
+   an `s2_template` seed, dial, check or golden, nor an `s2_grammar` 0.1.0 to 0.6.0 golden, in
+   this revision. `engine/deny.toml` changes only when the lock changes, and then from `cargo
+   deny list` with nothing assumed; `cargo deny check` runs beside `cargo audit` at S2.4, never
+   in the gate.
+7. Gate the committed tree, fetch fresh before pushing, open a pull request and stop. Al merges,
    with a merge commit, never squash.
 
 Bounds: the frozen packets, the registers, the constitution, the licence, the tag, the accepted

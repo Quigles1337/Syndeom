@@ -17,8 +17,8 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   FLAW-0008's statement drift and FLAW-0012's dropped hypothesis), the padding module (D2 `pad`,
   D5 FLAW-0013; 0.4.0), ground truth by construction (D7), and the manifest with checks K and T
   (D8, D9);
-- `src/grammar.rs` — the producer `s2_grammar`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0
-  and 0.5.0: the grammar `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
+- `src/grammar.rs` — the producer `s2_grammar`, in its versions 0.1.0, 0.2.0, 0.3.0, 0.4.0,
+  0.5.0 and 0.6.0: the grammar `ring_chain` (D6) — its atom library (the seed forms, the monomials and the
   presentations a chain is built from), the derivation (`grammar/plan`, `grammar/step/<k>`,
   `grammar/lemma/<j>`), the plan with its lemma steps, ground truth by construction with the
   control as the truth's reference (D7), FLAW-0001 `propagated` and `local` with generated
@@ -31,7 +31,10 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   from the template's lexicon, drawn on `injector/FLAW-0010/1`; the formal file unchanged), and
   from 0.5.0 FLAW-0003 `cycle` (a cited lemma's closing note replaced by a citation of the
   theorem, the lemma drawn on `injector/FLAW-0003/1`, the chain step citing the lemma unchanged,
-  so the plan's premise graph holds the cycle; the formal file unchanged); the plan is rendered
+  so the plan's premise graph holds the cycle; the formal file unchanged), and from 0.6.0
+  FLAW-0004 (a ring-closed step's justification replaced by a hedge drawn from the template's
+  lexicon on `injector/FLAW-0004/1` and prefixed to the bare claim, the `calc` line's tactic
+  omitted so that the kernel reports an unsolved goal at that line); the plan is rendered
   and measured by the same renderers and the same `assemble` as the template's;
 - `src/lib.rs` — the producer dispatch: `generate` prepares the producer a config names
   (`theorem`: `s2_template`; `grammar`: `s2_grammar`), `regenerate` and `verify` the producer and
@@ -127,7 +130,7 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   without material on the grammar as on the template; the formal file unchanged, the record
   informal-only, `N/A`, confirmed by the FLAW-0010 check; the 0.1.0, 0.2.0 and 0.3.0 bytes
   unchanged.
-- **`s2_grammar` 0.5.0** (Session 51; the version `generate` emits): FLAW-0003 `cycle` on
+- **`s2_grammar` 0.5.0** (Session 51): FLAW-0003 `cycle` on
   `ring_chain` — a cited lemma, drawn on `injector/FLAW-0003/1`, has its informal closing note
   replaced by a citation of the theorem (`this follows from the theorem`), recorded as the
   lemma step's premise, while the chain step that cites the lemma is unchanged, so the plan's
@@ -135,13 +138,22 @@ Deterministic seeded templates and grammars (the standing ruling of Session 2). 
   (`cycle_length` 2, fatal); the formal file unchanged, the record informal-only, `NO`, at the
   lemma step spanning the citation phrase, confirmed by the structural check; `direct` refused
   (`s2_template`-only); the 0.1.0 to 0.4.0 bytes unchanged.
+- **`s2_grammar` 0.6.0** (Session 52; the version `generate` emits): FLAW-0004 on
+  `ring_chain` — a ring-closed chain step, drawn on `injector/FLAW-0004/1`, has its
+  justification deleted and a hedge, drawn next on the same stream from the template's fixed
+  lexicon, prefixed to the bare claim; the aligned `calc` line loses its tactic step (`_ = e_k
+  := by ring` becomes `_ = e_k := by`, the `by` kept, never `sorry`), so that Lean reports one
+  `unsolved goals` error at that line (check K at the site); `hidden_step` `routine-true` only
+  (cosmetic; `nontrivial-true` and `false` refused for lack of material); a pair's instance
+  `YES-KERNEL` in both files with `lean_build` commanded `fail`, an informal-only artifact's
+  `N/A`; the target `formal` refused; the 0.1.0 to 0.5.0 bytes unchanged.
 
-The crate regenerates all twelve producer versions (seven of `s2_template`, five of `s2_grammar`):
+The crate regenerates all thirteen producer versions (seven of `s2_template`, six of `s2_grammar`):
 the goldens select the producer and version their manifests name, and `regenerate` and `verify`
 accept any of them. Every seed and the grammar's atom library state their `source`, never under
 `groundtruth/` (Al's ruling 1 of 2026-10-27).
 
-## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0, 0.3.0, 0.4.0 and 0.5.0)
+## The grammar `ring_chain` (`s2_grammar` 0.1.0, 0.2.0, 0.3.0, 0.4.0, 0.5.0 and 0.6.0)
 
 - **The instance.** A config `{"grammar": "ring_chain", "length": {"n_steps", "n_lemmas"},
   "target", "flaws", "padding_ratio"}` (D3; `n_steps` 1 to 256, `n_lemmas` 0 to 32 and at most
@@ -278,6 +290,33 @@ accept any of them. Every seed and the grammar's atom library state their `sourc
   the cycle — the lemma step's citation of the theorem and the chain step's `Lemma j` — each
   with its step and span), `inserted` (the phrase), `replaced` (the closing note) and
   `original_steps` (the faithful lemma step). The counts are the control's.
+- **FLAW-0004 (0.6.0; D5), as `s2_template` 0.5.0 reads it.** The config's one dial is
+  `hidden_step`, of which only `routine-true` has material on the chain (cosmetic: every step
+  of the chain is a `ring` identity, which is routine; `nontrivial-true` and `false` are refused
+  for lack of material); there is no sub-variant; the target is `informal` or `pair` (`formal`
+  is refused: the class manifests in the informal file). The site is a ring-closed chain step —
+  never a lemma step, and never a lemma-cited chain step; the last step is eligible — drawn on
+  `injector/FLAW-0004/1` when the spec's `site` is `auto` (an explicit `site` is such a step's
+  plan index); the hedge is drawn next on the same stream from the template's fixed lexicon
+  (`Clearly`, `It is easy to see that`, `Obviously`, `By a standard argument`, `One checks
+  that`), and the step becomes the hedge, a space and the bare claim `$e_{k-1} = e_k$.`, the
+  chain's own justification (`Expanding the square`, `Rearranging the terms`, `Factoring out
+  $x$`, …) deleted. The aligned fragment — the one `calc` line `_ = e_k := by ring` (`calc e_0
+  = e_1 := by ring` at the first step) — loses its tactic step and becomes `_ = e_k := by`:
+  the `by` is kept, as the template keeps its `have` header, and `sorry` is never written, so
+  that Lean reports exactly one `unsolved goals` error at that line, at any position of the
+  chain, and nothing else (the probes under `analysis/s2-generate-13/`; check K at the site). A
+  pair carries a record in each file, `YES-KERNEL` — the informal one over the whole hedged
+  step, confirmed by the FLAW-0004 check (the step is the hedge entry, a space and the recorded
+  claim; the faithful step held the justification exactly once; the step does not), the formal
+  one at the `calc` line of the main declaration, confirmed by check K — and commands
+  `lean_build` `fail`; an informal-only artifact's one record is `N/A`. The dials carry
+  `hidden_step`, `site`, `hedge` (the index), `hedge_text` and, in the informal file,
+  `justification`, `claim`, `inserted` (the hedged step), `replaced` (the faithful step) and
+  `original_steps`, or, in the formal file, `omitted` (`["ring"]`), `inserted` and `replaced`
+  (the flawed and the faithful `calc` line) and `original_fragments`. A hedged artifact is a
+  valid proof of a true statement (`proof_status: valid`, `correct: true`: the instance is
+  cosmetic, D7); the counts are the control's.
 
 ## Seeds whose statement is false (0.2.0)
 
