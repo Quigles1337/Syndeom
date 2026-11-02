@@ -8,19 +8,23 @@
 //! and, from 0.3.0, FLAW-0009 `axiom` (a cited lemma's declaration replaced by an axiom of the
 //! same identity, or of a false one used ex falso at the citing step; check T on the axiom print)
 //! — and, from 0.4.0, FLAW-0010 `a` (a ring-closed step's justification replaced by a fictional
-//! reference from the template's lexicon; the formal file unchanged; the FLAW-0010 check).
+//! reference from the template's lexicon; the formal file unchanged; the FLAW-0010 check) — and,
+//! from 0.5.0, FLAW-0003 `cycle` (a cited lemma's closing note replaced by a citation of the
+//! theorem, the citing chain step unchanged, the cycle on the plan's premise graph; the formal
+//! file unchanged; the structural check).
 
 use std::collections::{BTreeMap, BTreeSet};
 
 use serde_json::{Value, json};
 use syndeom_generate::grammar::{
-    self, GrammarVersion, MAIN_DECLARATION, PERTURBATIONS, Perturbation, SEED_FORMS, Shape, Style,
-    Term, apply, control_reference, derive, eval, mono_latex, mono_lean, normalize, render_ordered,
-    targets, witness_point,
+    self, CYCLE_LENGTH, CYCLE_PHRASE, GrammarVersion, LEMMA_NOTE, MAIN_DECLARATION, PERTURBATIONS,
+    Perturbation, SEED_FORMS, Shape, Style, Term, apply, control_reference, derive, eval,
+    mono_latex, mono_lean, normalize, render_ordered, targets, witness_point,
 };
 use syndeom_generate::harness::Observation;
 use syndeom_generate::plan::{
-    LemmaKind, PaddingKind, lemma_lines, own_declarations, padding_lines,
+    LemmaKind, PaddingKind, Premise, THEOREM_PREMISE, lemma_lines, own_declarations, padding_lines,
+    premise_cycle, premise_edges,
 };
 use syndeom_generate::rng::Stream;
 use syndeom_generate::template::{
@@ -124,6 +128,15 @@ fn cite_spec(shape: &str, claim: bool, site: Value) -> Value {
         "class": "FLAW-0010", "sub_variant": "a",
         "severity": if claim { "gap" } else { "fatal" }, "site": site,
         "dials": {"shape": shape, "claim": claim}
+    }])
+}
+
+/// A FLAW-0003 `cycle` spec (0.5.0): a cited lemma's closing note replaced by a citation of the
+/// theorem, the chain step citing the lemma unchanged; `cycle_length` 2, fatal.
+fn cycle_spec(site: Value) -> Value {
+    json!([{
+        "class": "FLAW-0003", "sub_variant": "cycle", "severity": "fatal", "site": site,
+        "dials": {"cycle_length": CYCLE_LENGTH}
     }])
 }
 
@@ -371,11 +384,11 @@ fn d6_every_step_presents_the_polynomial_and_differs_from_the_step_before() {
 fn d2_the_plan_renders_the_lemmas_then_a_calc_chain_closed_by_ring_or_a_cited_lemma() {
     let c = config(6, 2, "pair", json!([]));
     let (p, m) = build(&c, 7);
-    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_4_0));
+    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_5_0));
     assert_eq!(m.generator.id, "s2_grammar");
-    assert_eq!(m.generator.version, "0.4.0");
+    assert_eq!(m.generator.version, "0.5.0");
     assert_eq!(m.generator.rng, "syndeom-rng/1");
-    assert!(m.artifact_id.starts_with("s2_grammar-v0.4.0-"));
+    assert!(m.artifact_id.starts_with("s2_grammar-v0.5.0-"));
     assert!(m.artifact_id.ends_with("-s7"));
     let plan = &p.plan;
     assert_eq!(plan.steps.len(), 8);
@@ -541,7 +554,7 @@ fn d9_determinism_and_idempotence() {
     );
     // generate's dispatch: a grammar config is an s2_grammar config
     let any = prepare_any(&c, 7).unwrap();
-    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_4_0));
+    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_5_0));
     assert!(prepare_any(&json!({"theorem": "nat_le_sq", "grammar": "ring_chain"}), 7).is_err());
     assert!(prepare_any(&json!({"length": {"n_steps": 1, "n_lemmas": 0}}), 7).is_err());
     assert_eq!(
@@ -560,9 +573,13 @@ fn d9_determinism_and_idempotence() {
         Producer::parse("s2_grammar", "0.4.0"),
         Some(Producer::Grammar(GrammarVersion::V0_4_0))
     );
-    assert_eq!(Producer::parse("s2_grammar", "0.5.0"), None);
+    assert_eq!(
+        Producer::parse("s2_grammar", "0.5.0"),
+        Some(Producer::Grammar(GrammarVersion::V0_5_0))
+    );
+    assert_eq!(Producer::parse("s2_grammar", "0.6.0"), None);
     assert_eq!(Producer::parse("s2_grammars", "0.1.0"), None);
-    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.4.0");
+    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.5.0");
     assert!(grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0001"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0007"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0013"));
@@ -587,7 +604,19 @@ fn d9_determinism_and_idempotence() {
     }
     assert!(!grammar::realizes(GrammarVersion::V0_4_0, "FLAW-0004"));
     assert!(!grammar::realizes(GrammarVersion::V0_4_0, "FLAW-0003"));
-    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.4.0: only the version,
+    for class in [
+        "FLAW-0001",
+        "FLAW-0003",
+        "FLAW-0007",
+        "FLAW-0009",
+        "FLAW-0010",
+        "FLAW-0013",
+    ] {
+        assert!(grammar::realizes(GrammarVersion::V0_5_0, class), "{class}");
+    }
+    assert!(!grammar::realizes(GrammarVersion::V0_5_0, "FLAW-0004"));
+    assert!(!grammar::realizes(GrammarVersion::V0_5_0, "FLAW-0011"));
+    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.5.0: only the version,
     // and with it the id and the manifest, differ
     let old = prepare_for(Producer::Grammar(GrammarVersion::V0_1_0), &c, 7).unwrap();
     assert_eq!(old.informal, p1.informal);
@@ -1047,7 +1076,7 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     c["target"] = json!("both");
     assert!(refused(&c));
     // the version a manifest names must exist
-    assert!(GrammarVersion::parse("0.5.0").is_none());
+    assert!(GrammarVersion::parse("0.6.0").is_none());
 }
 
 #[test]
@@ -2542,7 +2571,7 @@ fn d5_flaw_0010_a_replaces_a_steps_justification_by_a_fictional_reference() {
             .is_err()
         );
     }
-    // the 0.3.0 bytes of a FLAW-0009 artifact and of a FLAW-0001 one are unchanged by 0.4.0:
+    // the 0.3.0 bytes of a FLAW-0009 artifact and of a FLAW-0001 one are unchanged by 0.4.0 and 0.5.0:
     // only the version, and with it the id and the manifest, differ
     for c in [
         config(4, 1, "pair", axiom_spec(false, json!("auto"))),
@@ -2550,6 +2579,416 @@ fn d5_flaw_0010_a_replaces_a_steps_justification_by_a_fictional_reference() {
     ] {
         let now = grammar::prepare(&c, 7).unwrap();
         let old = prepare_for(Producer::Grammar(GrammarVersion::V0_3_0), &c, 7).unwrap();
+        assert_eq!(old.informal, now.informal);
+        assert_eq!(
+            old.formal.as_ref().map(|f| &f.bytes),
+            now.formal.as_ref().map(|f| &f.bytes)
+        );
+        assert_ne!(old.artifact_id(), now.artifact_id());
+    }
+}
+
+#[test]
+fn d5_flaw_0003_cycle_rejustifies_a_cited_lemma_by_the_theorem() {
+    let span_of = |text: &str, needle: &str| -> [u64; 2] {
+        let at = text.find(needle).unwrap();
+        let s = text[..at].chars().count() as u64;
+        [s, s + needle.chars().count() as u64]
+    };
+    for (n, m) in [(4u64, 1u64), (6, 2), (3, 3), (24, 2), (1, 1), (12, 5)] {
+        let control = grammar::prepare(&config(n, m, "pair", json!([])), 7).unwrap();
+        let c = config(n, m, "pair", cycle_spec(json!("auto")));
+        let (p, manifest) = build(&c, 7);
+        let (n, m) = (n as usize, m as usize);
+        let d = derive(n, m, 7);
+        let inj = p.injection.as_ref().expect("one instance");
+        assert!(p.further.is_empty() && p.padding.is_empty());
+        assert!(p.composite.is_none() && p.false_theorem.is_none());
+        assert_eq!(inj.instance, 1);
+        assert_eq!(inj.class, "FLAW-0003");
+        assert_eq!(inj.sub_variant.as_deref(), Some("cycle"));
+        assert_eq!(inj.severity, Severity::Fatal);
+        assert_eq!(inj.lean_catchable, LeanCatchable::No);
+        // the site: a lemma step drawn on the stream — the one draw (D4)
+        let mut stream = Stream::new(7, "injector/FLAW-0003/1");
+        let j = 1 + stream.below(m as u64) as usize;
+        assert_eq!(inj.site, j);
+        let chain = d.sites[j - 1];
+        let citing = m + chain;
+        // the plan: every step the control's but the lemma step's text and premises; step 0
+        // untouched; the formal file unchanged, byte for byte
+        assert_eq!(p.plan.steps.len(), n + m);
+        assert_eq!(p.plan.claim, control.plan.claim);
+        assert_eq!(p.plan.statement, control.plan.statement);
+        assert_eq!(
+            p.formal.as_ref().map(|f| &f.bytes),
+            control.formal.as_ref().map(|f| &f.bytes),
+            "the formal file is unchanged"
+        );
+        assert_ne!(p.informal, control.informal);
+        let site_step = &p.plan.steps[j - 1];
+        let faithful_step = &control.plan.steps[j - 1];
+        for k in 0..n + m {
+            let (s, f) = (&p.plan.steps[k], &control.plan.steps[k]);
+            if k == j - 1 {
+                assert_eq!(s.fragment, f.fragment);
+                assert_eq!(s.lemma, f.lemma);
+                assert!(
+                    s.lemma
+                        .as_ref()
+                        .is_some_and(|l| l.kind == LemmaKind::Theorem)
+                );
+                assert!(s.padding.is_none());
+                assert!(f.premises.is_empty());
+                assert_eq!(
+                    s.premises,
+                    vec![Premise {
+                        cites: THEOREM_PREMISE.to_string(),
+                        phrase: CYCLE_PHRASE.to_string(),
+                    }]
+                );
+            } else {
+                assert_eq!(s, f);
+            }
+        }
+        // the text: the faithful lemma step's stem, then the citation of the theorem in place of
+        // the closing note; the note occurs once there and not here, the phrase once here
+        let stem = faithful_step
+            .text
+            .strip_suffix(&format!("; {LEMMA_NOTE}."))
+            .unwrap();
+        assert_eq!(site_step.text, format!("{stem}; {CYCLE_PHRASE}."));
+        assert!(site_step.text.starts_with(&format!("Lemma {j}. ")));
+        assert_eq!(faithful_step.text.matches(LEMMA_NOTE).count(), 1);
+        assert!(!site_step.text.contains(LEMMA_NOTE));
+        assert_eq!(site_step.text.matches(CYCLE_PHRASE).count(), 1);
+        assert!(!faithful_step.text.contains(CYCLE_PHRASE));
+        // the premise graph: the citing chain step, unchanged, names the lemma; the lemma now
+        // names the theorem; the cycle through the lemma has length 2 and the control has none
+        let lemma_name = site_step.lemma.as_ref().unwrap().name.clone();
+        assert_eq!(lemma_name, format!("{MAIN_DECLARATION}_lemma_{j}"));
+        let citing_step = &p.plan.steps[citing - 1];
+        assert_eq!(citing_step, &control.plan.steps[citing - 1]);
+        assert_eq!(
+            citing_step.premises,
+            vec![Premise {
+                cites: lemma_name.clone(),
+                phrase: format!("Lemma {j}"),
+            }]
+        );
+        let edges = premise_edges(&p.plan);
+        assert_eq!(edges.len(), m + 1);
+        assert!(edges.contains(&(MAIN_DECLARATION.to_string(), lemma_name.clone())));
+        assert!(edges.contains(&(lemma_name.clone(), MAIN_DECLARATION.to_string())));
+        let cycle = premise_cycle(&p.plan, &lemma_name, CYCLE_LENGTH as usize).unwrap();
+        assert_eq!(
+            cycle,
+            vec![lemma_name.clone(), MAIN_DECLARATION.to_string()]
+        );
+        assert!(premise_cycle(&control.plan, &lemma_name, CYCLE_LENGTH as usize).is_none());
+        assert!(premise_cycle(&p.plan, &lemma_name, 3).is_none());
+        // the dials: the spec's, the site, the cycle, the two citation phrases at their steps
+        // and spans, the phrase inserted for the note, the faithful lemma step
+        let di = &inj.informal_dials;
+        assert_eq!(di["cycle_length"], json!(CYCLE_LENGTH));
+        assert_eq!(di["site"], json!(j));
+        assert_eq!(di["cycle"], json!(cycle));
+        let phrase_span = span_of(&site_step.text, CYCLE_PHRASE);
+        let citing_span = span_of(&citing_step.text, &format!("Lemma {j}"));
+        assert_eq!(citing_span[0], 3, "`By Lemma j, …`");
+        assert_eq!(
+            di["citations"],
+            json!([
+                {"step": j, "span": phrase_span, "phrase": CYCLE_PHRASE},
+                {"step": citing, "span": citing_span, "phrase": format!("Lemma {j}")},
+            ])
+        );
+        assert_eq!(di["inserted"], json!(CYCLE_PHRASE));
+        assert_eq!(di["replaced"], json!(LEMMA_NOTE));
+        assert_eq!(
+            grammar::originals(di, "original_steps"),
+            BTreeMap::from([(j, json!(faithful_step.text))])
+        );
+        let df = &inj.formal_dials;
+        let lines = lemma_lines(faithful_step).unwrap();
+        assert_eq!(df["inserted"], json!(lines));
+        assert_eq!(df["replaced"], json!(lines));
+        assert_eq!(df["original_fragments"], json!({}));
+        assert!(df.get("declaration").is_none());
+        assert_eq!(inj.formal_inserted, lines);
+        // the record: informal-only, at the lemma step, spanning the citation phrase; an
+        // invalid proof of a true statement whose reference is the formal control
+        let gt = manifest.ground_truth.as_ref().unwrap();
+        assert_eq!(
+            gt.flaws.len(),
+            1,
+            "FLAW-0003 cycle manifests in the informal file only"
+        );
+        let r = &gt.flaws[0];
+        assert_eq!(r.instance, 1);
+        assert_eq!(r.class, "FLAW-0003");
+        assert_eq!(r.sub_variant.as_deref(), Some("cycle"));
+        assert_eq!(r.severity, Severity::Fatal);
+        assert_eq!(r.lean_catchable, LeanCatchable::No);
+        match &r.location {
+            Location::Informal(l) => {
+                assert_eq!(l.step, j as u64);
+                assert_eq!(l.span, phrase_span);
+            }
+            other => panic!("{other:?}"),
+        }
+        assert_eq!(r.dials, *di);
+        assert_eq!(gt.proof_status, ProofStatus::Invalid);
+        assert!(!gt.correct);
+        assert_eq!(gt.statement_status.value, Some(true));
+        assert_eq!(
+            gt.statement_status.reference,
+            control_reference(GrammarVersion::CURRENT, "ring_chain", n as u64, m as u64, 7)
+                .unwrap()
+        );
+        // commanded and achieved (D8): the counts the control's; the pair's build passing with
+        // the standard axioms; the instance confirmed by the structural check
+        assert_eq!(manifest.commanded["n_steps"].value, json!(n + m));
+        assert_eq!(manifest.commanded["n_lemmas"].value, json!(m));
+        assert_eq!(manifest.commanded["n_flaws_total"].value, json!(1));
+        assert_eq!(manifest.commanded["n_flaws_0003"].value, json!(1));
+        assert_eq!(manifest.commanded["lean_build"].value, json!("pass"));
+        assert_eq!(
+            manifest.commanded["lean_axioms_standard"].value,
+            json!(true)
+        );
+        assert_eq!(manifest.achieved["flaws_confirmed"].value, Some(json!(1)));
+        assert_eq!(
+            manifest.achieved["lean_axioms_standard"].value,
+            Some(json!(true))
+        );
+        assert_eq!(manifest.achieved["n_steps"].value, Some(json!(n + m)));
+        assert_eq!(manifest.achieved["n_lemmas"].value, Some(json!(m)));
+        assert_eq!(verdict(&manifest), json!("PASS"));
+        // the rendered informal file: the lemma step as planned, every other step the control's
+        let informal = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+        let faithful = parse_informal_md(control.informal.as_ref().unwrap()).unwrap();
+        assert_eq!(informal.steps[j], site_step.text);
+        for k in 1..=n + m {
+            if k != j {
+                assert_eq!(informal.steps[k], faithful.steps[k]);
+            }
+        }
+        // the check refuses confirmation when the recorded cycle is not the plan's, or when a
+        // citation phrase is not at its recorded span; the verdict is then FAIL, not a refusal
+        let mut tampered = p.clone();
+        let t = tampered.injection.as_mut().unwrap();
+        t.informal_dials["cycle"] = json!([MAIN_DECLARATION, lemma_name]);
+        let bad = assemble(&tampered, COMMIT, Some(toolchain()), predicted(&p).as_ref()).unwrap();
+        assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        let mut tampered = p.clone();
+        let t = tampered.injection.as_mut().unwrap();
+        t.informal_dials["citations"][1]["span"] = json!([citing_span[0] + 1, citing_span[1] + 1]);
+        let bad = assemble(&tampered, COMMIT, Some(toolchain()), predicted(&p).as_ref()).unwrap();
+        assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(0)));
+        assert_eq!(verdict(&bad), json!("FAIL"));
+        // the informal-only target carries the same record and the same informal bytes; the
+        // formal target is refused (D3: declaration order forbids a formal cycle)
+        let (pi, mi) = build(
+            &config(n as u64, m as u64, "informal", cycle_spec(json!("auto"))),
+            7,
+        );
+        assert_eq!(pi.informal, p.informal);
+        assert!(pi.formal.is_none());
+        assert_eq!(mi.ground_truth.as_ref().unwrap().flaws.len(), 1);
+        assert_eq!(mi.ground_truth.as_ref().unwrap().flaws[0].dials, *di);
+        assert!(!mi.commanded.contains_key("lean_build"));
+        assert_eq!(verdict(&mi), json!("PASS"));
+        assert!(
+            grammar::prepare(
+                &config(n as u64, m as u64, "formal", cycle_spec(json!("auto"))),
+                7
+            )
+            .is_err()
+        );
+    }
+    // determinism: two preparations agree; another seed draws another instance
+    let c = config(6, 2, "pair", cycle_spec(json!("auto")));
+    let (p1, m1) = build(&c, 7);
+    let (p2, m2) = build(&c, 7);
+    assert_eq!(p1, p2);
+    assert_eq!(m1, m2);
+    let (p3, _) = build(&c, 8);
+    assert_ne!(p3.plan.steps, p1.plan.steps);
+    // an explicit site is a lemma step's plan index and skips the site draw; a chain step is
+    // refused, lemma-cited or not
+    let d = derive(6, 2, 7);
+    for site in 1..=2usize {
+        let (p, m) = build(&config(6, 2, "pair", cycle_spec(json!(site))), 7);
+        let inj = p.injection.as_ref().unwrap();
+        assert_eq!(inj.site, site);
+        assert!(
+            p.plan.steps[site - 1]
+                .text
+                .ends_with(&format!("; {CYCLE_PHRASE}."))
+        );
+        assert_eq!(
+            inj.informal_dials["citations"][1]["step"],
+            json!(2 + d.sites[site - 1])
+        );
+        assert_eq!(verdict(&m), json!("PASS"));
+    }
+    for site in 3..=8 {
+        assert!(
+            grammar::prepare(&config(6, 2, "pair", cycle_spec(json!(site))), 7).is_err(),
+            "site {site} is a chain step"
+        );
+    }
+    // the refusals
+    let refused = |n: u64, m: u64, target: &str, flaws: Value| {
+        grammar::prepare(&config(n, m, target, flaws), 7).is_err()
+    };
+    let spec = |sub: Value, severity: &str, site: Value, dials: Value| {
+        json!([{
+            "class": "FLAW-0003", "sub_variant": sub, "severity": severity, "site": site,
+            "dials": dials
+        }])
+    };
+    let dials = json!({"cycle_length": 2});
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(json!("direct"), "fatal", json!("auto"), dials.clone())
+        ),
+        "direct is s2_template-only"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(json!(null), "fatal", json!("auto"), dials.clone())
+        ),
+        "sub-variant cycle"
+    );
+    assert!(refused(
+        4,
+        1,
+        "pair",
+        spec(json!("loop"), "fatal", json!("auto"), dials.clone())
+    ));
+    for severity in ["cosmetic", "repairable", "gap"] {
+        assert!(
+            refused(
+                4,
+                1,
+                "pair",
+                spec(json!("cycle"), severity, json!("auto"), dials.clone())
+            ),
+            "cycle is fatal"
+        );
+    }
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(
+                json!("cycle"),
+                "fatal",
+                json!("auto"),
+                json!({"cycle_length": 3})
+            )
+        ),
+        "cycle_length 2 in v0.1"
+    );
+    assert!(refused(
+        4,
+        1,
+        "pair",
+        spec(
+            json!("cycle"),
+            "fatal",
+            json!("auto"),
+            json!({"cycle_length": "2"})
+        )
+    ));
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(json!("cycle"), "fatal", json!("auto"), json!({}))
+        ),
+        "the dial is named"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(
+                json!("cycle"),
+                "fatal",
+                json!("auto"),
+                json!({"cycle_length": 2, "form": "restated-goal"})
+            )
+        ),
+        "no extra dial"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            spec(
+                json!("cycle"),
+                "fatal",
+                json!("auto"),
+                json!({"cycle_length": 2, "cycle": []})
+            )
+        ),
+        "a reserved dial"
+    );
+    assert!(
+        refused(4, 0, "pair", cycle_spec(json!("auto"))),
+        "a cited lemma is needed"
+    );
+    assert!(
+        refused(4, 1, "formal", cycle_spec(json!("auto"))),
+        "informal or pair"
+    );
+    assert!(refused(4, 1, "pair", cycle_spec(json!(0))));
+    assert!(
+        refused(4, 1, "pair", cycle_spec(json!(2))),
+        "site 2 is a chain step"
+    );
+    let two = json!([cycle_spec(json!("auto"))[0], unused_spec(1)[0]]);
+    assert!(refused(4, 1, "pair", two), "one spec per artifact");
+    // 0.1.0, 0.2.0, 0.3.0 and 0.4.0 never realized the class: their goldens regenerate under
+    // the versions they name
+    for v in [
+        GrammarVersion::V0_1_0,
+        GrammarVersion::V0_2_0,
+        GrammarVersion::V0_3_0,
+        GrammarVersion::V0_4_0,
+    ] {
+        assert!(
+            prepare_for(
+                Producer::Grammar(v),
+                &config(4, 1, "pair", cycle_spec(json!("auto"))),
+                7
+            )
+            .is_err()
+        );
+    }
+    // the 0.4.0 bytes of a FLAW-0010 artifact, of a FLAW-0009 one and of the (4, 1) control are
+    // unchanged by 0.5.0: only the version, and with it the id and the manifest, differ
+    for c in [
+        config(4, 0, "pair", cite_spec("journal", true, json!("auto"))),
+        config(4, 1, "pair", axiom_spec(false, json!("auto"))),
+        config(4, 1, "pair", json!([])),
+    ] {
+        let now = grammar::prepare(&c, 7).unwrap();
+        let old = prepare_for(Producer::Grammar(GrammarVersion::V0_4_0), &c, 7).unwrap();
         assert_eq!(old.informal, now.informal);
         assert_eq!(
             old.formal.as_ref().map(|f| &f.bytes),

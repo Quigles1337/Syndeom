@@ -11,7 +11,10 @@
 //!   generated from the atom library; 0.3.0: FLAW-0009 `axiom` on it (a cited lemma's
 //!   declaration replaced by an axiom of the same identity, or of a false one used ex falso);
 //!   0.4.0: FLAW-0010 `a` on it (a ring-closed step's justification replaced by a fictional
-//!   reference from the template's lexicon, the formal file unchanged).
+//!   reference from the template's lexicon, the formal file unchanged); 0.5.0: FLAW-0003
+//!   `cycle` on it (a cited lemma's closing note replaced by a citation of the theorem, the
+//!   chain step citing the lemma unchanged, so the plan's premise graph holds the cycle; the
+//!   formal file unchanged).
 //! - D8: the Lean harness ([`harness`]).
 //! - D9, as amended by Al's ruling 5 on PR 26: the running binary's provenance ([`provenance`]).
 //!
