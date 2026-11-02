@@ -13606,3 +13606,85 @@ external root, not in the tree it certifies.
 (the deprecated Real import; the refusal of a production whose inputs were edited). Each is
 recorded in the repository instead — NEXT's steps 3 and 5, this block — and a write would
 change a memory digest and make the next disclosure owe verbatim reproduction.
+
+SESSION 54 ADDENDUM — AL'S RULINGS ON PR 40. Received 2026-11-02 UTC (2026-11-02
+America/New_York), in this session's conversation after PR #40 opened. Recorded in a new commit on
+the same branch, with no force-push. Transcribed verbatim from Al's message as rendered to the
+executor; the message's first line is its header. The copy is `owner-rulings-pr40.txt` under
+`C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-080-20261102T2204Z\` (1,965 bytes, SHA-256
+`2c1c4d771ad163d9f02fa5a6fec7f97692bcc3b09684a3459ce0fe6beb7f4c73`):
+
+~~~text
+Rulings on PR #40 / s2_grammar 0.8.0 (record verbatim in ADR-0011 Amendments, STATE and this session’s HANDOFF block, as a new commit on the branch; no force-push):
+
+Readings 174 through 188 are accepted as read.
+
+On reading 181, record also: the ruling on reading 94 is narrowed to chains of identities, where a local perturbation necessarily produces a second kernel error at the following step. On a chain of inequalities the following step fails exactly when its own tactic does not certify it from the perturbed expression, which can happen whether that step is true or false, so a local instance shows one kernel error or two. The instance is one either way and its site is the first error; S3 reads a count of errors as a count of lines whose tactic failed — not of instances, and not of false steps.
+
+On reading 180, record also: the refusal of constant stands for 0.8.0. If the constant kind is taken up on inequalities, it is the lowering of a constant — FLAWS.md’s off-by-one bound — admitted where the witness grid shows the step false, as every kind is; not atoms that carry negative constants. It comes in its own version after the grammars’ v0.1 classes, if S3’s cells ask for it.
+
+On FLAW-0001 propagated on inequalities, record also: a propagated instance’s changed conclusion can imply the claim — as at seed 7, where the chain ends at a right side lowered by 2 — or fail to; the theorem-level calc.step goal is then a true inequality left unproven or a false one, and the fatal defect is the false step either way. Whether S3’s cells stratify by this relation is for the cell-design ADR; if they do, the record gains it in a later version.
+
+Standing, after Sessions 46 and 54: no producer input — anything under engine/generate/ — is edited while a production run is in flight; the provenance check is the backstop, not the guard.
+
+Run the gate on the committed tree, fetch fresh before pushing, and stop for my review.
+~~~
+
+Before recording the rulings, the checkout was on `main` at `009bb85`, left there at the close so
+that a successor's preflight would find it synchronized. It was switched back to
+`claude/s2-grammar-0.8.0` at `ace6305…`, clean and in sync with its remote, after a fresh fetch at
+2026-11-02T22:39:18Z (`origin/main` still `009bb85`). PR 40 had no review and no comment but the
+executor's own.
+
+How each ruling is applied:
+- **Readings 174–188 accepted as read.** Recorded in ADR-0011 *Amendments*; in STATE (*Standing
+  rulings*, *Standing escalations*, the Updated bullet, the Gate S2 table's S2.2 evidence); and
+  here. Nothing regenerated.
+- **The note on reading 181.** Recorded in ADR-0011 *Amendments* and in STATE. The ruling on
+  reading 94 is narrowed to chains of identities. On inequalities a local instance shows one kernel
+  error or two: the following step fails exactly when its own tactic does not certify it from the
+  perturbed expression, whether that step is true or false. S3 reads a count of errors as a count
+  of lines whose tactic failed — not of instances, and not of false steps. 0.8.0 already records
+  the `local` instance so (one instance, its site the first error, confirmed by check K), so no
+  byte changes. It confirms this block's BELIEF DELTAS item on `local`: the second error depends
+  on the next step's certificate, as the probes and seed 7's golden showed.
+- **The note on reading 180.** Recorded in ADR-0011 *Amendments*, in STATE and in NEXT's carried
+  items. The refusal of `constant` stands for 0.8.0. If the kind is taken up on inequalities it is
+  the lowering of a constant — FLAWS.md's off-by-one bound — admitted where the witness grid shows
+  the step false, in its own version after the grammars' v0.1 classes if S3's cells ask for it;
+  not atoms that carry negative constants.
+- **The note on FLAW-0001 `propagated`.** Recorded likewise. A propagated instance's changed
+  conclusion can imply the claim (seed 7's chain ends at a right side lowered by 2) or fail to;
+  the theorem-level `calc.step` goal is then a true inequality left unproven or a false one, and
+  the fatal defect is the false step either way. Whether S3's cells stratify by this relation is
+  for the cell-design ADR; the record gains it in a later version only if they do.
+- **The standing rule.** No producer input — anything under `engine/generate/` — is edited while a
+  production run is in flight; the provenance check is the backstop, not the guard. Recorded in
+  STATE's *Standing rulings* and in NEXT's step 5. It answers this block's first CONFUSIONS item.
+- **This session's executor model, under the standing rule of Al's rulings on PR 39.** Claude Opus
+  5.5 (`claude-opus-5-5`) from the launch through this addendum, with no change within Session 54.
+- **The record commit** (this one) holds ADR-0011 *Amendments*, STATE and this addendum. The gate
+  on the committed tree, the step-7 recheck and the push are recorded in the pull request and
+  under the external root.
+
+**The memory store is unchanged since the disclosure**, re-hashed at 2026-11-02T22:40:22Z after
+the rulings arrived:
+- the whole index, `0f7e69ab…8995` (15,471 bytes, 110 lines);
+- the matched lines 85, 86, 88, 89, 106 and 107, `0418e621…534c` (1,198 bytes; 104 withheld);
+- `project_syndeom.md`, `ce2ce6de…2cc0` (10,957 bytes).
+
+This session wrote no memory.
+
+CHECKS for this addendum:
+- No leakage: `contact/` was not opened, and no source was added.
+- No golden, check, dial or register status changed; nothing was regenerated.
+- Determinism: unchanged, since nothing was generated.
+- No verdict on any paper (SD3). **Memory writes:** none.
+ESCALATIONS (superseding the block's):
+- **This pull request:** merge with a merge commit, so that `677c8165…`, the `s2_grammar` 0.8.0
+  goldens' `engine_commit`, stays a real commit on `main`.
+- **Findings:** FINDING-018 (informational, backlog; scope extended to the new module);
+  FINDING-015 (standing; not extended to the grammar); FINDING-016 and FINDING-017 (standing).
+- Unchanged: human-referee participants (SD13).
+STOP-REASON: Al's direction, stop for review. Repo green: the gate on the committed tree is
+recorded in the pull request and under the external root, not in the tree it certifies.
