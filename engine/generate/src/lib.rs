@@ -16,7 +16,9 @@
 //!   chain step citing the lemma unchanged, so the plan's premise graph holds the cycle; the
 //!   formal file unchanged); 0.6.0: FLAW-0004 on it (a ring-closed step's justification
 //!   replaced by a drawn hedge before the bare claim, the `calc` line's tactic omitted so that
-//!   the kernel reports an unsolved goal at that line).
+//!   the kernel reports an unsolved goal at that line); 0.7.0: FLAW-0011, the composite, on it
+//!   (one embedded gap-or-fatal instance applied by its class's own injector, the composite's
+//!   records at the statement).
 //! - D8: the Lean harness ([`harness`]).
 //! - D9, as amended by Al's ruling 5 on PR 26: the running binary's provenance ([`provenance`]).
 //!

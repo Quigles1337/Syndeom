@@ -104,6 +104,22 @@
 //! carries a record in each file, `YES-KERNEL`, and commands `lean_build` `fail`; an
 //! informal-only artifact's record is `N/A`; the target `formal` is refused (D3). The RNG label
 //! `injector/FLAW-0004/1` (the site, then the hedge) is new in 0.6.0.
+//!
+//! **0.7.0 — FLAW-0011, the composite (D5), as `s2_template` 0.5.0 reads it with Al's rulings 2
+//! and 3 on PR 30.** The config's one dial is `embedded`, a list of exactly one FlawSpec (the
+//! grammar takes one spec per artifact) of a class FLAW-0001 through FLAW-0010 that the grammar
+//! realizes, of severity gap or fatal, the composite's own severity equal to it: FLAW-0001
+//! `propagated`, FLAW-0003 `cycle`, FLAW-0009 `axiom` with either truth, FLAW-0010 `a` with
+//! `claim: true`. FLAW-0001 `local` (repairable), FLAW-0004 `routine-true` and FLAW-0007
+//! `unused` (cosmetic), every class the grammar does not realize and FLAW-0011 to FLAW-0014 are
+//! refused. The embedded spec is applied by the grammar's own injector for its class — its site,
+//! draws, dials and target rule unchanged, so the proof files are the embedded artifact's byte
+//! for byte — as instance 1, and the composite is instance 2: its severity and `lean_catchable`
+//! the embedded instance's, its records at the statement (step 0 with span `[0, len)` in the
+//! informal file, the main declaration at its header line in the formal file), written and
+//! confirmed by `assemble` as for the template (every record of the embedded instance passes;
+//! the statement's truth is kernel-checked by construction, D7). Every composite is therefore an
+//! invalid proof of a true statement. 0.7.0 draws on no new RNG label.
 
 use std::cmp::Reverse;
 use std::collections::{BTreeMap, BTreeSet};
@@ -119,13 +135,13 @@ use crate::plan::{
 };
 use crate::rng::Stream;
 use crate::template::{
-    CITATION_SHAPES, FlawSpec, HEDGES, Injection, PaddingInsertion, Prepared, Producer, Target,
-    check_spec, citation_venues, draw_citation, exact_keys, parse_spec, unique_span,
+    CITATION_SHAPES, Composite, FlawSpec, HEDGES, Injection, PaddingInsertion, Prepared, Producer,
+    Target, check_spec, citation_venues, draw_citation, exact_keys, parse_spec, unique_span,
 };
 
 pub const GENERATOR_ID: &str = "s2_grammar";
 /// The producer version `generate` emits (ADR-0011 D1).
-pub const GENERATOR_VERSION: &str = "0.6.0";
+pub const GENERATOR_VERSION: &str = "0.7.0";
 /// The one grammar of 0.1.0 (ADR-0011 D6).
 pub const RING_CHAIN: &str = "ring_chain";
 /// The main declaration's name (ADR-0011 D2: `syndeom_s2_<producer>_<theorem>`).
@@ -188,10 +204,11 @@ pub enum GrammarVersion {
     V0_4_0,
     V0_5_0,
     V0_6_0,
+    V0_7_0,
 }
 
 impl GrammarVersion {
-    pub const CURRENT: GrammarVersion = GrammarVersion::V0_6_0;
+    pub const CURRENT: GrammarVersion = GrammarVersion::V0_7_0;
 
     pub fn parse(s: &str) -> Option<GrammarVersion> {
         match s {
@@ -201,6 +218,7 @@ impl GrammarVersion {
             "0.4.0" => Some(GrammarVersion::V0_4_0),
             "0.5.0" => Some(GrammarVersion::V0_5_0),
             "0.6.0" => Some(GrammarVersion::V0_6_0),
+            "0.7.0" => Some(GrammarVersion::V0_7_0),
             _ => None,
         }
     }
@@ -213,6 +231,7 @@ impl GrammarVersion {
             GrammarVersion::V0_4_0 => "0.4.0",
             GrammarVersion::V0_5_0 => "0.5.0",
             GrammarVersion::V0_6_0 => "0.6.0",
+            GrammarVersion::V0_7_0 => "0.7.0",
         }
     }
 
@@ -1080,15 +1099,15 @@ pub fn prepare_with(
         reference: control_reference(version, &cfg.grammar, cfg.n_steps, cfg.n_lemmas, seed_value)?,
     };
     let faithful = plan_of(&d, truth);
-    let (plan, injection, further, padding) = match cfg.flaws.first() {
-        None => (faithful, None, Vec::new(), Vec::new()),
+    let (plan, injection, further, padding, composite) = match cfg.flaws.first() {
+        None => (faithful, None, Vec::new(), Vec::new(), None),
         Some(spec) if spec.class == "FLAW-0007" => {
             let (plan, lemmas) = insert_unused(&d, &faithful, spec, cfg.target, seed_value)?;
             let mut lemmas = lemmas.into_iter();
             let first = lemmas
                 .next()
                 .ok_or("FLAW-0007 unused inserts at least one lemma")?;
-            (plan, Some(first), lemmas.collect(), Vec::new())
+            (plan, Some(first), lemmas.collect(), Vec::new(), None)
         }
         Some(spec) if spec.class == "FLAW-0013" => {
             let (plan, paragraphs) = pad(
@@ -1100,27 +1119,31 @@ pub fn prepare_with(
                 cfg.target,
                 seed_value,
             )?;
-            (plan, None, Vec::new(), paragraphs)
+            (plan, None, Vec::new(), paragraphs, None)
         }
         Some(spec) if spec.class == "FLAW-0009" => {
             let (plan, inj) = smuggle(&d, &faithful, spec, cfg.target, seed_value)?;
-            (plan, Some(inj), Vec::new(), Vec::new())
+            (plan, Some(inj), Vec::new(), Vec::new(), None)
         }
         Some(spec) if spec.class == "FLAW-0010" => {
             let (plan, inj) = cite(&d, &faithful, spec, cfg.target, seed_value)?;
-            (plan, Some(inj), Vec::new(), Vec::new())
+            (plan, Some(inj), Vec::new(), Vec::new(), None)
         }
         Some(spec) if spec.class == "FLAW-0003" => {
             let (plan, inj) = circulate(&d, &faithful, spec, cfg.target, seed_value)?;
-            (plan, Some(inj), Vec::new(), Vec::new())
+            (plan, Some(inj), Vec::new(), Vec::new(), None)
         }
         Some(spec) if spec.class == "FLAW-0004" => {
             let (plan, inj) = hedge(&d, &faithful, spec, cfg.target, seed_value)?;
-            (plan, Some(inj), Vec::new(), Vec::new())
+            (plan, Some(inj), Vec::new(), Vec::new(), None)
+        }
+        Some(spec) if spec.class == "FLAW-0011" => {
+            let (plan, inj, comp) = compose(version, &d, &faithful, spec, cfg.target, seed_value)?;
+            (plan, Some(inj), Vec::new(), Vec::new(), Some(comp))
         }
         Some(spec) => {
             let (plan, inj) = inject(&d, &faithful, spec, cfg.target, seed_value)?;
-            (plan, Some(inj), Vec::new(), Vec::new())
+            (plan, Some(inj), Vec::new(), Vec::new(), None)
         }
     };
     let informal = cfg
@@ -1145,7 +1168,7 @@ pub fn prepare_with(
         injection,
         further,
         padding,
-        composite: None,
+        composite,
         false_theorem: None,
     })
 }
@@ -2390,9 +2413,116 @@ fn hedge(
     Ok((plan, injection))
 }
 
+// ---- FLAW-0011, the composite (0.7.0) ----------------------------------------------------------
+
+/// FLAW-0011 as the composite on `ring_chain` (ADR-0011 D5; 0.7.0, as `s2_template` 0.5.0 reads
+/// it with Al's rulings 2 and 3 on PR 30). The one dial `embedded` lists exactly one FlawSpec —
+/// `s2_grammar` takes one spec per artifact, so a composite embeds one — of a class FLAW-0001
+/// through FLAW-0010 (FLAWS.md's definition; ruling 3) that this version realizes, of severity
+/// gap or fatal (ruling 2: a composite whose embedded instance is cosmetic is not an invalid
+/// proof, and with one instance a repairable one is refused too), the composite's severity
+/// equal to it. The embedded spec is applied by the grammar's own injector for its class — its
+/// site, draws, dials and target rule unchanged — as instance 1; the composite is instance 2,
+/// its severity and `lean_catchable` the embedded instance's, its records written by
+/// `assemble` at the statement, one in each file the artifact has. A grammar instance's
+/// statement is true by construction (D7), so every composite is an invalid proof of a true
+/// statement. No draw is made for the composite itself.
+fn compose(
+    version: GrammarVersion,
+    d: &Derivation,
+    faithful: &Plan,
+    spec: &FlawSpec,
+    target: Target,
+    seed: u64,
+) -> Result<(Plan, Injection, Composite), String> {
+    check_spec(spec, target)?;
+    if spec.sub_variant.is_some() {
+        return Err("FLAW-0011 has no sub-variant".into());
+    }
+    if spec.site.is_some() {
+        return Err("FLAW-0011 addresses the statement (step 0), so its site is \"auto\"".into());
+    }
+    exact_keys(&spec.dials, &["embedded"], "FLAW-0011's dials")?;
+    let embedded = spec.dials["embedded"]
+        .as_array()
+        .ok_or("FLAW-0011's embedded is an array of FlawSpecs")?;
+    if embedded.is_empty() {
+        return Err("FLAW-0011 embeds at least one instance".into());
+    }
+    if embedded.len() > 1 {
+        return Err(format!(
+            "s2_grammar {} takes one spec per artifact, so a composite embeds one instance (ADR-0011 D5)",
+            version.as_str()
+        ));
+    }
+    let inner = parse_spec(&embedded[0], "FLAW-0011's embedded[0]")?;
+    let number = inner
+        .class
+        .strip_prefix("FLAW-")
+        .and_then(|n| n.parse::<u32>().ok());
+    if !matches!(number, Some(1..=10)) {
+        return Err(format!(
+            "FLAW-0011 embeds an instance of FLAW-0001 through FLAW-0010 (FLAWS.md's definition; Al's ruling 3 on PR 30), not {}",
+            inner.class
+        ));
+    }
+    if !matches!(inner.severity, Severity::Gap | Severity::Fatal) {
+        return Err(format!(
+            "FLAW-0011 requires an embedded instance of severity gap or fatal; a composite of a {:?} instance is not an invalid proof (D7; Al's ruling 2 on PR 30)",
+            inner.severity
+        ));
+    }
+    if !realizes(version, &inner.class) {
+        return Err(format!(
+            "{} is not realized by s2_grammar {}",
+            inner.class,
+            version.as_str()
+        ));
+    }
+    if inner.severity != spec.severity {
+        return Err(format!(
+            "FLAW-0011's severity inherits its embedded instance's: {:?}, not {:?}",
+            inner.severity, spec.severity
+        ));
+    }
+    if faithful.truth.value != Some(true) {
+        return Err(
+            "FLAW-0011 is a true theorem with an invalid proof, and a grammar instance's statement is true by construction (D7)"
+                .into(),
+        );
+    }
+    let (plan, inj) = match inner.class.as_str() {
+        "FLAW-0001" => inject(d, faithful, &inner, target, seed)?,
+        "FLAW-0003" => circulate(d, faithful, &inner, target, seed)?,
+        "FLAW-0004" => hedge(d, faithful, &inner, target, seed)?,
+        "FLAW-0009" => smuggle(d, faithful, &inner, target, seed)?,
+        "FLAW-0010" => cite(d, faithful, &inner, target, seed)?,
+        "FLAW-0007" => {
+            return Err(
+                "FLAW-0007 has no gap-or-fatal material on ring_chain: unused is cosmetic, and vacuous needs hand-authored unsatisfiable hypotheses and is s2_template-only (ADR-0011 D6)"
+                    .into(),
+            );
+        }
+        other => {
+            return Err(format!(
+                "{other} is not embedded by s2_grammar {}",
+                version.as_str()
+            ));
+        }
+    };
+    let composite = Composite {
+        instance: inj.instance + 1,
+        severity: spec.severity,
+        lean_catchable: inj.lean_catchable,
+        embedded: spec.dials["embedded"].clone(),
+        embedded_instances: vec![inj.instance],
+    };
+    Ok((plan, inj, composite))
+}
+
 /// The classes `s2_grammar` realizes, by version (ADR-0011 D6): FLAW-0001 in 0.1.0; FLAW-0007
 /// `unused` and FLAW-0013 from 0.2.0; FLAW-0009 `axiom` from 0.3.0; FLAW-0010 `a` from 0.4.0;
-/// FLAW-0003 `cycle` from 0.5.0; FLAW-0004 from 0.6.0.
+/// FLAW-0003 `cycle` from 0.5.0; FLAW-0004 from 0.6.0; FLAW-0011, the composite, from 0.7.0.
 pub fn realizes(version: GrammarVersion, class: &str) -> bool {
     match version {
         GrammarVersion::V0_1_0 => class == "FLAW-0001",
@@ -2416,6 +2546,17 @@ pub fn realizes(version: GrammarVersion, class: &str) -> bool {
                 | "FLAW-0007"
                 | "FLAW-0009"
                 | "FLAW-0010"
+                | "FLAW-0013"
+        ),
+        GrammarVersion::V0_7_0 => matches!(
+            class,
+            "FLAW-0001"
+                | "FLAW-0003"
+                | "FLAW-0004"
+                | "FLAW-0007"
+                | "FLAW-0009"
+                | "FLAW-0010"
+                | "FLAW-0011"
                 | "FLAW-0013"
         ),
     }

@@ -1,0 +1,17 @@
+'control': exit 0 (expected 0) OK
+    s2_grammar-v0.7.0-82300f31bd83-s7
+'embedded-FLAW-+1': exit 2 (expected 2) OK
+    FLAW-+1 is not realized by s2_grammar 0.7.0
+'embedded-FLAW-1': exit 2 (expected 2) OK
+    FLAW-1 is not realized by s2_grammar 0.7.0
+'embedded-FLAW-001': exit 2 (expected 2) OK
+    FLAW-001 is not realized by s2_grammar 0.7.0
+'embedded-FLAW-00001': exit 2 (expected 2) OK
+    FLAW-00001 is not realized by s2_grammar 0.7.0
+'embedded-flaw-0001': exit 2 (expected 2) OK
+    FLAW-0011 embeds an instance of FLAW-0001 through FLAW-0010 (FLAWS.md's definition; Al's ruling 3 on PR 30), not flaw-0001
+'embedded-FLAW-0001 ': exit 2 (expected 2) OK
+    FLAW-0011 embeds an instance of FLAW-0001 through FLAW-0010 (FLAWS.md's definition; Al's ruling 3 on PR 30), not FLAW-0001
+'embedded-FLAW-0001': exit 0 (expected 0) OK
+    s2_grammar-v0.7.0-9dae22d9ec2e-s7
+ALL AS EXPECTED

@@ -3,8 +3,9 @@
 //! for the grammar `ring_chain` (`s2_grammar` 0.1.0), the controls at two lengths and FLAW-0001,
 //! (0.2.0) the short control, FLAW-0007 `unused` and FLAW-0013, (0.3.0) the control with one
 //! lemma and FLAW-0009 `axiom` with `truth` true and false, (0.4.0) the short control and
-//! FLAW-0010 `a` with `claim` true, (0.5.0) the control with one lemma and FLAW-0003 `cycle`, and
-//! (0.6.0) the short control and FLAW-0004 `routine-true`.
+//! FLAW-0010 `a` with `claim` true, (0.5.0) the control with one lemma and FLAW-0003 `cycle`,
+//! (0.6.0) the short control and FLAW-0004 `routine-true`, and (0.7.0) the short control and
+//! FLAW-0011, the composite of one FLAW-0001 `propagated` `sign` instance.
 //! Each case directory holds `case.json` (the config, the seed, the engine commit, the toolchain
 //! and the harness observation measured at implementation) and the exact bytes: `proof.md` or
 //! `Proof.lean`, and `manifest.json`. The test regenerates every case without Lean, from the
@@ -98,6 +99,13 @@ const GOLDENS_GRAMMAR_0_5_0: u64 = 4;
 /// `calc` line's tactic omitted with the `by` kept; informal and pair, the formal target being
 /// refused), produced at the implementation commit `bc093c4b…` from two byte-identical runs.
 const GOLDENS_GRAMMAR_0_6_0: u64 = 4;
+/// The `s2_grammar` 0.7.0 goldens (Session 53): on `ring_chain` at the short length (`n_steps`
+/// 4, `n_lemmas` 0), the control (informal, formal — the composite's truth reference names the
+/// formal one; the bytes the 0.1.0 short control's) and FLAW-0011, the composite embedding one
+/// FLAW-0001 `propagated` `sign` instance (fatal: the proof files the 0.1.0 FLAW-0001
+/// `propagated` golden's, the composite's records at the statement; informal, formal, pair),
+/// produced at the implementation commit `97c6cc6c…` from two byte-identical runs.
+const GOLDENS_GRAMMAR_0_7_0: u64 = 5;
 
 fn dirs(path: &Path) -> Vec<PathBuf> {
     let mut v: Vec<PathBuf> = fs::read_dir(path)
@@ -231,5 +239,10 @@ fn d10_goldens_regenerate_byte_for_byte_under_the_version_they_name() {
         count("s2_grammar 0.6.0"),
         GOLDENS_GRAMMAR_0_6_0,
         "the s2_grammar 0.6.0 goldens"
+    );
+    assert_eq!(
+        count("s2_grammar 0.7.0"),
+        GOLDENS_GRAMMAR_0_7_0,
+        "the s2_grammar 0.7.0 goldens"
     );
 }

@@ -14,7 +14,9 @@
 //! file unchanged; the structural check) — and, from 0.6.0, FLAW-0004 (a ring-closed step's
 //! justification replaced by a drawn hedge before the bare claim, the `calc` line's tactic
 //! omitted with the `by` kept, so that the kernel reports an unsolved goal at that line; check K
-//! at the site and the FLAW-0004 informal check).
+//! at the site and the FLAW-0004 informal check) — and, from 0.7.0, FLAW-0011, the composite (one
+//! embedded gap-or-fatal instance applied by its class's own injector, the bytes the embedded
+//! artifact's, the composite's records at the statement and confirmed with the embedded one).
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -32,8 +34,8 @@ use syndeom_generate::plan::{
 };
 use syndeom_generate::rng::Stream;
 use syndeom_generate::template::{
-    CITATION_AUTHORS, CITATION_RESULTS, CITATION_YEARS, HEDGES, Injection, Prepared, Producer,
-    assemble, citation_reference, citation_tokens_in_lexicon, citation_venues,
+    CITATION_AUTHORS, CITATION_RESULTS, CITATION_YEARS, Composite, HEDGES, Injection, Prepared,
+    Producer, assemble, citation_reference, citation_tokens_in_lexicon, citation_venues,
 };
 use syndeom_generate::{prepare_any, prepare_for};
 use syndeom_manifest::{
@@ -150,6 +152,15 @@ fn hedge_spec(hidden_step: &str, severity: &str, site: Value) -> Value {
     json!([{
         "class": "FLAW-0004", "sub_variant": null, "severity": severity, "site": site,
         "dials": {"hidden_step": hidden_step}
+    }])
+}
+
+/// A FLAW-0011 spec (0.7.0): the composite of the `embedded` FlawSpecs (a list, of one spec on
+/// the grammar), at the severity the spec states.
+fn composite_spec(severity: &str, embedded: Value) -> Value {
+    json!([{
+        "class": "FLAW-0011", "sub_variant": null, "severity": severity, "site": "auto",
+        "dials": {"embedded": embedded}
     }])
 }
 
@@ -397,11 +408,11 @@ fn d6_every_step_presents_the_polynomial_and_differs_from_the_step_before() {
 fn d2_the_plan_renders_the_lemmas_then_a_calc_chain_closed_by_ring_or_a_cited_lemma() {
     let c = config(6, 2, "pair", json!([]));
     let (p, m) = build(&c, 7);
-    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_6_0));
+    assert_eq!(p.producer, Producer::Grammar(GrammarVersion::V0_7_0));
     assert_eq!(m.generator.id, "s2_grammar");
-    assert_eq!(m.generator.version, "0.6.0");
+    assert_eq!(m.generator.version, "0.7.0");
     assert_eq!(m.generator.rng, "syndeom-rng/1");
-    assert!(m.artifact_id.starts_with("s2_grammar-v0.6.0-"));
+    assert!(m.artifact_id.starts_with("s2_grammar-v0.7.0-"));
     assert!(m.artifact_id.ends_with("-s7"));
     let plan = &p.plan;
     assert_eq!(plan.steps.len(), 8);
@@ -567,7 +578,7 @@ fn d9_determinism_and_idempotence() {
     );
     // generate's dispatch: a grammar config is an s2_grammar config
     let any = prepare_any(&c, 7).unwrap();
-    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_6_0));
+    assert_eq!(any.producer, Producer::Grammar(GrammarVersion::V0_7_0));
     assert!(prepare_any(&json!({"theorem": "nat_le_sq", "grammar": "ring_chain"}), 7).is_err());
     assert!(prepare_any(&json!({"length": {"n_steps": 1, "n_lemmas": 0}}), 7).is_err());
     assert_eq!(
@@ -594,9 +605,13 @@ fn d9_determinism_and_idempotence() {
         Producer::parse("s2_grammar", "0.6.0"),
         Some(Producer::Grammar(GrammarVersion::V0_6_0))
     );
-    assert_eq!(Producer::parse("s2_grammar", "0.7.0"), None);
+    assert_eq!(
+        Producer::parse("s2_grammar", "0.7.0"),
+        Some(Producer::Grammar(GrammarVersion::V0_7_0))
+    );
+    assert_eq!(Producer::parse("s2_grammar", "0.8.0"), None);
     assert_eq!(Producer::parse("s2_grammars", "0.1.0"), None);
-    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.6.0");
+    assert_eq!(GrammarVersion::CURRENT.as_str(), "0.7.0");
     assert!(grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0001"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0007"));
     assert!(!grammar::realizes(GrammarVersion::V0_1_0, "FLAW-0013"));
@@ -646,7 +661,29 @@ fn d9_determinism_and_idempotence() {
     }
     assert!(!grammar::realizes(GrammarVersion::V0_6_0, "FLAW-0011"));
     assert!(!grammar::realizes(GrammarVersion::V0_6_0, "FLAW-0002"));
-    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.6.0: only the version,
+    for class in [
+        "FLAW-0001",
+        "FLAW-0003",
+        "FLAW-0004",
+        "FLAW-0007",
+        "FLAW-0009",
+        "FLAW-0010",
+        "FLAW-0011",
+        "FLAW-0013",
+    ] {
+        assert!(grammar::realizes(GrammarVersion::V0_7_0, class), "{class}");
+    }
+    for class in [
+        "FLAW-0002",
+        "FLAW-0005",
+        "FLAW-0006",
+        "FLAW-0008",
+        "FLAW-0012",
+        "FLAW-0014",
+    ] {
+        assert!(!grammar::realizes(GrammarVersion::V0_7_0, class), "{class}");
+    }
+    // the 0.1.0 bytes of a control and of FLAW-0001 are unchanged by 0.7.0: only the version,
     // and with it the id and the manifest, differ
     let old = prepare_for(Producer::Grammar(GrammarVersion::V0_1_0), &c, 7).unwrap();
     assert_eq!(old.informal, p1.informal);
@@ -1106,7 +1143,7 @@ fn d3_unsupported_configs_and_specs_are_refused() {
     c["target"] = json!("both");
     assert!(refused(&c));
     // the version a manifest names must exist
-    assert!(GrammarVersion::parse("0.7.0").is_none());
+    assert!(GrammarVersion::parse("0.8.0").is_none());
 }
 
 #[test]
@@ -3472,6 +3509,617 @@ fn d5_flaw_0004_hedges_a_ring_closed_step_and_omits_its_tactic() {
     ] {
         let now = grammar::prepare(&c, 7).unwrap();
         let old = prepare_for(Producer::Grammar(GrammarVersion::V0_5_0), &c, 7).unwrap();
+        assert_eq!(old.informal, now.informal);
+        assert_eq!(
+            old.formal.as_ref().map(|f| &f.bytes),
+            now.formal.as_ref().map(|f| &f.bytes)
+        );
+        assert_ne!(old.artifact_id(), now.artifact_id());
+    }
+}
+
+#[test]
+fn d5_flaw_0011_composes_one_gap_or_fatal_instance_recorded_at_the_statement() {
+    // every embedded spec the grammar realizes at gap or fatal, at lengths that give it a site,
+    // in every target its class allows (the embedded injector's own target rule, D3)
+    let cases: Vec<(u64, u64, Value, &str, Vec<&str>)> = vec![
+        (
+            4,
+            0,
+            propagated("sign"),
+            "fatal",
+            vec!["informal", "formal", "pair"],
+        ),
+        (
+            6,
+            2,
+            propagated("coefficient"),
+            "fatal",
+            vec!["informal", "formal", "pair"],
+        ),
+        (24, 2, propagated("exponent"), "fatal", vec!["pair"]),
+        (1, 0, propagated("constant"), "fatal", vec!["pair"]),
+        (
+            4,
+            1,
+            cycle_spec(json!("auto")),
+            "fatal",
+            vec!["informal", "pair"],
+        ),
+        (12, 5, cycle_spec(json!("auto")), "fatal", vec!["pair"]),
+        (
+            4,
+            1,
+            axiom_spec(true, json!("auto")),
+            "gap",
+            vec!["formal", "pair"],
+        ),
+        (
+            6,
+            2,
+            axiom_spec(false, json!("auto")),
+            "fatal",
+            vec!["formal", "pair"],
+        ),
+        (
+            4,
+            0,
+            cite_spec("journal", true, json!("auto")),
+            "gap",
+            vec!["informal", "pair"],
+        ),
+        (
+            8,
+            1,
+            cite_spec("preprint", true, json!("auto")),
+            "gap",
+            vec!["pair"],
+        ),
+    ];
+    for (n, m, embedded, severity, targets) in cases {
+        for target in targets {
+            let what = format!("({n}, {m}) {target} {}", embedded[0]["class"]);
+            let alone = config(n, m, target, embedded.clone());
+            let c = config(n, m, target, composite_spec(severity, embedded.clone()));
+            let (pa, ma) = build(&alone, 7);
+            let (p, manifest) = build(&c, 7);
+            // the embedded spec is applied by its class's own injector, unchanged: the plan, the
+            // bytes and the instance are the standalone artifact's, and no draw is made for the
+            // composite itself
+            assert_eq!(p.plan, pa.plan, "{what}");
+            assert_eq!(p.informal, pa.informal, "{what}");
+            assert_eq!(
+                p.formal.as_ref().map(|f| &f.bytes),
+                pa.formal.as_ref().map(|f| &f.bytes),
+                "{what}"
+            );
+            assert_eq!(p.injection, pa.injection, "{what}");
+            assert!(p.further.is_empty() && p.padding.is_empty() && p.false_theorem.is_none());
+            assert_ne!(p.artifact_id(), pa.artifact_id());
+            let inj = p.injection.as_ref().expect("the embedded instance");
+            assert_eq!(inj.instance, 1);
+            assert_eq!(json!(inj.class), embedded[0]["class"]);
+            assert!(
+                matches!(inj.severity, Severity::Gap | Severity::Fatal),
+                "{what}"
+            );
+            // the composite: instance 2, the embedded instance's severity and lean_catchable, the
+            // embedded list exactly as the config gave it
+            assert_eq!(
+                p.composite,
+                Some(Composite {
+                    instance: 2,
+                    severity: inj.severity,
+                    lean_catchable: inj.lean_catchable,
+                    embedded: embedded.clone(),
+                    embedded_instances: vec![1],
+                }),
+                "{what}"
+            );
+            // the records: the standalone artifact's, then the composite's at the statement, one
+            // in each file the artifact has
+            let gt = manifest.ground_truth.as_ref().unwrap();
+            let ga = ma.ground_truth.as_ref().unwrap();
+            let k = ga.flaws.len();
+            let files = usize::from(p.informal.is_some()) + usize::from(p.formal.is_some());
+            assert_eq!(gt.flaws.len(), k + files, "{what}");
+            assert_eq!(gt.flaws[..k], ga.flaws[..], "{what}");
+            let (mut informal_record, mut formal_record) = (false, false);
+            for r in &gt.flaws[k..] {
+                assert_eq!(r.instance, 2);
+                assert_eq!(r.class, "FLAW-0011");
+                assert_eq!(r.sub_variant, None);
+                assert_eq!(r.severity, inj.severity);
+                assert_eq!(r.lean_catchable, inj.lean_catchable);
+                assert_eq!(r.dials["embedded"], embedded);
+                assert_eq!(r.dials["site"], json!(0));
+                assert_eq!(r.dials["embedded_instances"], json!([1]));
+                assert_eq!(r.dials["replaced"], Value::Null);
+                match &r.location {
+                    Location::Informal(l) => {
+                        let st = parse_informal_md(p.informal.as_ref().unwrap()).unwrap();
+                        assert_eq!(l.step, 0);
+                        assert_eq!(l.span, [0, st.steps[0].chars().count() as u64]);
+                        assert_eq!(r.dials["inserted"], json!(st.steps[0]));
+                        assert_eq!(st.steps[0], p.plan.statement);
+                        informal_record = true;
+                    }
+                    Location::Formal(l) => {
+                        let f = p.formal.as_ref().unwrap();
+                        let header = std::str::from_utf8(&f.bytes)
+                            .unwrap()
+                            .lines()
+                            .nth(f.main_line as usize - 1)
+                            .unwrap()
+                            .to_string();
+                        assert_eq!(l.declaration, MAIN_DECLARATION);
+                        assert_eq!(l.line, f.main_line);
+                        assert!(header.starts_with(&format!("theorem {MAIN_DECLARATION} ")));
+                        assert_eq!(r.dials["inserted"], json!([header]));
+                        formal_record = true;
+                    }
+                    other => panic!("{other:?}"),
+                }
+            }
+            assert_eq!(informal_record, p.informal.is_some(), "{what}");
+            assert_eq!(formal_record, p.formal.is_some(), "{what}");
+            // ground truth: an invalid proof of a true statement whose reference is the formal
+            // control of the same version, length and seed (D7)
+            assert_eq!(gt.proof_status, ProofStatus::Invalid, "{what}");
+            assert!(!gt.correct);
+            assert_eq!(gt.statement_status, ga.statement_status);
+            assert_eq!(gt.statement_status.value, Some(true));
+            assert_eq!(gt.statement_status.method, StatementMethod::LeanKernel);
+            assert_eq!(
+                gt.statement_status.reference,
+                control_reference(GrammarVersion::CURRENT, "ring_chain", n, m, 7).unwrap()
+            );
+            // commanded and achieved (D8): two instances, one per class; every other statistic,
+            // `lean_build` and `lean_axioms_standard` among them, the embedded artifact's
+            let class_key = format!("n_flaws_{}", &inj.class[5..]);
+            assert_eq!(manifest.commanded["n_flaws_total"].value, json!(2));
+            assert_eq!(manifest.commanded["n_flaws_0011"].value, json!(1));
+            assert_eq!(manifest.commanded[class_key.as_str()].value, json!(1));
+            assert_eq!(manifest.commanded["flaws_confirmed"].value, json!(2));
+            for key in [
+                "n_steps",
+                "n_lemmas",
+                "padding_ratio",
+                "lean_build",
+                "lean_axioms_standard",
+            ] {
+                assert_eq!(
+                    manifest.commanded.get(key),
+                    ma.commanded.get(key),
+                    "{what}: {key}"
+                );
+            }
+            assert_eq!(manifest.commanded.len(), ma.commanded.len() + 1, "{what}");
+            assert_eq!(manifest.achieved["n_flaws_total"].value, Some(json!(2)));
+            assert_eq!(manifest.achieved["n_flaws_0011"].value, Some(json!(1)));
+            assert_eq!(manifest.achieved[class_key.as_str()].value, Some(json!(1)));
+            assert_eq!(manifest.achieved["flaws_confirmed"].value, Some(json!(2)));
+            for key in [
+                "n_tokens",
+                "n_steps",
+                "n_lemmas",
+                "padding_ratio",
+                "lean_build",
+                "lean_axioms_standard",
+            ] {
+                assert_eq!(
+                    manifest.achieved.get(key),
+                    ma.achieved.get(key),
+                    "{what}: {key}"
+                );
+            }
+            assert_eq!(verdict(&manifest), json!("PASS"), "{what}");
+            assert_eq!(verdict(&ma), json!("PASS"), "{what}");
+            // the composite is confirmed with its embedded instance only. A composite naming no
+            // recorded instance is unconfirmed while the embedded one stands; an observation that
+            // fails the embedded instance's formal check leaves both unconfirmed. Either is a FAIL
+            // verdict, not a refusal.
+            let mut orphan = p.clone();
+            orphan.composite.as_mut().unwrap().embedded_instances = vec![9];
+            let obs = predicted(&orphan);
+            let tc = orphan.formal.as_ref().map(|_| toolchain());
+            let bad = assemble(&orphan, COMMIT, tc, obs.as_ref()).unwrap();
+            assert_eq!(bad.achieved["flaws_confirmed"].value, Some(json!(1)));
+            assert_eq!(bad.achieved["n_flaws_0011"].value, Some(json!(0)));
+            assert_eq!(verdict(&bad), json!("FAIL"));
+            if let Some(obs) = predicted(&p) {
+                let wrong = match inj.lean_catchable {
+                    LeanCatchable::YesKernel => Some(Observation {
+                        first_error_line: obs.first_error_line.map(|l| l + 1),
+                        ..obs
+                    }),
+                    LeanCatchable::YesTooling => Some(Observation {
+                        axioms: Some(vec!["propext".into(), "Quot.sound".into()]),
+                        ..obs
+                    }),
+                    _ => None,
+                };
+                if let Some(wrong) = wrong {
+                    let bad = assemble(&p, COMMIT, Some(toolchain()), Some(&wrong)).unwrap();
+                    assert_eq!(
+                        bad.achieved["flaws_confirmed"].value,
+                        Some(json!(0)),
+                        "{what}"
+                    );
+                    assert_eq!(verdict(&bad), json!("FAIL"));
+                }
+            }
+        }
+    }
+    // an explicit embedded site is the embedded class's (an eligible step's plan index); the
+    // composite's own site is "auto", the statement
+    let d = derive(6, 2, 7);
+    for chain in (1..=6usize).filter(|&c| d.lemma_of(c).is_none()) {
+        let embedded = flaw("propagated", "fatal", "sign", json!(2 + chain));
+        let (p, m) = build(&config(6, 2, "pair", composite_spec("fatal", embedded)), 7);
+        assert_eq!(p.injection.as_ref().unwrap().site, 2 + chain);
+        assert_eq!(verdict(&m), json!("PASS"));
+    }
+    // determinism: two preparations agree; another seed draws another instance
+    let c = config(6, 2, "pair", composite_spec("fatal", propagated("sign")));
+    let (p1, m1) = build(&c, 7);
+    let (p2, m2) = build(&c, 7);
+    assert_eq!(p1, p2);
+    assert_eq!(m1, m2);
+    let (p3, _) = build(&c, 8);
+    assert_ne!(p3.plan.steps, p1.plan.steps);
+    // the refusals
+    let refused = |n: u64, m: u64, target: &str, flaws: Value| {
+        grammar::prepare(&config(n, m, target, flaws), 7).is_err()
+    };
+    let spec = |class: &str, sub: Value, severity: &str, dials: Value| {
+        json!({
+            "class": class, "sub_variant": sub, "severity": severity, "site": "auto",
+            "dials": dials
+        })
+    };
+    // the embedded list holds exactly one FlawSpec
+    assert!(
+        refused(4, 0, "pair", composite_spec("fatal", json!([]))),
+        "one instance"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            composite_spec(
+                "fatal",
+                json!([propagated("sign")[0], cycle_spec(json!("auto"))[0]])
+            )
+        ),
+        "one spec per artifact"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec("fatal", propagated("sign")[0].clone())
+        ),
+        "a list"
+    );
+    assert!(
+        refused(4, 0, "pair", composite_spec("fatal", json!(["FLAW-0001"]))),
+        "a FlawSpec"
+    );
+    // classes the grammar does not realize
+    for (class, dials) in [
+        ("FLAW-0002", json!({"swap": "forall-exists"})),
+        (
+            "FLAW-0005",
+            json!({"theorem": "t", "hypothesis": "h", "mode": "unshown"}),
+        ),
+        ("FLAW-0006", json!({"mode": "drop-base"})),
+        ("FLAW-0008", json!({"transformation": "add-hypothesis"})),
+    ] {
+        assert!(
+            refused(
+                4,
+                1,
+                "pair",
+                composite_spec("gap", json!([spec(class, json!(null), "gap", dials)]))
+            ),
+            "{class}"
+        );
+    }
+    // an embedded instance that is cosmetic or repairable is not an invalid proof (ruling 2)
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec(
+                "cosmetic",
+                hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto"))
+            )
+        ),
+        "FLAW-0004 routine-true is cosmetic"
+    );
+    assert!(
+        refused(4, 0, "pair", composite_spec("cosmetic", unused_spec(1))),
+        "FLAW-0007 unused is cosmetic"
+    );
+    assert!(
+        refused(4, 0, "pair", composite_spec("repairable", local("sign"))),
+        "FLAW-0001 local is repairable"
+    );
+    // FLAW-0011 to FLAW-0014 are never embedded (ruling 3)
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec("fatal", composite_spec("fatal", propagated("sign")))
+        ),
+        "no nesting"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec(
+                "fatal",
+                json!([spec(
+                    "FLAW-0012",
+                    json!(null),
+                    "fatal",
+                    json!({"dropped_hypothesis": "h"})
+                )])
+            )
+        ),
+        "FLAW-0012"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec(
+                "cosmetic",
+                padding_spec(json!(["re-derivation"]), 1, "drawn")
+            )
+        ),
+        "FLAW-0013"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec(
+                "gap",
+                json!([spec(
+                    "FLAW-0014",
+                    json!(null),
+                    "gap",
+                    json!({"omitted_case": "c", "holds": true})
+                )])
+            )
+        ),
+        "FLAW-0014"
+    );
+    // the composite's severity is the embedded instance's
+    assert!(refused(
+        4,
+        0,
+        "pair",
+        composite_spec("gap", propagated("sign"))
+    ));
+    assert!(refused(
+        4,
+        0,
+        "pair",
+        composite_spec("fatal", cite_spec("journal", true, json!("auto")))
+    ));
+    // the composite's own shape: no sub-variant, the site "auto", the one dial
+    let mut c = composite_spec("fatal", propagated("sign"));
+    c[0]["sub_variant"] = json!("embedded");
+    assert!(refused(4, 0, "pair", c), "no sub-variant");
+    let mut c = composite_spec("fatal", propagated("sign"));
+    c[0]["site"] = json!(1);
+    assert!(refused(4, 0, "pair", c), "the statement's site is auto");
+    let mut c = composite_spec("fatal", propagated("sign"));
+    c[0]["dials"]["count"] = json!(1);
+    assert!(refused(4, 0, "pair", c), "no extra dial");
+    let mut c = composite_spec("fatal", propagated("sign"));
+    c[0]["dials"]["embedded_instances"] = json!([1]);
+    assert!(refused(4, 0, "pair", c), "a reserved dial");
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            json!([spec("FLAW-0011", json!(null), "fatal", json!({}))])
+        ),
+        "the dial is named"
+    );
+    let mut e = propagated("sign");
+    e[0]["dials"]["site"] = json!(1);
+    assert!(
+        refused(4, 0, "pair", composite_spec("fatal", e)),
+        "the embedded spec's reserved dial"
+    );
+    // the target follows the embedded class's
+    assert!(
+        refused(
+            4,
+            1,
+            "informal",
+            composite_spec("gap", axiom_spec(true, json!("auto")))
+        ),
+        "FLAW-0009: formal or pair"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "formal",
+            composite_spec("gap", cite_spec("journal", true, json!("auto")))
+        ),
+        "FLAW-0010: informal or pair"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "formal",
+            composite_spec("fatal", cycle_spec(json!("auto")))
+        ),
+        "FLAW-0003 cycle: informal or pair"
+    );
+    // the embedded injector's own refusals stand
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec("fatal", cite_spec("journal", false, json!("auto")))
+        ),
+        "FLAW-0010 claim: false has no material"
+    );
+    assert!(refused(
+        4,
+        0,
+        "pair",
+        composite_spec("gap", hedge_spec("nontrivial-true", "gap", json!("auto")))
+    ));
+    assert!(refused(
+        4,
+        0,
+        "pair",
+        composite_spec("fatal", hedge_spec("false", "fatal", json!("auto")))
+    ));
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            composite_spec(
+                "gap",
+                json!([spec(
+                    "FLAW-0007",
+                    json!("vacuous"),
+                    "gap",
+                    json!({"count": 1, "length_steps": 1})
+                )])
+            )
+        ),
+        "FLAW-0007 vacuous"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            composite_spec(
+                "fatal",
+                json!([spec(
+                    "FLAW-0003",
+                    json!("direct"),
+                    "fatal",
+                    json!({"form": "restated-goal"})
+                )])
+            )
+        ),
+        "FLAW-0003 direct"
+    );
+    assert!(
+        refused(
+            4,
+            1,
+            "pair",
+            composite_spec(
+                "gap",
+                json!([spec(
+                    "FLAW-0009",
+                    json!(null),
+                    "gap",
+                    json!({"mode": "native_decide", "truth": true})
+                )])
+            )
+        ),
+        "FLAW-0009 native_decide"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec("gap", axiom_spec(true, json!("auto")))
+        ),
+        "FLAW-0009 needs a lemma"
+    );
+    assert!(
+        refused(
+            4,
+            0,
+            "pair",
+            composite_spec("fatal", cycle_spec(json!("auto")))
+        ),
+        "FLAW-0003 cycle needs a lemma"
+    );
+    assert!(
+        refused(3, 3, "pair", composite_spec("fatal", propagated("sign"))),
+        "every chain step is lemma-cited"
+    );
+    // padding with a composite: two specs, or a ratio without its FLAW-0013 spec
+    let two = json!([
+        composite_spec("fatal", propagated("sign"))[0],
+        padding_spec(json!(["re-derivation"]), 1, "drawn")[0]
+    ]);
+    assert!(refused(4, 0, "pair", two), "one spec per artifact");
+    let mut c = config(4, 0, "pair", composite_spec("fatal", propagated("sign")));
+    c["padding_ratio"] = json!(0.25);
+    assert!(
+        grammar::prepare(&c, 7).is_err(),
+        "padding is commanded by a FLAW-0013 spec alone"
+    );
+    // 0.1.0 to 0.6.0 never realized the class: their goldens regenerate under the versions
+    // they name
+    for v in [
+        GrammarVersion::V0_1_0,
+        GrammarVersion::V0_2_0,
+        GrammarVersion::V0_3_0,
+        GrammarVersion::V0_4_0,
+        GrammarVersion::V0_5_0,
+        GrammarVersion::V0_6_0,
+    ] {
+        assert!(
+            prepare_for(
+                Producer::Grammar(v),
+                &config(4, 0, "pair", composite_spec("fatal", propagated("sign"))),
+                7
+            )
+            .is_err()
+        );
+    }
+    // the 0.6.0 bytes of an artifact of every class it realizes but FLAW-0013, and of the
+    // (4, 0) and (4, 1) controls, are unchanged by 0.7.0: only the version, and with it the id
+    // and the manifest, differ
+    for c in [
+        config(4, 0, "pair", propagated("sign")),
+        config(4, 1, "pair", cycle_spec(json!("auto"))),
+        config(
+            4,
+            0,
+            "pair",
+            hedge_spec(HIDDEN_STEP, "cosmetic", json!("auto")),
+        ),
+        config(4, 0, "pair", unused_spec(2)),
+        config(4, 1, "pair", axiom_spec(false, json!("auto"))),
+        config(4, 0, "pair", cite_spec("journal", true, json!("auto"))),
+        config(4, 0, "pair", json!([])),
+        config(4, 1, "pair", json!([])),
+    ] {
+        let now = grammar::prepare(&c, 7).unwrap();
+        let old = prepare_for(Producer::Grammar(GrammarVersion::V0_6_0), &c, 7).unwrap();
         assert_eq!(old.informal, now.informal);
         assert_eq!(
             old.formal.as_ref().map(|f| &f.bytes),
