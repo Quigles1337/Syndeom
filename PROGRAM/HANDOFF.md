@@ -13093,3 +13093,48 @@ root, not in the tree it certifies.
 **Memory writes:** none. The session is not an examination, so a hazard could have been written,
 but none of this session's lessons outweighs the cost: a write would change a memory digest and
 make the next disclosure owe verbatim reproduction.
+
+SESSION 53 ADDENDUM — THE GATE ON THE RECORD COMMIT FAILED, AND THE FIX (2026-11-02 UTC). Recorded
+in a new commit on the same branch before any push: no amend, no force-push.
+
+**The failure.** The gate on the committed tree `10f08c347b5ee931f46599b27a651aac9e832fc4` (tree
+`31b903c7afe420a80885ae25b5369eb1fe9b7689`, working tree clean) was launched detached at
+2026-11-02T20:07:24Z and ended at 20:10:01Z with exit 1.
+- These stages passed: `lake build` (8,938 jobs), the axiom audit (fourteen lines within the
+  standard three), `cargo fmt --check`, `cargo clippy -D warnings`, `cargo test` (151 tests across
+  the workspace, none failed) and the LF check.
+- The register cross-reference check failed: `FLAW: defined 14, referenced 15, undefined
+  ['0000']`. The gate stopped there, so the freeze register did not run.
+- The log is `gate-committed.log` under
+  `C:\Users\LEET\Codex\Temp\syndeom-s2-grammar-070-20261102T1950Z\` (SHA-256
+  `c47f8225bbd963629d61d19a0d6b54a13b3a8fc3cb80f7d9fde91d950f8a93e5`, 9,766 bytes); its stderr
+  file is 0 bytes.
+
+**The cause.** `scripts/check_registers.py` joins every tracked Markdown file and collects the
+prefix `FLAW-` followed by four digits, with no right boundary. Packet 14's README wrote the
+class-form probe's five-digit form literally, and its first four digits read as the id `0000`,
+which FLAWS.md does not define. The probe's script and output hold the same text, but they are
+not Markdown and lie outside the check's scope. A run of the check before the record commit had
+passed only because the packet was untracked then: the check reads `git ls-files`.
+
+**The fix.** One new commit holds:
+- one sentence of packet 14's README, rewritten to name the five-digit form without the token
+  and to say why;
+- the packet's commit table and STATE's Updated bullet, given the fourth commit;
+- this addendum.
+
+No code, golden, check or evidence file changed. The register check, run with every file
+tracked, passes before the commit. This is not a two-strike: it is the first failure, and its
+cause was found and removed. The branch is pushed only after the gate on the fixed commit is
+GREEN. That gate and the ADR-0008 step-7 recheck are recorded in the pull request and under the
+external root, not in the tree they certify.
+
+CONFUSIONS (added):
+- **The pre-commit register check ran on a tree in which the packet was untracked**, so it could
+  not see the packet's Markdown. Cost: one red gate on the record commit and one fix commit, before
+  anything was pushed. Fix for a successor: run `scripts/check_registers.py` after `git add` of
+  every new file, or run the gate itself before the record commit. Never write the prefix `FLAW-`
+  followed by four digits in a tracked Markdown file unless they name a class FLAWS.md defines.
+
+STOP-REASON (unchanged): natural boundary, after the gate on the fixed commit, the recheck and the
+pull request.

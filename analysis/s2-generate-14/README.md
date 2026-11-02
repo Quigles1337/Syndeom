@@ -13,7 +13,8 @@ Branch `claude/s2-grammar-0.7.0`, from `main` `22aac6edc9e3c4f4fb913ba825bf744c2
 |---|---|
 | `97c6cc6c4a65679e4cea62c3c0c778027b00d747` | the 0.7.0 producer: `src/grammar.rs` (`compose`, the dispatch, the version, `realizes`), `src/lib.rs`, `tests/grammar.rs`, the crate README |
 | `141b9310f602edc084cf5f742a598fa893068175` | the 5 goldens of `s2_grammar` 0.7.0, produced at `97c6cc6c…`, the goldens README and the count (110 cases) |
-| the record commit after it | this packet, ADR-0011 *Amendments*, STATE and HANDOFF Session 53 |
+| `10f08c347b5ee931f46599b27a651aac9e832fc4` | the record commit: this packet, ADR-0011 *Amendments*, STATE and HANDOFF Session 53 |
+| the fix commit after it | one sentence of this README rewritten so that the register check passes. The gate on the record commit had read the probe's five-digit class form here as an undefined FLAW id (HANDOFF Session 53's addendum). STATE and the addendum are in the same commit. |
 
 ## What was built
 
@@ -217,8 +218,11 @@ The dispatch's arm for an unexpected class returns a refusal, not an `unreachabl
 - The class pre-filter accepts forms like `FLAW-+1` or `FLAW-001` as 1, because u32's `FromStr`
   allows a sign and leading zeros. `realizes` and each injector's `check_spec` compare the exact
   class strings, so such a class is refused there. The probe `evidence/probe-class-forms-2.py`
-  ran `generate --dry-run` at `141b9310…` on six non-canonical forms (`FLAW-+1`, `FLAW-1`,
-  `FLAW-001`, `FLAW-00001`, `flaw-0001`, `FLAW-0001 `), each refused with exit 2. The control
+  ran `generate --dry-run` at `141b9310…` on six non-canonical forms, each refused with exit 2:
+  `FLAW-+1`, `FLAW-1`, `FLAW-001`, the five-digit form (the digits `00001` after the prefix),
+  `flaw-0001`, and `FLAW-0001 ` with a trailing space. The five-digit form is spelled out that
+  way here because the register check reads `FLAW-` followed by four digits anywhere in a
+  tracked Markdown file as a FLAW id. The script and its output hold it literally. The control
   and the canonical composite exit 0, the latter with the informal golden's id
   (`evidence/probe-class-forms-2.txt`). The pre-filter cannot widen what is realized.
 - The config's `embedded` list enters the manifest's composite records as the spec's dials, as

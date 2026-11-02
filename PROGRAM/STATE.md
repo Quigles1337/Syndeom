@@ -18,7 +18,7 @@
     corrects Entry 2's account of it.
 
   **`s2_grammar` 0.7.0 is built** (STATE's NEXT as it stood: S2 ordering step 4, continued —
-  FLAW-0011 as the composite on `ring_chain`) on branch `claude/s2-grammar-0.7.0`, in three
+  FLAW-0011 as the composite on `ring_chain`) on branch `claude/s2-grammar-0.7.0`, in four
   commits, for Al's review. `main` is unchanged until Al merges.
   - The grammar now carries FLAW-0011. One embedded gap-or-fatal instance (FLAW-0001
     `propagated`, FLAW-0003 `cycle`, FLAW-0009 `axiom` with either truth, FLAW-0010 `a` with
@@ -61,8 +61,15 @@
 
       They were produced at `97c6cc6c…` by two byte-identical runs. The commit also carries the
       goldens README (110 cases, its count line corrected).
-    - the record commit: `analysis/s2-generate-14/`, ADR-0011 *Amendments*, this file and
-      HANDOFF.
+    - `10f08c347b5ee931f46599b27a651aac9e832fc4`, the record commit:
+      `analysis/s2-generate-14/`, ADR-0011 *Amendments*, this file and HANDOFF.
+    - the fix commit, which rewrites one sentence of packet 14's README. **The gate on the
+      record commit failed** (2026-11-02T20:07:24Z–20:10:01Z, exit 1). Every stage passed but
+      the register cross-reference check: `FLAW: … undefined ['0000']`. The README had written
+      the probe's five-digit class form literally, and the check's pattern reads `FLAW-` and four
+      digits in a tracked Markdown file as an id. The pre-commit run of the check had passed only
+      because the packet was then untracked. This commit also carries this file and HANDOFF
+      Session 53's addendum. No code, golden or evidence file changed.
   - **Measured at implementation** (`analysis/s2-generate-14/README.md`):
     - no Lean probe: none was expected (NEXT's step 3) and none was needed;
     - the 105 earlier goldens regenerate byte for byte, and the 5 of `s2_grammar` 0.7.0 pass
