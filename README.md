@@ -4,187 +4,198 @@
 
 **Calibration infrastructure for mathematical proof triage.**
 
-SYNDEOM (συνδέω, *syndéō*, “to bind together”) is a research program for measuring how reliably
-triage methods detect flaws in mathematical proofs, and how much expert attention that detection
-costs. Its intended instrument combines labeled synthetic proofs, documented real examples, a
-versioned flaw taxonomy, and a calibrated detector battery for informal mathematics and Lean 4.
+AI systems now write mathematical proofs faster than people can check them, and the proofs arrive
+without calibration data: nobody can say how often a given way of checking misses an error, or how
+that rate changes as proofs grow longer. SYNDEOM (συνδέω, *syndéō*, “to bind together”) is a
+research program that sets out to measure it.
 
-The principal deliverables are **fooling length**—where a detector becomes statistically equivalent
-to chance—and **expert-minutes per true positive**. A precisely measured failure to detect flaws
-is a valid result. Outputs about real manuscripts are triage scores with uncertainty; they are
-never verdicts.
+It builds proofs, informal and in Lean 4, whose flaws are known because it put them there, and it
+collects real proofs whose status is documented: published proofs with recorded errata or
+retractions, and theorems with a Mathlib formalization. The synthetic proofs will calibrate a
+battery of detectors, flaw class by flaw class; the real ones will then test that battery blind.
+For each detector and class the program will report a **fooling length**, the proof length at which
+the detector becomes statistically equivalent to chance, and a **cost in expert-minutes per true
+positive**, because the verification bill is the point. A precisely measured failure to detect is a
+result of equal rank.
 
-[Status](#status) · [Architecture](#architecture) · [Artifact contract](#artifact-contract) ·
-[Calibration](#calibration-and-validation) · [Quick start](#quick-start) ·
-[Repository](#repository-map) · [Governance](#governance-and-contribution)
+SYNDEOM measures truth and triage, never understanding. About a real manuscript it will only ever
+report calibrated triage scores with uncertainty, never a verdict, and “proven” is reserved for
+sorry-free Lean proofs that pass an axiom audit and a statement-fidelity review.
 
-> **Research stage: Gate S1 (ground-truth corpus) is closed; S2 (generator) is next.** The manifest library, ingestion CLI, first canonical
-> derivation producer, narrow positive-pair producer, and Lean verification fixture are implemented. Synthetic generation,
-> the detector battery, calibration reports, and contact scoring remain planned work.
-> This repository does not yet provide a
-> calibrated proof-triage service.
+> **Where it stands:** Gates S0 and S1 are closed, and S2, the synthetic generator, is being built.
+> No detector battery exists yet; this repository does not provide a calibrated proof-triage
+> service.
+
+[Status](#status) · [Architecture](#architecture) · [Governance](#governance) ·
+[Quick start](#quick-start) · [Repository](#repository-map) · [Citation](#citation) ·
+[Licence](#licence)
 
 ## Status
 
-**PR 7 activated the accepted first-parent amendment on main.** The owner merged it
-at 2026-10-21T03:33:35Z (2026-10-20 23:33:35 America/New_York), producing
-`1c56028532ea135603dbad5423d5555313bfd9ec`. Its tree exactly matches tested head
-`a337375dbae49150a1a40fa46f6d1417835aadd2`. The
-[post-merge event](analysis/s1-post-merge-readiness/README.md) records the actual
-merge, successful checks and fresh Rust reproduction separately from the prior
-owner acceptance and verified integration. The
-[readiness assessment](analysis/s1-post-merge-readiness/READINESS.md) finds no
-additional substantive S1 exit criterion unmet for the admitted prefix.
-**Gate S1 is CLOSED: the Session 29 cold-start examination passed.** The closure is
-recorded in [`PROGRAM/STATE.md`](PROGRAM/STATE.md) and the Session 29 entry in
-[`PROGRAM/HANDOFF.md`](PROGRAM/HANDOFF.md), and it reached `main` via
-[PR #15](https://github.com/Quigles1337/Syndeom/pull/15).
-The authoritative checklist and next action are in [`PROGRAM/STATE.md`](PROGRAM/STATE.md).
+*As of merge commit
+[`e7b8357`](https://github.com/Quigles1337/Syndeom/commit/e7b835762dfdc19154668cae529463345561541e)
+(pull request [#40](https://github.com/Quigles1337/Syndeom/pull/40), 2026-11-02).*
+[`PROGRAM/STATE.md`](PROGRAM/STATE.md) holds the program's claims and its one next action; git
+history and the gate hold the evidence. Where this page and those records differ, the records
+govern.
 
-| Surface | Implemented or recorded | Remaining boundary |
+| Phase | Gate | Recorded in |
 |---|---|---|
-| Foundation | Ratified constitution; 14 flaw classes in taxonomy `0.1.0`; S0 closed | Case-specific D3/SD12 exception is recorded in ADR-0003; no general classifier authority |
-| Ground truth | Verified main: 35 archived representations, 32 effective logical items, two canonical children, one admitted positive pair | Canonical selection/context/locator review and external-byte verification remain separate scoring prerequisites |
-| Rust engine | Manifest library; ingestion, derivation and pair CLIs; one-case effective inventory consumer | Producers and counting tools do not adjudicate other mathematical truth questions |
-| Formal verification | Pinned Lean/Mathlib project, golden theorem and axiom audit | The witness's full analytic bridge is not formalized; no PROVEN transition |
-| Calibration | Experimental design and phase gates specified | No synthetic corpus, calibrated battery, freeze tag or contact report yet |
+| S0 · Foundation: sources, constitution, manifest schema, taxonomy, scaffold | **Closed** 2026-10-13; cold-start test passed | [STATE](PROGRAM/STATE.md), *Gate S0 exit criteria* |
+| S1 · Ground truth: real proofs with documented status | **Closed** 2026-10-26; cold-start test passed | [STATE](PROGRAM/STATE.md), *Gate S1 exit criteria*; [HANDOFF](PROGRAM/HANDOFF.md), Session 29 |
+| S2 · Generator: synthetic proofs with labelled flaws | **Open** since 2026-10-26: S2.1–S2.4 under way; the fidelity sweep, the goldens-lint-audit criterion and the cold-start test are open | [STATE](PROGRAM/STATE.md), *Gate S2 exit criteria* |
+| S3 · Detector battery, calibration, freeze | Not started: no detector, no curves, no `battery-freeze-v1` tag | [Constitution](PROGRAM/SYNDEOM-PROGRAM.md), §2; the repository's tags |
+| S4 · Blind validation on the S1 corpus | Not started | [Constitution](PROGRAM/SYNDEOM-PROGRAM.md), §2 |
+| S5 · Contact with AI-generated corpora | Not started; the contact quarantine holds | [Constitution](PROGRAM/SYNDEOM-PROGRAM.md), §2 and SD8 |
 
-The [effective map](groundtruth/amendment-map.json) keeps
-`s1_ingest-v0.1.0-63e23a952084` as the stable logical key, selecting
-`s1_ingest-v0.1.0-15ab865466d6` exactly once for status. Both raw objects and their
-original producing revisions survive unchanged. The replacement carries the exact
-executor-written, hash-bound counterexample; S-0025 remains author error/locator
-evidence, not the source of that witness. It is a raw metadata amendment, not a
-canonical-child relation. The accepted candidate's historical proposed notes remain
-unchanged; the later owner decision and validated map activate its use.
+**S2 to date.**
 
-The [effective Rust inventory](analysis/s1-first-parent-integration/report/inventory.json),
-[reproduced byte-for-byte on merged main](analysis/s1-post-merge-readiness/evidence/main-comparison.json),
-reports 35 archived representations (33 raw, two canonical), **32 effective logical
-items**, 46 flaw instances across five classes, nine zero-coverage classes and 30
-logical items without canonical representations. Statement truth is 5 true / 17 false /
-10 undetermined; offered-proof validity is 1 valid / 31 invalid. The unflagged subset
-is 18; truth-qualified counts are 5 true / 10 false. The seven older truth questions,
-seven severity questions and unnamed-result question retain their documented
-dispositions and exclusions. Missing raw lengths are not zero lengths.
+- **Design and code.** [ADR-0011](PROGRAM/DECISIONS/ADR-0011.md) fixes one deterministic family of
+  seeded Rust templates and grammars, no LLM, behind one shared interface, the *plan*; the engineer
+  of record, Al, accepted it by rulings on pull request #20 (2026-10-27).
+  [`engine/generate/`](engine/generate/README.md) implements it with two producers: `s2_template`
+  (versions 0.1.0–0.7.0), on twelve hand-authored seed theorems from the taxonomy's examples and
+  ADR-0001's fixture, and `s2_grammar` (0.1.0–0.8.0), which generates chains of commanded length.
+- **Flaw classes.** `s2_template` can inject all fourteen classes of taxonomy `0.1.0`, though some
+  sub-variants still lack material. Two of ADR-0011's four grammars exist. `ring_chain`, polynomial
+  identities over ℤ, realizes every class the ADR assigns a grammar for which it has material:
+  FLAW-0001, FLAW-0003 `cycle`, FLAW-0004 `routine-true`, FLAW-0007 `unused`, FLAW-0009 `axiom`,
+  FLAW-0010 (a), FLAW-0011 and FLAW-0013. `ineq_chain`, inequalities over ℝ, carries its control
+  and FLAW-0001 (STATE, *Gate S2 exit criteria*).
+- **Goldens.** 120 cases at seed 7, regenerated byte for byte by the gate: 69 from the template's
+  seeds, 41 on `ring_chain` and 10 on `ineq_chain`
+  ([goldens README](engine/generate/tests/goldens/README.md)). Since `s2_template` 0.2.0, each
+  version's goldens come from two production runs compared byte for byte, and each version's
+  evidence is its packet, [`analysis/s2-generate-1/`](analysis/s2-generate-1/) to
+  [`analysis/s2-generate-15/`](analysis/s2-generate-15/README.md).
+- **Not yet.** No artifact under `corpora/`, no fidelity sweep, no detector and no battery (STATE,
+  *Gate S2 exit criteria*). No claim in [`PROGRAM/CLAIMS.md`](PROGRAM/CLAIMS.md) is MEASURED,
+  REPRODUCED or PROVEN.
+- **Next.** STATE's NEXT-SINGLE-ACTION at this merge: `s2_grammar` 0.9.0, FLAW-0005 `unshown` on
+  `ineq_chain`, Lean probes first.
 
-The complete [frozen S1.4 packet](analysis/s1-4/README.md) remains byte-for-byte
-historical: its 34-representation/32-root census, 17-item unflagged subset, first-parent
-hold, first-write bins and receipts describe the original pinned snapshot. The new
-event does not replace that report. Its canonical selections still measure 75 tokens /
-one informal proof step and seven tokens / zero informal proof steps; the latter is
-a statement pair. The 14-token Lean alias does not measure a transitive Mathlib proof.
-All real-item cells remain expected underpowered pending S3's design-derived N_min;
-no detector performance or numerical power follows from these metadata counts.
-
-The status-support hold is discharged on verified main. Canonical production still
-needs its own authorized selection, context and locator review. Gate S1's cold-start
-examination ran in Session 29 and passed (above). The next action is STATE's
-NEXT-SINGLE-ACTION: S2.1, write `PROGRAM/DECISIONS/ADR-0011.md`, the first generator
-family's design; that session decides only and writes no generator code.
-S1.1 supports the admitted, unskipped
-prefix; the harvest is not exhausted. Harvest remains paused through candidate 27 /
-`1403.4485`, with candidate 28 / `1403.6317` saved for a later harvest.
-
-Orientation is governed by [ADR-0008](PROGRAM/DECISIONS/ADR-0008.md), the addendum to
-constitution §4.1 accepted by the owner on 2026-10-21: before any program state is
-reconstructed or any NEXT executed, a session fetches, discovers the default branch, records
-the fetched and checked-out SHAs and trees, selects the examined snapshot (fast-forward only
-for a clean behind-only checkout; an isolated worktree otherwise) and rechecks the target
-before publishing; [`scripts/orient_preflight.py`](scripts/orient_preflight.py) performs and
-records it, outside the build gate. A later harvest of candidates 28–30 is preserved on branch
-`claude/s1-harvest-candidates-28-30` at its recorded commit (owner decision 1); its retrieval
-evidence is pinned in [`analysis/s1-orientation-repair/`](analysis/s1-orientation-repair/README.md).
-With Gate S1 closed, its admission review is eligible; STATE records the owner's ordering, which
-schedules that review after ADR-0011. Nothing on the branch is approved.
+**S1 since its gate.** Gate S1 closed on 35 archived representations and 32 effective logical
+items, among them one admitted informal–formal pair (STATE, *Gate S1 exit criteria*). The first
+later prefix, harvest candidates 28–30, was then reviewed, integrated and counted as its own event:
+**40 archived representations, 37 effective logical items**. Nine of the fourteen flaw classes have
+no real example, so S4 cannot validate them, and every real-item cell is expected to be underpowered
+until S3 derives N_min ([report](analysis/s1-later-prefix-1/report/report.md);
+[ADR-0013](PROGRAM/DECISIONS/ADR-0013.md)). The harvest is paused after candidate 30 (STATE,
+*NEXT-SINGLE-ACTION*). The design as it stood at Gate S1's closure is registered on Zenodo
+([Citation](#citation)).
 
 ## Architecture
 
-SYNDEOM currently operates as a **local, file-based research pipeline**. Rust owns canonical
-manifest construction, canonical derivation, validation, and coverage aggregation; Lean checks the formal fixture;
-Python assists discovery and orchestrates reproduction.
-The repository holds the evidence, decisions, and execution record. There is no deployed API,
-queue, or database in the present implementation.
+SYNDEOM is a local, file-based pipeline with no deployed service. Rust ([`engine/`](engine/)) owns
+every canonical artifact, check and count; Lean 4 with Mathlib ([`lean/`](lean/)) checks formal
+statements and proofs; Python assists discovery with no result authority (SD10). In the diagrams,
+circles act, stadiums are what they hold or emit, and each arrow is labelled with what crosses it.
+The two accent colours only repeat what a label says: **ochre** for artifact flow (configs, files,
+goldens) and **teal** for truth flow (ground-truth records, kernel verdicts).
 
-### 01 · Evidence into an archive
+### 01 · The arc: ground truth, generation, calibration, validation, contact
 
-The S1.1 path begins with a published original and its erratum or retraction notice.
-The separate S1.2 path pairs one independently published statement with its reviewed Mathlib argument.
-Admission review establishes provenance, records the licence, and argues the flaw classification
-before the producer runs. The CLI validates structure and consistency, computes hashes, and
-writes the manifest.
+Three populations stay apart. Synthetic artifacts calibrate the battery, which is then frozen; real
+proofs with documented status test the frozen version blind; AI-generated corpora are scored last,
+read only, by that same version. No seed, grammar or template may be derived from the S1 corpus
+(ADR-0011, D6), and contact results never tune a battery in place: a change is a new version with a
+new freeze (SD8).
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":30,"rankSpacing":45,"htmlLabels":true}}}%%
-flowchart LR
-    accTitle: S1 evidence and ingestion architecture
-    accDescr: Primary sources and the flaw taxonomy inform admission review. Review supplies configuration and original bytes to the Rust ingestion tool, which uses the manifest library and writes the ground-truth archive. Review separately supplies the written record.
-
-    S(("Primary<br/>sources")) -->|"original + notice"| R(("Admission<br/>review"))
-    T(("Flaw<br/>taxonomy")) -->|"classification"| R
-    R -->|"config + bytes"| I(("Rust<br/>ingest"))
-    M(("Manifest<br/>library")) -->|"hash + self-check"| I
-    I -->|"manifest.json"| A(("S1<br/>archive"))
-    R -->|"RECORD.md"| A
-
-    classDef default fill:#faf8f3,stroke:#716b63,color:#292723,stroke-width:1px;
-    classDef focal fill:#fff5ef,stroke:#9c473b,color:#74372f,stroke-width:1.3px;
-    class A focal;
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":36,"rankSpacing":44,"htmlLabels":true}}}%%
+flowchart TB
+    accTitle: The program's arc, from ground truth to the contact boundary
+    accDescr: Published proofs with documented errata become the S1 ground-truth archive, and the S2 generator emits synthetic artifacts with known flaws. In S3 those artifacts calibrate a detector battery, yielding fooling lengths and a cost model, and the battery is frozen. S4 tests the frozen battery blind on the S1 archive; only after that gate does the same version score quarantined AI-generated corpora in S5, producing triage scores with uncertainty. S1 and S2 are built; S3 to S5 are planned.
+    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
+    classDef truth fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    P(["Published<br/>proofs"]) -->|"erratum or retraction"| GT(["S1 ground<br/>truth"]):::truth
+    G(("Generator<br/>S2")) -->|"labelled artifacts"| SY(["Synthetic<br/>artifacts"]):::artifact
+    SY -.->|"known flaws"| C(("Calibration<br/>S3"))
+    C -.->|"ROC/AUC with CIs"| D(["Fooling lengths<br/>+ cost model"])
+    C -.->|"battery-freeze-v1"| F((("Frozen<br/>battery")))
+    F -.->|"fixed protocol"| V(("Blind test<br/>S4"))
+    GT -.->|"documented status"| V
+    V -.->|"gate passes"| T(("Triage<br/>S5"))
+    Q(["AI corpora<br/>quarantined"]) -.->|"read only"| T
+    F -.->|"same version"| T
+    T -.->|"per manuscript"| S(["Scores with<br/>uncertainty"])
     linkStyle default stroke:#81796f,stroke-width:1px;
+    linkStyle 1,2 stroke:#a8741a,stroke-width:1.4px;
+    linkStyle 0,6 stroke:#3a7f8c,stroke-width:1.4px;
 ```
 
-*Implemented relationships. Circles identify actors or artifacts; arrows name their contribution.*
+*Ochre: artifact flow · teal: truth flow · grey: the rest · solid: built · dashed: planned · double
+ring: the immutable battery version.*
 
-- [`lab/`](lab/) retrieves candidates and comparison material; it has **zero result authority**.
-- [`engine/ingest/`](engine/ingest/) implements the deterministic producer `s1_ingest`. It
-  rejects inconsistent inputs and refuses conflicting content under an existing artifact ID.
-- [`engine/manifest/`](engine/manifest/) implements schema checks, byte-format parsing, hashes,
-  commanded-versus-achieved fidelity, and parent/derivative consistency checks.
-- [`engine/derive/`](engine/derive/) implements `s1_derive`: reviewed statement/proof slices from
-  one gzip TeX source become canonical informal Markdown, with the full original source retained
-  as external context. It validates actual bytes, inherited labels, and mapped flaw locations.
-- [`engine/pair/`](engine/pair/) implements the fixed ADR-0007 archive/canonical pair contract,
-  with executable-input provenance, actual-byte validation, full output preflight and fresh receipts.
-- [`analysis/s1-4/`](analysis/s1-4/) publishes the Rust-owned inventory, qualified coverage,
-  frozen length bins and interim-power statement. The example target lives outside the
-  pair producer's frozen source closure; Python only orchestrates reproducibility checks.
-- [`groundtruth/`](groundtruth/) retains the archival item and its written evidence.
-  [`lean/`](lean/) supplies the separate formal build and axiom-audit path.
+“Fooled” is defined before any curve exists ([ADR-0004](PROGRAM/DECISIONS/ADR-0004.md)). A detector
+is fooled in a cell only when the 95% bootstrap interval of its AUC lies entirely inside
+[0.45, 0.55] and the cell holds at least N_min items, a size derived from the design for 90% power
+before any curve is computed; the fooling length is the smallest proof length at which that holds.
+An interval that merely contains 0.5 is “not distinguished from chance”, and a smaller cell is
+“underpowered”, never fooled.
 
-Admission and licensing are review obligations: the CLI checks their input shape, not the
-underlying scholarship or redistribution rights. The procedure is
-[ADR-0003](PROGRAM/DECISIONS/ADR-0003.md) for errata and
-[ADR-0007](PROGRAM/DECISIONS/ADR-0007.md) for the reviewed positive pair.
+### 02 · S2: producing one artifact
 
-## Artifact contract
-
-Every counted proof artifact has a manifest. The current producer writes
-**`syndeom-manifest/2`**; the library also accepts `/1` under its original rules. Consumers pin the
-schema they understand. [ADR-0001](PROGRAM/DECISIONS/ADR-0001.md) defines the contract and amendments.
-
-### 02 · Identity, bytes, and provenance
+Every S2 module reads or rewrites one data structure, the plan, and only the renderers emit bytes,
+so an injected flaw lands at a known span in `proof.md` and a known line in `Proof.lean`
+([ADR-0011](PROGRAM/DECISIONS/ADR-0011.md), D2). A flawed artifact counts only when its flaw is
+confirmed: check K requires Lean's first error to fall inside the injected fragment, check T reads
+the axiom and usage audit, and informal records get a recorded structural check (D5, D8). A failed
+confirmation is kept as a FAIL finding, never regenerated under another seed.
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":30,"rankSpacing":42,"htmlLabels":true}}}%%
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":36,"rankSpacing":44,"htmlLabels":true}}}%%
+flowchart TB
+    accTitle: S2 production of one informal-formal pair
+    accDescr: A full configuration and a seed enter a producer, s2_template or s2_grammar, which builds a plan. The flaw injector and the padding module rewrite it, writing one ground-truth record per flaw instance, and it is rendered as proof.md and Proof.lean. The Lean harness compiles the formal file one process at a time, and its first error line and axiom and usage listing confirm or refute the formal records; a structural check confirms the informal ones. The manifest takes both files' hashes and counts, the confirmed records and the fidelity verdict. Goldens are outputs of two production runs compared byte for byte.
+    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
+    classDef truth fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    C(["Config<br/>+ seed"]):::artifact -->|"theorem or grammar, flaws"| P(("Producer"))
+    P -->|"plan"| J(("Injector<br/>+ padding"))
+    J -->|"rendered informal"| MD(["proof.md"]):::artifact
+    J -->|"rendered formal"| LN(["Proof.lean"]):::artifact
+    J -->|"one per instance"| R(["Flaw<br/>records"]):::truth
+    LN -->|"bytes + audit tail"| H(("Lean<br/>harness"))
+    H -->|"check K · check T"| R
+    MD -->|"structural check"| R
+    R -->|"confirmed + verdict"| M(["manifest.json"])
+    MD -->|"hash + counts"| M
+    LN -->|"hash + counts"| M
+    M -->|"two runs, byte-identical"| G(["Goldens"]):::artifact
+    linkStyle default stroke:#81796f,stroke-width:1px;
+    linkStyle 0,2,3,11 stroke:#a8741a,stroke-width:1.4px;
+    linkStyle 4,6,7,8 stroke:#3a7f8c,stroke-width:1.4px;
+```
+
+*Ochre: artifact flow · teal: truth flow · grey: the rest. Shown for a pair; an informal-only
+artifact has no Lean file. Every draw comes from a labelled stream of `syndeom-rng/1`, so one config
+and seed always give the same bytes.*
+
+### 03 · Identity and integrity
+
+Identity is a function of what produced an artifact, and integrity is checked against its exact
+bytes ([ADR-0001](PROGRAM/DECISIONS/ADR-0001.md)). The engine commit is verified against the
+producer's inputs before anything is written, and synthetic proof bytes under `corpora/` are
+regenerated and checked by hash rather than committed ([ADR-0011](PROGRAM/DECISIONS/ADR-0011.md),
+D9).
+
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":40,"rankSpacing":50,"htmlLabels":true}}}%%
 flowchart LR
     accTitle: Artifact identity and content integrity
-    accDescr: Canonical JSON configuration is hashed to form a configuration hash. Its prefix joins the producer identity and optional seed to form the artifact ID. The manifest records that identity, the exact-byte content hash, and the engine commit separately.
-
-    C(("Config")) -->|"JCS + SHA-256"| H(("Config<br/>hash"))
-    H -->|"first 12 hex"| ID(("Artifact<br/>ID"))
-    P(("Producer<br/>+ seed")) -->|"id + version"| ID
-    ID -->|"identity"| M(("Manifest"))
-    B(("Proof<br/>bytes")) -->|"SHA-256"| M
-    E(("Engine<br/>commit")) -->|"provenance"| M
-
-    classDef default fill:#faf8f3,stroke:#716b63,color:#292723,stroke-width:1px;
-    classDef focal fill:#fff5ef,stroke:#9c473b,color:#74372f,stroke-width:1.3px;
-    class M focal;
+    accDescr: The canonical JSON configuration is hashed to a configuration hash. Its first twelve hex digits join the producer's id and version, and the seed for a synthetic artifact, to form the artifact ID. The manifest records that identity, the SHA-256 of the exact file bytes, and the engine commit that produced them.
+    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
+    C(["Config"]):::artifact -->|"JCS + SHA-256"| H(["Config<br/>hash"])
+    H -->|"first 12 hex"| ID(["Artifact<br/>ID"])
+    P(("Producer")) -->|"id, version, seed"| ID
+    ID -->|"identity"| M(["Manifest"])
+    B(["Proof<br/>bytes"]):::artifact -->|"SHA-256"| M
+    E(["Engine<br/>commit"]) -->|"provenance"| M
     linkStyle default stroke:#81796f,stroke-width:1px;
+    linkStyle 0,4 stroke:#a8741a,stroke-width:1.4px;
 ```
 
-*Artifact identity is derived from configuration and producer identity. Content integrity is
-checked separately against the exact file bytes.*
+*Ochre: artifact flow · grey: the rest.*
 
 ```text
 config_hash = SHA-256(JCS(config))
@@ -192,112 +203,124 @@ content_hash = SHA-256(exact file bytes)
 artifact_id = <generator.id>-v<version>-<config_hash[0:12]>[-s<seed>]
 ```
 
-JCS is the JSON Canonicalization Scheme. Synthetic artifacts carry an integer seed; ground-truth
-and contact items carry `seed: null` and omit the suffix. The manifest also records origin,
-producer version, engine commit, file formats and storage, ground truth where permitted, and
-commanded/achieved statistics with fidelity verdicts. Formal files carry their toolchain pins.
+JCS is the JSON Canonicalization Scheme. Synthetic artifacts carry an integer seed; ground-truth and
+contact items carry `seed: null` and omit the suffix. The producers write `syndeom-manifest/2`, and
+consumers pin the schema they understand.
 
 | Origin | Location | Ground-truth basis | Use |
 |---|---|---|---|
-| `synthetic` | [`corpora/`](corpora/) | `by-construction` | Planned S2 generation and S3 calibration |
-| `ground-truth` | [`groundtruth/`](groundtruth/) | `documented-by-source` or `formalized-in-mathlib` | S1 evidence; later S4 validation |
-| `contact` | [`contact/`](contact/) | **`ground_truth: null`** | S5 only; quarantined until the prescribed gates pass |
+| `synthetic` | [`corpora/`](corpora/) | `by-construction` | S2 generation; S3 calibration |
+| `ground-truth` | [`groundtruth/`](groundtruth/) | `documented-by-source` or `formalized-in-mathlib` | S1 evidence; S4 validation |
+| `contact` | [`contact/`](contact/) | none: **`ground_truth: null`** | S5 only, quarantined until the prescribed gates pass |
 
-**Archival and detector inputs are distinct.** `raw/1` preserves original bytes. The detector
-interface is specified for `syndeom-informal-md/1` (`proof.md`) and `syndeom-lean/1` (`Proof.lean`).
-A real item to be scored needs a derived canonical artifact naming `config.derived_from` and
-`config.method`, preserving its parent's status and flaw labels, and documenting re-expressed
-locations. The first derivation producer and one canonical child now exist under
-[ADR-0006](PROGRAM/DECISIONS/ADR-0006.md): `s1_derive-v0.1.0-c08f9e3ec092`, derived from
-`s1_ingest-v0.1.0-00f28e252823`. The reviewed procedure preserves the original offered proof;
-it does not repair its argument. Metadata, the source map, and the
-[source-fidelity review](groundtruth/s1_derive-v0.1.0-c08f9e3ec092/RECORD.md) are committed;
-restricted proof/context bytes are external. The existing Lean golden audit does not formalize
-or certify this informal child. The separate first-parent status-support hold is discharged
-on [verified main](analysis/s1-post-merge-readiness/README.md) following PR 7's merge.
-Canonical selection/context/locator review remains separate.
+### 04 · What one artifact's ground truth holds
 
-**Statement truth and proof validity are independent fields.** Schema `/2` permits an undetermined
-statement (`value: null`, `method: "undetermined"`) only with an invalid proof. Ten current items
-have this status. They may contribute to proof-flaw calibration, but must be excluded from
-truth-dependent cells, including the FLAW-0011 and FLAW-0012 composites. `correct: false` on such
-an item does not assert that its theorem is false.
-
-Storage is explicit: `committed` retains permitted bytes; `external` retains a manifest and digest
-without redistributing the original; `regenerable` is reserved for synthetic artifacts. Synthetic
-proof bytes default to regeneration and hash verification; manifests remain committed.
-
-## Calibration and validation
-
-The following is the **specified research architecture, not an implemented scoring path**.
-Three populations remain separate: synthetic artifacts establish calibration, real proofs with
-documented status test the frozen battery, and AI-generated contact corpora are examined last.
-
-### 03 · Three populations, one frozen protocol
+Whether the statement is true and whether the offered proof proves it are separate fields, which
+FLAW-0011 and FLAW-0012 exist to test, and every label names how it was established. For a real
+item, admission review establishes provenance and licence and argues the flaw class in writing
+before `s1_ingest` writes the manifest ([ADR-0003](PROGRAM/DECISIONS/ADR-0003.md);
+[ADR-0007](PROGRAM/DECISIONS/ADR-0007.md) for the pair), and a statement its source leaves open is
+recorded as undetermined, only with an invalid proof ([ADR-0001](PROGRAM/DECISIONS/ADR-0001.md)),
+and kept out of every truth-dependent cell (STATE, *Standing rulings*).
 
 ```mermaid
-%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":34,"rankSpacing":44,"htmlLabels":true}}}%%
-flowchart LR
-    accTitle: Planned calibration, blind validation, and contact boundary
-    accDescr: Synthetic proofs calibrate a battery that is then frozen. The fixed protocol is validated on real ground-truth proofs. Only after the S4 gate passes can the same frozen version score quarantined AI contact corpora. Contact results never modify that version.
-
-    S(("Synthetic<br/>S2")) -.->|"calibrate in S3"| F((("Frozen<br/>battery")))
-    F -.->|"fixed protocol"| V(("Blind test<br/>S4"))
-    G(("Real proofs<br/>S1")) -.->|"documented status"| V
-    V -.->|"gate passes"| O(("Triage<br/>S5"))
-    C(("AI corpora<br/>quarantined")) -.->|"read only"| O
-    F -.->|"same version"| O
-
-    classDef default fill:#faf8f3,stroke:#716b63,color:#292723,stroke-width:1px;
-    classDef boundary fill:#fff5ef,stroke:#9c473b,color:#74372f,stroke-width:1.3px;
-    class F,C boundary;
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":36,"rankSpacing":44,"htmlLabels":true}}}%%
+flowchart TB
+    accTitle: What one artifact's ground truth holds
+    accDescr: For a synthetic artifact, statement status is established by the Lean kernel building a seed witness or a grammar instance's control; for a real item, by a source document. Flaw records come from the injector by construction, or from admission review's written class argument. Proof status is valid only when every record is cosmetic, and invalid whenever the statement is false or undetermined. The correct bit is derived from the statement's value and the proof status, never authored.
+    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
+    classDef truth fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    W(["Witness<br/>or control"]):::artifact -->|"statement + proof"| K(("Lean<br/>kernel"))
+    K -->|"builds: lean-kernel"| SS(["statement_status<br/>value · method · reference"]):::truth
+    SD(["Source<br/>document"]) -->|"documented-by-source"| SS
+    J(("Flaw<br/>injector")) -->|"by construction"| FL(["flaws[ ]<br/>class · severity · location<br/>lean_catchable · dials"]):::truth
+    RV(("Admission<br/>review")) -->|"class argued in writing"| FL
+    FL -->|"all cosmetic ⇒ valid"| PS(["proof_status<br/>valid · invalid"])
+    SS -->|"false or null ⇒ invalid"| PS
+    SS -->|"value"| CO(["correct<br/>derived"])
+    PS -->|"status"| CO
     linkStyle default stroke:#81796f,stroke-width:1px;
+    linkStyle 0 stroke:#a8741a,stroke-width:1.4px;
+    linkStyle 1,2,3,4 stroke:#3a7f8c,stroke-width:1.4px;
 ```
 
-*Dashed arrows are planned execution paths. The double ring marks the immutable battery version;
-red identifies the freeze and contact boundary. Contact observations cannot tune that version.*
+*Teal: truth entering the record · grey: rules the manifest library derives · ochre: artifact flow.
+A record locates its flaw by step and character span in the informal file and by declaration and
+line in the formal one.*
 
-| Phase | Required outcome | State |
-|---|---|---|
-| S0 · Foundation | Verified sources, ratified rules, manifest schema, taxonomy, reproducible scaffold | Closed |
-| S1 · Ground truth | Sourced real items, canonical derivatives, informal–formal pairs, coverage and power statement | Closed |
-| S2 · Generator | Seeded informal/formal variants, flaw injection, padding, measured generation fidelity | Planned |
-| S3 · Calibration | Detector battery, ROC/AUC with intervals, fooling lengths, cost model, referee design, `battery-freeze-v1` | Planned |
-| S4 · Validation | Blind test on S1 items; class-specific recall, false-positive rates, and power analysis | Planned |
-| S5 · Contact | Versioned manuscript triage scores with uncertainty; reproducible report and engineer sign-off | Planned |
+## Governance
 
-The first generator family is specified as seeded Rust templates and grammars. Any LLM-assisted
-family requires a separate ADR covering reproducibility and leakage. The planned battery
-prioritizes dependency extraction, hypothesis checks, lemma usage, citation existence,
-autoformalization, statement fidelity, and axiom audits. Surface statistics remain controls whose
-expected weakness must be tested.
+SYNDEOM runs under a written constitution that assumes its executor forgets everything between
+sessions. The executor, Claude Code, does not persist: the repository is the only memory, and every
+session must leave it resumable by a cold successor (constitution §0). That one constraint is why
+every figure on this page can show its work.
 
-Calibration crosses **detector × flaw class × proof length × severity**, with matched correct
-proofs, padded correct proofs, and other flaw classes as controls. Leave-one-generator-out and
-leave-one-flaw-class-out evaluations test whether detectors recognize flaws or merely generators.
-Conclusions require joint detector evidence within measured false-positive and ROC contexts.
-The [14-class taxonomy](PROGRAM/FLAWS.md) includes both local errors and failures that compilation
-alone cannot establish, such as statement drift and uninformative padding.
+```mermaid
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":36,"rankSpacing":36,"htmlLabels":true}}}%%
+flowchart TB
+    accTitle: The governance loop of one session
+    accDescr: A session is launched with the constitution's resume prompt and discloses its memory first. It orients from the fetched default branch and runs the gate, plans one action, executes and verifies it, gates the committed tree, and records the result in STATE, HANDOFF and an evidence packet. A pull request carries numbered readings to the engineer of record, whose rulings are recorded verbatim on the same branch. The engineer of record merges with a merge commit, and the next session orients from the new tip.
+    L(("Launch")) -->|"§6 prompt, verbatim"| D(("Disclose"))
+    D -->|"SD15 entry in HANDOFF"| O(("Orient"))
+    O -->|"fetched tip, gate GREEN"| P(("Plan"))
+    P -->|"one NEXT action"| E(("Execute<br/>+ verify"))
+    E -->|"commits"| G(("Gate"))
+    G -->|"GATE: GREEN"| R(("Record"))
+    R -->|"STATE, HANDOFF, packet"| PR(("Pull<br/>request"))
+    PR -->|"readings"| A(("Al's<br/>rulings"))
+    A -->|"rulings, verbatim"| R
+    A -->|"merge commit"| M(("main"))
+    M -->|"new tip"| O
+    linkStyle default stroke:#81796f,stroke-width:1px;
+    linkStyle 4,6 stroke:#a8741a,stroke-width:1.4px;
+    linkStyle 2,5 stroke:#3a7f8c,stroke-width:1.4px;
+```
 
-**“Fooled” has a pre-declared statistical meaning.** A cell qualifies only when its 95% bootstrap
-AUC interval lies entirely within **[0.45, 0.55]** and its sample size meets `N_min`. Fooling length
-is the smallest tested length meeting that rule, per detector and flaw class. An interval merely
-containing 0.5 is “not distinguished from chance”; an insufficient cell is “underpowered.”
-`N_min` must be derived for balanced flawed/correct cells at 90% power when true AUC is 0.5,
-then simulation-checked before curves are computed. Dependence among variants of one seed theorem
-must be accounted for.
-See [ADR-0004](PROGRAM/DECISIONS/ADR-0004.md).
+*Ochre: artifact flow (commits, records) · teal: truth flow (gate verdicts) · grey: the rest.*
 
-Expert cost initially uses a pre-declared review-time model. The blinded human-referee protocol
-is to be designed and versioned; recruitment, contact, and execution require the engineer of
-record's decision. A post-contact battery change creates a new version and freeze; prior results
-retain their original version.
+- **The constitution.** [`PROGRAM/SYNDEOM-PROGRAM.md`](PROGRAM/SYNDEOM-PROGRAM.md): the charter,
+  rules SD1–SD17, phases and gates, the session loop and its failure modes. It changes only by ADR;
+  ADR-0004, ADR-0005 and ADR-0009 have amended it.
+- **The loop (§4).** A session orients from the fetched default branch
+  ([ADR-0008](PROGRAM/DECISIONS/ADR-0008.md)), reads STATE, the last HANDOFF entry, the registers
+  and the relevant ADRs, and runs the gate: *state files are claims; builds are evidence*. It plans
+  one thing, normally the inherited NEXT-SINGLE-ACTION, executes and verifies it (two failures on
+  one approach end the attempt), records, and stops green. A session launched with the §6 prompt
+  discloses its executor memory first (SD15).
+- **The gate (SD9).** [`scripts/check.sh`](scripts/check.sh): the Lean build, an axiom audit of
+  the golden fixture and every seed witness, `cargo fmt`, `clippy -D warnings`, every Rust test
+  with the goldens, byte hygiene, the register cross-references and the freeze register. The
+  default branch always passes it.
+- **The records.** STATE holds the current claims, the gate tables with their evidence, the
+  standing rulings, the freeze register and one next action. HANDOFF is an append-only log of what
+  each session moved, believed, misunderstood and checked for leakage, determinism, manifests and
+  drift. Each [ADR](PROGRAM/DECISIONS/) records one decision, the owner's rulings verbatim under
+  *Amendments*. The registers keep claims append-only ([CLAIMS](PROGRAM/CLAIMS.md)), sources read
+  from primaries with their SHA-256 ([SOURCES](PROGRAM/SOURCES.md)) and the versioned taxonomy
+  ([FLAWS](PROGRAM/FLAWS.md)); packets under [`analysis/`](analysis/) hold each step's evidence.
+- **Rulings and merges.** Every pull request stops for the engineer of record, Al, whose rulings
+  accept, narrow or replace a packet's numbered readings. The rulings are recorded verbatim on the
+  branch, and Al merges with a merge commit, never a squash, so every golden's `engine_commit`
+  stays a real commit on `main`. Publication, human referees (SD13), constitution amendments and
+  the contact quarantine are escalations, never the executor's call (§4.6).
+- **The cold-start test.** A gate closes only when a session that is cold under SD15 re-derives the
+  program's state from the repository alone, in one pass. Gates S0 and S1 passed it.
+
+None of this makes a result right. It makes every result checkable: the commit that produced it,
+the seed and configuration that regenerate it, the session that recorded it and the ruling that
+accepted it are all in this repository.
+
+Contributions follow the same loop: feature branches, UTF-8 text with LF line endings, and commits
+named `[S<phase>][<CLAIM-ID or ADR-ID or FLAW-ID or INFRA>] imperative summary`. SYNDEOM binds the
+calibration discipline of [FRIEDMAN](https://github.com/Quigles1337/FR13DMAN) to the formal-methods
+discipline of [KOBER](https://github.com/Quigles1337/KOBER) through a versioned manifest extension,
+never a code dependency ([structural map](PROGRAM/SIBLING-MAP-2026-10.md)).
 
 ## Quick start
 
-Use Git, Bash, Python 3, Rust through `rustup`, and Lean through `elan`. On Windows, run the shell
-examples in **Git Bash** with Python, Cargo, and Lake on `PATH`. Keep the checkout and scratch files
-on a local disk outside OneDrive.
+Use Git, Bash, Python 3, Rust through `rustup` and Lean through `elan`. On Windows, run the shell
+examples in **Git Bash** with Python, Cargo and Lake on `PATH`, and keep the checkout and scratch
+files on a local disk outside OneDrive.
 
 | Dependency | Repository pin |
 |---|---|
@@ -317,16 +340,15 @@ cd Syndeom
 bash scripts/check.sh
 ```
 
-The first run downloads dependencies and compiled Lean modules; allow time and disk space for
-Mathlib. The gate checks the Lean build and golden fixture's axiom set, Rust formatting and Clippy,
-all Rust tests, LF/BOM/trailing-newline hygiene, and register cross-references. A successful run
-ends with **`GATE: GREEN`**. [CI](.github/workflows/check.yml) runs the same gate as an advisory
-check; the recorded local run is authoritative.
+The first run downloads dependencies and compiled Mathlib modules. A successful run ends with
+**`GATE: GREEN`**; its `cargo test` stage regenerates every S2 golden from its recorded config, seed
+and Lean observation and compares the bytes. [CI](.github/workflows/check.yml) runs the same gate as
+an advisory check; the recorded local run is authoritative. `cargo test --locked --manifest-path
+engine/Cargo.toml --all-targets --all-features` runs the Rust tests alone, not the gate.
 
-### Exercise ingestion without writing a corpus item
-
-From the repository root, this dry run uses the checked-in **test fixture**, whose source IDs are
-placeholders. It prints a manifest and leaves `groundtruth/` untouched.
+To exercise ingestion without writing a corpus item, run this from the repository root. It uses the
+checked-in **test fixture**, whose source IDs are placeholders, prints a manifest and leaves
+`groundtruth/` untouched.
 
 ```bash
 cargo run --locked --manifest-path engine/Cargo.toml -p syndeom-ingest -- \
@@ -337,106 +359,36 @@ cargo run --locked --manifest-path engine/Cargo.toml -p syndeom-ingest -- \
   --dry-run
 ```
 
-Real ingestion follows [ADR-0003](PROGRAM/DECISIONS/ADR-0003.md): register the original and notice,
-resolve storage rights, prepare the item config, run the producer, then add the written record and
-harvest-log entry. Test fixtures are never admitted as real evidence.
+Exit `0` means printed, written or already identical; `1` a usage or I/O error; `2` an input-shape
+or consistency failure; `3` a different manifest or different bytes already under that artifact ID. Real ingestion follows
+[ADR-0003](PROGRAM/DECISIONS/ADR-0003.md), and test fixtures are never admitted as evidence.
 
-| CLI exit | Meaning |
-|---|---|
-| `0` | Manifest printed, written, or already identical |
-| `1` | Usage or I/O error |
-| `2` | Input shape or manifest consistency failure |
-| `3` | Different manifest or bytes already exist under that artifact ID |
-
-For a Rust-only development check, run `cargo test --locked --manifest-path engine/Cargo.toml
---all-targets --all-features`. This is a partial check; it does not replace the repository gate.
-
-### Reproduce the first canonical derivation
-
-Follow the [S1.3 reproduction instructions](analysis/s1-3/README.md#reproduce-the-real-example).
-The Python helper verifies the original source hash and invokes the Rust producer twice,
-comparing exact proof, context, manifest, and source-map bytes. Choose a new external work
-directory for each run; existing destinations are refused. The retained evidence pins producer
-commit `49e47237924eddf0c39c24aefad0eb9aa02ee8b3`, which predates generation of the real child.
-
-### Reproduce the admitted first positive pair
-
-Follow [the S1.2 implementation instructions](analysis/s1-2/implementation/README.md#reproduce-into-a-new-destination).
-The helper retrieves frozen sources, invokes the committed Rust producer, compiles/audits the
-actual emitted alias, compares a fresh replay and runs labeled refusal controls. Every run
-uses a new external destination. The owner admitted this pair by merging PR 4; this
-reproduction preserves its original producing revision and does not imply PROVEN promotion.
-
-### Reproduce the effective inventory
-
-Use the [post-merge reproduction instructions](analysis/s1-post-merge-readiness/README.md#reproduce-without-touching-retained-evidence).
-The existing Rust consumer validates the one-case amendment and historical preservation,
-then emits one effective status per logical item. Choose a fresh external output directory;
-the wrapper compares two runs and confirms overwrite refusal. Inventory bytes match the
-retained result when inputs are unchanged, except the `preservation` object, which describes
-the byte checks the tool now makes (ADR-0012: its input set only); provenance names the actual
-checkout revision/tree.
+Recorded results reproduce into a new directory outside the repository:
+[the first canonical derivation](analysis/s1-3/README.md#reproduce-the-real-example) (S1.3),
+[the admitted positive pair](analysis/s1-2/implementation/README.md#reproduce-into-a-new-destination)
+(S1.2), [the effective inventory at Gate S1](analysis/s1-post-merge-readiness/README.md#reproduce-without-touching-retained-evidence)
+and [the first later prefix](analysis/s1-later-prefix-1/README.md#reproduce). The generator's
+`generate`, `regenerate` and `verify` commands are in
+[`engine/generate/README.md`](engine/generate/README.md#cli), and each golden's `case.json` holds its
+config and seed.
 
 ## Repository map
 
 | Path | Responsibility |
 |---|---|
-| [`PROGRAM/`](PROGRAM/) | Constitution, current state, claims, sources, taxonomy, ADRs, and session history |
-| [`engine/manifest/`](engine/manifest/) | Canonical Rust schema, identity, byte formats, fidelity, and consistency library |
-| [`engine/ingest/`](engine/ingest/) | Deterministic S1 ingestion CLI, tests and the one-case effective inventory example |
-| [`engine/derive/`](engine/derive/) | Deterministic reviewed TeX derivation CLI and mechanical tests |
-| [`engine/pair/`](engine/pair/) | Narrow reviewed positive-pair archive/canonical CLI, provenance and refusal tests |
-| [`lean/`](lean/) | Pinned formal project, golden theorem, and axiom audit |
-| [`lab/`](lab/) | Exploratory Python candidate discovery and examination |
-| [`groundtruth/`](groundtruth/) | Real archival manifests, canonical child metadata and recipes, item records, permitted originals, and harvest log |
-| [`corpora/`](corpora/) | Reserved for manifested synthetic artifacts in S2 |
-| [`contact/`](contact/) | Reserved for quarantined AI-generated corpora in S5 |
-| [`analysis/`](analysis/) | Engineering evidence and future experimental designs and calibration/validation/contact reports |
-| [`analysis/s1-3/`](analysis/s1-3/) | First canonical derivation receipts, preservation checks, and reproduction instructions |
-| [`analysis/s1-2/`](analysis/s1-2/) | Historical procedure evidence, separate source-map correction, implementation and proposed-admission evidence |
-| [`analysis/s1-4/`](analysis/s1-4/) | Complete frozen historical coverage packet and first-write bins |
-| [`analysis/s1-first-parent-integration/`](analysis/s1-first-parent-integration/) | Accepted ruling, separate effective inventory and preserved integration evidence |
-| [`analysis/s1-post-merge-readiness/`](analysis/s1-post-merge-readiness/) | Actual main activation, fresh reproduction and criterion-by-criterion S1 readiness |
-| [`sources/`](sources/) | Source copies whose licences permit redistribution |
-| [`scripts/`](scripts/) | Local verification gate and register checks |
-| [`scripts/reproduce_s1_3.py`](scripts/reproduce_s1_3.py) | Source retrieval and orchestration of two independent Rust derivations |
-| [`scripts/orient_preflight.py`](scripts/orient_preflight.py) | ADR-0008 orientation preflight: fetch, snapshot selection, receipt, pre-publication recheck (not part of the gate) |
-| [`scripts/orient_preflight_cases.py`](scripts/orient_preflight_cases.py) | Offline verification of the preflight against temporary Git repositories |
-| [`analysis/s1-orientation-repair/`](analysis/s1-orientation-repair/) | Owner decisions of 2026-10-21, held-harvest evidence pins, preflight cases and live receipts, preservation and gate receipts |
-
-## Governance and contribution
-
-The [constitution](PROGRAM/SYNDEOM-PROGRAM.md) and recorded
-[architectural decisions](PROGRAM/DECISIONS/) govern the program. This README is an orientation
-layer. Begin work with [`STATE.md`](PROGRAM/STATE.md), the latest
-[`HANDOFF.md`](PROGRAM/HANDOFF.md) entry, and the relevant decisions; verify their claims against
-the code and gate.
-
-| Evidence rule | Practical consequence |
-|---|---|
-| Truth and triage, not understanding | No scores for insight, pedagogy, or explanatory quality |
-| No manuscript verdicts | Report detector scores, uncertainty, battery version, and named flaw classes |
-| “Proven” is reserved | Require sorry/admit-free Lean, an axiom audit allowing at most `propext`, `Classical.choice`, and `Quot.sound`, and recorded line-by-line statement-fidelity review |
-| Reproducibility is required | Results record engine SHA, seeds, configuration, taxonomy/battery versions, and uncertainty |
-| Contact is quarantined | Freeze before validation and contact; never tune an existing battery from contact observations |
-| Evidence has an audit trail | Sources and claims live in registers; decisions and session handoffs preserve the reasoning |
-
-Use feature branches for work in progress, preserve UTF-8/LF text, run
-[`scripts/check.sh`](scripts/check.sh), and record evidence in the session handoff. Commit messages
-follow `[S<phase>][<CLAIM-ID or ADR-ID or FLAW-ID or INFRA>] imperative summary`. Public release,
-constitutional amendments, and human-referee participation follow the engineer-of-record
-decisions specified in the constitution.
-
-**Reading paths:** [constitution](PROGRAM/SYNDEOM-PROGRAM.md) for scope;
-[state](PROGRAM/STATE.md) for readiness; [claims](PROGRAM/CLAIMS.md) for assertions and evidence;
-[sources](PROGRAM/SOURCES.md) for provenance; [taxonomy](PROGRAM/FLAWS.md) for flaw semantics;
-[decisions](PROGRAM/DECISIONS/) for contracts; [handoff](PROGRAM/HANDOFF.md) for continuity.
-
-SYNDEOM combines the calibration discipline of
-[FRIEDMAN](https://github.com/Quigles1337/FR13DMAN) with the formal-methods discipline of
-[KOBER](https://github.com/Quigles1337/KOBER). The sibling interface is a versioned manifest
-extension; neither sibling's code is imported. The
-[structural map](PROGRAM/SIBLING-MAP-2026-10.md) records the relationship.
+| [`PROGRAM/`](PROGRAM/) | Constitution, STATE, HANDOFF, the CLAIMS, SOURCES and FLAWS registers, ADRs and the sibling map |
+| [`engine/manifest/`](engine/manifest/) | Canonical schema, identity, byte formats, fidelity and consistency library; the S1.4 coverage tool |
+| [`engine/ingest/`](engine/ingest/) | S1 ingestion CLI, with the effective-inventory and later-prefix tools |
+| [`engine/derive/`](engine/derive/), [`engine/pair/`](engine/pair/) | Canonical S1 derivations: reviewed TeX slices (S1.3) and the informal–formal positive pair (S1.2) |
+| [`engine/generate/`](engine/generate/) | The S2 family: plan, renderers, injector, padding, RNG, Lean harness, `s2_template`, `s2_grammar`, seeds and goldens |
+| [`lean/`](lean/) | Pinned Lean and Mathlib project: the Golden B fixture, the seed witnesses and the axiom audit |
+| [`lab/`](lab/) | Exploratory Python for candidate discovery; zero result authority |
+| [`groundtruth/`](groundtruth/) | Real S1 items: manifests, records, permitted originals, derivation recipes and the harvest log |
+| [`corpora/`](corpora/) | Manifested synthetic artifacts; none written yet (the fidelity sweep writes here) |
+| [`contact/`](contact/) | Reserved for quarantined AI-generated corpora in S5, under SD8 |
+| [`analysis/`](analysis/) | Evidence packets: `s1-*` for the ground-truth corpus, `s2-generate-*` for the generator |
+| [`sources/`](sources/) | Stored copies of sources whose licences permit redistribution |
+| [`scripts/`](scripts/) | The gate (`check.sh` with its register and freeze checks), the ADR-0008 orientation preflight (outside the gate) and the S1.3 reproduction helper |
 
 ## Citation
 
