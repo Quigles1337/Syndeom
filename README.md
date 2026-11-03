@@ -90,8 +90,8 @@ SYNDEOM is a local, file-based pipeline with no deployed service. Rust ([`engine
 every canonical artifact, check and count; Lean 4 with Mathlib ([`lean/`](lean/)) checks formal
 statements and proofs; Python assists discovery with no result authority (SD10). In the diagrams,
 circles act, stadiums are what they hold or emit, and each arrow is labelled with what crosses it.
-The two accent colours only repeat what a label says: **ochre** for artifact flow (configs, files,
-goldens) and **teal** for truth flow (ground-truth records, kernel verdicts).
+The two accent colours only repeat what a label says: **teal** for artifact flow (configs, files,
+goldens) and **ochre** for truth flow (ground-truth records, kernel verdicts).
 
 ### 01 · The arc: ground truth, generation, calibration, validation, contact
 
@@ -106,8 +106,8 @@ new freeze (SD8).
 flowchart TB
     accTitle: The program's arc, from ground truth to the contact boundary
     accDescr: Published proofs with documented errata become the S1 ground-truth archive, and the S2 generator emits synthetic artifacts with known flaws. In S3 those artifacts calibrate a detector battery, yielding fooling lengths and a cost model, and the battery is frozen. S4 tests the frozen battery blind on the S1 archive; only after that gate does the same version score quarantined AI-generated corpora in S5, producing triage scores with uncertainty. S1 and S2 are built; S3 to S5 are planned.
-    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
-    classDef truth fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    classDef artifact fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    classDef truth fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
     P(["Published<br/>proofs"]) -->|"erratum or retraction"| GT(["S1 ground<br/>truth"]):::truth
     G(("Generator<br/>S2")) -->|"labelled artifacts"| SY(["Synthetic<br/>artifacts"]):::artifact
     SY -.->|"known flaws"| C(("Calibration<br/>S3"))
@@ -120,11 +120,11 @@ flowchart TB
     F -.->|"same version"| T
     T -.->|"per manuscript"| S(["Scores with<br/>uncertainty"])
     linkStyle default stroke:#81796f,stroke-width:1px;
-    linkStyle 1,2 stroke:#a8741a,stroke-width:1.4px;
-    linkStyle 0,6 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 1,2 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 0,6 stroke:#a8741a,stroke-width:1.4px;
 ```
 
-*Ochre: artifact flow · teal: truth flow · grey: the rest · solid: built · dashed: planned · double
+*Teal: artifact flow · ochre: truth flow · grey: the rest · solid: built · dashed: planned · double
 ring: the immutable battery version.*
 
 “Fooled” is defined before any curve exists ([ADR-0004](PROGRAM/DECISIONS/ADR-0004.md)). A detector
@@ -148,8 +148,8 @@ confirmation is kept as a FAIL finding, never regenerated under another seed.
 flowchart TB
     accTitle: S2 production of one informal-formal pair
     accDescr: A full configuration and a seed enter a producer, s2_template or s2_grammar, which builds a plan. The flaw injector and the padding module rewrite it, writing one ground-truth record per flaw instance, and it is rendered as proof.md and Proof.lean. The Lean harness compiles the formal file one process at a time, and its first error line and axiom and usage listing confirm or refute the formal records; a structural check confirms the informal ones. The manifest takes both files' hashes and counts, the confirmed records and the fidelity verdict. Goldens are outputs of two production runs compared byte for byte.
-    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
-    classDef truth fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    classDef artifact fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    classDef truth fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
     C(["Config<br/>+ seed"]):::artifact -->|"theorem or grammar, flaws"| P(("Producer"))
     P -->|"plan"| J(("Injector<br/>+ padding"))
     J -->|"rendered informal"| MD(["proof.md"]):::artifact
@@ -163,11 +163,11 @@ flowchart TB
     LN -->|"hash + counts"| M
     M -->|"two runs, byte-identical"| G(["Goldens"]):::artifact
     linkStyle default stroke:#81796f,stroke-width:1px;
-    linkStyle 0,2,3,11 stroke:#a8741a,stroke-width:1.4px;
-    linkStyle 4,6,7,8 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 0,2,3,11 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 4,6,7,8 stroke:#a8741a,stroke-width:1.4px;
 ```
 
-*Ochre: artifact flow · teal: truth flow · grey: the rest. Shown for a pair; an informal-only
+*Teal: artifact flow · ochre: truth flow · grey: the rest. Shown for a pair; an informal-only
 artifact has no Lean file. Every draw comes from a labelled stream of `syndeom-rng/1`, so one config
 and seed always give the same bytes.*
 
@@ -184,7 +184,7 @@ D9).
 flowchart LR
     accTitle: Artifact identity and content integrity
     accDescr: The canonical JSON configuration is hashed to a configuration hash. Its first twelve hex digits join the producer's id and version, and the seed for a synthetic artifact, to form the artifact ID. The manifest records that identity, the SHA-256 of the exact file bytes, and the engine commit that produced them.
-    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
+    classDef artifact fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
     C(["Config"]):::artifact -->|"JCS + SHA-256"| H(["Config<br/>hash"])
     H -->|"first 12 hex"| ID(["Artifact<br/>ID"])
     P(("Producer")) -->|"id, version, seed"| ID
@@ -192,10 +192,10 @@ flowchart LR
     B(["Proof<br/>bytes"]):::artifact -->|"SHA-256"| M
     E(["Engine<br/>commit"]) -->|"provenance"| M
     linkStyle default stroke:#81796f,stroke-width:1px;
-    linkStyle 0,4 stroke:#a8741a,stroke-width:1.4px;
+    linkStyle 0,4 stroke:#3a7f8c,stroke-width:1.4px;
 ```
 
-*Ochre: artifact flow · grey: the rest.*
+*Teal: artifact flow · grey: the rest.*
 
 ```text
 config_hash = SHA-256(JCS(config))
@@ -228,8 +228,8 @@ and kept out of every truth-dependent cell (STATE, *Standing rulings*).
 flowchart TB
     accTitle: What one artifact's ground truth holds
     accDescr: For a synthetic artifact, statement status is established by the Lean kernel building a seed witness or a grammar instance's control; for a real item, by a source document. Flaw records come from the injector by construction, or from admission review's written class argument. Proof status is valid only when every record is cosmetic, and invalid whenever the statement is false or undetermined. The correct bit is derived from the statement's value and the proof status, never authored.
-    classDef artifact fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
-    classDef truth fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    classDef artifact fill:#faf8f3,stroke:#3a7f8c,color:#292723,stroke-width:1.4px;
+    classDef truth fill:#faf8f3,stroke:#a8741a,color:#292723,stroke-width:1.4px;
     W(["Witness<br/>or control"]):::artifact -->|"statement + proof"| K(("Lean<br/>kernel"))
     K -->|"builds: lean-kernel"| SS(["statement_status<br/>value · method · reference"]):::truth
     SD(["Source<br/>document"]) -->|"documented-by-source"| SS
@@ -240,11 +240,11 @@ flowchart TB
     SS -->|"value"| CO(["correct<br/>derived"])
     PS -->|"status"| CO
     linkStyle default stroke:#81796f,stroke-width:1px;
-    linkStyle 0 stroke:#a8741a,stroke-width:1.4px;
-    linkStyle 1,2,3,4 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 0 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 1,2,3,4 stroke:#a8741a,stroke-width:1.4px;
 ```
 
-*Teal: truth entering the record · grey: rules the manifest library derives · ochre: artifact flow.
+*Ochre: truth entering the record · grey: rules the manifest library derives · teal: artifact flow.
 A record locates its flaw by step and character span in the informal file and by declaration and
 line in the formal one.*
 
@@ -259,24 +259,24 @@ every figure on this page can show its work.
 %%{init: {"theme":"base","themeVariables":{"fontFamily":"Georgia, serif","fontSize":"14px","primaryColor":"#faf8f3","primaryTextColor":"#292723","primaryBorderColor":"#716b63","lineColor":"#81796f","edgeLabelBackground":"#faf8f3"},"flowchart":{"curve":"basis","nodeSpacing":36,"rankSpacing":36,"htmlLabels":true}}}%%
 flowchart TB
     accTitle: The governance loop of one session
-    accDescr: A session is launched with the constitution's resume prompt and discloses its memory first. It orients from the fetched default branch and runs the gate, plans one action, executes and verifies it, gates the committed tree, and records the result in STATE, HANDOFF and an evidence packet. A pull request carries numbered readings to the engineer of record, whose rulings are recorded verbatim on the same branch. The engineer of record merges with a merge commit, and the next session orients from the new tip.
+    accDescr: A session is launched with the constitution's resume prompt and discloses its memory first. It orients from the fetched default branch and runs the gate, plans one action, and executes and verifies it. It commits the work and records the result in STATE, HANDOFF, an evidence packet and any ADR amendment; the gate must then pass on that committed tree before a pull request carries numbered readings to the engineer of record. The rulings are recorded verbatim on the same branch, and that record is gated again before each push. The engineer of record merges with a merge commit, and the next session orients from the new tip.
     L(("Launch")) -->|"§6 prompt, verbatim"| D(("Disclose"))
     D -->|"SD15 entry in HANDOFF"| O(("Orient"))
     O -->|"fetched tip, gate GREEN"| P(("Plan"))
     P -->|"one NEXT action"| E(("Execute<br/>+ verify"))
-    E -->|"commits"| G(("Gate"))
-    G -->|"GATE: GREEN"| R(("Record"))
-    R -->|"STATE, HANDOFF, packet"| PR(("Pull<br/>request"))
+    E -->|"commits"| R(("Record"))
+    R -->|"STATE, HANDOFF, packet, ADR amendment"| G(("Gate"))
+    G -->|"GATE: GREEN on the committed tree"| PR(("Pull<br/>request"))
     PR -->|"readings"| A(("Al's<br/>rulings"))
     A -->|"rulings, verbatim"| R
     A -->|"merge commit"| M(("main"))
     M -->|"new tip"| O
     linkStyle default stroke:#81796f,stroke-width:1px;
-    linkStyle 4,6 stroke:#a8741a,stroke-width:1.4px;
-    linkStyle 2,5 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 4,5 stroke:#3a7f8c,stroke-width:1.4px;
+    linkStyle 2,6 stroke:#a8741a,stroke-width:1.4px;
 ```
 
-*Ochre: artifact flow (commits, records) · teal: truth flow (gate verdicts) · grey: the rest.*
+*Teal: artifact flow (commits, records) · ochre: truth flow (gate verdicts) · grey: the rest.*
 
 - **The constitution.** [`PROGRAM/SYNDEOM-PROGRAM.md`](PROGRAM/SYNDEOM-PROGRAM.md): the charter,
   rules SD1–SD17, phases and gates, the session loop and its failure modes. It changes only by ADR;
